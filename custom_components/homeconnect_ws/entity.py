@@ -12,7 +12,10 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from .entity_description import ExtraAttributeDict, HCEntityDescription
+    from .entity_descriptions.descriptions_definitions import (
+        ExtraAttributeDict,
+        HCEntityDescription,
+    )
 
 _LOGGER = logging.getLogger(__name__)
 

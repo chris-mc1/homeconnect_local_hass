@@ -7,12 +7,7 @@ from typing import TYPE_CHECKING
 from homeassistant.components.select import SelectEntity
 
 from .entity import HCEntity
-from .entity_description import (
-    SELECT_DESCRIPTIONS,
-    SELECTED_PROGRAM_DESCRIPTION,
-    START_IN_DESCRIPTION,
-)
-from .helpers import get_entities_available
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -23,7 +18,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket.entities import SelectedProgram
 
     from . import HCConfigEntry
-    from .entity_description import HCSelectEntityDescription
+    from .entity_descriptions.descriptions_definitions import HCSelectEntityDescription
 
 PARALLEL_UPDATES = 0
 
@@ -34,16 +29,10 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up select platform."""
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = [
-        HCSelect(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(SELECT_DESCRIPTIONS, appliance)
-    ]
-    if SELECTED_PROGRAM_DESCRIPTION.entity in appliance.entities:
-        entities.append(HCProgram(SELECTED_PROGRAM_DESCRIPTION, appliance, device_info))
-    if START_IN_DESCRIPTION.entity in appliance.entities:
-        entities.append(HCStartIn(START_IN_DESCRIPTION, appliance, device_info))
+    entities = create_entities(
+        {"select": HCSelect, "program": HCProgram, "start_in": HCStartIn},
+        config_entry.runtime_data,
+    )
     async_add_entites(entities)
 
 

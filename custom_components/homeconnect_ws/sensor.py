@@ -9,13 +9,7 @@ from homeassistant.helpers.device_registry import DeviceInfo
 from homeconnect_websocket import HomeAppliance
 
 from .entity import HCEntity
-from .entity_description import (
-    ACTIVE_PROGRAM_DESCRIPTIONS,
-    EVENT_SENSOR_DESCRIPTIONS,
-    SENSOR_DESCRIPTIONS,
-    HCSensorEntityDescription,
-)
-from .helpers import get_entities_available
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -24,6 +18,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
     from . import HCConfigEntry
+    from .entity_descriptions.descriptions_definitions import HCSensorEntityDescription
 
 PARALLEL_UPDATES = 0
 
@@ -34,18 +29,10 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up sensor platform."""
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = [
-        HCSensor(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(SENSOR_DESCRIPTIONS, appliance)
-    ]
-    entities += [
-        HCEventSensor(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(EVENT_SENSOR_DESCRIPTIONS, appliance)
-    ]
-    if ACTIVE_PROGRAM_DESCRIPTIONS.entity in appliance.entities:
-        entities.append(HCActiveProgram(ACTIVE_PROGRAM_DESCRIPTIONS, appliance, device_info))
+    entities = create_entities(
+        {"sensor": HCSensor, "event_sensor": HCEventSensor, "active_program": HCActiveProgram},
+        config_entry.runtime_data,
+    )
     async_add_entites(entities)
 
 

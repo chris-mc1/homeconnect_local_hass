@@ -5,24 +5,35 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
-
-    from homeconnect_websocket import HomeAppliance
-
-    from .entity_description import HCEntityDescription
+    from . import HCData
+    from .entity import HCEntity
 
 
-def get_entities_available(
-    entity_descriptions: Sequence[HCEntityDescription], appliance: HomeAppliance
-) -> list[HCEntityDescription]:
-    """Get all entity_descriptions available for this appliance."""
-    valid_entities_descriptions = []
-    for entity in entity_descriptions:
-        all_subscribed_entities = []
-        if entity.entity:
-            all_subscribed_entities.append(entity.entity)
-        if entity.entities:
-            all_subscribed_entities.extend(entity.entities)
-        if set(all_subscribed_entities).intersection(appliance.entities):
-            valid_entities_descriptions.append(entity)
-    return valid_entities_descriptions
+def create_entities(
+    entities_classes: dict[str, type[HCEntity]], runtime_data: HCData
+) -> set[HCEntity]:
+    """Create entities from entity_descriptions."""
+    entities = set()
+    for entity_key, entity_class in entities_classes.items():
+        if entity_key in runtime_data.available_entity_descriptions:
+            for entity_description in runtime_data.available_entity_descriptions[entity_key]:
+                entities.add(
+                    entity_class(
+                        entity_description=entity_description,
+                        appliance=runtime_data.appliance,
+                        device_info=runtime_data.device_info,
+                    )
+                )
+    return entities
+
+
+def merge_dicts(*args: dict[str, list]) -> dict[str, list]:
+    """Merge multiple dictionaries of type dict[str, list]."""
+    out_dict: dict[str, list] = {}
+    for in_dict in args:
+        for key, value in in_dict.items():
+            if key not in out_dict:
+                out_dict[key] = value
+            else:
+                out_dict[key].extend(value)
+    return out_dict

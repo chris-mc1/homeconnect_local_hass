@@ -6,7 +6,7 @@ from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
     CONF_PSK,
 )
-from custom_components.homeconnect_ws.entity_description import (
+from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
     HCNumberEntityDescription,
@@ -69,83 +69,80 @@ MOCK_AES_DEVICE_INFO = {
     "iv": "AES_IV",
 }
 
-ABORT_PROGRAM_DESCRIPTION = HCButtonEntityDescription(
-    key="Test.AbortProgram", name="AbortProgram", entity="Test.AbortProgram"
-)
-
-ACTIVE_PROGRAM_DESCRIPTIONS = HCSensorEntityDescription(
-    key="Test.ActiveProgram",
-    name="ActiveProgram",
-    entity="Test.ActiveProgram",
-    device_class=SensorDeviceClass.ENUM,
-)
-
-BINARY_SENSOR_DESCRIPTIONS = [
-    HCBinarySensorEntityDescription(
-        key="Test.BinarySensor", name="BinarySensor", entity="Test.BinarySensor"
-    ),
-    HCBinarySensorEntityDescription(
-        key="Test.BinarySensor.Enum",
-        name="BinarySensor.Enum",
-        entity="Test.BinarySensor.Enum",
-        value_on={"On"},
-        value_off={"Off"},
-    ),
-]
-
-EVENT_SENSOR_DESCRIPTIONS = [
-    HCSensorEntityDescription(
-        key="Test.Event",
-        name="Sensor.Event",
-        entities=[
-            "Test.Event2",
-            "Test.Event1",
-        ],
-        device_class=SensorDeviceClass.ENUM,
-        options=["Event2", "Event1", "No Event"],
-    ),
-]
-
-NUMBER_DESCRIPTIONS = [
-    HCNumberEntityDescription(key="Test.Number", name="Number", entity="Test.Number")
-]
-
-POWER_SWITCH_DESCRIPTION = HCSwitchEntityDescription(
-    key="Test.PowerState", name="PowerState", entity="Test.PowerState"
-)
-
-SELECT_DESCRIPTIONS = [
-    HCSelectEntityDescription(key="Test.Select", name="Select", entity="Test.Select")
-]
-
-SELECTED_PROGRAM_DESCRIPTION = HCSelectEntityDescription(
-    key="Test.SelectedProgram", name="SelectedProgram", entity="Test.SelectedProgram"
-)
-
-SENSOR_DESCRIPTIONS = [
-    HCSensorEntityDescription(key="Test.Sensor", name="Sensor", entity="Test.Sensor"),
-    HCSensorEntityDescription(
-        key="Test.Sensor.Enum",
-        name="Sensor.Enum",
-        entity="Test.Sensor.Enum",
-        device_class=SensorDeviceClass.ENUM,
-    ),
-]
-
-START_PROGRAM_DESCRIPTION = HCButtonEntityDescription(
-    key="Test.ActiveProgram", name="ActiveProgram", entity="Test.ActiveProgram"
-)
-
-SWITCH_DESCRIPTIONS = [
-    HCSwitchEntityDescription(key="Test.Switch", name="Switch", entity="Test.Switch"),
-    HCSwitchEntityDescription(
-        key="Test.Switch.Enum",
-        name="Switch.Enum",
-        entity="Test.Switch.Enum",
-        value_mapping=("On", "Off"),
-    ),
-]
-
+ENTITY_DESCRIPTIONS = {
+    "abort_button": [
+        HCButtonEntityDescription(
+            key="Test.AbortProgram", name="AbortProgram", entity="Test.AbortProgram"
+        )
+    ],
+    "active_program": [
+        HCSensorEntityDescription(
+            key="Test.ActiveProgram",
+            name="ActiveProgram",
+            entity="Test.ActiveProgram",
+            device_class=SensorDeviceClass.ENUM,
+        )
+    ],
+    "binary_sensor": [
+        HCBinarySensorEntityDescription(
+            key="Test.BinarySensor", name="BinarySensor", entity="Test.BinarySensor"
+        ),
+        HCBinarySensorEntityDescription(
+            key="Test.BinarySensor.Enum",
+            name="BinarySensor.Enum",
+            entity="Test.BinarySensor.Enum",
+            value_on={"On"},
+            value_off={"Off"},
+        ),
+    ],
+    "event_sensor": [
+        HCSensorEntityDescription(
+            key="Test.Event",
+            name="Sensor.Event",
+            entities=[
+                "Test.Event2",
+                "Test.Event1",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["Event2", "Event1", "No Event"],
+        ),
+    ],
+    "number": [HCNumberEntityDescription(key="Test.Number", name="Number", entity="Test.Number")],
+    "power_switch": [
+        HCSwitchEntityDescription(
+            key="Test.PowerState", name="PowerState", entity="Test.PowerState"
+        )
+    ],
+    "program": [
+        HCSelectEntityDescription(
+            key="Test.SelectedProgram", name="SelectedProgram", entity="Test.SelectedProgram"
+        )
+    ],
+    "select": [HCSelectEntityDescription(key="Test.Select", name="Select", entity="Test.Select")],
+    "sensor": [
+        HCSensorEntityDescription(key="Test.Sensor", name="Sensor", entity="Test.Sensor"),
+        HCSensorEntityDescription(
+            key="Test.Sensor.Enum",
+            name="Sensor.Enum",
+            entity="Test.Sensor.Enum",
+            device_class=SensorDeviceClass.ENUM,
+        ),
+    ],
+    "start_button": [
+        HCButtonEntityDescription(
+            key="Test.ActiveProgram", name="ActiveProgram", entity="Test.ActiveProgram"
+        )
+    ],
+    "switch": [
+        HCSwitchEntityDescription(key="Test.Switch", name="Switch", entity="Test.Switch"),
+        HCSwitchEntityDescription(
+            key="Test.Switch.Enum",
+            name="Switch.Enum",
+            entity="Test.Switch.Enum",
+            value_mapping=("On", "Off"),
+        ),
+    ],
+}
 DEVICE_DESCRIPTION = DeviceDescription(
     status=[
         EntityDescription(

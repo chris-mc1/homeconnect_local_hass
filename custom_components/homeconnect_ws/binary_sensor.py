@@ -4,15 +4,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from homeassistant.components.binary_sensor import BinarySensorEntity
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntity,
+)
+from homeassistant.const import EntityCategory
 
 from .entity import HCEntity
-from .entity_description import (
-    BINARY_SENSOR_DESCRIPTIONS,
-    CONNECTION_SENSOR_DESCRIPTIONS,
-    HCBinarySensorEntityDescription,
-)
-from .helpers import get_entities_available
+from .entity_descriptions.descriptions_definitions import HCBinarySensorEntityDescription
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -24,6 +24,12 @@ if TYPE_CHECKING:
 
 PARALLEL_UPDATES = 0
 
+CONNECTION_SENSOR_DESCRIPTIONS = HCBinarySensorEntityDescription(
+    key="connection",
+    device_class=BinarySensorDeviceClass.CONNECTIVITY,
+    entity_category=EntityCategory.DIAGNOSTIC,
+)
+
 
 async def async_setup_entry(
     hass: HomeAssistant,  # noqa: ARG001
@@ -31,18 +37,12 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up binary_sensor platform."""
-    entities: list[BinarySensorEntity] = []
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = [
-        HCBinarySensor(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(BINARY_SENSOR_DESCRIPTIONS, appliance)
-    ]
-    entities.append(
+    entities = create_entities({"binary_sensor": HCBinarySensor}, config_entry.runtime_data)
+    entities.add(
         HCConnectionSensor(
             CONNECTION_SENSOR_DESCRIPTIONS,
-            appliance,
-            device_info,
+            config_entry.runtime_data.appliance,
+            config_entry.runtime_data.device_info,
         )
     )
     async_add_entites(entities)

@@ -18,9 +18,12 @@ from homeassistant.helpers.device_registry import (
 from homeconnect_websocket import HomeAppliance
 
 from .const import CONF_AES_IV, CONF_PSK, DOMAIN, PLATFORMS
+from .entity_descriptions import get_available_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
+
+    from .entity_descriptions.descriptions_definitions import EntityDescriptions
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -31,6 +34,7 @@ class HCData:
 
     appliance: HomeAppliance
     device_info: DeviceInfo
+    available_entity_descriptions: EntityDescriptions
 
 
 type HCConfigEntry = ConfigEntry[HCData]
@@ -79,7 +83,8 @@ async def async_setup_entry(
         model_id=appliance.info["vib"],
         sw_version=appliance.info["swVersion"],
     )
-    config_entry.runtime_data = HCData(appliance, device_info)
+    available_entities = get_available_entities(appliance)
+    config_entry.runtime_data = HCData(appliance, device_info, available_entities)
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
     return True
 

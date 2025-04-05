@@ -7,11 +7,7 @@ from typing import TYPE_CHECKING
 from homeassistant.components.button import ButtonEntity
 
 from .entity import HCEntity
-from .entity_description import (
-    ABORT_PROGRAM_DESCRIPTION,
-    START_PROGRAM_DESCRIPTION,
-    HCButtonEntityDescription,
-)
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -19,6 +15,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket.entities import ActiveProgram, Command
 
     from . import HCConfigEntry
+    from .entity_descriptions.descriptions_definitions import HCButtonEntityDescription
 
 PARALLEL_UPDATES = 0
 
@@ -29,13 +26,9 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up button platform."""
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = []
-    if ABORT_PROGRAM_DESCRIPTION.entity in appliance.entities:
-        entities.append(HCAbortButton(ABORT_PROGRAM_DESCRIPTION, appliance, device_info))
-    if START_PROGRAM_DESCRIPTION.entity in appliance.entities:
-        entities.append(HCStartButton(START_PROGRAM_DESCRIPTION, appliance, device_info))
+    entities = create_entities(
+        {"abort_button": HCAbortButton, "start_button": HCStartButton}, config_entry.runtime_data
+    )
     async_add_entites(entities)
 
 

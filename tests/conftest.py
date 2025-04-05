@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 import pytest
 from custom_components import homeconnect_ws
-from custom_components.homeconnect_ws import entity_description
+from custom_components.homeconnect_ws import entity_descriptions
 from homeconnect_websocket.testutils import MockAppliance
 
 if TYPE_CHECKING:
@@ -17,24 +17,14 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 from .const import (
-    ABORT_PROGRAM_DESCRIPTION,
-    ACTIVE_PROGRAM_DESCRIPTIONS,
-    BINARY_SENSOR_DESCRIPTIONS,
     DEVICE_DESCRIPTION,
-    EVENT_SENSOR_DESCRIPTIONS,
+    ENTITY_DESCRIPTIONS,
     MOCK_AES_DEVICE_DESCRIPTION,
     MOCK_AES_DEVICE_ID,
     MOCK_AES_DEVICE_INFO,
     MOCK_TLS_DEVICE_DESCRIPTION,
     MOCK_TLS_DEVICE_ID,
     MOCK_TLS_DEVICE_INFO,
-    NUMBER_DESCRIPTIONS,
-    POWER_SWITCH_DESCRIPTION,
-    SELECT_DESCRIPTIONS,
-    SELECTED_PROGRAM_DESCRIPTION,
-    SENSOR_DESCRIPTIONS,
-    START_PROGRAM_DESCRIPTION,
-    SWITCH_DESCRIPTIONS,
 )
 
 
@@ -47,26 +37,12 @@ def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:  
 @pytest.fixture
 def patch_entity_description(monkeypatch: pytest.MonkeyPatch) -> None:
     """Patch entity_description for testing."""
-    monkeypatch.setattr(entity_description, "ABORT_PROGRAM_DESCRIPTION", ABORT_PROGRAM_DESCRIPTION)
     monkeypatch.setattr(
-        entity_description, "ACTIVE_PROGRAM_DESCRIPTIONS", ACTIVE_PROGRAM_DESCRIPTIONS
+        entity_descriptions, "get_available_entities", Mock(return_value=ENTITY_DESCRIPTIONS)
     )
     monkeypatch.setattr(
-        entity_description, "BINARY_SENSOR_DESCRIPTIONS", BINARY_SENSOR_DESCRIPTIONS
+        homeconnect_ws, "get_available_entities", Mock(return_value=ENTITY_DESCRIPTIONS)
     )
-    monkeypatch.setattr(entity_description, "EVENT_SENSOR_DESCRIPTIONS", EVENT_SENSOR_DESCRIPTIONS)
-    monkeypatch.setattr(entity_description, "POWER_SWITCH_DESCRIPTION", POWER_SWITCH_DESCRIPTION)
-    monkeypatch.setattr(entity_description, "NUMBER_DESCRIPTIONS", NUMBER_DESCRIPTIONS)
-    monkeypatch.setattr(entity_description, "SELECT_DESCRIPTIONS", SELECT_DESCRIPTIONS)
-
-    monkeypatch.setattr(
-        entity_description,
-        "SELECTED_PROGRAM_DESCRIPTION",
-        SELECTED_PROGRAM_DESCRIPTION,
-    )
-    monkeypatch.setattr(entity_description, "SENSOR_DESCRIPTIONS", SENSOR_DESCRIPTIONS)
-    monkeypatch.setattr(entity_description, "START_PROGRAM_DESCRIPTION", START_PROGRAM_DESCRIPTION)
-    monkeypatch.setattr(entity_description, "SWITCH_DESCRIPTIONS", SWITCH_DESCRIPTIONS)
 
 
 @pytest.fixture

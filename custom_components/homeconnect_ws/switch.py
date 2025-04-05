@@ -7,12 +7,7 @@ from typing import TYPE_CHECKING, Any
 from homeassistant.components.switch import SwitchEntity
 
 from .entity import HCEntity
-from .entity_description import (
-    POWER_SWITCH_DESCRIPTION,
-    SWITCH_DESCRIPTIONS,
-    HCSwitchEntityDescription,
-)
-from .helpers import get_entities_available
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -21,6 +16,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
     from . import HCConfigEntry
+    from .entity_descriptions.descriptions_definitions import HCSwitchEntityDescription
 
 PARALLEL_UPDATES = 0
 
@@ -31,14 +27,9 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up switch platform."""
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = [
-        HCSwitch(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(SWITCH_DESCRIPTIONS, appliance)
-    ]
-    if POWER_SWITCH_DESCRIPTION.entity in appliance.entities:
-        entities.append(HCPowerSwitch(POWER_SWITCH_DESCRIPTION, appliance, device_info))
+    entities = create_entities(
+        {"switch": HCSwitch, "power_switch": HCPowerSwitch}, config_entry.runtime_data
+    )
     async_add_entites(entities)
 
 

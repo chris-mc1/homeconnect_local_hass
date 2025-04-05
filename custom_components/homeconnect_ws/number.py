@@ -7,8 +7,7 @@ from typing import TYPE_CHECKING
 from homeassistant.components.number import NumberEntity
 
 from .entity import HCEntity
-from .entity_description import NUMBER_DESCRIPTIONS
-from .helpers import get_entities_available
+from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -17,7 +16,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
     from . import HCConfigEntry
-    from .entity_description import HCNumberEntityDescription
+    from .entity_descriptions.descriptions_definitions import HCNumberEntityDescription
 
 PARALLEL_UPDATES = 0
 
@@ -28,12 +27,7 @@ async def async_setup_entry(
     async_add_entites: AddEntitiesCallback,
 ) -> None:
     """Set up number platform."""
-    appliance = config_entry.runtime_data.appliance
-    device_info = config_entry.runtime_data.device_info
-    entities = [
-        HCNumber(entity_description, appliance, device_info)
-        for entity_description in get_entities_available(NUMBER_DESCRIPTIONS, appliance)
-    ]
+    entities = create_entities({"number": HCNumber}, config_entry.runtime_data)
     async_add_entites(entities)
 
 
