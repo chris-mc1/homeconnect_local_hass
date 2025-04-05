@@ -15,14 +15,14 @@ from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTime
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
-    HCEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    _EntityDescriptionsType,
 )
 
-COMMON_ENTITY_DESCRIPTIONS: dict[str, list[HCEntityDescription]] = {
+COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "abort_button": [
         HCButtonEntityDescription(
             key="button_abort_program",

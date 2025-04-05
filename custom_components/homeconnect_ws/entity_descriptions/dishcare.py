@@ -10,13 +10,13 @@ from homeassistant.const import EntityCategory
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
-    HCEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    _EntityDescriptionsType,
 )
 
-DISHCARE_ENTITY_DESCRIPTIONS: dict[str, list[HCEntityDescription]] = {
+DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
             key="binary_sensor_eco_dry_active",

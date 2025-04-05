@@ -16,6 +16,7 @@ from .descriptions_definitions import (
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    _EntityDescriptionsType,
 )
 from .dishcare import DISHCARE_ENTITY_DESCRIPTIONS
 from .refrigeration import REFRIGERATION_ENTITY_DESCRIPTIONS
@@ -25,10 +26,10 @@ if TYPE_CHECKING:
 
     from .descriptions_definitions import EntityDescriptions
 
-ALL_ENTITY_DESCRIPTIONS: dict[str, list[HCEntityDescription]] | None = None
+ALL_ENTITY_DESCRIPTIONS: _EntityDescriptionsType | None = None
 
 
-def get_all_entity_description() -> dict[str, list[HCEntityDescription]]:
+def get_all_entity_description() -> _EntityDescriptionsType:
     global ALL_ENTITY_DESCRIPTIONS  # noqa: PLW0603
     if ALL_ENTITY_DESCRIPTIONS is None:
         ALL_ENTITY_DESCRIPTIONS = merge_dicts(
@@ -58,6 +59,8 @@ def get_available_entities(appliance: HomeAppliance) -> EntityDescriptions:
     }
     for description_type, descriptions in get_all_entity_description().items():
         for description in descriptions:
+            if callable(description) and (dynamic_description := description(appliance)):
+                available_entities[description_type].append(dynamic_description)
             all_subscribed_entities = []
             if description.entity:
                 all_subscribed_entities.append(description.entity)

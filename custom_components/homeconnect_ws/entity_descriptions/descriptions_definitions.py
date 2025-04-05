@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import TYPE_CHECKING, NotRequired, TypedDict
 
 from homeassistant.components.binary_sensor import BinarySensorEntityDescription
@@ -11,11 +12,10 @@ from homeassistant.components.select import SelectEntityDescription
 from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.components.switch import SwitchEntityDescription
 from homeassistant.helpers.entity import EntityDescription
+from homeconnect_websocket import HomeAppliance
 from homeconnect_websocket.entities import Access
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
-
     from homeassistant.helpers.typing import StateType
     from homeconnect_websocket.entities import Entity as HcEntity
 
@@ -92,18 +92,25 @@ class HCNumberEntityDescription(
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
 
 
+_EntityDescriptionsType = dict[
+    str, list[HCEntityDescription | Callable[[HomeAppliance], HCEntityDescription | None]]
+]
+
+
 class EntityDescriptions(TypedDict):
     """Entity descriptions by type."""
 
-    abort_button: list[HCButtonEntityDescription]
-    active_program: list[HCSensorEntityDescription]
-    binary_sensor: list[HCBinarySensorEntityDescription]
-    event_sensor: list[HCSensorEntityDescription]
-    number: list[HCNumberEntityDescription]
-    power_switch: list[HCSwitchEntityDescription]
-    program: list[HCSelectEntityDescription]
-    select: list[HCSelectEntityDescription]
-    sensor: list[HCSensorEntityDescription]
-    start_button: list[HCButtonEntityDescription]
-    start_in: list[HCSelectEntityDescription]
-    switch: list[HCSwitchEntityDescription]
+    abort_button: list[HCButtonEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    active_program: list[HCSensorEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    binary_sensor: list[
+        HCBinarySensorEntityDescription | Callable[[HomeAppliance], HCEntityDescription]
+    ]
+    event_sensor: list[HCSensorEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    number: list[HCNumberEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    power_switch: list[HCSwitchEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    program: list[HCSelectEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    select: list[HCSelectEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    sensor: list[HCSensorEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    start_button: list[HCButtonEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    start_in: list[HCSelectEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]
+    switch: list[HCSwitchEntityDescription | Callable[[HomeAppliance], HCEntityDescription]]

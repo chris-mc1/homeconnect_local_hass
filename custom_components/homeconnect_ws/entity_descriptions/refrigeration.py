@@ -8,10 +8,10 @@ from homeassistant.components.binary_sensor import (
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
-    HCEntityDescription,
+    _EntityDescriptionsType,
 )
 
-REFRIGERATION_ENTITY_DESCRIPTIONS: dict[str, list[HCEntityDescription]] = {
+REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
             key="binary_sensor_door_state",

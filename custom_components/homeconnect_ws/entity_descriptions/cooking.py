@@ -8,11 +8,11 @@ from homeassistant.components.sensor import (
 from homeassistant.const import UnitOfTime
 
 from .descriptions_definitions import (
-    HCEntityDescription,
     HCSensorEntityDescription,
+    _EntityDescriptionsType,
 )
 
-COOKING_ENTITY_DESCRIPTIONS: dict[str, list[HCEntityDescription]] = {
+COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "sensor": [
         HCSensorEntityDescription(
             key="sensor_interval_time_off",
