@@ -15,6 +15,7 @@ PLATFORMS: Final = [
     Platform.BUTTON,
     Platform.NUMBER,
     Platform.LIGHT,
+    Platform.FAN,
 ]
 
 CONF_PSK: Final = "psk"

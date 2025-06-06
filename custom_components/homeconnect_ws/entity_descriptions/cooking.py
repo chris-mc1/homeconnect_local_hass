@@ -14,6 +14,7 @@ from custom_components.homeconnect_ws.helpers import get_groups_from_regex
 
 from .descriptions_definitions import (
     EntityDescriptions,
+    HCFanEntityDescription,
     HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
@@ -68,6 +69,20 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
             )
 
     return descriptions
+
+
+HOOD_FAN_ENTITIES = [
+    "Cooking.Common.Option.Hood.VentingLevel",
+    "Cooking.Common.Option.Hood.IntensiveLevel",
+]
+
+
+def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
+    """Get Hood Fan description."""
+    available_entities = [entity for entity in HOOD_FAN_ENTITIES if entity in appliance.entities]
+    if available_entities:
+        return HCFanEntityDescription(key="fan_hood", entities=available_entities)
+    return None
 
 
 COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
@@ -185,4 +200,5 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             brightness_entity="Cooking.Common.Setting.LightingBrightness",
         )
     ],
+    "fan": [generate_hood_fan],
 }

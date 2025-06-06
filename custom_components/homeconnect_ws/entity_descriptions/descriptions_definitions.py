@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Literal, NotRequired, TypedDict
 
 from homeassistant.components.binary_sensor import BinarySensorEntityDescription
 from homeassistant.components.button import ButtonEntityDescription
+from homeassistant.components.fan import FanEntityDescription
 from homeassistant.components.light import LightEntityDescription
 from homeassistant.components.number import NumberEntityDescription
 from homeassistant.components.select import SelectEntityDescription
@@ -102,6 +103,12 @@ class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, froz
     brightness_entity: str | None = None
 
 
+class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_or_thawed=True):
+    """Description for Fan Entity."""
+
+    available_access: tuple[Access] = (Access.READ_WRITE,)
+
+
 class EntityDescriptions(TypedDict):
     """Entity descriptions by type."""
 
@@ -117,6 +124,7 @@ class EntityDescriptions(TypedDict):
     switch: list[HCSwitchEntityDescription]
     wifi: list[HCSensorEntityDescription]
     light: list[HCLightEntityDescription]
+    fan: list[HCFanEntityDescription]
 
 
 _EntityDescriptionsDefinitionsType = dict[
@@ -133,6 +141,7 @@ _EntityDescriptionsDefinitionsType = dict[
         "switch",
         "wifi",
         "light",
+        "fan",
         "dynamic",
     ],
     list[
@@ -155,6 +164,7 @@ _EntityDescriptionsType = dict[
         "switch",
         "wifi",
         "light",
+        "fan",
     ],
     list[HCEntityDescription],
 ]
