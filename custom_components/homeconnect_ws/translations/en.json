@@ -1084,6 +1084,11 @@
       "light_cooking_lighting": {
         "name": "Light"
       }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Fan"
+      }
     }
   },
   "services": {

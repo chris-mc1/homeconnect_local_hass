@@ -9,10 +9,12 @@ from custom_components.homeconnect_ws.const import (
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
+    HCFanEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    _EntityDescriptionsType,
 )
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST, CONF_NAME
@@ -70,7 +72,7 @@ MOCK_AES_DEVICE_INFO = {
     "iv": "AES_IV",
 }
 
-ENTITY_DESCRIPTIONS = {
+ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "button": [
         HCButtonEntityDescription(
             key="Test.AbortProgram", name="AbortProgram", entity="Test.AbortProgram"
@@ -167,6 +169,13 @@ ENTITY_DESCRIPTIONS = {
             entity="Test.Switch.Enum",
             value_mapping=("On", "Off"),
         ),
+    ],
+    "fan": [
+        HCFanEntityDescription(
+            key="Test.Fan",
+            name="Fan",
+            entities=["Test.FanSpeed1", "Test.FanSpeed2"],
+        )
     ],
 }
 DEVICE_DESCRIPTION = DeviceDescription(
@@ -309,6 +318,22 @@ DEVICE_DESCRIPTION = DeviceDescription(
             name="Test.Option2",
             available=True,
             access=Access.READ_WRITE,
+        ),
+        EntityDescription(
+            uid=403,
+            name="Test.FanSpeed1",
+            available=True,
+            access=Access.READ_WRITE,
+            enumeration={"0": "Off", "1": "Speed1", "2": "Speed1"},
+            default=0,
+        ),
+        EntityDescription(
+            uid=404,
+            name="Test.FanSpeed2",
+            available=True,
+            access=Access.READ_WRITE,
+            enumeration={"0": "Off", "1": "Speed1", "2": "Speed1"},
+            default=0,
         ),
     ],
     program=[
