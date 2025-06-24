@@ -76,3 +76,6 @@ Use one of these two methods enable debug logging:
         [![Open your Home Assistant instance and show your Home Assistant logs.](https://my.home-assistant.io/badges/logs.svg)](https://my.home-assistant.io/redirect/logs/?)
 
     5. Download the log file using download button on the left
+
+## Tutorials
+Find a german tutorial from Tristans Smartes Heim here: https://youtu.be/guIfYZE4D4E
