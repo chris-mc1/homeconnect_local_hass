@@ -173,7 +173,8 @@
         "state": {
           "on": "Wartung nötig",
           "off": "Ok"
-        },
+        }
+      },
       "binary_sensor_machinecareandfiltercleaningreminder": {
         "name": "Maschinenreinigung mit Filter",
         "state": {
