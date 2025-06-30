@@ -223,6 +223,9 @@
       "sensor_energy_forecast": {
         "name": "Energieverbrauch Schätzung"
       },
+      "sensor_machinecarereminder": {
+        "name": "Maschinenreinigungtest"
+      },
       "sensor_operation_state": {
         "name": "Betriebszustand",
         "state": {
