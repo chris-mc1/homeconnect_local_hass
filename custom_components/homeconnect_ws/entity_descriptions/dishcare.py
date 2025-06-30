@@ -26,10 +26,9 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_machinecarereminder",
-            entity="Dishcare.Dishwasher.Event.MachineCareReminder",
             entities=[
-                "Dishcare.Dishwasher.Event.MachineCareReminder",
                 "Dishcare.Dishwasher.Event.MachineCareAndFilterCleaningReminder",
+                "Dishcare.Dishwasher.Event.MachineCareReminder",
             ],
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
