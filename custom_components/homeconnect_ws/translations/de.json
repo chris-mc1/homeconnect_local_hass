@@ -173,6 +173,12 @@
         "state": {
           "on": "Wartung nötig",
           "off": "Ok"
+        },
+      "binary_sensor_machinecareandfiltercleaningreminder": {
+        "name": "Maschinenreinigung mit Filter",
+        "state": {
+          "on": "Wartung nötig",
+          "off": "Ok"
         }
       },
       "binary_sensor_lint_filter_full": {
@@ -222,9 +228,6 @@
       },
       "sensor_energy_forecast": {
         "name": "Energieverbrauch Schätzung"
-      },
-      "sensor_machinecarereminder": {
-        "name": "Maschinenreinigungtest"
       },
       "sensor_operation_state": {
         "name": "Betriebszustand",
