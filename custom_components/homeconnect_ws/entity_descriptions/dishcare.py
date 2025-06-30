@@ -32,6 +32,14 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_machinecareandfiltercleaningreminder",
+            entity="Dishcare.Dishwasher.Event.MachineCareAndFilterCleaningReminder",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
     ],
     "event_sensor": [
         HCSensorEntityDescription(
@@ -106,12 +114,6 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSensorEntityDescription(
             key="sensor_program_phase",
             entity="Dishcare.Dishwasher.Status.ProgramPhase",
-            device_class=SensorDeviceClass.ENUM,
-            has_state_translation=True,
-        ),
-        HCSensorEntityDescription(
-            key="sensor_machinecarereminder",
-            entity="Dishcare.Dishwasher.Event.MachineCareReminder",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
         ),
