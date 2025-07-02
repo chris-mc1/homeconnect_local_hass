@@ -343,9 +343,6 @@
           "full": "Full"
         }
       },
-      "sensor_start_in": {
-        "name": "Start in"
-      },
       "sensor_count_started": {
         "name": "Start count"
       },
@@ -1177,6 +1174,9 @@
       },
       "number_hood_interval_on": {
         "name": "Interval time on"
+      },
+      "number_start_in": {
+        "name": "Start in"
       }
     },
     "light": {
