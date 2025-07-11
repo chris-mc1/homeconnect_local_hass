@@ -605,9 +605,6 @@
           "full": "Voll"
         }
       },
-      "sensor_start_in": {
-        "name": "Start in"
-      },
       "sensor_count_started": {
         "name": "Startanzahl"
       },
@@ -1617,6 +1614,9 @@
       },
       "number_oven_display_brightness": {
         "name": "Display Helligkeit"
+      },
+      "number_start_in": {
+        "name": "Start in"
       }
     },
     "light": {
