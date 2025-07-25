@@ -54,7 +54,6 @@ class HCLight(HCEntity, LightEntity):
         if entity_description.brightness_entity is not None:
             self._brightness_entity = self._appliance.entities[entity_description.brightness_entity]
             self._entities.append(self._brightness_entity)
-            self._brightness_scale = (self._brightness_entity.min, self._brightness_entity.max)
 
             self._attr_supported_color_modes = {ColorMode.BRIGHTNESS}
             self._attr_color_mode = ColorMode.BRIGHTNESS
@@ -77,11 +76,16 @@ class HCLight(HCEntity, LightEntity):
 
     @property
     def brightness(self) -> int | None:
-        return value_to_brightness(self._brightness_scale, self._brightness_entity.value)
+        return value_to_brightness((1, 100), self._brightness_entity.value)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         if ATTR_BRIGHTNESS in kwargs:
-            value_in_range = brightness_to_value(self._brightness_scale, kwargs[ATTR_BRIGHTNESS])
+            value_in_range = int(
+                max(
+                    brightness_to_value((1, 100), kwargs[ATTR_BRIGHTNESS]),
+                    self._brightness_entity.min,
+                )
+            )
             await self._brightness_entity.set_value(value_in_range)
         await self._entity.set_value(True)
 

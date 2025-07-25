@@ -10,6 +10,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
     HCFanEntityDescription,
+    HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -177,6 +178,19 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             entities=["Test.FanSpeed1", "Test.FanSpeed2"],
         )
     ],
+    "light": [
+        HCLightEntityDescription(
+            key="Test.Light.1",
+            name="Light.1",
+            entity="Test.Lighting",
+        ),
+        HCLightEntityDescription(
+            key="Test.Light.2",
+            name="Light.2",
+            entity="Test.Lighting",
+            brightness_entity="Test.LightingBrightness",
+        ),
+    ],
 }
 DEVICE_DESCRIPTION = DeviceDescription(
     status=[
@@ -284,6 +298,21 @@ DEVICE_DESCRIPTION = DeviceDescription(
             access=Access.READ_WRITE,
             available=True,
             default="",
+        ),
+        EntityDescription(
+            uid=108,
+            name="Test.Lighting",
+            access=Access.READ_WRITE,
+            available=True,
+        ),
+        EntityDescription(
+            uid=109,
+            name="Test.LightingBrightness",
+            access=Access.READ_WRITE,
+            available=True,
+            default=0,
+            min=2,
+            max=100,
         ),
     ],
     event=[
