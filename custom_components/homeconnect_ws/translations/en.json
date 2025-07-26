@@ -1177,6 +1177,9 @@
       },
       "number_hood_interval_on": {
         "name": "Interval time on"
+      },
+      "number_start_in": {
+        "name": "Start in"
       }
     },
     "light": {

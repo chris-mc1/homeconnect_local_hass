@@ -1029,6 +1029,9 @@
       },
       "number_oven_display_brightness": {
         "name": "Luminosità display"
+      },
+      "number_start_in": {
+        "name": "Avvio tra"
       }
     }
   }
