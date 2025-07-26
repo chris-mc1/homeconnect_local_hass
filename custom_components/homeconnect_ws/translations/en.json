@@ -307,7 +307,24 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Super Short 15min/30min",
-          "laundrycare_washer_program_wool_wool_wool": "Wool"
+          "laundrycare_washer_program_wool_wool_wool": "Wool",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Memory 1",
+          "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_dryer_program_blankets": "Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Shirts",
+          "laundrycare_dryer_program_cotton": "Cottons",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_hygiene": "Hygiene",
+          "laundrycare_dryer_program_inbasket": "Wool in Basket",
+          "laundrycare_dryer_program_mix": "Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Duvet",
+          "laundrycare_dryer_program_super40": "Rapid 40min",
+          "laundrycare_dryer_program_synthetic": "Easy-Care",
+          "laundrycare_dryer_program_timecold": "Time Progr. Cold",
+          "laundrycare_dryer_program_timewarm": "Time Progr. Warm",
+          "laundrycare_dryer_program_towels": "Towels"
         }
       },
       "sensor_rinse_aid": {
@@ -712,7 +729,24 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Super Short 15min/30min",
-          "laundrycare_washer_program_wool_wool_wool": "Wool"
+          "laundrycare_washer_program_wool_wool_wool": "Wool",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Memory 1",
+          "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_dryer_program_blankets": "Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Shirts",
+          "laundrycare_dryer_program_cotton": "Cottons",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_hygiene": "Hygiene",
+          "laundrycare_dryer_program_inbasket": "Wool in Basket",
+          "laundrycare_dryer_program_mix": "Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Duvet",
+          "laundrycare_dryer_program_super40": "Rapid 40min",
+          "laundrycare_dryer_program_synthetic": "Easy-Care",
+          "laundrycare_dryer_program_timecold": "Time Progr. Cold",
+          "laundrycare_dryer_program_timewarm": "Time Progr. Warm",
+          "laundrycare_dryer_program_towels": "Towels"
         }
       },
       "select_sensitivity_turbidity": {
