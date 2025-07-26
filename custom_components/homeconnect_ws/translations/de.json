@@ -175,6 +175,13 @@
           "off": "Ok"
         }
       },
+      "binary_sensor_machinecarefiltercleaningreminder": {
+        "name": "Maschinenreinigung",
+        "state": {
+          "on": "Wartung nötig",
+          "off": "Ok"
+        }
+      },
       "binary_sensor_lint_filter_full": {
         "name": "Flusenfilter",
         "state": {
@@ -604,9 +611,6 @@
           "not_inserted": "Nicht eingesetzt",
           "full": "Voll"
         }
-      },
-      "sensor_start_in": {
-        "name": "Start in"
       },
       "sensor_count_started": {
         "name": "Startanzahl"
@@ -1617,6 +1621,9 @@
       },
       "number_oven_display_brightness": {
         "name": "Display Helligkeit"
+      },
+      "number_start_in": {
+        "name": "Start in"
       }
     },
     "light": {
