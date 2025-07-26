@@ -247,6 +247,22 @@ def generate_hob_zones(appliance: HomeAppliance) -> HCFanEntityDescription:
     return descriptions
 
 
+def generate_hood_light(appliance: HomeAppliance) -> HCFanEntityDescription:
+    """Get Hood light descriptions."""
+    if "Cooking.Hood.Setting.ColorTemperaturePercent" in appliance.entities:
+        return HCLightEntityDescription(
+            key="light_cooking_lighting",
+            entity="Cooking.Common.Setting.Lighting",
+            brightness_entity="Cooking.Common.Setting.LightingBrightness",
+            color_temperature_entity="Cooking.Hood.Setting.ColorTemperaturePercent",
+        )
+    return HCLightEntityDescription(
+        key="light_cooking_lighting",
+        entity="Cooking.Common.Setting.Lighting",
+        brightness_entity="Cooking.Common.Setting.LightingBrightness",
+    )
+
+
 COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "sensor": [
         HCSensorEntityDescription(
@@ -396,12 +412,6 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
         ),
     ],
-    "light": [
-        HCLightEntityDescription(
-            key="light_cooking_lighting",
-            entity="Cooking.Common.Setting.Lighting",
-            brightness_entity="Cooking.Common.Setting.LightingBrightness",
-        )
-    ],
+    "light": [generate_hood_light],
     "fan": [generate_hood_fan],
 }

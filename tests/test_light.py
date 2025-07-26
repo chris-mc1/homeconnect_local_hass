@@ -7,6 +7,8 @@ from typing import TYPE_CHECKING
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_BRIGHTNESS_PCT,
+    ATTR_COLOR_MODE,
+    ATTR_COLOR_TEMP_KELVIN,
     ATTR_SUPPORTED_COLOR_MODES,
     SERVICE_TURN_ON,
     ColorMode,
@@ -14,6 +16,7 @@ from homeassistant.components.light import (
 from homeassistant.components.light import (
     DOMAIN as LIGHT_DOMAIN,
 )
+from homeassistant.components.light.const import DEFAULT_MAX_KELVIN, DEFAULT_MIN_KELVIN
 from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_FRIENDLY_NAME,
@@ -37,18 +40,29 @@ async def test_setup(
 ) -> None:
     """Test setting up entity."""
     assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    await mock_appliance.entities["Test.Lighting"].update({"value": True})
+    await hass.async_block_till_done()
 
     state = hass.states.get("light.fake_brand_homeappliance_light_1")
     assert state
     assert state.name == "Fake_brand HomeAppliance Light.1"
     assert state.attributes[ATTR_FRIENDLY_NAME] == "Fake_brand HomeAppliance Light.1"
+    assert state.attributes[ATTR_COLOR_MODE] == ColorMode.ONOFF
     assert state.attributes[ATTR_SUPPORTED_COLOR_MODES] == [ColorMode.ONOFF]
 
     state = hass.states.get("light.fake_brand_homeappliance_light_2")
     assert state
     assert state.name == "Fake_brand HomeAppliance Light.2"
     assert state.attributes[ATTR_FRIENDLY_NAME] == "Fake_brand HomeAppliance Light.2"
+    assert state.attributes[ATTR_COLOR_MODE] == ColorMode.BRIGHTNESS
     assert state.attributes[ATTR_SUPPORTED_COLOR_MODES] == [ColorMode.BRIGHTNESS]
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_3")
+    assert state
+    assert state.name == "Fake_brand HomeAppliance Light.3"
+    assert state.attributes[ATTR_FRIENDLY_NAME] == "Fake_brand HomeAppliance Light.3"
+    assert state.attributes[ATTR_COLOR_MODE] == ColorMode.COLOR_TEMP
+    assert state.attributes[ATTR_SUPPORTED_COLOR_MODES] == [ColorMode.COLOR_TEMP]
 
 
 async def test_update_on_off(
@@ -95,7 +109,7 @@ async def test_on(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data={"uid": 108, "value": True},
+            data=[{"uid": 108, "value": True}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -155,11 +169,11 @@ async def test_set_brightness(
         },
         blocking=True,
     )
-    mock_appliance.session.send_sync.assert_any_await(
+    mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data={"uid": 109, "value": 100},
+            data=[{"uid": 109, "value": 100}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -174,11 +188,11 @@ async def test_set_brightness(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_any_await(
+    mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data={"uid": 109, "value": 50},
+            data=[{"uid": 109, "value": 50}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -193,11 +207,11 @@ async def test_set_brightness(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_any_await(
+    mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data={"uid": 109, "value": 2},
+            data=[{"uid": 109, "value": 2}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -212,11 +226,174 @@ async def test_set_brightness(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_any_await(
+    mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data={"uid": 109, "value": 2},
+            data=[{"uid": 109, "value": 2}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
+
+
+async def test_update_color_temp(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test Color temp."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    await mock_appliance.entities["Test.Lighting"].update({"value": True})
+    await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 100})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_3")
+    assert state.state == STATE_ON
+    assert state.attributes[ATTR_BRIGHTNESS] == 255  # 100%
+    assert state.attributes[ATTR_COLOR_TEMP_KELVIN] == DEFAULT_MAX_KELVIN  # 100%
+
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 0})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_3")
+    assert state.attributes[ATTR_COLOR_TEMP_KELVIN] == DEFAULT_MIN_KELVIN  # 0%
+
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 50})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_3")
+    assert state.attributes[ATTR_COLOR_TEMP_KELVIN] == 4267  # 50%
+
+
+async def test_set_color_temp(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test Color temp."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    await mock_appliance.entities["Test.Lighting"].update({"value": True})
+    await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 0})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_3",
+            ATTR_COLOR_TEMP_KELVIN: DEFAULT_MAX_KELVIN,
+        },
+        blocking=True,
+    )
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[{"uid": 110, "value": 100}],
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_3",
+            ATTR_COLOR_TEMP_KELVIN: DEFAULT_MIN_KELVIN,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[{"uid": 110, "value": 0}],
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_3",
+            ATTR_COLOR_TEMP_KELVIN: 4268,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[{"uid": 110, "value": 50}],
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()
+
+
+async def test_set_brightness_color_temp(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test Brightness and Color temp."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    await mock_appliance.entities["Test.Lighting"].update({"value": False})
+    await mock_appliance.entities["Test.LightingBrightness"].update({"value": 0})
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 0})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_3",
+            ATTR_BRIGHTNESS_PCT: 100,
+            ATTR_COLOR_TEMP_KELVIN: DEFAULT_MAX_KELVIN,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[
+                {"uid": 109, "value": 100},
+                {"uid": 110, "value": 100},
+                {"uid": 108, "value": True},
+            ],
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()
+
+    await mock_appliance.entities["Test.Lighting"].update({"value": True})
+    await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 100})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_3",
+            ATTR_BRIGHTNESS_PCT: 2,
+            ATTR_COLOR_TEMP_KELVIN: DEFAULT_MIN_KELVIN,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[
+                {"uid": 109, "value": 2},
+                {"uid": 110, "value": 0},
+            ],
+        )
+    )
