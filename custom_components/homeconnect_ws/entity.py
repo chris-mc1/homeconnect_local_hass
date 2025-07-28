@@ -85,7 +85,17 @@ class HCEntity(Entity):
         for description in self._extra_attributes:
             entity = self._appliance.entities[description["entity"]]
             if "value_fn" in description:
-                extra_state_attributes[description["name"]] = description["value_fn"](entity)
+                try:
+                    extra_state_attributes[description["name"]] = description["value_fn"](entity)
+                except Exception as exc:  # noqa: BLE001
+                    _LOGGER.debug(
+                        "Failed to set extra attribute %s for %s: %s",
+                        description["name"],
+                        self.entity_description.key,
+                        str(exc),
+                        exc_info=True,
+                    )
+                    extra_state_attributes[description["name"]] = None
             else:
                 extra_state_attributes[description["name"]] = entity.value
         return extra_state_attributes

@@ -43,6 +43,7 @@ class HCNumber(HCEntity, NumberEntity):
         device_info: DeviceInfo,
     ) -> None:
         super().__init__(entity_description, appliance, device_info)
+        self._entity._type = int  # noqa: SLF001 Force integer type
         if hasattr(self._entity, "min") and self._entity.min is not None:
             self._attr_native_min_value = self._entity.min
         if hasattr(self._entity, "max") and self._entity.max is not None:

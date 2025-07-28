@@ -100,6 +100,26 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_refrigerator_defrost",
+            entity="Refrigeration.FridgeFreezer.Status.DefrostFreezer",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_appliance_error",
+            entity="Refrigeration.FridgeFreezer.Event.ApplianceError",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_low_voltage",
+            entity="Refrigeration.FridgeFreezer.Event.LowVoltageHint",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
     ],
     "sensor": [
         HCSensorEntityDescription(
@@ -191,6 +211,18 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="switch_refrigeration_light_theater_mode",
             entity="Refrigeration.Common.Setting.Light.Internal.EnableTheaterMode",
             device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_refrigerator_sabbath_mode",
+            entity="Refrigeration.FridgeFreezer.Setting.SabbathMode",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_refrigerator_fresh_mode",
+            entity="Refrigeration.FridgeFreezer.Setting.FreshMode",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
         ),
     ],
     "select": [

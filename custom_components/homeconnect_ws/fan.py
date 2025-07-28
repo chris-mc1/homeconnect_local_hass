@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import TYPE_CHECKING, NamedTuple
+from typing import TYPE_CHECKING, Any, NamedTuple
 
 from homeassistant.components.fan import FanEntity, FanEntityFeature
 from homeassistant.exceptions import ServiceValidationError
@@ -59,7 +59,7 @@ class HCFan(HCEntity, FanEntity):
         device_info: DeviceInfo,
     ) -> None:
         super().__init__(entity_description, appliance, device_info)
-        self._attr_supported_features = FanEntityFeature.SET_SPEED
+        self._attr_supported_features = FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
         self._speed_mapping = []
         self._speed_entities = {}
         self._attr_speed_count = 0
@@ -110,3 +110,12 @@ class HCFan(HCEntity, FanEntity):
         else:
             msg = f"Speed {percentage} is invalid"
             raise ServiceValidationError(msg)
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        data = [{"uid": entity.uid, "value": 0} for entity in self._speed_entities.values()]
+        message = Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=data,
+        )
+        await self._appliance.session.send_sync(message)

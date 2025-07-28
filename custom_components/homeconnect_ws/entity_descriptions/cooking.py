@@ -247,6 +247,31 @@ def generate_hob_zones(appliance: HomeAppliance) -> HCFanEntityDescription:
     return descriptions
 
 
+def generate_hood_light(appliance: HomeAppliance) -> HCFanEntityDescription:
+    """Get Hood light descriptions."""
+    if "Cooking.Hood.Setting.ColorTemperaturePercent" in appliance.entities:
+        return HCLightEntityDescription(
+            key="light_cooking_lighting",
+            entity="Cooking.Common.Setting.Lighting",
+            brightness_entity="Cooking.Common.Setting.LightingBrightness",
+            color_temperature_entity="Cooking.Hood.Setting.ColorTemperaturePercent",
+        )
+
+    if "Cooking.Hood.Setting.LightingBrightness" in appliance.entities:
+        return HCLightEntityDescription(
+            key="light_cooking_lighting",
+            entity="Cooking.Common.Setting.Lighting",
+            brightness_entity="Cooking.Common.Setting.LightingBrightness",
+        )
+
+    if "Cooking.Common.Setting.Lighting" in appliance.entities:
+        return HCLightEntityDescription(
+            key="light_cooking_lighting",
+            entity="Cooking.Common.Setting.Lighting",
+        )
+    return None
+
+
 COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "sensor": [
         HCSensorEntityDescription(
@@ -313,6 +338,17 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=UnitOfTime.SECONDS,
             mode=NumberMode.AUTO,
         ),
+        HCNumberEntityDescription(
+            key="number_hood_delayed_shutoff_time",
+            entity="Cooking.Hood.Setting.DelayedShutOffTime",
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_hood_sensor_sensitivity",
+            entity="Cooking.Hood.Setting.SensorSensitivity",
+            mode=NumberMode.AUTO,
+        ),
     ],
     "select": [
         HCSelectEntityDescription(
@@ -365,6 +401,11 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        HCSelectEntityDescription(
+            key="select_hob_delaye_shutoff_stage",
+            entity="Cooking.Hood.Setting.DelayedShutOffStage",
+            has_state_translation=True,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -395,13 +436,12 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Common.Option.Hood.Boost",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_hood_silence_mode",
+            entity="Cooking.Hood.Setting.NoiseReduction",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
     ],
-    "light": [
-        HCLightEntityDescription(
-            key="light_cooking_lighting",
-            entity="Cooking.Common.Setting.Lighting",
-            brightness_entity="Cooking.Common.Setting.LightingBrightness",
-        )
-    ],
+    "light": [generate_hood_light],
     "fan": [generate_hood_fan],
 }

@@ -190,6 +190,13 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             entity="Test.Lighting",
             brightness_entity="Test.LightingBrightness",
         ),
+        HCLightEntityDescription(
+            key="Test.Light.3",
+            name="Light.3",
+            entity="Test.Lighting",
+            brightness_entity="Test.LightingBrightness",
+            color_temperature_entity="Test.LightingColor",
+        ),
     ],
 }
 DEVICE_DESCRIPTION = DeviceDescription(
@@ -304,6 +311,7 @@ DEVICE_DESCRIPTION = DeviceDescription(
             name="Test.Lighting",
             access=Access.READ_WRITE,
             available=True,
+            protocolType="Boolean",
         ),
         EntityDescription(
             uid=109,
@@ -313,6 +321,17 @@ DEVICE_DESCRIPTION = DeviceDescription(
             default=0,
             min=2,
             max=100,
+            protocolType="Float",
+        ),
+        EntityDescription(
+            uid=110,
+            name="Test.LightingColor",
+            access=Access.READ_WRITE,
+            available=True,
+            default=0,
+            min=0,
+            max=100,
+            protocolType="Float",
         ),
     ],
     event=[

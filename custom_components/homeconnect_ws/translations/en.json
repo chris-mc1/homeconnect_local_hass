@@ -148,6 +148,12 @@
       },
       "switch_hood_boost": {
         "name": "Boost"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Silence Mode"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Fresh Mode"
       }
     },
     "binary_sensor": {
@@ -225,6 +231,12 @@
       },
       "binary_sensor_water_filter_full": {
         "name": "Water filter full"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Appliance Error"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Low Voltage"
       }
     },
     "sensor": {
@@ -307,7 +319,24 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Super Short 15min/30min",
-          "laundrycare_washer_program_wool_wool_wool": "Wool"
+          "laundrycare_washer_program_wool_wool_wool": "Wool",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Memory 1",
+          "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_dryer_program_blankets": "Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Shirts",
+          "laundrycare_dryer_program_cotton": "Cottons",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_hygiene": "Hygiene",
+          "laundrycare_dryer_program_inbasket": "Wool in Basket",
+          "laundrycare_dryer_program_mix": "Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Duvet",
+          "laundrycare_dryer_program_super40": "Rapid 40min",
+          "laundrycare_dryer_program_synthetic": "Easy-Care",
+          "laundrycare_dryer_program_timecold": "Time Progr. Cold",
+          "laundrycare_dryer_program_timewarm": "Time Progr. Warm",
+          "laundrycare_dryer_program_towels": "Towels"
         }
       },
       "sensor_rinse_aid": {
@@ -624,6 +653,30 @@
       },
       "sensor_hob_zone_program_progress": {
         "name": "Zone {group_name} Program Progress"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Ristretto Espresso count"
+      },
+      "sensor_count_coffee": {
+        "name": "Coffee count"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Coffee & Milk count"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Frothy Milk count"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Hot Milk count"
+      },
+      "sensor_count_hot_water": {
+        "name": "Hot Water count"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Hot Water Cups count"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Powder Coffee count"
       }
     },
     "select": {
@@ -709,7 +762,24 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Super Short 15min/30min",
-          "laundrycare_washer_program_wool_wool_wool": "Wool"
+          "laundrycare_washer_program_wool_wool_wool": "Wool",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Memory 1",
+          "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_dryer_program_blankets": "Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Shirts",
+          "laundrycare_dryer_program_cotton": "Cottons",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_hygiene": "Hygiene",
+          "laundrycare_dryer_program_inbasket": "Wool in Basket",
+          "laundrycare_dryer_program_mix": "Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Duvet",
+          "laundrycare_dryer_program_super40": "Rapid 40min",
+          "laundrycare_dryer_program_synthetic": "Easy-Care",
+          "laundrycare_dryer_program_timecold": "Time Progr. Cold",
+          "laundrycare_dryer_program_timewarm": "Time Progr. Warm",
+          "laundrycare_dryer_program_towels": "Towels"
         }
       },
       "select_sensitivity_turbidity": {
@@ -1119,6 +1189,15 @@
           "fanstage02": "2",
           "fanstage03": "3"
         }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Delayed ShutOff Stage",
+        "state": {
+          "fanoff": "Off",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
       }
     },
     "button": {
@@ -1174,6 +1253,12 @@
       },
       "number_hood_interval_on": {
         "name": "Interval time on"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Delayed Shutoff Time"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Auto Sensor Sensitivity"
       },
       "number_start_in": {
         "name": "Start in"

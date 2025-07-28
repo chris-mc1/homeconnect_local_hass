@@ -1,11 +1,11 @@
 [project]
-version = "1.0.5"
+version = "1.0.5b9"
 name = "homeconnect_ws"
 authors = [{ name = "chris-mc1" }]
 description = "Home Connect Local for Homeassistant"
 readme = "README.md"
 requires-python = ">=3.13.2"
-dependencies = ["homeconnect-websocket==1.4.0"]
+dependencies = ["homeconnect-websocket==1.4.1"]
 [project.urls]
 Homepage = "https://github.com/chris-mc1/homeconnect_local_hass"
 Issues = "https://github.com/chris-mc1/homeconnect_local_hass/issues"

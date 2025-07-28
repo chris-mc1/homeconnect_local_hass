@@ -42,7 +42,8 @@ def create_entities(
                     )
                 except Exception:
                     _LOGGER.exception("Failed to create Entity %s", entity_description.key)
-                entities.add(entity)
+                else:
+                    entities.add(entity)
     return entities
 
 

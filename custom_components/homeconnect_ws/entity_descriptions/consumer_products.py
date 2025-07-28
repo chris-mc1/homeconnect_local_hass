@@ -142,4 +142,46 @@ CONSUMER_PRODUCTS_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.BOX,
         )
     ],
+    "sensor": [
+        HCSensorEntityDescription(
+            key="sensor_count_ristretto_espresso",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterRistrettoEspresso",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_coffee",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterCoffee",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_coffee_milk",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterCoffeeAndMilk",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_frothy_milk",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterFrothyMilk",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_hot_milk",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterHotMilk",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_hot_water",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterHotWater",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_hot_water_cups",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterHotWaterCups",
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_count_powder_coffee",
+            entity="ConsumerProducts.CoffeeMaker.Status.BeverageCounterPowderCoffee",
+            entity_registry_enabled_default=False,
+        ),
+    ],
 }

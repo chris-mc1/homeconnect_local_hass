@@ -40,7 +40,10 @@ async def test_setup(
     assert state
     assert state.name == "Fake_brand HomeAppliance Fan"
     assert state.attributes[ATTR_FRIENDLY_NAME] == "Fake_brand HomeAppliance Fan"
-    assert state.attributes[ATTR_SUPPORTED_FEATURES] == FanEntityFeature.SET_SPEED
+    assert (
+        state.attributes[ATTR_SUPPORTED_FEATURES]
+        == FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
+    )
     assert state.attributes[ATTR_PERCENTAGE_STEP] == 25
 
 

@@ -101,6 +101,7 @@ class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, froz
 
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
     brightness_entity: str | None = None
+    color_temperature_entity: str | None = None
 
 
 class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_or_thawed=True):
