@@ -850,6 +850,9 @@
       "sensor_oven_current_temperature": {
         "name": "Aktuelle Temperatur{group_name}"
       },
+      "sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarm abgelaufen{group_name}"
+      },
       "sensor_heatup_progress": {
         "name": "Aufwärmprozess"
       },
@@ -1757,6 +1760,9 @@
       },
       "number_start_in": {
         "name": "Start in"
+      },
+      "sensor_oven_setting_alarm_clock": {
+        "name": "Alarm"
       }
     },
     "light": {
