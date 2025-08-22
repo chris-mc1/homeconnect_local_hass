@@ -255,24 +255,25 @@
       "sensor_operation_state": {
         "name": "Operation State",
         "state": {
-          "inactive": "Inactive",
-          "ready": "Ready",
-          "delayedstart": "Delayed Start",
-          "run": "Running",
-          "pause": "Paused",
-          "actionrequired": "Action Required",
-          "finished": "Finished",
-          "error": "Error",
-          "aborting": "Aborting"
+          "Inactive": "Inactive",
+          "Ready": "Ready",
+          "DelayedStart": "Delayed Start",
+          "Run": "Running",
+          "Pause": "Paused",
+          "ActionRequired": "Action Required",
+          "Finished": "Finished",
+          "Error": "Error",
+          "Aborting": "Aborting"
         }
       },
       "sensor_program_phase": {
         "name": "Program phase",
         "state": {
-          "prerinse": "Pre Rinse",
-          "mainwash": "Main Wash",
-          "finalrinse": "Final Rinse",
-          "drying": "Drying"
+          "None": "None",
+          "PreRinse": "Pre Rinse",
+          "MainWash": "Main Wash",
+          "FinalRinse": "Final Rinse",
+          "Drying": "Drying"
         }
       },
       "sensor_active_program": {
@@ -299,10 +300,31 @@
           "favorite_008": "Favorite 8",
           "favorite_009": "Favorite 9",
           "favorite_010": "Favorite 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Bottom Heating",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart function",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, large area",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, small area",
+          "cooking_oven_program_heatingmode_hotair": "Hot Air",
+          "cooking_oven_program_heatingmode_hotaireco": "Hot Air eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Hot Air Grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Keep Warm",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza Setting",
+          "cooking_oven_program_heatingmode_preheatovenware": "Preheat Ovenware",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath program",
+          "cooking_oven_program_heatingmode_slowcook": "Slow Cook",
+          "cooking_oven_program_heatingmode_topbottomheating": "Top/Bottom Heating",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Top/Bottom Heating eco",
+          "cooking_oven_program_microwave_90watt": "Microwave 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Microwave 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Microwave 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Microwave 600 Watt",
+          "cooking_oven_program_microwave_max": "Microwave maximaal",
+          "cooking_oven_program_cleaning_drying": "Drying",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
           "laundrycare_washer_program_cotton_cotton_cotton": "Wash - Cotton",
           "laundrycare_washer_program_darkwash_darkwash_darkwash": "Wash - Darkwash",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Wash - Curtains",
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Wash - Delicates/Silk",
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Wash - Anti Microplastic",
           "laundrycare_washer_program_downduvet_down_down": "Wash - Down",
@@ -312,6 +334,7 @@
           "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Wash - Eco 40-60",
           "laundrycare_washer_program_mix_mix_mix": "Fast/Mix",
           "laundrycare_washer_program_outdoor_outdoor_outdoor": "Wash - Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
           "laundrycare_washer_program_rinse_rinse_rinse": "Rinse",
           "laundrycare_washer_program_sensitive_sensitive_sensitive": "Wash - Sensitive",
           "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Wash - Shirts/Blouses",
@@ -319,6 +342,7 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Wash - Super Short 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Towels",
           "laundrycare_washer_program_wool_wool_wool": "Wash - Wool",
           "laundrycare_washer_program_sportfitness": "Wash - Sportswear",
           "laundrycare_common_program_juststart": "Just Start",
@@ -797,14 +821,23 @@
         }
       },
       "select_hot_water": {
-        "name": "Water Temperature",
+        "name": "Water Connection",
         "state": {
           "coldwater": "Cold Water",
           "hotwater": "Hot Water"
         }
       },
       "select_rinse_aid": {
-        "name": "Rinse Aid"
+        "name": "Rinse Aid",
+        "state": {
+          "Off": "Level 0",
+          "R01": "Level 1",
+          "R02": "Level 2",
+          "R03": "Level 3",
+          "R04": "Level 4",
+          "R05": "Level 5",
+          "R06": "Level 6"
+        }
       },
       "select_sound_level_signal": {
         "name": "Sound Level Signal",
@@ -816,7 +849,17 @@
         }
       },
       "select_water_hardness": {
-        "name": "Water Hardness"
+        "name": "Water Hardness",
+        "state": {
+          "H00": "°E 0-8 soft (0-1.1 mmol/l)",
+          "H01": "°E 9-10 soft (1.2-1.4 mmol/l)",
+          "H02": "°E 11-12 medium (1.5-1.8 mmol/l)",
+          "H03": "°E 13-15 medium (1.9-2.1 mmol/l)",
+          "H04": "°E 16-20 medium (2.2-2.9 mmol/l)",
+          "H05": "°E 21-26 hard (3.0-3.7 mmol/l)",
+          "H06": "°E 27-38 hard (3.8-5.4 mmol/l)",
+          "H07": "°E 39-62 hard (5.5-8.9 mmol/l)"
+        }
       },
       "select_remote_control_level": {
         "name": "Remote Control",
@@ -850,10 +893,31 @@
           "favorite_008": "Favorite 8",
           "favorite_009": "Favorite 9",
           "favorite_010": "Favorite 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Bottom Heating",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart function",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, large area",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, small area",
+          "cooking_oven_program_heatingmode_hotair": "Hot Air",
+          "cooking_oven_program_heatingmode_hotaireco": "Hot Air eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Hot Air Grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Keep Warm",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza Setting",
+          "cooking_oven_program_heatingmode_preheatovenware": "Preheat Ovenware",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath program",
+          "cooking_oven_program_heatingmode_slowcook": "Slow Cook",
+          "cooking_oven_program_heatingmode_topbottomheating": "Top/Bottom Heating",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Top/Bottom Heating eco",
+          "cooking_oven_program_microwave_90watt": "Microwave 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Microwave 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Microwave 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Microwave 600 Watt",
+          "cooking_oven_program_microwave_max": "Microwave maximaal",
+          "cooking_oven_program_cleaning_drying": "Drying",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
           "laundrycare_washer_program_cotton_cotton_cotton": "Wash - Cotton",
           "laundrycare_washer_program_darkwash_darkwash_darkwash": "Wash - Darkwash",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Wash - Curtains",
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Wash - Delicates/Silk",
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Wash - Anti Microplastic",
           "laundrycare_washer_program_downduvet_down_down": "Wash - Down",
@@ -863,6 +927,7 @@
           "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Wash - Eco 40-60",
           "laundrycare_washer_program_mix_mix_mix": "Fast/Mix",
           "laundrycare_washer_program_outdoor_outdoor_outdoor": "Wash - Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
           "laundrycare_washer_program_rinse_rinse_rinse": "Rinse",
           "laundrycare_washer_program_sensitive_sensitive_sensitive": "Wash - Sensitive",
           "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Wash - Shirts/Blouses",
@@ -870,9 +935,9 @@
           "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
           "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
           "laundrycare_washer_program_super153045_super1530_super1530": "Wash - Super Short 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Towels",
           "laundrycare_washer_program_wool_wool_wool": "Wash - Wool",
           "laundrycare_washer_program_sportfitness": "Wash - Sportswear",
-          "laundrycare_washer_program_towels": "Wash - Towels",
           "laundrycare_common_program_juststart": "Just Start",
           "laundrycare_common_program_memory1": "Memory 1",
           "laundrycare_common_program_memory2": "Memory 2",
@@ -1270,9 +1335,7 @@
         "name": "Coolingfan runtime",
         "state": {
           "short": "Short",
-          "medium": "Medium",
-          "long": "Long",
-          "verylong": "Very long"
+          "recommended": "Recommended"
         }
       },
       "select_oven_signal_duration": {
