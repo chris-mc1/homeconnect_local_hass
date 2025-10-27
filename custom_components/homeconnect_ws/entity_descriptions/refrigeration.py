@@ -1,4 +1,4 @@
-"""Description for Cooking Entities."""
+"""Description for Refrigeration Entities."""
 
 from __future__ import annotations
 
@@ -10,7 +10,6 @@ from homeassistant.const import EntityCategory, UnitOfTemperature
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
-    HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -113,6 +112,14 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Off"},
         ),
         HCBinarySensorEntityDescription(
+            key="binary_sensor_appliance_error",
+            entity="Refrigeration.Common.Event.ApplianceError",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_freezer_low_voltage",
             entity="Refrigeration.FridgeFreezer.Event.LowVoltageHint",
             entity_category=EntityCategory.DIAGNOSTIC,
@@ -136,6 +143,7 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
     ],
     "number": [
+        # Legacy/Generic temperature controls
         HCNumberEntityDescription(
             key="number_setpoint_freezer",
             entity="Refrigeration.FridgeFreezer.Setting.SetpointTemperatureFreezer",
@@ -152,6 +160,48 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.AUTO,
             step=1,
         ),
+        # Enhanced Bosch/Siemens Specific Temperature Controls - Celsius
+        HCNumberEntityDescription(
+            key="number_refrigerator_setpoint_temperature_celsius",
+            entity="Refrigeration.Common.Setting.Refrigerator.SetpointTemperature",
+            name="Refrigerator Temperature",
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            mode=NumberMode.AUTO,
+            step=1,
+            icon="mdi:fridge-outline",
+        ),
+        HCNumberEntityDescription(
+            key="number_freezer_setpoint_temperature_celsius",
+            entity="Refrigeration.Common.Setting.Freezer.SetpointTemperature",
+            name="Freezer Temperature",
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            mode=NumberMode.AUTO,
+            step=1,
+            icon="mdi:snowflake",
+        ),
+        # Enhanced Temperature Controls - Fahrenheit
+        HCNumberEntityDescription(
+            key="number_refrigerator_setpoint_temperature_fahrenheit",
+            entity="Refrigeration.Common.Setting.Refrigerator.SetpointTemperatureFahrenheit",
+            name="Refrigerator Temperature (°F)",
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            mode=NumberMode.AUTO,
+            step=1,
+            icon="mdi:fridge-outline",
+        ),
+        HCNumberEntityDescription(
+            key="number_freezer_setpoint_temperature_fahrenheit",
+            entity="Refrigeration.Common.Setting.Freezer.SetpointTemperatureFahrenheit",
+            name="Freezer Temperature (°F)",
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            mode=NumberMode.AUTO,
+            step=1,
+            icon="mdi:snowflake",
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -162,12 +212,21 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_super_freezer",
             entity="Refrigeration.Common.Setting.Freezer.SuperMode",
+            name="Super Freeze Mode",
             device_class=SwitchDeviceClass.SWITCH,
+            icon="mdi:snowflake-alert",
         ),
         HCSwitchEntityDescription(
             key="switch_super_refrigerator",
             entity="Refrigeration.FridgeFreezer.Setting.SuperModeRefrigerator",
             device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_super_refrigerator",
+            entity="Refrigeration.Common.Setting.Refrigerator.SuperMode",
+            name="Super Cool Mode",
+            device_class=SwitchDeviceClass.SWITCH,
+            icon="mdi:fridge-alert-outline",
         ),
         HCSwitchEntityDescription(
             key="switch_refrigerator_eco",
@@ -183,6 +242,13 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="switch_refrigerator_vacation",
             entity="Refrigeration.FridgeFreezer.Setting.VacationMode",
             device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_refrigerator_vacation",
+            entity="Refrigeration.Common.Setting.VacationMode",
+            name="Vacation Mode",
+            device_class=SwitchDeviceClass.SWITCH,
+            icon="mdi:airplane",
         ),
         HCSwitchEntityDescription(
             key="switch_refrigerator_dispenser_enabled",
@@ -237,12 +303,6 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Refrigeration.Common.Setting.Door.AssistantForceFreezer",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
-        ),
-    ],
-    "light": [
-        HCLightEntityDescription(
-            key="light_internal",
-            entity="Refrigeration.Common.Setting.Light.Internal.Power",
         ),
     ],
 }
