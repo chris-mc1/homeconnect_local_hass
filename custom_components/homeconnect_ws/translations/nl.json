@@ -41,6 +41,9 @@
       "switch_hygiene_plus": {
         "name": "Hygiene Plus"
       },
+      "switch_extra_dry_option": {
+        "name": "Extra Droog"
+      },
       "switch_intensiv_zone": {
         "name": "IntensiveZone"
       },

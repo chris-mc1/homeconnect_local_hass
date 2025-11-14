@@ -190,6 +190,10 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="button_resume_program",
             entity="BSH.Common.Command.ResumeProgram",
         ),
+        HCButtonEntityDescription(
+            key="button_mains_power_off",
+            entity="BSH.Common.Command.MainsPowerOff",
+        ),
     ],
     "binary_sensor": [
         HCBinarySensorEntityDescription(
@@ -228,6 +232,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Event.ProgramAborted",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_program_finished",
+            entity="BSH.Common.Event.ProgramFinished",
+            entity_category=EntityCategory.DIAGNOSTIC,
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),

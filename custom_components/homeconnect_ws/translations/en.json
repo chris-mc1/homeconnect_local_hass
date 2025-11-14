@@ -41,6 +41,9 @@
       "switch_hygiene_plus": {
         "name": "Hygiene Plus"
       },
+      "switch_extra_dry_option": {
+        "name": "Extra Dry"
+      },
       "switch_intensiv_zone": {
         "name": "Intensiv Zone"
       },
@@ -92,8 +95,11 @@
       "switch_laundry_silent_mode": {
         "name": "Silent mode"
       },
-      "switch_laundry_speed_perfect": {
-        "name": "Speed perfect"
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "Low Temperature Hygiene"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "Vario perfect"
       },
       "switch_laundry_gentle": {
         "name": "Gentle"
@@ -114,10 +120,49 @@
         "name": "Vacation mode"
       },
       "switch_laundry_idos1_active": {
-        "name": "i-DOS Liquid Detergent (Container 1)"
+        "name": "i-DOS 1 enable"
       },
       "switch_laundry_idos2_active": {
-        "name": "i-DOS Liquid Detergent (Container 2)"
+        "name": "i-DOS 2 enable"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "Intensive Plus"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "Less Ironing"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "Silent Wash"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "Speed Perfect"
+      },
+      "switch_laundry_soak": {
+        "name": "Soak"
+      },
+      "switch_laundry_prewash": {
+        "name": "Prewash"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "Rinse Hold"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "Rinse Plus 1"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "Rinse Plus 3"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "Water and Rinse Plus 1"
+      },
+      "switch_laundry_water_plus": {
+        "name": "Water Plus"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "Disinfectant"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "Hygienic Steam"
       },
       "switch_oven_fast_pre_heat": {
         "name": "Fast Preheat"
@@ -199,8 +244,63 @@
           "off": "OK"
         }
       },
+      "binary_sensor_low_voltage": {
+        "name": "Low Voltage"
+      },
       "binary_sensor_maintenance_reminder": {
         "name": "Care Cycle Recommended"
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "Machine Care",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "Machine Care & Filter Cleaning",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "Water Heater Calcified",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "Smart Filter Cleaning",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "Check Filter System",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "Draining Not Possible",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "Drain Pump Blocked",
+        "state": {
+          "on": "Maintenance Required",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_program_finished": {
+        "name": "Program Finished"
       },
       "binary_sensor_program_aborted": {
         "name": "Program Aborted"
@@ -208,8 +308,41 @@
       "binary_sensor_foam_detection": {
         "name": "Foam Detection"
       },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "Supply Voltage Low"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "Water Level High"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "Door Not Lockable"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "Door Not Unlockable"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "Fatal Error"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "Drum Clean Reminder"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "i-DOS 2 Low"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "i-DOS 1 Low"
+      },
       "binary_sensor_freezer_door_state": {
         "name": "Freezer Door"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "i-DOS Defect"
+      },
+      "binary_sensor_pump_error": {
+        "name": "Pump Error"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "Spin Aborted"
       },
       "binary_sensor_fridge_door_state": {
         "name": "Fridge Door"
@@ -348,6 +481,12 @@
           "laundrycare_common_program_juststart": "Just Start",
           "laundrycare_common_program_memory1": "Memory 1",
           "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_common_program_memory3": "Memory 3",
+          "laundrycare_common_program_memory4": "Memory 4",
+          "laundrycare_common_program_memory5": "Memory 5",
+          "laundrycare_common_program_memory6": "Memory 6",
+          "laundrycare_common_program_memory7": "Memory 7",
+          "laundrycare_common_program_memory8": "Memory 8",
           "laundrycare_dryer_program_blankets": "Dry - Down Wear",
           "laundrycare_dryer_program_businessshirts": "Shirts",
           "laundrycare_dryer_program_cotton": "Dry - Cottons",
@@ -614,6 +753,12 @@
       "sensor_temperature_ambient": {
         "name": "Ambient Temperature"
       },
+      "sensor_laundry_load_recommendation": {
+        "name": "Load Recommendation"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "Memory Temperature Freezer"
+      },
       "sensor_laundry_spin_speed": {
         "name": "Spin Speed",
         "state": {
@@ -811,6 +956,20 @@
           "emptypowdersources": "Emptying Powder Sources",
           "roundrobinflush": "Flushing System",
           "initializenewcartridge": "Initializing Cartridge"
+        }
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "i-DOS 1 Fill Level",
+        "state": {
+          "poor": "Poor",
+          "filled": "Filled"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "i-DOS 2 Fill Level",
+        "state": {
+          "poor": "Poor",
+          "filled": "Filled"
         }
       }
     },
@@ -1271,6 +1430,137 @@
           "business": "Business"
         }
       },
+      "select_laundry_idos2_content": {
+        "name": "i-DOS 2 Content",
+        "state": {
+          "softener": "Softener",
+          "detergent": "Detergent"
+        }
+      },
+      "select_laundry_idos2_level": {
+        "name": "i-DOS 2 Level",
+        "state": {
+          "off": "Off",
+          "light": "Light",
+          "normal": "Normal",
+          "strong": "Strong"
+        }
+      },
+      "select_laundry_idos1_level": {
+        "name": "i-DOS 1 Level",
+        "state": {
+          "off": "Off",
+          "light": "Light",
+          "normal": "Normal",
+          "strong": "Strong"
+        }
+      },
+      "select_laundry_vario_perfect": {
+        "name": "Vario perfect",
+        "state": {
+          "off": "Off",
+          "ecoperfect": "Eco Perfect",
+          "speedperfect": "Speed Perfect"
+        }
+      },
+      "select_laundry_hygienic_steam_intensity": {
+        "name": "Hygienic Steam Intensity",
+        "state": {
+          "middle": "Middle",
+          "high": "High"
+        }
+      },
+      "select_laundry_multiple_soak": {
+        "name": "Multiple Soak",
+        "state": {
+          "off": "Off",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_RinsePlus": {
+        "name": "Rinse Plus",
+        "state": {
+          "off": "Off",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed": {
+        "name": "Spin Speed",
+        "state": {
+          "off": "Off",
+          "uloff": "UlOff",
+          "rpm1000": "RPM1000",
+          "ulhigh": "UlHigh",
+          "rpm1200": "RPM1200",
+          "rpm1400": "RPM1400",
+          "rpm1500": "RPM1500",
+          "rpm1600": "RPM1600",
+          "auto": "Auto",
+          "max": "Max",
+          "ullow": "UlLow",
+          "rpm400": "RPM400",
+          "rpm600": "RPM600",
+          "rpm700": "RPM700",
+          "ulmedium": "UlMedium",
+          "rpm800": "RPM800",
+          "rpm900": "RPM900"
+        }
+      },
+      "select_laundry_option_stains": {
+        "name": "Stains",
+        "state": {
+          "off": "Off",
+          "babyfood": "Baby Food",
+          "perspiration": "Perspiration",
+          "socks": "Socks",
+          "butteroil": "Butter Oil",
+          "tea": "Tea",
+          "tomatosauce": "Tomato Sauce",
+          "strawberry": "Strawberry",
+          "orange": "Orange",
+          "blood": "Blood",
+          "egg": "Egg",
+          "mud": "Mud",
+          "grass": "Grass",
+          "coffee": "Coffee",
+          "cosmetics": "Cosmetics",
+          "redwine": "Red Wine",
+          "chocolate": "Chocolate"
+        }
+      },
+      "select_laundry_option_temperature": {
+        "name": "Washing Temperature",
+        "state": {
+          "cold": "Cold",
+          "gc20": "20°C",
+          "ulcold": "Ultra Cold",
+          "ulwarm": "Ultra Warm",
+          "ulhot": "Ultra Hot",
+          "ulextrahot": "Ultra Extra Hot",
+          "gc30": "30°C",
+          "auto": "Auto",
+          "max": "Max",
+          "gc40": "40°C",
+          "gc50": "50°C",
+          "gc60": "60°C",
+          "gc70": "70°C",
+          "gc80": "80°C",
+          "gc90": "90°C"
+        }
+      },
+      "select_laundry_option_water_and_rinse_plus": {
+        "name": "Water and Rinse Plus",
+        "state": {
+          "off": "Off",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
       "select_oven_level": {
         "name": "Level",
         "state": {
@@ -1396,6 +1686,9 @@
       },
       "button_resume_program": {
         "name": "Resume"
+      },
+      "button_mains_power_off": {
+        "name": "PowerOFF"
       }
     },
     "number": {
@@ -1419,6 +1712,9 @@
       },
       "number_setpoint_refrigerator": {
         "name": "Temperature Fridge"
+      },
+      "number_light_internal_brightness": {
+        "name": "Internal Light Brightness"
       },
       "number_idos1_base_level": {
         "name": "i-DOS dosing volume: detergent"
@@ -1457,6 +1753,9 @@
       },
       "light_internal": {
         "name": "Internal Light"
+      },
+      "light_logo": {
+        "name": "Logo Light"
       },
       "light_cooking_lighting": {
         "name": "Light"
