@@ -5,10 +5,12 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import logging
+import time
 from typing import TYPE_CHECKING
 
 from homeassistant.helpers.entity import Entity
 
+from .const import MAX_RECONECT_TIME
 from .helpers import entity_is_available
 
 if TYPE_CHECKING:
@@ -74,7 +76,7 @@ class HCEntity(Entity):
         available = (
             self._appliance.session.connected
             # Hide first reconnect
-            or (not self._appliance.session.connected and self._appliance.session.retry_count <= 2)
+            or not (self._appliance.session.last_msg_time > (time.time() + MAX_RECONECT_TIME))
         )
         available &= entity_is_available(self._entity, self.entity_description.available_access)
         return available
