@@ -76,7 +76,7 @@ class HCEntity(Entity):
         available = (
             self._appliance.session.connected
             # Hide first reconnect
-            or not (self._appliance.session.last_msg_time > (time.time() + MAX_RECONECT_TIME))
+            or not (self._appliance.session.disconnect_time > (time.time() + MAX_RECONECT_TIME))
         )
         available &= entity_is_available(self._entity, self.entity_description.available_access)
         return available
