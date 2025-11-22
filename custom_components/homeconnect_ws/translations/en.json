@@ -1851,6 +1851,15 @@
     },
     "not_appliance": {
       "message": "Not a Homeconnect Appliance"
+    },
+    "access_error": {
+      "message": "Entity is not Accessible"
+    },
+    "code_respons": {
+      "message": "Error response from Appliance: {message}"
+    },
+    "not_connected": {
+      "message": "Client is not Connected"
     }
   }
 }

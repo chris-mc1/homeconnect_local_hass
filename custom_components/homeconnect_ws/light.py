@@ -24,7 +24,7 @@ from homeconnect_websocket.message import Action
 from homeconnect_websocket.message import Message as HC_Message
 
 from .entity import HCEntity
-from .helpers import create_entities, entity_is_available
+from .helpers import create_entities, entity_is_available, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -145,6 +145,7 @@ class HCLight(HCEntity, LightEntity):
             return match_max_scale((255,), rgb)
         return None
 
+    @error_decorator
     async def async_turn_on(self, **kwargs: Any) -> None:
         message = HC_Message(
             resource="/ro/values",
@@ -197,5 +198,6 @@ class HCLight(HCEntity, LightEntity):
             message.data.append({"uid": self._entity.uid, "value": True})
         await self._appliance.session.send_sync(message)
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         await self._entity.set_value(False)

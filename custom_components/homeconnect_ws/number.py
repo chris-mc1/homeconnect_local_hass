@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from homeassistant.components.number import NumberEntity
 
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -67,5 +67,6 @@ class HCNumber(HCEntity, NumberEntity):
             return self._entity.step
         return None
 
+    @error_decorator
     async def async_set_native_value(self, value: float) -> None:
         await self._entity.set_value(int(value))

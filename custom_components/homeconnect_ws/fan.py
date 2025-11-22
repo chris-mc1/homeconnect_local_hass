@@ -12,7 +12,7 @@ from homeconnect_websocket.message import Action, Message
 
 from .const import DOMAIN
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -87,6 +87,7 @@ class HCFan(HCEntity, FanEntity):
                 return ranged_value_to_percentage(self._speed_range, speed.speed)
         return 0
 
+    @error_decorator
     async def async_set_percentage(self, percentage: int) -> None:
         new_speed = math.ceil(percentage_to_ranged_value(self._speed_range, percentage))
         new_speed_entity: str = None
@@ -115,6 +116,7 @@ class HCFan(HCEntity, FanEntity):
                 translation_placeholders={"percentage", percentage},
             )
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         data = [{"uid": entity.uid, "value": 0} for entity in self._speed_entities.values()]
         message = Message(

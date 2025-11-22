@@ -8,7 +8,7 @@ from homeassistant.components.select import SelectEntity
 from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -76,6 +76,7 @@ class HCSelect(HCEntity, SelectEntity):
             return value
         return None
 
+    @error_decorator
     async def async_select_option(self, option: str) -> None:
         if self._rev_options:
             option = self._rev_options[option]
@@ -109,6 +110,7 @@ class HCProgram(HCSelect):
             return self._appliance.selected_program.name
         return None
 
+    @error_decorator
     async def async_select_option(self, option: str) -> None:
         selected_program = self._appliance.programs[self._rev_programs[option]]
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):

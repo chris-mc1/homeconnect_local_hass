@@ -34,7 +34,7 @@ from .const import (
     PLATFORMS,
 )
 from .entity_descriptions import get_available_entities
-from .helpers import get_config_entry_from_call
+from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
@@ -87,6 +87,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         hass.data[HC_KEY].override_host = config[DOMAIN].get(CONF_DEV_OVERRIDE_HOST)
         hass.data[HC_KEY].override_psk = config[DOMAIN].get(CONF_DEV_OVERRIDE_PSK)
 
+    @error_decorator
     async def handle_start_program(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
 
@@ -126,6 +127,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 translation_key="no_program_selected",
             )
 
+    @error_decorator
     async def handle_set_start_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
@@ -142,6 +144,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 translation_key="start_in_not_available",
             )
 
+    @error_decorator
     async def handle_set_finish_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
