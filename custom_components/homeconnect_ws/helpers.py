@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers.service import async_extract_config_entry_ids
 
-from custom_components.homeconnect_ws.const import DOMAIN
+from .const import DOMAIN
 
 if TYPE_CHECKING:
     import re
@@ -94,8 +94,7 @@ async def get_config_entry_from_call(
         config_entry = hass.config_entries.async_get_entry(config_entry_id)
         if config_entry.domain == DOMAIN:
             return config_entry
-    msg = "Not a Homeconnect Appliance"
-    raise ServiceValidationError(msg)
+    raise ServiceValidationError(translation_domain=DOMAIN, translation_key="not_appliance")
 
 
 def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bool:

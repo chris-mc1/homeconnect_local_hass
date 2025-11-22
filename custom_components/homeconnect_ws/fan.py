@@ -10,6 +10,7 @@ from homeassistant.exceptions import ServiceValidationError
 from homeassistant.util.percentage import percentage_to_ranged_value, ranged_value_to_percentage
 from homeconnect_websocket.message import Action, Message
 
+from .const import DOMAIN
 from .entity import HCEntity
 from .helpers import create_entities
 
@@ -108,8 +109,11 @@ class HCFan(HCEntity, FanEntity):
             )
             await self._appliance.session.send_sync(message)
         else:
-            msg = f"Speed {percentage} is invalid"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="speed_invalid",
+                translation_placeholders={"percentage", percentage},
+            )
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         data = [{"uid": entity.uid, "value": 0} for entity in self._speed_entities.values()]
