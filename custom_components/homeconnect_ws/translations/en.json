@@ -1670,6 +1670,31 @@
           "highforce": "High"
         }
       },
+      "select_chiller_common_preset": {
+        "name": "Chiller preset",
+        "state": {
+          "meatfish": "29°F \uD83D\uDCA7 (Meat/Fish)",
+          "fruit": "32°F \uD83D\uDCA7 (Fruit)",
+          "vegetables": "32°F \uD83D\uDCA7\uD83D\uDCA7 (Vegetables)",
+          "beverages": "34°F \uD83D\uDCA7 (Beverages)",
+          "snacks": "40°F \uD83D\uDCA7 (Snacks/Misc.)",
+          "custom": "Custom"
+        }
+      },
+      "select_chiller_left_humidity": {
+        "name": "Chiller left humidity",
+        "state": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+      "select_chiller_right_humidity": {
+        "name": "Chiller right humidity",
+        "state": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
       "select_hood_interval_stage": {
         "name": "Interval stage",
         "state": {

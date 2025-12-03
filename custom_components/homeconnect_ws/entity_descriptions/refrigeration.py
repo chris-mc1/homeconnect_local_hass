@@ -231,6 +231,7 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.AUTO,
             step=1,
         ),
+        # This is only available when the `ChillerCommon.Preset` is `custom`.
         HCNumberEntityDescription(
             key="number_setpoint_chiller_common",
             entity="Refrigeration.Common.Setting.ChillerCommon.SetpointTemperature",
@@ -239,6 +240,7 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.AUTO,
             step=1,
         ),
+        # This is only available when the `ChillerCommon.Preset` is `custom`.
         HCNumberEntityDescription(
             key="number_setpoint_chiller_common_fahrenheit",
             translation_key="number_setpoint_chiller_common",
@@ -247,8 +249,6 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=NumberDeviceClass.TEMPERATURE,
             mode=NumberMode.AUTO,
             step=1,
-            native_min_value=29,
-            native_max_value=40,
         ),
         HCNumberEntityDescription(
             key="number_light_internal_brightness",
@@ -355,6 +355,26 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_refrigerator_door_assistant_freezer_force",
             entity="Refrigeration.Common.Setting.Door.AssistantForceFreezer",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_chiller_common_preset",
+            entity="Refrigeration.Common.Setting.ChillerCommon.Preset",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        # This is only available when the `ChillerCommon.Preset` is `custom`.
+        HCSelectEntityDescription(
+            key="select_chiller_left_humidity",
+            entity="Refrigeration.Common.Setting.ChillerLeft.Humidity",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        # This is only available when the `ChillerCommon.Preset` is `custom`.
+        HCSelectEntityDescription(
+            key="select_chiller_right_humidity",
+            entity="Refrigeration.Common.Setting.ChillerRight.Humidity",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
         ),
