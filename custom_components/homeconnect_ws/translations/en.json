@@ -56,6 +56,9 @@
       "switch_brilliance_dry": {
         "name": "Brilliance Dry"
       },
+      "switch_zeolite_dry": {
+        "name": "CrystalDry"
+      },
       "switch_extra_dry": {
         "name": "Extra Dry"
       },

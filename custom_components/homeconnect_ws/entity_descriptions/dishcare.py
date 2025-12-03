@@ -210,6 +210,14 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Dishcare.Dishwasher.Option.BrillianceDry",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        # Also referred to as "CrystalDry"
+        HCSwitchEntityDescription(
+            key="switch_zeolite_dry",
+            entity="Dishcare.Dishwasher.Option.ZeoliteDry",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
         HCSwitchEntityDescription(
             key="switch_extra_dry",
             entity="Dishcare.Dishwasher.Setting.ExtraDry",
