@@ -21,6 +21,13 @@ from .descriptions_definitions import (
 REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
+            key="binary_sensor_chiller_common_door_state",
+            entity="Refrigeration.Common.Status.Door.ChillerCommon",
+            device_class=BinarySensorDeviceClass.DOOR,
+            value_on={"Open"},
+            value_off={"Closed"},
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_freezer_door_state",
             entity="Refrigeration.Common.Status.Door.Freezer",
             device_class=BinarySensorDeviceClass.DOOR,
@@ -30,6 +37,13 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCBinarySensorEntityDescription(
             key="binary_sensor_fridge_door_state",
             entity="Refrigeration.Common.Status.Door.Refrigerator",
+            device_class=BinarySensorDeviceClass.DOOR,
+            value_on={"Open"},
+            value_off={"Closed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_chiller_common_door_state",
+            entity="Refrigeration.FridgeFreezer.Status.ChillerCommon",
             device_class=BinarySensorDeviceClass.DOOR,
             value_on={"Open"},
             value_off={"Closed"},
@@ -49,6 +63,14 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Closed"},
         ),
         HCBinarySensorEntityDescription(
+            key="binary_sensor_door_alarm_chiller_common",
+            entity="Refrigeration.FridgeFreezer.Event.DoorAlarmChillerCommon",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_door_alarm_freezer",
             entity="Refrigeration.FridgeFreezer.Event.DoorAlarmFreezer",
             entity_category=EntityCategory.DIAGNOSTIC,
@@ -59,6 +81,14 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCBinarySensorEntityDescription(
             key="binary_sensor_door_alarm_fridge",
             entity="Refrigeration.FridgeFreezer.Event.DoorAlarmRefrigerator",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_door_alarm_chiller_common",
+            entity="Refrigeration.Common.Event.Door.AlarmChillerCommon",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
             value_on={"Present", "Confirmed"},

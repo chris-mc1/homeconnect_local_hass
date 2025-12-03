@@ -338,6 +338,9 @@
       "binary_sensor_idos1_fill_level_poor": {
         "name": "i-DOS 1 Low"
       },
+      "binary_sensor_chiller_common_door_state": {
+        "name": "Chiller Door"
+      },
       "binary_sensor_freezer_door_state": {
         "name": "Freezer Door"
       },
@@ -352,6 +355,9 @@
       },
       "binary_sensor_fridge_door_state": {
         "name": "Fridge Door"
+      },
+      "binary_sensor_door_alarm_chiller_common": {
+        "name": "Door alarm Chiller"
       },
       "binary_sensor_door_alarm_freezer": {
         "name": "Door alarm Freezer"
