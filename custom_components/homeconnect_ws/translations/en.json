@@ -1750,10 +1750,13 @@
         "name": "Spin class"
       },
       "number_setpoint_freezer": {
-        "name": "Temperature Freezer"
+        "name": "Freezer Temperature"
       },
       "number_setpoint_refrigerator": {
-        "name": "Temperature Fridge"
+        "name": "Fridge Temperature"
+      },
+      "number_setpoint_chiller_common": {
+        "name": "Chiller Temperature"
       },
       "number_light_internal_brightness": {
         "name": "Internal Light Brightness"
