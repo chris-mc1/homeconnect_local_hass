@@ -143,6 +143,13 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
+            key="select_sound_level_key",
+            entity="Dishcare.Dishwasher.Setting.SoundLevelKey",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
             key="select_water_hardness",
             entity="Dishcare.Dishwasher.Setting.WaterHardness",
             entity_category=EntityCategory.CONFIG,

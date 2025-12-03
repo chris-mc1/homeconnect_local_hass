@@ -1007,13 +1007,13 @@
       "select_rinse_aid": {
         "name": "Rinse Aid",
         "state": {
-          "off": "Level 0",
-          "r01": "Level 1",
-          "r02": "Level 2",
-          "r03": "Level 3",
-          "r04": "Level 4",
-          "r05": "Level 5",
-          "r06": "Level 6"
+          "off": "Level 0 (Off)",
+          "r01": "Level 1 (Lowest)",
+          "r02": "Level 2 (Low)",
+          "r03": "Level 3 (Medium)",
+          "r04": "Level 4 (Med./High)",
+          "r05": "Level 5 (High)",
+          "r06": "Level 6 (Highest)"
         }
       },
       "select_sound_level_signal": {
@@ -1023,6 +1023,15 @@
           "low": "Low",
           "medium": "Medium",
           "off": "Off"
+        }
+      },
+      "select_sound_level_key": {
+        "name": "Sound Level Key",
+        "state": {
+          "off": "Off",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
         }
       },
       "select_water_hardness": {
