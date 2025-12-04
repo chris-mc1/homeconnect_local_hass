@@ -308,6 +308,27 @@
           "off": "OK"
         }
       },
+      "binary_sensor_flexspray_error_blocked": {
+        "name": "FlexSpray Blocked",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_general": {
+        "name": "FlexSpray Error",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_spray_arm_not_mounted": {
+        "name": "Spray Arm Not Mounted",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
       "binary_sensor_program_finished": {
         "name": "Program Finished"
       },
@@ -1035,6 +1056,79 @@
           "low": "Low",
           "medium": "Medium",
           "high": "High"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "PowerControl Type",
+        "state": {
+          "front": "Front",
+          "back": "Back",
+          "custom": "Custom",
+          "individual": "Individual"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl Front Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl Back Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl Back Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl Front Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "PowerControl Custom Front Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "PowerControl Custom Back Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "PowerControl Custom Back Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "PowerControl Custom Front Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
         }
       },
       "select_water_hardness": {
