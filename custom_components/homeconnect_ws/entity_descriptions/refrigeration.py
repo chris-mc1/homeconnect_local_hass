@@ -10,6 +10,7 @@ from homeassistant.const import EntityCategory, UnitOfTemperature
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
+    HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -303,6 +304,12 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Refrigeration.Common.Setting.Door.AssistantForceFreezer",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
+        ),
+    ],
+    "light": [
+        HCLightEntityDescription(
+            key="light_internal",
+            entity="Refrigeration.Common.Setting.Light.Internal.Power",
         ),
     ],
 }
