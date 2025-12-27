@@ -61,7 +61,7 @@ class HCFan(HCEntity, FanEntity):
         self._speed_entities = {}
         self._attr_speed_count = 0
         for entity_name in entity_description.entities:
-            entity = self._appliance.entities[entity_name]
+            entity = self._runtime_data.appliance.entities[entity_name]
             self._speed_entities[entity_name] = entity
             for option in entity.enum:
                 if option != 0:
@@ -103,7 +103,7 @@ class HCFan(HCEntity, FanEntity):
                 action=Action.POST,
                 data=data,
             )
-            await self._appliance.session.send_sync(message)
+            await self._runtime_data.appliance.session.send_sync(message)
         else:
             msg = f"Speed {percentage} is invalid"
             raise ServiceValidationError(msg)
@@ -115,4 +115,4 @@ class HCFan(HCEntity, FanEntity):
             action=Action.POST,
             data=data,
         )
-        await self._appliance.session.send_sync(message)
+        await self._runtime_data.appliance.session.send_sync(message)

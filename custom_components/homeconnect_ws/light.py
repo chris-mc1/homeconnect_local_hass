@@ -63,21 +63,27 @@ class HCLight(HCEntity, LightEntity):
     ) -> None:
         super().__init__(entity_description, runtime_data)
         if entity_description.brightness_entity is not None:
-            self._brightness_entity = self._appliance.entities[entity_description.brightness_entity]
+            self._brightness_entity = self._runtime_data.appliance.entities[
+                entity_description.brightness_entity
+            ]
             self._entities.append(self._brightness_entity)
 
         if entity_description.color_temperature_entity is not None:
-            self._color_temperature_entity = self._appliance.entities[
+            self._color_temperature_entity = self._runtime_data.appliance.entities[
                 entity_description.color_temperature_entity
             ]
             self._entities.append(self._color_temperature_entity)
 
         if entity_description.color_entity is not None:
-            self._color_entity = self._appliance.entities[entity_description.color_entity]
+            self._color_entity = self._runtime_data.appliance.entities[
+                entity_description.color_entity
+            ]
             self._entities.append(self._color_entity)
 
         if entity_description.color_mode_entity is not None:
-            self._color_mode_entity = self._appliance.entities[entity_description.color_mode_entity]
+            self._color_mode_entity = self._runtime_data.appliance.entities[
+                entity_description.color_mode_entity
+            ]
             self._entities.append(self._color_mode_entity)
 
         if self._color_entity:
@@ -192,7 +198,7 @@ class HCLight(HCEntity, LightEntity):
 
         if self._entity.value is not True:
             message.data.append({"uid": self._entity.uid, "value": True})
-        await self._appliance.session.send_sync(message)
+        await self._runtime_data.appliance.session.send_sync(message)
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         await self._entity.set_value(False)

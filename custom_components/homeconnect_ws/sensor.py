@@ -86,7 +86,7 @@ class HCEventSensor(HCEntity, SensorEntity):
 
     @property
     def available(self) -> bool:
-        return self._appliance.session.connected
+        return self._runtime_data.appliance.session.connected
 
 
 class HCActiveProgram(HCSensor):
@@ -104,10 +104,12 @@ class HCActiveProgram(HCSensor):
 
     @property
     def native_value(self) -> str | None:
-        if self._appliance.active_program:
-            if self._appliance.active_program.name in self.entity_description.mapping:
-                return self.entity_description.mapping[self._appliance.active_program.name]
-            return self._appliance.active_program.name
+        if self._runtime_data.appliance.active_program:
+            if self._runtime_data.appliance.active_program.name in self.entity_description.mapping:
+                return self.entity_description.mapping[
+                    self._runtime_data.appliance.active_program.name
+                ]
+            return self._runtime_data.appliance.active_program.name
         return None
 
 
@@ -125,7 +127,7 @@ class HCWiFI(HCEntity, SensorEntity):
 
     async def async_update(self) -> None:
         try:
-            network_info = await self._appliance.get_network_config()
+            network_info = await self._runtime_data.appliance.get_network_config()
             if network_info and isinstance(network_info, list) and "rssi" in network_info[0]:
                 self._attr_native_value = network_info[0]["rssi"]
             else:

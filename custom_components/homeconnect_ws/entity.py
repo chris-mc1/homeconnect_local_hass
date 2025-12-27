@@ -15,7 +15,6 @@ from .helpers import entity_is_available
 
 if TYPE_CHECKING:
     from homeassistant.helpers.device_registry import DeviceInfo
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
     from . import HCData
@@ -43,7 +42,7 @@ class HCEntity(Entity):
         runtime_data: HCData,
     ) -> None:
         super().__init__()
-        self._appliance: HomeAppliance = runtime_data.appliance
+        self._runtime_data = runtime_data.appliance
         self.entity_description = entity_description
         self._attr_unique_id = f"{runtime_data.appliance.info['deviceID']}-{entity_description.key}"
         self._attr_device_info: DeviceInfo = runtime_data.device_info
@@ -53,14 +52,14 @@ class HCEntity(Entity):
         self._entities = []
         self._extra_attributes = []
         if entity_description.entity:
-            self._entity = self._appliance.entities[entity_description.entity]
-            self._entities.append(self._appliance.entities[entity_description.entity])
+            self._entity = self._runtime_data.appliance.entities[entity_description.entity]
+            self._entities.append(self._runtime_data.appliance.entities[entity_description.entity])
         if entity_description.entities:
             for entity_name in entity_description.entities:
-                self._entities.append(self._appliance.entities[entity_name])
+                self._entities.append(self._runtime_data.appliance.entities[entity_name])
         if entity_description.extra_attributes:
             for extra_attribute in entity_description.extra_attributes:
-                if extra_attribute["entity"] in self._appliance.entities:
+                if extra_attribute["entity"] in self._runtime_data.appliance.entities:
                     self._extra_attributes.append(extra_attribute)
 
     async def async_added_to_hass(self) -> None:
@@ -74,7 +73,7 @@ class HCEntity(Entity):
     @property
     def available(self) -> bool:
         available = (
-            self._appliance.session.connected
+            self._runtime_data.appliance.session.connected
             # Hide first reconnect
             or not (self._appliance.session.disconnect_time > (time.time() + MAX_RECONECT_TIME))
         )
@@ -85,7 +84,7 @@ class HCEntity(Entity):
     def extra_state_attributes(self) -> dict:
         extra_state_attributes = {}
         for description in self._extra_attributes:
-            entity = self._appliance.entities[description["entity"]]
+            entity = self._runtime_data.appliance.entities[description["entity"]]
             if "value_fn" in description:
                 try:
                     extra_state_attributes[description["name"]] = description["value_fn"](entity)
@@ -105,8 +104,10 @@ class HCEntity(Entity):
     async def callback(self, _: HcEntity) -> None:
         if not self._has_callback:
             self._has_callback = True
-            if not self._appliance.session.connected:
+            if not self._runtime_data.appliance.session.connected:
                 with contextlib.suppress(TimeoutError):
-                    await asyncio.wait_for(self._appliance.session.connected_event.wait(), 10)
+                    await asyncio.wait_for(
+                        self._runtime_data.appliance.session.connected_event.wait(), 10
+                    )
             self.async_write_ha_state()
             self._has_callback = False

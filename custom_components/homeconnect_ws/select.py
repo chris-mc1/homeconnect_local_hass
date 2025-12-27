@@ -99,14 +99,14 @@ class HCProgram(HCSelect):
 
     @property
     def current_option(self) -> list[str] | None:
-        if self._appliance.selected_program:
-            if self._appliance.selected_program.name in self._programs:
-                return self._programs[self._appliance.selected_program.name]
-            return self._appliance.selected_program.name
+        if self._runtime_data.appliance.selected_program:
+            if self._runtime_data.appliance.selected_program.name in self._programs:
+                return self._programs[self._runtime_data.appliance.selected_program.name]
+            return self._runtime_data.appliance.selected_program.name
         return None
 
     async def async_select_option(self, option: str) -> None:
-        selected_program = self._appliance.programs[self._rev_programs[option]]
+        selected_program = self._runtime_data.appliance.programs[self._rev_programs[option]]
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):
             await selected_program.select()
         elif selected_program.execution == Execution.START_ONLY:
