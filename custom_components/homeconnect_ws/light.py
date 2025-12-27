@@ -28,12 +28,10 @@ from .helpers import create_entities, entity_is_available
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCLightEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -61,10 +59,9 @@ class HCLight(HCEntity, LightEntity):
     def __init__(
         self,
         entity_description: HCLightEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         if entity_description.brightness_entity is not None:
             self._brightness_entity = self._appliance.entities[entity_description.brightness_entity]
             self._entities.append(self._brightness_entity)

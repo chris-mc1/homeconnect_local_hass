@@ -36,9 +36,7 @@ def create_entities(
                 _LOGGER.debug("Creating Entity %s", entity_description.key)
                 try:
                     entity = entity_class(
-                        entity_description=entity_description,
-                        appliance=runtime_data.appliance,
-                        device_info=runtime_data.device_info,
+                        entity_description=entity_description, runtime_data=runtime_data
                     )
                 except Exception:
                     _LOGGER.exception("Failed to create Entity %s", entity_description.key)

@@ -12,12 +12,10 @@ from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import SelectedProgram
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCSelectEntityDescription
 PARALLEL_UPDATES = 0
 
@@ -44,10 +42,9 @@ class HCSelect(HCEntity, SelectEntity):
     def __init__(
         self,
         entity_description: HCSelectEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
 
         self._rev_options = {}
         if entity_description.options:
@@ -90,10 +87,9 @@ class HCProgram(HCSelect):
     def __init__(
         self,
         entity_description: HCSelectEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         self._programs = entity_description.mapping
         self._rev_programs = {value: key for key, value in self._programs.items()}
 

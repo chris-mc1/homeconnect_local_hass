@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
     from homeconnect_websocket import HomeAppliance
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
 
 PARALLEL_UPDATES = 0
 
@@ -38,13 +38,7 @@ async def async_setup_entry(
 ) -> None:
     """Set up binary_sensor platform."""
     entities = create_entities({"binary_sensor": HCBinarySensor}, config_entry.runtime_data)
-    entities.add(
-        HCConnectionSensor(
-            CONNECTION_SENSOR_DESCRIPTIONS,
-            config_entry.runtime_data.appliance,
-            config_entry.runtime_data.device_info,
-        )
-    )
+    entities.add(HCConnectionSensor(CONNECTION_SENSOR_DESCRIPTIONS, config_entry.runtime_data))
     async_add_entites(entities)
 
 
@@ -73,16 +67,13 @@ class HCConnectionSensor(BinarySensorEntity):
     entity_description: HCBinarySensorEntityDescription
 
     def __init__(
-        self,
-        entity_description: HCBinarySensorEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        self, entity_description: HCBinarySensorEntityDescription, runtime_data: HCData
     ) -> None:
         super().__init__()
-        self._appliance: HomeAppliance = appliance
+        self._appliance: HomeAppliance = runtime_data.appliance
         self.entity_description = entity_description
-        self._attr_unique_id = f"{appliance.info['deviceID']}-{entity_description.key}"
-        self._attr_device_info: DeviceInfo = device_info
+        self._attr_unique_id = f"{runtime_data.appliance.info['deviceID']}-{entity_description.key}"
+        self._attr_device_info: DeviceInfo = runtime_data.device_info
         self._attr_translation_key = entity_description.key
 
     @property

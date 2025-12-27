@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
+    from . import HCData
     from .entity_descriptions.descriptions_definitions import (
         ExtraAttributeDict,
         HCEntityDescription,
@@ -39,14 +40,13 @@ class HCEntity(Entity):
     def __init__(
         self,
         entity_description: HCEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
         super().__init__()
-        self._appliance: HomeAppliance = appliance
+        self._appliance: HomeAppliance = runtime_data.appliance
         self.entity_description = entity_description
-        self._attr_unique_id = f"{appliance.info['deviceID']}-{entity_description.key}"
-        self._attr_device_info: DeviceInfo = device_info
+        self._attr_unique_id = f"{runtime_data.appliance.info['deviceID']}-{entity_description.key}"
+        self._attr_device_info: DeviceInfo = runtime_data.device_info
         if entity_description.translation_key is None:
             self._attr_translation_key = entity_description.key
 

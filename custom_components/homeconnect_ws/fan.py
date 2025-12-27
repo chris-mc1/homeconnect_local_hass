@@ -15,12 +15,10 @@ from .helpers import create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCFanEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -55,10 +53,9 @@ class HCFan(HCEntity, FanEntity):
     def __init__(
         self,
         entity_description: HCFanEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         self._attr_supported_features = FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
         self._speed_mapping = []
         self._speed_entities = {}
