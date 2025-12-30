@@ -199,6 +199,9 @@
       },
       "switch_refrigerator_fresh_mode": {
         "name": "Fresh Mode"
+      },
+      "switch_extra_rinse": {
+        "name": "Extra Rinse"
       }
     },
     "binary_sensor": {
@@ -1847,4 +1850,5 @@
       }
     }
   }
+
 }

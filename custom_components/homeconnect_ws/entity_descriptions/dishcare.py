@@ -229,5 +229,10 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Dishcare.Dishwasher.Option.HalfLoad",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_extra_rinse",
+            entity="Dishcare.Dishwasher.Option.ExtraRinse",
+            device_class=SwitchDeviceClass.SWITCH,
+        )
     ],
 }
