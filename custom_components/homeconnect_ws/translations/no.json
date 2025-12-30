@@ -1,0 +1,1850 @@
+{
+  "config": {
+    "step": {
+      "upload": {
+        "title": "Legg til nye Home Connect-apparater",
+        "description": "Last opp din profilfil",
+        "data": {
+          "file": "Profilfil"
+        }
+      },
+      "device_select": {
+        "title": "Velg ditt apparat",
+        "description": "Velg apparatet du vil sette opp"
+      },
+      "host": {
+        "title": "Skriv inn vertsnavn",
+        "description": "Prøv å skrive inn vertsnavnet eller IP-adressen til apparatet manuelt",
+        "data": {
+          "host": "Vert / IP-adresse"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Tilkobling til apparatet mislyktes",
+      "already_configured": "Dette apparatet er allerede konfigurert"
+    },
+    "abort": {
+      "auth_failed": "Autentisering mislyktes",
+      "reauth_successful": "Ny autentisering vellykket",
+      "invalid_profile_file": "Profilfilen er ugyldig",
+      "profile_file_parser_error": "Profilfilen er ugyldig: {error}",
+      "appliance_not_in_profile_file": "Profilfilen inneholder ikke profil for dette apparatet",
+      "all_setup": "Alle apparater i denne profilfilen er allerede satt opp"
+    }
+  },
+  "entity": {
+    "switch": {
+      "switch_power_state": {
+        "name": "Strøm"
+      },
+      "switch_hygiene_plus": {
+        "name": "Hygiene Plus"
+      },
+      "switch_extra_dry_option": {
+        "name": "Ekstra tørr"
+      },
+      "switch_intensiv_zone": {
+        "name": "Intensiv sone"
+      },
+      "switch_vario_speed_plus": {
+        "name": "VariospeedPlus"
+      },
+      "switch_silence_on_demand": {
+        "name": "Stille på krav"
+      },
+      "switch_brilliance_dry": {
+        "name": "Brilliance Tørr"
+      },
+      "switch_extra_dry": {
+        "name": "Ekstra tørr"
+      },
+      "switch_speed_on_demand": {
+        "name": "Hastighet på krav"
+      },
+      "switch_info_light": {
+        "name": "Info-lys"
+      },
+      "switch_multiple_beverages": {
+        "name": "Flere drikker"
+      },
+      "switch_half_load": {
+        "name": "Halv last"
+      },
+      "switch_child_lock": {
+        "name": "Barnesikring"
+      },
+      "switch_door_light_ring": {
+        "name": "Dørringlys"
+      },
+      "switch_drum_light": {
+        "name": "Trommellys"
+      },
+      "switch_laundry_end_signal": {
+        "name": "Slutt-signal"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "Lyd av"
+      },
+      "switch_laundry_time_light": {
+        "name": "Tidslys"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "Rynkevern"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "Stille modus"
+      },
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "Lavtemperaturhygiene"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "Vario perfekt"
+      },
+      "switch_laundry_gentle": {
+        "name": "Skånsom"
+      },
+      "switch_laundry_hygiene": {
+        "name": "Hygiene"
+      },
+      "switch_super_freezer": {
+        "name": "Supermodus fryser"
+      },
+      "switch_super_refrigerator": {
+        "name": "Supermodus kjøleskap"
+      },
+      "switch_refrigerator_eco": {
+        "name": "Øko-modus"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "Ferie-modus"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "i-DOS 1 aktivert"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "i-DOS 2 aktivert"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "Intensiv Plus"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "Mindre stryking"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "Stille vask"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "Speed Perfect"
+      },
+      "switch_laundry_soak": {
+        "name": "Bløtlegging"
+      },
+      "switch_laundry_prewash": {
+        "name": "Forvask"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "Skyllepause"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "Skylle Plus 1"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "Skylle Plus 3"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "Vann og skylle Plus 1"
+      },
+      "switch_laundry_water_plus": {
+        "name": "Vann Plus"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "Desinfeksjonsmiddel"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "Hygienisk damp"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "Rask forvarming"
+      },
+      "switch_oven_button_tones": {
+        "name": "Knappelyder"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "Ovnslys under drift"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "Sabbatsmodus"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Sabbatsmodus"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Utløser"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Fryserdørassistent"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Innendørslys"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Innendørslys teatermodus"
+      },
+      "switch_hood_boost": {
+        "name": "Boost"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Stille modus"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Fersk modus"
+      }
+    },
+    "binary_sensor": {
+      "connection": {
+        "name": "Tilkobling"
+      },
+      "binary_sensor_door_state": {
+        "name": "Dør"
+      },
+      "binary_sensor_eco_dry_active": {
+        "name": "EcoDry aktiv"
+      },
+      "binary_sensor_aqua_stop": {
+        "name": "AquaStop oppstod"
+      },
+      "binary_sensor_low_water_pressure": {
+        "name": "Lavt vanntrykk"
+      },
+      "binary_sensor_bean_container_empty": {
+        "name": "Bønnebeholder tom"
+      },
+      "binary_remote_start_allowed": {
+        "name": "Fjernstart tillatt"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "Oppfriskernivå",
+        "state": {
+          "on": "Dårlig",
+          "off": "Fylt"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "Kondensbeholder",
+        "state": {
+          "on": "Full",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "MachineCare"
+      },
+      "binary_sensor_machinecareandfiltercleaningreminder": {
+        "name": "MachineCare og filter"
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "Lintfilter",
+        "state": {
+          "on": "Full",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_low_voltage": {
+        "name": "Lav spenning"
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "Vedlikeholdssyklus anbefalt"
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "Maskinvedlikehold",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "Maskinvedlikehold og filterrengjøring",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "Vannvarmer kalket",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "Smart filterrengjøring",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "Sjekk filtersystem",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "Tømming ikke mulig",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "Tømmepumpe blokkert",
+        "state": {
+          "on": "Vedlikehold påkrevd",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_program_finished": {
+        "name": "Program fullført"
+      },
+      "binary_sensor_program_aborted": {
+        "name": "Program avbrutt"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "Skumdeteksjon"
+      },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "Forsyningsspenning lav"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "Vannnivå høyt"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "Dør kan ikke låses"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "Dør kan ikke låses opp"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "Kritisk feil"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "Trommelrengjøring påminnelse"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "i-DOS 2 lav"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "i-DOS 1 lav"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "Fryserdør"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "i-DOS defekt"
+      },
+      "binary_sensor_pump_error": {
+        "name": "Pumpefeil"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "Sentrifugering avbrutt"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "Kjøleskapdør"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "Døralarm fryser"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "Døralarm kjøleskap"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "Temperaturalarm fryser"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "Innendørs belysning"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Avising"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Vannfilter fullt"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Apparatfeil"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Lav spenning"
+      }
+    },
+    "sensor": {
+      "sensor_remaining_program_time": {
+        "name": "Gjenværende programtid"
+      },
+      "sensor_program_progress": {
+        "name": "Programfremgang"
+      },
+      "sensor_water_forecast": {
+        "name": "Vannprognose"
+      },
+      "sensor_energy_forecast": {
+        "name": "Energiprognoose"
+      },
+      "sensor_operation_state": {
+        "name": "Driftstilstand",
+        "state": {
+          "inactive": "Inaktiv",
+          "ready": "Klar",
+          "delayedstart": "Forsinket start",
+          "run": "Kjører",
+          "pause": "Pauset",
+          "actionrequired": "Handling påkrevd",
+          "finished": "Fullført",
+          "error": "Feil",
+          "aborting": "Avbryter"
+        }
+      },
+      "sensor_program_phase": {
+        "name": "Programfase",
+        "state": {
+          "none": "Ingen",
+          "prerinse": "Forskylle",
+          "mainwash": "Hovedvask",
+          "finalrinse": "Sluttskylle",
+          "drying": "Tørking"
+        }
+      },
+      "sensor_active_program": {
+        "name": "Aktivt program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensiv 70",
+          "dishcare_dishwasher_program_auto2": "Auto 2",
+          "dishcare_dishwasher_program_eco50": "Eco 50",
+          "dishcare_dishwasher_program_quick45": "Quick 45",
+          "dishcare_dishwasher_program_prerinse": "Forskylle",
+          "dishcare_dishwasher_program_quick65": "Quick 65",
+          "dishcare_dishwasher_program_machinecare": "MachineCare",
+          "dishcare_dishwasher_program_nightwash": "Nattvask",
+          "dishcare_dishwasher_program_glas40": "Glass 40",
+          "dishcare_dishwasher_program_kurz60": "Speed 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "favorite_001": "Favoritt 1",
+          "favorite_002": "Favoritt 2",
+          "favorite_003": "Favoritt 3",
+          "favorite_004": "Favoritt 4",
+          "favorite_005": "Favoritt 5",
+          "favorite_006": "Favoritt 6",
+          "favorite_007": "Favoritt 7",
+          "favorite_008": "Favoritt 8",
+          "favorite_009": "Favoritt 9",
+          "favorite_010": "Favoritt 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Bunnvarme",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart-funksjon",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, stor flate",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, liten flate",
+          "cooking_oven_program_heatingmode_hotair": "Varmluft",
+          "cooking_oven_program_heatingmode_hotaireco": "Varmluft øko",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Varmluft grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Hold varmt",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza-innstilling",
+          "cooking_oven_program_heatingmode_preheatovenware": "Forvarm stekeutstyr",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbatsprogram",
+          "cooking_oven_program_heatingmode_slowcook": "Saktekok",
+          "cooking_oven_program_heatingmode_topbottomheating": "Over/under varme",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Over/under varme øko",
+          "cooking_oven_program_microwave_90watt": "Mikrobølgeovn 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Mikrobølgeovn 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Mikrobølgeovn 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Mikrobølgeovn 600 Watt",
+          "cooking_oven_program_microwave_max": "Mikrobølgeovn maksimalt",
+          "cooking_oven_program_cleaning_drying": "Tørking",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Vask - Automatisk myk/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Vask - Automatisk 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Vask - Bomull",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Vask - Mørktøy",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Vask - Gardiner",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Vask - Sarte/Silke",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Vask - Anti mikroplast",
+          "laundrycare_washer_program_downduvet_down_down": "Vask - Dun",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelrengjøring (gammel)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelrengjøring",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Vask - Lettstell",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Vask - Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Rask/Blandet",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Vask - Utendørs",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Skylle",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Vask - Sensitiv",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Vask - Skjorter/Bluser",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Vask - Sportsklær",
+          "laundrycare_washer_program_spin_spin_spindrain": "Sentrifugere/Tømme",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Damp/Strykehjelp",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Vask - Super kort 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Håndklær",
+          "laundrycare_washer_program_wool_wool_wool": "Vask - Ull",
+          "laundrycare_washer_program_sportfitness": "Vask - Sportsklær",
+          "laundrycare_common_program_juststart": "Bare start",
+          "laundrycare_common_program_memory1": "Minne 1",
+          "laundrycare_common_program_memory2": "Minne 2",
+          "laundrycare_common_program_memory3": "Minne 3",
+          "laundrycare_common_program_memory4": "Minne 4",
+          "laundrycare_common_program_memory5": "Minne 5",
+          "laundrycare_common_program_memory6": "Minne 6",
+          "laundrycare_common_program_memory7": "Minne 7",
+          "laundrycare_common_program_memory8": "Minne 8",
+          "laundrycare_dryer_program_blankets": "Tørk - Dunklær",
+          "laundrycare_dryer_program_businessshirts": "Skjorter",
+          "laundrycare_dryer_program_cotton": "Tørk - Bomull",
+          "laundrycare_dryer_program_dessous": "Tørk - Undertøy",
+          "laundrycare_dryer_program_hygiene": "Tørk - Hygiene",
+          "laundrycare_dryer_program_inbasket": "Tørk - Ull i kurv",
+          "laundrycare_dryer_program_mix": "Tørk - Blandede stoffer",
+          "laundrycare_dryer_program_outdoor": "Tørk - Utendørs",
+          "laundrycare_dryer_program_pillow": "Tørk - Dyner",
+          "laundrycare_dryer_program_super40": "Tørk - Rask 40min",
+          "laundrycare_dryer_program_synthetic": "Tørk - Lettstell",
+          "laundrycare_dryer_program_timecold": "Tidsprog. Kald",
+          "laundrycare_dryer_program_timewarm": "Tidsprog. Varm",
+          "laundrycare_dryer_program_towels": "Tørk - Håndklær",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Tørk - Sportsklær",
+          "laundrycare_washerdryer_program_towels_towels": "Vask og tørk - Håndklær",
+          "laundrycare_washerdryer_program_cotton_cotton": "Vask og tørk - Bomull",
+          "laundrycare_washerdryer_program_mix_mix": "Vask og tørk - Blandet",
+          "laundrycare_washerdryer_program_wool_wool": "Vask og tørk - Ull",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Vask og tørk - Sportsklær",
+          "laundrycare_washerdryer_program_washanddry_60": "Vask og tørk - 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Vask og tørk - Dun",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Caffè Latte",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Kaffe",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Varmt vann",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Melkeskum",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Varm melk",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Kaffe XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Blackeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café Conleche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Deadeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flatwhite",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Redeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Skylle når av",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Skylle når på",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Kalk og rengjøring",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Rengjøring",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Rengjør brygeenhet",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Rengjør brygeenhet (detaljert)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Rengjør drikkeutløser",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Avkalk",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Frostbeskyttelse",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Fjern vannfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Erstatt vannfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Skylle melkesystem",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Skylle vannfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Spesialskylle"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "Skyllemiddel",
+        "state": {
+          "empty": "Tom",
+          "nearly_empty": "Nesten tom",
+          "full": "Full"
+        }
+      },
+      "sensor_salt": {
+        "name": "Salt",
+        "state": {
+          "empty": "Tom",
+          "nearly_empty": "Nesten tom",
+          "full": "Full"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "Vanntank",
+        "state": {
+          "empty": "Tom",
+          "nearly_empty": "Nesten tom",
+          "not_inserted": "Ikke satt inn",
+          "full": "Full"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Dryppbrett",
+        "state": {
+          "ok": "OK",
+          "not_inserted": "Ikke satt inn",
+          "full": "Full"
+        }
+      },
+      "sensor_start_in": {
+        "name": "Start om"
+      },
+      "sensor_finish_in": {
+        "name": "Ferdig om"
+      },
+      "sensor_count_started": {
+        "name": "Startteller"
+      },
+      "sensor_end_trigger": {
+        "name": "Programsluttbetingelse",
+        "state": {
+          "programfinished": "Fullført",
+          "programabortedbyuser": "Avbrutt av bruker",
+          "programabortedbyappliance": "Avbrutt av apparat",
+          "programabortedbyappliancecriticalerror": "Kritisk feil"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "Intervall av"
+      },
+      "sensor_interval_time_on": {
+        "name": "Intervall på"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "Forsinket avstenging"
+      },
+      "sensor_power_state": {
+        "name": "Strømtilstand",
+        "state": {
+          "mainsoff": "Nett av",
+          "off": "Av",
+          "on": "På",
+          "standby": "Standby"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Dør",
+        "state": {
+          "open": "Åpen",
+          "closed": "Lukket",
+          "locked": "Låst",
+          "ajar": "På gløtt"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Vaskelast påfylling",
+        "state": {
+          "impossible": "Umulig",
+          "possiblepauseprogram": "Mulig pause program",
+          "possibleopendoor": "Mulig åpne dør"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Prosessfase",
+        "state": {
+          "nophase": "Ingen fase",
+          "prewash": "Forvask",
+          "intermediatespin": "Mellomsentrifugering",
+          "fillingdetergent": "Fyller vaskemiddel",
+          "detectingload": "Detekterer last",
+          "heating": "Varmer opp",
+          "washing": "Vasker",
+          "cooldown": "Avkjøling",
+          "rinsingfoam": "Skylle skum",
+          "rinsing": "Skylle",
+          "rinsingaquasensor": "Skylle Aqua-sensor",
+          "rinseonly": "Bare skylle",
+          "waterproofing": "Vanntetting",
+          "rinsingsoftener": "Skylle skyllemiddel",
+          "holdafterrinse": "Hold etter skylle",
+          "pumping": "Pumper",
+          "spinningfinal": "Sluttsentrifugering",
+          "lessironing": "Mindre stryking",
+          "fluffing": "Løfter opp",
+          "soaking": "Bløtlegger",
+          "hygienicsteamfogging": "Hygienisk damp tåking",
+          "guardingoxy": "Vokter Oxy",
+          "generatingozone": "Genererer ozon",
+          "degradingozone": "Nedbryter ozon",
+          "drying": "Tørker",
+          "coolingdown": "Kjøler ned",
+          "additionalcoolingdown": "Ekstra nedkjøling",
+          "guardingwrinkle": "Vokter rynker",
+          "detectingtextile": "Detekterer tekstil",
+          "detectingsoil": "Detekterer skitt",
+          "disinfecting": "Desinfiserer",
+          "lowtemperaturehygiene": "Lavtemperaturhygiene",
+          "steamingactive": "Damping aktiv",
+          "irondryreached": "Stryketørr nådd",
+          "cupboarddryreached": "Skaptørr nådd",
+          "cupboarddryplusreached": "Skaptørr plus nådd",
+          "cleaningheatexchanger": "Rengjør varmeveksler",
+          "slightlydampreached": "Lett fuktig nådd",
+          "extradryreached": "Ekstra tørr nådd",
+          "gentlydryreached": "Skånsomt tørr nådd",
+          "quickcare": "Rask pleie",
+          "depthcarephase1": "Dybde pleie fase 1",
+          "depthcarephase2": "Dybde pleie fase 2",
+          "coldrefreshing": "Kald oppfriskning",
+          "steaming": "Damping",
+          "foam": "Skum",
+          "testprogramdummytextfinalspeedreached": "Testprogram dummy tekst endelig hastighet nådd",
+          "rinsingfoamf21": "Skylle skum F21",
+          "handsoak": "Håndbløtlegging",
+          "vacant": "Ledig",
+          "spinning": "Sentrifugerer",
+          "displayspinabortnospin": "Vis sentrifugering avbryt ingen sentrifugering",
+          "multiplesoak": "Flere bløtlegging",
+          "laundryrefreshing": "Vaskelast oppfriskning",
+          "reload": "Påfylling",
+          "hotmoistheatingwetting": "Varm fuktig oppvarming fukting",
+          "hotmoistheatingheating": "Varm fuktig oppvarming oppvarming",
+          "hotmoistheatingwashing": "Varm fuktig oppvarming vask",
+          "moistureremoval": "Fuktfjerning",
+          "selfcleaning": "Selvrengjøring",
+          "hygiene": "Hygiene",
+          "smartsoak": "Smart bløtlegging",
+          "soakpause": "Bløtleggingspause",
+          "soakfinished": "Bløtlegging fullført",
+          "anyphase": "Hvilken som helst fase"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Fullført teller"
+      },
+      "sensor_flex_start": {
+        "name": "Fleksibel start",
+        "state": {
+          "disabled": "Deaktivert",
+          "enabled": "Aktivert",
+          "pending": "Venter",
+          "scheduled": "Planlagt",
+          "started": "Startet",
+          "finished": "Fullført"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Prosessfase",
+        "state": {
+          "steamactive": "Damp aktiv",
+          "progstarted": "Program startet",
+          "drying": "Tørker",
+          "irondryreached": "Stryketørr nådd",
+          "cupboarddryreached": "Skaptørr nådd",
+          "cubboarddryplusreached": "Skaptørr plus nådd",
+          "cooling": "Kjøler",
+          "finishedanticrease": "Fullført antikrease",
+          "heatexchangercleaning": "Varmeveksler rengjøring",
+          "slightlydampreached": "Lett fuktig nådd",
+          "extradryreached": "Ekstra tørr nådd",
+          "quickcare": "Rask pleie",
+          "depthcarephase1": "Dybde pleie fase 1",
+          "depthcarephase2": "Dybde pleie fase 2",
+          "spare": "Reserve"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Omgivelsestemperatur"
+      },
+      "sensor_laundry_load_recommendation": {
+        "name": "Lastanbefaling"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "Minnetemperatur fryser"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Sentrifugeringshastighet",
+        "state": {
+          "off": "Av",
+          "rpm400": "400 rpm",
+          "rpm600": "600 rpm",
+          "rpm700": "700 rpm",
+          "rpm800": "800 rpm",
+          "rpm900": "900 rpm",
+          "rpm1000": "1000 rpm",
+          "rpm1200": "1200 rpm",
+          "rpm1400": "1400 rpm",
+          "rpm1500": "1500 rpm",
+          "rpm1600": "1600 rpm",
+          "rinsehold": "Skyllepause",
+          "auto": "Auto"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Estimert total programtid"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Vanntank{group_name}",
+        "state": {
+          "ok": "OK",
+          "empty": "Tom",
+          "unplugged": "Ikke koblet til"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Gjeldende temperatur{group_name}"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Vekkerklokke utløpt{group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "Oppvarmingsfremgang"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "WiFi-signalstyrke"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Fettfiltersmetning"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Kullfiltersmetning"
+      },
+      "sensor_hob_zone_state": {
+        "name": "Sone {group_name} tilstand",
+        "state": {
+          "notselectable": "Ikke valgbar",
+          "off": "Av",
+          "active": "Aktiv",
+          "residuelheat": "Restvarme"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Sone {group_name} driftstilstand",
+        "state": {
+          "inactive": "Inaktiv",
+          "ready": "Klar",
+          "delayedstart": "Forsinket start",
+          "run": "Kjører",
+          "pause": "Pauset",
+          "actionrequired": "Handling påkrevd",
+          "finished": "Fullført",
+          "error": "Feil",
+          "aborting": "Avbryter"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Sone {group_name} effektnivå",
+        "state": {
+          "off": "Av",
+          "keepwarm": "Hold varmt",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Boost 1",
+          "boost2": "Boost 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Sone {group_name} stekesensornivå",
+        "state": {
+          "off": "Av",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Sone {group_name} gjeldende temperatur"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Sone {group_name} oppvarmingsfremgang"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Sone {group_name} varighet"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Sone {group_name} forløpt programtid"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Sone {group_name} gjenværende programtid"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Sone {group_name} programfremgang"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Ristretto Espresso-teller"
+      },
+      "sensor_count_coffee": {
+        "name": "Kaffeteller"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Kaffe og melk-teller"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Skummet melk-teller"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Varm melk-teller"
+      },
+      "sensor_count_hot_water": {
+        "name": "Varmt vann-teller"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Varmt vann kopper-teller"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Pulverkaffe-teller"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "Kalk og rengjøring påkrevd"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "Rengjøring påkrevd"
+      },
+      "sensor_countdown_descaling": {
+        "name": "Avkalking påkrevd"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "Vannfilter utskifting"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "Prosessfase",
+        "state": {
+          "none": "Inaktiv",
+          "beverageaborting": "Avbryter drikke",
+          "grinding": "Maler bønner",
+          "brewingunitmovesup": "Forbereder brygeenhet",
+          "coffeebrewing": "Brygger kaffe",
+          "brewingunitmovesdown": "Fullfører brygging",
+          "milkfroth": "Skummer melk",
+          "cleaningmilksystem": "Rengjør melkesystem",
+          "hotwaterdispensing": "Dispenserer varmt vann",
+          "cleaningmode": "Rengjøringsmodus",
+          "descalephase": "Avkalking",
+          "rinsephase": "Skylle",
+          "cleanphase": "Rengjøring",
+          "warmmilk": "Varmer melk",
+          "frostprotection": "Frostbeskyttelse aktiv",
+          "specialrinsing": "Spesialskylle",
+          "waterfilteractivation": "Aktiverer vannfilter",
+          "lattemacpause": "Latte Macchiato pause",
+          "startphase": "Starter opp",
+          "skipphase": "Hopper over steg",
+          "preliminary": "Foreløpig steg",
+          "autodescalephase": "Auto avkalking",
+          "autocleanphase": "Auto rengjøring",
+          "drainingdescalephase": "Tømmer etter avkalking",
+          "milkdescalephase": "Melkesystem avkalking",
+          "coldbrew": "Brygger Cold Brew",
+          "dripbrew": "Dryppbrygging",
+          "emptypowdersources": "Tømmer pulverkilder",
+          "roundrobinflush": "Spyler system",
+          "initializenewcartridge": "Initialiserer nytt patron"
+        }
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "i-DOS 1 fyllnivå",
+        "state": {
+          "poor": "Dårlig",
+          "filled": "Fylt"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "i-DOS 2 fyllnivå",
+        "state": {
+          "poor": "Dårlig",
+          "filled": "Fylt"
+        }
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Tørkeassistent alle programmer",
+        "state": {
+          "off": "Av",
+          "allprograms": "Alle programmer",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_hot_water": {
+        "name": "Vannforbindelse",
+        "state": {
+          "coldwater": "Kaldt vann",
+          "hotwater": "Varmt vann"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Skyllemiddel",
+        "state": {
+          "off": "Nivå 0",
+          "r01": "Nivå 1",
+          "r02": "Nivå 2",
+          "r03": "Nivå 3",
+          "r04": "Nivå 4",
+          "r05": "Nivå 5",
+          "r06": "Nivå 6"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "Lydnivå signal",
+        "state": {
+          "high": "Høy",
+          "low": "Lav",
+          "medium": "Middels",
+          "off": "Av"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Vannhardhet",
+        "state": {
+          "h00": "°E 0-8 mykt (0-1.1 mmol/l)",
+          "h01": "°E 9-10 mykt (1.2-1.4 mmol/l)",
+          "h02": "°E 11-12 middels (1.5-1.8 mmol/l)",
+          "h03": "°E 13-15 middels (1.9-2.1 mmol/l)",
+          "h04": "°E 16-20 middels (2.2-2.9 mmol/l)",
+          "h05": "°E 21-26 hardt (3.0-3.7 mmol/l)",
+          "h06": "°E 27-38 hardt (3.8-5.4 mmol/l)",
+          "h07": "°E 39-62 hardt (5.5-8.9 mmol/l)"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "Fjernkontroll",
+        "state": {
+          "monitoring": "Av",
+          "manualremotestart": "Manuell fjernstart",
+          "permanentremotestart": "Permanent fjernstart"
+        }
+      },
+      "select_program": {
+        "name": "Valgt program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensiv 70",
+          "dishcare_dishwasher_program_auto2": "Auto 2",
+          "dishcare_dishwasher_program_eco50": "Eco 50",
+          "dishcare_dishwasher_program_quick45": "Quick 45",
+          "dishcare_dishwasher_program_prerinse": "Forskylle",
+          "dishcare_dishwasher_program_quick65": "Quick 65",
+          "dishcare_dishwasher_program_machinecare": "MachineCare",
+          "dishcare_dishwasher_program_nightwash": "Nattvask",
+          "dishcare_dishwasher_program_glas40": "Glass 40",
+          "dishcare_dishwasher_program_kurz60": "Speed 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "favorite_001": "Favoritt 1",
+          "favorite_002": "Favoritt 2",
+          "favorite_003": "Favoritt 3",
+          "favorite_004": "Favoritt 4",
+          "favorite_005": "Favoritt 5",
+          "favorite_006": "Favoritt 6",
+          "favorite_007": "Favoritt 7",
+          "favorite_008": "Favoritt 8",
+          "favorite_009": "Favoritt 9",
+          "favorite_010": "Favoritt 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Bunnvarme",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart-funksjon",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, stor flate",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, liten flate",
+          "cooking_oven_program_heatingmode_hotair": "Varmluft",
+          "cooking_oven_program_heatingmode_hotaireco": "Varmluft øko",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Varmluft grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Hold varmt",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza-innstilling",
+          "cooking_oven_program_heatingmode_preheatovenware": "Forvarm stekeutstyr",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbatsprogram",
+          "cooking_oven_program_heatingmode_slowcook": "Saktekok",
+          "cooking_oven_program_heatingmode_topbottomheating": "Over/under varme",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Over/under varme øko",
+          "cooking_oven_program_microwave_90watt": "Mikrobølgeovn 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Mikrobølgeovn 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Mikrobølgeovn 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Mikrobølgeovn 600 Watt",
+          "cooking_oven_program_microwave_max": "Mikrobølgeovn maksimalt",
+          "cooking_oven_program_cleaning_drying": "Tørking",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Vask - Automatisk myk/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Vask - Automatisk 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Vask - Bomull",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Vask - Mørktøy",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Vask - Gardiner",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Vask - Sarte/Silke",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Vask - Anti mikroplast",
+          "laundrycare_washer_program_downduvet_down_down": "Vask - Dun",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelrengjøring (gammel)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelrengjøring",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Vask - Lettstell",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Vask - Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Rask/Blandet",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Vask - Utendørs",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Skylle",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Vask - Sensitiv",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Vask - Skjorter/Bluser",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Vask - Sportsklær",
+          "laundrycare_washer_program_spin_spin_spindrain": "Sentrifugere/Tømme",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Damp/Strykehjelp",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Vask - Super kort 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Håndklær",
+          "laundrycare_washer_program_wool_wool_wool": "Vask - Ull",
+          "laundrycare_washer_program_sportfitness": "Vask - Sportsklær",
+          "laundrycare_common_program_juststart": "Bare start",
+          "laundrycare_common_program_memory1": "Minne 1",
+          "laundrycare_common_program_memory2": "Minne 2",
+          "laundrycare_dryer_program_blankets": "Tørk - Dunklær",
+          "laundrycare_dryer_program_businessshirts": "Skjorter",
+          "laundrycare_dryer_program_cotton": "Tørk - Bomull",
+          "laundrycare_dryer_program_dessous": "Tørk - Undertøy",
+          "laundrycare_dryer_program_hygiene": "Tørk - Hygiene",
+          "laundrycare_dryer_program_inbasket": "Tørk - Ull i kurv",
+          "laundrycare_dryer_program_mix": "Tørk - Blandede stoffer",
+          "laundrycare_dryer_program_outdoor": "Tørk - Utendørs",
+          "laundrycare_dryer_program_pillow": "Tørk - Dyner",
+          "laundrycare_dryer_program_super40": "Tørk - Rask 40min",
+          "laundrycare_dryer_program_synthetic": "Tørk - Lettstell",
+          "laundrycare_dryer_program_timecold": "Tidsprog. Kald",
+          "laundrycare_dryer_program_timewarm": "Tidsprog. Varm",
+          "laundrycare_dryer_program_towels": "Tørk - Håndklær",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Tørk - Sportsklær",
+          "laundrycare_washerdryer_program_towels_towels": "Vask og tørk - Håndklær",
+          "laundrycare_washerdryer_program_cotton_cotton": "Vask og tørk - Bomull",
+          "laundrycare_washerdryer_program_mix_mix": "Vask og tørk - Blandet",
+          "laundrycare_washerdryer_program_wool_wool": "Vask og tørk - Ull",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Vask og tørk - Sportsklær",
+          "laundrycare_washerdryer_program_washanddry_60": "Vask og tørk - 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Vask og tørk - Dun"
+        }
+      },
+      "select_sensitivity_turbidity": {
+        "name": "Turbiditetssensitivitet",
+        "state": {
+          "standard": "Standard",
+          "sensitive": "Sensitiv",
+          "verysensitive": "Veldig sensitiv"
+        }
+      },
+      "select_eco_as_default": {
+        "name": "Standardprogram",
+        "state": {
+          "lastprogram": "Siste program",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_power_state": {
+        "name": "Strømtilstand",
+        "state": {
+          "mainsoff": "Nett av",
+          "off": "Av",
+          "on": "På",
+          "standby": "Standby"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "Kaffetemperatur",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "Bønnemengde",
+        "state": {
+          "verymild": "Veldig mild",
+          "mild": "Mild",
+          "mildplus": "Mild Plus",
+          "normal": "Normal",
+          "normalplus": "Normal Plus",
+          "strong": "Sterk",
+          "strongplus": "Sterk Plus",
+          "verystrong": "Veldig sterk",
+          "verystrongplus": "Veldig sterk Plus",
+          "extrastrong": "Ekstra sterk",
+          "doubleshot": "Dobbel shot",
+          "doubleshotplus": "Dobbel shot Plus",
+          "doubleshotplusplus": "Dobbel shot Plus Plus",
+          "tripleshot": "Trippel shot",
+          "tripleshotplus": "Trippel shot Plus",
+          "coffeeground": "Kaffepulver"
+        }
+      },
+      "select_beverage_size": {
+        "name": "Drikkestørrelse",
+        "state": {
+          "small": "Liten",
+          "medium": "Middels",
+          "large": "Stor",
+          "verylarge": "Veldig stor"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "Kaffe melk-forhold",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "Varmt vann temperatur",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "Strømningshastighet",
+        "state": {
+          "normal": "Normal",
+          "intense": "Intens",
+          "intenseplus": "Intens Plus"
+        }
+      },
+      "select_coarsness": {
+        "name": "Grovhet",
+        "state": {
+          "coarsness1": "Grovhet 1",
+          "coarsness2": "Grovhet 2",
+          "coarsness3": "Grovhet 3",
+          "coarsness4": "Grovhet 4",
+          "coarsness5": "Grovhet 5",
+          "coarsness6": "Grovhet 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "Kaffestyrke",
+        "state": {
+          "strength1": "Styrke 1",
+          "strength2": "Styrke 2",
+          "strength3": "Styrke 3",
+          "strength4": "Styrke 4",
+          "strength5": "Styrke 5",
+          "strength6": "Styrke 6",
+          "strength7": "Styrke 7",
+          "strength8": "Styrke 8",
+          "strength9": "Styrke 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "Aroma valg",
+        "state": {
+          "fine": "Fin",
+          "balanced": "Balansert",
+          "distinctive": "Særegen"
+        }
+      },
+      "select_bean_container": {
+        "name": "Bønnebeholder",
+        "state": {
+          "right": "Høyre",
+          "left": "Venstre"
+        }
+      },
+      "select_shot_count": {
+        "name": "Shot-teller",
+        "state": {
+          "double": "Dobbel",
+          "triple": "Trippel"
+        }
+      },
+      "select_cups": {
+        "name": "Kopper",
+        "state": {
+          "two": "To",
+          "four": "Fire",
+          "six": "Seks"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "Auto strøm av",
+        "state": {
+          "off": "Av",
+          "15min": "15 min",
+          "30min": "30 min",
+          "60min": "60 min"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "Lysstyrkenivå",
+        "state": {
+          "low": "Lav",
+          "medium": "Middels",
+          "high": "Høy",
+          "veryhigh": "Veldig høy"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "Dørringlys modus",
+        "state": {
+          "off": "Av",
+          "on": "På",
+          "auto": "Auto"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "Dørringlys lysstyrkenivå",
+        "state": {
+          "low": "Lav",
+          "medium": "Middels",
+          "high": "Høy",
+          "veryhigh": "Veldig høy"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "Sluttsignal volum",
+        "state": {
+          "off": "Av",
+          "low": "Lav",
+          "medium": "Middels",
+          "loud": "Høy",
+          "veryloud": "Veldig høy"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "Nøkkelsignal volum",
+        "state": {
+          "off": "Av",
+          "low": "Lav",
+          "medium": "Middels",
+          "loud": "Høy",
+          "veryloud": "Veldig høy"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "Nøkkelsignal volum",
+        "state": {
+          "off": "Av",
+          "volume1": "Volum 1",
+          "volume2": "Volum 2",
+          "volume3": "Volum 3",
+          "volume4": "Volum 4"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "Forsyningskraftvurdering"
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "Rynkevern",
+        "state": {
+          "off": "Av",
+          "min30": "30 min",
+          "min60": "60 min",
+          "min90": "90 min",
+          "min120": "120 min",
+          "min180": "180 min"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "Skaptørr fininnstilling",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "Skaptørr plus fininnstilling",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "Stryketørr fininnstilling",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "Sentrifugeringshastighet før tørking",
+        "state": {
+          "off": "Av",
+          "rpm400": "400 rpm",
+          "rpm600": "600 rpm",
+          "rpm700": "700 rpm",
+          "rpm800": "800 rpm",
+          "rpm900": "900 rpm",
+          "rpm1000": "1000 rpm",
+          "rpm1200": "1200 rpm",
+          "rpm1400": "1400 rpm",
+          "rpm1500": "1500 rpm",
+          "rpm1600": "1600 rpm",
+          "auto": "Auto"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "Tørkemål",
+        "state": {
+          "irondry": "Stryketørr",
+          "gentledry": "Skånsom tørr",
+          "cupboarddry": "Skaptørr",
+          "cupboarddryplus": "Skaptørr plus",
+          "extradry": "Ekstra tørr"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "Tørkemål",
+        "state": {
+          "shirt1": "Skjorte 1",
+          "shirt5": "Skjorte 5",
+          "business": "Forretning"
+        }
+      },
+      "select_laundry_idos2_content": {
+        "name": "i-DOS 2 innhold",
+        "state": {
+          "softener": "Skyllemiddel",
+          "detergent": "Vaskemiddel"
+        }
+      },
+      "select_laundry_idos2_level": {
+        "name": "i-DOS 2 nivå",
+        "state": {
+          "off": "Av",
+          "light": "Lett",
+          "normal": "Normal",
+          "strong": "Sterk"
+        }
+      },
+      "select_laundry_idos1_level": {
+        "name": "i-DOS 1 nivå",
+        "state": {
+          "off": "Av",
+          "light": "Lett",
+          "normal": "Normal",
+          "strong": "Sterk"
+        }
+      },
+      "select_laundry_vario_perfect": {
+        "name": "Vario perfekt",
+        "state": {
+          "off": "Av",
+          "ecoperfect": "Eco Perfect",
+          "speedperfect": "Speed Perfect"
+        }
+      },
+      "select_laundry_hygienic_steam_intensity": {
+        "name": "Hygienisk dampintensitet",
+        "state": {
+          "middle": "Middels",
+          "high": "Høy"
+        }
+      },
+      "select_laundry_multiple_soak": {
+        "name": "Flere bløtlegging",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_rinseplus": {
+        "name": "Skylle Plus",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed": {
+        "name": "Sentrifugeringshastighet",
+        "state": {
+          "off": "Av",
+          "uloff": "UlAv",
+          "rpm1000": "RPM1000",
+          "ulhigh": "UlHøy",
+          "rpm1200": "RPM1200",
+          "rpm1400": "RPM1400",
+          "rpm1500": "RPM1500",
+          "rpm1600": "RPM1600",
+          "auto": "Auto",
+          "max": "Maks",
+          "ullow": "UlLav",
+          "rpm400": "RPM400",
+          "rpm600": "RPM600",
+          "rpm700": "RPM700",
+          "ulmedium": "UlMiddels",
+          "rpm800": "RPM800",
+          "rpm900": "RPM900"
+        }
+      },
+      "select_laundry_option_stains": {
+        "name": "Flekk",
+        "state": {
+          "off": "Av",
+          "babyfood": "Barnemat",
+          "perspiration": "Svette",
+          "socks": "Sokker",
+          "butteroil": "Smør olje",
+          "tea": "Te",
+          "tomatosauce": "Tomat saus",
+          "strawberry": "Jordbær",
+          "orange": "Appelsin",
+          "blood": "Blod",
+          "egg": "Egg",
+          "mud": "Gjørm",
+          "grass": "Gress",
+          "coffee": "Kaffe",
+          "cosmetics": "Kosmetikk",
+          "redwine": "Rødvin",
+          "chocolate": "Sjokolade"
+        }
+      },
+      "select_laundry_option_temperature": {
+        "name": "Vasketemperatur",
+        "state": {
+          "cold": "Kald",
+          "gc20": "20°C",
+          "ulcold": "Ultra kald",
+          "ulwarm": "Ultra varm",
+          "ulhot": "Ultra varmt",
+          "ulextrahot": "Ultra ekstra varmt",
+          "gc30": "30°C",
+          "auto": "Auto",
+          "max": "Maks",
+          "gc40": "40°C",
+          "gc50": "50°C",
+          "gc60": "60°C",
+          "gc70": "70°C",
+          "gc80": "80°C",
+          "gc90": "90°C"
+        }
+      },
+      "select_laundry_option_water_and_rinse_plus": {
+        "name": "Vann og skylle Plus",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_oven_level": {
+        "name": "Nivå",
+        "state": {
+          "level01": "Nivå 1",
+          "level02": "Nivå 2",
+          "level03": "Nivå 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "Brukt oppvarmingsmodus",
+        "state": {
+          "automaticoperation": "Automatisk drift",
+          "automaticoperationwithmicrowave": "Automatisk drift med mikrobølgeovn",
+          "bakingsensoroperation": "Baking sensor drift",
+          "bottomheating": "Bunnvarme",
+          "defrosting": "Tining",
+          "desiccation": "Tørking",
+          "doughproving": "Deigheving",
+          "frozenheatupspecial": "Frossen oppvarming spesiell",
+          "grilllargearea": "Grill stor flate",
+          "grillsmallarea": "Grill liten flate",
+          "hotair": "Varmluft",
+          "hotaireco": "Varmluft Eco",
+          "hotairgrilling": "Varmluft grilling",
+          "intensiveheat": "Intensiv varme",
+          "keepwarm": "Hold varmt",
+          "microwave": "Mikrobølgeovn",
+          "pizzasetting": "Pizza-innstilling",
+          "preheatovenware": "Forvarm stekeutstyr",
+          "reheat": "Varm opp",
+          "sabbathprogramme": "Sabbatsprogram",
+          "slowcook": "Saktekok",
+          "steam": "Damp",
+          "topbottomheating": "Over/under varme",
+          "topbottomheatingeco": "Over/under varme Eco",
+          "breadbaking": "Brødbaking",
+          "steamwithsteamset": "Damp med dampsett"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "Pyrolysenivå",
+        "state": {
+          "level01": "Nivå 1",
+          "level02": "Nivå 2",
+          "level03": "Nivå 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "Barnesikringsinnstilling",
+        "state": {
+          "deactivated": "Deaktivert",
+          "activated": "Aktivert",
+          "activatedwithdoorlock": "Aktivert med dørlås"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "Slå på forsinkelse",
+        "state": {
+          "short": "Kort",
+          "medium": "Middels",
+          "long": "Lang"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "Kjølevifte kjøretid",
+        "state": {
+          "short": "Kort",
+          "recommended": "Anbefalt"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "Signalduration",
+        "state": {
+          "short": "Kort",
+          "medium": "Middels",
+          "long": "Lang"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Fryserdørassistent utløser",
+        "state": {
+          "push": "Trykk",
+          "pull": "Trekk",
+          "pushpull": "TrykkTrekk"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Fryserdørassistent kraft",
+        "state": {
+          "lowforce": "Lav",
+          "middleforce": "Middels",
+          "highforce": "Høy"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Intervalltrinn",
+        "state": {
+          "fanoff": "Av",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Forsinket avstengingstrinn",
+        "state": {
+          "fanoff": "Av",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_temperature_unit": {
+        "name": "Temperatursenhet",
+        "state": {
+          "celsius": "Celsius",
+          "fahrenheit": "Fahrenheit"
+        }
+      },
+      "select_hood_carbon_filter_type": {
+        "name": "Kullfiltertype",
+        "state": {
+          "none": "Ingen",
+          "fahrenheit": "Grunnleggende kullfilter",
+          "regenerativecarbonfilter": "Regenerativt kullfilter"
+        }
+      }
+    },
+    "button": {
+      "button_abort_program": {
+        "name": "Avbryt"
+      },
+      "button_start_program": {
+        "name": "Start"
+      },
+      "button_pause_program": {
+        "name": "Pause"
+      },
+      "button_resume_program": {
+        "name": "Fortsett"
+      },
+      "button_mains_power_off": {
+        "name": "StrømAV"
+      },
+      "button_hood_carbon_filter_reset": {
+        "name": "Kullfilter nullstill"
+      },
+      "button_hood_grease_filter_reset": {
+        "name": "Fettfilter nullstill"
+      },
+      "button_hood_regenerative_carbon_filter_reset": {
+        "name": "Regenerativt kullfilter nullstill"
+      },
+      "button_hood_regenerative_carbon_filter_lifetime_reset": {
+        "name": "Regenerativt kullfilter levetid nullstill"
+      }
+    },
+    "number": {
+      "number_fill_quantity": {
+        "name": "Fyllmengde"
+      },
+      "number_laundry_brightness": {
+        "name": "Lysstyrke"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "Dørringlys lysstyrke"
+      },
+      "number_duration": {
+        "name": "Varighet"
+      },
+      "number_laundry_spin_class": {
+        "name": "Sentrifugeringsklasse"
+      },
+      "number_setpoint_freezer": {
+        "name": "Temperatur fryser"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "Temperatur kjøleskap"
+      },
+      "number_light_internal_brightness": {
+        "name": "Innendørslys lysstyrke"
+      },
+      "number_idos1_base_level": {
+        "name": "i-DOS doseringsvolum: vaskemiddel"
+      },
+      "number_idos2_base_level": {
+        "name": "i-DOS doseringsvolum: vaskemiddel eller skyllemiddel"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "Innstilt temperatur"
+      },
+      "number_oven_display_brightness": {
+        "name": "Skjermlysstyrke"
+      },
+      "number_hood_interval_off": {
+        "name": "Intervalltid av"
+      },
+      "number_hood_interval_on": {
+        "name": "Intervalltid på"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Forsinket avstengingstid"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Auto sensorsensitivitet"
+      },
+      "number_start_in": {
+        "name": "Start om"
+      },
+      "number_oven_setting_alarm_clock": {
+        "name": "Vekkerklokke"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "Dørringlys"
+      },
+      "light_drum_light": {
+        "name": "Trommellys"
+      },
+      "light_internal": {
+        "name": "Innendørslys"
+      },
+      "light_logo": {
+        "name": "Logolys"
+      },
+      "light_cooking_lighting": {
+        "name": "Lys"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "Områdelys"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Vifte"
+      }
+    }
+  },
+  "services": {
+    "start_program": {
+      "name": "Start program",
+      "description": "Start det valgte programmet",
+      "fields": {
+        "device_id": {
+          "name": "Apparat",
+          "description": "Apparatet å starte programmet på"
+        },
+        "start_in": {
+          "name": "Start om",
+          "description": "Forsink programstarten"
+        },
+        "finish_in": {
+          "name": "Ferdig om",
+          "description": "Tid programmet skal være ferdig om"
+        }
+      }
+    },
+    "set_start_in": {
+      "name": "Sett startforsinkelse",
+      "description": "Sett startforsinkelsen",
+      "fields": {
+        "device_id": {
+          "name": "Apparat",
+          "description": "Apparatet å sette startforsinkelsen på"
+        },
+        "start_in": {
+          "name": "Forsinkelse",
+          "description": "Sett startforsinkelsen"
+        },
+        "finish_in": {
+          "name": "Ferdig om",
+          "description": "Sett tiden programmet skal være ferdig om"
+        }
+      }
+    }
+  }
+}
