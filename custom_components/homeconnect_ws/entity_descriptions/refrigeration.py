@@ -1,7 +1,3 @@
-"""Description for Refrigeration Entities."""
-
-from __future__ import annotations
-
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
@@ -21,32 +17,24 @@ from .descriptions_definitions import (
 REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
+            key="binary_sensor_refrigerator_door_state",
+            entity="Refrigeration.Common.Status.Door.Refrigerator",
+            device_class=BinarySensorDeviceClass.DOOR,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_refrigerator_door_state",
+            entity="Refrigeration.FridgeFreezer.Status.Door.Refrigerator",
+            device_class=BinarySensorDeviceClass.DOOR,
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_freezer_door_state",
             entity="Refrigeration.Common.Status.Door.Freezer",
             device_class=BinarySensorDeviceClass.DOOR,
-            value_on={"Open"},
-            value_off={"Closed"},
-        ),
-        HCBinarySensorEntityDescription(
-            key="binary_sensor_fridge_door_state",
-            entity="Refrigeration.Common.Status.Door.Refrigerator",
-            device_class=BinarySensorDeviceClass.DOOR,
-            value_on={"Open"},
-            value_off={"Closed"},
         ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_freezer_door_state",
-            entity="Refrigeration.FridgeFreezer.Status.DoorFreezer",
+            entity="Refrigeration.FridgeFreezer.Status.Door.Freezer",
             device_class=BinarySensorDeviceClass.DOOR,
-            value_on={"Open"},
-            value_off={"Closed"},
-        ),
-        HCBinarySensorEntityDescription(
-            key="binary_sensor_fridge_door_state",
-            entity="Refrigeration.FridgeFreezer.Status.DoorRefrigerator",
-            device_class=BinarySensorDeviceClass.DOOR,
-            value_on={"Open"},
-            value_off={"Closed"},
         ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_door_alarm_freezer",
@@ -57,7 +45,15 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Off"},
         ),
         HCBinarySensorEntityDescription(
-            key="binary_sensor_door_alarm_fridge",
+            key="binary_sensor_door_alarm_freezer",
+            entity="Refrigeration.Common.Event.Door.Freezer.Alarm",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_door_alarm_refrigerator",
             entity="Refrigeration.FridgeFreezer.Event.DoorAlarmRefrigerator",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
@@ -65,8 +61,8 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Off"},
         ),
         HCBinarySensorEntityDescription(
-            key="binary_sensor_door_alarm_freezer",
-            entity="Refrigeration.Common.Event.Door.AlarmFreezer",
+            key="binary_sensor_door_alarm_refrigerator",
+            entity="Refrigeration.Common.Event.Door.Refrigerator.Alarm",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
             value_on={"Present", "Confirmed"},
