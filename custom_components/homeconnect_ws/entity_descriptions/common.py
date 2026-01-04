@@ -291,7 +291,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                     "entity": "BSH.Common.Option.RemainingProgramTimeIsEstimated",
                 }
             ],
-        )
+        ),
         HCSensorEntityDescription(
             key="sensor_program_progress",
             entity="BSH.Common.Option.ProgramProgress",
