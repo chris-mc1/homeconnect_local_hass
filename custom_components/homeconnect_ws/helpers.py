@@ -104,4 +104,4 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
 
     if hasattr(entity, "access"):
         available &= entity.access in available_access
-    return True
+    return available

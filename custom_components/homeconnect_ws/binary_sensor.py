@@ -9,6 +9,7 @@ from homeassistant.components.binary_sensor import (
     BinarySensorEntity,
 )
 from homeassistant.const import EntityCategory
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .entity import HCEntity
 from .entity_descriptions.descriptions_definitions import HCBinarySensorEntityDescription
@@ -58,7 +59,7 @@ class HCBinarySensor(HCEntity, BinarySensorEntity):
         return bool(self._entity.value)
 
 
-class HCConnectionSensor(BinarySensorEntity):
+class HCConnectionSensor(CoordinatorEntity, BinarySensorEntity):
     """Connection sensor Entity."""
 
     _attr_has_entity_name = True
@@ -69,7 +70,7 @@ class HCConnectionSensor(BinarySensorEntity):
     def __init__(
         self, entity_description: HCBinarySensorEntityDescription, runtime_data: HCData
     ) -> None:
-        super().__init__()
+        super().__init__(runtime_data.coordinator)
         self._appliance: HomeAppliance = runtime_data.appliance
         self.entity_description = entity_description
         self._attr_unique_id = f"{runtime_data.appliance.info['deviceID']}-{entity_description.key}"

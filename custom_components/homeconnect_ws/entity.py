@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-import asyncio
-import contextlib
 import logging
-import time
 from typing import TYPE_CHECKING
 
 from homeassistant.helpers.entity import Entity
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import MAX_RECONECT_TIME
 from .helpers import entity_is_available
 
 if TYPE_CHECKING:
@@ -26,7 +23,7 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 
-class HCEntity(Entity):
+class HCEntity(CoordinatorEntity, Entity):
     """Base Entity."""
 
     entity_description: HCEntityDescription
@@ -41,8 +38,8 @@ class HCEntity(Entity):
         entity_description: HCEntityDescription,
         runtime_data: HCData,
     ) -> None:
-        super().__init__()
-        self._runtime_data = runtime_data.appliance
+        super().__init__(runtime_data.coordinator)
+        self._runtime_data = runtime_data
         self.entity_description = entity_description
         self._attr_unique_id = f"{runtime_data.appliance.info['deviceID']}-{entity_description.key}"
         self._attr_device_info: DeviceInfo = runtime_data.device_info
@@ -63,6 +60,7 @@ class HCEntity(Entity):
                     self._extra_attributes.append(extra_attribute)
 
     async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
         for entity in self._entities:
             entity.register_callback(self.callback)
 
@@ -72,13 +70,9 @@ class HCEntity(Entity):
 
     @property
     def available(self) -> bool:
-        available = (
-            self._runtime_data.appliance.session.connected
-            # Hide first reconnect
-            or not (self._appliance.session.disconnect_time > (time.time() + MAX_RECONECT_TIME))
+        return self._runtime_data.coordinator.connected and entity_is_available(
+            self._entity, self.entity_description.available_access
         )
-        available &= entity_is_available(self._entity, self.entity_description.available_access)
-        return available
 
     @property
     def extra_state_attributes(self) -> dict:
@@ -104,10 +98,5 @@ class HCEntity(Entity):
     async def callback(self, _: HcEntity) -> None:
         if not self._has_callback:
             self._has_callback = True
-            if not self._runtime_data.appliance.session.connected:
-                with contextlib.suppress(TimeoutError):
-                    await asyncio.wait_for(
-                        self._runtime_data.appliance.session.connected_event.wait(), 10
-                    )
             self.async_write_ha_state()
             self._has_callback = False
