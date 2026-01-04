@@ -70,6 +70,10 @@ class HCSensor(HCEntity, SensorEntity):
             return None
         if self._entity.enum and self.entity_description.has_state_translation:
             return str(self._entity.value).lower()
+        if self.entity_description.key == "sensor_remaining_program_time" and self._entity.value is not None:
+            from datetime import timedelta
+            from homeassistant.util import dt as dt_util
+            return dt_util.now() + timedelta(seconds=self._entity.value)
         return self._entity.value
 
 
