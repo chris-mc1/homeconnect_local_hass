@@ -14,7 +14,7 @@ from .const import DOMAIN
 
 if TYPE_CHECKING:
     import re
-    from collections.abc import Callable
+    from collections.abc import Callable, Coroutine
 
     from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
@@ -110,12 +110,12 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     return available
 
 
-def error_decorator(func: Callable[..., Any]) -> Callable[..., Callable[..., Any]]:
+def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Coroutine[T]]:
     """Catches HomeConnect Errors and raise HomeAssistantError."""
 
-    def wrap(*args: Any, **kwargs: Any) -> Any:
+    async def wrap(*args: Any, **kwargs: Any) -> Any:
         try:
-            return func(*args, **kwargs)
+            return await func(*args, **kwargs)
         except AccessError:
             raise HomeAssistantError(
                 translation_domain=DOMAIN,
