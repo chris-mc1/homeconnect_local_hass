@@ -8,7 +8,7 @@ from homeassistant.components.button import ButtonEntity
 from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -57,5 +57,6 @@ class HCStartButton(HCEntity, ButtonEntity):
             available &= self._appliance.selected_program.execution == Execution.SELECT_AND_START
         return available
 
+    @error_decorator
     async def async_press(self) -> None:
         await self._appliance.selected_program.start()

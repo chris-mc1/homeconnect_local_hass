@@ -4,15 +4,17 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
-from homeassistant.exceptions import ServiceValidationError
+from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers.service import async_extract_config_entry_ids
+from homeconnect_websocket.errors import AccessError, CodeResponsError, NotConnectedError
 
-from custom_components.homeconnect_ws.const import DOMAIN
+from .const import DOMAIN
 
 if TYPE_CHECKING:
     import re
+    from collections.abc import Callable, Coroutine
 
     from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
@@ -94,8 +96,7 @@ async def get_config_entry_from_call(
         config_entry = hass.config_entries.async_get_entry(config_entry_id)
         if config_entry.domain == DOMAIN:
             return config_entry
-    msg = "Not a Homeconnect Appliance"
-    raise ServiceValidationError(msg)
+    raise ServiceValidationError(translation_domain=DOMAIN, translation_key="not_appliance")
 
 
 def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bool:
@@ -107,3 +108,29 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     if hasattr(entity, "access"):
         available &= entity.access in available_access
     return available
+
+
+def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Coroutine[T]]:
+    """Catches HomeConnect Errors and raise HomeAssistantError."""
+
+    async def wrap(*args: Any, **kwargs: Any) -> Any:
+        try:
+            return await func(*args, **kwargs)
+        except AccessError:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="access_error",
+            ) from None
+        except CodeResponsError as exc:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="code_respons",
+                translation_placeholders={"message": exc.message},
+            ) from None
+        except NotConnectedError:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="not_connected",
+            ) from None
+
+    return wrap

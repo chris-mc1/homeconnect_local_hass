@@ -34,7 +34,7 @@ from .const import (
     PLATFORMS,
 )
 from .entity_descriptions import get_available_entities
-from .helpers import get_config_entry_from_call
+from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
@@ -87,6 +87,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         hass.data[HC_KEY].override_host = config[DOMAIN].get(CONF_DEV_OVERRIDE_HOST)
         hass.data[HC_KEY].override_psk = config[DOMAIN].get(CONF_DEV_OVERRIDE_PSK)
 
+    @error_decorator
     async def handle_start_program(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
 
@@ -101,8 +102,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 )
                 options[start_in_entity.uid] = relative_time_in_seconds
             else:
-                msg = "'Start in' is not available on this Appliance"
-                raise ServiceValidationError(msg)
+                raise ServiceValidationError(
+                    translation_domain=DOMAIN,
+                    translation_key="start_in_not_available",
+                )
         if "finish_in" in call.data:
             if finish_in_entity := appliance.entities.get("BSH.Common.Option.FinishInRelative"):
                 relative_time_in_seconds = (
@@ -112,14 +115,19 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 )
                 options[finish_in_entity.uid] = relative_time_in_seconds
             else:
-                msg = "'Finish in' is not available on this Appliance"
-                raise ServiceValidationError(msg)
+                raise ServiceValidationError(
+                    translation_domain=DOMAIN,
+                    translation_key="finish_in_not_available",
+                )
         if appliance.selected_program:
             await appliance.selected_program.start(options)
         else:
-            msg = "No Program selected"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="no_program_selected",
+            )
 
+    @error_decorator
     async def handle_set_start_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
@@ -131,9 +139,12 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
             await start_in_entity.set_value(relative_time_in_seconds)
         else:
-            msg = "'Start in' is not available on this Appliance"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="start_in_not_available",
+            )
 
+    @error_decorator
     async def handle_set_finish_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
@@ -145,8 +156,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
             await finish_in_entity.set_value(relative_time_in_seconds)
         else:
-            msg = "'Finish in' is not available on this Appliance"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="finish_in_not_available",
+            )
 
     hass.services.async_register(DOMAIN, "start_program", handle_start_program)
     hass.services.async_register(DOMAIN, "set_start_in", handle_set_start_in)
@@ -172,20 +185,28 @@ async def async_setup_entry(
         await appliance.connect()
     except ClientConnectorSSLError as ex:
         await appliance.close()
-        msg = f"Authentication failed with {config_entry.data[CONF_HOST]}"
-        raise ConfigEntryAuthFailed(msg) from ex
+        raise ConfigEntryAuthFailed(
+            translation_domain=DOMAIN,
+            translation_key="auth_failed",
+            translation_placeholders={"host": config_entry.data[CONF_HOST]},
+        ) from ex
     except (TimeoutError, ClientConnectionError) as ex:
         await appliance.close()
-        msg = f"Can't connect to {config_entry.data[CONF_HOST]}"
-        raise ConfigEntryNotReady(msg) from ex
+        raise ConfigEntryNotReady(
+            translation_domain=DOMAIN,
+            translation_key="cannot_connect",
+            translation_placeholders={"host": config_entry.data[CONF_HOST]},
+        ) from ex
     except Exception:
         await appliance.close()
         raise
 
     _LOGGER.debug("Connected to %s", config_entry.data[CONF_DESCRIPTION]["info"].get("vib"))
     if not appliance.info:
-        msg = "Appliance has no device info"
-        raise ConfigEntryError(msg)
+        raise ConfigEntryError(
+            translation_domain=DOMAIN,
+            translation_key="no_device_info",
+        )
 
     device_info = DeviceInfo(
         connections={(CONNECTION_NETWORK_MAC, format_mac(appliance.info["mac"]))},

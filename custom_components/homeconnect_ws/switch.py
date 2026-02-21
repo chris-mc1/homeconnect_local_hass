@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any
 from homeassistant.components.switch import SwitchEntity
 
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -55,12 +55,14 @@ class HCSwitch(HCEntity, SwitchEntity):
             return None
         return bool(self._entity.value)
 
+    @error_decorator
     async def async_turn_on(self, **kwargs: Any) -> None:
         if self._value_mapping:
             await self._entity.set_value(self._value_mapping[0])
         else:
             await self._entity.set_value(True)
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         if self._value_mapping:
             await self._entity.set_value(self._value_mapping[1])
