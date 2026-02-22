@@ -10,17 +10,16 @@ from homeassistant.exceptions import ServiceValidationError
 from homeassistant.util.percentage import percentage_to_ranged_value, ranged_value_to_percentage
 from homeconnect_websocket.message import Action, Message
 
+from .const import DOMAIN
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCFanEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -55,16 +54,15 @@ class HCFan(HCEntity, FanEntity):
     def __init__(
         self,
         entity_description: HCFanEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         self._attr_supported_features = FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
         self._speed_mapping = []
         self._speed_entities = {}
         self._attr_speed_count = 0
         for entity_name in entity_description.entities:
-            entity = self._appliance.entities[entity_name]
+            entity = self._runtime_data.appliance.entities[entity_name]
             self._speed_entities[entity_name] = entity
             for option in entity.enum:
                 if option != 0:
@@ -86,6 +84,7 @@ class HCFan(HCEntity, FanEntity):
                 return ranged_value_to_percentage(self._speed_range, speed.speed)
         return 0
 
+    @error_decorator
     async def async_set_percentage(self, percentage: int) -> None:
         new_speed = math.ceil(percentage_to_ranged_value(self._speed_range, percentage))
         new_speed_entity: str = None
@@ -106,11 +105,15 @@ class HCFan(HCEntity, FanEntity):
                 action=Action.POST,
                 data=data,
             )
-            await self._appliance.session.send_sync(message)
+            await self._runtime_data.appliance.session.send_sync(message)
         else:
-            msg = f"Speed {percentage} is invalid"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="speed_invalid",
+                translation_placeholders={"percentage", percentage},
+            )
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         data = [{"uid": entity.uid, "value": 0} for entity in self._speed_entities.values()]
         message = Message(
@@ -118,4 +121,4 @@ class HCFan(HCEntity, FanEntity):
             action=Action.POST,
             data=data,
         )
-        await self._appliance.session.send_sync(message)
+        await self._runtime_data.appliance.session.send_sync(message)

@@ -24,16 +24,14 @@ from homeconnect_websocket.message import Action
 from homeconnect_websocket.message import Message as HC_Message
 
 from .entity import HCEntity
-from .helpers import create_entities, entity_is_available
+from .helpers import create_entities, entity_is_available, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCLightEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -62,16 +60,17 @@ class HCLight(HCEntity, LightEntity):
     def __init__(
         self,
         entity_description: HCLightEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         if entity_description.brightness_entity is not None:
-            self._brightness_entity = self._appliance.entities[entity_description.brightness_entity]
+            self._brightness_entity = self._runtime_data.appliance.entities[
+                entity_description.brightness_entity
+            ]
             self._entities.append(self._brightness_entity)
 
         if entity_description.color_temperature_entity is not None:
-            self._color_temperature_entity = self._appliance.entities[
+            self._color_temperature_entity = self._runtime_data.appliance.entities[
                 entity_description.color_temperature_entity
             ]
             self._entities.append(self._color_temperature_entity)
@@ -80,11 +79,15 @@ class HCLight(HCEntity, LightEntity):
             )
 
         if entity_description.color_entity is not None:
-            self._color_entity = self._appliance.entities[entity_description.color_entity]
+            self._color_entity = self._runtime_data.appliance.entities[
+                entity_description.color_entity
+            ]
             self._entities.append(self._color_entity)
 
         if entity_description.color_mode_entity is not None:
-            self._color_mode_entity = self._appliance.entities[entity_description.color_mode_entity]
+            self._color_mode_entity = self._runtime_data.appliance.entities[
+                entity_description.color_mode_entity
+            ]
             self._entities.append(self._color_mode_entity)
 
         if self._color_entity:
@@ -156,6 +159,7 @@ class HCLight(HCEntity, LightEntity):
             return match_max_scale((255,), rgb)
         return None
 
+    @error_decorator
     async def async_turn_on(self, **kwargs: Any) -> None:
         message = HC_Message(
             resource="/ro/values",
@@ -215,7 +219,8 @@ class HCLight(HCEntity, LightEntity):
 
         if self._entity.value is not True:
             message.data.append({"uid": self._entity.uid, "value": True})
-        await self._appliance.session.send_sync(message)
+        await self._runtime_data.appliance.session.send_sync(message)
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         await self._entity.set_value(False)
