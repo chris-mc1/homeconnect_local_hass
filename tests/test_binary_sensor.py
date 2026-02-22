@@ -16,11 +16,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("binary_sensor.fake_brand_homeappliance_binarysensor")
     assert state
@@ -42,7 +42,7 @@ async def test_update(
 ) -> None:
     """Test updating entity."""
     entity_id = "binary_sensor.fake_brand_homeappliance_binarysensor"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.BinarySensor"].update({"value": True})
     await hass.async_block_till_done()
@@ -64,7 +64,7 @@ async def test_update_enum(
 ) -> None:
     """Test updating entity with enum."""
     entity_id = "binary_sensor.fake_brand_homeappliance_binarysensor_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.BinarySensor.Enum"].update({"value": 0})
     await hass.async_block_till_done()

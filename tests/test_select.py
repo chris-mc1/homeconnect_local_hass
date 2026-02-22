@@ -23,11 +23,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("select.fake_brand_homeappliance_select")
     assert state
@@ -69,7 +69,7 @@ async def test_update(
     entity_id = "select.fake_brand_homeappliance_select"
     entity_id_translated = "select.fake_brand_homeappliance_select_translated"
     entity_id_options = "select.fake_brand_homeappliance_select_options"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Select"].update({"value": 0})
     await hass.async_block_till_done()
@@ -105,7 +105,7 @@ async def test_select(
     entity_id = "select.fake_brand_homeappliance_select"
     entity_id_translated = "select.fake_brand_homeappliance_select_translated"
     entity_id_options = "select.fake_brand_homeappliance_select_options"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         SELECT_DOMAIN,
@@ -171,7 +171,7 @@ async def test_update_program(
 ) -> None:
     """Test updating program select entity."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
     await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
     await hass.async_block_till_done()
 
@@ -192,7 +192,7 @@ async def test_select_program(
 ) -> None:
     """Test selecting an program."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         SELECT_DOMAIN,

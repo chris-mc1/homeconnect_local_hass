@@ -75,7 +75,7 @@ class HCLight(HCEntity, LightEntity):
             ]
             self._entities.append(self._color_temperature_entity)
             self._color_temp_inverted = (
-                "Cooking.Hood.Setting.ColorTemperature" in self._appliance.entities
+                "Cooking.Hood.Setting.ColorTemperature" in self._runtime_data.appliance.entities
             )
 
         if entity_description.color_entity is not None:
