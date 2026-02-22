@@ -7,38 +7,31 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import voluptuous as vol
-from aiohttp import ClientConnectionError, ClientConnectorSSLError
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
-from homeassistant.exceptions import (
-    ConfigEntryAuthFailed,
-    ConfigEntryError,
-    ConfigEntryNotReady,
-    ServiceValidationError,
-)
+from homeassistant.const import CONF_DESCRIPTION
+from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers.device_registry import (
     CONNECTION_NETWORK_MAC,
     DeviceInfo,
     format_mac,
 )
 from homeassistant.util.hass_dict import HassKey
-from homeconnect_websocket import HomeAppliance
 
 from .const import (
-    CONF_AES_IV,
     CONF_DEV_OVERRIDE_HOST,
     CONF_DEV_OVERRIDE_PSK,
     CONF_DEV_SETUP_FROM_DUMP,
-    CONF_PSK,
     DOMAIN,
     PLATFORMS,
 )
+from .coordinator import HomeConnectCoordinator
 from .entity_descriptions import get_available_entities
 from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
     from homeassistant.helpers.typing import ConfigType
+    from homeconnect_websocket import HomeAppliance
 
     from .entity_descriptions import _EntityDescriptionsType
 
@@ -63,6 +56,7 @@ class HCData:
     appliance: HomeAppliance
     device_info: DeviceInfo
     available_entity_descriptions: _EntityDescriptionsType
+    coordinator: HomeConnectCoordinator
 
 
 @dataclass
@@ -173,41 +167,8 @@ async def async_setup_entry(
 ) -> bool:
     """Set up this integration using config entry."""
     _LOGGER.debug("Setting up %s", config_entry.data[CONF_DESCRIPTION]["info"].get("model"))
-    appliance = HomeAppliance(
-        description=config_entry.data[CONF_DESCRIPTION],
-        host=config_entry.data[CONF_HOST],
-        app_name="Homeassistant",
-        app_id=config_entry.data[CONF_DEVICE_ID],
-        psk64=config_entry.data[CONF_PSK],
-        iv64=config_entry.data.get(CONF_AES_IV, None),
-    )
-    try:
-        await appliance.connect()
-    except ClientConnectorSSLError as ex:
-        await appliance.close()
-        raise ConfigEntryAuthFailed(
-            translation_domain=DOMAIN,
-            translation_key="auth_failed",
-            translation_placeholders={"host": config_entry.data[CONF_HOST]},
-        ) from ex
-    except (TimeoutError, ClientConnectionError) as ex:
-        await appliance.close()
-        raise ConfigEntryNotReady(
-            translation_domain=DOMAIN,
-            translation_key="cannot_connect",
-            translation_placeholders={"host": config_entry.data[CONF_HOST]},
-        ) from ex
-    except Exception:
-        await appliance.close()
-        raise
-
-    _LOGGER.debug("Connected to %s", config_entry.data[CONF_DESCRIPTION]["info"].get("vib"))
-    if not appliance.info:
-        raise ConfigEntryError(
-            translation_domain=DOMAIN,
-            translation_key="no_device_info",
-        )
-
+    coordinator = HomeConnectCoordinator(hass, config_entry)
+    appliance = coordinator.appliance
     device_info = DeviceInfo(
         connections={(CONNECTION_NETWORK_MAC, format_mac(appliance.info["mac"]))},
         hw_version=appliance.info["hwVersion"],
@@ -218,8 +179,17 @@ async def async_setup_entry(
         model_id=appliance.info["vib"],
         sw_version=appliance.info["swVersion"],
     )
+
     available_entities = get_available_entities(appliance)
-    config_entry.runtime_data = HCData(appliance, device_info, available_entities)
+
+    config_entry.runtime_data = HCData(
+        appliance=appliance,
+        device_info=device_info,
+        available_entity_descriptions=available_entities,
+        coordinator=coordinator,
+    )
+
+    await coordinator.async_config_entry_first_refresh()
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
     return True
 
@@ -229,5 +199,5 @@ async def async_unload_entry(hass: HomeAssistant, entry: HCConfigEntry) -> bool:
     _LOGGER.debug("Unloading %s", entry.data[CONF_DESCRIPTION]["info"].get("vib"))
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
-        await entry.runtime_data.appliance.close()
+        await entry.runtime_data.coordinator.close()
     return unload_ok

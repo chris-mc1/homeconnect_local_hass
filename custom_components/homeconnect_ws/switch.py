@@ -11,11 +11,9 @@ from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.entity import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCSwitchEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -39,10 +37,9 @@ class HCSwitch(HCEntity, SwitchEntity):
     def __init__(
         self,
         entity_description: HCSwitchEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         self._value_mapping: tuple[str, str] = entity_description.value_mapping
 
     @property

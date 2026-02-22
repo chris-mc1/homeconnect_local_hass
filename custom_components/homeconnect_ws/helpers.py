@@ -38,9 +38,7 @@ def create_entities(
                 _LOGGER.debug("Creating Entity %s", entity_description.key)
                 try:
                     entity = entity_class(
-                        entity_description=entity_description,
-                        appliance=runtime_data.appliance,
-                        device_info=runtime_data.device_info,
+                        entity_description=entity_description, runtime_data=runtime_data
                     )
                 except Exception:
                     _LOGGER.exception("Failed to create Entity %s", entity_description.key)
@@ -108,7 +106,7 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     if hasattr(entity, "access"):
         available &= entity.access in available_access
     return available
-
+  
 
 def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Coroutine[T]]:
     """Catches HomeConnect Errors and raise HomeAssistantError."""

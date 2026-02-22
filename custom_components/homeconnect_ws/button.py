@@ -52,11 +52,14 @@ class HCStartButton(HCEntity, ButtonEntity):
     @property
     def available(self) -> bool:
         available = super().available
-        available &= self._appliance.selected_program is not None
-        if self._appliance.selected_program is not None:
-            available &= self._appliance.selected_program.execution == Execution.SELECT_AND_START
+        available &= self._runtime_data.appliance.selected_program is not None
+        if self._runtime_data.appliance.selected_program is not None:
+            available &= (
+                self._runtime_data.appliance.selected_program.execution
+                == Execution.SELECT_AND_START
+            )
         return available
 
     @error_decorator
     async def async_press(self) -> None:
-        await self._appliance.selected_program.start()
+        await self._runtime_data.appliance.selected_program.start()
