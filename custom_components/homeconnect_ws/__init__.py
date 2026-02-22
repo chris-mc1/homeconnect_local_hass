@@ -26,7 +26,7 @@ from .const import (
 )
 from .coordinator import HomeConnectCoordinator
 from .entity_descriptions import get_available_entities
-from .helpers import get_config_entry_from_call
+from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
@@ -81,6 +81,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         hass.data[HC_KEY].override_host = config[DOMAIN].get(CONF_DEV_OVERRIDE_HOST)
         hass.data[HC_KEY].override_psk = config[DOMAIN].get(CONF_DEV_OVERRIDE_PSK)
 
+    @error_decorator
     async def handle_start_program(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
 
@@ -95,8 +96,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 )
                 options[start_in_entity.uid] = relative_time_in_seconds
             else:
-                msg = "'Start in' is not available on this Appliance"
-                raise ServiceValidationError(msg)
+                raise ServiceValidationError(
+                    translation_domain=DOMAIN,
+                    translation_key="start_in_not_available",
+                )
         if "finish_in" in call.data:
             if finish_in_entity := appliance.entities.get("BSH.Common.Option.FinishInRelative"):
                 relative_time_in_seconds = (
@@ -106,14 +109,19 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                 )
                 options[finish_in_entity.uid] = relative_time_in_seconds
             else:
-                msg = "'Finish in' is not available on this Appliance"
-                raise ServiceValidationError(msg)
+                raise ServiceValidationError(
+                    translation_domain=DOMAIN,
+                    translation_key="finish_in_not_available",
+                )
         if appliance.selected_program:
             await appliance.selected_program.start(options)
         else:
-            msg = "No Program selected"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="no_program_selected",
+            )
 
+    @error_decorator
     async def handle_set_start_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
@@ -125,9 +133,12 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
             await start_in_entity.set_value(relative_time_in_seconds)
         else:
-            msg = "'Start in' is not available on this Appliance"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="start_in_not_available",
+            )
 
+    @error_decorator
     async def handle_set_finish_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
@@ -139,8 +150,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
             await finish_in_entity.set_value(relative_time_in_seconds)
         else:
-            msg = "'Finish in' is not available on this Appliance"
-            raise ServiceValidationError(msg)
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="finish_in_not_available",
+            )
 
     hass.services.async_register(DOMAIN, "start_program", handle_start_program)
     hass.services.async_register(DOMAIN, "set_start_in", handle_set_start_in)
@@ -154,10 +167,8 @@ async def async_setup_entry(
 ) -> bool:
     """Set up this integration using config entry."""
     _LOGGER.debug("Setting up %s", config_entry.data[CONF_DESCRIPTION]["info"].get("model"))
-
     coordinator = HomeConnectCoordinator(hass, config_entry)
     appliance = coordinator.appliance
-
     device_info = DeviceInfo(
         connections={(CONNECTION_NETWORK_MAC, format_mac(appliance.info["mac"]))},
         hw_version=appliance.info["hwVersion"],

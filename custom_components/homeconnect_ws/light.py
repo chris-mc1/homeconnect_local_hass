@@ -24,7 +24,7 @@ from homeconnect_websocket.message import Action
 from homeconnect_websocket.message import Message as HC_Message
 
 from .entity import HCEntity
-from .helpers import create_entities, entity_is_available
+from .helpers import create_entities, entity_is_available, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -55,6 +55,7 @@ class HCLight(HCEntity, LightEntity):
     _color_temperature_entity: HcEntity | None = None
     _color_entity: HcEntity | None = None
     _color_mode_entity: HcEntity | None = None
+    _color_temp_inverted: bool = False
 
     def __init__(
         self,
@@ -73,6 +74,9 @@ class HCLight(HCEntity, LightEntity):
                 entity_description.color_temperature_entity
             ]
             self._entities.append(self._color_temperature_entity)
+            self._color_temp_inverted = (
+                "Cooking.Hood.Setting.ColorTemperature" in self._appliance.entities
+            )
 
         if entity_description.color_entity is not None:
             self._color_entity = self._runtime_data.appliance.entities[
@@ -134,6 +138,13 @@ class HCLight(HCEntity, LightEntity):
     @property
     def color_temp_kelvin(self) -> int | None:
         if self._color_temperature_entity is not None:
+            if self._color_temp_inverted:
+                return scale_ranged_value_to_int_range(
+                    (101, 0),
+                    (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
+                    self._color_temperature_entity.value,
+                )
+
             return scale_ranged_value_to_int_range(
                 (1, 100),
                 (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
@@ -148,6 +159,7 @@ class HCLight(HCEntity, LightEntity):
             return match_max_scale((255,), rgb)
         return None
 
+    @error_decorator
     async def async_turn_on(self, **kwargs: Any) -> None:
         message = HC_Message(
             resource="/ro/values",
@@ -185,13 +197,22 @@ class HCLight(HCEntity, LightEntity):
             message.data.append({"uid": self._brightness_entity.uid, "value": value_in_range})
 
         if ATTR_COLOR_TEMP_KELVIN in kwargs:
-            value_in_range = int(
-                scale_ranged_value_to_int_range(
-                    (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
-                    (1, 100),
-                    kwargs[ATTR_COLOR_TEMP_KELVIN],
+            if self._color_temp_inverted:
+                value_in_range = int(
+                    scale_ranged_value_to_int_range(
+                        (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
+                        (101, 0),
+                        kwargs[ATTR_COLOR_TEMP_KELVIN],
+                    )
                 )
-            )
+            else:
+                value_in_range = int(
+                    scale_ranged_value_to_int_range(
+                        (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
+                        (1, 100),
+                        kwargs[ATTR_COLOR_TEMP_KELVIN],
+                    )
+                )
             message.data.append(
                 {"uid": self._color_temperature_entity.uid, "value": value_in_range}
             )
@@ -200,5 +221,6 @@ class HCLight(HCEntity, LightEntity):
             message.data.append({"uid": self._entity.uid, "value": True})
         await self._runtime_data.appliance.session.send_sync(message)
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         await self._entity.set_value(False)

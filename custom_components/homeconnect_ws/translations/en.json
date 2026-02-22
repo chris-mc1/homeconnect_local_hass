@@ -56,6 +56,9 @@
       "switch_brilliance_dry": {
         "name": "Brilliance Dry"
       },
+      "switch_zeolite_dry": {
+        "name": "CrystalDry"
+      },
       "switch_extra_dry": {
         "name": "Extra Dry"
       },
@@ -199,6 +202,9 @@
       },
       "switch_refrigerator_fresh_mode": {
         "name": "Fresh Mode"
+      },
+      "switch_extra_rinse": {
+        "name": "Extra Rinse"
       }
     },
     "binary_sensor": {
@@ -305,6 +311,27 @@
           "off": "OK"
         }
       },
+      "binary_sensor_flexspray_error_blocked": {
+        "name": "FlexSpray Blocked",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_general": {
+        "name": "FlexSpray Error",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_spray_arm_not_mounted": {
+        "name": "Spray Arm Not Mounted",
+        "state": {
+          "on": "Issue Present",
+          "off": "OK"
+        }
+      },
       "binary_sensor_program_finished": {
         "name": "Program Finished"
       },
@@ -338,6 +365,9 @@
       "binary_sensor_idos1_fill_level_poor": {
         "name": "i-DOS 1 Low"
       },
+      "binary_sensor_chiller_common_door_state": {
+        "name": "Chiller Door"
+      },
       "binary_sensor_freezer_door_state": {
         "name": "Freezer Door"
       },
@@ -352,6 +382,9 @@
       },
       "binary_sensor_fridge_door_state": {
         "name": "Fridge Door"
+      },
+      "binary_sensor_door_alarm_chiller_common": {
+        "name": "Door alarm Chiller"
       },
       "binary_sensor_door_alarm_freezer": {
         "name": "Door alarm Freezer"
@@ -1001,13 +1034,13 @@
       "select_rinse_aid": {
         "name": "Rinse Aid",
         "state": {
-          "off": "Level 0",
-          "r01": "Level 1",
-          "r02": "Level 2",
-          "r03": "Level 3",
-          "r04": "Level 4",
-          "r05": "Level 5",
-          "r06": "Level 6"
+          "off": "Level 0 (Off)",
+          "r01": "Level 1 (Lowest)",
+          "r02": "Level 2 (Low)",
+          "r03": "Level 3 (Medium)",
+          "r04": "Level 4 (Med./High)",
+          "r05": "Level 5 (High)",
+          "r06": "Level 6 (Highest)"
         }
       },
       "select_sound_level_signal": {
@@ -1017,6 +1050,88 @@
           "low": "Low",
           "medium": "Medium",
           "off": "Off"
+        }
+      },
+      "select_sound_level_key": {
+        "name": "Sound Level Key",
+        "state": {
+          "off": "Off",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "PowerControl Type",
+        "state": {
+          "front": "Front",
+          "back": "Back",
+          "custom": "Custom",
+          "individual": "Individual"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl Front Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl Back Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl Back Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl Front Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "PowerControl Custom Front Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "PowerControl Custom Back Left",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "PowerControl Custom Back Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "PowerControl Custom Front Right",
+        "state": {
+          "delicate": "Delicate",
+          "normal": "Normal",
+          "heavy": "Heavy"
         }
       },
       "select_water_hardness": {
@@ -1664,6 +1779,31 @@
           "highforce": "High"
         }
       },
+      "select_chiller_common_preset": {
+        "name": "Chiller preset",
+        "state": {
+          "meatfish": "29°F \uD83D\uDCA7 (Meat/Fish)",
+          "fruit": "32°F \uD83D\uDCA7 (Fruit)",
+          "vegetables": "32°F \uD83D\uDCA7\uD83D\uDCA7 (Vegetables)",
+          "beverages": "34°F \uD83D\uDCA7 (Beverages)",
+          "snacks": "40°F \uD83D\uDCA7 (Snacks/Misc.)",
+          "custom": "Custom"
+        }
+      },
+      "select_chiller_left_humidity": {
+        "name": "Chiller left humidity",
+        "state": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
+      "select_chiller_right_humidity": {
+        "name": "Chiller right humidity",
+        "state": {
+          "low": "Low",
+          "high": "High"
+        }
+      },
       "select_hood_interval_stage": {
         "name": "Interval stage",
         "state": {
@@ -1680,6 +1820,21 @@
           "fanstage01": "1",
           "fanstage02": "2",
           "fanstage03": "3"
+        }
+      },
+      "select_temperature_unit": {
+        "name": "Temperature unit",
+        "state": {
+          "celsius": "Celsius",
+          "fahrenheit": "Fahrenheit"
+        }
+      },
+      "select_hood_carbon_filter_type": {
+        "name": "Carbon filter type",
+        "state": {
+          "none": "None",
+          "fahrenheit": "Basic Carbon filter",
+          "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
       }
     },
@@ -1698,6 +1853,18 @@
       },
       "button_mains_power_off": {
         "name": "PowerOFF"
+      },
+      "button_hood_carbon_filter_reset": {
+        "name": "Carbon filter reset"
+      },
+      "button_hood_grease_filter_reset": {
+        "name": "Grease filter reset"
+      },
+      "button_hood_regenerative_carbon_filter_reset": {
+        "name": "Regenerative Carbon filter reset"
+      },
+      "button_hood_regenerative_carbon_filter_lifetime_reset": {
+        "name": "Regenerative Carbon filter lifetime reset"
       }
     },
     "number": {
@@ -1717,10 +1884,13 @@
         "name": "Spin class"
       },
       "number_setpoint_freezer": {
-        "name": "Temperature Freezer"
+        "name": "Freezer Temperature"
       },
       "number_setpoint_refrigerator": {
-        "name": "Temperature Fridge"
+        "name": "Fridge Temperature"
+      },
+      "number_setpoint_chiller_common": {
+        "name": "Chiller Temperature"
       },
       "number_light_internal_brightness": {
         "name": "Internal Light Brightness"
@@ -1818,6 +1988,41 @@
           "description": "Set the time the Program should be finished in"
         }
       }
+    }
+  },
+  "exceptions": {
+    "start_in_not_available": {
+      "message": "'Start in' is not available on this Appliance"
+    },
+    "finish_in_not_available": {
+      "message": "'Finish in' is not available on this Appliance"
+    },
+    "no_program_selected": {
+      "message": "No Program selected"
+    },
+    "auth_failed": {
+      "message": "Authentication failed {host}"
+    },
+    "cannot_connect": {
+      "message": "Can't connect to {host}"
+    },
+    "no_device_info": {
+      "message": "Appliance has no device info"
+    },
+    "speed_invalid": {
+      "message": "Speed {percentage} is invalid"
+    },
+    "not_appliance": {
+      "message": "Not a Homeconnect Appliance"
+    },
+    "access_error": {
+      "message": "Entity is not Accessible"
+    },
+    "code_respons": {
+      "message": "Error response from Appliance: {message}"
+    },
+    "not_connected": {
+      "message": "Client is not Connected"
     }
   }
 }

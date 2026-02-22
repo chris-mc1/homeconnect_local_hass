@@ -176,6 +176,21 @@ def generate_wifi(appliance: HomeAppliance) -> EntityDescriptions:
     return None
 
 
+def generate_temperature_unit(appliance: HomeAppliance) -> HCSelectEntityDescription | None:
+    """Get Temperature unit description."""
+    entity = appliance.entities.get("BSH.Common.Setting.TemperatureUnit")
+    if entity and len(entity.enum) > 2:
+        return HCSelectEntityDescription(
+            key="select_temperature_unit",
+            entity="BSH.Common.Setting.TemperatureUnit",
+            device_class=SensorDeviceClass.ENUM,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        )
+    return None
+
+
 COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "button": [
         HCButtonEntityDescription(
@@ -256,6 +271,14 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_registry_enabled_default=False,
             has_state_translation=True,
         ),
+        HCSelectEntityDescription(
+            key="select_remote_control_level",
+            entity="BSH.Common.Setting.RemoteControlLevel",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        generate_temperature_unit,
     ],
     "sensor": [
         HCSensorEntityDescription(
@@ -318,16 +341,16 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 {
                     "name": "Last Start",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: entity.value["start"]
-                    if entity.value is not None
-                    else None,
+                    "value_fn": lambda entity: (
+                        entity.value["start"] if entity.value is not None else None
+                    ),
                 },
                 {
                     "name": "Last End",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: entity.value["end"]
-                    if entity.value is not None
-                    else None,
+                    "value_fn": lambda entity: (
+                        entity.value["end"] if entity.value is not None else None
+                    ),
                 },
             ],
         ),

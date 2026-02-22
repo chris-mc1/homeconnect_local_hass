@@ -16,6 +16,7 @@ from custom_components.homeconnect_ws.helpers import get_groups_from_regex
 from .descriptions_definitions import (
     EntityDescriptions,
     HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
     HCFanEntityDescription,
     HCLightEntityDescription,
     HCNumberEntityDescription,
@@ -77,7 +78,7 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven event descriptions."""
     pattern = re.compile(r"^Cooking\.Oven\.Event\.Cavity\.([0-9]*)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
-    descriptions = EntityDescriptions(event_sensor=[])
+    descriptions = EntityDescriptions(binary_sensor=[])
     for group in groups:
         group_name = f" {int(group[0])}"
         if len(groups) == 1:
@@ -86,7 +87,7 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
         # AlarmClockElapsed
         entity = f"Cooking.Oven.Event.Cavity.{group[0]}.AlarmClockElapsed"
         if entity in appliance.entities:
-            descriptions["event_sensor"].append(
+            descriptions["binary_sensor"].append(
                 HCBinarySensorEntityDescription(
                     key=f"binary_sensor_oven_alarm_clock_elapsed_{group[0]}",
                     translation_key="binary_sensor_oven_alarm_clock_elapsed",
@@ -499,6 +500,12 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Hood.Setting.DelayedShutOffStage",
             has_state_translation=True,
         ),
+        HCSelectEntityDescription(
+            key="select_hood_carbon_filter_type",
+            entity="Cooking.Hood.Setting.CarbonFilterType",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -537,4 +544,26 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
     "fan": [generate_hood_fan],
+    "button": [
+        HCButtonEntityDescription(
+            key="button_hood_carbon_filter_reset",
+            entity="Cooking.Common.Command.Hood.CarbonFilterReset ",
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCButtonEntityDescription(
+            key="button_hood_grease_filter_reset",
+            entity="Cooking.Common.Command.Hood.GreaseFilterReset ",
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCButtonEntityDescription(
+            key="button_hood_regenerative_carbon_filter_reset",
+            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterReset ",
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCButtonEntityDescription(
+            key="button_hood_regenerative_carbon_filter_lifetime_reset",
+            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterLifeTimeReset ",
+            entity_category=EntityCategory.CONFIG,
+        ),
+    ],
 }
