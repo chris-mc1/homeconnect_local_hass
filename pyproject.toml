@@ -5,7 +5,7 @@ authors = [{ name = "chris-mc1" }]
 description = "Home Connect Local for Homeassistant"
 readme = "README.md"
 requires-python = ">=3.13.2"
-dependencies = ["homeconnect-websocket==1.5.0a3"]
+dependencies = ["homeconnect-websocket==1.5.1"]
 
 [project.urls]
 Homepage = "https://github.com/chris-mc1/homeconnect_local_hass"
