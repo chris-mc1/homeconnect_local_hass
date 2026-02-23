@@ -45,13 +45,13 @@
         "name": "Extra Trocken"
       },
       "switch_intensiv_zone": {
-        "name": "Intensiv Zone"
+        "name": "Intensivzone"
       },
       "switch_vario_speed_plus": {
         "name": "Variospeed Plus"
       },
       "switch_silence_on_demand": {
-        "name": "Silence On Demand"
+        "name": "Leise auf Knopfdruck"
       },
       "switch_brilliance_dry": {
         "name": "Glanz Trocknen"
@@ -60,7 +60,7 @@
         "name": "Extra Trocken"
       },
       "switch_speed_on_demand": {
-        "name": "Speed On Demand"
+        "name": "Schnell auf Knopfdruck"
       },
       "switch_info_light": {
         "name": "Info-Licht"
@@ -133,6 +133,78 @@
       },
       "switch_oven_sabbath_mode": {
         "name": "Sabbat Modus"
+      },
+      "switch_zeolite_dry": {
+        "name": "CrystalDry"
+      },
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "Niedrigtemperatur-Hygiene"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "Vario Perfect"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "Intensiv Plus"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "Weniger Bügeln"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "Leise Waschen"
+      },
+      "switch_laundry_soak": {
+        "name": "Einweichen"
+      },
+      "switch_laundry_prewash": {
+        "name": "Vorwäsche"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "Spülstopp"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "Spülen Plus 1"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "Spülen Plus 3"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "Wasser und Spülen Plus 1"
+      },
+      "switch_laundry_water_plus": {
+        "name": "Wasser Plus"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "Desinfektionsmittel"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "Hygiene-Dampf"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Sabbat-Modus"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Spender"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Gefrierschrank-Türassistent"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Innenbeleuchtung"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Innenbeleuchtung Theatermodus"
+      },
+      "switch_hood_boost": {
+        "name": "Boost-Stufe"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Leisemodus"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Frische-Modus"
+      },
+      "switch_extra_rinse": {
+        "name": "Extra Spülen"
       }
     },
     "binary_sensor": {
@@ -218,6 +290,126 @@
       },
       "binary_sensor_interior_illumination": {
         "name": "Innenbeleuchtung"
+      },
+      "binary_sensor_program_finished": {
+        "name": "Programm beendet"
+      },
+      "binary_sensor_low_voltage": {
+        "name": "Niederspannung"
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "Maschinenpflege & Filterreinigung",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "Wasserheizung verkalkt",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "Smarte Filterreinigung",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "Filtersystem prüfen",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "Abpumpen nicht möglich",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "Ablaufpumpe blockiert",
+        "state": {
+          "on": "Wartung erforderlich",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_blocked": {
+        "name": "FlexSpray blockiert",
+        "state": {
+          "on": "Problem vorhanden",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_general": {
+        "name": "FlexSpray Fehler",
+        "state": {
+          "on": "Problem vorhanden",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_spray_arm_not_mounted": {
+        "name": "Sprüharm nicht montiert",
+        "state": {
+          "on": "Problem vorhanden",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "Versorgungsspannung niedrig"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "Wasserstand zu hoch"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "Tür nicht verriegelbar"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "Tür nicht entriegelbar"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "Schwerwiegender Fehler"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "Trommelreinigung empfohlen"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "i-DOS 2 niedrig"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "i-DOS 1 niedrig"
+      },
+      "binary_sensor_chiller_common_door_state": {
+        "name": "Frischezone-Tür"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "i-DOS Defekt"
+      },
+      "binary_sensor_pump_error": {
+        "name": "Pumpenfehler"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "Schleudern abgebrochen"
+      },
+      "binary_sensor_door_alarm_chiller_common": {
+        "name": "Türalarm Frischezone"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Abtauen"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Wasserfilter voll"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Gerätefehler"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Niederspannung"
       }
     },
     "sensor": {
@@ -316,12 +508,914 @@
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Waschen - Fein/Seide",
           "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Waschen - Anti Mikroplastik",
           "laundrycare_washer_program_downduvet_down_down": "Waschen - Daunen",
-          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Drum Clean (alt)",
-          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Drum Clean",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelreinigung (alt)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelreinigung",
           "laundrycare_washer_program_easycare_easycare_easycare": "Waschen - Pflegeleicht",
           "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Waschen - Eco 40-60",
           "laundrycare_washer_program_mix_mix_mix": "Schnell/Mix",
           "laundrycare_washer_program_outdoor_outdoor_outdoor": "Waschen - Funktionswäsche",
+          "laundrycare_washer_program_plushtoy_plushtoy_plushtoy": "Waschen - Kuscheltiere",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Spülen",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Waschen - Sensitiv",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Waschen - Hemden/Blusen",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Waschen - Sportbekleidung",
+          "laundrycare_washer_program_spin_spin_spindrain": "Schleudern/Abpumpen",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Bedampfen/Iron Assist",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Extra Kurz 15min/30min",
+          "laundrycare_washer_program_wool_wool_wool": "Wolle",
+          "laundrycare_washerdryer_program_towels_towels": "Waschen & Trocknen - Handtücher",
+          "laundrycare_washerdryer_program_cotton_cotton": "Waschen & Trocknen - Baumwolle",
+          "laundrycare_washerdryer_program_mix_mix": "Waschen & Trocknen - Mix",
+          "laundrycare_washerdryer_program_wool_wool": "Waschen & Trocknen - Wolle",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
+          "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
+          "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
+          "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
+          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
+          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Camembert (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Käsesauce",
+          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Chicken Nuggets (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_chop": "Kotelett",
+          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Cordon Bleu",
+          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Cordon Bleu (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_courgettes": "Zucchini",
+          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Trockengerichte",
+          "cooking_hob_program_dish_fryingsensor_escalope": "Schnitzel",
+          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Paniertes Schnitzel",
+          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Schnitzel (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_fillet": "Filet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Paniertes Fischfilet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Paniertes Fischfilet (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Natur Fischfilet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Natur Fischfilet (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Fischstäbchen (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_frenchfriesmadefromrawpotatoes": "Pommes aus rohen Kartoffeln",
+          "cooking_hob_program_dish_fryingsensor_frenchtoast": "Armer Ritter",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinbutter": "Spiegeleier in Butter",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinoil": "Spiegeleier in Öl",
+          "cooking_hob_program_dish_fryingsensor_fryingcamembert": "Camembert braten",
+          "cooking_hob_program_dish_fryingsensor_fryingcroutons": "Croutons braten",
+          "cooking_hob_program_dish_fryingsensor_fryingfishwhole": "Ganzen Fisch braten",
+          "cooking_hob_program_dish_fryingsensor_fryingfrenchfriesfrozen": "Pommes (tiefgekühlt) braten",
+          "cooking_hob_program_dish_fryingsensor_fryinggreenasparagus": "Grüner Spargel braten",
+          "cooking_hob_program_dish_fryingsensor_fryingmeatballs": "Frikadellen braten",
+          "cooking_hob_program_dish_fryingsensor_fryingpotatoesboiledintheirskin": "Kartoffeln mit Schale braten",
+          "cooking_hob_program_dish_fryingsensor_fryingpreboiledsausages": "Vorgekochte Würstchen braten",
+          "cooking_hob_program_dish_fryingsensor_fryingrawsausages": "Rohwürstchen braten",
+          "cooking_hob_program_dish_fryingsensor_fryingrissoles": "Bratlinge braten",
+          "cooking_hob_program_dish_fryingsensor_garlic": "Knoblauch",
+          "cooking_hob_program_dish_fryingsensor_glazedonions": "Glasierte Zwiebeln",
+          "cooking_hob_program_dish_fryingsensor_glazedpotatoes": "Glasierte Kartoffeln",
+          "cooking_hob_program_dish_fryingsensor_glazedvegetables": "Glasiertes Gemüse",
+          "cooking_hob_program_dish_fryingsensor_gyros": "Gyros",
+          "cooking_hob_program_dish_fryingsensor_gyrosfrozen": "Gyros (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_hamburgers": "Hamburger",
+          "cooking_hob_program_dish_fryingsensor_kebabfrozen": "Kebab (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_meatloaf": "Hackbraten",
+          "cooking_hob_program_dish_fryingsensor_mincedmeat": "Hackfleisch",
+          "cooking_hob_program_dish_fryingsensor_mushrooms": "Pilze",
+          "cooking_hob_program_dish_fryingsensor_omelettes": "Omeletts",
+          "cooking_hob_program_dish_fryingsensor_pancake": "Pfannkuchen",
+          "cooking_hob_program_dish_fryingsensor_pancakes": "Pfannkuchen",
+          "cooking_hob_program_dish_fryingsensor_peppers": "Paprika",
+          "cooking_hob_program_dish_fryingsensor_potatopancakes": "Kartoffelpuffer",
+          "cooking_hob_program_dish_fryingsensor_poultrybreast": "Geflügelbrust",
+          "cooking_hob_program_dish_fryingsensor_poultrybreastfrozen": "Geflügelbrust (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_prawns": "Garnelen",
+          "cooking_hob_program_dish_fryingsensor_reducingsauces": "Soßen reduzieren",
+          "cooking_hob_program_dish_fryingsensor_sauteingvegetablesinoil": "Gemüse in Öl sautieren",
+          "cooking_hob_program_dish_fryingsensor_scampi": "Scampi",
+          "cooking_hob_program_dish_fryingsensor_scrambledeggs": "Rührei",
+          "cooking_hob_program_dish_fryingsensor_springrollsfrozen": "Frühlingsrollen (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_steaksmedium": "Steak medium",
+          "cooking_hob_program_dish_fryingsensor_steaksrare": "Steak blutig",
+          "cooking_hob_program_dish_fryingsensor_steakswelldone": "Steak durch",
+          "cooking_hob_program_dish_fryingsensor_stirfriesfrozen": "Wokgerichte (tiefgekühlt)",
+          "cooking_hob_program_dish_fryingsensor_stripsofmeat": "Fleischstreifen",
+          "cooking_hob_program_dish_fryingsensor_sweetsauces": "Süße Soßen",
+          "cooking_hob_program_dish_fryingsensor_swissroesti": "Schweizer Rösti",
+          "cooking_hob_program_dish_fryingsensor_toastingalmonds": "Mandeln rösten",
+          "cooking_hob_program_dish_fryingsensor_toastingnuts": "Nüsse rösten",
+          "cooking_hob_program_dish_fryingsensor_toastingpinenuts": "Pinienkerne rösten",
+          "cooking_hob_program_dish_fryingsensor_tomatosaucewithvegetables": "Tomatensoße mit Gemüse",
+          "cooking_hob_program_dish_fryingsensor_vienneseschnitzel": "Wiener Schnitzel",
+          "cooking_hob_program_fryingsensormode": "Bratsensor-Modus",
+          "cooking_hob_program_powerlevelmode": "Leistungsstufe",
+          "cooking_hob_program_powermovemode": "PowerMove-Modus",
+          "cooking_oven_program_cleaning_drying": "Trocknen",
+          "cooking_oven_program_cleaning_pyrolysis": "Pyrolyse",
+          "cooking_oven_program_dish_automatic_konv_babyputeungefuellt": "Babypute Ungefuellt",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitfleisch": "Eintopf Mit Fleisch",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitgemuese": "Eintopf Mit Gemuese",
+          "cooking_oven_program_dish_automatic_konv_enteungefuellt": "Ente Ungefuellt",
+          "cooking_oven_program_dish_automatic_konv_fischganz": "Fisch Ganz",
+          "cooking_oven_program_dish_automatic_konv_gaensebrust": "Gaensebrust",
+          "cooking_oven_program_dish_automatic_konv_gaensekeulen": "Gaensekeulen",
+          "cooking_oven_program_dish_automatic_konv_gulasch": "Gulasch",
+          "cooking_oven_program_dish_automatic_konv_hirschkeuleohneknochen": "Hirschkeule Ohne Knochen",
+          "cooking_oven_program_dish_automatic_konv_kalbsossobuco": "Kalbs Osso Buco",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratendurchwachsen": "Kalbsbraten Durchwachsen",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratenmager": "Kalbsbraten Mager",
+          "cooking_oven_program_dish_automatic_konv_kalbshaxe": "Kalbshaxe",
+          "cooking_oven_program_dish_automatic_konv_kaninchenganz": "Kaninchen Ganz",
+          "cooking_oven_program_dish_automatic_konv_lammkeulemitknochendurchgegart": "Lammkeule Mit Knochen Durchgegart",
+          "cooking_oven_program_dish_automatic_konv_pavlova": "Pavlova",
+          "cooking_oven_program_dish_automatic_konv_poulardeungefuellt": "Poularde Ungefuellt",
+          "cooking_oven_program_dish_automatic_konv_rehkeuleohneknochen": "Rehkeule Ohne Knochen",
+          "cooking_oven_program_dish_automatic_konv_rinderrouladen": "Rinderrouladen",
+          "cooking_oven_program_dish_automatic_konv_rinderschmorbraten": "Rinderschmorbraten",
+          "cooking_oven_program_dish_automatic_konv_roastbeefenglisch": "Roastbeef Englisch",
+          "cooking_oven_program_dish_automatic_konv_schweinebratenmitkrustezbschulter": "Schweinebraten Mit Kruste z. B. Schulter",
+          "cooking_oven_program_dish_automatic_konv_schweinekotelettbratenmitknochen": "Schweinekotelettbraten Mit Knochen",
+          "cooking_oven_program_dish_automatic_konv_schweinelendenbraten": "Schweinelendenbraten",
+          "cooking_oven_program_dish_automatic_konv_schweinerollbraten": "Schweinerollbraten",
+          "cooking_oven_program_dish_automatic_konv_skandinavischerweihnachtsschinken": "Skandinavischer Weihnachtsschinken",
+          "cooking_oven_program_dish_automatic_konv_wildschweinbraten": "Wildschweinbraten",
+          "cooking_oven_program_dish_automatic_microwave_aufbackbroetchenoderbaguette": "Aufbackbrötchen oder Baguette",
+          "cooking_oven_program_dish_automatic_microwave_auflaufpikantfrischgegartezutaten": "Pikanter Auflauf – frisch gegarte Zutaten",
+          "cooking_oven_program_dish_automatic_microwave_auflaufsuessfrisch": "Süßer Auflauf – frisch",
+          "cooking_oven_program_dish_automatic_microwave_backofenkartoffelnganz": "Backofenkartoffeln ganz",
+          "cooking_oven_program_dish_automatic_microwave_basmatireis": "Basmatireis",
+          "cooking_oven_program_dish_automatic_microwave_broetchenauftauen": "Brötchen auftauen",
+          "cooking_oven_program_dish_automatic_microwave_cannelloni": "Cannelloni",
+          "cooking_oven_program_dish_automatic_microwave_couscous": "Couscous",
+          "cooking_oven_program_dish_automatic_microwave_fischganzauftauen": "Fisch ganz auftauen",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletauftauen": "Fischfilet auftauen",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletduensten": "Fischfilet dünsten",
+          "cooking_oven_program_dish_automatic_microwave_fischstaebchen": "Fischstäbchen",
+          "cooking_oven_program_dish_automatic_microwave_fleischauftauen": "Fleisch auftauen",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelganzauftauen": "Geflügel ganz auftauen",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelteileauftauen": "Geflügelteile auftauen",
+          "cooking_oven_program_dish_automatic_microwave_gemuesefrisch": "Gemüse frisch",
+          "cooking_oven_program_dish_automatic_microwave_gemuesegefroren": "Gemüse gefroren",
+          "cooking_oven_program_dish_automatic_microwave_graupen": "Graupen",
+          "cooking_oven_program_dish_automatic_microwave_gruenkerngeschrotet": "Grünkern geschrotet",
+          "cooking_oven_program_dish_automatic_microwave_hackbratenausfrischemhackfleisch": "Hackbraten aus frischem Hackfleisch",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenhalbiert": "Hähnchen halbiert",
+          "cooking_oven_program_dish_automatic_microwave_haehnchensticksnuggets": "Hähnchen-Sticks / Nuggets",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenungefuellt": "Hähnchen ungefüllt",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenteile": "Hähnchenteile",
+          "cooking_oven_program_dish_automatic_microwave_hirse": "Hirse",
+          "cooking_oven_program_dish_automatic_microwave_kartoffelgratinrohezutaten4cmhoch": "Kartoffelgratin – rohe Zutaten, 4 cm hoch",
+          "cooking_oven_program_dish_automatic_microwave_kartoffeltaschengefuellt": "Gefüllte Kartoffeltaschen",
+          "cooking_oven_program_dish_automatic_microwave_kroketten": "Kroketten",
+          "cooking_oven_program_dish_automatic_microwave_kuchensaftigauftauen": "Kuchen saftig auftauen",
+          "cooking_oven_program_dish_automatic_microwave_kuchentrockenauftauen": "Kuchen trocken auftauen",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochendurchgegart": "Lammkeule ohne Knochen – durchgegart",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochenmedium": "Lammkeule ohne Knochen – medium",
+          "cooking_oven_program_dish_automatic_microwave_langkornreis": "Langkornreis",
+          "cooking_oven_program_dish_automatic_microwave_lasagne": "Lasagne",
+          "cooking_oven_program_dish_automatic_microwave_minipizzen": "Mini-Pizzen",
+          "cooking_oven_program_dish_automatic_microwave_mischbrotaftauen": "Mischbrot auftauen",
+          "cooking_oven_program_dish_automatic_microwave_naturreis": "Naturreis",
+          "cooking_oven_program_dish_automatic_microwave_parboiledreis": "Parboiled Reis",
+          "cooking_oven_program_dish_automatic_microwave_pellkartoffeln": "Pellkartoffeln",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitdickemboden1stueck": "Pizza mit dickem Boden – 1 Stück",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitduennemboden1stueck": "Pizza mit dünnem Boden – 1 Stück",
+          "cooking_oven_program_dish_automatic_microwave_polenta": "Polenta",
+          "cooking_oven_program_dish_automatic_microwave_pommesfrites": "Pommes frites",
+          "cooking_oven_program_dish_automatic_microwave_putenbrust": "Putenbrust",
+          "cooking_oven_program_dish_automatic_microwave_risotto": "Risotto",
+          "cooking_oven_program_dish_automatic_microwave_roastbeefmedium": "Roastbeef – medium",
+          "cooking_oven_program_dish_automatic_microwave_salzkartoffeln": "Salzkartoffeln",
+          "cooking_oven_program_dish_automatic_microwave_schweinenackenbratenohneknochen": "Schweinenackenbraten ohne Knochen",
+          "cooking_oven_program_dish_automatic_microwave_tintenfischringepaniert": "Tintenfischringe paniert",
+          "cooking_oven_program_dish_automatic_microwave_vollkornbrotaftauen": "Vollkornbrot auftauen",
+          "cooking_oven_program_dish_automatic_microwave_weissbrotaftauen": "Weißbrot auftauen",
+          "cooking_oven_program_dish_automatic_microwave_zartweizen": "Zartweizen",
+          "cooking_oven_program_dish_recommendation_konv_aufbackbroetchenoderbaguette": "Aufbackbrötchen oder Baguette",
+          "cooking_oven_program_dish_recommendation_konv_baiser": "Baiser",
+          "cooking_oven_program_dish_recommendation_konv_baklava": "Baklava",
+          "cooking_oven_program_dish_recommendation_konv_biskuitrolle": "Biskuitrolle",
+          "cooking_oven_program_dish_recommendation_konv_biskuittorte": "Biskuittorte",
+          "cooking_oven_program_dish_recommendation_konv_blaetterteiggebaeck": "Blätterteiggebäck",
+          "cooking_oven_program_dish_recommendation_konv_boerek": "Börek",
+          "cooking_oven_program_dish_recommendation_konv_brandteiggebaeck": "Brandteiggebäck",
+          "cooking_oven_program_dish_recommendation_konv_brezelnteiglinge": "Brezeln (Teiglinge)",
+          "cooking_oven_program_dish_recommendation_konv_broetchenfrisch": "Brötchen frisch",
+          "cooking_oven_program_dish_recommendation_konv_broetchensuessfrisch": "Süße Brötchen frisch",
+          "cooking_oven_program_dish_recommendation_konv_ciabatta": "Ciabatta",
+          "cooking_oven_program_dish_recommendation_konv_croissantsteiglinge": "Croissants (Teiglinge)",
+          "cooking_oven_program_dish_recommendation_konv_empanada": "Empanada",
+          "cooking_oven_program_dish_recommendation_konv_entegefuellt": "Ente gefüllt",
+          "cooking_oven_program_dish_recommendation_konv_entenbrust": "Entenbrust",
+          "cooking_oven_program_dish_recommendation_konv_fischfiletueberbacken": "Fischfilet überbacken",
+          "cooking_oven_program_dish_recommendation_konv_fladenbrot": "Fladenbrot",
+          "cooking_oven_program_dish_recommendation_konv_flammkuchen": "Flammkuchen",
+          "cooking_oven_program_dish_recommendation_konv_gansgefuellt": "Gans gefüllt",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegefuellt": "Gemüse gefüllt",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegratinieren": "Gemüse gratinieren",
+          "cooking_oven_program_dish_recommendation_konv_haehnchengefuellt": "Hähnchen gefüllt",
+          "cooking_oven_program_dish_recommendation_konv_hefegugelhupf": "Hefe-Gugelhupf",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmitsaftigembelag": "Hefekuchen mit saftigem Belag",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmittrockenembelag": "Hefekuchen mit trockenem Belag",
+          "cooking_oven_program_dish_recommendation_konv_hefeteiggebaeck": "Hefeteiggebäck",
+          "cooking_oven_program_dish_recommendation_konv_hefezopfhefekranz": "Hefezopf / Hefekranz",
+          "cooking_oven_program_dish_recommendation_konv_kalbsbrustgefuellt": "Kalbsbrust gefüllt",
+          "cooking_oven_program_dish_recommendation_konv_kalbsruecken": "Kalbsrücken",
+          "cooking_oven_program_dish_recommendation_konv_kartoffelroesti": "Kartoffelrösti",
+          "cooking_oven_program_dish_recommendation_konv_makronen": "Makronen",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigbodenblindbacken": "Mürbeteigboden blindbacken",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteiggebaeck": "Mürbeteiggebäck",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigkuchenmitsaftigembelag": "Mürbeteigkuchen mit saftigem Belag",
+          "cooking_oven_program_dish_recommendation_konv_muffins": "Muffins",
+          "cooking_oven_program_dish_recommendation_konv_obstoderquarktortemitmuerbeteigboden": "Obst- oder Quarktorte mit Mürbeteigboden",
+          "cooking_oven_program_dish_recommendation_konv_piroggen": "Piroggen",
+          "cooking_oven_program_dish_recommendation_konv_pizzabaguette": "Pizza-Baguette",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischaufbackblech": "Pizza frisch auf Backblech",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischduennerbodeninpizzaform": "Pizza frisch – dünner Boden in Pizzaform",
+          "cooking_oven_program_dish_recommendation_konv_pizzagekuehlt": "Pizza gekühlt",
+          "cooking_oven_program_dish_recommendation_konv_plaetzchen": "Plätzchen",
+          "cooking_oven_program_dish_recommendation_konv_plundergebaeck": "Plundergebäck",
+          "cooking_oven_program_dish_recommendation_konv_potatoewedges": "Potatoe Wedges",
+          "cooking_oven_program_dish_recommendation_konv_putenrollbraten": "Putenrollbraten",
+          "cooking_oven_program_dish_recommendation_konv_quichetarte": "Quiche / Tarte",
+          "cooking_oven_program_dish_recommendation_konv_rehrueckenmitknochen": "Rehrücken mit Knochen",
+          "cooking_oven_program_dish_recommendation_konv_rinderfiletmedium": "Rinderfilet medium",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmitsaftigembelag": "Rührkuchen mit saftigem Belag",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmittrockenembelag": "Rührkuchen mit trockenem Belag",
+          "cooking_oven_program_dish_recommendation_konv_schweinshaxe": "Schweinshaxe",
+          "cooking_oven_program_dish_recommendation_konv_souffleinportionsformen": "Soufflé in Portionsformen",
+          "cooking_oven_program_dish_recommendation_konv_spritzgebaeck": "Spritzgebäck",
+          "cooking_oven_program_dish_recommendation_konv_strudelsuess": "Strudel süß",
+          "cooking_oven_program_dish_recommendation_konv_tarte": "Tarte",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausmuerbeteig": "Tortenboden aus Mürbeteig",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausruehrteig": "Tortenboden aus Rührteig",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotaufbackblech": "Weißbrot auf Backblech",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotinkastenform": "Weißbrot in Kastenform",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotaufbackblech": "Weizenbrot / -mischbrot auf Backblech",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotinkastenform": "Weizenbrot / -mischbrot in Kastenform",
+          "cooking_oven_program_dish_recommendation_microwave_gansungefuellt": "Gans ungefüllt",
+          "cooking_oven_program_dish_recommendation_microwave_gebackenekartoffelnhalbiert": "Gebackene Kartoffeln halbiert",
+          "cooking_oven_program_dish_recommendation_microwave_haehnchenbrust": "Hähnchenbrust",
+          "cooking_oven_program_dish_recommendation_microwave_lasagnefrisch": "Lasagne frisch",
+          "cooking_oven_program_dish_recommendation_microwave_obstkuchenausruehrteigfein": "Obstkuchen aus Rührteig (fein)",
+          "cooking_oven_program_dish_recommendation_microwave_ruehrkucheneinfach": "Rührkuchen einfach",
+          "cooking_oven_program_dish_subsequentcooking": "Nachgarprogramm",
+          "cooking_oven_program_heatingmode_bottomheating": "Unterhitze",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "Spezial-Aufheizen für Gefrorenes",
+          "cooking_oven_program_heatingmode_grilllargearea": "Grill – große Fläche",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill – kleine Fläche",
+          "cooking_oven_program_heatingmode_hotair": "Heißluft",
+          "cooking_oven_program_heatingmode_hotaireco": "Heißluft Eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Umluftgrillen",
+          "cooking_oven_program_heatingmode_keepwarm": "Warmhalten",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizzastufe",
+          "cooking_oven_program_heatingmode_preheatovenware": "Vorheizen von Geschirr",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath-Programm",
+          "cooking_oven_program_heatingmode_slowcook": "Schonendes Garen",
+          "cooking_oven_program_heatingmode_topbottomheating": "Ober-/Unterhitze",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Ober-/Unterhitze Eco",
+          "cooking_oven_program_steammodes_reheat": "Regenerieren",
+          "cooking_oven_program_steammodes_steam": "Dämpfen",
+          "cooking_oven_program_steammodes_doughproving": "Gärstufe",
+          "cooking_oven_program_steammodes_defrosting": "Auftauen",
+          "cooking_oven_program_heatingmode_preheating": "Vorheizen",
+          "cooking_oven_program_heatingmode_letrest": "Ruhen lassen",
+          "cooking_oven_program_heatingmode_hotairgentle": "Circo Therm Sanft",
+          "cooking_oven_program_heatingmode_breadbaking": "Brotbackstufe",
+          "cooking_oven_program_heatingmode_airfry": "Air Fry",
+          "cooking_oven_program_dish_recommmendation_fullsteam_yeastdumplings": "Germknödel",
+          "cooking_oven_program_dish_recommmendation_fullsteam_wholeweat": "Weizen, ganz",
+          "cooking_oven_program_microcombimodes_grilllargearea": "Mikro-Kombi: Grill große Fläche",
+          "cooking_oven_program_microcombimodes_grillsmallarea": "Mikro-Kombi: Grill kleine Fläche",
+          "cooking_oven_program_microcombimodes_hotair": "Mikro-Kombi: Heißluft",
+          "cooking_oven_program_microcombimodes_hotairgrilling": "Mikro-Kombi: Umluftgrillen",
+          "cooking_oven_program_microcombimodes_topbottomheating": "Mikro-Kombi: Ober-/Unterhitze",
+          "cooking_oven_program_microwave_180watt": "Mikrowelle 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Mikrowelle 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Mikrowelle 600 Watt",
+          "cooking_oven_program_microwave_90watt": "Mikrowelle 90 Watt",
+          "cooking_oven_program_microwave_max": "Mikrowelle Maximalleistung",
+          "cooking_oven_program_dish_automatic_microwave_vollkornbrotauftauen": "Vollkornbrot auftauen",
+          "cooking_oven_program_dish_automatic_microwave_weissbrotauftauen": "Weißbrot auftauen",
+          "cooking_oven_program_dish_automatic_microwave_mischbrotauftauen": "Mischbrot auftauen",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Milchkaffee",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Caffè Crema",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Heißwasser",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Milchschaum",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Warme Milch",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Caffè XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Black eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café con leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Dead eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat white",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Red eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Ausschaltspülen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Einschaltspülen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "calc'nClean",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Reinigung",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Reinigung Brüheinheit",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Reinigung Brüheinheit (detailliert)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Reinigung Getränkeauslauf",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Entkalken",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Frostschutz",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Wasserfilter entfernen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Wasserfilter ersetzen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Milchsystem Reinigung",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Wasserfilter Reinigung",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Reinigung Spezial",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, großflächig",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Waschen - Gardinen",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_towels_towels_towels": "Handtücher",
+          "laundrycare_washer_program_sportfitness": "Waschen - Sportwäsche",
+          "laundrycare_common_program_juststart": "Einfach starten",
+          "laundrycare_common_program_memory1": "Speicher 1",
+          "laundrycare_common_program_memory2": "Speicher 2",
+          "laundrycare_common_program_memory3": "Speicher 3",
+          "laundrycare_common_program_memory4": "Speicher 4",
+          "laundrycare_common_program_memory5": "Speicher 5",
+          "laundrycare_common_program_memory6": "Speicher 6",
+          "laundrycare_common_program_memory7": "Speicher 7",
+          "laundrycare_common_program_memory8": "Speicher 8",
+          "laundrycare_dryer_program_blankets": "Trocknen - Daunen",
+          "laundrycare_dryer_program_businessshirts": "Hemden",
+          "laundrycare_dryer_program_cotton": "Trocknen - Baumwolle",
+          "laundrycare_dryer_program_dessous": "Trocknen - Dessous",
+          "laundrycare_dryer_program_hygiene": "Trocknen - Hygiene",
+          "laundrycare_dryer_program_inbasket": "Trocknen - Wolle im Korb",
+          "laundrycare_dryer_program_mix": "Trocknen - Mischgewebe",
+          "laundrycare_dryer_program_outdoor": "Trocknen - Outdoor",
+          "laundrycare_dryer_program_pillow": "Trocknen - Bettdecke",
+          "laundrycare_dryer_program_super40": "Trocknen - Schnell 40 Min.",
+          "laundrycare_dryer_program_synthetic": "Trocknen - Pflegeleicht",
+          "laundrycare_dryer_program_timecold": "Zeitprogramm Kalt",
+          "laundrycare_dryer_program_timewarm": "Zeitprogramm Warm",
+          "laundrycare_dryer_program_towels": "Trocknen - Handtücher",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Trocknen - Sportwäsche"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "Klarspüler",
+        "state": {
+          "empty": "Leer",
+          "nearly_empty": "Fast Leer",
+          "full": "Voll"
+        }
+      },
+      "sensor_salt": {
+        "name": "Salz",
+        "state": {
+          "empty": "Leer",
+          "nearly_empty": "Fast Leer",
+          "full": "Voll"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "Wassertank",
+        "state": {
+          "empty": "Leer",
+          "nearly_empty": "Fast Leer",
+          "not_inserted": "Entfernt",
+          "full": "Voll"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Auffangschale",
+        "state": {
+          "ok": "OK",
+          "not_inserted": "Nicht eingesetzt",
+          "full": "Voll"
+        }
+      },
+      "sensor_start_in": {
+        "name": "Starten in"
+      },
+      "sensor_count_started": {
+        "name": "Startanzahl"
+      },
+      "sensor_end_trigger": {
+        "name": "Programmende-Bedingung",
+        "state": {
+          "programfinished": "Beendet",
+          "programabortedbyuser": "Vom Benutzer Abgebrochen",
+          "programabortedbyappliance": "Vom Gerät Abgebrochen",
+          "programabortedbyappliancecriticalerror": "Kritischer Fehler"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "Intervall Aus"
+      },
+      "sensor_interval_time_on": {
+        "name": "Intervall An"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "Verzögerte Abschaltung"
+      },
+      "sensor_power_state": {
+        "name": "Status",
+        "state": {
+          "mainsoff": "Strom getrennt",
+          "off": "Aus",
+          "on": "An",
+          "standby": "Standby"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Tür",
+        "state": {
+          "open": "Offen",
+          "closed": "Geschlossen",
+          "locked": "Abgeschlossen",
+          "ajar": "Angelehnt"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Nachlegemöglichkeit",
+        "state": {
+          "impossible": "Unmöglich",
+          "possiblepauseprogram": "Pausieren möglich",
+          "possibleopendoor": "Türöffnung möglich"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Prozessphase",
+        "state": {
+          "nophase": "Keine Phase",
+          "prewash": "Vorwäsche",
+          "intermediatespin": "Zwischenschleudern",
+          "fillingdetergent": "Einfüllen Waschmittel",
+          "detectingload": "Ladungserkennung",
+          "heating": "Heizen",
+          "washing": "Waschen",
+          "cooldown": "Abkühlen",
+          "rinsingfoam": "Spülen Schaum",
+          "rinsing": "Spülen",
+          "rinsingaquasensor": "Spülen AquaSensor",
+          "rinseonly": "Nur Spülen",
+          "waterproofing": "Imprägnieren",
+          "rinsingsoftener": "Spülen Weichspüler",
+          "holdafterrinse": "Halten nach Spülen",
+          "pumping": "Abpumpen",
+          "spinningfinal": "Endschleudern",
+          "lessironing": "Leicht Bügeln",
+          "fluffing": "Auflockern",
+          "soaking": "Einweichen",
+          "hygienicsteamfogging": "Hygienedampfvernebelung",
+          "guardingoxy": "Sauerstoffschutz",
+          "generatingozone": "Ozongenerierung",
+          "degradingozone": "Ozonabbau",
+          "drying": "Trocknen",
+          "coolingdown": "Abkühlen",
+          "additionalcoolingdown": "Zusätzliches Abkühlen",
+          "guardingwrinkle": "Knitterschutz",
+          "detectingtextile": "Textilerkennung",
+          "detectingsoil": "Schmutzerkennung",
+          "disinfecting": "Desinfizieren",
+          "lowtemperaturehygiene": "Niedrigtemperaturhygiene",
+          "steamingactive": "Dampfen aktiv",
+          "irondryreached": "Bügeltrocken erreicht",
+          "cupboarddryreached": "Schranktrocken erreicht",
+          "cupboarddryplusreached": "Extra schranktrocken erreicht",
+          "cleaningheatexchanger": "Reinigen Wärmetauscher",
+          "slightlydampreached": "Leicht feucht erreicht",
+          "extradryreached": "Extratrocken erreicht",
+          "gentlydryreached": "Sanft trocken erreicht",
+          "quickcare": "Schnellpflege",
+          "depthcarephase1": "Tiefenpflege Phase 1",
+          "depthcarephase2": "Tiefenpflege Phase 2",
+          "coldrefreshing": "Kaltauffrischung",
+          "steaming": "Dampfen",
+          "foam": "Schaum",
+          "testprogramdummytextfinalspeedreached": "Testprogramm: Endgeschwindigkeit erreicht",
+          "rinsingfoamf21": "Spülen Schaum F21",
+          "handsoak": "Handeinweichen",
+          "vacant": "Leer",
+          "spinning": "Schleudern",
+          "displayspinabortnospin": "Anzeige Schleuderabbruch kein Schleudern",
+          "multiplesoak": "Mehrfaches Einweichen",
+          "laundryrefreshing": "Wäsche auffrischen",
+          "reload": "Nachladen",
+          "hotmoistheatingwetting": "Heißfeucht: Befeuchten",
+          "hotmoistheatingheating": "Heißfeucht: Heizen",
+          "hotmoistheatingwashing": "Heißfeucht: Waschen",
+          "moistureremoval": "Feuchtigkeitsentzug",
+          "selfcleaning": "Selbstreinigung",
+          "hygiene": "Hygiene",
+          "smartsoak": "Smartes Einweichen",
+          "soakpause": "Einweichpause",
+          "soakfinished": "Einweichen beendet",
+          "anyphase": "Beliebige Phase"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Beendet-Zähler"
+      },
+      "sensor_flex_start": {
+        "name": "Flex Start",
+        "state": {
+          "disabled": "Deaktiviert",
+          "enabled": "Aktiviert",
+          "pending": "Ausstehend",
+          "scheduled": "Geplant",
+          "started": "Angefangen",
+          "finished": "Beendet"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Prozessphase",
+        "state": {
+          "steamactive": "Dampf aktiv",
+          "progstarted": "Programm gestartet",
+          "drying": "Trocknen",
+          "irondryreached": "Bügeltrocken erreicht",
+          "cupboarddryreached": "Schranktrocken erreicht",
+          "cubboarddryplusreached": "Schranktrocken Plus erreicht",
+          "cooling": "Abkühlen",
+          "finishedanticrease": "Fertig – Knitterschutz",
+          "heatexchangercleaning": "Wärmetauscherreinigung",
+          "slightlydampreached": "Leicht feucht erreicht",
+          "extradryreached": "Extratrocken erreicht",
+          "quickcare": "Schnellpflege",
+          "depthcarephase1": "Tiefenpflege Phase 1",
+          "depthcarephase2": "Tiefenpflege Phase 2",
+          "spare": "Reserve"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Umgebungstemperatur"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Schleuderdrehzahl",
+        "state": {
+          "off": "Aus",
+          "rpm400": "400 U/min",
+          "rpm600": "600 U/min",
+          "rpm700": "700 U/min",
+          "rpm800": "800 U/min",
+          "rpm900": "900 U/min",
+          "rpm1000": "1000 U/min",
+          "rpm1200": "1200 U/min",
+          "rpm1400": "1400 U/min",
+          "rpm1500": "1500 U/min",
+          "rpm1600": "1600 U/min",
+          "rinsehold": "Spülstopp",
+          "auto": "Auto"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Geschätzte Verbleibende Programmlaufzeit"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Wassertank{group_name}",
+        "state": {
+          "ok": "OK",
+          "empty": "Leer",
+          "unplugged": "Ausgesteckt"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Aktuelle Temperatur{group_name}"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarm abgelaufen{group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "Aufwärmprozess"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "WLAN Signalstärke"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Anzahl Ristretto"
+      },
+      "sensor_count_coffee": {
+        "name": "Anzahl Kaffeegetränke"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Anzahl Kaffee-Milch-Spezialitäten"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Anzahl Milchschaum"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Anzahl Milchgetränke"
+      },
+      "sensor_count_hot_water": {
+        "name": "Menge Heißwasser"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Anzahl Heißwasser"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Anzahl Pulverkaffee"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "calc'nClean notwendig"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "Reinigung notwendig"
+      },
+      "sensor_countdown_descaling": {
+        "name": "Entkalkung notwendig"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "Wasserfilter austauschen"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "Prozessphase",
+        "state": {
+          "none": "Bereit",
+          "beverageaborting": "Ausgabe wird abgebrochen",
+          "grinding": "Bohnen werden gemahlen",
+          "brewingunitmovesup": "Brüheinheit fährt hoch",
+          "coffeebrewing": "Kaffee wird gebrüht",
+          "brewingunitmovesdown": "Brüheinheit fährt herunter",
+          "milkfroth": "Milch wird aufgeschäumt",
+          "cleaningmilksystem": "Milchsystem wird gereinigt",
+          "hotwaterdispensing": "Heißwasser wird ausgegeben",
+          "cleaningmode": "Reinigungsmodus aktiv",
+          "descalephase": "Entkalkung läuft",
+          "rinsephase": "Spülvorgang läuft",
+          "cleanphase": "Reinigung läuft",
+          "warmmilk": "Milch wird erwärmt",
+          "frostprotection": "Frostschutz aktiv",
+          "specialrinsing": "Spezialspülung",
+          "waterfilteractivation": "Wasserfilter wird aktiviert",
+          "lattemacpause": "Latte Macchiato Pause",
+          "startphase": "Startvorgang",
+          "skipphase": "Phase wird übersprungen",
+          "preliminary": "Vorbereitungsphase",
+          "autodescalephase": "Automatische Entkalkung",
+          "autocleanphase": "Automatische Reinigung",
+          "drainingdescalephase": "Entleerung nach Entkalkung",
+          "milkdescalephase": "Milchsystem-Entkalkung",
+          "coldbrew": "Cold Brew Zubereitung",
+          "dripbrew": "Drip Brew Zubereitung",
+          "emptypowdersources": "Pulverquellen werden geleert",
+          "roundrobinflush": "Systemspülung",
+          "initializenewcartridge": "Kartusche wird initialisiert"
+        }
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Fettfilter-Sättigung"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Aktivkohlefilter-Sättigung"
+      },
+      "sensor_hob_zone_state": {
+        "name": "Zone {group_name} Status",
+        "state": {
+          "notselectable": "Nicht wählbar",
+          "off": "Aus",
+          "active": "Aktiv",
+          "residuelheat": "Restwärme"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Zone {group_name} Betriebszustand",
+        "state": {
+          "inactive": "Inaktiv",
+          "ready": "Bereit",
+          "delayedstart": "Verzögerter Start",
+          "run": "Im Betrieb",
+          "pause": "Pause",
+          "actionrequired": "Aktion erforderlich",
+          "finished": "Beendet",
+          "error": "Fehler",
+          "aborting": "Abbruch"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Zone {group_name} Leistungsstufe",
+        "state": {
+          "off": "Aus",
+          "keepwarm": "Warmhalten",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Pfannen-Boost",
+          "boost2": "Power-Boost"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Zone {group_name} Bratsensor-Stufe",
+        "state": {
+          "off": "Aus",
+          "level01": "Stufe 1",
+          "level02": "Stufe 2",
+          "level03": "Stufe 3",
+          "level04": "Stufe 4",
+          "level05": "Stufe 5",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Zone {group_name} Aktuelle Temperatur"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Zone {group_name} Aufheizfortschritt"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Zone {group_name} Timer-Einstellung"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Zone {group_name} Verstrichene Zeit"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Zone {group_name} Restzeit"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Zone {group_name} Fortschritt"
+      },
+      "sensor_finish_in": {
+        "name": "Fertig in"
+      },
+      "sensor_laundry_load_recommendation": {
+        "name": "Beladungsempfehlung"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "Speichertemperatur Gefrierschrank"
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "i-DOS 1 Fill Level",
+        "state": {
+          "poor": "Poor",
+          "filled": "Gefüllt"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "i-DOS 2 Fill Level",
+        "state": {
+          "poor": "Poor",
+          "filled": "Gefüllt"
+        }
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Trocknungsassistent Alle Programme",
+        "state": {
+          "off": "Aus",
+          "allprograms": "Alle Programme",
+          "ecoasdefault": "Eco 50°C"
+        }
+      },
+      "select_hot_water": {
+        "name": "Wassertemperatur",
+        "state": {
+          "coldwater": "Kaltwasser",
+          "hotwater": "Warmwasser"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Klarspüler",
+        "state": {
+          "off": "Stufe 0 (Aus)",
+          "r01": "Stufe 1 (Niedrigste)",
+          "r02": "Stufe 2 (Niedrig)",
+          "r03": "Stufe 3 (Mittel)",
+          "r04": "Stufe 4 (Mittel/Hoch)",
+          "r05": "Stufe 5 (Hoch)",
+          "r06": "Stufe 6 (Höchste)"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "Signaltonlautstärke",
+        "state": {
+          "high": "Hoch",
+          "low": "Niedrig",
+          "medium": "Mittel",
+          "off": "Aus"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Wasserhärte",
+        "state": {
+          "h00": "°E 0-8 soft (0-1.1 mmol/l)",
+          "h01": "°E 9-10 soft (1.2-1.4 mmol/l)",
+          "h02": "°E 11-12 medium (1.5-1.8 mmol/l)",
+          "h03": "°E 13-15 medium (1.9-2.1 mmol/l)",
+          "h04": "°E 16-20 medium (2.2-2.9 mmol/l)",
+          "h05": "°E 21-26 hard (3.0-3.7 mmol/l)",
+          "h06": "°E 27-38 hard (3.8-5.4 mmol/l)",
+          "h07": "°E 39-62 hard (5.5-8.9 mmol/l)"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "Fernbedienung",
+        "state": {
+          "monitoring": "Aus",
+          "manualremotestart": "Manueller Fernstart",
+          "permanentremotestart": "Permanenter Fernstart"
+        }
+      },
+      "select_program": {
+        "name": "Ausgewähltes Programm",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensiv 70°C",
+          "dishcare_dishwasher_program_auto2": "Auto 45-65°C",
+          "dishcare_dishwasher_program_eco50": "Eco 50°C",
+          "dishcare_dishwasher_program_quick45": "Schnell 45°C",
+          "dishcare_dishwasher_program_prerinse": "Vorspülen",
+          "dishcare_dishwasher_program_quick65": "Schnell 65°C",
+          "dishcare_dishwasher_program_machinecare": "Maschinenpflege",
+          "dishcare_dishwasher_program_glas40": "Glas 40°C",
+          "dishcare_dishwasher_program_glassshine": "brilliantShine",
+          "dishcare_dishwasher_program_intensivpower": "Intensiv Plus 70°C",
+          "dishcare_dishwasher_program_kurz60": "Speed 60°C",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "dishcare_dishwasher_program_maxefficient": "Max Efficient",
+          "dishcare_dishwasher_program_mixedload": "Mischbeladung",
+          "dishcare_dishwasher_program_nightwash": "Leise 50°C",
+          "dishcare_dishwasher_program_quickd": "Quick Wash and Dry",
+          "dishcare_dishwasher_program_super60": "Super 60°C",
+          "favorite_001": "Favorit 1",
+          "favorite_002": "Favorit 2",
+          "favorite_003": "Favorit 3",
+          "favorite_004": "Favorit 4",
+          "favorite_005": "Favorit 5",
+          "favorite_006": "Favorit 6",
+          "favorite_007": "Favorit 7",
+          "favorite_008": "Favorit 8",
+          "favorite_009": "Favorit 9",
+          "favorite_010": "Favorit 10",
+          "laundrycare_dryer_program_bedlinens_bedlinens_bedlinens": "Trocknen - Bettwäsche",
+          "laundrycare_dryer_program_coldrefresh_coldrefresh_coldrefresh": "Trocknen - Smart Finish",
+          "laundrycare_dryer_program_connecteddry": "IntelligentDry",
+          "laundrycare_dryer_program_cotton_cotton_cotton": "Trocknen - Baumwolle",
+          "laundrycare_dryer_program_cottoneco_cottoneco_cottoneco": "Trocknen - Baumwolle Eco",
+          "laundrycare_dryer_program_delicates_delicates_dessous": "Trocknen - Feinwäsche / Dessous",
+          "laundrycare_dryer_program_downfeathers_downfeathers_downfeathers": "Trocknen - Daunen",
+          "laundrycare_dryer_program_hygiene_hygiene_hygiene": "Trocknen - Hygieneprogramm",
+          "laundrycare_dryer_program_jeans_jeans_jeans": "Trocknen - Jeans",
+          "laundrycare_dryer_program_maintenancecare1_maintenancecare1_quickcare": "Pflegeleicht – Schnellpflege",
+          "laundrycare_dryer_program_maintenancecare2_maintenancecare2_depthcare": "Pflegeleicht – Tiefenpflege",
+          "laundrycare_dryer_program_mix_mix_mix": "Schnell/Mix",
+          "laundrycare_dryer_program_outdoor_outdoor_outdoor": "Trocknen - Outdoor",
+          "laundrycare_dryer_program_outdoor_outdoor_sportswear": "Trocknen - Sportbekleidung",
+          "laundrycare_dryer_program_shirtblouses_shirtblouses_shirtblouses": "Trocknen - Hemden / Blusen",
+          "laundrycare_dryer_program_silentdry_silentdry_silentdry": "Nachttrocknen/Leisetrocknen",
+          "laundrycare_dryer_program_super40_super40_super40": "Super 40",
+          "laundrycare_dryer_program_synthetic_synthetic_synthetic": "Trocknen - Pflegeleicht",
+          "laundrycare_dryer_program_timecold_timecold_timecold": "Kalt",
+          "laundrycare_dryer_program_timewarm_timewarm_timewarm": "Zeitprogramm warm",
+          "laundrycare_dryer_program_towels_towels_towels": "Trocknen - Handtücher",
+          "laundrycare_dryer_program_woolfinish_woolfinish_woolfinish": "Trocknen - Wolle Finish",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Waschen - Automatik sanft/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Waschen - Automatik 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Waschen - Baumwolle",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Waschen - Jeans/Dunkle Wäsche",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Waschen - Fein/Seide",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Waschen - Anti Mikroplastik",
+          "laundrycare_washer_program_downduvet_down_down": "Waschen - Daunen",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelreinigung (alt)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelreinigung",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Waschen - Pflegeleicht",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Waschen - Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Schnell/Mix",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Waschen - Funktionswäsche",
+          "laundrycare_washer_program_plushtoy_plushtoy_plushtoy": "Waschen - Kuscheltiere",
           "laundrycare_washer_program_rinse_rinse_rinse": "Spülen",
           "laundrycare_washer_program_sensitive_sensitive_sensitive": "Waschen - Sensitiv",
           "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Waschen - Hemden/Blusen",
@@ -587,729 +1681,52 @@
           "cooking_oven_program_dish_automatic_microwave_vollkornbrotauftauen": "Vollkornbrot auftauen",
           "cooking_oven_program_dish_automatic_microwave_weissbrotauftauen": "Weißbrot auftauen",
           "cooking_oven_program_dish_automatic_microwave_mischbrotauftauen": "Mischbrot auftauen",
-          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
-          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Milchkaffee",
-          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
-          "consumerproducts_coffeemaker_program_beverage_coffee": "Caffè Crema",
-          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
-          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso doppio",
-          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso macchiato",
-          "consumerproducts_coffeemaker_program_beverage_hotwater": "Heißwasser",
-          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte macchiato",
-          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Milchschaum",
-          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
-          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Warme Milch",
-          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Caffè XL",
-          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
-          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Black eye",
-          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au lait",
-          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café con leche",
-          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
-          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
-          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
-          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
-          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Dead eye",
-          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
-          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat white",
-          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
-          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
-          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
-          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
-          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
-          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie verkeerd",
-          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Red eye",
-          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
-          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
-          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter braun",
-          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
-          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Ausschaltspülen",
-          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Einschaltspülen",
-          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "calc'nClean",
-          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Reinigung",
-          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Reinigung Brüheinheit",
-          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Reinigung Brüheinheit (detailliert)",
-          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Reinigung Getränkeauslauf",
-          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Entkalken",
-          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Frostschutz",
-          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Wasserfilter entfernen",
-          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Wasserfilter ersetzen",
-          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Milchsystem Reinigung",
-          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Wasserfilter Reinigung",
-          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Reinigung Spezial"
-        }
-      },
-      "sensor_rinse_aid": {
-        "name": "Klarspüler",
-        "state": {
-          "empty": "Leer",
-          "nearly_empty": "Fast Leer",
-          "full": "Voll"
-        }
-      },
-      "sensor_salt": {
-        "name": "Salz",
-        "state": {
-          "empty": "Leer",
-          "nearly_empty": "Fast Leer",
-          "full": "Voll"
-        }
-      },
-      "sensor_water_tank": {
-        "name": "Wassertank",
-        "state": {
-          "empty": "Leer",
-          "nearly_empty": "Fast Leer",
-          "not_inserted": "Entfernt",
-          "full": "Voll"
-        }
-      },
-      "sensor_drip_tray": {
-        "name": "Auffangschale",
-        "state": {
-          "ok": "OK",
-          "not_inserted": "Nicht eingesetzt",
-          "full": "Voll"
-        }
-      },
-      "sensor_start_in": {
-        "name": "Start in"
-      },
-      "sensor_count_started": {
-        "name": "Startanzahl"
-      },
-      "sensor_end_trigger": {
-        "name": "Programmende-Bedingung",
-        "state": {
-          "programfinished": "Beendet",
-          "programabortedbyuser": "Vom Benutzer Abgebrochen",
-          "programabortedbyappliance": "Vom Gerät Abgebrochen",
-          "programabortedbyappliancecriticalerror": "Kritischer Fehler"
-        }
-      },
-      "sensor_interval_time_off": {
-        "name": "Intervall Aus"
-      },
-      "sensor_interval_time_on": {
-        "name": "Intervall An"
-      },
-      "sensor_delayed_shutoff_time": {
-        "name": "Verzögerte Abschaltung"
-      },
-      "sensor_power_state": {
-        "name": "Status",
-        "state": {
-          "mainsoff": "Strom getrennt",
-          "off": "Aus",
-          "on": "An",
-          "standby": "Standby"
-        }
-      },
-      "sensor_door_state": {
-        "name": "Tür",
-        "state": {
-          "open": "Offen",
-          "closed": "Geschlossen",
-          "locked": "Abgeschlossen",
-          "ajar": "Angelehnt"
-        }
-      },
-      "sensor_laundry_reload": {
-        "name": "Nachlegemöglichkeit",
-        "state": {
-          "impossible": "Unmöglich",
-          "possiblepauseprogram": "Pausieren möglich",
-          "possibleopendoor": "Türöffnung moöglich"
-        }
-      },
-      "sensor_laundry_process_phase": {
-        "name": "Prozessphase",
-        "state": {
-          "nophase": "Keine Phase",
-          "prewash": "Vorwäsche",
-          "intermediatespin": "Zwischenschleudern",
-          "fillingdetergent": "Einfüllen Waschmittel",
-          "detectingload": "Ladungserkennung",
-          "heating": "Heizen",
-          "washing": "Waschen",
-          "cooldown": "Abkühlen",
-          "rinsingfoam": "Spülen Schaum",
-          "rinsing": "Spülen",
-          "rinsingaquasensor": "Spülen AquaSensor",
-          "rinseonly": "Nur Spülen",
-          "waterproofing": "Imprägnieren",
-          "rinsingsoftener": "Spülen Weichspüler",
-          "holdafterrinse": "Halten nach Spülen",
-          "pumping": "Abpumpen",
-          "spinningfinal": "Endschleudern",
-          "lessironing": "Leicht Bügeln",
-          "fluffing": "Auflockern",
-          "soaking": "Einweichen",
-          "hygienicsteamfogging": "Hygienedampfvernebelung",
-          "guardingoxy": "Sauerstoffschutz",
-          "generatingozone": "Ozongenerierung",
-          "degradingozone": "Ozonabbau",
-          "drying": "Trocknen",
-          "coolingdown": "Abkühlen",
-          "additionalcoolingdown": "Zusätzliches Abkühlen",
-          "guardingwrinkle": "Knitterschutz",
-          "detectingtextile": "Textilerkennung",
-          "detectingsoil": "Schmutzerkennung",
-          "disinfecting": "Desinfizieren",
-          "lowtemperaturehygiene": "Niedrigtemperaturhygiene",
-          "steamingactive": "Dampfen aktiv",
-          "irondryreached": "Bügeltrocken erreicht",
-          "cupboarddryreached": "Schranktrocken erreicht",
-          "cupboarddryplusreached": "Extra schranktrocken erreicht",
-          "cleaningheatexchanger": "Reinigen Wärmetauscher",
-          "slightlydampreached": "Leicht feucht erreicht",
-          "extradryreached": "Extratrocken erreicht",
-          "gentlydryreached": "Sanft trocken erreicht",
-          "quickcare": "Schnellpflege",
-          "depthcarephase1": "Tiefenpflege Phase 1",
-          "depthcarephase2": "Tiefenpflege Phase 2",
-          "coldrefreshing": "Kaltauffrischung",
-          "steaming": "Dampfen",
-          "foam": "Schaum",
-          "testprogramdummytextfinalspeedreached": "Testprogramm: Endgeschwindigkeit erreicht",
-          "rinsingfoamf21": "Spülen Schaum F21",
-          "handsoak": "Handeinweichen",
-          "vacant": "Leer",
-          "spinning": "Schleudern",
-          "displayspinabortnospin": "Anzeige Schleuderabbruch kein Schleudern",
-          "multiplesoak": "Mehrfaches Einweichen",
-          "laundryrefreshing": "Wäsche auffrischen",
-          "reload": "Nachladen",
-          "hotmoistheatingwetting": "Heißfeucht: Befeuchten",
-          "hotmoistheatingheating": "Heißfeucht: Heizen",
-          "hotmoistheatingwashing": "Heißfeucht: Waschen",
-          "moistureremoval": "Feuchtigkeitsentzug",
-          "selfcleaning": "Selbstreinigung",
-          "hygiene": "Hygiene",
-          "smartsoak": "Smartes Einweichen",
-          "soakpause": "Einweichpause",
-          "soakfinished": "Einweichen beendet",
-          "anyphase": "Beliebige Phase"
-        }
-      },
-      "sensor_count_completed": {
-        "name": "Beendet-Zähler"
-      },
-      "sensor_flex_start": {
-        "name": "Flex Start",
-        "state": {
-          "disabled": "Deaktiviert",
-          "enabled": "Aktiviert",
-          "pending": "Ausstehend",
-          "scheduled": "Geplant",
-          "started": "Angefangen",
-          "finished": "Beendet"
-        }
-      },
-      "sensor_dryer_process_phase": {
-        "name": "Prozessphase",
-        "state": {
-          "steamactive": "Dampf aktiv",
-          "progstarted": "Programm gestartet",
-          "drying": "Trocknen",
-          "irondryreached": "Bügeltrocken erreicht",
-          "cupboarddryreached": "Schranktrocken erreicht",
-          "cubboarddryplusreached": "Schranktrocken Plus erreicht",
-          "cooling": "Abkühlen",
-          "finishedanticrease": "Fertig – Knitterschutz",
-          "heatexchangercleaning": "Wärmetauscherreinigung",
-          "slightlydampreached": "Leicht feucht erreicht",
-          "extradryreached": "Extratrocken erreicht",
-          "quickcare": "Schnellpflege",
-          "depthcarephase1": "Tiefenpflege Phase 1",
-          "depthcarephase2": "Tiefenpflege Phase 2",
-          "spare": "Reserve"
-        }
-      },
-      "sensor_temperature_ambient": {
-        "name": "Umgebungstemperatur"
-      },
-      "sensor_laundry_spin_speed": {
-        "name": "Schleuderdrehzahl",
-        "state": {
-          "off": "Aus",
-          "rpm400": "400 U/min",
-          "rpm600": "600 U/min",
-          "rpm700": "700 U/min",
-          "rpm800": "800 U/min",
-          "rpm900": "900 U/min",
-          "rpm1000": "1000 U/min",
-          "rpm1200": "1200 U/min",
-          "rpm1400": "1400 U/min",
-          "rpm1500": "1500 U/min",
-          "rpm1600": "1600 U/min",
-          "rinsehold": "Spülstopp",
-          "auto": "Auto"
-        }
-      },
-      "sensor_estimated_remaining_program_time": {
-        "name": "Geschätzte Verbleibende Programmlaufzeit"
-      },
-      "sensor_oven_water_tank": {
-        "name": "Wassertank{group_name}",
-        "state": {
-          "ok": "OK",
-          "empty": "Leer",
-          "unplugged": "Ausgesteckt"
-        }
-      },
-      "sensor_oven_current_temperature": {
-        "name": "Aktuelle Temperatur{group_name}"
-      },
-      "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarm abgelaufen{group_name}"
-      },
-      "sensor_heatup_progress": {
-        "name": "Aufwärmprozess"
-      },
-      "sensor_wifi_signal_strength": {
-        "name": "WLAN Signalstärke"
-      },
-      "sensor_count_ristretto_espresso": {
-        "name": "Anzahl Ristretto"
-      },
-      "sensor_count_coffee": {
-        "name": "Anzahl Kaffeegetränke"
-      },
-      "sensor_count_coffee_milk": {
-        "name": "Anzahl Kaffee-Milch-Spezialitäten"
-      },
-      "sensor_count_frothy_milk": {
-        "name": "Anzahl Milchschaum"
-      },
-      "sensor_count_hot_milk": {
-        "name": "Anzahl Milchgetränke"
-      },
-      "sensor_count_hot_water": {
-        "name": "Menge Heißwasser"
-      },
-      "sensor_count_hot_water_cups": {
-        "name": "Anzahl Heißwasser"
-      },
-      "sensor_count_powder_coffee": {
-        "name": "Anzahl Pulverkaffee"
-      },
-      "sensor_countdown_calc_n_clean": {
-        "name": "calc'nClean notwendig"
-      },
-      "sensor_countdown_cleaning": {
-        "name": "Reinigung notwendig"
-      },
-      "sensor_countdown_descaling": {
-        "name": "Entkalkung notwendig"
-      },
-      "sensor_countdown_water_filter": {
-        "name": "Wasserfilter austauschen"
-      },
-      "sensor_coffeemaker_process_phase": {
-        "name": "Prozessphase",
-        "state": {
-          "none": "Bereit",
-          "beverageaborting": "Ausgabe wird abgebrochen",
-          "grinding": "Bohnen werden gemahlen",
-          "brewingunitmovesup": "Brüheinheit fährt hoch",
-          "coffeebrewing": "Kaffee wird gebrüht",
-          "brewingunitmovesdown": "Brüheinheit fährt herunter",
-          "milkfroth": "Milch wird aufgeschäumt",
-          "cleaningmilksystem": "Milchsystem wird gereinigt",
-          "hotwaterdispensing": "Heißwasser wird ausgegeben",
-          "cleaningmode": "Reinigungsmodus aktiv",
-          "descalephase": "Entkalkung läuft",
-          "rinsephase": "Spülvorgang läuft",
-          "cleanphase": "Reinigung läuft",
-          "warmmilk": "Milch wird erwärmt",
-          "frostprotection": "Frostschutz aktiv",
-          "specialrinsing": "Spezialspülung",
-          "waterfilteractivation": "Wasserfilter wird aktiviert",
-          "lattemacpause": "Latte Macchiato Pause",
-          "startphase": "Startvorgang",
-          "skipphase": "Phase wird übersprungen",
-          "preliminary": "Vorbereitungsphase",
-          "autodescalephase": "Automatische Entkalkung",
-          "autocleanphase": "Automatische Reinigung",
-          "drainingdescalephase": "Entleerung nach Entkalkung",
-          "milkdescalephase": "Milchsystem-Entkalkung",
-          "coldbrew": "Cold Brew Zubereitung",
-          "dripbrew": "Drip Brew Zubereitung",
-          "emptypowdersources": "Pulverquellen werden geleert",
-          "roundrobinflush": "Systemspülung",
-          "initializenewcartridge": "Kartusche wird initialisiert"
-        }
-      }
-    },
-    "select": {
-      "select_drying_assistant_all_programs": {
-        "name": "Trocknungsassistent Alle Programme",
-        "state": {
-          "off": "Aus",
-          "allprograms": "Alle Programme",
-          "ecoasdefault": "Eco 50"
-        }
-      },
-      "select_hot_water": {
-        "name": "Wassertemperatur",
-        "state": {
-          "coldwater": "Kaltwasser",
-          "hotwater": "Warmwasser"
-        }
-      },
-      "select_rinse_aid": {
-        "name": "Klarspüler"
-      },
-      "select_sound_level_signal": {
-        "name": "Signaltonlautstärke",
-        "state": {
-          "high": "Hoch",
-          "low": "Niedrig",
-          "medium": "Mittel",
-          "off": "Aus"
-        }
-      },
-      "select_water_hardness": {
-        "name": "Wasserhärte"
-      },
-      "select_remote_control_level": {
-        "name": "Fernbedienung",
-        "state": {
-          "monitoring": "Aus",
-          "manualremotestart": "Manueller Fernstart",
-          "permanentremotestart": "Permanenter Fernstart"
-        }
-      },
-      "select_program": {
-        "name": "Ausgewähltes Programm",
-        "state": {
-          "dishcare_dishwasher_program_intensiv70": "Intensiv 70°C",
-          "dishcare_dishwasher_program_auto2": "Auto 45-65°C",
-          "dishcare_dishwasher_program_eco50": "Eco 50°C",
-          "dishcare_dishwasher_program_quick45": "Schnell 45°C",
-          "dishcare_dishwasher_program_prerinse": "Vorspülen",
-          "dishcare_dishwasher_program_quick65": "Schnell 65°C",
-          "dishcare_dishwasher_program_machinecare": "Maschinenpflege",
-          "dishcare_dishwasher_program_glas40": "Glas 40°C",
-          "dishcare_dishwasher_program_glassshine": "brilliantShine",
-          "dishcare_dishwasher_program_intensivpower": "Intensiv Plus 70°C",
-          "dishcare_dishwasher_program_kurz60": "Speed 60°C",
-          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
-          "dishcare_dishwasher_program_maxefficient": "Max Efficient",
-          "dishcare_dishwasher_program_mixedload": "Mischbeladung",
-          "dishcare_dishwasher_program_nightwash": "Leise 50°C",
-          "dishcare_dishwasher_program_quickd": "Quick Wash and Dry",
-          "dishcare_dishwasher_program_super60": "Super 60°C",
-          "favorite_001": "Favorit 1",
-          "favorite_002": "Favorit 2",
-          "favorite_003": "Favorit 3",
-          "favorite_004": "Favorit 4",
-          "favorite_005": "Favorit 5",
-          "favorite_006": "Favorit 6",
-          "favorite_007": "Favorit 7",
-          "favorite_008": "Favorit 8",
-          "favorite_009": "Favorit 9",
-          "favorite_010": "Favorit 10",
-          "laundrycare_dryer_program_bedlinens_bedlinens_bedlinens": "Trocknen - Bettwäsche",
-          "laundrycare_dryer_program_coldrefresh_coldrefresh_coldrefresh": "Trocknen - Smart Finish",
-          "laundrycare_dryer_program_connecteddry": "IntelligentDry",
-          "laundrycare_dryer_program_cotton_cotton_cotton": "Trocknen - Baumwolle",
-          "laundrycare_dryer_program_cottoneco_cottoneco_cottoneco": "Trocknen - Baumwolle Eco",
-          "laundrycare_dryer_program_delicates_delicates_dessous": "Trocknen - Feinwäsche / Dessous",
-          "laundrycare_dryer_program_downfeathers_downfeathers_downfeathers": "Trocknen - Daunen",
-          "laundrycare_dryer_program_hygiene_hygiene_hygiene": "Trocknen - Hygieneprogramm",
-          "laundrycare_dryer_program_jeans_jeans_jeans": "Trocknen - Jeans",
-          "laundrycare_dryer_program_maintenancecare1_maintenancecare1_quickcare": "Pflegeleicht – Schnellpflege",
-          "laundrycare_dryer_program_maintenancecare2_maintenancecare2_depthcare": "Pflegeleicht – Tiefenpflege",
-          "laundrycare_dryer_program_mix_mix_mix": "Schnell/Mix",
-          "laundrycare_dryer_program_outdoor_outdoor_outdoor": "Trocknen - Outdoor",
-          "laundrycare_dryer_program_outdoor_outdoor_sportswear": "Trocknen - Sportbekleidung",
-          "laundrycare_dryer_program_shirtblouses_shirtblouses_shirtblouses": "Trocknen - Hemden / Blusen",
-          "laundrycare_dryer_program_silentdry_silentdry_silentdry": "Nachttrocknen/Leisetrocknen",
-          "laundrycare_dryer_program_super40_super40_super40": "Super 40",
-          "laundrycare_dryer_program_synthetic_synthetic_synthetic": "Trocknen - Pflegeleicht",
-          "laundrycare_dryer_program_timecold_timecold_timecold": "Kalt",
-          "laundrycare_dryer_program_timewarm_timewarm_timewarm": "Zeitprogramm warm",
-          "laundrycare_dryer_program_towels_towels_towels": "Trocknen - Handtücher",
-          "laundrycare_dryer_program_woolfinish_woolfinish_woolfinish": "Trocknen - Wolle Finish",
-          "laundrycare_washer_program_automatic30_auto30_auto30": "Waschen - Automatik sanft/30",
-          "laundrycare_washer_program_automatic4060_auto40_auto40": "Waschen - Automatik 40-60",
-          "laundrycare_washer_program_cotton_cotton_cotton": "Waschen - Baumwolle",
-          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Waschen - Jeans/Dunkle Wäsche",
-          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Waschen - Fein/Seide",
-          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Waschen - Anti Mikroplastik",
-          "laundrycare_washer_program_downduvet_down_down": "Waschen - Daunen",
-          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Drum Clean (alt)",
-          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Drum Clean",
-          "laundrycare_washer_program_easycare_easycare_easycare": "Waschen - Pflegeleicht",
-          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Waschen - Eco 40-60",
-          "laundrycare_washer_program_mix_mix_mix": "Schnell/Mix",
-          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Waschen - Funktionswäsche",
-          "laundrycare_washer_program_rinse_rinse_rinse": "Spülen",
-          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Waschen - Sensitiv",
-          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Waschen - Hemden/Blusen",
-          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Waschen - Sportbekleidung",
-          "laundrycare_washer_program_spin_spin_spindrain": "Schleudern/Abpumpen",
-          "laundrycare_washer_program_steaming_steaming_steaming": "Bedampfen/Iron Assist",
-          "laundrycare_washer_program_super153045_super1530_super1530": "Extra Kurz 15min/30min",
-          "laundrycare_washer_program_wool_wool_wool": "Wolle",
-          "laundrycare_washerdryer_program_towels_towels": "Waschen & Trocknen - Handtücher",
-          "laundrycare_washerdryer_program_cotton_cotton": "Waschen & Trocknen - Baumwolle",
-          "laundrycare_washerdryer_program_mix_mix": "Waschen & Trocknen - Mix",
-          "laundrycare_washerdryer_program_wool_wool": "Waschen & Trocknen - Wolle",
-          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
-          "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
-          "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
-          "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
-          "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
-          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
-          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Camembert (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Käsesauce",
-          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Chicken Nuggets (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_chop": "Kotelett",
-          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Cordon Bleu",
-          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Cordon Bleu (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_courgettes": "Zucchini",
-          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Trockengerichte",
-          "cooking_hob_program_dish_fryingsensor_escalope": "Schnitzel",
-          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Paniertes Schnitzel",
-          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Schnitzel (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_fillet": "Filet",
-          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Paniertes Fischfilet",
-          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Paniertes Fischfilet (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Natur Fischfilet",
-          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Natur Fischfilet (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Fischstäbchen (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_frenchfriesmadefromrawpotatoes": "Pommes aus rohen Kartoffeln",
-          "cooking_hob_program_dish_fryingsensor_frenchtoast": "Armer Ritter",
-          "cooking_hob_program_dish_fryingsensor_friedeggsinbutter": "Spiegeleier in Butter",
-          "cooking_hob_program_dish_fryingsensor_friedeggsinoil": "Spiegeleier in Öl",
-          "cooking_hob_program_dish_fryingsensor_fryingcamembert": "Camembert braten",
-          "cooking_hob_program_dish_fryingsensor_fryingcroutons": "Croutons braten",
-          "cooking_hob_program_dish_fryingsensor_fryingfishwhole": "Ganzen Fisch braten",
-          "cooking_hob_program_dish_fryingsensor_fryingfrenchfriesfrozen": "Pommes (tiefgekühlt) braten",
-          "cooking_hob_program_dish_fryingsensor_fryinggreenasparagus": "Grüner Spargel braten",
-          "cooking_hob_program_dish_fryingsensor_fryingmeatballs": "Frikadellen braten",
-          "cooking_hob_program_dish_fryingsensor_fryingpotatoesboiledintheirskin": "Kartoffeln mit Schale braten",
-          "cooking_hob_program_dish_fryingsensor_fryingpreboiledsausages": "Vorgekochte Würstchen braten",
-          "cooking_hob_program_dish_fryingsensor_fryingrawsausages": "Rohwürstchen braten",
-          "cooking_hob_program_dish_fryingsensor_fryingrissoles": "Bratlinge braten",
-          "cooking_hob_program_dish_fryingsensor_garlic": "Knoblauch",
-          "cooking_hob_program_dish_fryingsensor_glazedonions": "Glasierte Zwiebeln",
-          "cooking_hob_program_dish_fryingsensor_glazedpotatoes": "Glasierte Kartoffeln",
-          "cooking_hob_program_dish_fryingsensor_glazedvegetables": "Glasiertes Gemüse",
-          "cooking_hob_program_dish_fryingsensor_gyros": "Gyros",
-          "cooking_hob_program_dish_fryingsensor_gyrosfrozen": "Gyros (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_hamburgers": "Hamburger",
-          "cooking_hob_program_dish_fryingsensor_kebabfrozen": "Kebab (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_meatloaf": "Hackbraten",
-          "cooking_hob_program_dish_fryingsensor_mincedmeat": "Hackfleisch",
-          "cooking_hob_program_dish_fryingsensor_mushrooms": "Pilze",
-          "cooking_hob_program_dish_fryingsensor_omelettes": "Omeletts",
-          "cooking_hob_program_dish_fryingsensor_pancake": "Pfannkuchen",
-          "cooking_hob_program_dish_fryingsensor_pancakes": "Pfannkuchen",
-          "cooking_hob_program_dish_fryingsensor_peppers": "Paprika",
-          "cooking_hob_program_dish_fryingsensor_potatopancakes": "Kartoffelpuffer",
-          "cooking_hob_program_dish_fryingsensor_poultrybreast": "Geflügelbrust",
-          "cooking_hob_program_dish_fryingsensor_poultrybreastfrozen": "Geflügelbrust (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_prawns": "Garnelen",
-          "cooking_hob_program_dish_fryingsensor_reducingsauces": "Soßen reduzieren",
-          "cooking_hob_program_dish_fryingsensor_sauteingvegetablesinoil": "Gemüse in Öl sautieren",
-          "cooking_hob_program_dish_fryingsensor_scampi": "Scampi",
-          "cooking_hob_program_dish_fryingsensor_scrambledeggs": "Rührei",
-          "cooking_hob_program_dish_fryingsensor_springrollsfrozen": "Frühlingsrollen (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_steaksmedium": "Steak medium",
-          "cooking_hob_program_dish_fryingsensor_steaksrare": "Steak blutig",
-          "cooking_hob_program_dish_fryingsensor_steakswelldone": "Steak durch",
-          "cooking_hob_program_dish_fryingsensor_stirfriesfrozen": "Wokgerichte (tiefgekühlt)",
-          "cooking_hob_program_dish_fryingsensor_stripsofmeat": "Fleischstreifen",
-          "cooking_hob_program_dish_fryingsensor_sweetsauces": "Süße Soßen",
-          "cooking_hob_program_dish_fryingsensor_swissroesti": "Schweizer Rösti",
-          "cooking_hob_program_dish_fryingsensor_toastingalmonds": "Mandeln rösten",
-          "cooking_hob_program_dish_fryingsensor_toastingnuts": "Nüsse rösten",
-          "cooking_hob_program_dish_fryingsensor_toastingpinenuts": "Pinienkerne rösten",
-          "cooking_hob_program_dish_fryingsensor_tomatosaucewithvegetables": "Tomatensoße mit Gemüse",
-          "cooking_hob_program_dish_fryingsensor_vienneseschnitzel": "Wiener Schnitzel",
-          "cooking_hob_program_fryingsensormode": "Bratsensor-Modus",
-          "cooking_hob_program_powerlevelmode": "Leistungsstufe",
-          "cooking_hob_program_powermovemode": "PowerMove-Modus",
-          "cooking_oven_program_cleaning_drying": "Trocknen",
-          "cooking_oven_program_cleaning_pyrolysis": "Pyrolyse",
-          "cooking_oven_program_dish_automatic_konv_babyputeungefuellt": "Babypute Ungefuellt",
-          "cooking_oven_program_dish_automatic_konv_eintopfmitfleisch": "Eintopf Mit Fleisch",
-          "cooking_oven_program_dish_automatic_konv_eintopfmitgemuese": "Eintopf Mit Gemuese",
-          "cooking_oven_program_dish_automatic_konv_enteungefuellt": "Ente Ungefuellt",
-          "cooking_oven_program_dish_automatic_konv_fischganz": "Fisch Ganz",
-          "cooking_oven_program_dish_automatic_konv_gaensebrust": "Gaensebrust",
-          "cooking_oven_program_dish_automatic_konv_gaensekeulen": "Gaensekeulen",
-          "cooking_oven_program_dish_automatic_konv_gulasch": "Gulasch",
-          "cooking_oven_program_dish_automatic_konv_hirschkeuleohneknochen": "Hirschkeule Ohne Knochen",
-          "cooking_oven_program_dish_automatic_konv_kalbsossobuco": "Kalbs Osso Buco",
-          "cooking_oven_program_dish_automatic_konv_kalbsbratendurchwachsen": "Kalbsbraten Durchwachsen",
-          "cooking_oven_program_dish_automatic_konv_kalbsbratenmager": "Kalbsbraten Mager",
-          "cooking_oven_program_dish_automatic_konv_kalbshaxe": "Kalbshaxe",
-          "cooking_oven_program_dish_automatic_konv_kaninchenganz": "Kaninchen Ganz",
-          "cooking_oven_program_dish_automatic_konv_lammkeulemitknochendurchgegart": "Lammkeule Mit Knochen Durchgegart",
-          "cooking_oven_program_dish_automatic_konv_pavlova": "Pavlova",
-          "cooking_oven_program_dish_automatic_konv_poulardeungefuellt": "Poularde Ungefuellt",
-          "cooking_oven_program_dish_automatic_konv_rehkeuleohneknochen": "Rehkeule Ohne Knochen",
-          "cooking_oven_program_dish_automatic_konv_rinderrouladen": "Rinderrouladen",
-          "cooking_oven_program_dish_automatic_konv_rinderschmorbraten": "Rinderschmorbraten",
-          "cooking_oven_program_dish_automatic_konv_roastbeefenglisch": "Roastbeef Englisch",
-          "cooking_oven_program_dish_automatic_konv_schweinebratenmitkrustezbschulter": "Schweinebraten Mit Kruste z. B. Schulter",
-          "cooking_oven_program_dish_automatic_konv_schweinekotelettbratenmitknochen": "Schweinekotelettbraten Mit Knochen",
-          "cooking_oven_program_dish_automatic_konv_schweinelendenbraten": "Schweinelendenbraten",
-          "cooking_oven_program_dish_automatic_konv_schweinerollbraten": "Schweinerollbraten",
-          "cooking_oven_program_dish_automatic_konv_skandinavischerweihnachtsschinken": "Skandinavischer Weihnachtsschinken",
-          "cooking_oven_program_dish_automatic_konv_wildschweinbraten": "Wildschweinbraten",
-          "cooking_oven_program_dish_automatic_microwave_aufbackbroetchenoderbaguette": "Aufbackbrötchen oder Baguette",
-          "cooking_oven_program_dish_automatic_microwave_auflaufpikantfrischgegartezutaten": "Pikanter Auflauf – frisch gegarte Zutaten",
-          "cooking_oven_program_dish_automatic_microwave_auflaufsuessfrisch": "Süßer Auflauf – frisch",
-          "cooking_oven_program_dish_automatic_microwave_backofenkartoffelnganz": "Backofenkartoffeln ganz",
-          "cooking_oven_program_dish_automatic_microwave_basmatireis": "Basmatireis",
-          "cooking_oven_program_dish_automatic_microwave_broetchenauftauen": "Brötchen auftauen",
-          "cooking_oven_program_dish_automatic_microwave_cannelloni": "Cannelloni",
-          "cooking_oven_program_dish_automatic_microwave_couscous": "Couscous",
-          "cooking_oven_program_dish_automatic_microwave_fischganzauftauen": "Fisch ganz auftauen",
-          "cooking_oven_program_dish_automatic_microwave_fischfiletauftauen": "Fischfilet auftauen",
-          "cooking_oven_program_dish_automatic_microwave_fischfiletduensten": "Fischfilet dünsten",
-          "cooking_oven_program_dish_automatic_microwave_fischstaebchen": "Fischstäbchen",
-          "cooking_oven_program_dish_automatic_microwave_fleischauftauen": "Fleisch auftauen",
-          "cooking_oven_program_dish_automatic_microwave_gefluegelganzauftauen": "Geflügel ganz auftauen",
-          "cooking_oven_program_dish_automatic_microwave_gefluegelteileauftauen": "Geflügelteile auftauen",
-          "cooking_oven_program_dish_automatic_microwave_gemuesefrisch": "Gemüse frisch",
-          "cooking_oven_program_dish_automatic_microwave_gemuesegefroren": "Gemüse gefroren",
-          "cooking_oven_program_dish_automatic_microwave_graupen": "Graupen",
-          "cooking_oven_program_dish_automatic_microwave_gruenkerngeschrotet": "Grünkern geschrotet",
-          "cooking_oven_program_dish_automatic_microwave_hackbratenausfrischemhackfleisch": "Hackbraten aus frischem Hackfleisch",
-          "cooking_oven_program_dish_automatic_microwave_haehnchenhalbiert": "Hähnchen halbiert",
-          "cooking_oven_program_dish_automatic_microwave_haehnchensticksnuggets": "Hähnchen-Sticks / Nuggets",
-          "cooking_oven_program_dish_automatic_microwave_haehnchenungefuellt": "Hähnchen ungefüllt",
-          "cooking_oven_program_dish_automatic_microwave_haehnchenteile": "Hähnchenteile",
-          "cooking_oven_program_dish_automatic_microwave_hirse": "Hirse",
-          "cooking_oven_program_dish_automatic_microwave_kartoffelgratinrohezutaten4cmhoch": "Kartoffelgratin – rohe Zutaten, 4 cm hoch",
-          "cooking_oven_program_dish_automatic_microwave_kartoffeltaschengefuellt": "Gefüllte Kartoffeltaschen",
-          "cooking_oven_program_dish_automatic_microwave_kroketten": "Kroketten",
-          "cooking_oven_program_dish_automatic_microwave_kuchensaftigauftauen": "Kuchen saftig auftauen",
-          "cooking_oven_program_dish_automatic_microwave_kuchentrockenauftauen": "Kuchen trocken auftauen",
-          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochendurchgegart": "Lammkeule ohne Knochen – durchgegart",
-          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochenmedium": "Lammkeule ohne Knochen – medium",
-          "cooking_oven_program_dish_automatic_microwave_langkornreis": "Langkornreis",
-          "cooking_oven_program_dish_automatic_microwave_lasagne": "Lasagne",
-          "cooking_oven_program_dish_automatic_microwave_minipizzen": "Mini-Pizzen",
-          "cooking_oven_program_dish_automatic_microwave_mischbrotaftauen": "Mischbrot auftauen",
-          "cooking_oven_program_dish_automatic_microwave_naturreis": "Naturreis",
-          "cooking_oven_program_dish_automatic_microwave_parboiledreis": "Parboiled Reis",
-          "cooking_oven_program_dish_automatic_microwave_pellkartoffeln": "Pellkartoffeln",
-          "cooking_oven_program_dish_automatic_microwave_pizzamitdickemboden1stueck": "Pizza mit dickem Boden – 1 Stück",
-          "cooking_oven_program_dish_automatic_microwave_pizzamitduennemboden1stueck": "Pizza mit dünnem Boden – 1 Stück",
-          "cooking_oven_program_dish_automatic_microwave_polenta": "Polenta",
-          "cooking_oven_program_dish_automatic_microwave_pommesfrites": "Pommes frites",
-          "cooking_oven_program_dish_automatic_microwave_putenbrust": "Putenbrust",
-          "cooking_oven_program_dish_automatic_microwave_risotto": "Risotto",
-          "cooking_oven_program_dish_automatic_microwave_roastbeefmedium": "Roastbeef – medium",
-          "cooking_oven_program_dish_automatic_microwave_salzkartoffeln": "Salzkartoffeln",
-          "cooking_oven_program_dish_automatic_microwave_schweinenackenbratenohneknochen": "Schweinenackenbraten ohne Knochen",
-          "cooking_oven_program_dish_automatic_microwave_tintenfischringepaniert": "Tintenfischringe paniert",
-          "cooking_oven_program_dish_automatic_microwave_vollkornbrotaftauen": "Vollkornbrot auftauen",
-          "cooking_oven_program_dish_automatic_microwave_weissbrotaftauen": "Weißbrot auftauen",
-          "cooking_oven_program_dish_automatic_microwave_zartweizen": "Zartweizen",
-          "cooking_oven_program_dish_recommendation_konv_aufbackbroetchenoderbaguette": "Aufbackbrötchen oder Baguette",
-          "cooking_oven_program_dish_recommendation_konv_baiser": "Baiser",
-          "cooking_oven_program_dish_recommendation_konv_baklava": "Baklava",
-          "cooking_oven_program_dish_recommendation_konv_biskuitrolle": "Biskuitrolle",
-          "cooking_oven_program_dish_recommendation_konv_biskuittorte": "Biskuittorte",
-          "cooking_oven_program_dish_recommendation_konv_blaetterteiggebaeck": "Blätterteiggebäck",
-          "cooking_oven_program_dish_recommendation_konv_boerek": "Börek",
-          "cooking_oven_program_dish_recommendation_konv_brandteiggebaeck": "Brandteiggebäck",
-          "cooking_oven_program_dish_recommendation_konv_brezelnteiglinge": "Brezeln (Teiglinge)",
-          "cooking_oven_program_dish_recommendation_konv_broetchenfrisch": "Brötchen frisch",
-          "cooking_oven_program_dish_recommendation_konv_broetchensuessfrisch": "Süße Brötchen frisch",
-          "cooking_oven_program_dish_recommendation_konv_ciabatta": "Ciabatta",
-          "cooking_oven_program_dish_recommendation_konv_croissantsteiglinge": "Croissants (Teiglinge)",
-          "cooking_oven_program_dish_recommendation_konv_empanada": "Empanada",
-          "cooking_oven_program_dish_recommendation_konv_entegefuellt": "Ente gefüllt",
-          "cooking_oven_program_dish_recommendation_konv_entenbrust": "Entenbrust",
-          "cooking_oven_program_dish_recommendation_konv_fischfiletueberbacken": "Fischfilet überbacken",
-          "cooking_oven_program_dish_recommendation_konv_fladenbrot": "Fladenbrot",
-          "cooking_oven_program_dish_recommendation_konv_flammkuchen": "Flammkuchen",
-          "cooking_oven_program_dish_recommendation_konv_gansgefuellt": "Gans gefüllt",
-          "cooking_oven_program_dish_recommendation_konv_gemuesegefuellt": "Gemüse gefüllt",
-          "cooking_oven_program_dish_recommendation_konv_gemuesegratinieren": "Gemüse gratinieren",
-          "cooking_oven_program_dish_recommendation_konv_haehnchengefuellt": "Hähnchen gefüllt",
-          "cooking_oven_program_dish_recommendation_konv_hefegugelhupf": "Hefe-Gugelhupf",
-          "cooking_oven_program_dish_recommendation_konv_hefekuchenmitsaftigembelag": "Hefekuchen mit saftigem Belag",
-          "cooking_oven_program_dish_recommendation_konv_hefekuchenmittrockenembelag": "Hefekuchen mit trockenem Belag",
-          "cooking_oven_program_dish_recommendation_konv_hefeteiggebaeck": "Hefeteiggebäck",
-          "cooking_oven_program_dish_recommendation_konv_hefezopfhefekranz": "Hefezopf / Hefekranz",
-          "cooking_oven_program_dish_recommendation_konv_kalbsbrustgefuellt": "Kalbsbrust gefüllt",
-          "cooking_oven_program_dish_recommendation_konv_kalbsruecken": "Kalbsrücken",
-          "cooking_oven_program_dish_recommendation_konv_kartoffelroesti": "Kartoffelrösti",
-          "cooking_oven_program_dish_recommendation_konv_makronen": "Makronen",
-          "cooking_oven_program_dish_recommendation_konv_muerbeteigbodenblindbacken": "Mürbeteigboden blindbacken",
-          "cooking_oven_program_dish_recommendation_konv_muerbeteiggebaeck": "Mürbeteiggebäck",
-          "cooking_oven_program_dish_recommendation_konv_muerbeteigkuchenmitsaftigembelag": "Mürbeteigkuchen mit saftigem Belag",
-          "cooking_oven_program_dish_recommendation_konv_muffins": "Muffins",
-          "cooking_oven_program_dish_recommendation_konv_obstoderquarktortemitmuerbeteigboden": "Obst- oder Quarktorte mit Mürbeteigboden",
-          "cooking_oven_program_dish_recommendation_konv_piroggen": "Piroggen",
-          "cooking_oven_program_dish_recommendation_konv_pizzabaguette": "Pizza-Baguette",
-          "cooking_oven_program_dish_recommendation_konv_pizzafrischaufbackblech": "Pizza frisch auf Backblech",
-          "cooking_oven_program_dish_recommendation_konv_pizzafrischduennerbodeninpizzaform": "Pizza frisch – dünner Boden in Pizzaform",
-          "cooking_oven_program_dish_recommendation_konv_pizzagekuehlt": "Pizza gekühlt",
-          "cooking_oven_program_dish_recommendation_konv_plaetzchen": "Plätzchen",
-          "cooking_oven_program_dish_recommendation_konv_plundergebaeck": "Plundergebäck",
-          "cooking_oven_program_dish_recommendation_konv_potatoewedges": "Potatoe Wedges",
-          "cooking_oven_program_dish_recommendation_konv_putenrollbraten": "Putenrollbraten",
-          "cooking_oven_program_dish_recommendation_konv_quichetarte": "Quiche / Tarte",
-          "cooking_oven_program_dish_recommendation_konv_rehrueckenmitknochen": "Rehrücken mit Knochen",
-          "cooking_oven_program_dish_recommendation_konv_rinderfiletmedium": "Rinderfilet medium",
-          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmitsaftigembelag": "Rührkuchen mit saftigem Belag",
-          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmittrockenembelag": "Rührkuchen mit trockenem Belag",
-          "cooking_oven_program_dish_recommendation_konv_schweinshaxe": "Schweinshaxe",
-          "cooking_oven_program_dish_recommendation_konv_souffleinportionsformen": "Soufflé in Portionsformen",
-          "cooking_oven_program_dish_recommendation_konv_spritzgebaeck": "Spritzgebäck",
-          "cooking_oven_program_dish_recommendation_konv_strudelsuess": "Strudel süß",
-          "cooking_oven_program_dish_recommendation_konv_tarte": "Tarte",
-          "cooking_oven_program_dish_recommendation_konv_tortenbodenausmuerbeteig": "Tortenboden aus Mürbeteig",
-          "cooking_oven_program_dish_recommendation_konv_tortenbodenausruehrteig": "Tortenboden aus Rührteig",
-          "cooking_oven_program_dish_recommendation_konv_weissbrotaufbackblech": "Weißbrot auf Backblech",
-          "cooking_oven_program_dish_recommendation_konv_weissbrotinkastenform": "Weißbrot in Kastenform",
-          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotaufbackblech": "Weizenbrot / -mischbrot auf Backblech",
-          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotinkastenform": "Weizenbrot / -mischbrot in Kastenform",
-          "cooking_oven_program_dish_recommendation_microwave_gansungefuellt": "Gans ungefüllt",
-          "cooking_oven_program_dish_recommendation_microwave_gebackenekartoffelnhalbiert": "Gebackene Kartoffeln halbiert",
-          "cooking_oven_program_dish_recommendation_microwave_haehnchenbrust": "Hähnchenbrust",
-          "cooking_oven_program_dish_recommendation_microwave_lasagnefrisch": "Lasagne frisch",
-          "cooking_oven_program_dish_recommendation_microwave_obstkuchenausruehrteigfein": "Obstkuchen aus Rührteig (fein)",
-          "cooking_oven_program_dish_recommendation_microwave_ruehrkucheneinfach": "Rührkuchen einfach",
-          "cooking_oven_program_dish_subsequentcooking": "Nachgarprogramm",
-          "cooking_oven_program_heatingmode_bottomheating": "Unterhitze",
-          "cooking_oven_program_heatingmode_frozenheatupspecial": "Spezial-Aufheizen für Gefrorenes",
-          "cooking_oven_program_heatingmode_grilllargearea": "Grill – große Fläche",
-          "cooking_oven_program_heatingmode_grillsmallarea": "Grill – kleine Fläche",
-          "cooking_oven_program_heatingmode_hotair": "Heißluft",
-          "cooking_oven_program_heatingmode_hotaireco": "Heißluft Eco",
-          "cooking_oven_program_heatingmode_hotairgrilling": "Umluftgrillen",
-          "cooking_oven_program_heatingmode_keepwarm": "Warmhalten",
-          "cooking_oven_program_heatingmode_pizzasetting": "Pizzastufe",
-          "cooking_oven_program_heatingmode_preheatovenware": "Vorheizen von Geschirr",
-          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath-Programm",
-          "cooking_oven_program_heatingmode_slowcook": "Schonendes Garen",
-          "cooking_oven_program_heatingmode_topbottomheating": "Ober-/Unterhitze",
-          "cooking_oven_program_heatingmode_topbottomheatingeco": "Ober-/Unterhitze Eco",
-          "cooking_oven_program_microcombimodes_grilllargearea": "Mikro-Kombi: Grill große Fläche",
-          "cooking_oven_program_microcombimodes_grillsmallarea": "Mikro-Kombi: Grill kleine Fläche",
-          "cooking_oven_program_microcombimodes_hotair": "Mikro-Kombi: Heißluft",
-          "cooking_oven_program_microcombimodes_hotairgrilling": "Mikro-Kombi: Umluftgrillen",
-          "cooking_oven_program_microcombimodes_topbottomheating": "Mikro-Kombi: Ober-/Unterhitze",
-          "cooking_oven_program_microwave_180watt": "Mikrowelle 180 Watt",
-          "cooking_oven_program_microwave_360watt": "Mikrowelle 360 Watt",
-          "cooking_oven_program_microwave_600watt": "Mikrowelle 600 Watt",
-          "cooking_oven_program_microwave_90watt": "Mikrowelle 90 Watt",
-          "cooking_oven_program_microwave_max": "Mikrowelle Maximalleistung",
-          "cooking_oven_program_dish_automatic_microwave_vollkornbrotauftauen": "Vollkornbrot auftauen",
-          "cooking_oven_program_dish_automatic_microwave_weissbrotauftauen": "Weißbrot auftauen",
-          "cooking_oven_program_dish_automatic_microwave_mischbrotauftauen": "Mischbrot auftauen"
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, großflächig",
+          "laundrycare_washer_program_auto60": "Waschen - Automatik 60",
+          "laundrycare_washer_program_cotton": "Waschen - Baumwolle",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Waschen - Gardinen",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_towels_towels_towels": "Handtücher",
+          "laundrycare_washer_program_sportfitness": "Waschen - Sportwäsche",
+          "laundrycare_common_program_juststart": "Einfach starten",
+          "laundrycare_common_program_memory1": "Speicher 1",
+          "laundrycare_common_program_memory2": "Speicher 2",
+          "laundrycare_dryer_program_blankets": "Trocknen - Daunen",
+          "laundrycare_dryer_program_businessshirts": "Hemden",
+          "laundrycare_dryer_program_cotton": "Trocknen - Baumwolle",
+          "laundrycare_dryer_program_dessous": "Trocknen - Dessous",
+          "laundrycare_dryer_program_hygiene": "Trocknen - Hygiene",
+          "laundrycare_dryer_program_inbasket": "Trocknen - Wolle im Korb",
+          "laundrycare_dryer_program_mix": "Trocknen - Mischgewebe",
+          "laundrycare_dryer_program_outdoor": "Trocknen - Outdoor",
+          "laundrycare_dryer_program_pillow": "Trocknen - Bettdecke",
+          "laundrycare_dryer_program_super40": "Trocknen - Schnell 40 Min.",
+          "laundrycare_dryer_program_synthetic": "Trocknen - Pflegeleicht",
+          "laundrycare_dryer_program_timecold": "Zeitprogramm Kalt",
+          "laundrycare_dryer_program_timewarm": "Zeitprogramm Warm",
+          "laundrycare_dryer_program_towels": "Trocknen - Handtücher",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Trocknen - Sportwäsche",
+          "laundrycare_washer_program_cotton_colour": "Buntwäsche",
+          "laundrycare_washer_program_cotton_eco4060": "Cotton Eco 40–60",
+          "laundrycare_washer_program_delicatessilk": "Feinwäsche/Seide",
+          "laundrycare_washer_program_downduvet_duvet": "Daunen/Bettdecke",
+          "laundrycare_washer_program_easycare": "Pflegeleicht",
+          "laundrycare_washer_program_mix": "Mischbeladung",
+          "laundrycare_washer_program_rinse": "Spülen",
+          "laundrycare_washer_program_sensitive": "Empfindlich",
+          "laundrycare_washer_program_spin_spindrain": "Schleudern/Abpumpen",
+          "laundrycare_washer_program_super153045_super1530": "Super 15/30",
+          "laundrycare_washer_program_wool": "Wool",
+          "laundrycare_washer_program_easycare_antistainlight_blood": "Pflegeleicht – AntiFlecken (Blut)",
+          "laundrycare_washer_program_easycare_antistainlight_butteroil": "Pflegeleicht – AntiFlecken (Butter/Öl)",
+          "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Pflegeleicht – AntiFlecken (Kosmetik)",
+          "laundrycare_washer_program_easycare_antistainlight_tea": "Pflegeleicht – AntiFlecken (Tee)",
+          "laundrycare_common_program_memory3": "Speicher 3",
+          "laundrycare_common_program_memory4": "Speicher 4",
+          "laundrycare_common_program_memory5": "Speicher 5",
+          "laundrycare_common_program_memory6": "Speicher 6",
+          "laundrycare_common_program_memory7": "Speicher 7",
+          "laundrycare_common_program_memory8": "Speicher 8"
         }
       },
       "select_sensitivity_turbidity": {
@@ -1324,7 +1741,7 @@
         "name": "Standardprogramm",
         "state": {
           "lastprogram": "Letztes Programm",
-          "ecoasdefault": "Eco 50"
+          "ecoasdefault": "Eco 50°C"
         }
       },
       "select_power_state": {
@@ -1415,8 +1832,8 @@
         "name": "Durchflussmenge",
         "state": {
           "normal": "Normal",
-          "intense": "Intense",
-          "intenseplus": "Intense Plus"
+          "intense": "Intensiv",
+          "intenseplus": "Intensiv Plus"
         }
       },
       "select_coarsness": {
@@ -1633,10 +2050,10 @@
           "defrosting": "Auftauen",
           "desiccation": "Austrocknen",
           "doughproving": "Teig Ruhen",
-          "frozenheatupspecial": "Frozen Heatup Special",
+          "frozenheatupspecial": "Gefrorenes Aufheizen Spezial",
           "grilllargearea": "Grill groß",
           "grillsmallarea": "Grill klein",
-          "hotair": "HotAir",
+          "hotair": "Heißluft",
           "hotaireco": "HotAir Eco",
           "hotairgrilling": "HotAir Grillen",
           "intensiveheat": "Intensive Hitze",
@@ -1657,9 +2074,9 @@
       "select_pyrolysis_level": {
         "name": "Pyrolyse Level",
         "state": {
-          "level01": "Level 1",
-          "level02": "Level 2",
-          "level03": "Level 3"
+          "level01": "Stufe 1",
+          "level02": "Stufe 2",
+          "level03": "Stufe 3"
         }
       },
       "select_oven_child_lock_setting": {
@@ -1684,7 +2101,8 @@
           "short": "Kurz",
           "medium": "Mittel",
           "long": "Lang",
-          "verylong": "Sehr Lang"
+          "verylong": "Sehr Lang",
+          "recommended": "Empfohlen"
         }
       },
       "select_oven_signal_duration": {
@@ -1721,6 +2139,293 @@
           "boostlevel1": "Intensiv 1",
           "boostlevel2": "Intensiv 2"
         }
+      },
+      "select_sound_level_key": {
+        "name": "Tastenton-Lautstärke",
+        "state": {
+          "off": "Aus",
+          "low": "Niedrig",
+          "medium": "Mittel",
+          "high": "Hoch"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "PowerControl-Typ",
+        "state": {
+          "front": "Front",
+          "back": "Back",
+          "custom": "Benutzerdefiniert",
+          "individual": "Individuell"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl Vorne Links",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl Hinten Links",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl Hinten Rechts",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl Vorne Rechts",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "PowerControl Benutzerdefiniert Vorne Links",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "PowerControl Benutzerdefiniert Hinten Links",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "PowerControl Benutzerdefiniert Hinten Rechts",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "PowerControl Benutzerdefiniert Vorne Rechts",
+        "state": {
+          "delicate": "Fein",
+          "normal": "Normal",
+          "heavy": "Stark"
+        }
+      },
+      "select_laundry_idos2_content": {
+        "name": "i-DOS 2 Content",
+        "state": {
+          "softener": "Weichspüler",
+          "detergent": "Waschmittel"
+        }
+      },
+      "select_laundry_idos2_level": {
+        "name": "i-DOS 2 Level",
+        "state": {
+          "off": "Aus",
+          "light": "Leicht",
+          "normal": "Normal",
+          "strong": "Stark"
+        }
+      },
+      "select_laundry_idos1_level": {
+        "name": "i-DOS 1 Level",
+        "state": {
+          "off": "Aus",
+          "light": "Leicht",
+          "normal": "Normal",
+          "strong": "Stark"
+        }
+      },
+      "select_laundry_vario_perfect": {
+        "name": "VarioPerfect",
+        "state": {
+          "off": "Aus",
+          "ecoperfect": "Eco Perfect",
+          "speedperfect": "Speed Perfect"
+        }
+      },
+      "select_laundry_hygienic_steam_intensity": {
+        "name": "Hygienedampf-Intensität",
+        "state": {
+          "middle": "Mittel",
+          "high": "Hoch"
+        }
+      },
+      "select_laundry_multiple_soak": {
+        "name": "Mehrfach-Einweichen",
+        "state": {
+          "off": "Aus",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_rinseplus": {
+        "name": "Spülen Plus",
+        "state": {
+          "off": "Aus",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed": {
+        "name": "Schleudergeschwindigkeit",
+        "state": {
+          "off": "Aus",
+          "uloff": "UlAus",
+          "rpm1000": "RPM1000",
+          "ulhigh": "UlHoch",
+          "rpm1200": "RPM1200",
+          "rpm1400": "RPM1400",
+          "rpm1500": "RPM1500",
+          "rpm1600": "RPM1600",
+          "auto": "Auto",
+          "max": "Max",
+          "ullow": "UlNiedrig",
+          "rpm400": "RPM400",
+          "rpm600": "RPM600",
+          "rpm700": "RPM700",
+          "ulmedium": "UlMittel",
+          "rpm800": "RPM800",
+          "rpm900": "RPM900"
+        }
+      },
+      "select_laundry_option_stains": {
+        "name": "Flecken",
+        "state": {
+          "off": "Aus",
+          "babyfood": "Babynahrung",
+          "perspiration": "Schweiß",
+          "socks": "Socken",
+          "butteroil": "Butteröl",
+          "tea": "Tee",
+          "tomatosauce": "Tomatensauce",
+          "strawberry": "Erdbeere",
+          "orange": "Orange",
+          "blood": "Blut",
+          "egg": "Ei",
+          "mud": "Schlamm",
+          "grass": "Gras",
+          "coffee": "Kaffee",
+          "cosmetics": "Kosmetik",
+          "redwine": "Rotwein",
+          "chocolate": "Schokolade"
+        }
+      },
+      "select_laundry_option_temperature": {
+        "name": "Waschtemperatur",
+        "state": {
+          "cold": "Kalt",
+          "gc20": "20°C",
+          "ulcold": "Ultra Kalt",
+          "ulwarm": "Ultra Warm",
+          "ulhot": "Ultra Heiß",
+          "ulextrahot": "Ultra Extra Heiß",
+          "gc30": "30°C",
+          "auto": "Auto",
+          "max": "Max",
+          "gc40": "40°C",
+          "gc50": "50°C",
+          "gc60": "60°C",
+          "gc70": "70°C",
+          "gc80": "80°C",
+          "gc90": "90°C"
+        }
+      },
+      "select_laundry_option_water_and_rinse_plus": {
+        "name": "Wasser und Spülen Plus",
+        "state": {
+          "off": "Aus",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Gefrierschrank-Türassistent Auslöser",
+        "state": {
+          "push": "Drücken",
+          "pull": "Ziehen",
+          "pushpull": "Drücken/Ziehen"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Gefrierschrank-Türassistent Stärke",
+        "state": {
+          "lowforce": "Niedrig",
+          "middleforce": "Mittel",
+          "highforce": "Hoch"
+        }
+      },
+      "select_chiller_common_preset": {
+        "name": "Frischezone-Voreinstellung",
+        "state": {
+          "meatfish": "29°F 💧 (Meat/Fish)",
+          "fruit": "32°F 💧 (Fruit)",
+          "vegetables": "32°F 💧💧 (Vegetables)",
+          "beverages": "34°F 💧 (Beverages)",
+          "snacks": "40°F 💧 (Snacks/Misc.)",
+          "custom": "Benutzerdefiniert"
+        }
+      },
+      "select_chiller_left_humidity": {
+        "name": "Frischezone links Feuchtigkeit",
+        "state": {
+          "low": "Niedrig",
+          "high": "Hoch"
+        }
+      },
+      "select_chiller_right_humidity": {
+        "name": "Frischezone rechts Feuchtigkeit",
+        "state": {
+          "low": "Niedrig",
+          "high": "Hoch"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Intervallstufe",
+        "state": {
+          "fanoff": "Aus",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Verzögerte Abschaltstufe",
+        "state": {
+          "fanoff": "Aus",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_temperature_unit": {
+        "name": "Temperatureinheit",
+        "state": {
+          "celsius": "Celsius",
+          "fahrenheit": "Fahrenheit"
+        }
+      },
+      "select_hood_carbon_filter_type": {
+        "name": "Kohlefiltertyp",
+        "state": {
+          "none": "Keine",
+          "fahrenheit": "Standard-Kohlefilter",
+          "regenerativecarbonfilter": "Regenerierbarer Kohlefilter"
+        }
       }
     },
     "button": {
@@ -1732,6 +2437,24 @@
       },
       "button_resume_program": {
         "name": "Fortsetzen"
+      },
+      "button_pause_program": {
+        "name": "Pause"
+      },
+      "button_mains_power_off": {
+        "name": "Ausschalten"
+      },
+      "button_hood_carbon_filter_reset": {
+        "name": "Kohlefilter zurücksetzen"
+      },
+      "button_hood_grease_filter_reset": {
+        "name": "Fettfilter zurücksetzen"
+      },
+      "button_hood_regenerative_carbon_filter_reset": {
+        "name": "Regenerierbaren Kohlefilter zurücksetzen"
+      },
+      "button_hood_regenerative_carbon_filter_lifetime_reset": {
+        "name": "Kohlefilter-Lebensdauer zurücksetzen"
       }
     },
     "number": {
@@ -1769,10 +2492,28 @@
         "name": "Display Helligkeit"
       },
       "number_start_in": {
-        "name": "Start in"
+        "name": "Starten in"
       },
       "number_oven_setting_alarm_clock": {
         "name": "Alarm"
+      },
+      "number_setpoint_chiller_common": {
+        "name": "Frischezone-Temperatur"
+      },
+      "number_light_internal_brightness": {
+        "name": "Innenbeleuchtung Helligkeit"
+      },
+      "number_hood_interval_off": {
+        "name": "Intervallzeit aus"
+      },
+      "number_hood_interval_on": {
+        "name": "Intervallzeit ein"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Verzögerte Abschaltzeit"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Automatische Sensorempfindlichkeit"
       }
     },
     "light": {
@@ -1781,6 +2522,23 @@
       },
       "light_drum_light": {
         "name": "Trommellicht"
+      },
+      "light_internal": {
+        "name": "Innenbeleuchtung"
+      },
+      "light_logo": {
+        "name": "Logo-Licht"
+      },
+      "light_cooking_lighting": {
+        "name": "Licht"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "Umgebungslicht"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Lüfter"
       }
     }
   },
@@ -1796,6 +2554,10 @@
         "start_in": {
           "name": "Starten in",
           "description": "Programmstart verzögern"
+        },
+        "finish_in": {
+          "name": "Fertig in",
+          "description": "Zeit, in der das Programm fertig sein soll"
         }
       }
     },
@@ -1810,6 +2572,10 @@
         "start_in": {
           "name": "Verzögerung",
           "description": "Setzt die Startverzögerung"
+        },
+        "finish_in": {
+          "name": "Fertig in",
+          "description": "Zeit einstellen, in der das Programm fertig sein soll"
         }
       }
     }
