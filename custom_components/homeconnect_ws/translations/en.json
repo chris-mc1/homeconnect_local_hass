@@ -2015,5 +2015,40 @@
         }
       }
     }
+  },
+  "exceptions": {
+    "start_in_not_available": {
+      "message": "'Start in' is not available on this Appliance"
+    },
+    "finish_in_not_available": {
+      "message": "'Finish in' is not available on this Appliance"
+    },
+    "no_program_selected": {
+      "message": "No Program selected"
+    },
+    "auth_failed": {
+      "message": "Authentication failed {host}"
+    },
+    "cannot_connect": {
+      "message": "Can't connect to {host}"
+    },
+    "no_device_info": {
+      "message": "Appliance has no device info"
+    },
+    "speed_invalid": {
+      "message": "Speed {percentage} is invalid"
+    },
+    "not_appliance": {
+      "message": "Not a Homeconnect Appliance"
+    },
+    "access_error": {
+      "message": "Entity is not Accessible"
+    },
+    "code_respons": {
+      "message": "Error response from Appliance: {message}"
+    },
+    "not_connected": {
+      "message": "Client is not Connected"
+    }
   }
 }
