@@ -493,7 +493,6 @@
           "cooking_oven_program_microwave_600watt": "Mikrovåg 600 W",
           "cooking_oven_program_microwave_max": "Mikrovåg max",
           "cooking_oven_program_cleaning_drying": "Torkning",
-          
           "laundrycare_washer_program_automatic30_auto30_auto30": "Automatisk – mjukt/30",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Automatisk 40–60",
           "laundrycare_washer_program_auto60": "Automatisk 40–60",
@@ -512,11 +511,11 @@
           "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trumrengöring",
           "laundrycare_washer_program_easycare_easycare_easycare": "Strykfri",
           "laundrycare_washer_program_easycare": "Strykfri",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40-60",
           "laundrycare_washer_program_easycare_antistainlight_blood": "Strykfri fläckborttagning (blod)",
           "laundrycare_washer_program_easycare_antistainlight_butteroil": "Strykfri fläckborttagning (smör/olja)",
           "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Strykfri fläckborttagning (kosmetika)",
           "laundrycare_washer_program_easycare_antistainlight_tea": "Strykfri fläckborttagning (te)",
-          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40–60",
           "laundrycare_washer_program_mix_mix_mix": "Mix/Snabb",
           "laundrycare_washer_program_mix": "Mix/Snabb",
           "laundrycare_washer_program_outdoor_outdoor_outdoor": "Outdoor",
@@ -545,7 +544,6 @@
           "laundrycare_common_program_memory6": "Minne 6",
           "laundrycare_common_program_memory7": "Minne 7",
           "laundrycare_common_program_memory8": "Minne 8",
-          
           "laundrycare_dryer_program_blankets": "Torkning – Dunplagg",
           "laundrycare_dryer_program_businessshirts": "Skjortor",
           "laundrycare_dryer_program_cotton": "Torkning – Bomull",
@@ -561,7 +559,6 @@
           "laundrycare_dryer_program_timewarm": "Tidsprogram – Varm",
           "laundrycare_dryer_program_towels": "Torkning – Handdukar",
           "laundrycare_dryer_program_shirtsblouses_sportfitness": "Torkning – Sportkläder",
-          
           "laundrycare_washerdryer_program_towels_towels": "Tvätt & Tork – Handdukar",
           "laundrycare_washerdryer_program_cotton_cotton": "Tvätt & Tork – Bomull",
           "laundrycare_washerdryer_program_mix_mix": "Tvätt & Tork – Mix",
@@ -569,7 +566,6 @@
           "laundrycare_washerdryer_program_sportfitness_sportfitness": "Tvätt & Tork – Sportkläder",
           "laundrycare_washerdryer_program_washanddry_60": "Tvätt & Tork – 60 min",
           "laundrycare_washerdryer_program_downduvet_down": "Tvätt & Tork – Dun",
-          
           "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
           "consumerproducts_coffeemaker_program_beverage_caffelatte": "Caffè Latte",
           "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
@@ -1021,957 +1017,855 @@
           "roundrobinflush": "Spolar system",
           "initializenewcartridge": "Initierar filterpatron"
         }
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Torkassistent – alla program",
+        "state": {
+          "off": "Av",
+          "allprograms": "Alla program",
+          "ecoasdefault": "Eco 50"
+        }
       },
-
-      "select": {
-        "select_drying_assistant_all_programs": {
-          "name": "Torkassistent – alla program",
-          "state": {
-            "off": "Av",
-            "allprograms": "Alla program",
-            "ecoasdefault": "Eco 50"
-          }
-        },
-        "select_hot_water": {
-          "name": "Vattentemperatur",
-          "state": {
-            "coldwater": "Kallt vatten",
-            "hotwater": "Varmt vatten"
-          }
-        },
-        "select_rinse_aid": {
-          "name": "Sköljmedel",
-          "state": {
-            "off": "Av",
-            "r01": "Nivå 1 (Lägst)",
-            "r02": "Nivå 2 (Låg)",
-            "r03": "Nivå 3 (Medium)",
-            "r04": "Nivå 4 (Med./Hög)",
-            "r05": "Nivå 5 (Hög)",
-            "r06": "Nivå 6 (Högst)"
-          }
-        },
-        "select_sound_level_signal": {
-          "name": "Ljudnivå – signal",
-          "state": {
-            "high": "Hög",
-            "low": "Låg",
-            "medium": "Medel",
-            "off": "Av"
-          }
-        },
-        "select_sound_level_key": {
-          "name": "Ljudnivå – knappar",
-          "state": {
-            "off": "Av",
-            "low": "Låg",
-            "medium": "Medel",
-            "high": "Hög"
-          }
-        },
-        "select_flexspray_type": {
-          "name": "PowerControl – typ",
-          "state": {
-            "front": "Fram",
-            "back": "Bak",
-            "custom": "Anpassad",
-            "individual": "Individuell"
-          }
-        },
-        "select_flexspray_front_left": {
-          "name": "PowerControl – fram vänster",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_back_left": { 
-		  "name": "PowerControl – bak vänster", 
-		  "state": { 
-		    "delicate": "Ömtålig", 
-			"normal": "Normal", 
-			"heavy": "Kraftig" 
-          } 
-        },
-        "select_flexspray_back_right": {
-          "name": "PowerControl – bak höger",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_front_right": {
-          "name": "PowerControl – fram höger",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_custom_front_left": {
-          "name": "PowerControl – anpassad fram vänster",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_custom_back_left": {
-          "name": "PowerControl – anpassad bak vänster",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_custom_back_right": {
-          "name": "PowerControl – anpassad bak höger",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_flexspray_custom_front_right": {
-          "name": "PowerControl – anpassad fram höger",
-          "state": {
-            "delicate": "Ömtålig",
-            "normal": "Normal",
-            "heavy": "Kraftig"
-          }
-        },
-        "select_water_hardness": {
-          "name": "Vattenhårdhet",
-          "state": {
-            "h00": "°E 0–8 mjukt (0–1.1 mmol/l)",
-            "h01": "°E 9–10 mjukt (1.2–1.4 mmol/l)",
-            "h02": "°E 11–12 medel (1.5–1.8 mmol/l)",
-            "h03": "°E 13–15 medel (1.9–2.1 mmol/l)",
-            "h04": "°E 16–20 medel (2.2–2.9 mmol/l)",
-            "h05": "°E 21–26 hårt (3.0–3.7 mmol/l)",
-            "h06": "°E 27–38 hårt (3.8–5.4 mmol/l)",
-            "h07": "°E 39–62 hårt (5.5–8.9 mmol/l)"
-          }
-        },
-        "select_remote_control_level": {
-          "name": "Fjärrkontroll",
-          "state": {
-            "monitoring": "Av",
-            "manualremotestart": "Manuell fjärrstart",
-            "permanentremotestart": "Permanent fjärrstart"
-          }
-        },
-        "select_program": {
-          "name": "Valt program",
-          "state": {
-            "dishcare_dishwasher_program_intensiv70": "Intensiv 70",
-            "dishcare_dishwasher_program_auto2": "Auto 2",
-            "dishcare_dishwasher_program_eco50": "Eco 50",
-            "dishcare_dishwasher_program_quick45": "Snabb 45",
-            "dishcare_dishwasher_program_prerinse": "Försköljning",
-            "dishcare_dishwasher_program_quick65": "Snabb 65",
-            "dishcare_dishwasher_program_machinecare": "Maskinrengöring",
-            "dishcare_dishwasher_program_nightwash": "Nattprogram",
-            "dishcare_dishwasher_program_glas40": "Glas 40",
-            "dishcare_dishwasher_program_kurz60": "Speed 60",
-            "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
-            "favorite_001": "Favorit 1",
-            "favorite_002": "Favorit 2",
-            "favorite_003": "Favorit 3",
-            "favorite_004": "Favorit 4",
-            "favorite_005": "Favorit 5",
-            "favorite_006": "Favorit 6",
-            "favorite_007": "Favorit 7",
-            "favorite_008": "Favorit 8",
-            "favorite_009": "Favorit 9",
-            "favorite_010": "Favorit 10",
-            "cooking_oven_program_heatingmode_bottomheating": "Undervärme",
-            "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart-funktion",
-            "cooking_oven_program_heatingmode_grillargearea": "Grill - stor yta",
-            "cooking_oven_program_heatingmode_grillsmallarea": "Grill - liten yta",
-            "cooking_oven_program_heatingmode_hotair": "Varmluft",
-            "cooking_oven_program_heatingmode_hotaireco": "Varmluft Eco",
-            "cooking_oven_program_heatingmode_hotairgrilling": "Varmluftsgrill",
-            "cooking_oven_program_heatingmode_keepwarm": "Varmhållning",
-            "cooking_oven_program_heatingmode_pizzasetting": "Pizzaläge",
-            "cooking_oven_program_heatingmode_preheatovenware": "Förvärmning av kärl",
-            "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbatsprogram",
-            "cooking_oven_program_heatingmode_slowcook": "Långsam tillagning",
-            "cooking_oven_program_heatingmode_topbottomheating": "Över-/undervärme",
-            "cooking_oven_program_heatingmode_topbottomheatingeco": "Över-/undervärme Eco",
-            "cooking_oven_program_microwave_90watt": "Mikrovåg 90 W",
-            "cooking_oven_program_microwave_180watt": "Mikrovåg 180 W",
-            "cooking_oven_program_microwave_360watt": "Mikrovåg 360 W",
-            "cooking_oven_program_microwave_600watt": "Mikrovåg 600 W",
-            "cooking_oven_program_microwave_max": "Mikrovåg max",
-            "cooking_oven_program_cleaning_drying": "Torkning",
-            "laundrycare_washer_program_automatic30_auto30_auto30": "Automatisk - mjukt/30",
-            "laundrycare_washer_program_automatic4060_auto40_auto40": "Automatisk 40-60",
-            "laundrycare_washer_program_auto60": "Automatisk 60",
-            "laundrycare_washer_program_cotton_cotton_cotton": "Bomull",
-            "laundrycare_washer_program_cotton": "Bomull",
-            "laundrycare_washer_program_cotton_colour": "Bomull färg",
-            "laundrycare_washer_program_cotton_eco4060": "Bomull Eko 40-60",
-            "laundrycare_washer_program_darkwash_darkwash_darkwash": "Mörk tvätt",
-            "laundrycare_washer_program_darkwash_curtains_curtains": "Gardiner",
-            "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Fintvätt/Siden",
-            "laundrycare_washer_program_delicatessilk": "Fintvätt/Siden",
-            "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Fintvätt - Anti-mikroplast",
-            "laundrycare_washer_program_downduvet_down_down": "Dun/Täcke",
-            "laundrycare_washer_program_downduvet_duvet": "Dun/Täcke",
-            "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trumrengöring (äldre)",
-            "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trumrengöring",
-            "laundrycare_washer_program_easycare_easycare_easycare": "Strykfri",
-            "laundrycare_washer_program_easycare": "Strykfri",
-            "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40-60",
-            "laundrycare_washer_program_mix_mix_mix": "Mix/Snabb",
-            "laundrycare_washer_program_mix": "Mix/Snabb",
-            "laundrycare_washer_program_easycare_antistainlight_blood": "Strykfri fläckborttagning (blod)",
-            "laundrycare_washer_program_easycare_antistainlight_butteroil": "Strykfri fläckborttagning (smör/olja)",
-            "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Strykfri fläckborttagning (kosmetika)",
-            "laundrycare_washer_program_easycare_antistainlight_tea": "Strykfri fläckborttagning (te)",
-            "laundrycare_washer_program_outdoor_outdoor_outdoor": "Outdoor",
-            "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59",
-            "laundrycare_washer_program_rinse_rinse_rinse": "Sköljning",
-            "laundrycare_washer_program_rinse": "Sköljning",
-            "laundrycare_washer_program_sensitive_sensitive_sensitive": "Känslig",
-            "laundrycare_washer_program_sensitive": "Känslig",
-            "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Skjortor/Blusar",
-            "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Sportkläder",
-            "laundrycare_washer_program_spin_spin_spindrain": "Centrifug/Tömning",
-            "laundrycare_washer_program_spin_spindrain": "Centrifug/Tömning",
-            "laundrycare_washer_program_steaming_steaming_steaming": "Ånga/Sträckhjälp",
-            "laundrycare_washer_program_super153045_super1530_super1530": "Superkort 15/30 min",
-            "laundrycare_washer_program_super153045_super1530": "Superkort 15/30 min",
-            "laundrycare_washer_program_towels_towels_towels": "Handdukar",
-            "laundrycare_washer_program_wool_wool_wool": "Ull",
-            "laundrycare_washer_program_wool": "Ull",
-            "laundrycare_washer_program_sportfitness": "Sportkläder",
-            "laundrycare_common_program_juststart": "Starta direkt",
-            "laundrycare_common_program_memory1": "Minne 1",
-            "laundrycare_common_program_memory2": "Minne 2",
-            "laundrycare_common_program_memory3": "Minne 3",
-            "laundrycare_common_program_memory4": "Minne 4",
-            "laundrycare_common_program_memory5": "Minne 5",
-            "laundrycare_common_program_memory6": "Minne 6",
-            "laundrycare_common_program_memory7": "Minne 7",
-            "laundrycare_common_program_memory8": "Minne 8",
-            "laundrycare_dryer_program_blankets": "Torkning - Dunplagg",
-            "laundrycare_dryer_program_businessshirts": "Skjortor",
-            "laundrycare_dryer_program_cotton": "Torkning - Bomull",
-            "laundrycare_dryer_program_dessous": "Torkning - Underkläder",
-            "laundrycare_dryer_program_hygiene": "Torkning - Hygien",
-            "laundrycare_dryer_program_inbasket": "Torkning - Ull i korg",
-            "laundrycare_dryer_program_mix": "Torkning - Blandat",
-            "laundrycare_dryer_program_outdoor": "Torkning - Outdoor",
-            "laundrycare_dryer_program_pillow": "Torkning - Täcke",
-            "laundrycare_dryer_program_super40": "Snabbt 40 min",
-            "laundrycare_dryer_program_synthetic": "Torkning - Syntet",
-            "laundrycare_dryer_program_timecold": "Tidsprogram - Kall",
-            "laundrycare_dryer_program_timewarm": "Tidsprogram - Varm",
-            "laundrycare_dryer_program_towels": "Torkning - Handdukar",
-            "laundrycare_dryer_program_shirtsblouses_sportfitness": "Torkning - Sportkläder",
-            "laundrycare_washerdryer_program_towels_towels": "Tvätt & Tork - Handdukar",
-            "laundrycare_washerdryer_program_cotton_cotton": "Tvätt & Tork - Bomull",
-            "laundrycare_washerdryer_program_mix_mix": "Tvätt & Tork - Mix",
-            "laundrycare_washerdryer_program_wool_wool": "Tvätt & Tork - Ull",
-            "laundrycare_washerdryer_program_sportfitness_sportfitness": "Tvätt & Tork - Sportkläder",
-            "laundrycare_washerdryer_program_washanddry_60": "Tvätt & Tork - 60 min",
-            "laundrycare_washerdryer_program_downduvet_down": "Tvätt & Tork - Dun"
-          }
-        },
-        "BSH.Common.EnumType.Program.Washer": {
-          "name": "Tvättprogram",
-          "state": {
-            "laundrycare_washer_program_auto60": "Automatisk 60",
-            "laundrycare_washer_program_cotton": "Bomull",
-            "laundrycare_washer_program_cotton_colour": "Bomull färg",
-            "laundrycare_washer_program_cotton_eco4060": "Bomull Eco 40-60",
-            "laundrycare_washer_program_delicatessilk": "Fintvätt/Siden",
-            "laundrycare_washer_program_downduvet_duvet": "Dun/Täcke",
-            "laundrycare_washer_program_easycare": "Strykfri",
-            "laundrycare_washer_program_easycare_antistainlight_blood": "Strykfri fläckborttagning (blod)",
-            "laundrycare_washer_program_easycare_antistainlight_butteroil": "Strykfri fläckborttagning (smör/olja)",
-            "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Strykfri fläckborttagning (kosmetika)",
-            "laundrycare_washer_program_easycare_antistainlight_tea": "Strykfri fläckborttagning (te)",
-            "laundrycare_washer_program_mix": "Mix/Snabb",
-            "laundrycare_washer_program_rinse": "Sköljning",
-            "laundrycare_washer_program_sensitive": "Känslig",
-            "laundrycare_washer_program_spin_spindrain": "Centrifug/Tömning",
-            "laundrycare_washer_program_super153045_super1530": "Superkort 15/30 min",
-            "laundrycare_washer_program_wool": "Ull",
-
-            "laundrycare_common_program_memory1": "Minne 1",
-            "laundrycare_common_program_memory2": "Minne 2",
-            "laundrycare_common_program_memory3": "Minne 3",
-            "laundrycare_common_program_memory4": "Minne 4",
-            "laundrycare_common_program_memory5": "Minne 5",
-            "laundrycare_common_program_memory6": "Minne 6",
-            "laundrycare_common_program_memory7": "Minne 7",
-            "laundrycare_common_program_memory8": "Minne 8"
-          }
-        },
-        "select_sensitivity_turbidity": {
-          "name": "Känslighet – grumlighetssensor",
-          "state": {
-            "standard": "Standard",
-            "sensitive": "Känslig",
-            "verysensitive": "Mycket känslig"
-          }
-        },
-        "select_eco_as_default": {
-          "name": "Standardprogram",
-          "state": {
-            "lastprogram": "Senaste programmet",
-            "ecoasdefault": "Eco 50"
-          }
-        },
-        "select_power_state": {
-          "name": "Strömläge",
-          "state": {
-            "mainsoff": "Huvudström av",
-            "off": "Av",
-            "on": "På",
-            "standby": "Vänteläge"
-          }
-        },
-        "select_coffee_temperature": {
-          "name": "Kaffetemperatur",
-          "state": {
-            "88c": "88 °C",
-            "90c": "90 °C",
-            "92c": "92 °C",
-            "94c": "94 °C",
-            "95c": "95 °C",
-            "96c": "96 °C",
-            "98c": "98 °C"
-          }
-        },
-        "select_bean_amount": {
-          "name": "Bönstyrka",
-          "state": {
-            "verymild": "Mycket mild",
-            "mild": "Mild",
-            "mildplus": "Mild Plus",
-            "normal": "Normal",
-            "normalplus": "Normal Plus",
-            "strong": "Stark",
-            "strongplus": "Stark Plus",
-            "verystrong": "Mycket stark",
-            "verystrongplus": "Mycket stark Plus",
-            "extrastrong": "Extra stark",
-            "doubleshot": "Dubbel shot",
-            "doubleshotplus": "Dubbel shot Plus",
-            "doubleshotplusplus": "Dubbel shot Plus Plus",
-            "tripleshot": "Trippel shot",
-            "tripleshotplus": "Trippel shot Plus",
-            "coffeeground": "Malet kaffe"
-          }
-        },
-        "select_beverage_size": {
-          "name": "Dryckesstorlek",
-          "state": {
-            "small": "Liten",
-            "medium": "Mellan",
-            "large": "Stor",
-            "verylarge": "Mycket stor"
-          }
-        },
-        "select_coffee_milk_ratio": {
-          "name": "Kaffe/mjölk‑förhållande",
-          "state": {
-            "10percent": "10%",
-            "20percent": "20%",
-            "25percent": "25%",
-            "30percent": "30%",
-            "40percent": "40%",
-            "50percent": "50%",
-            "55percent": "55%",
-            "60percent": "60%",
-            "65percent": "65%",
-            "67percent": "67%",
-            "70percent": "70%",
-            "75percent": "75%",
-            "80percent": "80%",
-            "85percent": "85%",
-            "90percent": "90%"
-          }
-        },
-        "select_hot_water_temperature": {
-          "name": "Temperatur – varmt vatten",
-          "state": {
-            "60c": "60 °C",
-            "70c": "70 °C",
-            "75c": "75 °C",
-            "80c": "80 °C",
-            "85c": "85 °C",
-            "90c": "90 °C",
-            "95c": "95 °C",
-            "97c": "97 °C"
-          }
-        },
-        "select_flow_rate": {
-          "name": "Flödeshastighet",
-          "state": {
-            "normal": "Normal",
-            "intense": "Intensiv",
-            "intenseplus": "Intensiv Plus"
-          }
-        },
-        "select_coarsness": {
-          "name": "Malningsgrad",
-          "state": {
-            "coarsness1": "Malningsgrad 1",
-            "coarsness2": "Malningsgrad 2",
-            "coarsness3": "Malningsgrad 3",
-            "coarsness4": "Malningsgrad 4",
-            "coarsness5": "Malningsgrad 5",
-            "coarsness6": "Malningsgrad 6"
-          }
-        },
-        "select_coffee_strength": {
-          "name": "Styrka",
-          "state": {
-            "strength1": "Styrka 1",
-            "strength2": "Styrka 2",
-            "strength3": "Styrka 3",
-            "strength4": "Styrka 4",
-            "strength5": "Styrka 5",
-            "strength6": "Styrka 6",
-            "strength7": "Styrka 7",
-            "strength8": "Styrka 8",
-            "strength9": "Styrka 9"
-          }
-        },
-        "select_aroma_select": {
-          "name": "Aromval",
-          "state": {
-            "fine": "Fin",
-            "balanced": "Balanserad",
-            "distinctive": "Distinkt"
-          }
-        },
-        "select_bean_container": {
-          "name": "Bönbehållare",
-          "state": {
-            "right": "Höger",
-            "left": "Vänster"
-          }
-        },
-        "select_shot_count": {
-          "name": "Antal shots",
-          "state": {
-            "double": "Dubbel",
-            "triple": "Trippel"
-          }
-        },
-        "select_cups": {
-          "name": "Antal koppar",
-          "state": {
-            "two": "Två",
-            "four": "Fyra",
-            "six": "Sex"
-          }
-        },
-        "select_auto_power_off": {
-          "name": "Automatisk avstängning",
-          "state": {
-            "off": "Av",
-            "15min": "15 min",
-            "30min": "30 min",
-            "60min": "60 min"
-          }
-        },
-        "select_laundry_brightness": {
-          "name": "Ljusstyrka",
-          "state": {
-            "low": "Låg",
-            "medium": "Medel",
-            "high": "Hög",
-            "veryhigh": "Mycket hög"
-          }
-        },
-        "select_door_light_ring_mode": {
-          "name": "Dörrljusring – läge",
-          "state": {
-            "off": "Av",
-            "on": "På",
-            "auto": "Auto"
-          }
-        },
-        "select_door_light_ring_brightness": {
-          "name": "Dörrljusring – ljusstyrka",
-          "state": {
-            "low": "Låg",
-            "medium": "Medel",
-            "high": "Hög",
-            "veryhigh": "Mycket hög"
-          }
-        },
-        "select_laundry_end_signal_volume": {
-          "name": "Slutsignal – volym",
-          "state": {
-            "off": "Av",
-            "low": "Låg",
-            "medium": "Medel",
-            "loud": "Hög",
-            "veryloud": "Mycket hög"
-          }
-        },
-        "select_laundry_key_signal_volume": {
-          "name": "Knappsignal – volym",
-          "state": {
-            "off": "Av",
-            "low": "Låg",
-            "medium": "Medel",
-            "loud": "Hög",
-            "veryloud": "Mycket hög"
-          }
-        },
-        "select_laundry_sound_volume": {
-          "name": "Ljudvolym",
-          "state": {
-            "off": "Av",
-            "volume1": "Volym 1",
-            "volume2": "Volym 2",
-            "volume3": "Volym 3",
-            "volume4": "Volym 4"
-          }
-        },
-        "select_laundry_power_rating": {
-          "name": "Effektklass"
-        },
-        "select_laundry_wrinkle_guard": {
-          "name": "Skrynkelskydd",
-          "state": {
-            "off": "Av",
-            "min30": "30 min",
-            "min60": "60 min",
-            "min90": "90 min",
-            "min120": "120 min",
-            "min180": "180 min"
-          }
-        },
-        "select_laundry_cupboard_dry_fine_adjust": {
-          "name": "Finjustering – skåptorrt",
-          "state": {
-            "off": "Av",
-            "plus1": "Plus 1",
-            "plus2": "Plus 2",
-            "plus3": "Plus 3"
-          }
-        },
-        "select_laundry_cupboard_dry_plus_fine_adjust": {
-          "name": "Finjustering – skåptorrt Plus",
-          "state": {
-            "off": "Av",
-            "plus1": "Plus 1",
-            "plus2": "Plus 2",
-            "plus3": "Plus 3"
-          }
-        },
-        "select_laundry_iron_dry_fine_adjust": {
-          "name": "Finjustering – stryktorrt",
-          "state": {
-            "off": "Av",
-            "plus1": "Plus 1",
-            "plus2": "Plus 2",
-            "plus3": "Plus 3"
-          }
-        },
-        "select_laundry_spin_speed_before_drying": {
-          "name": "Centrifugeringshastighet före torkning",
-          "state": {
-            "off": "Av",
-            "rpm400": "400 varv/min",
-            "rpm600": "600 varv/min",
-            "rpm700": "700 varv/min",
-            "rpm800": "800 varv/min",
-            "rpm900": "900 varv/min",
-            "rpm1000": "1000 varv/min",
-            "rpm1200": "1200 varv/min",
-            "rpm1400": "1400 varv/min",
-            "rpm1500": "1500 varv/min",
-            "rpm1600": "1600 varv/min",
-            "auto": "Auto"
-          }
-        },
-        "select_laundry_drying_target": {
-          "name": "Torknivå",
-          "state": {
-            "irondry": "Stryktorr",
-            "gentledry": "Skonsamt torr",
-            "cupboarddry": "Skåptorr",
-            "cupboarddryplus": "Skåptorr Plus",
-            "extradry": "Extra torr"
-          }
-        },
-        "select_laundry_refresher": {
-          "name": "Uppfräschning",
-          "state": {
-            "shirt1": "Skjorta 1",
-            "shirt5": "Skjorta 5",
-            "business": "Business"
-          }
-        },
-        "select_oven_level": {
-          "name": "Nivå",
-          "state": {
-            "level01": "Nivå 1",
-            "level02": "Nivå 2",
-            "level03": "Nivå 3"
-          }
-        },
-        "select_oven_used_heating_mode": {
-          "name": "Använt värmeläge",
-          "state": {
-            "automaticoperation": "Automatiskt läge",
-            "automaticoperationwithmicrowave": "Automatiskt läge med mikrovåg",
-            "bakingsensoroperation": "Bakningssensor",
-            "bottomheating": "Undervärme",
-            "defrosting": "Upptining",
-            "desiccation": "Torkning",
-            "doughproving": "Jäsning",
-            "frozenheatupspecial": "Special – fryst uppvärmning",
-            "grilllargearea": "Grill – stor yta",
-            "grillsmallarea": "Grill – liten yta",
-            "hotair": "Varmluft",
-            "hotaireco": "Varmluft Eco",
-            "hotairgrilling": "Varmluftsgrill",
-            "intensiveheat": "Intensiv värme",
-            "keepwarm": "Varmhållning",
-            "microwave": "Mikrovåg",
-            "pizzasetting": "Pizzaläge",
-            "preheatovenware": "Förvärmning av kärl",
-            "reheat": "Uppvärmning",
-            "sabbathprogramme": "Sabbatsprogram",
-            "slowcook": "Långsam tillagning",
-            "steam": "Ånga",
-            "topbottomheating": "Över-/undervärme",
-            "topbottomheatingeco": "Över-/undervärme Eco",
-            "breadbaking": "Brödbakning",
-            "steamwithsteamset": "Ånga med SteamSet"
-          }
-        },
-        "select_pyrolysis_level": {
-          "name": "Pyrolysnivå",
-          "state": {
-            "level01": "Nivå 1",
-            "level02": "Nivå 2",
-            "level03": "Nivå 3"
-          }
-        },
-        "select_oven_child_lock_setting": {
-          "name": "Barnlåsläge",
-          "state": {
-            "deactivated": "Avaktiverat",
-            "activated": "Aktiverat",
-            "activatedwithdoorlock": "Aktiverat med dörrlås"
-          }
-        },
-        "select_oven_switch_on_delay": {
-          "name": "Fördröjd start",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång"
-          }
-        },
-        "select_oven_cooling_fan_runtime": {
-          "name": "Kylfläkt – eftergångstid",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång",
-            "verylong": "Mycket lång"
-          }
-        },
-        "select_oven_signal_duration": {
-          "name": "Signallängd",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång"
-          }
-        },
-        "select_refrigerator_door_assistant_freezer_trigger": {
-          "name": "Dörrassistent – frys (utlösning)",
-          "state": {
-            "push": "Tryck",
-            "pull": "Dra",
-            "pushpull": "Tryck/Dra"
-          }
-        },
-        "select_refrigerator_door_assistant_freezer_force": {
-          "name": "Dörrassistent – frys (kraft)",
-          "state": {
-            "lowforce": "Låg",
-            "middleforce": "Medel",
-            "highforce": "Hög"
-          }
-        },
-        "select_hood_interval_stage": {
-          "name": "Intervallsteg",
-          "state": {
-            "fanoff": "Av",
-            "fanstage01": "1",
-            "fanstage02": "2",
-            "fanstage03": "3"
-          }
-        },
-        "select_hob_delaye_shutoff_stage": {
-          "name": "Fördröjd avstängning – steg",
-          "state": {
-            "fanoff": "Av",
-            "fanstage01": "1",
-            "fanstage02": "2",
-            "fanstage03": "3"
+      "select_hot_water": {
+        "name": "Vattentemperatur",
+        "state": {
+          "coldwater": "Kallt vatten",
+          "hotwater": "Varmt vatten"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Sköljmedel",
+        "state": {
+          "off": "Av",
+          "r01": "Nivå 1 (Lägst)",
+          "r02": "Nivå 2 (Låg)",
+          "r03": "Nivå 3 (Medium)",
+          "r04": "Nivå 4 (Med./Hög)",
+          "r05": "Nivå 5 (Hög)",
+          "r06": "Nivå 6 (Högst)"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "Ljudnivå – signal",
+        "state": {
+          "high": "Hög",
+          "low": "Låg",
+          "medium": "Medel",
+          "off": "Av"
+        }
+      },
+      "select_sound_level_key": {
+        "name": "Ljudnivå – knappar",
+        "state": {
+          "off": "Av",
+          "low": "Låg",
+          "medium": "Medel",
+          "high": "Hög"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "PowerControl – typ",
+        "state": {
+          "front": "Fram",
+          "back": "Bak",
+          "custom": "Anpassad",
+          "individual": "Individuell"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl – fram vänster",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl – bak vänster",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl – bak höger",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl – fram höger",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "PowerControl – anpassad fram vänster",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "PowerControl – anpassad bak vänster",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "PowerControl – anpassad bak höger",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "PowerControl – anpassad fram höger",
+        "state": {
+          "delicate": "Ömtålig",
+          "normal": "Normal",
+          "heavy": "Kraftig"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Vattenhårdhet",
+        "state": {
+          "h00": "°E 0–8 mjukt (0–1.1 mmol/l)",
+          "h01": "°E 9–10 mjukt (1.2–1.4 mmol/l)",
+          "h02": "°E 11–12 medel (1.5–1.8 mmol/l)",
+          "h03": "°E 13–15 medel (1.9–2.1 mmol/l)",
+          "h04": "°E 16–20 medel (2.2–2.9 mmol/l)",
+          "h05": "°E 21–26 hårt (3.0–3.7 mmol/l)",
+          "h06": "°E 27–38 hårt (3.8–5.4 mmol/l)",
+          "h07": "°E 39–62 hårt (5.5–8.9 mmol/l)"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "Fjärrkontroll",
+        "state": {
+          "monitoring": "Av",
+          "manualremotestart": "Manuell fjärrstart",
+          "permanentremotestart": "Permanent fjärrstart"
+        }
+      },
+      "select_program": {
+        "name": "Valt program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensiv 70°",
+          "dishcare_dishwasher_program_auto2": "Auto 2",
+          "dishcare_dishwasher_program_eco50": "Eco 50°",
+          "dishcare_dishwasher_program_quick45": "Snabb 45°",
+          "dishcare_dishwasher_program_prerinse": "Försköljning",
+          "dishcare_dishwasher_program_quick65": "Snabb 65°",
+          "dishcare_dishwasher_program_machinecare": "Maskinrengöring",
+          "dishcare_dishwasher_program_nightwash": "Nattprogram",
+          "dishcare_dishwasher_program_glas40": "Glas 40°",
+          "dishcare_dishwasher_program_kurz60": "Speed 60°",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "favorite_001": "Favorit 1",
+          "favorite_002": "Favorit 2",
+          "favorite_003": "Favorit 3",
+          "favorite_004": "Favorit 4",
+          "favorite_005": "Favorit 5",
+          "favorite_006": "Favorit 6",
+          "favorite_007": "Favorit 7",
+          "favorite_008": "Favorit 8",
+          "favorite_009": "Favorit 9",
+          "favorite_010": "Favorit 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Undervärme",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart‑funktion",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill – stor yta",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill – liten yta",
+          "cooking_oven_program_heatingmode_hotair": "Varmluft",
+          "cooking_oven_program_heatingmode_hotaireco": "Varmluft Eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Varmluftsgrill",
+          "cooking_oven_program_heatingmode_keepwarm": "Varmhållning",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizzaläge",
+          "cooking_oven_program_heatingmode_preheatovenware": "Förvärmning av kärl",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbatsprogram",
+          "cooking_oven_program_heatingmode_slowcook": "Långsam tillagning",
+          "cooking_oven_program_heatingmode_topbottomheating": "Över-/undervärme",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Över-/undervärme Eco",
+          "cooking_oven_program_microwave_90watt": "Mikrovåg 90 W",
+          "cooking_oven_program_microwave_180watt": "Mikrovåg 180 W",
+          "cooking_oven_program_microwave_360watt": "Mikrovåg 360 W",
+          "cooking_oven_program_microwave_600watt": "Mikrovåg 600 W",
+          "cooking_oven_program_microwave_max": "Mikrovåg max",
+          "cooking_oven_program_cleaning_drying": "Torkning",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Automatisk – mjukt/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Automatisk 40–60",
+          "laundrycare_washer_program_auto60": "Automatisk 40–60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Bomull",
+          "laundrycare_washer_program_cotton": "Bomull",
+          "laundrycare_washer_program_cotton_colour": "Bomull färg",
+          "laundrycare_washer_program_cotton_eco4060": "Bomull eko automatisk 40–60",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Mörk tvätt",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Gardiner",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Fintvätt/Siden",
+          "laundrycare_washer_program_delicatessilk": "Fintvätt/Siden",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Fintvätt – Anti‑mikroplast",
+          "laundrycare_washer_program_downduvet_down_down": "Dun/Täcke",
+          "laundrycare_washer_program_downduvet_duvet": "Dun/Täcke",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trumrengöring (äldre)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trumrengöring",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Strykfri",
+          "laundrycare_washer_program_easycare": "Strykfri",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40-60",
+          "laundrycare_washer_program_easycare_antistainlight_blood": "Strykfri fläckborttagning (blod)",
+          "laundrycare_washer_program_easycare_antistainlight_butteroil": "Strykfri fläckborttagning (smör/olja)",
+          "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Strykfri fläckborttagning (kosmetika)",
+          "laundrycare_washer_program_easycare_antistainlight_tea": "Strykfri fläckborttagning (te)",
+          "laundrycare_washer_program_mix_mix_mix": "Mix/Snabb",
+          "laundrycare_washer_program_mix": "Mix/Snabb",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Sköljning",
+          "laundrycare_washer_program_rinse": "Sköljning",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Känslig",
+          "laundrycare_washer_program_sensitive": "Känslig",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Skjortor/Blusar",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Sportkläder",
+          "laundrycare_washer_program_spin_spin_spindrain": "Centrifug/Tömning",
+          "laundrycare_washer_program_spin_spindrain": "Centrifug/Tömning",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Ånga/Sträckhjälp",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Superkort 15/30 min",
+          "laundrycare_washer_program_super153045_super1530": "Superkort 15/30 min",
+          "laundrycare_washer_program_towels_towels_towels": "Handdukar",
+          "laundrycare_washer_program_wool_wool_wool": "Ull",
+          "laundrycare_washer_program_wool": "Ull",
+          "laundrycare_washer_program_sportfitness": "Sportkläder",
+          "laundrycare_common_program_juststart": "Starta direkt",
+          "laundrycare_common_program_memory1": "Minne 1",
+          "laundrycare_common_program_memory2": "Minne 2",
+          "laundrycare_common_program_memory3": "Minne 3",
+          "laundrycare_common_program_memory4": "Minne 4",
+          "laundrycare_common_program_memory5": "Minne 5",
+          "laundrycare_common_program_memory6": "Minne 6",
+          "laundrycare_common_program_memory7": "Minne 7",
+          "laundrycare_common_program_memory8": "Minne 8",
+          "laundrycare_dryer_program_blankets": "Torkning – Dunplagg",
+          "laundrycare_dryer_program_businessshirts": "Skjortor",
+          "laundrycare_dryer_program_cotton": "Torkning – Bomull",
+          "laundrycare_dryer_program_dessous": "Torkning – Underkläder",
+          "laundrycare_dryer_program_hygiene": "Torkning – Hygien",
+          "laundrycare_dryer_program_inbasket": "Torkning – Ull i korg",
+          "laundrycare_dryer_program_mix": "Torkning – Blandat",
+          "laundrycare_dryer_program_outdoor": "Torkning – Outdoor",
+          "laundrycare_dryer_program_pillow": "Torkning – Täcke",
+          "laundrycare_dryer_program_super40": "Snabbt 40 min",
+          "laundrycare_dryer_program_synthetic": "Torkning – Syntet",
+          "laundrycare_dryer_program_timecold": "Tidsprogram – Kall",
+          "laundrycare_dryer_program_timewarm": "Tidsprogram – Varm",
+          "laundrycare_dryer_program_towels": "Torkning – Handdukar",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Torkning – Sportkläder",
+          "laundrycare_washerdryer_program_towels_towels": "Tvätt & Tork – Handdukar",
+          "laundrycare_washerdryer_program_cotton_cotton": "Tvätt & Tork – Bomull",
+          "laundrycare_washerdryer_program_mix_mix": "Tvätt & Tork – Mix",
+          "laundrycare_washerdryer_program_wool_wool": "Tvätt & Tork – Ull",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Tvätt & Tork – Sportkläder",
+          "laundrycare_washerdryer_program_washanddry_60": "Tvätt & Tork – 60 min",
+          "laundrycare_washerdryer_program_downduvet_down": "Tvätt & Tork – Dun",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Caffè Latte",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Kaffe",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Varmt vatten",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Mjölkskum",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Varm mjölk",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Kaffe XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Blackeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café con Leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew Macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Deadeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat White",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Redeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Sköljning vid avstängning",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Sköljning vid start",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Avkalkning & rengöring",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Rengöring",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Rengör bryggenhet",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Rengör bryggenhet (detaljerad)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Rengör utlopp",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Avkalkning",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Frostskydd",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Ta bort vattenfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Byt vattenfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Skölj mjölksystem",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Skölj vattenfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Specialsköljning"
+        }
+      },
+      "select_sensitivity_turbidity": {
+        "name": "Känslighet – grumlighetssensor",
+        "state": {
+          "standard": "Standard",
+          "sensitive": "Känslig",
+          "verysensitive": "Mycket känslig"
+        }
+      },
+      "select_eco_as_default": {
+        "name": "Standardprogram",
+        "state": {
+          "lastprogram": "Senaste programmet",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_power_state": {
+        "name": "Strömläge",
+        "state": {
+          "mainsoff": "Huvudström av",
+          "off": "Av",
+          "on": "På",
+          "standby": "Vänteläge"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "Kaffetemperatur",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "Bönstyrka",
+        "state": {
+          "verymild": "Mycket mild",
+          "mild": "Mild",
+          "mildplus": "Mild Plus",
+          "normal": "Normal",
+          "normalplus": "Normal Plus",
+          "strong": "Stark",
+          "strongplus": "Stark Plus",
+          "verystrong": "Mycket stark",
+          "verystrongplus": "Mycket stark Plus",
+          "extrastrong": "Extra stark",
+          "doubleshot": "Dubbel shot",
+          "doubleshotplus": "Dubbel shot Plus",
+          "doubleshotplusplus": "Dubbel shot Plus Plus",
+          "tripleshot": "Trippel shot",
+          "tripleshotplus": "Trippel shot Plus",
+          "coffeeground": "Malet kaffe"
+        }
+      },
+      "select_beverage_size": {
+        "name": "Dryckesstorlek",
+        "state": {
+          "small": "Liten",
+          "medium": "Mellan",
+          "large": "Stor",
+          "verylarge": "Mycket stor"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "Kaffe/mjölk‑förhållande",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "Temperatur – varmt vatten",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "Flödeshastighet",
+        "state": {
+          "normal": "Normal",
+          "intense": "Intensiv",
+          "intenseplus": "Intensiv Plus"
+        }
+      },
+      "select_coarsness": {
+        "name": "Malningsgrad",
+        "state": {
+          "coarsness1": "Malningsgrad 1",
+          "coarsness2": "Malningsgrad 2",
+          "coarsness3": "Malningsgrad 3",
+          "coarsness4": "Malningsgrad 4",
+          "coarsness5": "Malningsgrad 5",
+          "coarsness6": "Malningsgrad 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "Styrka",
+        "state": {
+          "strength1": "Styrka 1",
+          "strength2": "Styrka 2",
+          "strength3": "Styrka 3",
+          "strength4": "Styrka 4",
+          "strength5": "Styrka 5",
+          "strength6": "Styrka 6",
+          "strength7": "Styrka 7",
+          "strength8": "Styrka 8",
+          "strength9": "Styrka 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "Aromval",
+        "state": {
+          "fine": "Fin",
+          "balanced": "Balanserad",
+          "distinctive": "Distinkt"
+        }
+      },
+      "select_bean_container": {
+        "name": "Bönbehållare",
+        "state": {
+          "right": "Höger",
+          "left": "Vänster"
+        }
+      },
+      "select_shot_count": {
+        "name": "Antal shots",
+        "state": {
+          "double": "Dubbel",
+          "triple": "Trippel"
+        }
+      },
+      "select_cups": {
+        "name": "Antal koppar",
+        "state": {
+          "two": "Två",
+          "four": "Fyra",
+          "six": "Sex"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "Automatisk avstängning",
+        "state": {
+          "off": "Av",
+          "15min": "15 min",
+          "30min": "30 min",
+          "60min": "60 min"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "Ljusstyrka",
+        "state": {
+          "low": "Låg",
+          "medium": "Medel",
+          "high": "Hög",
+          "veryhigh": "Mycket hög"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "Dörrljusring – läge",
+        "state": {
+          "off": "Av",
+          "on": "På",
+          "auto": "Auto"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "Dörrljusring – ljusstyrka",
+        "state": {
+          "low": "Låg",
+          "medium": "Medel",
+          "high": "Hög",
+          "veryhigh": "Mycket hög"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "Slutsignal – volym",
+        "state": {
+          "off": "Av",
+          "low": "Låg",
+          "medium": "Medel",
+          "loud": "Hög",
+          "veryloud": "Mycket hög"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "Knappsignal – volym",
+        "state": {
+          "off": "Av",
+          "low": "Låg",
+          "medium": "Medel",
+          "loud": "Hög",
+          "veryloud": "Mycket hög"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "Ljudvolym",
+        "state": {
+          "off": "Av",
+          "volume1": "Volym 1",
+          "volume2": "Volym 2",
+          "volume3": "Volym 3",
+          "volume4": "Volym 4"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "Effektklass"
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "Skrynkelskydd",
+        "state": {
+          "off": "Av",
+          "min30": "30 min",
+          "min60": "60 min",
+          "min90": "90 min",
+          "min120": "120 min",
+          "min180": "180 min"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "Finjustering – skåptorrt",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "Finjustering – skåptorrt Plus",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "Finjustering – stryktorrt",
+        "state": {
+          "off": "Av",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "Centrifugeringshastighet före torkning",
+        "state": {
+          "off": "Av",
+          "rpm400": "400 varv/min",
+          "rpm600": "600 varv/min",
+          "rpm700": "700 varv/min",
+          "rpm800": "800 varv/min",
+          "rpm900": "900 varv/min",
+          "rpm1000": "1000 varv/min",
+          "rpm1200": "1200 varv/min",
+          "rpm1400": "1400 varv/min",
+          "rpm1500": "1500 varv/min",
+          "rpm1600": "1600 varv/min",
+          "auto": "Auto"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "Torknivå",
+        "state": {
+          "irondry": "Stryktorr",
+          "gentledry": "Skonsamt torr",
+          "cupboarddry": "Skåptorr",
+          "cupboarddryplus": "Skåptorr Plus",
+          "extradry": "Extra torr"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "Uppfräschning",
+        "state": {
+          "shirt1": "Skjorta 1",
+          "shirt5": "Skjorta 5",
+          "business": "Business"
+        }
+      },
+      "select_oven_level": {
+        "name": "Nivå",
+        "state": {
+          "level01": "Nivå 1",
+          "level02": "Nivå 2",
+          "level03": "Nivå 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "Använt värmeläge",
+        "state": {
+          "automaticoperation": "Automatiskt läge",
+          "automaticoperationwithmicrowave": "Automatiskt läge med mikrovåg",
+          "bakingsensoroperation": "Bakningssensor",
+          "bottomheating": "Undervärme",
+          "defrosting": "Upptining",
+          "desiccation": "Torkning",
+          "doughproving": "Jäsning",
+          "frozenheatupspecial": "Special – fryst uppvärmning",
+          "grilllargearea": "Grill – stor yta",
+          "grillsmallarea": "Grill – liten yta",
+          "hotair": "Varmluft",
+          "hotaireco": "Varmluft Eco",
+          "hotairgrilling": "Varmluftsgrill",
+          "intensiveheat": "Intensiv värme",
+          "keepwarm": "Varmhållning",
+          "microwave": "Mikrovåg",
+          "pizzasetting": "Pizzaläge",
+          "preheatovenware": "Förvärmning av kärl",
+          "reheat": "Uppvärmning",
+          "sabbathprogramme": "Sabbatsprogram",
+          "slowcook": "Långsam tillagning",
+          "steam": "Ånga",
+          "topbottomheating": "Över-/undervärme",
+          "topbottomheatingeco": "Över-/undervärme Eco",
+          "breadbaking": "Brödbakning",
+          "steamwithsteamset": "Ånga med SteamSet"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "Pyrolysnivå",
+        "state": {
+          "level01": "Nivå 1",
+          "level02": "Nivå 2",
+          "level03": "Nivå 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "Barnlåsläge",
+        "state": {
+          "deactivated": "Avaktiverat",
+          "activated": "Aktiverat",
+          "activatedwithdoorlock": "Aktiverat med dörrlås"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "Fördröjd start",
+        "state": {
+          "short": "Kort",
+          "medium": "Medel",
+          "long": "Lång"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "Kylfläkt – eftergångstid",
+        "state": {
+          "short": "Kort",
+          "medium": "Medel",
+          "long": "Lång",
+          "verylong": "Mycket lång"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "Signallängd",
+        "state": {
+          "short": "Kort",
+          "medium": "Medel",
+          "long": "Lång"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Dörrassistent – frys (utlösning)",
+        "state": {
+          "push": "Tryck",
+          "pull": "Dra",
+          "pushpull": "Tryck/Dra"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Dörrassistent – frys (kraft)",
+        "state": {
+          "lowforce": "Låg",
+          "middleforce": "Medel",
+          "highforce": "Hög"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Intervallsteg",
+        "state": {
+          "fanoff": "Av",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Fördröjd avstängning – steg",
+        "state": {
+          "fanoff": "Av",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      }
+    },
+    "button": {
+      "button_abort_program": {
+        "name": "Avbryt"
+      },
+      "button_start_program": {
+        "name": "Starta"
+      },
+      "button_pause_program": {
+        "name": "Pausa"
+      },
+      "button_resume_program": {
+        "name": "Fortsätt"
+      },
+      "button_resume": {
+        "name": "Fortsätt"
+      }
+    },
+    "number": {
+      "number_fill_quantity": {
+        "name": "Fyllnadsmängd"
+      },
+      "number_laundry_brightness": {
+        "name": "Ljusstyrka"
+      },
+      "number_brightness": {
+        "name": "Ljusstyrka"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "Dörrljusring – ljusstyrka"
+      },
+      "number_duration": {
+        "name": "Varaktighet"
+      },
+      "number_laundry_spin_class": {
+        "name": "Centrifugeringsklass"
+      },
+      "number_setpoint_freezer": {
+        "name": "Temperatur – frys"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "Temperatur – kyl"
+      },
+      "number_idos1_base_level": {
+        "name": "i-DOS dosering: tvättmedel"
+      },
+      "number_idos2_base_level": {
+        "name": "i-DOS dosering: tvättmedel/sköljmedel"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "Målt temperatur"
+      },
+      "number_oven_display_brightness": {
+        "name": "Display – ljusstyrka"
+      },
+      "number_hood_interval_off": {
+        "name": "Intervall – av"
+      },
+      "number_hood_interval_on": {
+        "name": "Intervall – på"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Fördröjd avstängning"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Autosensor – känslighet"
+      },
+      "number_start_in": {
+        "name": "Startar om"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "Dörrljusring"
+      },
+      "light_drum_light": {
+        "name": "Trumljus"
+      },
+      "light_internal": {
+        "name": "Invändigt ljus"
+      },
+      "light_cooking_lighting": {
+        "name": "Belysning"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "Stämningsljus"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Fläkt"
+      }
+    },
+    "services": {
+      "start_program": {
+        "name": "Starta program",
+        "description": "Startar valt program",
+        "fields": {
+          "device_id": {
+            "name": "Apparat",
+            "description": "Apparaten som programmet ska startas på"
+          },
+          "start_in": {
+            "name": "Startar om",
+            "description": "Fördröj programstart"
           }
         }
       },
-        "select_oven_level": {
-          "name": "Nivå",
-          "state": {
-            "level01": "Nivå 1",
-            "level02": "Nivå 2",
-            "level03": "Nivå 3"
-          }
-        },
-        "select_oven_used_heating_mode": {
-          "name": "Använt värmeläge",
-          "state": {
-            "automaticoperation": "Automatiskt läge",
-            "automaticoperationwithmicrowave": "Automatiskt läge med mikrovåg",
-            "bakingsensoroperation": "Bakningssensor",
-            "bottomheating": "Undervärme",
-            "defrosting": "Upptining",
-            "desiccation": "Torkning",
-            "doughproving": "Jäsning",
-            "frozenheatupspecial": "Special – fryst uppvärmning",
-            "grilllargearea": "Grill – stor yta",
-            "grillsmallarea": "Grill – liten yta",
-            "hotair": "Varmluft",
-            "hotaireco": "Varmluft Eco",
-            "hotairgrilling": "Varmluftsgrill",
-            "intensiveheat": "Intensiv värme",
-            "keepwarm": "Varmhållning",
-            "microwave": "Mikrovåg",
-            "pizzasetting": "Pizzaläge",
-            "preheatovenware": "Förvärmning av kärl",
-            "reheat": "Uppvärmning",
-            "sabbathprogramme": "Sabbatsprogram",
-            "slowcook": "Långsam tillagning",
-            "steam": "Ånga",
-            "topbottomheating": "Över-/undervärme",
-            "topbottomheatingeco": "Över-/undervärme Eco",
-            "breadbaking": "Brödbakning",
-            "steamwithsteamset": "Ånga med SteamSet"
-          }
-        },
-        "select_pyrolysis_level": {
-          "name": "Pyrolysnivå",
-          "state": {
-            "level01": "Nivå 1",
-            "level02": "Nivå 2",
-            "level03": "Nivå 3"
-          }
-        },
-        "select_oven_child_lock_setting": {
-          "name": "Barnlåsläge",
-          "state": {
-            "deactivated": "Avaktiverat",
-            "activated": "Aktiverat",
-            "activatedwithdoorlock": "Aktiverat med dörrlås"
-          }
-        },
-        "select_oven_switch_on_delay": {
-          "name": "Fördröjd start",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång"
-          }
-        },
-        "select_oven_cooling_fan_runtime": {
-          "name": "Kylfläkt – eftergångstid",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång",
-            "verylong": "Mycket lång"
-          }
-        },
-        "select_oven_signal_duration": {
-          "name": "Signallängd",
-          "state": {
-            "short": "Kort",
-            "medium": "Medel",
-            "long": "Lång"
-          }
-        },
-        "select_refrigerator_door_assistant_freezer_trigger": {
-          "name": "Dörrassistent – frys (utlösning)",
-          "state": {
-            "push": "Tryck",
-            "pull": "Dra",
-            "pushpull": "Tryck/Dra"
-          }
-        },
-        "select_refrigerator_door_assistant_freezer_force": {
-          "name": "Dörrassistent – frys (kraft)",
-          "state": {
-            "lowforce": "Låg",
-            "middleforce": "Medel",
-            "highforce": "Hög"
-          }
-        },
-        "select_hood_interval_stage": {
-          "name": "Intervallsteg",
-          "state": {
-            "fanoff": "Av",
-            "fanstage01": "1",
-            "fanstage02": "2",
-            "fanstage03": "3"
-          }
-        },
-        "select_hob_delaye_shutoff_stage": {
-          "name": "Fördröjd avstängning – steg",
-          "state": {
-            "fanoff": "Av",
-            "fanstage01": "1",
-            "fanstage02": "2",
-            "fanstage03": "3"
-          }
-        }
-      },
-
-      "button": {
-        "button_abort_program": {
-          "name": "Avbryt"
-        },
-        "button_start_program": {
-          "name": "Starta"
-        },
-        "button_pause_program": {
-          "name": "Pausa"
-        },
-        "button_resume_program": {
-          "name": "Fortsätt"
-        },
-        "button_resume": {
-          "name": "Fortsätt"
-        }
-      },
-
-      "number": {
-        "number_fill_quantity": {
-          "name": "Fyllnadsmängd"
-        },
-        "number_laundry_brightness": {
-          "name": "Ljusstyrka"
-        },
-        "number_brightness": {
-          "name": "Ljusstyrka"
-        },
-        "number_door_light_ring_brightness": {
-          "name": "Dörrljusring – ljusstyrka"
-        },
-        "number_duration": {
-          "name": "Varaktighet"
-        },
-        "number_laundry_spin_class": {
-          "name": "Centrifugeringsklass"
-        },
-        "number_setpoint_freezer": {
-          "name": "Temperatur – frys"
-        },
-        "number_setpoint_refrigerator": {
-          "name": "Temperatur – kyl"
-        },
-        "number_idos1_base_level": {
-          "name": "i-DOS dosering: tvättmedel"
-        },
-        "number_idos2_base_level": {
-          "name": "i-DOS dosering: tvättmedel/sköljmedel"
-        },
-        "number_oven_setpoint_temperature": {
-          "name": "Målt temperatur"
-        },
-        "number_oven_display_brightness": {
-          "name": "Display – ljusstyrka"
-        },
-        "number_hood_interval_off": {
-          "name": "Intervall – av"
-        },
-        "number_hood_interval_on": {
-          "name": "Intervall – på"
-        },
-        "number_hood_delayed_shutoff_time": {
-          "name": "Fördröjd avstängning"
-        },
-        "number_hood_sensor_sensitivity": {
-          "name": "Autosensor – känslighet"
-        },
-        "number_start_in": {
-          "name": "Startar om"
-        }
-      },
-
-      "light": {
-        "light_door_ring": {
-          "name": "Dörrljusring"
-        },
-        "light_drum_light": {
-          "name": "Trumljus"
-        },
-        "light_internal": {
-          "name": "Invändigt ljus"
-        },
-        "light_cooking_lighting": {
-          "name": "Belysning"
-        },
-        "light_cooking_ambient_lighting": {
-          "name": "Stämningsljus"
-        }
-      },
-
-      "fan": {
-        "fan_hood": {
-          "name": "Fläkt"
-        }
-      },
-
-      "services": {
-        "start_program": {
-          "name": "Starta program",
-          "description": "Startar valt program",
-          "fields": {
-            "device_id": {
-              "name": "Apparat",
-              "description": "Apparaten som programmet ska startas på"
-            },
-            "start_in": {
-              "name": "Startar om",
-              "description": "Fördröj programstart"
-            }
-          }
-        },
-        "set_start_in": {
-          "name": "Ställ in startfördröjning",
-          "description": "Anger fördröjd start",
-          "fields": {
-            "device_id": {
-              "name": "Apparat",
-              "description": "Apparaten som startfördröjningen ska ställas in på"
-            },
-            "start_in": {
-              "name": "Fördröjning",
-              "description": "Anger startfördröjningen"
-            }
+      "set_start_in": {
+        "name": "Ställ in startfördröjning",
+        "description": "Anger fördröjd start",
+        "fields": {
+          "device_id": {
+            "name": "Apparat",
+            "description": "Apparaten som startfördröjningen ska ställas in på"
+          },
+          "start_in": {
+            "name": "Fördröjning",
+            "description": "Anger startfördröjningen"
           }
         }
       }
     }
   }
+}
