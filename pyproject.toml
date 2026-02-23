@@ -14,7 +14,7 @@ Issues = "https://github.com/chris-mc1/homeconnect_local_hass/issues"
 [dependency-groups]
 dev = [
     "colorlog",
-    "homeassistant>=2025.12",
+    "homeassistant>=2026.2",
     "pytest-homeassistant-custom-component",
     "voluptuous-stubs==0.1.1",
     "ruff==0.15.2",
