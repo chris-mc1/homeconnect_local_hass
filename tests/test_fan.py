@@ -30,11 +30,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
     assert state
@@ -53,7 +53,7 @@ async def test_update(
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test updating entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
     assert state.state == STATE_OFF
@@ -95,7 +95,7 @@ async def test_set_speed(
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting a speed."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         FAN_DOMAIN,
