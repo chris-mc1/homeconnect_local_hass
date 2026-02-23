@@ -1,0 +1,1892 @@
+{
+  "config": {
+    "step": {
+      "upload": {
+        "title": "Ajoutez de nouveaux appareils Home Connect",
+        "description": "Téléverser votre fichier de profil",
+        "data": {
+          "file": "Fichier de profil"
+        }
+      },
+      "device_select": {
+        "title": "Sélectionnez votre appareil",
+        "description": "Sélectionnez l'appareil que vous souhaitez configurer"
+      },
+      "host": {
+        "title": "Saisissez le nom d'hôte",
+        "description": "Essayez de saisir manuellement le nom d'hôte ou l'adresse IP de l'appareil",
+        "data": {
+          "host": "Hôte / Adresse IP"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "La connexion à l'appareil a échoué",
+      "already_configured": "Cet appareil est déjà configuré"
+    },
+    "abort": {
+      "auth_failed": "L'authentification a échouée",
+      "reauth_successful": "Ré-authentification réussie",
+      "invalid_profile_file": "Fichier de profil invalide",
+      "profile_file_parser_error": "Le fichier de profil est invalide : {error}",
+      "appliance_not_in_profile_file": "Le fichier ne contient pas de profil pour cet appareil",
+      "all_setup": "Tous les appareils contenus dans le fichier sont déjà configurés"
+    }
+  },
+  "entity": {
+    "switch": {
+      "switch_power_state": {
+        "name": "Alimentation"
+      },
+      "switch_hygiene_plus": {
+        "name": "Hygiène Plus"
+      },
+      "switch_extra_dry_option": {
+        "name": "Extra Séchage"
+      },
+      "switch_intensiv_zone": {
+        "name": "Intensiv Zone"
+      },
+      "switch_vario_speed_plus": {
+        "name": "VariospeedPlus"
+      },
+      "switch_silence_on_demand": {
+        "name": "Silence à la Demande"
+      },
+      "switch_brilliance_dry": {
+        "name": "Brilliance séchage"
+      },
+      "switch_extra_dry": {
+        "name": "Extra séchage"
+      },
+      "switch_speed_on_demand": {
+        "name": "Vitesse à la demande"
+      },
+      "switch_info_light": {
+        "name": "Voyant d'information"
+      },
+      "switch_multiple_beverages": {
+        "name": "Boissons multiples"
+      },
+      "switch_half_load": {
+        "name": "Demi charge"
+      },
+      "switch_child_lock": {
+        "name": "Verrouillage enfant"
+      },
+      "switch_door_light_ring": {
+        "name": "Éclairage porte"
+      },
+      "switch_drum_light": {
+        "name": "Éclairage tambour"
+      },
+      "switch_laundry_end_signal": {
+        "name": "Signal de fin"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "Son muet"
+      },
+      "switch_laundry_time_light": {
+        "name": "Voyant de durée"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "Wrinkle guard"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "Mode silencieux"
+      },
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "Hygiène - Faible Température"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "Vario perfect"
+      },
+      "switch_laundry_gentle": {
+        "name": "Délicat"
+      },
+      "switch_laundry_hygiene": {
+        "name": "Hygiène"
+      },
+      "switch_super_freezer": {
+        "name": "Congélateur - Mode Super"
+      },
+      "switch_super_refrigerator": {
+        "name": "Réfrigerateur - Mode Super"
+      },
+      "switch_refrigerator_eco": {
+        "name": "Mode Eco"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "Mode vacance"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "i-DOS lessive (bac 1)"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "i-DOS lessive (bac 2)"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "Intensif Plus"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "Moins de repassage"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "Lavage Silencieux"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "Speed Perfect"
+      },
+      "switch_laundry_soak": {
+        "name": "Soak"
+      },
+      "switch_laundry_prewash": {
+        "name": "Prewash"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "Arrêt de Rinçage"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "Rinçage Plus 1"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "Rinçage Plus 3"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "Eau et Rinçage Plus 1"
+      },
+      "switch_laundry_water_plus": {
+        "name": "Eau Plus"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "Désinfectant"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "Vapeur Hygiénique"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "Préchauffage rapide"
+      },
+      "switch_oven_button_tones": {
+        "name": "Son des touches"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "Éclairage du four en fonctionnement"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "Mode Sabbath"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Mode Sabbath"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Distributeur"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Freezer Door Assistant"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Éclairage intérieur"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Internal Light TheaterMode"
+      },
+      "switch_hood_boost": {
+        "name": "Boost"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Mode silencieux"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Mode frais"
+      }
+    },
+    "binary_sensor": {
+      "connection": {
+        "name": "Connexion"
+      },
+      "binary_sensor_door_state": {
+        "name": "Porte"
+      },
+      "binary_sensor_eco_dry_active": {
+        "name": "EcoDry Actif"
+      },
+      "binary_sensor_aqua_stop": {
+        "name": "AquaStop déclenché"
+      },
+      "binary_sensor_low_water_pressure": {
+        "name": "Pression d'eau faible"
+      },
+      "binary_sensor_bean_container_empty": {
+        "name": "Bac à grains vide"
+      },
+      "binary_remote_start_allowed": {
+        "name": "Démarrage à distance autorisé"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "Refresher fill level",
+        "state": {
+          "on": "Faible",
+          "off": "Plein"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "Bac de condensation",
+        "state": {
+          "on": "Plein",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "MachineCare"
+      },
+      "binary_sensor_machinecareandfiltercleaningreminder": {
+        "name": "Entretient de la Machine et Filtre"
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "Récupérateur de peluches",
+        "state": {
+          "on": "Plein",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_low_voltage": {
+        "name": "Faible Voltage"
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "Maintenance recommandée"
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "Machine Care",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "Machine Care & Filter Cleaning",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "Water Heater Calcified",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "Smart Filter Cleaning",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "Check Filter System",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "Draining Not Possible",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "Drain Pump Blocked",
+        "state": {
+          "on": "Maintenance requise",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_program_finished": {
+        "name": "Programme terminé"
+      },
+      "binary_sensor_program_aborted": {
+        "name": "Programme annulé"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "Détection de mousse"
+      },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "Tension faible"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "Nideau d'eau trop élevé"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "Porte non verrouillable"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "Porte non deverrouiable"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "Erreur fatale"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "Drum Clean Reminder"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "i-DOS 2 faible"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "i-DOS 1 faible"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "Porte du congélateur"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "i-DOS Defect"
+      },
+      "binary_sensor_pump_error": {
+        "name": "Erreur de la pompe"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "Essorage annulé"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "Porte du réfrigérateur"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "Alarme de la porte du congélateur"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "Alarme de la porte du réfrigérateur"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "Alarme de température du congélateur"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "Éclairage intérieur"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Dégivrage"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Filtre à eau plein"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Erreur de l'appareil"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Tension faible"
+      }
+    },
+    "sensor": {
+      "sensor_remaining_program_time": {
+        "name": "Temps restant"
+      },
+      "sensor_program_progress": {
+        "name": "Progression du programme"
+      },
+      "sensor_water_forecast": {
+        "name": "Consommation d'eau estimée"
+      },
+      "sensor_energy_forecast": {
+        "name": "Consommation électrique estimée"
+      },
+      "sensor_operation_state": {
+        "name": "État d'activité",
+        "state": {
+          "inactive": "Inactif",
+          "ready": "Prêt",
+          "delayedstart": "Départ différé",
+          "run": "En cours",
+          "pause": "En pause",
+          "actionrequired": "Action requise",
+          "finished": "Terminé",
+          "error": "Erreur",
+          "aborting": "Annulation..."
+        }
+      },
+      "sensor_program_phase": {
+        "name": "Phase du programme",
+        "state": {
+          "none": "None",
+          "prerinse": "Pre Rinçage",
+          "mainwash": "Lavage",
+          "finalrinse": "Rinçage Final",
+          "drying": "Séchage"
+        }
+      },
+      "sensor_active_program": {
+        "name": "Programme actif",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensif 70°",
+          "dishcare_dishwasher_program_auto2": "Auto 45-60°",
+          "dishcare_dishwasher_program_eco50": "Eco 50°",
+          "dishcare_dishwasher_program_quick45": "Rapide 45°",
+          "dishcare_dishwasher_program_prerinse": "Pré-Rinçage",
+          "dishcare_dishwasher_program_quick65": "Express 65°",
+          "dishcare_dishwasher_program_machinecare": "Entretien de la machine",
+          "dishcare_dishwasher_program_nightwash": "Lavage de Nuit",
+          "dishcare_dishwasher_program_glas40": "Verre 40°",
+          "dishcare_dishwasher_program_kurz60": "Rapide 60°",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "dishcare_dishwasher_program_quickd": "Lavage et séchage rapides",
+          "favorite_001": "Favori 1",
+          "favorite_002": "Favori 2",
+          "favorite_003": "Favori 3",
+          "favorite_004": "Favori 4",
+          "favorite_005": "Favori 5",
+          "favorite_006": "Favori 6",
+          "favorite_007": "Favori 7",
+          "favorite_008": "Favori 8",
+          "favorite_009": "Favori 9",
+          "favorite_010": "Favori 10",
+          "favorite_011": "Favori 11",
+          "favorite_012": "Favori 12",
+          "favorite_013": "Favori 13",
+          "favorite_014": "Favori 14",
+          "favorite_015": "Favori 15",
+          "favorite_016": "Favori 16",
+          "favorite_017": "Favori 17",
+          "favorite_018": "Favori 18",
+          "favorite_019": "Favori 19",
+          "favorite_020": "Favori 20",
+          "favorite_021": "Favori 21",
+          "favorite_022": "Favori 22",
+          "favorite_023": "Favori 23",
+          "favorite_024": "Favori 24",
+          "favorite_025": "Favori 25",
+          "favorite_026": "Favori 26",
+          "favorite_027": "Favori 27",
+          "favorite_028": "Favori 28",
+          "favorite_029": "Favori 29",
+          "favorite_030": "Favori 30",
+          "cooking_oven_program_heatingmode_bottomheating": "Bottom Heating",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart function",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, large area",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, small area",
+          "cooking_oven_program_heatingmode_hotair": "Hot Air",
+          "cooking_oven_program_heatingmode_hotaireco": "Hot Air eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Hot Air Grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Keep Warm",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza Setting",
+          "cooking_oven_program_heatingmode_preheatovenware": "Preheat Ovenware",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath program",
+          "cooking_oven_program_heatingmode_slowcook": "Slow Cook",
+          "cooking_oven_program_heatingmode_topbottomheating": "Top/Bottom Heating",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Top/Bottom Heating eco",
+          "cooking_oven_program_microwave_90watt": "Microwave 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Microwave 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Microwave 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Microwave 600 Watt",
+          "cooking_oven_program_microwave_max": "Microwave maximaal",
+          "cooking_oven_program_cleaning_drying": "Drying",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Lavage - Automatique doux/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Lavage - Automatique 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Lavage - Coton",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Lavage - Darkwash",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Lavage - Rideaux",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Lavage - Délicat/Soie",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Lavage - Anti Micro-plastique",
+          "laundrycare_washer_program_downduvet_down_down": "Lavage - Down",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Nettoyage du tambour",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Nettoyage du tambour",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Lavage - Easy Care",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Lavage - Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Rapide/Mixte",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Lavage - Extérieur",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Rinçage",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Lavage - Sensitive",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Lavage - Chemises/Blouses",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Lavage - Vêtements de sport",
+          "laundrycare_washer_program_spin_spin_spindrain": "Essorage/Vidange",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Lavage - Super rapide 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Serviettes",
+          "laundrycare_washer_program_wool_wool_wool": "Lavage - Laine",
+          "laundrycare_washer_program_sportfitness": "Lavage - Vêtements de sport",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Mémoire 1",
+          "laundrycare_common_program_memory2": "Mémoire 2",
+          "laundrycare_common_program_memory3": "Mémoire 3",
+          "laundrycare_common_program_memory4": "Mémoire 4",
+          "laundrycare_common_program_memory5": "Mémoire 5",
+          "laundrycare_common_program_memory6": "Mémoire 6",
+          "laundrycare_common_program_memory7": "Mémoire 7",
+          "laundrycare_common_program_memory8": "Mémoire 8",
+          "laundrycare_dryer_program_blankets": "Sèchage - Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Chemises",
+          "laundrycare_dryer_program_cotton": "Sèchage - Coton",
+          "laundrycare_dryer_program_dessous": "Sèchage - Lingerie",
+          "laundrycare_dryer_program_hygiene": "Sèchage - Hygiène",
+          "laundrycare_dryer_program_inbasket": "Sèchage - Laine en filet",
+          "laundrycare_dryer_program_mix": "Sèchage - Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Sèchage - Outdoor",
+          "laundrycare_dryer_program_pillow": "Sèchage - Duvet",
+          "laundrycare_dryer_program_super40": "Sèchage - Rapide 40min",
+          "laundrycare_dryer_program_synthetic": "Sèchage -  Easy-Care",
+          "laundrycare_dryer_program_timecold": "Temps Progr. Froid",
+          "laundrycare_dryer_program_timewarm": "Temps Progr. Tiède",
+          "laundrycare_dryer_program_towels": "Sèchage - Serviettes",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Sèchage - Vêtements de sport",
+          "laundrycare_washerdryer_program_towels_towels": "Lavage & sèchage - Towels",
+          "laundrycare_washerdryer_program_cotton_cotton": "Lavage & sèchage - Cotton",
+          "laundrycare_washerdryer_program_mix_mix": "Lavage & sèchage - Mixte",
+          "laundrycare_washerdryer_program_wool_wool": "Lavage & sèchage - Laine",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Lavage & sèchage - Vêtements de sport",
+          "laundrycare_washerdryer_program_washanddry_60": "Lavage & sèchage - 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Lavage & sèchage - Down",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Caffè Latte",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Café",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Expresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Expresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Expresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Eau chaude",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Mousse de lait",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Lait chaud",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Café XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Black eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café Con leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Café infusé à froid",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Macchiato infusé à froid",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Dead eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat white",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Red eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Infusion lente",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Rinçage à l'arrêt",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Rinçage au démarrage",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Calc'nClean",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Nettoyage",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Nettoyage rapide de l'unité de percolation",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Nettoyage approfondi de l'unité de percolation",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Nettoyage de la buse d'écoulement",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Détartrage",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Protection contre le gel",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Retirer le filtre à eau",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Remplacement du filtre à eau",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Nettoyage du système à lait",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Rinçage du filtre à eau",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Rinçage spécial"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "Liquide de rinçage",
+        "state": {
+          "empty": "Vide",
+          "nearly_empty": "Presque vide",
+          "full": "Plein"
+        }
+      },
+      "sensor_salt": {
+        "name": "Sel",
+        "state": {
+          "empty": "Vide",
+          "nearly_empty": "Presque vide",
+          "full": "Plein"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "Réservoir d'eau",
+        "state": {
+          "empty": "Vide",
+          "nearly_empty": "Presque vide",
+          "not_inserted": "Absent",
+          "full": "Plein"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Bac collecteur",
+        "state": {
+          "ok": "OK",
+          "not_inserted": "Absent",
+          "full": "Plein"
+        }
+      },
+      "sensor_start_in": {
+        "name": "Démarrage dans"
+      },
+      "sensor_finish_in": {
+        "name": "Fin dans"
+      },
+      "sensor_count_started": {
+        "name": "Décompte de démarrage"
+      },
+      "sensor_end_trigger": {
+        "name": "Raison de l'arrêt",
+        "state": {
+          "programfinished": "Terminé",
+          "programabortedbyuser": "Annulé par l'utilisateur",
+          "programabortedbyappliance": "Annulé par l'appareil",
+          "programabortedbyappliancecriticalerror": "Erreur critique"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "Interval Off"
+      },
+      "sensor_interval_time_on": {
+        "name": "Interval On"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "Arrêt programmé"
+      },
+      "sensor_power_state": {
+        "name": "Etat de l'alimentation",
+        "state": {
+          "mainsoff": "Alimentation principale coupée",
+          "off": "Éteint",
+          "on": "Allumé",
+          "standby": "En veille"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Porte",
+        "state": {
+          "open": "Ouverte",
+          "closed": "Fermée",
+          "locked": "Verrouillée",
+          "ajar": "Entrebaillée"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Laundry reload",
+        "state": {
+          "impossible": "Impossible",
+          "possiblepauseprogram": "Possible Pause Program",
+          "possibleopendoor": "Possible Open Door"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Étape du programme",
+        "state": {
+          "nophase": "Inactif",
+          "prewash": "Pré-lavage",
+          "intermediatespin": "Essorage",
+          "fillingdetergent": "Ajout de lessive",
+          "detectingload": "Détection de la charge",
+          "heating": "Chauffage",
+          "washing": "Lavage",
+          "cooldown": "Refroidissement",
+          "rinsingfoam": "Rinçage de la mousse",
+          "rinsing": "Rinçage",
+          "rinsingaquasensor": "Rinçage Aqua Sensor",
+          "rinseonly": "Rinçage seul",
+          "waterproofing": "Imperméabilisation",
+          "rinsingsoftener": "Rinçage de l'adoucissant",
+          "holdafterrinse": "Maintient après rinçage",
+          "pumping": "Pompage",
+          "spinningfinal": "Essorage final",
+          "lessironing": "Défroissage",
+          "fluffing": "Soufflage",
+          "soaking": "Trempage",
+          "hygienicsteamfogging": "Désinfection à la vapeur",
+          "guardingoxy": "Oxygènation",
+          "generatingozone": "Génération d'ozone",
+          "degradingozone": "Dégradation de l'ozone",
+          "drying": "Sèchage",
+          "coolingdown": "Refroidissement",
+          "additionalcoolingdown": "Refroidissement additionnel",
+          "guardingwrinkle": "Guarding Wrinkle",
+          "detectingtextile": "Analyse du textile",
+          "detectingsoil": "Détection de la terre",
+          "disinfecting": "Désinfection",
+          "lowtemperaturehygiene": "Désinfection basse température",
+          "steamingactive": "Vapeur active",
+          "irondryreached": "Iron dry atteint",
+          "cupboarddryreached": "Cupboard dry atteint",
+          "cupboarddryplusreached": "Cupboard dry plus atteint",
+          "cleaningheatexchanger": "Cleaning heat exchanger",
+          "slightlydampreached": "Slightly damp reached",
+          "extradryreached": "Extra dry reached",
+          "gentlydryreached": "Gently dry reached",
+          "quickcare": "Quick Care",
+          "depthcarephase1": "Depth Care phase 1",
+          "depthcarephase2": "Depth Care phase 2",
+          "coldrefreshing": "Cold Refreshing",
+          "steaming": "Vaporisation",
+          "foam": "Mousse",
+          "testprogramdummytextfinalspeedreached": "Test Program dummy text final speed reached",
+          "rinsingfoamf21": "Rinsing Foam F21",
+          "handsoak": "Lavage main",
+          "vacant": "Libre",
+          "spinning": "Essorage",
+          "displayspinabortnospin": "Display Spin Abort no Spin",
+          "multiplesoak": "Trempage multiple",
+          "laundryrefreshing": "Laundry Refreshing",
+          "reload": "Rechargement",
+          "hotmoistheatingwetting": "Hot Moist Heating Wetting",
+          "hotmoistheatingheating": "Hot Moist Heating Heating",
+          "hotmoistheatingwashing": "Hot Moist Heating Washing",
+          "moistureremoval": "Élimination de l'humidité",
+          "selfcleaning": "Nettoyage auto",
+          "hygiene": "Hygiène",
+          "smartsoak": "Trempage doux",
+          "soakpause": "Pause du trempage",
+          "soakfinished": "Trempage terminé",
+          "anyphase": "Any Phase"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Completed count"
+      },
+      "sensor_flex_start": {
+        "name": "Flex start",
+        "state": {
+          "disabled": "Désactivé",
+          "enabled": "Activé",
+          "pending": "En attente",
+          "scheduled": "Programmé",
+          "started": "Démarré",
+          "finished": "Terminé"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Process Phase",
+        "state": {
+          "steamactive": "Steam active",
+          "progstarted": "Program started",
+          "drying": "Drying",
+          "irondryreached": "Iron dry reached",
+          "cupboarddryreached": "Cupboard dry reached",
+          "cubboarddryplusreached": "Cubboard dry plus reached",
+          "cooling": "Cooling",
+          "finishedanticrease": "Finished anti crease",
+          "heatexchangercleaning": "Heat Exchanger cleaning",
+          "slightlydampreached": "Slightly damp reached",
+          "extradryreached": "Extra dry reached",
+          "quickcare": "Quick Care",
+          "depthcarephase1": "Depth Care Phase 1",
+          "depthcarephase2": "Depth Care Phase 2",
+          "spare": "Spare"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Température ambiante"
+      },
+      "sensor_laundry_load_recommendation": {
+        "name": "Recommendation de remplissage"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "Mémoire de la température du congélateur"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Vitesse d'essorage",
+        "state": {
+          "off": "0",
+          "rpm400": "400 tpm",
+          "rpm600": "600 tpm",
+          "rpm700": "700 tpm",
+          "rpm800": "800 tpm",
+          "rpm900": "900 tpm",
+          "rpm1000": "1000 tpm",
+          "rpm1200": "1200 tpm",
+          "rpm1400": "1400 tpm",
+          "rpm1500": "1500 tpm",
+          "rpm1600": "1600 tpm",
+          "rinsehold": "Rinçage",
+          "auto": "Auto"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Durée totale estimée"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Réservoir d'eau{group_name}",
+        "state": {
+          "ok": "OK",
+          "empty": "Vide",
+          "unplugged": "Absent"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Température actuelle {group_name}"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarme dépassée {group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "Progression du chauffage"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "Force du signal Wi-Fi"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Saturation du filtre à graisses"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Saturation du filtre carbone"
+      },
+      "sensor_hob_zone_state": {
+        "name": "État de la zone {group_name}",
+        "state": {
+          "notselectable": "Non disponible",
+          "off": "Éteint",
+          "active": "Actif",
+          "residuelheat": "Chaleur résiduelle"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Zone {group_name} Operation State",
+        "state": {
+          "inactive": "Inactif",
+          "ready": "Prêt",
+          "delayedstart": "Départ programmé",
+          "run": "En cours",
+          "pause": "En pause",
+          "actionrequired": "Action Requise",
+          "finished": "Terminé",
+          "error": "Erreur",
+          "aborting": "Annulation..."
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Zone {group_name} Puissance",
+        "state": {
+          "off": "Éteint",
+          "keepwarm": "Maintient au chaud",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Boost 1",
+          "boost2": "Boost 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Zone {group_name} Frying Sensor level",
+        "state": {
+          "off": "Éteint",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Zone {group_name} Température actuelle"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Zone {group_name} Progression du chauffage"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Zone {group_name} Durée"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Zone {group_name} Temps écoulé"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Zone {group_name} Temps restant"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Zone {group_name} Progression du programme"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Nombre de Ristrettos"
+      },
+      "sensor_count_coffee": {
+        "name": "Nombre de cafés"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Nombre de cafés au lait"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Nombre de mousses de lait"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Nombre de laits chauds"
+      },
+      "sensor_count_hot_water": {
+        "name": "Quantité d'eau chaude"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Nombre de tasses d'eau chaude"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Nombre de cafés moulus"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "Calc'nClean requis"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "Nettoyage requis"
+      },
+      "sensor_countdown_descaling": {
+        "name": "Détartrage requis"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "Remplacement du filtre à eau"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "Étape de préparation",
+        "state": {
+          "none": "Aucune",
+          "beverageaborting": "Annulation de la boisson",
+          "grinding": "Broyage du grain",
+          "brewingunitmovesup": "Préparation de l'unité de percolation",
+          "coffeebrewing": "Préparation du café",
+          "brewingunitmovesdown": "Fin de percolation",
+          "milkfroth": "Préparation de la mousse de lait",
+          "cleaningmilksystem": "Nettoyage du circuit lait",
+          "hotwaterdispensing": "Distribution d'eau chaude",
+          "cleaningmode": "Mode nettoyage",
+          "descalephase": "Détartrage",
+          "rinsephase": "Rinçage",
+          "cleanphase": "Nettoyage",
+          "warmmilk": "Chauffage du lait",
+          "frostprotection": "Protection anti-gel",
+          "specialrinsing": "Rinçage spécial",
+          "waterfilteractivation": "Activation du filtre à eau",
+          "lattemacpause": "Pause Latte Macchiato",
+          "startphase": "Démarrage",
+          "skipphase": "Saute une étape",
+          "preliminary": "Étapes préliminaires",
+          "autodescalephase": "Détartrage automatique",
+          "autocleanphase": "Nettoyage automatique",
+          "drainingdescalephase": "Vidange après détartrage",
+          "milkdescalephase": "Détartage du circuit lait",
+          "coldbrew": "Percolation à froid",
+          "dripbrew": "Percolation goutte à goutte",
+          "emptypowdersources": "Vidange du circuit de mouture",
+          "roundrobinflush": "Rinçage du système",
+          "initializenewcartridge": "Initialisation de la cartouche"
+        }
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "i-DOS 1 Fill Level",
+        "state": {
+          "poor": "Faible",
+          "filled": "Rempli"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "i-DOS 2 Fill Level",
+        "state": {
+          "poor": "Faible",
+          "filled": "Rempli"
+        }
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Assistant séchage tous programmes",
+        "state": {
+          "off": "Éteint",
+          "allprograms": "Tous programmes",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_hot_water": {
+        "name": "Température d'eau",
+        "state": {
+          "coldwater": "Eau froide",
+          "hotwater": "Eau chaude"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Liquide de Rinçage",
+        "state": {
+          "off": "Niveau 0",
+          "r01": "Niveau 1",
+          "r02": "Niveau 2",
+          "r03": "Niveau 3",
+          "r04": "Niveau 4",
+          "r05": "Niveau 5",
+          "r06": "Niveau 6"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "Sound Level Signal",
+        "state": {
+          "high": "Élevé",
+          "low": "Faible",
+          "medium": "Moyen",
+          "off": "Désactivé"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Dureté de l'Eau",
+        "state": {
+          "h00": "°E 0-8 douce (0-1.1 mmol/l)",
+          "h01": "°E 9-10 douce (1.2-1.4 mmol/l)",
+          "h02": "°E 11-12 moyenne (1.5-1.8 mmol/l)",
+          "h03": "°E 13-15 moyenne (1.9-2.1 mmol/l)",
+          "h04": "°E 16-20 moyenne (2.2-2.9 mmol/l)",
+          "h05": "°E 21-26 dure (3.0-3.7 mmol/l)",
+          "h06": "°E 27-38 dure (3.8-5.4 mmol/l)",
+          "h07": "°E 39-62 dure (5.5-8.9 mmol/l)"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "Contrôle à distance",
+        "state": {
+          "monitoring": "Désactivé",
+          "manualremotestart": "Manuel",
+          "permanentremotestart": "Permanent"
+        }
+      },
+      "select_program": {
+        "name": "Selected Program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensif 70°",
+          "dishcare_dishwasher_program_auto2": "Auto 45-60°",
+          "dishcare_dishwasher_program_eco50": "Eco 50°",
+          "dishcare_dishwasher_program_quick45": "Rapide 45°",
+          "dishcare_dishwasher_program_prerinse": "Pré-Rinçage",
+          "dishcare_dishwasher_program_quick65": "Express 65°",
+          "dishcare_dishwasher_program_machinecare": "Entretien de la machine",
+          "dishcare_dishwasher_program_nightwash": "Lavage de Nuit",
+          "dishcare_dishwasher_program_glas40": "Verre 40°",
+          "dishcare_dishwasher_program_kurz60": "Rapide 60°",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "dishcare_dishwasher_program_quickd": "Lavage et séchage rapides",
+          "favorite_001": "Favori 1",
+          "favorite_002": "Favori 2",
+          "favorite_003": "Favori 3",
+          "favorite_004": "Favori 4",
+          "favorite_005": "Favori 5",
+          "favorite_006": "Favori 6",
+          "favorite_007": "Favori 7",
+          "favorite_008": "Favori 8",
+          "favorite_009": "Favori 9",
+          "favorite_010": "Favori 10",
+          "favorite_011": "Favori 11",
+          "favorite_012": "Favori 12",
+          "favorite_013": "Favori 13",
+          "favorite_014": "Favori 14",
+          "favorite_015": "Favori 15",
+          "favorite_016": "Favori 16",
+          "favorite_017": "Favori 17",
+          "favorite_018": "Favori 18",
+          "favorite_019": "Favori 19",
+          "favorite_020": "Favori 20",
+          "favorite_021": "Favori 21",
+          "favorite_022": "Favori 22",
+          "favorite_023": "Favori 23",
+          "favorite_024": "Favori 24",
+          "favorite_025": "Favori 25",
+          "favorite_026": "Favori 26",
+          "favorite_027": "Favori 27",
+          "favorite_028": "Favori 28",
+          "favorite_029": "Favori 29",
+          "favorite_030": "Favori 30",
+          "cooking_oven_program_heatingmode_bottomheating": "Bottom Heating",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "CoolStart function",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, large area",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, small area",
+          "cooking_oven_program_heatingmode_hotair": "Hot Air",
+          "cooking_oven_program_heatingmode_hotaireco": "Hot Air eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Hot Air Grilling",
+          "cooking_oven_program_heatingmode_keepwarm": "Keep Warm",
+          "cooking_oven_program_heatingmode_pizzasetting": "Pizza Setting",
+          "cooking_oven_program_heatingmode_preheatovenware": "Preheat Ovenware",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Sabbath program",
+          "cooking_oven_program_heatingmode_slowcook": "Slow Cook",
+          "cooking_oven_program_heatingmode_topbottomheating": "Top/Bottom Heating",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Top/Bottom Heating eco",
+          "cooking_oven_program_microwave_90watt": "Microwave 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Microwave 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Microwave 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Microwave 600 Watt",
+          "cooking_oven_program_microwave_max": "Microwave maximaal",
+          "cooking_oven_program_cleaning_drying": "Drying",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Wash - Cotton",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Wash - Darkwash",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Wash - Curtains",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Wash - Delicates/Silk",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Wash - Anti Microplastic",
+          "laundrycare_washer_program_downduvet_down_down": "Wash - Down",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Drum Clean (legacy)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Drum Clean",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Wash - Easy Care",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Wash - Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Fast/Mix",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Wash - Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Rinse",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Wash - Sensitive",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Wash - Shirts/Blouses",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Wash - Sportswear",
+          "laundrycare_washer_program_spin_spin_spindrain": "Spin/Drain",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Steam/Iron Assist",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Wash - Super Short 15min/30min",
+          "laundrycare_washer_program_towels_towels_towels": "Towels",
+          "laundrycare_washer_program_wool_wool_wool": "Wash - Wool",
+          "laundrycare_washer_program_sportfitness": "Wash - Sportswear",
+          "laundrycare_common_program_juststart": "Just Start",
+          "laundrycare_common_program_memory1": "Memory 1",
+          "laundrycare_common_program_memory2": "Memory 2",
+          "laundrycare_dryer_program_blankets": "Dry - Down Wear",
+          "laundrycare_dryer_program_businessshirts": "Shirts",
+          "laundrycare_dryer_program_cotton": "Dry - Cottons",
+          "laundrycare_dryer_program_dessous": "Dry - Lingerie",
+          "laundrycare_dryer_program_hygiene": "Dry - Hygiene",
+          "laundrycare_dryer_program_inbasket": "Dry - Wool in Basket",
+          "laundrycare_dryer_program_mix": "Dry - Mixed Fabrics",
+          "laundrycare_dryer_program_outdoor": "Dry - Outdoor",
+          "laundrycare_dryer_program_pillow": "Dry - Duvet",
+          "laundrycare_dryer_program_super40": "Dry - Rapid 40min",
+          "laundrycare_dryer_program_synthetic": "Dry -  Easy-Care",
+          "laundrycare_dryer_program_timecold": "Time Progr. Cold",
+          "laundrycare_dryer_program_timewarm": "Time Progr. Warm",
+          "laundrycare_dryer_program_towels": "Dry - Towels",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Dry - Sportswear",
+          "laundrycare_washerdryer_program_towels_towels": "Wash & Dry - Towels",
+          "laundrycare_washerdryer_program_cotton_cotton": "Wash & Dry - Cotton",
+          "laundrycare_washerdryer_program_mix_mix": "Wash & Dry - Mix",
+          "laundrycare_washerdryer_program_wool_wool": "Wash & Dry - Wool",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Wash & Dry - Sportswear",
+          "laundrycare_washerdryer_program_washanddry_60": "Wash & Dry - 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Wash & Dry - Down"
+        }
+      },
+      "select_sensitivity_turbidity": {
+        "name": "Sensibilité du capteur de turbidité",
+        "state": {
+          "standard": "Standard",
+          "sensitive": "Sensible",
+          "verysensitive": "Très sensible"
+        }
+      },
+      "select_eco_as_default": {
+        "name": "Programme par Défaut",
+        "state": {
+          "lastprogram": "Dernier programme",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_power_state": {
+        "name": "État de l'alimentation",
+        "state": {
+          "mainsoff": "Arrêt complet",
+          "off": "Éteint",
+          "on": "Allumé",
+          "standby": "En veille"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "Température du café",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "Force (quantité de grain)",
+        "state": {
+          "verymild": "Très léger",
+          "mild": "Léger",
+          "mildplus": "Plus léger",
+          "normal": "Normal",
+          "normalplus": "Normal Plus",
+          "strong": "Fort",
+          "strongplus": "Plus fort",
+          "verystrong": "Très fort",
+          "verystrongplus": "Encore plus fort",
+          "extrastrong": "Extra fort",
+          "doubleshot": "Double Shot",
+          "doubleshotplus": "Double Shot Plus",
+          "doubleshotplusplus": "Double Shot Plus Plus",
+          "tripleshot": "Triple Shot",
+          "tripleshotplus": "Triple Shot Plus",
+          "coffeeground": "Café moulu"
+        }
+      },
+      "select_beverage_size": {
+        "name": "Taille de boisson",
+        "state": {
+          "small": "Petit",
+          "medium": "Moyen",
+          "large": "Grand",
+          "verylarge": "Très grand"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "Quantité de lait",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "Température d'eau chaude",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "Intensité",
+        "state": {
+          "normal": "Normal",
+          "intense": "Intense",
+          "intenseplus": "Plus intense"
+        }
+      },
+      "select_coarsness": {
+        "name": "Finesse",
+        "state": {
+          "coarsness1": "Finesse 1",
+          "coarsness2": "Finesse 2",
+          "coarsness3": "Finesse 3",
+          "coarsness4": "Finesse 4",
+          "coarsness5": "Finesse 5",
+          "coarsness6": "Finesse 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "Puissance du café",
+        "state": {
+          "strength1": "Puissance 1",
+          "strength2": "Puissance 2",
+          "strength3": "Puissance 3",
+          "strength4": "Puissance 4",
+          "strength5": "Puissance 5",
+          "strength6": "Puissance 6",
+          "strength7": "Puissance 7",
+          "strength8": "Puissance 8",
+          "strength9": "Puissance 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "Aroma select",
+        "state": {
+          "fine": "Doux",
+          "balanced": "Équilibré",
+          "distinctive": "Corsé"
+        }
+      },
+      "select_bean_container": {
+        "name": "Bac à grain",
+        "state": {
+          "right": "Droite",
+          "left": "Gauche"
+        }
+      },
+      "select_shot_count": {
+        "name": "Shot count",
+        "state": {
+          "double": "Double",
+          "triple": "Triple"
+        }
+      },
+      "select_cups": {
+        "name": "Tasses",
+        "state": {
+          "two": "Deux",
+          "four": "Quatre",
+          "six": "Six"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "Extinction auto",
+        "state": {
+          "off": "Désactivé",
+          "15min": "15 min",
+          "30min": "30 min",
+          "60min": "60 min"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "Luminosité",
+        "state": {
+          "low": "Faible",
+          "medium": "Moyen",
+          "high": "Élevé",
+          "veryhigh": "Très élevé"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "Mode d'éclairage du hublot",
+        "state": {
+          "off": "Éteint",
+          "on": "Allumé",
+          "auto": "Auto"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "Luminosité de l'éclairage du hublot",
+        "state": {
+          "low": "Faible",
+          "medium": "Moyen",
+          "high": "Élevé",
+          "veryhigh": "Très élevé"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "Volume de la tonalité de fin",
+        "state": {
+          "off": "Désactivé",
+          "low": "Faible",
+          "medium": "Moyen",
+          "loud": "Fort",
+          "veryloud": "Très fort"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "Volume de la tonalité des touches",
+        "state": {
+          "off": "Désactivé",
+          "low": "Faible",
+          "medium": "Moyen",
+          "loud": "Fort",
+          "veryloud": "Très fort"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "Volume de la tonalité des touches",
+        "state": {
+          "off": "Désactivé",
+          "volume1": "Volume 1",
+          "volume2": "Volume 2",
+          "volume3": "Volume 3",
+          "volume4": "Volume 4"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "Supply power rating"
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "Wrinkle guard",
+        "state": {
+          "off": "Désactivé",
+          "min30": "30 min",
+          "min60": "60 min",
+          "min90": "90 min",
+          "min120": "120 min",
+          "min180": "180 min"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "Cupboard dry fine adjust",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "Cupboard dry plus fine adjust",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "Iron dry fine adjust",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "Vitesse d'essorage avant sèchage",
+        "state": {
+          "off": "Désactivé",
+          "rpm400": "400 tpm",
+          "rpm600": "600 tpm",
+          "rpm700": "700 tpm",
+          "rpm800": "800 tpm",
+          "rpm900": "900 tpm",
+          "rpm1000": "1000 tpm",
+          "rpm1200": "1200 tpm",
+          "rpm1400": "1400 tpm",
+          "rpm1500": "1500 tpm",
+          "rpm1600": "1600 tpm",
+          "auto": "Auto"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "Drying target",
+        "state": {
+          "irondry": "Iron dry",
+          "gentledry": "Gentle dry",
+          "cupboarddry": "Cupboard dry",
+          "cupboarddryplus": "Cupboard dry plus",
+          "extradry": "Extra dry"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "Drying target",
+        "state": {
+          "shirt1": "Shirt 1",
+          "shirt5": "Shirt 5",
+          "business": "Business"
+        }
+      },
+      "select_laundry_idos2_content": {
+        "name": "i-DOS 2 Content",
+        "state": {
+          "softener": "Softener",
+          "detergent": "Detergent"
+        }
+      },
+      "select_laundry_idos2_level": {
+        "name": "i-DOS 2 Level",
+        "state": {
+          "off": "Désactivé",
+          "light": "Light",
+          "normal": "Normal",
+          "strong": "Strong"
+        }
+      },
+      "select_laundry_idos1_level": {
+        "name": "i-DOS 1 Level",
+        "state": {
+          "off": "Désactivé",
+          "light": "Light",
+          "normal": "Normal",
+          "strong": "Strong"
+        }
+      },
+      "select_laundry_vario_perfect": {
+        "name": "Vario perfect",
+        "state": {
+          "off": "Off",
+          "ecoperfect": "Eco Perfect",
+          "speedperfect": "Speed Perfect"
+        }
+      },
+      "select_laundry_hygienic_steam_intensity": {
+        "name": "Hygienic Steam Intensity",
+        "state": {
+          "middle": "Middle",
+          "high": "Élevé"
+        }
+      },
+      "select_laundry_multiple_soak": {
+        "name": "Multiple Soak",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_rinseplus": {
+        "name": "Rinçage Plus",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_laundry_spin_speed": {
+        "name": "Vitesse D'Essorage",
+        "state": {
+          "off": "Désactivé",
+          "uloff": "UlOff",
+          "rpm1000": "RPM1000",
+          "ulhigh": "UlHigh",
+          "rpm1200": "RPM1200",
+          "rpm1400": "RPM1400",
+          "rpm1500": "RPM1500",
+          "rpm1600": "RPM1600",
+          "auto": "Auto",
+          "max": "Max",
+          "ullow": "UlLow",
+          "rpm400": "RPM400",
+          "rpm600": "RPM600",
+          "rpm700": "RPM700",
+          "ulmedium": "UlMedium",
+          "rpm800": "RPM800",
+          "rpm900": "RPM900"
+        }
+      },
+      "select_laundry_option_stains": {
+        "name": "Stains",
+        "state": {
+          "off": "Désactivé",
+          "babyfood": "Baby Food",
+          "perspiration": "Perspiration",
+          "socks": "Socks",
+          "butteroil": "Butter Oil",
+          "tea": "Tea",
+          "tomatosauce": "Tomato Sauce",
+          "strawberry": "Strawberry",
+          "orange": "Orange",
+          "blood": "Blood",
+          "egg": "Egg",
+          "mud": "Mud",
+          "grass": "Grass",
+          "coffee": "Coffee",
+          "cosmetics": "Cosmetics",
+          "redwine": "Red Wine",
+          "chocolate": "Chocolate"
+        }
+      },
+      "select_laundry_option_temperature": {
+        "name": "Washing Temperature",
+        "state": {
+          "cold": "Cold",
+          "gc20": "20°C",
+          "ulcold": "Ultra Cold",
+          "ulwarm": "Ultra Warm",
+          "ulhot": "Ultra Hot",
+          "ulextrahot": "Ultra Extra Hot",
+          "gc30": "30°C",
+          "auto": "Auto",
+          "max": "Max",
+          "gc40": "40°C",
+          "gc50": "50°C",
+          "gc60": "60°C",
+          "gc70": "70°C",
+          "gc80": "80°C",
+          "gc90": "90°C"
+        }
+      },
+      "select_laundry_option_water_and_rinse_plus": {
+        "name": "Water and Rinse Plus",
+        "state": {
+          "off": "Désactivé",
+          "plus1": "Plus 1",
+          "plus2": "Plus 2",
+          "plus3": "Plus 3"
+        }
+      },
+      "select_oven_level": {
+        "name": "Niveau",
+        "state": {
+          "level01": "Niveau 1",
+          "level02": "Niveau 2",
+          "level03": "Niveau 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "Used Heating mode",
+        "state": {
+          "automaticoperation": "Automatic Operation",
+          "automaticoperationwithmicrowave": "Automatic Operation with Microwave",
+          "bakingsensoroperation": "Baking Sensor Operation",
+          "bottomheating": "Bottom Heating",
+          "defrosting": "Defrosting",
+          "desiccation": "Desiccation",
+          "doughproving": "Dough Proving",
+          "frozenheatupspecial": "Frozen Heatup Special",
+          "grilllargearea": "Grill large area",
+          "grillsmallarea": "Grill small area",
+          "hotair": "HotAir",
+          "hotaireco": "HotAir Eco",
+          "hotairgrilling": "HotAir grilling",
+          "intensiveheat": "Intensive heat",
+          "keepwarm": "Keep warm",
+          "microwave": "Microwave",
+          "pizzasetting": "Pizza setting",
+          "preheatovenware": "Preheat Ovenware",
+          "reheat": "Reheat",
+          "sabbathprogramme": "Sabbath Programme",
+          "slowcook": "Slow Cook",
+          "steam": "Steam",
+          "topbottomheating": "Top/Bottom Heating",
+          "topbottomheatingeco": "Top/Bottom Heating Eco",
+          "breadbaking": "Bread baking",
+          "steamwithsteamset": "Steam with Steamset"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "Niveau de Pyrolysise",
+        "state": {
+          "level01": "Niveau 1",
+          "level02": "Niveau 2",
+          "level03": "Niveau 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "Sécurité enfants",
+        "state": {
+          "deactivated": "Désactivé",
+          "activated": "Activé",
+          "activatedwithdoorlock": "Activé avec verrouillage de porte"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "Switch on delay",
+        "state": {
+          "short": "Court",
+          "medium": "Moyen",
+          "long": "Long"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "Temps de ventilation de refroidissement",
+        "state": {
+          "short": "Short",
+          "recommended": "Recommended"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "Durée du signal",
+        "state": {
+          "short": "Court",
+          "medium": "Moyen",
+          "long": "Long"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Freezer Door Assistant trigger",
+        "state": {
+          "push": "Push",
+          "pull": "Pull",
+          "pushpull": "PushPull"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Freezer Door Assistant force",
+        "state": {
+          "lowforce": "Low",
+          "middleforce": "Middle",
+          "highforce": "High"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Interval stage",
+        "state": {
+          "fanoff": "Désactivé",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Delayed ShutOff Stage",
+        "state": {
+          "fanoff": "Désactivé",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_temperature_unit": {
+        "name": "Temperature unit",
+        "state": {
+          "celsius": "Celsius",
+          "fahrenheit": "Fahrenheit"
+        }
+      },
+      "select_hood_carbon_filter_type": {
+        "name": "Carbon filter type",
+        "state": {
+          "none": "None",
+          "fahrenheit": "Basic Carbon filter",
+          "regenerativecarbonfilter": "Regenerative Carbon filter"
+        }
+      }
+    },
+    "button": {
+      "button_abort_program": {
+        "name": "Annuler"
+      },
+      "button_start_program": {
+        "name": "Démarrer"
+      },
+      "button_pause_program": {
+        "name": "Pause"
+      },
+      "button_resume_program": {
+        "name": "Reprendre"
+      },
+      "button_mains_power_off": {
+        "name": "PowerOFF"
+      },
+      "button_hood_carbon_filter_reset": {
+        "name": "Carbon filter reset"
+      },
+      "button_hood_grease_filter_reset": {
+        "name": "Grease filter reset"
+      },
+      "button_hood_regenerative_carbon_filter_reset": {
+        "name": "Regenerative Carbon filter reset"
+      },
+      "button_hood_regenerative_carbon_filter_lifetime_reset": {
+        "name": "Regenerative Carbon filter lifetime reset"
+      }
+    },
+    "number": {
+      "number_fill_quantity": {
+        "name": "Fill quantity"
+      },
+      "number_laundry_brightness": {
+        "name": "Luminosité"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "Luminosité de l'éclairage du hublot"
+      },
+      "number_duration": {
+        "name": "Durée"
+      },
+      "number_laundry_spin_class": {
+        "name": "Essorage"
+      },
+      "number_setpoint_freezer": {
+        "name": "Température congélateur"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "Température réfrigérateur"
+      },
+      "number_light_internal_brightness": {
+        "name": "Internal Light Brightness"
+      },
+      "number_idos1_base_level": {
+        "name": "i-DOS dosage lessive"
+      },
+      "number_idos2_base_level": {
+        "name": "i-DOS dosage lessive ou adoucissant"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "Température cible"
+      },
+      "number_oven_display_brightness": {
+        "name": "Luminosité de l'affichage"
+      },
+      "number_hood_interval_off": {
+        "name": "Interval time off"
+      },
+      "number_hood_interval_on": {
+        "name": "Interval time on"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Delayed Shutoff Time"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Auto Sensor Sensitivity"
+      },
+      "number_start_in": {
+        "name": "Démarrer dans"
+      },
+      "number_oven_setting_alarm_clock": {
+        "name": "Alarm Clock"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "Éclairage hublot"
+      },
+      "light_drum_light": {
+        "name": "Éclairage tambour"
+      },
+      "light_internal": {
+        "name": "Eclairage intérieur"
+      },
+      "light_logo": {
+        "name": "Affichage du logo"
+      },
+      "light_cooking_lighting": {
+        "name": "Éclairage"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "Éclairage ambiant"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Ventilateur"
+      }
+    }
+  },
+  "services": {
+    "start_program": {
+      "name": "Démarrer le programme",
+      "description": "Démarre le programme sélectionné",
+      "fields": {
+        "device_id": {
+          "name": "Appareil",
+          "description": "L'appareil sur lequel le programme sera lancé"
+        },
+        "start_in": {
+          "name": "Démarrer dans",
+          "description": "Décaler le démarrage du programme"
+        },
+        "finish_in": {
+          "name": "Terminer dans",
+          "description": "Temps auquel le programme doit terminer"
+        }
+      }
+    },
+    "set_start_in": {
+      "name": "Délai de démarrage",
+      "description": "Définit le délai avant le démarrage",
+      "fields": {
+        "device_id": {
+          "name": "Appareil",
+          "description": "L'appareil sur lequel le délai de démarrage sera défini"
+        },
+        "start_in": {
+          "name": "Délai",
+          "description": "Définit le délai avant démarrage"
+        },
+        "finish_in": {
+          "name": "Finir dans",
+          "description": "Définit le temps dans lequel le programme doit se Terminer"
+        }
+      }
+    }
+  }
+}
