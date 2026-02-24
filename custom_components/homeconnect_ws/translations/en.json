@@ -833,6 +833,9 @@
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed{group_name}"
       },
+      "binary_sensor_alarm_clock_elapsed": {
+        "name": "Alarm Clock Elapsed"
+      },
       "sensor_heatup_progress": {
         "name": "Heatup progress"
       },
@@ -1199,7 +1202,6 @@
           "cooking_oven_program_microwave_600watt": "Microwave 600 Watt",
           "cooking_oven_program_microwave_max": "Microwave maximaal",
           "cooking_oven_program_cleaning_drying": "Drying",
-          
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_auto60": "Wash - Automatic 60",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
@@ -1948,7 +1950,7 @@
       "number_start_in": {
         "name": "Start in"
       },
-      "number_oven_setting_alarm_clock": {
+      "number_setting_alarm_clock": {
         "name": "Alarm Clock"
       }
     },
