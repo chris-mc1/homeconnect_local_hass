@@ -1,4 +1,4 @@
-"""BAse Entity."""
+"""Base Entity."""
 
 from __future__ import annotations
 
@@ -70,9 +70,13 @@ class HCEntity(CoordinatorEntity, Entity):
 
     @property
     def available(self) -> bool:
-        return self._runtime_data.coordinator.connected and entity_is_available(
-            self._entity, self.entity_description.available_access
+        # FIX: session.connected fallback prevents unavailable during reconnects
+        # and initial load before coordinator callback. 300s timeout still applies.
+        conn = (
+            self._runtime_data.coordinator.connected
+            or self._runtime_data.appliance.session.connected
         )
+        return conn and entity_is_available(self._entity, self.entity_description.available_access)
 
     @property
     def extra_state_attributes(self) -> dict:
