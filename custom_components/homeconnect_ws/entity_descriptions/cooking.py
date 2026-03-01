@@ -30,13 +30,18 @@ if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
 
+def _extract_group_id(group_key: str) -> int:
+    """Extract numeric ID from group key, handling formats like '001.RemainingProgramTime'."""
+    return int(group_key.split(".")[0])
+
+
 def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven status descriptions."""
     pattern = re.compile(r"^Cooking\.Oven\.Status\.Cavity\.(\d+)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
     descriptions = EntityDescriptions(event_sensor=[], sensor=[])
     for group in groups:
-        group_name = f" {int(group[0])}"
+        group_name = f" {_extract_group_id(group[0])}"
         if len(groups) == 1:
             group_name = ""
 
@@ -80,7 +85,7 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
     groups = get_groups_from_regex(appliance, pattern)
     descriptions = EntityDescriptions(binary_sensor=[])
     for group in groups:
-        group_name = f" {int(group[0])}"
+        group_name = f" {_extract_group_id(group[0])}"
         if len(groups) == 1:
             group_name = ""
 
@@ -107,7 +112,7 @@ def generate_oven_settings(appliance: HomeAppliance) -> EntityDescriptions:
     groups = get_groups_from_regex(appliance, pattern)
     descriptions = EntityDescriptions(number=[])
     for group in groups:
-        group_name = f" {int(group[0])}"
+        group_name = f" {_extract_group_id(group[0])}"
 
         # AlarmClock
         entity = f"Cooking.Oven.Setting.Cavity.{group[0]}.AlarmClock"
@@ -148,7 +153,7 @@ def generate_hob_zones(appliance: HomeAppliance) -> HCFanEntityDescription:
     groups = get_groups_from_regex(appliance, pattern)
     descriptions = EntityDescriptions(sensor=[])
     for group in groups:
-        group_name = f" {int(group[0])}"
+        group_name = f" {_extract_group_id(group[0])}"
 
         # State
         entity = f"Cooking.Hob.Status.Zone.{group[0]}.State"
