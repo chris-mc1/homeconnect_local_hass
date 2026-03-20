@@ -7,15 +7,13 @@ from typing import TYPE_CHECKING, Any
 from homeassistant.components.switch import SwitchEntity
 
 from .entity import HCEntity
-from .helpers import create_entities
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.entity import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket import HomeAppliance
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCSwitchEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -39,10 +37,9 @@ class HCSwitch(HCEntity, SwitchEntity):
     def __init__(
         self,
         entity_description: HCSwitchEntityDescription,
-        appliance: HomeAppliance,
-        device_info: DeviceInfo,
+        runtime_data: HCData,
     ) -> None:
-        super().__init__(entity_description, appliance, device_info)
+        super().__init__(entity_description, runtime_data)
         self._value_mapping: tuple[str, str] = entity_description.value_mapping
 
     @property
@@ -55,12 +52,14 @@ class HCSwitch(HCEntity, SwitchEntity):
             return None
         return bool(self._entity.value)
 
+    @error_decorator
     async def async_turn_on(self, **kwargs: Any) -> None:
         if self._value_mapping:
             await self._entity.set_value(self._value_mapping[0])
         else:
             await self._entity.set_value(True)
 
+    @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
         if self._value_mapping:
             await self._entity.set_value(self._value_mapping[1])

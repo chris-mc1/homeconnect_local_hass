@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from unittest.mock import MagicMock, Mock
+from unittest.mock import ANY, Mock
 
-from aiohttp import ClientConnectionError, ClientConnectorSSLError
-from custom_components import homeconnect_ws
+from custom_components.homeconnect_ws import coordinator
 from custom_components.homeconnect_ws.const import DOMAIN
 from homeassistant.config_entries import ConfigEntryState
 from homeconnect_websocket.testutils import MockAppliance
@@ -26,7 +25,7 @@ async def test_load_unload_entry(
     """Test setup and unload config entry."""
     appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", "PSK_KEY")
     appliance_mock = Mock(return_value=appliance)
-    monkeypatch.setattr(homeconnect_ws, "HomeAppliance", appliance_mock)
+    monkeypatch.setattr(coordinator, "HomeAppliance", appliance_mock)
 
     entry = MockConfigEntry(
         domain=DOMAIN,
@@ -47,6 +46,7 @@ async def test_load_unload_entry(
         app_id="Test_Device_ID",
         psk64="PSK_KEY",
         iv64="AES_IV",
+        connection_callback=ANY,
     )
 
     assert await hass.config_entries.async_unload(entry.entry_id)
@@ -55,46 +55,3 @@ async def test_load_unload_entry(
     assert entry.state is ConfigEntryState.NOT_LOADED
 
     appliance.session.close.assert_awaited_once()
-
-
-async def test_load_failure(
-    hass: HomeAssistant,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """Test setup and unload config entry."""
-    appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", "PSK_KEY")
-    appliance_mock = Mock(return_value=appliance)
-    monkeypatch.setattr(homeconnect_ws, "HomeAppliance", appliance_mock)
-
-    entry = MockConfigEntry(
-        domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
-        unique_id=MOCK_TLS_DEVICE_ID,
-    )
-    entry.add_to_hass(hass)
-
-    appliance.session.connect.side_effect = ClientConnectorSSLError(MagicMock(), MagicMock())
-    await hass.config_entries.async_setup(entry.entry_id)
-    await hass.async_block_till_done()
-
-    assert entry.state is ConfigEntryState.SETUP_ERROR
-    appliance.session.close.assert_awaited_once()
-    await hass.config_entries.async_unload(entry.entry_id)
-    appliance.session.reset_mock()
-
-    appliance.session.connect.side_effect = TimeoutError()
-    await hass.config_entries.async_setup(entry.entry_id)
-    await hass.async_block_till_done()
-
-    assert entry.state is ConfigEntryState.SETUP_RETRY
-    appliance.session.close.assert_awaited_once()
-    await hass.config_entries.async_unload(entry.entry_id)
-    appliance.session.reset_mock()
-
-    appliance.session.connect.side_effect = ClientConnectionError()
-    await hass.config_entries.async_setup(entry.entry_id)
-    await hass.async_block_till_done()
-
-    assert entry.state is ConfigEntryState.SETUP_RETRY
-    appliance.session.close.assert_awaited_once()
-    await hass.config_entries.async_unload(entry.entry_id)

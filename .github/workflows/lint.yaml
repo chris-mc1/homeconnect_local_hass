@@ -11,13 +11,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v3
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - run: |
           pip install uv
           uv sync --no-install-project --prerelease=allow
       - run: |
-          uv run ruff format --check custom_components/
-          uv run ruff format --check tests/
+          uv run ruff format --diff custom_components/
+          uv run ruff format --diff tests/
       - run: |
           uv run ruff check custom_components/
           uv run ruff check tests/

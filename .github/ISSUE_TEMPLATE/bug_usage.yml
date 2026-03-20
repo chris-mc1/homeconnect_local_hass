@@ -1,0 +1,59 @@
+name: Issue using the Integration
+description: Report an issue with using Home Connect Local integration.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue form is for reporting issue with Integration!
+
+        If you have an issue with setting up the Integration or a feature request, please use the appropriate issue form.
+  - type: textarea
+    attributes:
+      label: The problem
+      description: |
+        Provide a clear description of the problem.
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Before submitting a bug report, please follow these troubleshooting steps
+      description: Please confirm that you have completed the following steps
+      options:
+        - label: I have tried the latest beta release of Home Connect Local.
+        - label: I have checked that I can perform the same action through the HomeConnect App.
+        - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+  - type: input
+    attributes:
+      label: Version of Home Connect Local
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of Home Assistant
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Diagnostics information
+      placeholder: "drag-and-drop the diagnostics file here"
+      description: >-
+        [Download the Integration Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) and drag-and-drop that file into the textbox below.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Debug logs
+      render: txt
+      description: |
+        Check the README for instructions on how to enable debug logging, then drag-and-drop that file into the textbox below.
+        The log should at least contain one reload of config entry        Can be found in: [Settings ⇒ System ⇒ Logs](https://my.home-assistant.io/redirect/logs/).

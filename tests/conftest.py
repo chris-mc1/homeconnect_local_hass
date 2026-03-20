@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 import pytest
 from custom_components import homeconnect_ws
-from custom_components.homeconnect_ws import entity_descriptions
+from custom_components.homeconnect_ws import coordinator, entity_descriptions
 from homeconnect_websocket.testutils import MockAppliance
 
 if TYPE_CHECKING:
@@ -124,5 +124,8 @@ def mock_appliance(
         psk64 = None
         iv64 = None
     appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", psk64, iv64)
-    monkeypatch.setattr(homeconnect_ws, "HomeAppliance", Mock(return_value=appliance))
+    appliance.session.connected = True
+    monkeypatch.setattr(coordinator, "HomeAppliance", Mock(return_value=appliance))
+    monkeypatch.setattr(coordinator.HomeConnectCoordinator, "connected", True)
+
     return appliance

@@ -7,6 +7,9 @@
             "switch_hygiene_plus": {
                 "default": "mdi:thermometer-plus"
             },
+            "switch_extra_dry_option": {
+                "default": "mdi:heat-wave"
+            },
             "switch_intensiv_zone": {},
             "switch_vario_speed_plus": {
                 "default": "mdi:timer-play-outline"
@@ -22,7 +25,9 @@
             "switch_brilliance_dry": {
                 "default": "mdi:shimmer"
             },
-            "switch_multiple_beverages": {},
+            "switch_multiple_beverages": {
+                "default": "mdi:select-multiple"
+            },
             "switch_half_load": {
                 "default": "mdi:fraction-one-half"
             },
@@ -37,6 +42,9 @@
             },
             "switch_laundry_idos2_active": {
                 "default": "mdi:office-building-cog"
+            },
+            "switch_extra_rinse": {
+                "default": "mdi:water-plus"
             }
         },
         "binary_sensor": {
@@ -76,6 +84,9 @@
             }
         },
         "sensor": {
+            "sensor_laundry_load_recommendation": {
+                "default": "mdi:weight-kilogram"
+            },
             "sensor_remaining_program_time": {
                 "default": "mdi:progress-clock"
             },
@@ -88,7 +99,9 @@
             "sensor_energy_forecast": {
                 "default": "mdi:lightning-bolt"
             },
-            "sensor_operation_state": {},
+            "sensor_operation_state": {
+                "default": "mdi:state-machine"
+            },
             "sensor_program_phase": {
                 "default": "mdi:progress-check"
             },
@@ -103,7 +116,14 @@
                     "not_inserted": "mdi:water-remove"
                 }
             },
-            "sensor_drip_tray": {},
+            "sensor_drip_tray": {
+                "default": "mdi:tray",
+                "state": {
+                    "ok": "mdi:tray",
+                    "not_inserted": "mdi:tray-remove",
+                    "full": "mdi:tray-alert"
+                }
+            },
             "sensor_start_in": {},
             "sensor_count_started": {},
             "sensor_end_trigger": {},
@@ -148,6 +168,48 @@
             },
             "sensor_carbon_filter_saturation": {
                 "default": "mdi:air-filter"
+            },
+            "sensor_count_ristretto_espresso": {
+                "default": "mdi:coffee"
+            },
+            "sensor_count_coffee": {
+                "default": "mdi:coffee"
+            },
+            "sensor_count_coffee_milk": {
+                "default": "mdi:coffee"
+            },
+            "sensor_count_frothy_milk": {
+                "default": "mdi:cup"
+            },
+            "sensor_count_frothy_milk": {
+                "default": "mdi:cup"
+            },
+            "sensor_count_hot_milk": {
+                "default": "mdi:cup"
+            },
+            "sensor_count_hot_water": {
+                "default": "mdi:cup"
+            },
+            "sensor_count_hot_water_cups": {
+                "default": "mdi:cup"
+            },
+            "sensor_count_powder_coffee": {
+                "default": "mdi:coffee"
+            },
+            "sensor_countdown_calc_n_clean": {
+                "default": "mdi:broom"
+            },
+            "sensor_countdown_cleaning": {
+                "default": "mdi:broom"
+            },
+            "sensor_countdown_descaling": {
+                "default": "mdi:broom"
+            },
+            "sensor_countdown_water_filter": {
+                "default": "mdi:swap-horizontal-bold"
+            },
+            "sensor_coffeemaker_process_phase": {
+                "default": "mdi:state-machine"
             }
         },
         "select": {
@@ -166,6 +228,12 @@
                 }
             },
             "select_water_hardness": {},
+            "select_shot_count": {
+                "default": "mdi:coffee"
+            },
+            "select_cups": {
+                "default": "mdi:coffee"
+            },
             "select_remote_control_level": {
                 "default": "mdi:remote",
                 "state": {
@@ -186,10 +254,21 @@
                 "default": "mdi:thermometer"
             },
             "select_bean_amount": {},
-            "select_beverage_size": {},
-            "select_coffee_milk_ratio": {},
+            "select_beverage_size": {
+                "default": "mdi:resize"
+            },
+            "select_coffee_milk_ratio": {
+                "default": "mdi:fraction-one-half"
+            },
             "select_hot_water_temperature": {
                 "default": "mdi:water-thermometer-outline"
+            },
+            "select_temperature_unit": {
+                "default": "mdi:thermometer",
+                "state": {
+                    "celsius": "mdi:temperature-celsius",
+                    "fahrenheit": "mdi:temperature-fahrenheit"
+                }
             }
         },
         "button": {
@@ -204,6 +283,21 @@
             },
             "button_resume_program": {
                 "default": "mdi:play"
+            },
+            "button_mains_power_off": {
+                "default": "mdi:power-plug-off"
+            },
+            "button_hood_carbon_filter_reset": {
+                "default": "mdi:restore"
+            },
+            "button_hood_grease_filter_reset": {
+                "default": "mdi:restore"
+            },
+            "button_hood_regenerative_carbon_filter_reset": {
+                "default": "mdi:restore"
+            },
+            "button_hood_regenerative_carbon_filter_lifetime_reset": {
+                "default": "mdi:restore"
             }
         },
         "number": {
@@ -213,6 +307,9 @@
             },
             "number_idos2_base_level": {
                 "default": "mdi:tune"
+            },
+            "number_light_internal_brightness": {
+                "default": "mdi:lightbulb"
             }
         }
     },

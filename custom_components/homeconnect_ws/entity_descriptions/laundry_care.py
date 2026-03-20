@@ -8,7 +8,13 @@ from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
-from homeassistant.const import PERCENTAGE, REVOLUTIONS_PER_MINUTE, EntityCategory, UnitOfVolume
+from homeassistant.const import (
+    PERCENTAGE,
+    REVOLUTIONS_PER_MINUTE,
+    EntityCategory,
+    UnitOfMass,
+    UnitOfVolume,
+)
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
@@ -48,6 +54,27 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
         ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_load_recommendation",
+            entity="LaundryCare.Common.Option.LoadRecommendation",
+            device_class=SensorDeviceClass.WEIGHT,
+            native_unit_of_measurement=UnitOfMass.GRAMS,
+            suggested_unit_of_measurement=UnitOfMass.KILOGRAMS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_status_idos1_fill_level",
+            entity="LaundryCare.Washer.Status.IDos1FillLevel",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_status_idos2_fill_level",
+            entity="LaundryCare.Washer.Status.IDos2FillLevel",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "binary_sensor": [
         HCBinarySensorEntityDescription(
@@ -85,6 +112,119 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCBinarySensorEntityDescription(
             key="binary_sensor_foam_detection",
             entity="LaundryCare.Common.Event.FoamDetection",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_supply_voltage_too_low",
+            entity="LaundryCare.Common.Event.SupplyPower.SupplyVoltageTooLow",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_water_level_too_high",
+            entity="LaundryCare.Common.Event.DoorLock.WaterLevelTooHigh",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_door_not_lockable",
+            entity="LaundryCare.Common.Event.DoorNotLockable",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_door_not_unlockable",
+            entity="LaundryCare.Common.Event.DoorNotUnlockable",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_fatal_error_occurred",
+            entity="LaundryCare.Common.Event.FatalErrorOccured",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_drum_clean_reminder",
+            entity="LaundryCare.Washer.Event.DrumCleanReminder",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_idos1_fill_level_poor",
+            entity="LaundryCare.Washer.Event.IDos1FillLevelPoor",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_idos2_fill_level_poor",
+            entity="LaundryCare.Washer.Event.IDos2FillLevelPoor",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_idos_unit_defect",
+            entity="LaundryCare.Washer.Event.IDosUnitDefect",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_pump_error",
+            entity="LaundryCare.Washer.Event.PumpError",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_spin_abort",
+            entity="LaundryCare.Washer.Event.Spin.SpinAbort",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_release_rinse_hold_pending",
+            entity="LaundryCare.Washer.Event.ReleaseRinseHoldPending",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_idos_open_tray",
+            entity="LaundryCare.Washer.Event.IDos.IDosOpenTray",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
             value_on={"Present", "Confirmed"},
@@ -175,6 +315,62 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="LaundryCare.Dryer.Option.Refresher",
             has_state_translation=True,
         ),
+        HCSelectEntityDescription(
+            key="select_laundry_idos2_content",
+            entity="LaundryCare.Washer.Setting.IDos2Content",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_idos2_level",
+            entity="LaundryCare.Washer.Option.IDos2DosingLevel",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_idos1_level",
+            entity="LaundryCare.Washer.Option.IDos1DosingLevel",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_vario_perfect",
+            entity="LaundryCare.Common.Option.VarioPerfect",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_hygienic_steam_intensity",
+            entity="LaundryCare.Common.Option.HygienicSteamIntensity",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_multiple_soak",
+            entity="LaundryCare.Washer.Option.MultipleSoak",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_rinseplus",
+            entity="LaundryCare.Washer.Option.RinsePlus",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_spin_speed",
+            entity="LaundryCare.Washer.Option.SpinSpeed",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_option_stains",
+            entity="LaundryCare.Washer.Option.Stains",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_option_temperature",
+            entity="LaundryCare.Washer.Option.Temperature",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_option_water_and_rinse_plus",
+            entity="LaundryCare.Washer.Option.WaterAndRinsePlus",
+            has_state_translation=True,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "number": [
         HCNumberEntityDescription(
@@ -260,6 +456,11 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(
+            key="switch_laundry_low_temperature_hygiene",
+            entity="LaundryCare.Common.Option.LowTemperatureHygiene",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
             key="switch_laundry_gentle",
             entity="LaundryCare.Dryer.Option.Gentle",
             device_class=SwitchDeviceClass.SWITCH,
@@ -282,6 +483,84 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_laundry_idos2_active",
             entity="LaundryCare.Washer.Option.IDos2Active",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_idos1_active",
+            entity="LaundryCare.Washer.Option.IDos1.Active",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_idos2_active",
+            entity="LaundryCare.Washer.Option.IDos2.Active",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_intensive_plus",
+            entity="LaundryCare.Washer.Option.IntensivePlus",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_less_ironing",
+            entity="LaundryCare.Washer.Option.LessIroning",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_silent_wash",
+            entity="LaundryCare.Washer.Option.SilentWash",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_speed_perfect",
+            entity="LaundryCare.Washer.Option.SpeedPerfect",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_soak",
+            entity="LaundryCare.Washer.Option.Soak",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_prewash",
+            entity="LaundryCare.Washer.Option.Prewash",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_rinse_hold",
+            entity="LaundryCare.Washer.Option.RinseHold",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_rinse_plus1",
+            entity="LaundryCare.Washer.Option.RinsePlus1",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_rinse_plus3",
+            entity="LaundryCare.Washer.Option.RinsePlus3",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_water_and_rinse_plus1",
+            entity="LaundryCare.Washer.Option.WaterAndRinsePlus1",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_water_plus",
+            entity="LaundryCare.Washer.Option.WaterPlus",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_disinfectant",
+            entity="LaundryCare.Washer.Option.Disinfectant",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_laundry_hygienic_steam",
+            entity="LaundryCare.Washer.Option.HygienicSteam",
             device_class=SwitchDeviceClass.SWITCH,
         ),
     ],

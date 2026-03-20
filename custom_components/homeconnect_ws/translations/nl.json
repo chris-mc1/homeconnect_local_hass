@@ -36,31 +36,127 @@
   "entity": {
     "switch": {
       "switch_power_state": {
-        "name": "Aan/Uit"
+        "name": "Voedingsstatus"
       },
       "switch_hygiene_plus": {
         "name": "Hygiene Plus"
       },
+      "switch_extra_dry_option": {
+        "name": "Extra Droog"
+      },
       "switch_intensiv_zone": {
-        "name": "Intensiv Zone"
+        "name": "IntensiveZone"
       },
       "switch_vario_speed_plus": {
-        "name": "VariospeedPlus"
+        "name": "VarioSpeedPlus"
       },
       "switch_silence_on_demand": {
-        "name": "Silence On Demand"
+        "name": "Geluid dempen"
       },
       "switch_brilliance_dry": {
         "name": "Brilliance Dry"
       },
       "switch_extra_dry": {
-        "name": "Extra Dry"
+        "name": "Extra droog"
       },
       "switch_speed_on_demand": {
         "name": "Speed On Demand"
       },
       "switch_info_light": {
-        "name": "Info Light"
+        "name": "Infolicht"
+      },
+      "switch_multiple_beverages": {
+        "name": "Multiple Beverages"
+      },
+      "switch_half_load": {
+        "name": "Halve belading"
+      },
+      "switch_child_lock": {
+        "name": "Kinderslot"
+      },
+      "switch_door_light_ring": {
+        "name": "Deur ringlicht"
+      },
+      "switch_drum_light": {
+        "name": "Trommelverlichting"
+      },
+      "switch_laundry_end_signal": {
+        "name": "Eindsignaal"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "Stil"
+      },
+      "switch_laundry_time_light": {
+        "name": "TimeLight"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "Minder strijken"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "Stille modus"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "SpeedPerfect"
+      },
+      "switch_laundry_gentle": {
+        "name": "Voorzichtig"
+      },
+      "switch_laundry_hygiene": {
+        "name": "Hygiene"
+      },
+      "switch_super_freezer": {
+        "name": "Super mode vriezer"
+      },
+      "switch_super_refrigerator": {
+        "name": "Super mode koelkast"
+      },
+      "switch_refrigerator_eco": {
+        "name": "Eco modus"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "Vakantiemodus"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "i-DOS Wasmiddel (Lade 1)"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "i-DOS Wasmiddel (Lade 2)"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "Snel voorverwarmen"
+      },
+      "switch_oven_button_tones": {
+        "name": "Geluid van knop"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "Verlichting tijdens werking"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "Sabbat modus"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Sabbat modus"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Dispenser"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Vriezer deurassistent"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Binnenverlichting"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Binnenverlichting TheaterMode"
+      },
+      "switch_hood_boost": {
+        "name": "Boost"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Stille modus"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Opfris modus"
       }
     },
     "binary_sensor": {
@@ -74,44 +170,139 @@
         "name": "EcoDry Actief"
       },
       "binary_sensor_aqua_stop": {
-        "name": "AquaStop plaatsgevonden"
+        "name": "AquaStop"
       },
       "binary_sensor_low_water_pressure": {
         "name": "Lage waterdruk"
       },
       "binary_sensor_bean_container_empty": {
         "name": "Bonenreservoir leeg"
+      },
+      "binary_remote_start_allowed": {
+        "name": "Start op afstand"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "Verfrisser vulniveau",
+        "state": {
+          "on": "Leeg",
+          "off": "Vol"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "Condenswaterreservoir",
+        "state": {
+          "on": "Vol",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "Pluizenfilter",
+        "state": {
+          "on": "Vol",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "Machinereiniging",
+        "state": {
+          "on": "Reiniging nodig",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_program_aborted": {
+        "name": "Programma afgebroken"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "Schuimdetectie"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "Deur vriezer"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "Koelkast deur"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "Vriezer deuralarm"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "Koelkast deuralarm"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "Vriezer temperatuuralarm"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "Binnenverlichting"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Ontdooien"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Waterfilter vol"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Apparaatfout"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Lage voedingsspanning"
       }
     },
     "sensor": {
       "sensor_remaining_program_time": {
-        "name": "Resterende programmaduur"
+        "name": "Resterende tijd"
       },
       "sensor_program_progress": {
         "name": "Programmavoortgang"
       },
       "sensor_water_forecast": {
-        "name": "Watervoorspelling"
+        "name": "Waterprognose"
       },
       "sensor_energy_forecast": {
         "name": "Energieprognose"
       },
       "sensor_operation_state": {
-        "name": "Bedrijfsstatus"
+        "name": "Bedrijfsstatus",
+        "state": {
+          "inactive": "Inactief",
+          "ready": "Paraat",
+          "delayedstart": "Uitgestelde start",
+          "run": "Loopt",
+          "pause": "Gepauzeerd",
+          "actionrequired": "Actie benodigd",
+          "finished": "Afgerond",
+          "error": "Fout",
+          "aborting": "Afbreken"
+        }
       },
       "sensor_program_phase": {
-        "name": "Programmafase"
+        "name": "Programmafase",
+        "state": {
+          "none": "Geen",
+          "prerinse": "Voorspoelen",
+          "mainwash": "Wassen",
+          "finalrinse": "Naspoelen",
+          "drying": "Drogen"
+        }
       },
       "sensor_active_program": {
-        "name": "Actief Programma",
+        "name": "Actief programma",
         "state": {
-          "dishcare_dishwasher_program_intensiv70": "Intensief 70",
-          "dishcare_dishwasher_program_auto2": "Auto 45-65",
-          "dishcare_dishwasher_program_eco50": "Eco 50",
-          "dishcare_dishwasher_program_quick45": "Snel 45",
-          "dishcare_dishwasher_program_prerinse": "Spoelen",
-          "dishcare_dishwasher_program_quick65": "Snel 65",
+          "dishcare_dishwasher_program_intensiv70": "Intensief 70°",
+          "dishcare_dishwasher_program_auto2": "Auto 45-65°",
+          "dishcare_dishwasher_program_eco50": "Eco 50°",
+          "dishcare_dishwasher_program_quick45": "Speed 45°",
+          "dishcare_dishwasher_program_prerinse": "Voorspoelen",
+          "dishcare_dishwasher_program_quick65": "Speed 65°",
           "dishcare_dishwasher_program_machinecare": "Machinereiniging",
+          "dishcare_dishwasher_program_glas40": "Glas 40°",
+          "dishcare_dishwasher_program_glasshine": "brilliantShine",
+          "dishcare_dishwasher_program_intensivpower": "Intensief+ 70°",
+          "dishcare_dishwasher_program_kurz60": "Speed 60°",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "dishcare_dishwasher_program_maxefficient": "Max Efficient",
+          "dishcare_dishwasher_program_mixedload": "Mix belading",
+          "dishcare_dishwasher_program_nightwash": "Stil 50°",
+          "dishcare_dishwasher_program_quickd": "Snel Was & Droog",
+          "dishcare_dishwasher_program_super60": "Super 60°",
           "favorite_001": "Favoriet 1",
           "favorite_002": "Favoriet 2",
           "favorite_003": "Favoriet 3",
@@ -121,14 +312,371 @@
           "favorite_007": "Favoriet 7",
           "favorite_008": "Favoriet 8",
           "favorite_009": "Favoriet 9",
-          "favorite_010": "Favoriet 10"
+          "favorite_010": "Favoriet 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Verw.wijze: Onderverwarming",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "Verw.wijze: CoolStart functie",
+          "cooking_oven_program_heatingmode_grilllargearea": "Verw.wijze: Grill, groot gebied",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Verw.wijze: Grill, klein gebied",
+          "cooking_oven_program_heatingmode_hotair": "Verw.wijze: 4D Hetelucht",
+          "cooking_oven_program_heatingmode_hotaireco": "Verw.wijze: Hetelucht eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Verw.wijze: Hetelucht grillen",
+          "cooking_oven_program_heatingmode_keepwarm": "Verw.wijze: Warmhouden",
+          "cooking_oven_program_heatingmode_pizzasetting": "Verw.wijze: Pizzastand",
+          "cooking_oven_program_heatingmode_preheatovenware": "Verw.wijze: Voorverwarmen ovenschalen",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Verw.wijze: Sabbat programma",
+          "cooking_oven_program_heatingmode_slowcook": "Verw.wijze: Langzaam garen",
+          "cooking_oven_program_heatingmode_topbottomheating": "Verw.wijze: Boven/onderverwarming",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Verw.wijze: Boven/onderverwarming eco",
+          "cooking_oven_program_microcombimodes_grilllargearea": "Combi: Grill, groot gebied, met magnetron",
+          "cooking_oven_program_microcombimodes_grillsmallarea": "Combi: Grill, klein gebied, met magnetron",
+          "cooking_oven_program_microcombimodes_hotair": "Combi: 4D Hetelucht met magnetron",
+          "cooking_oven_program_microcombimodes_hotairgrilling": "Combi: Hetelucht grillen met magnetron",
+          "cooking_oven_program_microcombimodes_topbottomheating": "Combi: Boven/onderverwarming met magnetron",
+          "cooking_oven_program_microwave_90watt": "Magnetron: 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Magnetron: 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Magnetron: 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Magnetron: 600 Watt",
+          "cooking_oven_program_microwave_max": "Magnetron: Boost",
+          "cooking_oven_program_cleaning_drying": "Reiniging: Droogfunctie",
+          "cooking_oven_program_cleaning_pyrolysis": "Reiniging: Pyrolyse",
+          "cooking_oven_program_dish_automatic_konv_babyputeungefuellt": "Gerecht: Kleine kalkoen, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitfleisch": "Gerecht: Vleesstoofschotel",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitgemuese": "Gerecht: Groenteschotel",
+          "cooking_oven_program_dish_automatic_konv_enteungefuellt": "Gerecht: Eend, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_fischganz": "Gerecht: Vis, hele",
+          "cooking_oven_program_dish_automatic_konv_gaensebrust": "Gerecht: Ganzeborst",
+          "cooking_oven_program_dish_automatic_konv_gaensekeulen": "Gerecht: Ganzebouten",
+          "cooking_oven_program_dish_automatic_konv_gulasch": "Gerecht: Goulash",
+          "cooking_oven_program_dish_automatic_konv_hirschkeuleohneknochen": "Gerecht: Hertenbout, uitgebeend",
+          "cooking_oven_program_dish_automatic_konv_kalbsossobuco": "Gerecht: Ossobuco",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratendurchwachsen": "Gerecht: Kalfsvlees, doorregen",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratenmager": "Gerecht: Stuk kalfsvlees, mager",
+          "cooking_oven_program_dish_automatic_konv_kalbshaxe": "Gerecht: Kalfsschenkel",
+          "cooking_oven_program_dish_automatic_konv_kaninchenganz": "Gerecht: Konijn, heel",
+          "cooking_oven_program_dish_automatic_konv_lammkeulemitknochendurchgegart": "Gerecht: Lamsbout, well-done, op het bot",
+          "cooking_oven_program_dish_automatic_konv_pavlova": "Gerecht: Pavlova",
+          "cooking_oven_program_dish_automatic_konv_poulardeungefuellt": "Gerecht: Poularde, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_rehkeuleohneknochen": "Gerecht: Reezadel, uitgebeend",
+          "cooking_oven_program_dish_automatic_konv_rinderrouladen": "Gerecht: Runderrollade",
+          "cooking_oven_program_dish_automatic_konv_rinderschmorbraten": "Gerecht: Runderstoofpot",
+          "cooking_oven_program_dish_automatic_konv_roastbeefenglisch": "Gerecht: Biefstuk, rood",
+          "cooking_oven_program_dish_automatic_konv_schweinebratenmitkrustezbschulter": "Gerecht: Varkensrack met knapperige korst",
+          "cooking_oven_program_dish_automatic_konv_schweinekotelettbratenmitknochen": "Gerecht: Varkenskotelettenbraad met bot",
+          "cooking_oven_program_dish_automatic_konv_schweinelendenbraten": "Gerecht: Varkenshaas",
+          "cooking_oven_program_dish_automatic_konv_schweinerollbraten": "Gerecht: Varkensrollade",
+          "cooking_oven_program_dish_automatic_konv_skandinavischerweihnachtsschinken": "Gerecht: Scandinavische kerstham",
+          "cooking_oven_program_dish_automatic_konv_wildschweinbraten": "Gerecht: Everzwijn, deel",
+          "cooking_oven_program_dish_automatic_microwave_aufbackbroetchenoderbaguette": "Gerecht: Afgebakbroodjes of baguette",
+          "cooking_oven_program_dish_automatic_microwave_auflaufpikantfrischgegartezutaten": "Gerecht: Vers hartig gekookte ingrediënten (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_auflaufsuessfrisch": "Gerecht: Ovenschotel, zoet, vers",
+          "cooking_oven_program_dish_automatic_microwave_backofenkartoffelnganz": "Gerecht: Hele ovenaardappelen",
+          "cooking_oven_program_dish_automatic_microwave_basmatireis": "Gerecht: Basmatirijst",
+          "cooking_oven_program_dish_automatic_microwave_broetchenauftauen": "Gerecht: Ontdooien van broodjes",
+          "cooking_oven_program_dish_automatic_microwave_cannelloni": "Gerecht: Cannelloni (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_couscous": "Gerecht: Couscous",
+          "cooking_oven_program_dish_automatic_microwave_fischganzauftauen": "Gerecht: Ontdooien van vis",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletauftauen": "Gerecht: Ontdooien van visfilet",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletduensten": "Gerecht: Stomen van visfilet",
+          "cooking_oven_program_dish_automatic_microwave_fischstaebchen": "Gerecht: Vissticks",
+          "cooking_oven_program_dish_automatic_microwave_fleischauftauen": "Gerecht: Vlees ontdooien",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelganzauftauen": "Gerecht: Ontdooien van gevogelte, heel",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelteileauftauen": "Gerecht: Ontdooien van gevogelte, delen",
+          "cooking_oven_program_dish_automatic_microwave_gemuesefrisch": "Gerecht: Groenten, vers",
+          "cooking_oven_program_dish_automatic_microwave_gemuesegefroren": "Gerecht: Groenten, diepvries",
+          "cooking_oven_program_dish_automatic_microwave_graupen": "Gerecht: Gierst",
+          "cooking_oven_program_dish_automatic_microwave_gruenkerngeschrotet": "Gerecht: Groenteschotel",
+          "cooking_oven_program_dish_automatic_microwave_hackbratenausfrischemhackfleisch": "Gerecht: Gehaktbrood van vers gehakt",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenhalbiert": "Gerecht: Kip, half",
+          "cooking_oven_program_dish_automatic_microwave_haehnchensticksnuggets": "Gerecht: Kip goujons, nuggets",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenungefuellt": "Gerecht: Kip, niet gevuld",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenteile": "Gerecht: Kippenstukken",
+          "cooking_oven_program_dish_automatic_microwave_hirse": "Gerecht: Gierst",
+          "cooking_oven_program_dish_automatic_microwave_kartoffelgratinrohezutaten4cmhoch": "Gerecht: Aardappelgratin",
+          "cooking_oven_program_dish_automatic_microwave_kartoffeltaschengefuellt": "Gerecht: Aardappelkroketten, gevuld",
+          "cooking_oven_program_dish_automatic_microwave_kroketten": "Gerecht: Kroketten",
+          "cooking_oven_program_dish_automatic_microwave_kuchensaftigauftauen": "Gerecht: Ontdooien van cake, vochtig",
+          "cooking_oven_program_dish_automatic_microwave_kuchentrockenauftauen": "Gerecht: Ontdooien van cake, droog",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochendurchgegart": "Gerecht: Lamsbout, uitgebeend, well-done",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochenmedium": "Gerecht: Lamsbout, uitgebeend, medium",
+          "cooking_oven_program_dish_automatic_microwave_langkornreis": "Gerecht: Langkorrelige rijst",
+          "cooking_oven_program_dish_automatic_microwave_lasagne": "Gerecht: Diepvries lasagne (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_minipizzen": "Gerecht: Mini pizza’s",
+          "cooking_oven_program_dish_automatic_microwave_mischbrotauftauen": "Gerecht: Ontdooien van meergranenbrood",
+          "cooking_oven_program_dish_automatic_microwave_naturreis": "Gerecht: Zilvervliesrijst",
+          "cooking_oven_program_dish_automatic_microwave_parboiledreis": "Gerecht: Voorgekookte rijst",
+          "cooking_oven_program_dish_automatic_microwave_pellkartoffeln": "Gerecht: Gekookte aardappelen in de schil",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitdickemboden1stueck": "Gerecht: Pizza, één, dikke bodem",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitduennemboden1stueck": "Gerecht: Pizza, één, dunne bodem",
+          "cooking_oven_program_dish_automatic_microwave_polenta": "Gerecht: Polenta",
+          "cooking_oven_program_dish_automatic_microwave_pommesfrites": "Gerecht: Patat",
+          "cooking_oven_program_dish_automatic_microwave_putenbrust": "Gerecht: Kalkoenborst",
+          "cooking_oven_program_dish_automatic_microwave_risotto": "Gerecht: Risotto",
+          "cooking_oven_program_dish_automatic_microwave_roastbeefmedium": "Gerecht: Biefstuk, medium",
+          "cooking_oven_program_dish_automatic_microwave_salzkartoffeln": "Gerecht: Gekookte aardappelen",
+          "cooking_oven_program_dish_automatic_microwave_schweinenackenbratenohneknochen": "Gerecht: Varkensnekbout, uitgebeend",
+          "cooking_oven_program_dish_automatic_microwave_tintenfischringepaniert": "Gerecht: Inktvisringen",
+          "cooking_oven_program_dish_automatic_microwave_vollkornbrotauftauen": "Gerecht: Ontdooien van volkorenbrood",
+          "cooking_oven_program_dish_automatic_microwave_weissbrotauftauen": "Gerecht: Ontdooien van witbrood",
+          "cooking_oven_program_dish_automatic_microwave_zartweizen": "Gerecht: Tarwebrood",
+          "cooking_oven_program_dish_recommendation_konv_aufbackbroetchenoderbaguette": "Gerecht: Afbakroodjes of baquettes opwarmen",
+          "cooking_oven_program_dish_recommendation_konv_baiser": "Gerecht: Baiser",
+          "cooking_oven_program_dish_recommendation_konv_baklava": "Gerecht: Baklava",
+          "cooking_oven_program_dish_recommendation_konv_biskuitrolle": "Gerecht: Biscuitrol",
+          "cooking_oven_program_dish_recommendation_konv_biskuittorte": "Gerecht: Biscuitgebak",
+          "cooking_oven_program_dish_recommendation_konv_blaetterteiggebaeck": "Gerecht: Bladerdeeg",
+          "cooking_oven_program_dish_recommendation_konv_boerek": "Gerecht: Börek",
+          "cooking_oven_program_dish_recommendation_konv_brandteiggebaeck": "Gerecht: Soezendeeg",
+          "cooking_oven_program_dish_recommendation_konv_brezelnteiglinge": "Gerecht: Pretzels, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_broetchenfrisch": "Gerecht: Broodjes, vers",
+          "cooking_oven_program_dish_recommendation_konv_broetchensuessfrisch": "Gerecht: Broodjes, vers, zoet",
+          "cooking_oven_program_dish_recommendation_konv_ciabatta": "Gerecht: Ciabatta",
+          "cooking_oven_program_dish_recommendation_konv_croissantsteiglinge": "Gerecht: Croissants",
+          "cooking_oven_program_dish_recommendation_konv_empanada": "Gerecht: Empanada",
+          "cooking_oven_program_dish_recommendation_konv_entegefuellt": "Gerecht: Eend, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_entenbrust": "Gerecht: Eendeborst",
+          "cooking_oven_program_dish_recommendation_konv_fischfiletueberbacken": "Gerecht: Visfilet gegratineerd",
+          "cooking_oven_program_dish_recommendation_konv_fladenbrot": "Gerecht: Platbrood",
+          "cooking_oven_program_dish_recommendation_konv_flammkuchen": "Gerecht: Tarte flambée",
+          "cooking_oven_program_dish_recommendation_konv_gansgefuellt": "Gerecht: Gans, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegefuellt": "Gerecht: Groenten, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegratinieren": "Gerecht: Groenten, gratineren",
+          "cooking_oven_program_dish_recommendation_konv_haehnchengefuellt": "Gerecht: Kip, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_hefegugelhupf": "Gerecht: Gisttulband",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmitsaftigembelag": "Gerecht: Gistcake met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmittrockenembelag": "Gerecht: Gistcake met droge topping",
+          "cooking_oven_program_dish_recommendation_konv_hefeteiggebaeck": "Gerecht: Gistgebak",
+          "cooking_oven_program_dish_recommendation_konv_hefezopfhefekranz": "Gerecht: Gevlochten ring op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_kalbsbrustgefuellt": "Gerecht: Kalfsborst, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_kalbsruecken": "Gerecht: Kalfszadel",
+          "cooking_oven_program_dish_recommendation_konv_kartoffelroesti": "Gerecht: Aardappel rösti",
+          "cooking_oven_program_dish_recommendation_konv_makronen": "Gerecht: Macarons",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigbodenblindbacken": "Gerecht: Blind bakken van een kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteiggebaeck": "Gerecht: Kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigkuchenmitsaftigembelag": "Gerecht: Kruimeldeeg cakes met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_muffins": "Gerecht: Muffins",
+          "cooking_oven_program_dish_recommendation_konv_obstoderquarktortemitmuerbeteigboden": "Gerecht: Fruittaar of cheesecake met kruimeldeeg",
+          "cooking_oven_program_dish_recommendation_konv_piroggen": "Gerecht: Pirozhki",
+          "cooking_oven_program_dish_recommendation_konv_pizzabaguette": "Gerecht: Pizza, baguette, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischaufbackblech": "Gerecht: Pizza op een bakplaat, vers",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischduennerbodeninpizzaform": "Gerecht: Pizza op eem pizzaplaat, dunne bodem, vers",
+          "cooking_oven_program_dish_recommendation_konv_pizzagekuehlt": "Gerecht: Pizza, gekoeld",
+          "cooking_oven_program_dish_recommendation_konv_plaetzchen": "Gerecht: Koekjes",
+          "cooking_oven_program_dish_recommendation_konv_plundergebaeck": "Gerecht: Deens gebak",
+          "cooking_oven_program_dish_recommendation_konv_potatoewedges": "Gerecht: Aardappelpartjes, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_putenrollbraten": "Gerecht: Kalkoenrollade",
+          "cooking_oven_program_dish_recommendation_konv_quichetarte": "Gerecht: Quiche, hartige taarten",
+          "cooking_oven_program_dish_recommendation_konv_rehrueckenmitknochen": "Gerecht: Hertenbout met bot",
+          "cooking_oven_program_dish_recommendation_konv_rinderfiletmedium": "Gerecht: Runderfilet medium",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmitsaftigembelag": "Gerecht: Biscuitgebak met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmittrockenembelag": "Gerecht: Biscuitgebak met droge topping",
+          "cooking_oven_program_dish_recommendation_konv_schweinshaxe": "Gerecht: Varkensschenkel",
+          "cooking_oven_program_dish_recommendation_konv_souffleinportionsformen": "Gerecht: Soufflé",
+          "cooking_oven_program_dish_recommendation_konv_spritzgebaeck": "Gerecht: Spritsgebak",
+          "cooking_oven_program_dish_recommendation_konv_strudelsuess": "Gerecht: Strudel, zoet",
+          "cooking_oven_program_dish_recommendation_konv_tarte": "Gerecht: Taartje",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausmuerbeteig": "Gerecht: Kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausruehrteig": "Gerecht: Biscuitdeeg bodem",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotaufbackblech": "Gerecht: Witbrood op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotinkastenform": "Gerecht: Witbrood in een bakblik",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotaufbackblech": "Gerecht: Meergranen volkorenbrood op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotinkastenform": "Gerecht: Meergranen volkorenbrood in een bakblik",
+          "cooking_oven_program_dish_recommendation_microwave_gansungefuellt": "Gerecht: Gans, ongevuld",
+          "cooking_oven_program_dish_recommendation_microwave_gebackenekartoffelnhalbiert": "Gerecht: Gebakken aardappelen, half",
+          "cooking_oven_program_dish_recommendation_microwave_haehnchenbrust": "Gerecht: Kipfilet",
+          "cooking_oven_program_dish_recommendation_microwave_lasagnefrisch": "Gerecht: Verse lasagne",
+          "cooking_oven_program_dish_recommendation_microwave_obstkuchenausruehrteigfein": "Gerecht: Fruittaartje van biscuitdeeg",
+          "cooking_oven_program_dish_recommendation_microwave_ruehrkucheneinfach": "Gerecht: Biscuitgebak",
+          "cooking_oven_program_dish_subsequentcooking": "Gerecht: Nagaren",
+          "cooking_hob_program_dish_fryingsensor_aubergines": "Gerecht: Aubergines",
+          "cooking_hob_program_dish_fryingsensor_bacon": "Gerecht: Spek",
+          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Gerecht: Bechamelsaus",
+          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Gerecht: Camembert diepvries",
+          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Gerecht: Kaassaus",
+          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Gerecht: Kipnuggets diepvries",
+          "cooking_hob_program_dish_fryingsensor_chop": "Gerecht: Kotelet",
+          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Gerecht: Cordon bleu",
+          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Gerecht: Cordon bleu diepvries",
+          "cooking_hob_program_dish_fryingsensor_courgettes": "Gerecht: Courgette",
+          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Gerecht: Gedroogde kant-en-klaar maaltijden",
+          "cooking_hob_program_dish_fryingsensor_escalope": "Gerecht: Kalfsschnitzel",
+          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Gerecht: Kalfsschnitzel gepaneerd",
+          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Gerecht: Kalfsschnitzel diepvries",
+          "cooking_hob_program_dish_fryingsensor_fillet": "Gerecht: Filet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Gerecht: Visfilet gepaneerd",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Gerecht: Visfilet gepaneerd diepvries",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Gerecht: Visfilet ongepaneerd",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Gerecht: Visfilet ongepaneerd diepvries",
+          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Gerecht: Vissticks diepvries",
+          "cooking_hob_program_dish_fryingsensor_frenchfriesmadefromrawpotatoes": "Gerecht: Gebakken aardappels gemaakt van ongekookte aardappelen",
+          "cooking_hob_program_dish_fryingsensor_frenchtoast": "Gerecht: Wentelteefjes",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinbutter": "Gerecht: In boter gebakken eieren",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinoil": "Gerecht: In olie gebakken eieren",
+          "cooking_hob_program_dish_fryingsensor_fryingcamembert": "Gerecht: Bakken van camembert",
+          "cooking_hob_program_dish_fryingsensor_fryingcroutons": "Gerecht: Bakken van croûtons",
+          "cooking_hob_program_dish_fryingsensor_fryingfishwhole": "Gerecht: Bakken van vis, hele",
+          "cooking_hob_program_dish_fryingsensor_fryingfrenchfriesfrozen": "Gerecht: Bakken van patat (diepvries)",
+          "cooking_hob_program_dish_fryingsensor_fryinggreenasparagus": "Gerecht: Bakken van groene asperges",
+          "cooking_hob_program_dish_fryingsensor_fryingmeatballs": "Gerecht: Bakken van gehaktballen",
+          "cooking_hob_program_dish_fryingsensor_fryingpotatoesboiledintheirskin": "Gerecht: Bakken van aardappels in de schil",
+          "cooking_hob_program_dish_fryingsensor_fryingpreboiledsausages": "Gerecht: Bakken van voorgekookte worstjes",
+          "cooking_hob_program_dish_fryingsensor_fryingrawsausages": "Gerecht: Bakkenn van rauwe worstjes",
+          "cooking_hob_program_dish_fryingsensor_fryingrissoles": "Gerecht: Bakken van rissoles",
+          "cooking_hob_program_dish_fryingsensor_garlic": "Gerecht: Knoflook",
+          "cooking_hob_program_dish_fryingsensor_glazedonions": "Gerecht: Gekarameliseerde uien",
+          "cooking_hob_program_dish_fryingsensor_glazedpotatoes": "Gerecht: Geglaceerde aardappelen",
+          "cooking_hob_program_dish_fryingsensor_glazedvegetables": "Gerecht: Geglaceerde groenten",
+          "cooking_hob_program_dish_fryingsensor_gyros": "Gerecht: Gyros",
+          "cooking_hob_program_dish_fryingsensor_gyrosfrozen": "Gerecht: Gyros diepvries",
+          "cooking_hob_program_dish_fryingsensor_hamburgers": "Gerecht: Hamburgers",
+          "cooking_hob_program_dish_fryingsensor_kebabfrozen": "Gerecht: Kebab diepvries",
+          "cooking_hob_program_dish_fryingsensor_meatloaf": "Gerecht: Gehaktbrood",
+          "cooking_hob_program_dish_fryingsensor_mincedmeat": "Gerecht: Gehakt",
+          "cooking_hob_program_dish_fryingsensor_mushrooms": "Gerecht: Champignons",
+          "cooking_hob_program_dish_fryingsensor_omelettes": "Gerecht: Omeletten",
+          "cooking_hob_program_dish_fryingsensor_pancake": "Gerecht: Pannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_pancakes": "Gerecht: Pannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_peppers": "Gerecht: Paprika's",
+          "cooking_hob_program_dish_fryingsensor_potatopancakes": "Gerecht: Aardappelpannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_poultrybreast": "Gerecht: Gevogelte filet",
+          "cooking_hob_program_dish_fryingsensor_poultrybreastfrozen": "Gerecht: Gevogelte-filet diepvries",
+          "cooking_hob_program_dish_fryingsensor_prawns": "Gerecht: Garnalen",
+          "cooking_hob_program_dish_fryingsensor_reducingsauces": "Gerecht: Inkoken van sauzen",
+          "cooking_hob_program_dish_fryingsensor_sauteingvegetablesinoil": "Gerecht: Sauteren van groenten in olie",
+          "cooking_hob_program_dish_fryingsensor_scampi": "Gerecht: Scampi",
+          "cooking_hob_program_dish_fryingsensor_scrambledeggs": "Gerecht: Roerei",
+          "cooking_hob_program_dish_fryingsensor_springrollsfrozen": "Gerecht: Loempia's diepvries",
+          "cooking_hob_program_dish_fryingsensor_steaksmedium": "Gerecht: Steaks medium",
+          "cooking_hob_program_dish_fryingsensor_steaksrare": "Gerecht: Steaks rare",
+          "cooking_hob_program_dish_fryingsensor_steakswelldone": "Gerecht: Steaks well-done",
+          "cooking_hob_program_dish_fryingsensor_stirfriesfrozen": "Gerecht: Roerbakgerechten diepvries",
+          "cooking_hob_program_dish_fryingsensor_stripsofmeat": "Gerecht: Reepjes vlees",
+          "cooking_hob_program_dish_fryingsensor_sweetsauces": "Gerecht: Zoete saus",
+          "cooking_hob_program_dish_fryingsensor_swissroesti": "Gerecht: Zwitserse rösti",
+          "cooking_hob_program_dish_fryingsensor_toastingalmonds": "Gerecht: Roosteren van amandelen",
+          "cooking_hob_program_dish_fryingsensor_toastingnuts": "Gerecht: Roosteren van noten",
+          "cooking_hob_program_dish_fryingsensor_toastingpinenuts": "Gerecht: Roosteren van pijnboompitten",
+          "cooking_hob_program_dish_fryingsensor_tomatosaucewithvegetables": "Gerecht: Tomatensaus met groenten",
+          "cooking_hob_program_dish_fryingsensor_vienneseschnitzel": "Gerecht: Wiener schnitzel",
+          "cooking_hob_program_fryingsensormode": "Handmatig: Baksensor",
+          "cooking_hob_program_powerlevelmode": "Handmatig: Vermogensinstelling",
+          "cooking_hob_program_powermovemode": "Handmatig: PowerMove-modus",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Automatisch 30°C",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Automatisch 40°C",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Katoen",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Donkere was",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Gordijnen",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Fijne Was/Zijde",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Fijne Was/Zijde (mp)",
+          "laundrycare_washer_program_downduvet_down_down": "Ondergoed",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelreiniging",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelreiniging 70°C",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Kreukherstellend",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40-60°C",
+          "laundrycare_washer_program_mix_mix_mix": "Snel + Mix",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Spoelen",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Hygiëne",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Overhemden/blouses",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Sportkleding",
+          "laundrycare_washer_program_spin_spin_spindrain": "Centrifugeren/afpompen",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Stomen/Kreukvrij",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Supersnel 15'/30'",
+          "laundrycare_washer_program_towels_towels_towels": "Handdoeken",
+          "laundrycare_washer_program_wool_wool_wool": "Wol",
+          "laundrycare_common_program_juststart": "Direct starten",
+          "laundrycare_common_program_memory1": "Opgeslagen 1",
+          "laundrycare_common_program_memory2": "Opgeslagen 2",
+          "laundrycare_common_program_memory3": "Opgeslagen 3",
+          "laundrycare_common_program_memory4": "Opgeslagen 4",
+          "laundrycare_common_program_memory5": "Opgeslagen 5",
+          "laundrycare_common_program_memory6": "Opgeslagen 6",
+          "laundrycare_common_program_memory7": "Opgeslagen 7",
+          "laundrycare_common_program_memory8": "Opgeslagen 8",
+          "laundrycare_dryer_program_blankets": "Dekens",
+          "laundrycare_dryer_program_businessshirts": "Overhemden/blouses",
+          "laundrycare_dryer_program_businessshirts_easyiron": "Overhemden/blouses kreukherstellend",
+          "laundrycare_dryer_program_connecteddry": "intelligentDry",
+          "laundrycare_dryer_program_cotton": "Katoen",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_delicates": "Delicates",
+          "laundrycare_dryer_program_downfeathers": "Downfeathers",
+          "laundrycare_dryer_program_hygiene": "Hygiëne",
+          "laundrycare_dryer_program_inbasket_woolbasket": "Wol in de mand",
+          "laundrycare_dryer_program_maintenance_depthcare": "Machinereiniging Uitgebreid",
+          "laundrycare_dryer_program_maintenance_quickcare": "Machinereiniging Snel",
+          "laundrycare_dryer_program_mix": "Mix",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Hoofdkussen",
+          "laundrycare_dryer_program_super40": "Extra snel 40'",
+          "laundrycare_dryer_program_synthetic": "Syntetisch",
+          "laundrycare_dryer_program_timecold": "Tijdprogr. koud",
+          "laundrycare_dryer_program_timewarm": "Tijdprogr. warm",
+          "laundrycare_dryer_program_towels": "Handdoeken",
+          "laundrycare_dryer_program_woolfinish": "Wol Finish",
+          "laundrycare_washerdryer_program_towels_towels": "Handdoeken",
+          "laundrycare_washerdryer_program_cotton_cotton": "Katoen",
+          "laundrycare_washerdryer_program_mix_mix": "Mix",
+          "laundrycare_washerdryer_program_wool_wool": "Wol",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Sportkleding",
+          "laundrycare_washerdryer_program_washanddry_60": "Wassen & Drogen 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Ondergoed",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Koffie verkeerd",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Koffie",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Heet Water",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Melkschuim",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Warme Melk",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Koffie XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Black Eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café Con Leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Dead Eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat White",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Redeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Apparaat Uit Spoelen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Apparaat Aan Spoelen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Calc & Clean",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Schoonmaken",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Clean Brewing Unit",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Clean Brewing Unit (detailed)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Clean Beverage Dispenser",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Ontkalken",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Vriesbeveiliging",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Verwijder Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Vervang Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Spoel Melksysteem",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Spoel Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Speciale Spoeling"
         }
       },
       "sensor_rinse_aid": {
         "name": "Glansspoelmiddel",
         "state": {
           "empty": "Leeg",
-          "nearly_empty": "Bijna Leeg",
+          "nearly_empty": "Bijna leeg",
           "full": "Vol"
         }
       },
@@ -136,7 +684,7 @@
         "name": "Zout",
         "state": {
           "empty": "Leeg",
-          "nearly_empty": "Bijna Leeg",
+          "nearly_empty": "Bijna leeg",
           "full": "Vol"
         }
       },
@@ -144,16 +692,27 @@
         "name": "Waterreservoir",
         "state": {
           "empty": "Leeg",
-          "nearly_empty": "Bijna Leeg",
-          "not_inserted": "Niet Geplaatst",
+          "nearly_empty": "Bijna leeg",
+          "not_inserted": "Niet geplaatst",
+          "full": "Vol"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Lekbakje",
+        "state": {
+          "ok": "OK",
+          "not_inserted": "Niet geplaatst",
           "full": "Vol"
         }
       },
       "sensor_start_in": {
         "name": "Start over"
       },
+      "sensor_finish_in": {
+        "name": "Klaar in"
+      },
       "sensor_count_started": {
-        "name": "Start aantal"
+        "name": "Gestarte programma's"
       },
       "sensor_end_trigger": {
         "name": "Programma afrondingsstatus",
@@ -172,57 +731,418 @@
       },
       "sensor_delayed_shutoff_time": {
         "name": "Vertraagde uitschakeling"
+      },
+      "sensor_power_state": {
+        "name": "Voedingsstatus",
+        "state": {
+          "mainsoff": "Voeding uit",
+          "off": "Uit",
+          "on": "Aan",
+          "standby": "Standby"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Deur",
+        "state": {
+          "open": "Open",
+          "closed": "Gesloten",
+          "locked": "Vergrendeld",
+          "ajar": "Niet correct gesloten"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Was toevoegen",
+        "state": {
+          "impossible": "Niet mogelijk",
+          "possiblepauseprogram": "Mogelijk, pauzeer programma",
+          "possibleopendoor": "Mogelijk, open de deur"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Programmafase",
+        "state": {
+          "nophase": "Geen fase",
+          "prewash": "Voorwas",
+          "intermediatespin": "Tussentijds centrifugeren",
+          "fillingdetergent": "Wasverzachter toevoegen",
+          "detectingload": "Belasting detecteren",
+          "heating": "Opwarmen",
+          "washing": "Wassen",
+          "cooldown": "Afkoelen",
+          "rinsingfoam": "Spoelen schuim",
+          "rinsing": "Spoelen",
+          "rinsingaquasensor": "Spoelen vochtsensor",
+          "rinseonly": "Alleen spoelen",
+          "waterproofing": "Water proofing",
+          "rinsingsoftener": "Spoelen wasverzachter",
+          "holdafterrinse": "Wachten na het spoelen",
+          "pumping": "Pompen",
+          "spinningfinal": "Centrifugeren",
+          "lessironing": "Strijkdroog",
+          "fluffing": "Stuiven",
+          "soaking": "Natmaken",
+          "hygienicsteamfogging": "Hygienic Steam Fogging",
+          "guardingoxy": "Guarding Oxy",
+          "generatingozone": "Ozone genereren",
+          "degradingozone": "Ozone degenereren",
+          "drying": "Drogen",
+          "coolingdown": "Afkoelen",
+          "additionalcoolingdown": "Aanvullend afkoelen",
+          "guardingwrinkle": "Guarding Wrinkle",
+          "detectingtextile": "Textiel detecteren",
+          "detectingsoil": "Natheid detecteren",
+          "disinfecting": "Disinfecteren",
+          "lowtemperaturehygiene": "Lage temperatuur hygiëne",
+          "steamingactive": "Stomen actief",
+          "irondryreached": "Strijkdroog bereikt",
+          "cupboarddryreached": "Kastdroog bedreikt",
+          "cupboarddryplusreached": "KastdroogPlus bereikt",
+          "cleaningheatexchanger": "Reinigen warmtewisselaar",
+          "slightlydampreached": "Lichtvochtig bereikt",
+          "extradryreached": "Extra droog bereikt",
+          "gentlydryreached": "Geleidelijk droog bereikt",
+          "quickcare": "QuickCare",
+          "depthcarephase1": "Depth Care phase 1",
+          "depthcarephase2": "Depth Care phase 2",
+          "coldrefreshing": "Koed verfrissen",
+          "steaming": "Stomen",
+          "foam": "Schuim",
+          "testprogramdummytextfinalspeedreached": "Testprogramma dummy text final speed reached",
+          "rinsingfoamf21": "Schuimspoeling 21'",
+          "handsoak": "Handwassen",
+          "vacant": "Leeg",
+          "spinning": "Centrifugeren",
+          "displayspinabortnospin": "Display Spin Abort no Spin",
+          "multiplesoak": "Meerdere wassen",
+          "laundryrefreshing": "Was verfrissen",
+          "reload": "Herladen",
+          "hotmoistheatingwetting": "Hete bevochtiging",
+          "hotmoistheatingheating": "Hete bevochtiging opwarmen",
+          "hotmoistheatingwashing": "Hete bevochtiging wassen",
+          "moistureremoval": "Vocht verwijderen",
+          "selfcleaning": "Zelfreiniging",
+          "hygiene": "Hygiëne",
+          "smartsoak": "Smart weken",
+          "soakpause": "Weken gepauzeerd",
+          "soakfinished": "Weken afgerond",
+          "anyphase": "Willekeurige fase"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Afgeronde programma's"
+      },
+      "sensor_flex_start": {
+        "name": "Flex start",
+        "state": {
+          "disabled": "Uitgeschakeld",
+          "enabled": "Ingeschakeld",
+          "pending": "Wachten",
+          "scheduled": "Uitgesteld",
+          "started": "Gestart",
+          "finished": "Afgerond"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Process Phase",
+        "state": {
+          "steamactive": "Stomen actief",
+          "progstarted": "Programma gestart",
+          "drying": "Drogen",
+          "irondryreached": "Strijkdroog bereikt",
+          "cupboarddryreached": "Kastdroog bereikt",
+          "cubboarddryplusreached": "Kastdroog+ bereikt",
+          "cooling": "Afkoelen",
+          "finishedanticrease": "Anti-kreuk afgrond",
+          "heatexchangercleaning": "Reinigen warmtewisselaar",
+          "slightlydampreached": "Lichtvochtig bereikt",
+          "extradryreached": "Extra droog bereikt",
+          "quickcare": "QuickCare",
+          "depthcarephase1": "Depth Care Phase 1",
+          "depthcarephase2": "Depth Care Phase 2",
+          "spare": "Reserve"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Omgevingstemperatuur"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Centrifugetoerental",
+        "state": {
+          "off": "Uit",
+          "rpm400": "400 tpm",
+          "rpm600": "600 tpm",
+          "rpm700": "700 tpm",
+          "rpm800": "800 tpm",
+          "rpm900": "900 tpm",
+          "rpm1000": "1000 tpm",
+          "rpm1200": "1200 tpm",
+          "rpm1400": "1400 tpm",
+          "rpm1500": "1500 tpm",
+          "rpm1600": "1600 tpm",
+          "rinsehold": "Spoelen vasthouden",
+          "auto": "Auto"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Geschatte resterende tijd"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Watertank {group_name}",
+        "state": {
+          "ok": "OK",
+          "empty": "Leeg",
+          "unplugged": "Niet geplaatst"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Huidige temperatuur {group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "Voortgang opwarmen"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "Wifi Signaalsterkte"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Verzadiging vetfilter"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Verzadiging koolstoffilter"
+      },
+      "sensor_hob_zone_state": {
+        "name": "Status zone {group_name}",
+        "state": {
+          "notselectable": "Niet selecteerbaar",
+          "off": "Uit",
+          "active": "Actief",
+          "residuelheat": "Restwarmte"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Bedrijfsstatus zone {group_name}",
+        "state": {
+          "inactive": "Inactief",
+          "ready": "Paraat",
+          "delayedstart": "Uitgestelde start",
+          "run": "Loopt",
+          "pause": "Gepauzeerd",
+          "actionrequired": "Aandacht benodigd",
+          "finished": "Afgerond",
+          "error": "Fout",
+          "aborting": "Afbreken"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Vermogensinstelling zone {group_name}",
+        "state": {
+          "off": "Uit",
+          "keepwarm": "Warmhouden",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Boost 1",
+          "boost2": "Boost 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Temperatuurinstelling zone {group_name}",
+        "state": {
+          "off": "Uit",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Huidige temperatuur zone {group_name}"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Voortgang opwarming zone {group_name}"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Tijdsduur zone {group_name}"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Gelopen programmatijd zone {group_name}"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Resterende programmatijd zone {group_name}"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Programmavoortgang zone {group_name}"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Aantal Ristretto Espresso"
+      },
+      "sensor_count_coffee": {
+        "name": "Aantal Koffie"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Aantal Koffie & Melk"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Aantal Melkschuim"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Aantal Warme Melk"
+      },
+      "sensor_count_hot_water": {
+        "name": "Aantal Heet water"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Aantal Heet water kopjes"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Aantal Poederkoffie"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "Aantal Calc & Clean benodigd"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "Machinereiniging benodigd"
+      },
+      "sensor_countdown_descaling": {
+        "name": "Ontkalking benodigd"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "Waterfilter vervangen"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "Programmafase",
+        "state": {
+          "none": "Geen",
+          "beverageaborting": "Drank annuleren",
+          "grinding": "Bonen malen",
+          "brewingunitmovesup": "Bereiding voorbereiden",
+          "coffeebrewing": "Koffie bereiden",
+          "brewingunitmovesdown": "Bereiding afronden",
+          "milkfroth": "Melk opschuimen",
+          "cleaningmilksystem": "Reinigen melksysteem",
+          "hotwaterdispensing": "Heet water toedienen",
+          "cleaningmode": "Schoonmaak modus",
+          "descalephase": "Ontkalking",
+          "rinsephase": "Spoelen",
+          "cleanphase": "Reinigen",
+          "warmmilk": "Melk opwarmen",
+          "frostprotection": "Vriesbeveiliging",
+          "specialrinsing": "Speciale spoeling",
+          "waterfilteractivation": "Waterfilter activeren",
+          "lattemacpause": "Latte Macchiato Pauzeren",
+          "startphase": "Opstarten",
+          "skipphase": "Stap overslaan",
+          "preliminary": "Voorbereidende stap",
+          "autodescalephase": "Auto ontkalking",
+          "autocleanphase": "Auto reiniging",
+          "drainingdescalephase": "Leeglaten na ontkalking",
+          "milkdescalephase": "Ontkalken melksysteem",
+          "coldbrew": "Koud zetten",
+          "dripbrew": "Druppelgewijs zetten",
+          "emptypowdersources": "Leegmaken poederbronnen",
+          "roundrobinflush": "Spoelsysteem",
+          "initializenewcartridge": "Initiëren Cartridge"
+        }
       }
     },
     "select": {
       "select_drying_assistant_all_programs": {
-        "name": "Drying Assistant All Programs",
+        "name": "Automatische deuropening",
         "state": {
           "off": "Uit",
-          "allprograms": "Alle Programma's",
+          "allprograms": "Alle programma's",
           "ecoasdefault": "Eco 50"
         }
       },
       "select_hot_water": {
-        "name": "Watertemperatuur",
+        "name": "Wateraansluiting",
         "state": {
           "coldwater": "Koud water",
           "hotwater": "Heet water"
         }
       },
       "select_rinse_aid": {
-        "name": "Glansspoelmiddel"
+        "name": "Glansspoelmiddelinstelling",
+        "state": {
+          "off": "Niveau 0",
+          "r01": "Niveau 1",
+          "r02": "Niveau 2",
+          "r03": "Niveau 3",
+          "r04": "Niveau 4",
+          "r05": "Niveau 5",
+          "r06": "Niveau 6"
+        }
       },
       "select_sound_level_signal": {
-        "name": "Geluidsniveau signaal",
+        "name": "Geluidssignaal volume",
         "state": {
           "high": "Hoog",
-          "low": "Laag",
+          "low": "Zacht",
           "medium": "Gemiddeld",
           "off": "Uit"
         }
       },
       "select_water_hardness": {
-        "name": "Waterhardheid"
+        "name": "Waterhardheid",
+        "state": {
+          "h00": "°E 0-8 zacht (0-1.1 mmol/l)",
+          "h01": "°E 9-10 zacht (1.2-1.4 mmol/l)",
+          "h02": "°E 11-12 gemiddeld (1.5-1.8 mmol/l)",
+          "h03": "°E 13-15 gemiddeld (1.9-2.1 mmol/l)",
+          "h04": "°E 16-20 gemiddeld (2.2-2.9 mmol/l)",
+          "h05": "°E 21-26 hard (3.0-3.7 mmol/l)",
+          "h06": "°E 27-38 hard (3.8-5.4 mmol/l)",
+          "h07": "°E 39-62 hard (5.5-8.9 mmol/l)"
+        }
       },
       "select_remote_control_level": {
-        "name": "Bediening op afstand",
+        "name": "Niveau van besturen op afstand",
         "state": {
-          "monitoring": "Uit",
-          "manualremotestart": "Handmatige Start op afstand",
-          "permanentremotestart": "Permanente Start op afstand"
+          "monitoring": "Monitoren",
+          "manualremotestart": "Handmatige starten op afstand",
+          "permanentremotestart": "Altijd starten op afstand"
         }
       },
       "select_program": {
         "name": "Geselecteerd programma",
         "state": {
-          "Dishcare_Dishwasher_Program_Intensiv70": "Intensief 70",
-          "Dishcare_Dishwasher_Program_Auto2": "Auto 45-65",
-          "Dishcare_Dishwasher_Program_Eco50": "Eco 50",
-          "Dishcare_Dishwasher_Program_Quick45": "Snel 45",
-          "Dishcare_Dishwasher_Program_PreRinse": "Spoelen",
-          "Dishcare_Dishwasher_Program_Quick65": "Snel 65",
-          "Dishcare_Dishwasher_Program_MachineCare": "Machinereiniging",
+          "dishcare_dishwasher_program_intensiv70": "Intensief 70°",
+          "dishcare_dishwasher_program_auto2": "Auto 45-65°",
+          "dishcare_dishwasher_program_eco50": "Eco 50°",
+          "dishcare_dishwasher_program_quick45": "Speed 45°",
+          "dishcare_dishwasher_program_prerinse": "Voorspoelen",
+          "dishcare_dishwasher_program_quick65": "Speed 65°",
+          "dishcare_dishwasher_program_machinecare": "Machinereiniging",
+          "dishcare_dishwasher_program_glas40": "Glas 40°",
+          "dishcare_dishwasher_program_glasshine": "brilliantShine",
+          "dishcare_dishwasher_program_intensivpower": "Intensief+ 70°",
+          "dishcare_dishwasher_program_kurz60": "Speed 60°",
+          "dishcare_dishwasher_program_learningdishwasher": "Intelligent",
+          "dishcare_dishwasher_program_maxefficient": "Max Efficient",
+          "dishcare_dishwasher_program_mixedload": "Mix belading",
+          "dishcare_dishwasher_program_nightwash": "Stil 50°",
+          "dishcare_dishwasher_program_quickd": "Snel Was & Droog",
+          "dishcare_dishwasher_program_super60": "Super 60°",
           "favorite_001": "Favoriet 1",
           "favorite_002": "Favoriet 2",
           "favorite_003": "Favoriet 3",
@@ -232,33 +1152,924 @@
           "favorite_007": "Favoriet 7",
           "favorite_008": "Favoriet 8",
           "favorite_009": "Favoriet 9",
-          "favorite_010": "Favoriet 10"
+          "favorite_010": "Favoriet 10",
+          "cooking_oven_program_heatingmode_bottomheating": "Verw.wijze: Onderverwarming",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "Verw.wijze: CoolStart functie",
+          "cooking_oven_program_heatingmode_grilllargearea": "Verw.wijze: Grill, groot gebied",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Verw.wijze: Grill, klein gebied",
+          "cooking_oven_program_heatingmode_hotair": "Verw.wijze: 4D Hetelucht",
+          "cooking_oven_program_heatingmode_hotaireco": "Verw.wijze: Hetelucht eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Verw.wijze: Hetelucht grillen",
+          "cooking_oven_program_heatingmode_keepwarm": "Verw.wijze: Warmhouden",
+          "cooking_oven_program_heatingmode_pizzasetting": "Verw.wijze: Pizzastand",
+          "cooking_oven_program_heatingmode_preheatovenware": "Verw.wijze: Voorverwarmen ovenschalen",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Verw.wijze: Sabbat programma",
+          "cooking_oven_program_heatingmode_slowcook": "Verw.wijze: Langzaam garen",
+          "cooking_oven_program_heatingmode_topbottomheating": "Verw.wijze: Boven/onderverwarming",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Verw.wijze: Boven/onderverwarming eco",
+          "cooking_oven_program_microcombimodes_grilllargearea": "Combi: Grill, groot gebied, met magnetron",
+          "cooking_oven_program_microcombimodes_grillsmallarea": "Combi: Grill, klein gebied, met magnetron",
+          "cooking_oven_program_microcombimodes_hotair": "Combi: 4D Hetelucht met magnetron",
+          "cooking_oven_program_microcombimodes_hotairgrilling": "Combi: Hetelucht grillen met magnetron",
+          "cooking_oven_program_microcombimodes_topbottomheating": "Combi: Boven/onderverwarming met magnetron",
+          "cooking_oven_program_microwave_90watt": "Magnetron: 90 Watt",
+          "cooking_oven_program_microwave_180watt": "Magnetron: 180 Watt",
+          "cooking_oven_program_microwave_360watt": "Magnetron: 360 Watt",
+          "cooking_oven_program_microwave_600watt": "Magnetron: 600 Watt",
+          "cooking_oven_program_microwave_max": "Magnetron: Boost",
+          "cooking_oven_program_cleaning_drying": "Reiniging: Droogfunctie",
+          "cooking_oven_program_cleaning_pyrolysis": "Reiniging: Pyrolyse",
+          "cooking_oven_program_dish_automatic_konv_babyputeungefuellt": "Gerecht: Kleine kalkoen, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitfleisch": "Gerecht: Vleesstoofschotel",
+          "cooking_oven_program_dish_automatic_konv_eintopfmitgemuese": "Gerecht: Groenteschotel",
+          "cooking_oven_program_dish_automatic_konv_enteungefuellt": "Gerecht: Eend, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_fischganz": "Gerecht: Vis, hele",
+          "cooking_oven_program_dish_automatic_konv_gaensebrust": "Gerecht: Ganzeborst",
+          "cooking_oven_program_dish_automatic_konv_gaensekeulen": "Gerecht: Ganzebouten",
+          "cooking_oven_program_dish_automatic_konv_gulasch": "Gerecht: Goulash",
+          "cooking_oven_program_dish_automatic_konv_hirschkeuleohneknochen": "Gerecht: Hertenbout, uitgebeend",
+          "cooking_oven_program_dish_automatic_konv_kalbsossobuco": "Gerecht: Ossobuco",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratendurchwachsen": "Gerecht: Kalfsvlees, doorregen",
+          "cooking_oven_program_dish_automatic_konv_kalbsbratenmager": "Gerecht: Stuk kalfsvlees, mager",
+          "cooking_oven_program_dish_automatic_konv_kalbshaxe": "Gerecht: Kalfsschenkel",
+          "cooking_oven_program_dish_automatic_konv_kaninchenganz": "Gerecht: Konijn, heel",
+          "cooking_oven_program_dish_automatic_konv_lammkeulemitknochendurchgegart": "Gerecht: Lamsbout, well-done, op het bot",
+          "cooking_oven_program_dish_automatic_konv_pavlova": "Gerecht: Pavlova",
+          "cooking_oven_program_dish_automatic_konv_poulardeungefuellt": "Gerecht: Poularde, niet gevuld",
+          "cooking_oven_program_dish_automatic_konv_rehkeuleohneknochen": "Gerecht: Reezadel, uitgebeend",
+          "cooking_oven_program_dish_automatic_konv_rinderrouladen": "Gerecht: Runderrollade",
+          "cooking_oven_program_dish_automatic_konv_rinderschmorbraten": "Gerecht: Runderstoofpot",
+          "cooking_oven_program_dish_automatic_konv_roastbeefenglisch": "Gerecht: Biefstuk, rood",
+          "cooking_oven_program_dish_automatic_konv_schweinebratenmitkrustezbschulter": "Gerecht: Varkensrack met knapperige korst",
+          "cooking_oven_program_dish_automatic_konv_schweinekotelettbratenmitknochen": "Gerecht: Varkenskotelettenbraad met bot",
+          "cooking_oven_program_dish_automatic_konv_schweinelendenbraten": "Gerecht: Varkenshaas",
+          "cooking_oven_program_dish_automatic_konv_schweinerollbraten": "Gerecht: Varkensrollade",
+          "cooking_oven_program_dish_automatic_konv_skandinavischerweihnachtsschinken": "Gerecht: Scandinavische kerstham",
+          "cooking_oven_program_dish_automatic_konv_wildschweinbraten": "Gerecht: Everzwijn, deel",
+          "cooking_oven_program_dish_automatic_microwave_aufbackbroetchenoderbaguette": "Gerecht: Afgebakbroodjes of baguette",
+          "cooking_oven_program_dish_automatic_microwave_auflaufpikantfrischgegartezutaten": "Gerecht: Vers hartig gekookte ingrediënten (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_auflaufsuessfrisch": "Gerecht: Ovenschotel, zoet, vers",
+          "cooking_oven_program_dish_automatic_microwave_backofenkartoffelnganz": "Gerecht: Hele ovenaardappelen",
+          "cooking_oven_program_dish_automatic_microwave_basmatireis": "Gerecht: Basmatirijst",
+          "cooking_oven_program_dish_automatic_microwave_broetchenauftauen": "Gerecht: Ontdooien van broodjes",
+          "cooking_oven_program_dish_automatic_microwave_cannelloni": "Gerecht: Cannelloni (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_couscous": "Gerecht: Couscous",
+          "cooking_oven_program_dish_automatic_microwave_fischganzauftauen": "Gerecht: Ontdooien van vis",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletauftauen": "Gerecht: Ontdooien van visfilet",
+          "cooking_oven_program_dish_automatic_microwave_fischfiletduensten": "Gerecht: Stomen van visfilet",
+          "cooking_oven_program_dish_automatic_microwave_fischstaebchen": "Gerecht: Vissticks",
+          "cooking_oven_program_dish_automatic_microwave_fleischauftauen": "Gerecht: Vlees ontdooien",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelganzauftauen": "Gerecht: Ontdooien van gevogelte, heel",
+          "cooking_oven_program_dish_automatic_microwave_gefluegelteileauftauen": "Gerecht: Ontdooien van gevogelte, delen",
+          "cooking_oven_program_dish_automatic_microwave_gemuesefrisch": "Gerecht: Groenten, vers",
+          "cooking_oven_program_dish_automatic_microwave_gemuesegefroren": "Gerecht: Groenten, diepvries",
+          "cooking_oven_program_dish_automatic_microwave_graupen": "Gerecht: Gierst",
+          "cooking_oven_program_dish_automatic_microwave_gruenkerngeschrotet": "Gerecht: Groenteschotel",
+          "cooking_oven_program_dish_automatic_microwave_hackbratenausfrischemhackfleisch": "Gerecht: Gehaktbrood van vers gehakt",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenhalbiert": "Gerecht: Kip, half",
+          "cooking_oven_program_dish_automatic_microwave_haehnchensticksnuggets": "Gerecht: Kip goujons, nuggets",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenungefuellt": "Gerecht: Kip, niet gevuld",
+          "cooking_oven_program_dish_automatic_microwave_haehnchenteile": "Gerecht: Kippenstukken",
+          "cooking_oven_program_dish_automatic_microwave_hirse": "Gerecht: Gierst",
+          "cooking_oven_program_dish_automatic_microwave_kartoffelgratinrohezutaten4cmhoch": "Gerecht: Aardappelgratin",
+          "cooking_oven_program_dish_automatic_microwave_kartoffeltaschengefuellt": "Gerecht: Aardappelkroketten, gevuld",
+          "cooking_oven_program_dish_automatic_microwave_kroketten": "Gerecht: Kroketten",
+          "cooking_oven_program_dish_automatic_microwave_kuchensaftigauftauen": "Gerecht: Ontdooien van cake, vochtig",
+          "cooking_oven_program_dish_automatic_microwave_kuchentrockenauftauen": "Gerecht: Ontdooien van cake, droog",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochendurchgegart": "Gerecht: Lamsbout, uitgebeend, well-done",
+          "cooking_oven_program_dish_automatic_microwave_lammkeuleohneknochenmedium": "Gerecht: Lamsbout, uitgebeend, medium",
+          "cooking_oven_program_dish_automatic_microwave_langkornreis": "Gerecht: Langkorrelige rijst",
+          "cooking_oven_program_dish_automatic_microwave_lasagne": "Gerecht: Diepvries lasagne (sneller)",
+          "cooking_oven_program_dish_automatic_microwave_minipizzen": "Gerecht: Mini pizza’s",
+          "cooking_oven_program_dish_automatic_microwave_mischbrotauftauen": "Gerecht: Ontdooien van meergranenbrood",
+          "cooking_oven_program_dish_automatic_microwave_naturreis": "Gerecht: Zilvervliesrijst",
+          "cooking_oven_program_dish_automatic_microwave_parboiledreis": "Gerecht: Voorgekookte rijst",
+          "cooking_oven_program_dish_automatic_microwave_pellkartoffeln": "Gerecht: Gekookte aardappelen in de schil",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitdickemboden1stueck": "Gerecht: Pizza, één, dikke bodem",
+          "cooking_oven_program_dish_automatic_microwave_pizzamitduennemboden1stueck": "Gerecht: Pizza, één, dunne bodem",
+          "cooking_oven_program_dish_automatic_microwave_polenta": "Gerecht: Polenta",
+          "cooking_oven_program_dish_automatic_microwave_pommesfrites": "Gerecht: Patat",
+          "cooking_oven_program_dish_automatic_microwave_putenbrust": "Gerecht: Kalkoenborst",
+          "cooking_oven_program_dish_automatic_microwave_risotto": "Gerecht: Risotto",
+          "cooking_oven_program_dish_automatic_microwave_roastbeefmedium": "Gerecht: Biefstuk, medium",
+          "cooking_oven_program_dish_automatic_microwave_salzkartoffeln": "Gerecht: Gekookte aardappelen",
+          "cooking_oven_program_dish_automatic_microwave_schweinenackenbratenohneknochen": "Gerecht: Varkensnekbout, uitgebeend",
+          "cooking_oven_program_dish_automatic_microwave_tintenfischringepaniert": "Gerecht: Inktvisringen",
+          "cooking_oven_program_dish_automatic_microwave_vollkornbrotauftauen": "Gerecht: Ontdooien van volkorenbrood",
+          "cooking_oven_program_dish_automatic_microwave_weissbrotauftauen": "Gerecht: Ontdooien van witbrood",
+          "cooking_oven_program_dish_automatic_microwave_zartweizen": "Gerecht: Tarwebrood",
+          "cooking_oven_program_dish_recommendation_konv_aufbackbroetchenoderbaguette": "Gerecht: Afbakroodjes of baquettes opwarmen",
+          "cooking_oven_program_dish_recommendation_konv_baiser": "Gerecht: Baiser",
+          "cooking_oven_program_dish_recommendation_konv_baklava": "Gerecht: Baklava",
+          "cooking_oven_program_dish_recommendation_konv_biskuitrolle": "Gerecht: Biscuitrol",
+          "cooking_oven_program_dish_recommendation_konv_biskuittorte": "Gerecht: Biscuitgebak",
+          "cooking_oven_program_dish_recommendation_konv_blaetterteiggebaeck": "Gerecht: Bladerdeeg",
+          "cooking_oven_program_dish_recommendation_konv_boerek": "Gerecht: Börek",
+          "cooking_oven_program_dish_recommendation_konv_brandteiggebaeck": "Gerecht: Soezendeeg",
+          "cooking_oven_program_dish_recommendation_konv_brezelnteiglinge": "Gerecht: Pretzels, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_broetchenfrisch": "Gerecht: Broodjes, vers",
+          "cooking_oven_program_dish_recommendation_konv_broetchensuessfrisch": "Gerecht: Broodjes, vers, zoet",
+          "cooking_oven_program_dish_recommendation_konv_ciabatta": "Gerecht: Ciabatta",
+          "cooking_oven_program_dish_recommendation_konv_croissantsteiglinge": "Gerecht: Croissants",
+          "cooking_oven_program_dish_recommendation_konv_empanada": "Gerecht: Empanada",
+          "cooking_oven_program_dish_recommendation_konv_entegefuellt": "Gerecht: Eend, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_entenbrust": "Gerecht: Eendeborst",
+          "cooking_oven_program_dish_recommendation_konv_fischfiletueberbacken": "Gerecht: Visfilet gegratineerd",
+          "cooking_oven_program_dish_recommendation_konv_fladenbrot": "Gerecht: Platbrood",
+          "cooking_oven_program_dish_recommendation_konv_flammkuchen": "Gerecht: Tarte flambée",
+          "cooking_oven_program_dish_recommendation_konv_gansgefuellt": "Gerecht: Gans, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegefuellt": "Gerecht: Groenten, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_gemuesegratinieren": "Gerecht: Groenten, gratineren",
+          "cooking_oven_program_dish_recommendation_konv_haehnchengefuellt": "Gerecht: Kip, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_hefegugelhupf": "Gerecht: Gisttulband",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmitsaftigembelag": "Gerecht: Gistcake met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_hefekuchenmittrockenembelag": "Gerecht: Gistcake met droge topping",
+          "cooking_oven_program_dish_recommendation_konv_hefeteiggebaeck": "Gerecht: Gistgebak",
+          "cooking_oven_program_dish_recommendation_konv_hefezopfhefekranz": "Gerecht: Gevlochten ring op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_kalbsbrustgefuellt": "Gerecht: Kalfsborst, gevuld",
+          "cooking_oven_program_dish_recommendation_konv_kalbsruecken": "Gerecht: Kalfszadel",
+          "cooking_oven_program_dish_recommendation_konv_kartoffelroesti": "Gerecht: Aardappel rösti",
+          "cooking_oven_program_dish_recommendation_konv_makronen": "Gerecht: Macarons",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigbodenblindbacken": "Gerecht: Blind bakken van een kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteiggebaeck": "Gerecht: Kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_muerbeteigkuchenmitsaftigembelag": "Gerecht: Kruimeldeeg cakes met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_muffins": "Gerecht: Muffins",
+          "cooking_oven_program_dish_recommendation_konv_obstoderquarktortemitmuerbeteigboden": "Gerecht: Fruittaar of cheesecake met kruimeldeeg",
+          "cooking_oven_program_dish_recommendation_konv_piroggen": "Gerecht: Pirozhki",
+          "cooking_oven_program_dish_recommendation_konv_pizzabaguette": "Gerecht: Pizza, baguette, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischaufbackblech": "Gerecht: Pizza op een bakplaat, vers",
+          "cooking_oven_program_dish_recommendation_konv_pizzafrischduennerbodeninpizzaform": "Gerecht: Pizza op eem pizzaplaat, dunne bodem, vers",
+          "cooking_oven_program_dish_recommendation_konv_pizzagekuehlt": "Gerecht: Pizza, gekoeld",
+          "cooking_oven_program_dish_recommendation_konv_plaetzchen": "Gerecht: Koekjes",
+          "cooking_oven_program_dish_recommendation_konv_plundergebaeck": "Gerecht: Deens gebak",
+          "cooking_oven_program_dish_recommendation_konv_potatoewedges": "Gerecht: Aardappelpartjes, diepvries",
+          "cooking_oven_program_dish_recommendation_konv_putenrollbraten": "Gerecht: Kalkoenrollade",
+          "cooking_oven_program_dish_recommendation_konv_quichetarte": "Gerecht: Quiche, hartige taarten",
+          "cooking_oven_program_dish_recommendation_konv_rehrueckenmitknochen": "Gerecht: Hertenbout met bot",
+          "cooking_oven_program_dish_recommendation_konv_rinderfiletmedium": "Gerecht: Runderfilet medium",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmitsaftigembelag": "Gerecht: Biscuitgebak met vochtige topping",
+          "cooking_oven_program_dish_recommendation_konv_ruehrkuchenmittrockenembelag": "Gerecht: Biscuitgebak met droge topping",
+          "cooking_oven_program_dish_recommendation_konv_schweinshaxe": "Gerecht: Varkensschenkel",
+          "cooking_oven_program_dish_recommendation_konv_souffleinportionsformen": "Gerecht: Soufflé",
+          "cooking_oven_program_dish_recommendation_konv_spritzgebaeck": "Gerecht: Spritsgebak",
+          "cooking_oven_program_dish_recommendation_konv_strudelsuess": "Gerecht: Strudel, zoet",
+          "cooking_oven_program_dish_recommendation_konv_tarte": "Gerecht: Taartje",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausmuerbeteig": "Gerecht: Kruimeldeegbodem",
+          "cooking_oven_program_dish_recommendation_konv_tortenbodenausruehrteig": "Gerecht: Biscuitdeeg bodem",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotaufbackblech": "Gerecht: Witbrood op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_weissbrotinkastenform": "Gerecht: Witbrood in een bakblik",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotaufbackblech": "Gerecht: Meergranen volkorenbrood op een bakplaat",
+          "cooking_oven_program_dish_recommendation_konv_weizenbrotweizenmischbrotinkastenform": "Gerecht: Meergranen volkorenbrood in een bakblik",
+          "cooking_oven_program_dish_recommendation_microwave_gansungefuellt": "Gerecht: Gans, ongevuld",
+          "cooking_oven_program_dish_recommendation_microwave_gebackenekartoffelnhalbiert": "Gerecht: Gebakken aardappelen, half",
+          "cooking_oven_program_dish_recommendation_microwave_haehnchenbrust": "Gerecht: Kipfilet",
+          "cooking_oven_program_dish_recommendation_microwave_lasagnefrisch": "Gerecht: Verse lasagne",
+          "cooking_oven_program_dish_recommendation_microwave_obstkuchenausruehrteigfein": "Gerecht: Fruittaartje van biscuitdeeg",
+          "cooking_oven_program_dish_recommendation_microwave_ruehrkucheneinfach": "Gerecht: Biscuitgebak",
+          "cooking_oven_program_dish_subsequentcooking": "Gerecht: Nagaren",
+          "cooking_hob_program_dish_fryingsensor_aubergines": "Gerecht: Aubergines",
+          "cooking_hob_program_dish_fryingsensor_bacon": "Gerecht: Spek",
+          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Gerecht: Bechamelsaus",
+          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Gerecht: Camembert diepvries",
+          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Gerecht: Kaassaus",
+          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Gerecht: Kipnuggets diepvries",
+          "cooking_hob_program_dish_fryingsensor_chop": "Gerecht: Kotelet",
+          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Gerecht: Cordon bleu",
+          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Gerecht: Cordon bleu diepvries",
+          "cooking_hob_program_dish_fryingsensor_courgettes": "Gerecht: Courgette",
+          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Gerecht: Gedroogde kant-en-klaar maaltijden",
+          "cooking_hob_program_dish_fryingsensor_escalope": "Gerecht: Kalfsschnitzel",
+          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Gerecht: Kalfsschnitzel gepaneerd",
+          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Gerecht: Kalfsschnitzel diepvries",
+          "cooking_hob_program_dish_fryingsensor_fillet": "Gerecht: Filet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Gerecht: Visfilet gepaneerd",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Gerecht: Visfilet gepaneerd diepvries",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Gerecht: Visfilet ongepaneerd",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Gerecht: Visfilet ongepaneerd diepvries",
+          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Gerecht: Vissticks diepvries",
+          "cooking_hob_program_dish_fryingsensor_frenchfriesmadefromrawpotatoes": "Gerecht: Gebakken aardappels gemaakt van ongekookte aardappelen",
+          "cooking_hob_program_dish_fryingsensor_frenchtoast": "Gerecht: Wentelteefjes",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinbutter": "Gerecht: In boter gebakken eieren",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinoil": "Gerecht: In olie gebakken eieren",
+          "cooking_hob_program_dish_fryingsensor_fryingcamembert": "Gerecht: Bakken van camembert",
+          "cooking_hob_program_dish_fryingsensor_fryingcroutons": "Gerecht: Bakken van croûtons",
+          "cooking_hob_program_dish_fryingsensor_fryingfishwhole": "Gerecht: Bakken van vis, hele",
+          "cooking_hob_program_dish_fryingsensor_fryingfrenchfriesfrozen": "Gerecht: Bakken van patat (diepvries)",
+          "cooking_hob_program_dish_fryingsensor_fryinggreenasparagus": "Gerecht: Bakken van groene asperges",
+          "cooking_hob_program_dish_fryingsensor_fryingmeatballs": "Gerecht: Bakken van gehaktballen",
+          "cooking_hob_program_dish_fryingsensor_fryingpotatoesboiledintheirskin": "Gerecht: Bakken van aardappels in de schil",
+          "cooking_hob_program_dish_fryingsensor_fryingpreboiledsausages": "Gerecht: Bakken van voorgekookte worstjes",
+          "cooking_hob_program_dish_fryingsensor_fryingrawsausages": "Gerecht: Bakkenn van rauwe worstjes",
+          "cooking_hob_program_dish_fryingsensor_fryingrissoles": "Gerecht: Bakken van rissoles",
+          "cooking_hob_program_dish_fryingsensor_garlic": "Gerecht: Knoflook",
+          "cooking_hob_program_dish_fryingsensor_glazedonions": "Gerecht: Gekarameliseerde uien",
+          "cooking_hob_program_dish_fryingsensor_glazedpotatoes": "Gerecht: Geglaceerde aardappelen",
+          "cooking_hob_program_dish_fryingsensor_glazedvegetables": "Gerecht: Geglaceerde groenten",
+          "cooking_hob_program_dish_fryingsensor_gyros": "Gerecht: Gyros",
+          "cooking_hob_program_dish_fryingsensor_gyrosfrozen": "Gerecht: Gyros diepvries",
+          "cooking_hob_program_dish_fryingsensor_hamburgers": "Gerecht: Hamburgers",
+          "cooking_hob_program_dish_fryingsensor_kebabfrozen": "Gerecht: Kebab diepvries",
+          "cooking_hob_program_dish_fryingsensor_meatloaf": "Gerecht: Gehaktbrood",
+          "cooking_hob_program_dish_fryingsensor_mincedmeat": "Gerecht: Gehakt",
+          "cooking_hob_program_dish_fryingsensor_mushrooms": "Gerecht: Champignons",
+          "cooking_hob_program_dish_fryingsensor_omelettes": "Gerecht: Omeletten",
+          "cooking_hob_program_dish_fryingsensor_pancake": "Gerecht: Pannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_pancakes": "Gerecht: Pannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_peppers": "Gerecht: Paprika's",
+          "cooking_hob_program_dish_fryingsensor_potatopancakes": "Gerecht: Aardappelpannenkoeken",
+          "cooking_hob_program_dish_fryingsensor_poultrybreast": "Gerecht: Gevogelte filet",
+          "cooking_hob_program_dish_fryingsensor_poultrybreastfrozen": "Gerecht: Gevogelte-filet diepvries",
+          "cooking_hob_program_dish_fryingsensor_prawns": "Gerecht: Garnalen",
+          "cooking_hob_program_dish_fryingsensor_reducingsauces": "Gerecht: Inkoken van sauzen",
+          "cooking_hob_program_dish_fryingsensor_sauteingvegetablesinoil": "Gerecht: Sauteren van groenten in olie",
+          "cooking_hob_program_dish_fryingsensor_scampi": "Gerecht: Scampi",
+          "cooking_hob_program_dish_fryingsensor_scrambledeggs": "Gerecht: Roerei",
+          "cooking_hob_program_dish_fryingsensor_springrollsfrozen": "Gerecht: Loempia's diepvries",
+          "cooking_hob_program_dish_fryingsensor_steaksmedium": "Gerecht: Steaks medium",
+          "cooking_hob_program_dish_fryingsensor_steaksrare": "Gerecht: Steaks rare",
+          "cooking_hob_program_dish_fryingsensor_steakswelldone": "Gerecht: Steaks well-done",
+          "cooking_hob_program_dish_fryingsensor_stirfriesfrozen": "Gerecht: Roerbakgerechten diepvries",
+          "cooking_hob_program_dish_fryingsensor_stripsofmeat": "Gerecht: Reepjes vlees",
+          "cooking_hob_program_dish_fryingsensor_sweetsauces": "Gerecht: Zoete saus",
+          "cooking_hob_program_dish_fryingsensor_swissroesti": "Gerecht: Zwitserse rösti",
+          "cooking_hob_program_dish_fryingsensor_toastingalmonds": "Gerecht: Roosteren van amandelen",
+          "cooking_hob_program_dish_fryingsensor_toastingnuts": "Gerecht: Roosteren van noten",
+          "cooking_hob_program_dish_fryingsensor_toastingpinenuts": "Gerecht: Roosteren van pijnboompitten",
+          "cooking_hob_program_dish_fryingsensor_tomatosaucewithvegetables": "Gerecht: Tomatensaus met groenten",
+          "cooking_hob_program_dish_fryingsensor_vienneseschnitzel": "Gerecht: Wiener schnitzel",
+          "cooking_hob_program_fryingsensormode": "Handmatig: Baksensor",
+          "cooking_hob_program_powerlevelmode": "Handmatig: Vermogensinstelling",
+          "cooking_hob_program_powermovemode": "Handmatig: PowerMove-modus",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Automatisch 30°C",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Automatisch 40°C",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Katoen",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Donkere was",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Gordijnen",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Fijne Was/Zijde",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Fijne Was/Zijde (mp)",
+          "laundrycare_washer_program_downduvet_down_down": "Ondergoed",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Trommelreiniging",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Trommelreiniging 70°C",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Kreukherstellend",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Eco 40-60°C",
+          "laundrycare_washer_program_mix_mix_mix": "Snel + Mix",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Outdoor",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Spoelen",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Hygiëne",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Overhemden/blouses",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Sportkleding",
+          "laundrycare_washer_program_spin_spin_spindrain": "Centrifugeren/afpompen",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Stomen/Kreukvrij",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Supersnel 15'/30'",
+          "laundrycare_washer_program_towels_towels_towels": "Handdoeken",
+          "laundrycare_washer_program_wool_wool_wool": "Wol",
+          "laundrycare_common_program_juststart": "Direct starten",
+          "laundrycare_common_program_memory1": "Opgeslagen 1",
+          "laundrycare_common_program_memory2": "Opgeslagen 2",
+          "laundrycare_common_program_memory3": "Opgeslagen 3",
+          "laundrycare_common_program_memory4": "Opgeslagen 4",
+          "laundrycare_common_program_memory5": "Opgeslagen 5",
+          "laundrycare_common_program_memory6": "Opgeslagen 6",
+          "laundrycare_common_program_memory7": "Opgeslagen 7",
+          "laundrycare_common_program_memory8": "Opgeslagen 8",
+          "laundrycare_dryer_program_blankets": "Dekens",
+          "laundrycare_dryer_program_businessshirts": "Overhemden/blouses",
+          "laundrycare_dryer_program_businessshirts_easyiron": "Overhemden/blouses kreukherstellend",
+          "laundrycare_dryer_program_connecteddry": "intelligentDry",
+          "laundrycare_dryer_program_cotton": "Katoen",
+          "laundrycare_dryer_program_dessous": "Lingerie",
+          "laundrycare_dryer_program_delicates": "Delicates",
+          "laundrycare_dryer_program_downfeathers": "Downfeathers",
+          "laundrycare_dryer_program_hygiene": "Hygiëne",
+          "laundrycare_dryer_program_inbasket_woolbasket": "Wol in de mand",
+          "laundrycare_dryer_program_maintenance_depthcare": "Machinereiniging Uitgebreid",
+          "laundrycare_dryer_program_maintenance_quickcare": "Machinereiniging Snel",
+          "laundrycare_dryer_program_mix": "Mix",
+          "laundrycare_dryer_program_outdoor": "Outdoor",
+          "laundrycare_dryer_program_pillow": "Hoofdkussen",
+          "laundrycare_dryer_program_super40": "Extra snel 40'",
+          "laundrycare_dryer_program_synthetic": "Syntetisch",
+          "laundrycare_dryer_program_timecold": "Tijdprogr. koud",
+          "laundrycare_dryer_program_timewarm": "Tijdprogr. warm",
+          "laundrycare_dryer_program_towels": "Handdoeken",
+          "laundrycare_dryer_program_woolfinish": "Wol Finish",
+          "laundrycare_washerdryer_program_towels_towels": "Handdoeken",
+          "laundrycare_washerdryer_program_cotton_cotton": "Katoen",
+          "laundrycare_washerdryer_program_mix_mix": "Mix",
+          "laundrycare_washerdryer_program_wool_wool": "Wol",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Sportkleding",
+          "laundrycare_washerdryer_program_washanddry_60": "Wassen & Drogen 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Ondergoed",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Koffie verkeerd",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Koffie",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Heet Water",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Melkschuim",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Warme Melk",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Koffie XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Black Eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café Con Leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Dead Eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat White",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Redeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Apparaat Uit Spoelen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Apparaat Aan Spoelen",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Calc & Clean",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Schoonmaken",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Clean Brewing Unit",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Clean Brewing Unit (detailed)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Clean Beverage Dispenser",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Ontkalken",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Vriesbeveiliging",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Verwijder Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Vervang Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Spoel Melksysteem",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Spoel Waterfilter",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Speciale Spoeling"
         }
       },
       "select_sensitivity_turbidity": {
-        "name": "Gevoeligheid van troebelheidssensor",
+        "name": "Sensorinstelling",
         "state": {
-          "standard": "Standard",
+          "standard": "Standaard",
           "sensitive": "Gevoelig",
-          "verysensitive": "Zeer Gevoelig"
+          "verysensitive": "Zeer gevoelig"
         }
       },
       "select_eco_as_default": {
-        "name": "Standaard Programma",
+        "name": "Start programma",
         "state": {
-          "lastprogram": "Last Program",
-          "ecoasdefault": "Eco 50"
+          "lastprogram": "Laatste programma",
+          "ecoasdefault": "Eco 50°"
+        }
+      },
+      "select_power_state": {
+        "name": "Voedingsstatus",
+        "state": {
+          "mainsoff": "Voeding uit",
+          "off": "Uit",
+          "on": "Aan",
+          "standby": "Standby"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "Koffietemperatuur",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "Hoeveelheid ",
+        "state": {
+          "verymild": "Slappe bak",
+          "mild": "Mild",
+          "mildplus": "Mild +",
+          "normal": "Normaal",
+          "normalplus": "Normaal +",
+          "strong": "Sterk",
+          "strongplus": "Strong +",
+          "verystrong": "Heel sterk",
+          "verystrongplus": "Heel sterk +",
+          "extrastrong": "Extra sterk",
+          "doubleshot": "Double shot",
+          "doubleshotplus": "Double shot +",
+          "doubleshotplusplus": "Double shot ++",
+          "tripleshot": "Triple Shot",
+          "tripleshotplus": "Triple Shot +",
+          "coffeeground": "Gemalen koffie"
+        }
+      },
+      "select_beverage_size": {
+        "name": "Drankformaat",
+        "state": {
+          "small": "Klein",
+          "medium": "Middel",
+          "large": "Groot",
+          "verylarge": "Zeer groot"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "Koffie melkratio",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "Temperatuur heet water",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "Stroomsnelheid",
+        "state": {
+          "normal": "Normal",
+          "intense": "Intens",
+          "intenseplus": "Intense +"
+        }
+      },
+      "select_coarsness": {
+        "name": "Grofheid",
+        "state": {
+          "coarsness1": "Niveau 1",
+          "coarsness2": "Niveau 2",
+          "coarsness3": "Niveau 3",
+          "coarsness4": "Niveau 4",
+          "coarsness5": "Niveau 5",
+          "coarsness6": "Niveau 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "Sterkte koffie",
+        "state": {
+          "strength1": "Sterkte 1",
+          "strength2": "Sterkte 2",
+          "strength3": "Sterkte 3",
+          "strength4": "Sterkte 4",
+          "strength5": "Sterkte 5",
+          "strength6": "Sterkte 6",
+          "strength7": "Sterkte 7",
+          "strength8": "Sterkte 8",
+          "strength9": "Sterkte 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "Aroma keuze",
+        "state": {
+          "fine": "Fijn",
+          "balanced": "Gebalanceerd",
+          "distinctive": "Onderscheidend"
+        }
+      },
+      "select_bean_container": {
+        "name": "Bonencontainer",
+        "state": {
+          "right": "Rechts",
+          "left": "Links"
+        }
+      },
+      "select_shot_count": {
+        "name": "Aantal shots",
+        "state": {
+          "double": "Dubbel",
+          "triple": "Trippel"
+        }
+      },
+      "select_cups": {
+        "name": "Kopjes",
+        "state": {
+          "two": "Twee",
+          "four": "Vier",
+          "six": "Zes"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "Automatisch uitschakelen",
+        "state": {
+          "off": "Uit",
+          "15min": "15 min",
+          "30min": "30 min",
+          "60min": "60 min"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "Helderheid",
+        "state": {
+          "low": "Laag",
+          "medium": "Gemiddeld",
+          "high": "Hoog",
+          "veryhigh": "Zeer hoog"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "Deur ringlicht modus",
+        "state": {
+          "off": "Uit",
+          "on": "Aan",
+          "auto": "Auto"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "Deur ringlicht helderheid",
+        "state": {
+          "low": "Laag",
+          "medium": "Gemiddeld",
+          "high": "Hoog",
+          "veryhigh": "Zeer hoog"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "Volume eindsignaal",
+        "state": {
+          "off": "Uit",
+          "low": "Stil",
+          "medium": "Gemiddeld",
+          "loud": "Luid",
+          "veryloud": "Zeer luid"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "Volume knop signaal",
+        "state": {
+          "off": "Uit",
+          "low": "Stil",
+          "medium": "Gemiddeld",
+          "loud": "Luid",
+          "veryloud": "Zeer luid"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "Volume signaal",
+        "state": {
+          "off": "Uit",
+          "volume1": "Stil",
+          "volume2": "Gemiddeld",
+          "volume3": "Luid",
+          "volume4": "Zeer luid"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "Voedingsspanningswaarde"
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "Anti-kreuk",
+        "state": {
+          "off": "Uit",
+          "min30": "30 min",
+          "min60": "60 min",
+          "min90": "90 min",
+          "min120": "120 min",
+          "min180": "180 min"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "Kastdroog instelling",
+        "state": {
+          "off": "Uit",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "Kastdroog+ instelling",
+        "state": {
+          "off": "Uit",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "Strijkdroog instelling",
+        "state": {
+          "off": "Uit",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "Centrifugetoerental vóór drogen",
+        "state": {
+          "off": "Uit",
+          "rpm400": "400 tpm",
+          "rpm600": "600 tpm",
+          "rpm700": "700 tpm",
+          "rpm800": "800 tpm",
+          "rpm900": "900 tpm",
+          "rpm1000": "1000 tpm",
+          "rpm1200": "1200 tpm",
+          "rpm1400": "1400 tpm",
+          "rpm1500": "1500 tpm",
+          "rpm1600": "1600 tpm",
+          "auto": "Auto"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "Droogtegraad",
+        "state": {
+          "irondry": "Strijkdroog",
+          "gentledry": "Zachtdroog",
+          "cupboarddry": "Kastdroog",
+          "cupboarddryplus": "Kastdroog+",
+          "extradry": "Extra droog"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "Opfrissen",
+        "state": {
+          "shirt1": "Shirt 1'",
+          "shirt5": "Shirt 5' ",
+          "business": "Overhemd"
+        }
+      },
+      "select_oven_level": {
+        "name": "Niveau",
+        "state": {
+          "level01": "Niveau 1",
+          "level02": "Niveau 2",
+          "level03": "Niveau 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "Verwarmingsmodus",
+        "state": {
+          "automaticoperation": "Automatisch bedrijf",
+          "automaticoperationwithmicrowave": "Automatisch bedrijf met magnetron",
+          "bakingsensoroperation": "Baksensor",
+          "bottomheating": "Onderverwarming",
+          "defrosting": "Ontdooien",
+          "desiccation": "Uitdrogen",
+          "doughproving": "Deeg laten rijzen",
+          "frozenheatupspecial": "CoolStart functie",
+          "grilllargearea": "Grill, groot gebied",
+          "grillsmallarea": "Grill, klein gebied",
+          "hotair": "Hetelucht",
+          "hotaireco": "Hetelucht eco",
+          "hotairgrilling": "Hetelucht grillen",
+          "intensiveheat": "Intensief verwarmen",
+          "keepwarm": "Warmhouden",
+          "microwave": "Magnetron",
+          "pizzasetting": "Pizzastand",
+          "preheatovenware": "Voorverwarmen van ovenschalen",
+          "reheat": "Her-verwarmen",
+          "sabbathprogramme": "Sabbat Programma",
+          "slowcook": "Langzaam garen",
+          "steam": "Stomen",
+          "topbottomheating": "Boven/onderverwarming",
+          "topbottomheatingeco": "Boven/onderverwarming eco",
+          "breadbaking": "Broodbakken",
+          "steamwithsteamset": "Stomen met stoomset"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "Pyrolyse niveau",
+        "state": {
+          "level01": "Niveau 1",
+          "level02": "Niveau 2",
+          "level03": "Niveau 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "Kinderslot",
+        "state": {
+          "deactivated": "Uit",
+          "activated": "Aan",
+          "activatedwithdoorlock": "Aan + deurvergrendeling"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "Inschakelvertraging",
+        "state": {
+          "short": "Kort",
+          "medium": "Gemiddeld",
+          "long": "Lang"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "Ventilator nalooptijd",
+        "state": {
+          "short": "Kort",
+          "recommended": "Aanbevolen"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "Akoestisch signaal",
+        "state": {
+          "short": "Kort",
+          "medium": "Medium",
+          "long": "Lang"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Assistent vriezerdeur trigger",
+        "state": {
+          "push": "Duwen",
+          "pull": "Trekken",
+          "pushpull": "Duwen & Trekken"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Assistent vriezerdeur kracht",
+        "state": {
+          "lowforce": "Laag",
+          "middleforce": "Gemiddeld",
+          "highforce": "Hoog"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Interval",
+        "state": {
+          "fanoff": "Uit",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delayed_shutoff_stage": {
+        "name": "Vertraagde uitschakeling niveau",
+        "state": {
+          "fanoff": "Uit",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_ventilation": {
+        "name": "Ventilatorstand",
+        "state": {
+          "off": "Uit",
+          "automatic": "Automatisch",
+          "afterrun": "Nalopen",
+          "level01": "Niveau 1",
+          "level02": "Niveau 1.5",
+          "level03": "Niveau 2",
+          "level04": "Niveau 2.5",
+          "level05": "Niveau 3",
+          "level06": "Niveau 3.5",
+          "level07": "Niveau 4",
+          "level08": "Niveau 4.5",
+          "level09": "Niveau 5",
+          "level10": "Niveau 5.5",
+          "level11": "Niveau 6",
+          "level12": "Niveau 6.5",
+          "level13": "Niveau 7",
+          "level14": "Niveau 7.5",
+          "level15": "Niveau 8",
+          "level16": "Niveau 8.5",
+          "level17": "Niveau 9",
+          "boostlevel1": "Boost 1",
+          "boostlevel2": "Boost 2"
         }
       }
     },
     "button": {
       "button_abort_program": {
-        "name": "Afbreken"
+        "name": "Stop"
       },
       "button_start_program": {
         "name": "Start"
+      },
+      "button_pause_program": {
+        "name": "Pauzeren"
+      },
+      "button_resume_program": {
+        "name": "Hervatten"
       }
     },
-    "number": {}
+    "number": {
+      "number_fill_quantity": {
+        "name": "Vul hoeveelheid"
+      },
+      "number_laundry_brightness": {
+        "name": "Helderheid"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "Helderheid deurverlichting"
+      },
+      "number_duration": {
+        "name": "Tijd"
+      },
+      "number_laundry_spin_class": {
+        "name": "Centrifuge klasse"
+      },
+      "number_setpoint_freezer": {
+        "name": "Temperatuur vriezer"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "Temperatuur koelkast"
+      },
+      "number_idos1_base_level": {
+        "name": "i-DOS doseervolume: wasmiddel"
+      },
+      "number_idos2_base_level": {
+        "name": "i-DOS doseervolume: wasmiddel of wasverzachter"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "Temperatuurinstelling"
+      },
+      "number_oven_display_brightness": {
+        "name": "Helderheid display"
+      },
+      "number_hood_interval_off": {
+        "name": "Tijdsinterval uitschakelen"
+      },
+      "number_hood_interval_on": {
+        "name": "Tijdsinterval inschakelen"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Vertraagd uitschakelen"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Sensorgevoeligheid"
+      },
+      "number_start_in": {
+        "name": "Start over"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "Deur ringlicht"
+      },
+      "light_drum_light": {
+        "name": "Trommelverlighting"
+      },
+      "light_internal": {
+        "name": "Binnenverlichting"
+      },
+      "light_cooking_lighting": {
+        "name": "Kookverlichting"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "Bladverlichting"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Afzuigventilator"
+      }
+    }
+  },
+  "services": {
+    "start_program": {
+      "name": "Start programma",
+      "description": "Start het geselecteerde programma",
+      "fields": {
+        "device_id": {
+          "name": "Apparaat",
+          "description": "Het apparaat waarop het programma gestart wordt"
+        },
+        "start_in": {
+          "name": "Start over",
+          "description": "Stel de start van het programma uit"
+        }
+      }
+    },
+    "set_start_in": {
+      "name": "Stel vertraging in",
+      "description": "Stel de startvertraging in",
+      "fields": {
+        "device_id": {
+          "name": "Apparaat",
+          "description": "Het apparaat waarop de vertraging ingesteld wordt"
+        },
+        "start_in": {
+          "name": "Vertraging",
+          "description": "Stel startvertraging in"
+        }
+      }
+    }
   }
 }

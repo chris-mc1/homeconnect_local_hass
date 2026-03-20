@@ -1,0 +1,1319 @@
+{
+  "config": {
+    "step": {
+      "upload": {
+        "title": "Добавить новую технику Home Connect",
+        "description": "Загрузите файл профиля",
+        "data": {
+          "file": "Файл профиля"
+        }
+      },
+      "device_select": {
+        "title": "Выберите устройство",
+        "description": "Выберите устройство для настройки"
+      },
+      "host": {
+        "title": "Введите имя хоста",
+        "description": "Попробуйте вручную ввести имя хоста или IP-адрес устройства",
+        "data": {
+          "host": "Хост / IP-адрес"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не удалось подключиться к устройству",
+      "already_configured": "Это устройство уже настроено"
+    },
+    "abort": {
+      "auth_failed": "Ошибка аутентификации",
+      "reauth_successful": "Повторная аутентификация успешна",
+      "invalid_profile_file": "Неверный файл профиля",
+      "profile_file_parser_error": "Неверный файл профиля: {error}",
+      "appliance_not_in_profile_file": "Файл профиля не содержит данных для этого устройства",
+      "all_setup": "Все устройства в этом файле профиля уже настроены"
+    }
+  },
+  "entity": {
+    "switch": {
+      "switch_power_state": {
+        "name": "Питание"
+      },
+      "switch_hygiene_plus": {
+        "name": "Гигиена Плюс"
+      },
+      "switch_intensiv_zone": {
+        "name": "Интенсивная зона"
+      },
+      "switch_vario_speed_plus": {
+        "name": "VariospeedPlus"
+      },
+      "switch_silence_on_demand": {
+        "name": "Тишина по требованию"
+      },
+      "switch_brilliance_dry": {
+        "name": "Brilliance Dry"
+      },
+      "switch_extra_dry": {
+        "name": "Extra Dry"
+      },
+      "switch_speed_on_demand": {
+        "name": "Скорость по требованию"
+      },
+      "switch_info_light": {
+        "name": "Индикатор"
+      },
+      "switch_multiple_beverages": {
+        "name": "Несколько напитков"
+      },
+      "switch_half_load": {
+        "name": "Половина загрузки"
+      },
+      "switch_child_lock": {
+        "name": "Детский замок"
+      },
+      "switch_door_light_ring": {
+        "name": "Подсветка дверного кольца"
+      },
+      "switch_drum_light": {
+        "name": "Подсветка барабана"
+      },
+      "switch_laundry_end_signal": {
+        "name": "Сигнал окончания"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "Отключение звука"
+      },
+      "switch_laundry_time_light": {
+        "name": "Подсветка времени"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "Защита от складок"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "Тихий режим"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "Идеальная скорость"
+      },
+      "switch_laundry_gentle": {
+        "name": "Щадящий режим"
+      },
+      "switch_laundry_hygiene": {
+        "name": "Гигиена"
+      },
+      "switch_super_freezer": {
+        "name": "Супер режим морозилки"
+      },
+      "switch_super_refrigerator": {
+        "name": "Супер режим холодильника"
+      },
+      "switch_refrigerator_eco": {
+        "name": "Эко режим"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "Режим отпуска"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "i-DOS Жидкое моющее средство (Контейнер 1)"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "i-DOS Жидкое моющее средство (Контейнер 2)"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "Быстрый нагрев"
+      },
+      "switch_oven_button_tones": {
+        "name": "Звуки кнопок"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "Подсветка духовки во время работы"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "Режим Шаббат"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Режим Шаббат"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Диспенсер"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Помощник двери морозилки"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Внутренняя подсветка"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Режим театральной подсветки"
+      },
+      "switch_hood_boost": {
+        "name": "Турбо"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Тихий режим"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Режим свежести"
+      }
+    },
+    "binary_sensor": {
+      "connection": {
+        "name": "Соединение"
+      },
+      "binary_sensor_door_state": {
+        "name": "Дверь"
+      },
+      "binary_sensor_eco_dry_active": {
+        "name": "EcoDry активен"
+      },
+      "binary_sensor_aqua_stop": {
+        "name": "Произошло AquaStop"
+      },
+      "binary_sensor_low_water_pressure": {
+        "name": "Низкое давление воды"
+      },
+      "binary_sensor_bean_container_empty": {
+        "name": "Контейнер для зерен пуст"
+      },
+      "binary_remote_start_allowed": {
+        "name": "Удаленный запуск разрешен"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "Уровень освежителя",
+        "state": {
+          "on": "Низкий",
+          "off": "Полный"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "Контейнер для конденсата",
+        "state": {
+          "on": "Полный",
+          "off": "Норма"
+        }
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "Фильтр для ворса",
+        "state": {
+          "on": "Полный",
+          "off": "Норма"
+        }
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "Рекомендуется уход"
+      },
+      "binary_sensor_program_aborted": {
+        "name": "Программа прервана"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "Обнаружение пены"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "Дверь морозилки"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "Дверь холодильника"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "Тревога двери морозилки"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "Тревога двери холодильника"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "Тревога температуры морозилки"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "Внутренняя подсветка"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Разморозка"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Водяной фильтр полон"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Ошибка устройства"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Низкое напряжение"
+      }
+    },
+    "sensor": {
+      "sensor_remaining_program_time": {
+        "name": "Оставшееся время программы"
+      },
+      "sensor_program_progress": {
+        "name": "Прогресс программы"
+      },
+      "sensor_water_forecast": {
+        "name": "Прогноз воды"
+      },
+      "sensor_energy_forecast": {
+        "name": "Прогноз энергии"
+      },
+      "sensor_operation_state": {
+        "name": "Состояние работы",
+        "state": {
+          "inactive": "Неактивно",
+          "ready": "Готово",
+          "delayedstart": "Отложенный старт",
+          "run": "Работает",
+          "pause": "Пауза",
+          "actionrequired": "Требуется действие",
+          "finished": "Завершено",
+          "error": "Ошибка",
+          "aborting": "Прерывание"
+        }
+      },
+      "sensor_program_phase": {
+        "name": "Фаза программы",
+        "state": {
+          "prerinse": "Предварительное полоскание",
+          "mainwash": "Основная мойка",
+          "finalrinse": "Финальное полоскание",
+          "drying": "Сушка"
+        }
+      },
+      "sensor_active_program": {
+        "name": "Активная программа",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Интенсив 70",
+          "dishcare_dishwasher_program_auto2": "Авто 2",
+          "dishcare_dishwasher_program_eco50": "Эко 50",
+          "dishcare_dishwasher_program_quick45": "Быстрая 45",
+          "dishcare_dishwasher_program_prerinse": "Предварительное полоскание",
+          "dishcare_dishwasher_program_quick65": "Быстрая 65",
+          "dishcare_dishwasher_program_machinecare": "Уход за машиной",
+          "dishcare_dishwasher_program_nightwash": "Ночная мойка",
+          "dishcare_dishwasher_program_glas40": "Стекло 40",
+          "dishcare_dishwasher_program_kurz60": "Скорость 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Интеллектуальная",
+          "favorite_001": "Избранное 1",
+          "favorite_002": "Избранное 2",
+          "favorite_003": "Избранное 3",
+          "favorite_004": "Избранное 4",
+          "favorite_005": "Избранное 5",
+          "favorite_006": "Избранное 6",
+          "favorite_007": "Избранное 7",
+          "favorite_008": "Избранное 8",
+          "favorite_009": "Избранное 9",
+          "favorite_010": "Избранное 10",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Автоматическая мягкая/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Автоматическая 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Хлопок",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Темная стирка",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Деликатные/Шелк",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Анти-микропластик",
+          "laundrycare_washer_program_downduvet_down_down": "Пух",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Очистка барабана (устаревшая)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Очистка барабана",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Легкий уход",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Эко 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Быстрая/Смешанная",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Уличная",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Полоскание",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Чувствительная",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Рубашки/Блузки",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Спортивная одежда",
+          "laundrycare_washer_program_spin_spin_spindrain": "Отжим/Слив",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Пар/Помощь при глажке",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Супер короткая 15мин/30мин",
+          "laundrycare_washer_program_wool_wool_wool": "Шерсть",
+          "laundrycare_common_program_juststart": "Просто начать",
+          "laundrycare_common_program_memory1": "Память 1",
+          "laundrycare_common_program_memory2": "Память 2",
+          "laundrycare_dryer_program_blankets": "Пуховые изделия",
+          "laundrycare_dryer_program_businessshirts": "Рубашки",
+          "laundrycare_dryer_program_cotton": "Хлопок",
+          "laundrycare_dryer_program_dessous": "Нижнее белье",
+          "laundrycare_dryer_program_hygiene": "Гигиена",
+          "laundrycare_dryer_program_inbasket": "Шерсть в корзине",
+          "laundrycare_dryer_program_mix": "Смешанные ткани",
+          "laundrycare_dryer_program_outdoor": "Уличная",
+          "laundrycare_dryer_program_pillow": "Одеяло",
+          "laundrycare_dryer_program_super40": "Быстрая 40мин",
+          "laundrycare_dryer_program_synthetic": "Легкий уход",
+          "laundrycare_dryer_program_timecold": "Программа по времени (холодная)",
+          "laundrycare_dryer_program_timewarm": "Программа по времени (теплая)",
+          "laundrycare_dryer_program_towels": "Полотенца"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "Ополаскиватель",
+        "state": {
+          "empty": "Пусто",
+          "nearly_empty": "Почти пусто",
+          "full": "Полный"
+        }
+      },
+      "sensor_salt": {
+        "name": "Соль",
+        "state": {
+          "empty": "Пусто",
+          "nearly_empty": "Почти пусто",
+          "full": "Полный"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "Водяной бак",
+        "state": {
+          "empty": "Пусто",
+          "nearly_empty": "Почти пусто",
+          "not_inserted": "Не вставлен",
+          "full": "Полный"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Поддон для капель",
+        "state": {
+          "ok": "Норма",
+          "not_inserted": "Не вставлен",
+          "full": "Полный"
+        }
+      },
+      "sensor_start_in": {
+        "name": "Запуск через"
+      },
+      "sensor_count_started": {
+        "name": "Количество запусков"
+      },
+      "sensor_end_trigger": {
+        "name": "Условие завершения программы",
+        "state": {
+          "programfinished": "Завершено",
+          "programabortedbyuser": "Прервано пользователем",
+          "programabortedbyappliance": "Прервано устройством",
+          "programabortedbyappliancecriticalerror": "Критическая ошибка"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "Интервал выключения"
+      },
+      "sensor_interval_time_on": {
+        "name": "Интервал включения"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "Отложенное выключение"
+      },
+      "sensor_power_state": {
+        "name": "Состояние питания",
+        "state": {
+          "mainsoff": "Питание отключено",
+          "off": "Выключено",
+          "on": "Включено",
+          "standby": "Ожидание"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Дверь",
+        "state": {
+          "open": "Открыта",
+          "closed": "Закрыта",
+          "locked": "Заблокирована",
+          "ajar": "Приоткрыта"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Перезагрузка белья",
+        "state": {
+          "impossible": "Невозможно",
+          "possiblepauseprogram": "Возможно при паузе программы",
+          "possibleopendoor": "Возможно при открытии двери"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Фаза процесса",
+        "state": {
+          "nophase": "Нет фазы",
+          "prewash": "Предварительная стирка",
+          "intermediatespin": "Промежуточный отжим",
+          "fillingdetergent": "Наполнение моющим средством",
+          "detectingload": "Определение загрузки",
+          "heating": "Нагрев",
+          "washing": "Стирка",
+          "cooldown": "Охлаждение",
+          "rinsingfoam": "Полоскание пены",
+          "rinsing": "Полоскание",
+          "rinsingaquasensor": "Полоскание с аква-сенсором",
+          "rinseonly": "Только полоскание",
+          "waterproofing": "Водоотталкивание",
+          "rinsingsoftener": "Полоскание с кондиционером",
+          "holdafterrinse": "Удержание после полоскания",
+          "pumping": "Откачка",
+          "spinningfinal": "Финальный отжим",
+          "lessironing": "Меньше глажки",
+          "fluffing": "Разрыхление",
+          "soaking": "Замачивание",
+          "hygienicsteamfogging": "Гигиеническая паровая обработка",
+          "guardingoxy": "Защита кислородом",
+          "generatingozone": "Генерация озона",
+          "degradingozone": "Разложение озона",
+          "drying": "Сушка",
+          "coolingdown": "Охлаждение",
+          "additionalcoolingdown": "Дополнительное охлаждение",
+          "guardingwrinkle": "Защита от складок",
+          "detectingtextile": "Определение ткани",
+          "detectingsoil": "Определение загрязнения",
+          "disinfecting": "Дезинфекция",
+          "lowtemperaturehygiene": "Гигиена при низкой температуре",
+          "steamingactive": "Активная паровая обработка",
+          "irondryreached": "Достигнута сушка для глажки",
+          "cupboarddryreached": "Достигнута сушка для шкафа",
+          "cupboarddryplusreached": "Достигнута сушка для шкафа плюс",
+          "slightlydampreached": "Достигнута легкая влажность",
+          "extradryreached": "Достигнута экстра сушка",
+          "gentlydryreached": "Достигнута щадящая сушка",
+          "quickcare": "Быстрый уход",
+          "depthcarephase1": "Глубокий уход фаза 1",
+          "depthcarephase2": "Глубокий уход фаза 2",
+          "coldrefreshing": "Холодное освежение",
+          "steaming": "Паровая обработка",
+          "foam": "Пена",
+          "testprogramdummytextfinalspeedreached": "Тестовая программа: достигнута финальная скорость",
+          "rinsingfoamf21": "Полоскание пены F21",
+          "handsoak": "Ручное замачивание",
+          "vacant": "Свободно",
+          "spinning": "Отжим",
+          "displayspinabortnospin": "Отображение отмены отжима",
+          "multiplesoak": "Многократное замачивание",
+          "laundryrefreshing": "Освежение белья",
+          "reload": "Перезагрузка",
+          "hotmoistheatingwetting": "Горячее увлажнение",
+          "hotmoistheatingheating": "Горячий нагрев",
+          "hotmoistheatingwashing": "Горячая стирка",
+          "moistureremoval": "Удаление влаги",
+          "selfcleaning": "Самоочистка",
+          "hygiene": "Гигиена",
+          "smartsoak": "Умное замачивание",
+          "soakpause": "Пауза замачивания",
+          "soakfinished": "Замачивание завершено",
+          "anyphase": "Любая фаза"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Количество завершенных"
+      },
+      "sensor_flex_start": {
+        "name": "Гибкий старт",
+        "state": {
+          "disabled": "Отключено",
+          "enabled": "Включено",
+          "pending": "Ожидание",
+          "scheduled": "Запланировано",
+          "started": "Запущено",
+          "finished": "Завершено"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Фаза процесса сушки",
+        "state": {
+          "steamactive": "Пар активен",
+          "progstarted": "Программа запущена",
+          "drying": "Сушка",
+          "irondryreached": "Достигнута сушка для глажки",
+          "cupboarddryreached": "Достигнута сушка для шкафа",
+          "cubboarddryplusreached": "Достигнута сушка для шкафа плюс",
+          "cooling": "Охлаждение",
+          "finishedanticrease": "Завершено анти-складка",
+          "heatexchangercleaning": "Очистка теплообменника",
+          "slightlydampreached": "Достигнута легкая влажность",
+          "extradryreached": "Достигнута экстра сушка",
+          "quickcare": "Быстрый уход",
+          "depthcarephase1": "Глубокий уход фаза 1",
+          "depthcarephase2": "Глубокий уход фаза 2",
+          "spare": "Запасная"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Температура окружающей среды"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Скорость отжима",
+        "state": {
+          "off": "Выключено",
+          "rpm400": "400 об/мин",
+          "rpm600": "600 об/мин",
+          "rpm700": "700 об/мин",
+          "rpm800": "800 об/мин",
+          "rpm900": "900 об/мин",
+          "rpm1000": "1000 об/мин",
+          "rpm1200": "1200 об/мин",
+          "rpm1400": "1400 об/мин",
+          "rpm1500": "1500 об/мин",
+          "rpm1600": "1600 об/мин",
+          "rinsehold": "Удержание полоскания",
+          "auto": "Авто"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Расчетное общее время программы"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Водяной бак{group_name}",
+        "state": {
+          "ok": "Норма",
+          "empty": "Пусто",
+          "unplugged": "Отключено"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Текущая температура{group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "Прогресс нагрева"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "Сила сигнала WiFi"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Насыщение жирового фильтра"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Насыщение угольного фильтра"
+      },
+      "sensor_hob_zone_state": {
+        "name": "Состояние зоны {group_name}",
+        "state": {
+          "notselectable": "Не выбирается",
+          "off": "Выключено",
+          "active": "Активно",
+          "residuelheat": "Остаточное тепло"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Состояние работы зоны {group_name}",
+        "state": {
+          "inactive": "Неактивно",
+          "ready": "Готово",
+          "delayedstart": "Отложенный старт",
+          "run": "Работает",
+          "pause": "Пауза",
+          "actionrequired": "Требуется действие",
+          "finished": "Завершено",
+          "error": "Ошибка",
+          "aborting": "Прерывание"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Уровень мощности зоны {group_name}",
+        "state": {
+          "off": "Выключено",
+          "keepwarm": "Подогрев",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Турбо 1",
+          "boost2": "Турбо 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Уровень сенсора жарки зоны {group_name}",
+        "state": {
+          "off": "Выключено",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Текущая температура зоны {group_name}"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Прогресс нагрева зоны {group_name}"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Длительность зоны {group_name}"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Прошедшее время программы зоны {group_name}"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Оставшееся время программы зоны {group_name}"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Прогресс программы зоны {group_name}"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Количество ристретто эспрессо"
+      },
+      "sensor_count_coffee": {
+        "name": "Количество кофе"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Количество кофе с молоком"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Количество вспененного молока"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Количество горячего молока"
+      },
+      "sensor_count_hot_water": {
+        "name": "Количество горячей воды"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Количество чашек горячей воды"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Количество порошкового кофе"
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Помощник сушки для всех программ",
+        "state": {
+          "off": "Выключено",
+          "allprograms": "Все программы",
+          "ecoasdefault": "Эко 50"
+        }
+      },
+      "select_hot_water": {
+        "name": "Температура воды",
+        "state": {
+          "coldwater": "Холодная вода",
+          "hotwater": "Горячая вода"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Ополаскиватель"
+      },
+      "select_sound_level_signal": {
+        "name": "Уровень звукового сигнала",
+        "state": {
+          "high": "Высокий",
+          "low": "Низкий",
+          "medium": "Средний",
+          "off": "Выключено"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Жесткость воды"
+      },
+      "select_remote_control_level": {
+        "name": "Удаленное управление",
+        "state": {
+          "monitoring": "Выключено",
+          "manualremotestart": "Ручной удаленный старт",
+          "permanentremotestart": "Постоянный удаленный старт"
+        }
+      },
+      "select_program": {
+        "name": "Выбранная программа",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Интенсив 70",
+          "dishcare_dishwasher_program_auto2": "Авто 2",
+          "dishcare_dishwasher_program_eco50": "Эко 50",
+          "dishcare_dishwasher_program_quick45": "Быстрая 45",
+          "dishcare_dishwasher_program_prerinse": "Предварительное полоскание",
+          "dishcare_dishwasher_program_quick65": "Быстрая 65",
+          "dishcare_dishwasher_program_machinecare": "Уход за машиной",
+          "dishcare_dishwasher_program_nightwash": "Ночная мойка",
+          "dishcare_dishwasher_program_glas40": "Стекло 40",
+          "dishcare_dishwasher_program_kurz60": "Скорость 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Интеллектуальная",
+          "favorite_001": "Избранное 1",
+          "favorite_002": "Избранное 2",
+          "favorite_003": "Избранное 3",
+          "favorite_004": "Избранное 4",
+          "favorite_005": "Избранное 5",
+          "favorite_006": "Избранное 6",
+          "favorite_007": "Избранное 7",
+          "favorite_008": "Избранное 8",
+          "favorite_009": "Избранное 9",
+          "favorite_010": "Избранное 10",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Автоматическая мягкая/30",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Автоматическая 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Хлопок",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Темная стирка",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Деликатные/Шелк",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Анти-микропластик",
+          "laundrycare_washer_program_downduvet_down_down": "Пух",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Очистка барабана (устаревшая)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Очистка барабана",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Легкий уход",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Эко 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Быстрая/Смешанная",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Уличная",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Полоскание",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Чувствительная",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Рубашки/Блузки",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Спортивная одежда",
+          "laundrycare_washer_program_spin_spin_spindrain": "Отжим/Слив",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Пар/Помощь при глажке",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Супер короткая 15мин/30мин",
+          "laundrycare_washer_program_wool_wool_wool": "Шерсть",
+          "laundrycare_common_program_juststart": "Просто начать",
+          "laundrycare_common_program_memory1": "Память 1",
+          "laundrycare_common_program_memory2": "Память 2",
+          "laundrycare_dryer_program_blankets": "Пуховые изделия",
+          "laundrycare_dryer_program_businessshirts": "Рубашки",
+          "laundrycare_dryer_program_cotton": "Хлопок",
+          "laundrycare_dryer_program_dessous": "Нижнее белье",
+          "laundrycare_dryer_program_hygiene": "Гигиена",
+          "laundrycare_dryer_program_inbasket": "Шерсть в корзине",
+          "laundrycare_dryer_program_mix": "Смешанные ткани",
+          "laundrycare_dryer_program_outdoor": "Уличная",
+          "laundrycare_dryer_program_pillow": "Одеяло",
+          "laundrycare_dryer_program_super40": "Быстрая 40мин",
+          "laundrycare_dryer_program_synthetic": "Легкий уход",
+          "laundrycare_dryer_program_timecold": "Программа по времени (холодная)",
+          "laundrycare_dryer_program_timewarm": "Программа по времени (теплая)",
+          "laundrycare_dryer_program_towels": "Полотенца"
+        }
+      },
+      "select_sensitivity_turbidity": {
+        "name": "Чувствительность сенсора мутности",
+        "state": {
+          "standard": "Стандартная",
+          "sensitive": "Чувствительная",
+          "verysensitive": "Очень чувствительная"
+        }
+      },
+      "select_eco_as_default": {
+        "name": "Программа по умолчанию",
+        "state": {
+          "lastprogram": "Последняя программа",
+          "ecoasdefault": "Эко 50"
+        }
+      },
+      "select_power_state": {
+        "name": "Состояние питания",
+        "state": {
+          "mainsoff": "Питание отключено",
+          "off": "Выключено",
+          "on": "Включено",
+          "standby": "Ожидание"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "Температура кофе",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "Количество зерен",
+        "state": {
+          "verymild": "Очень мягкий",
+          "mild": "Мягкий",
+          "mildplus": "Мягкий плюс",
+          "normal": "Нормальный",
+          "normalplus": "Нормальный плюс",
+          "strong": "Крепкий",
+          "strongplus": "Крепкий плюс",
+          "verystrong": "Очень крепкий",
+          "verystrongplus": "Очень крепкий плюс",
+          "extrastrong": "Экстра крепкий",
+          "doubleshot": "Двойной шот",
+          "doubleshotplus": "Двойной шот плюс",
+          "doubleshotplusplus": "Двойной шот плюс плюс",
+          "tripleshot": "Тройной шот",
+          "tripleshotplus": "Тройной шот плюс",
+          "coffeeground": "Молотый кофе"
+        }
+      },
+      "select_beverage_size": {
+        "name": "Размер напитка",
+        "state": {
+          "small": "Маленький",
+          "medium": "Средний",
+          "large": "Большой",
+          "verylarge": "Очень большой"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "Соотношение кофе и молока",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "Температура горячей воды",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "Скорость потока",
+        "state": {
+          "normal": "Нормальная",
+          "intense": "Интенсивная",
+          "intenseplus": "Интенсивная плюс"
+        }
+      },
+      "select_coarsness": {
+        "name": "Грубость",
+        "state": {
+          "coarsness1": "Грубость 1",
+          "coarsness2": "Грубость 2",
+          "coarsness3": "Грубость 3",
+          "coarsness4": "Грубость 4",
+          "coarsness5": "Грубость 5",
+          "coarsness6": "Грубость 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "Крепость кофе",
+        "state": {
+          "strength1": "Крепость 1",
+          "strength2": "Крепость 2",
+          "strength3": "Крепость 3",
+          "strength4": "Крепость 4",
+          "strength5": "Крепость 5",
+          "strength6": "Крепость 6",
+          "strength7": "Крепость 7",
+          "strength8": "Крепость 8",
+          "strength9": "Крепость 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "Выбор аромата",
+        "state": {
+          "fine": "Тонкий",
+          "balanced": "Сбалансированный",
+          "distinctive": "Отличительный"
+        }
+      },
+      "select_bean_container": {
+        "name": "Контейнер для зерен",
+        "state": {
+          "right": "Правый",
+          "left": "Левый"
+        }
+      },
+      "select_shot_count": {
+        "name": "Количество шотов",
+        "state": {
+          "double": "Двойной",
+          "triple": "Тройной"
+        }
+      },
+      "select_cups": {
+        "name": "Чашки",
+        "state": {
+          "two": "Две",
+          "four": "Четыре",
+          "six": "Шесть"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "Автоматическое выключение",
+        "state": {
+          "off": "Выключено",
+          "15min": "15 мин",
+          "30min": "30 мин",
+          "60min": "60 мин"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "Уровень яркости",
+        "state": {
+          "low": "Низкий",
+          "medium": "Средний",
+          "high": "Высокий",
+          "veryhigh": "Очень высокий"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "Режим подсветки дверного кольца",
+        "state": {
+          "off": "Выключено",
+          "on": "Включено",
+          "auto": "Авто"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "Уровень яркости подсветки дверного кольца",
+        "state": {
+          "low": "Низкий",
+          "medium": "Средний",
+          "high": "Высокий",
+          "veryhigh": "Очень высокий"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "Громкость сигнала окончания",
+        "state": {
+          "off": "Выключено",
+          "low": "Низкий",
+          "medium": "Средний",
+          "loud": "Громкий",
+          "veryloud": "Очень громкий"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "Громкость сигнала кнопки",
+        "state": {
+          "off": "Выключено",
+          "low": "Низкий",
+          "medium": "Средний",
+          "loud": "Громкий",
+          "veryloud": "Очень громкий"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "Громкость звука",
+        "state": {
+          "off": "Выключено",
+          "volume1": "Громкость 1",
+          "volume2": "Громкость 2",
+          "volume3": "Громкость 3",
+          "volume4": "Громкость 4"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "Мощность питания"
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "Защита от складок",
+        "state": {
+          "off": "Выключено",
+          "min30": "30 мин",
+          "min60": "60 мин",
+          "min90": "90 мин",
+          "min120": "120 мин",
+          "min180": "180 мин"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "Точная настройка сушки для шкафа",
+        "state": {
+          "off": "Выключено",
+          "plus1": "Плюс 1",
+          "plus2": "Плюс 2",
+          "plus3": "Плюс 3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "Точная настройка сушки для шкафа плюс",
+        "state": {
+          "off": "Выключено",
+          "plus1": "Плюс 1",
+          "plus2": "Плюс 2",
+          "plus3": "Плюс 3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "Точная настройка сушки для глажки",
+        "state": {
+          "off": "Выключено",
+          "plus1": "Плюс 1",
+          "plus2": "Плюс 2",
+          "plus3": "Плюс 3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "Скорость отжима перед сушкой",
+        "state": {
+          "off": "Выключено",
+          "rpm400": "400 об/мин",
+          "rpm600": "600 об/мин",
+          "rpm700": "700 об/мин",
+          "rpm800": "800 об/мин",
+          "rpm900": "900 об/мин",
+          "rpm1000": "1000 об/мин",
+          "rpm1200": "1200 об/мин",
+          "rpm1400": "1400 об/мин",
+          "rpm1500": "1500 об/мин",
+          "rpm1600": "1600 об/мин",
+          "auto": "Авто"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "Цель сушки",
+        "state": {
+          "irondry": "Сушка для глажки",
+          "gentledry": "Щадящая сушка",
+          "cupboarddry": "Сушка для шкафа",
+          "cupboarddryplus": "Сушка для шкафа плюс",
+          "extradry": "Экстра сушка"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "Цель сушки",
+        "state": {
+          "shirt1": "Рубашка 1",
+          "shirt5": "Рубашка 5",
+          "business": "Деловая"
+        }
+      },
+      "select_oven_level": {
+        "name": "Уровень",
+        "state": {
+          "level01": "Уровень 1",
+          "level02": "Уровень 2",
+          "level03": "Уровень 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "Используемый режим нагрева",
+        "state": {
+          "automaticoperation": "Автоматическая работа",
+          "automaticoperationwithmicrowave": "Автоматическая работа с микроволновкой",
+          "bakingsensoroperation": "Работа с сенсором выпечки",
+          "bottomheating": "Нижний нагрев",
+          "defrosting": "Разморозка",
+          "desiccation": "Обезвоживание",
+          "doughproving": "Поднятие теста",
+          "frozenheatupspecial": "Специальный нагрев замороженного",
+          "grilllargearea": "Гриль большая площадь",
+          "grillsmallarea": "Гриль малая площадь",
+          "hotair": "Горячий воздух",
+          "hotaireco": "Горячий воздух эко",
+          "hotairgrilling": "Гриль горячим воздухом",
+          "intensiveheat": "Интенсивный нагрев",
+          "keepwarm": "Подогрев",
+          "microwave": "Микроволновка",
+          "pizzasetting": "Настройка пиццы",
+          "preheatovenware": "Предварительный нагрев посуды",
+          "reheat": "Подогрев",
+          "sabbathprogramme": "Программа Шаббат",
+          "slowcook": "Медленное приготовление",
+          "steam": "Пар",
+          "topbottomheating": "Верхний/нижний нагрев",
+          "topbottomheatingeco": "Верхний/нижний нагрев эко",
+          "breadbaking": "Выпечка хлеба",
+          "steamwithsteamset": "Пар с паровым набором"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "Уровень пиролиза",
+        "state": {
+          "level01": "Уровень 1",
+          "level02": "Уровень 2",
+          "level03": "Уровень 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "Настройка детского замка",
+        "state": {
+          "deactivated": "Деактивирован",
+          "activated": "Активирован",
+          "activatedwithdoorlock": "Активирован с блокировкой двери"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "Задержка включения",
+        "state": {
+          "short": "Короткая",
+          "medium": "Средняя",
+          "long": "Длинная"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "Время работы вентилятора охлаждения",
+        "state": {
+          "short": "Короткое",
+          "medium": "Среднее",
+          "long": "Длинное",
+          "verylong": "Очень длинное"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "Длительность сигнала",
+        "state": {
+          "short": "Короткая",
+          "medium": "Средняя",
+          "long": "Длинная"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "Триггер помощника двери морозилки",
+        "state": {
+          "push": "Нажатие",
+          "pull": "Тяга",
+          "pushpull": "Нажатие/Тяга"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "Сила помощника двери морозилки",
+        "state": {
+          "lowforce": "Низкая",
+          "middleforce": "Средняя",
+          "highforce": "Высокая"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "Интервальная ступень",
+        "state": {
+          "fanoff": "Выключено",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "Ступень отложенного выключения",
+        "state": {
+          "fanoff": "Выключено",
+          "fanstage01": "1",
+          "fanstage02": "2",
+          "fanstage03": "3"
+        }
+      }
+    },
+    "button": {
+      "button_abort_program": {
+        "name": "Прервать"
+      },
+      "button_start_program": {
+        "name": "Запустить"
+      },
+      "button_pause_program": {
+        "name": "Пауза"
+      },
+      "button_resume_program": {
+        "name": "Продолжить"
+      }
+    },
+    "number": {
+      "number_fill_quantity": {
+        "name": "Количество наполнения"
+      },
+      "number_laundry_brightness": {
+        "name": "Яркость"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "Яркость подсветки дверного кольца"
+      },
+      "number_duration": {
+        "name": "Длительность"
+      },
+      "number_laundry_spin_class": {
+        "name": "Класс отжима"
+      },
+      "number_setpoint_freezer": {
+        "name": "Температура морозилки"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "Температура холодильника"
+      },
+      "number_idos1_base_level": {
+        "name": "Объем дозирования i-DOS: моющее средство"
+      },
+      "number_idos2_base_level": {
+        "name": "Объем дозирования i-DOS: моющее средство или кондиционер"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "Установленная температура"
+      },
+      "number_oven_display_brightness": {
+        "name": "Яркость дисплея"
+      },
+      "number_hood_interval_off": {
+        "name": "Время интервала выключения"
+      },
+      "number_hood_interval_on": {
+        "name": "Время интервала включения"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "Время отложенного выключения"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "Чувствительность авто-сенсора"
+      },
+      "number_start_in": {
+        "name": "Запуск через"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "Подсветка дверного кольца"
+      },
+      "light_drum_light": {
+        "name": "Подсветка барабана"
+      },
+      "light_internal": {
+        "name": "Внутренняя подсветка"
+      },
+      "light_cooking_lighting": {
+        "name": "Подсветка"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "Вентилятор"
+      }
+    }
+  },
+  "services": {
+    "start_program": {
+      "name": "Запустить программу",
+      "description": "Запустить выбранную программу",
+      "fields": {
+        "device_id": {
+          "name": "Устройство",
+          "description": "Устройство для запуска программы"
+        },
+        "start_in": {
+          "name": "Запуск через",
+          "description": "Задержка запуска программы"
+        }
+      }
+    },
+    "set_start_in": {
+      "name": "Установить задержку запуска",
+      "description": "Установить задержку запуска",
+      "fields": {
+        "device_id": {
+          "name": "Устройство",
+          "description": "Устройство для установки задержки запуска"
+        },
+        "start_in": {
+          "name": "Задержка",
+          "description": "Установить задержку запуска"
+        }
+      }
+    }
+  }
+}

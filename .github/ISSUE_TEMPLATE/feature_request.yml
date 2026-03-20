@@ -1,0 +1,38 @@
+name: Feature request
+description: Report a missing feature
+labels: ["feature request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue form is for reporting issue with Integration!
+
+        If you have an issue with the Integration, please use the appropriate issue form.
+  - type: textarea
+    attributes:
+      label: Feature Description
+      description: |
+        Provide a clear description of the feature.
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Before submitting a Feature request, please follow these steps
+      description: Please confirm that you have completed the following steps
+      options:
+        - label: The requested feature is not latest beta release of Home Connect Local.
+        - label: The requested feature is available through the HomeConnect App.
+        - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Diagnostics information
+      placeholder: "drag-and-drop the diagnostics file here"
+      description: >-
+        [Download the Integration Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) and drag-and-drop that file into the textbox below.
+        Diagnostics contain the current Appliance state, so it is best to download Diagnostics while the Appliance is in a specific state or before and after perform an action through the HomeConnect App.
+    validations:
+      required: true

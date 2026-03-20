@@ -1,0 +1,65 @@
+name: Issue setting up the Integration
+description: Report an issue with setting up the Home Connect Local Integration.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue form is for reporting issue with Integration setup only!
+
+        If you have an issue with using the Integration or a feature request, please use the appropriate issue form.
+  - type: textarea
+    attributes:
+      label: The problem
+      description: |
+        Provide a clear description of the problem.
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Before submitting a bug report, please follow these troubleshooting steps
+      description: Please confirm that you have completed the following steps
+      options:
+        - label: I have tried the latest beta release of Home Connect Local.
+        - label: I have checked that my Appliance is controllable through the HomeConnect App.
+        - label: I have checked that the HomeConnect App shows a local connection to the Appliance. (Appliance ⇒ Settings ⇒ Scroll down to Network)
+        - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+  - type: input
+    attributes:
+      label: Version of Home Connect Local
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of Home Assistant
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description files
+      placeholder: "drag-and-drop the Description files here"
+      description: |
+        Please upload the `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files from the Profile File here.
+        Do NOT upload the `.json` file or the entire Zip file as it contains personal information.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Logs
+      render: txt
+      description: |
+        Anything in the logs that might be useful?
+        For example, error message, or stack traces.
+        Please copy the full log entry using the copy button in the Upper Right.
+        Can be found in: [Settings ⇒ System ⇒ Logs](https://my.home-assistant.io/redirect/logs/).
+
+        [![Open your Home Assistant instance and show your Home Assistant logs.](https://my.home-assistant.io/badges/logs.svg)](https://my.home-assistant.io/redirect/logs/)
