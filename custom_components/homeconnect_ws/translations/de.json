@@ -410,6 +410,9 @@
       },
       "binary_sensor_freezer_low_voltage": {
         "name": "Niederspannung"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarm abgelaufen{group_name}"
       }
     },
     "sensor": {
@@ -1097,9 +1100,6 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Aktuelle Temperatur{group_name}"
-      },
-      "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarm abgelaufen{group_name}"
       },
       "sensor_heatup_progress": {
         "name": "Aufwärmprozess"
