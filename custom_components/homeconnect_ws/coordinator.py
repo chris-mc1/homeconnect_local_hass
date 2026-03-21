@@ -75,35 +75,37 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     async def _async_setup(self) -> None:
         self.config_entry.async_create_task(self.hass, self._connect())
 
+    def _schedule_reconnect(self) -> None:
+        if self._connecting:
+            self.hass.loop.call_later(MAX_RECONECT_TIME, lambda: self.config_entry.async_create_task(self.hass, self._connect()))
+
     async def _connect(self) -> None:
+        if not self._connecting or self._reconnecting:
+            return
         self.logger.debug(
             "Connecting to %s", self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib")
         )
-        first_failure = True
-        while self._connecting:
-            try:
-                await self.appliance.connect()
-                if self.appliance.session.connected:
-                    self.connected = True  # FIX
-                    self.async_set_updated_data(None)  # FIX
-                    return
-            except (ConnectionFailedError, HCHandshakeError, ClientConnectorError):
-                await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
-                if first_failure:
-                    self.logger.error(msg)  # noqa: TRY400
-                    first_failure = False  # first_failure_fix
-                else:
-                    self.logger.debug(msg)
-            except AllreadyConnectedError:
-                await self.appliance.close()
-                msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
-                self.logger.error(msg)  # noqa: TRY400
-                return
-            except Exception:
-                await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
-                self.logger.exception(msg)
+        try:
+            await self.appliance.connect()
+            if self.appliance.session.connected:
+                self.connected = True  # FIX
+                self.async_set_updated_data(None)  # FIX
+        except (ConnectionFailedError, HCHandshakeError, ClientConnectorError):
+            await self.appliance.close()
+            self.logger.warning(
+                "Can't connect to %s (offline?), retrying in %ds",
+                self.config_entry.data[CONF_HOST],
+                MAX_RECONECT_TIME,
+            )
+            self._schedule_reconnect()
+        except AllreadyConnectedError:
+            await self.appliance.close()
+            msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
+            self.logger.error(msg)  # noqa: TRY400
+        except Exception:
+            await self.appliance.close()
+            msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
+            self.logger.exception(msg)
 
     async def _async_update_data(self) -> None:
         return None
