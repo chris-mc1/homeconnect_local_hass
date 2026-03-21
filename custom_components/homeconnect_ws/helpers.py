@@ -89,7 +89,7 @@ async def get_config_entry_from_call(
     hass: HomeAssistant, service_call: ServiceCall
 ) -> HCConfigEntry | None:
     """Get the config entry from a service call."""
-    config_entry_ids = await async_extract_config_entry_ids(hass, service_call)
+    config_entry_ids = await async_extract_config_entry_ids(service_call)
     for config_entry_id in config_entry_ids:
         config_entry = hass.config_entries.async_get_entry(config_entry_id)
         if config_entry.domain == DOMAIN:
