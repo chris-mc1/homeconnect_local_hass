@@ -133,4 +133,6 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     def _connection_reconnect_callback(self) -> None:
         if not self.appliance.session.connected:
             self.connected = False
+            self._reconnecting = False
             self.async_set_updated_data(None)
+            self.config_entry.async_create_task(self.hass, self._connect())
