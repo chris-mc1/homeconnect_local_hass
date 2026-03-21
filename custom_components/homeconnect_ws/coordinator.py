@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import time
 from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
@@ -63,7 +62,6 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             iv64=config_entry.data.get(CONF_AES_IV, None),
             connection_callback=self._connection_state_callback,
         )
-        self.disconnect_time = time.time()
         if not self.appliance.info:
             msg = "Appliance has no device info"
             raise ConfigEntryError(msg)
