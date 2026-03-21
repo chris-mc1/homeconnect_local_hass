@@ -210,7 +210,7 @@ async def test_select_program(
             action=Action.POST,
             data={
                 "program": 501,
-                "options": [],
+                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
             },
         )
     )
