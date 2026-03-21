@@ -188,7 +188,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                     reason="profile_file_parser_error",
                     description_placeholders={"error": exc.args[0]},
                 )
-            except (KeyError, ValueError):
+            except KeyError, ValueError:
                 return self.async_abort(reason="invalid_profile_file")
 
             if not self.errors:
@@ -265,7 +265,14 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             socket = hc_socket.TlsSocket(host, self.data[CONF_PSK])
         try:
             await socket.connect()
-        except (ClientConnectorSSLError, BinasciiError) as ex:
+
+        except ClientConnectorSSLError as ex:
+            _LOGGER.debug("validate_config failed: %s", ex)
+            if self.data[CONF_MODE] == "TLS":
+                self.errors["base"] = "cannot_connect"
+            else:
+                return self.async_abort(reason="auth_failed")
+        except BinasciiError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             return self.async_abort(reason="auth_failed")
         except (TimeoutError, ClientConnectionError) as ex:
@@ -330,7 +337,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
 
             self._set_encryption_keys(appliance_info)
-        except (KeyError, ValueError):
+        except KeyError, ValueError:
             return self.async_abort(reason="invalid_profile_file")
 
         return await self.async_step_test_connection()

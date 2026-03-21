@@ -442,10 +442,12 @@ async def test_user_auth_failed_ssl_error(
         },
     )
 
-    assert result["type"] is FlowResultType.ABORT
-    assert result["reason"] == "auth_failed"
+    assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "host"
+    assert result["errors"]["base"] == "cannot_connect"
 
     mock_hc_socket.return_value.close.assert_awaited_once()
+    hass.config_entries.flow.async_abort(result["flow_id"])
     mock_setup_entry.assert_not_awaited()
 
 
