@@ -1,4 +1,4 @@
-"""Description for ConsumerProducts Entities."""
+"""Description for CoffeeMaker Entities."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from .descriptions_definitions import (
 if TYPE_CHECKING:
     from .descriptions_definitions import _EntityDescriptionsDefinitionsType
 
-CONSUMER_PRODUCTS_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
+COFFEE_MAKER_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
             key="binary_sensor_bean_container_empty",
