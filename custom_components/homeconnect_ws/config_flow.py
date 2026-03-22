@@ -33,6 +33,7 @@ from homeassistant.helpers.selector import (
     SelectSelectorConfig,
 )
 from homeconnect_websocket import (
+    ConnectionFailedError,
     ConnectionState,
     DeviceDescription,
     HomeAppliance,
@@ -290,7 +291,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         except BinasciiError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             return self.async_abort(reason="auth_failed")
-        except (TimeoutError, ClientConnectionError) as ex:
+        except (TimeoutError, ClientConnectionError, ConnectionFailedError) as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             self.errors["base"] = "cannot_connect"
         finally:
@@ -298,7 +299,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         if self.errors:
             _LOGGER.debug("Connection error, showing host step")
             return await self.async_step_host()
-        _LOGGER.debug("config vaild, adding config entry")
+        _LOGGER.debug("config valid, adding config entry")
         return await self.async_step_create_entry(self.data)
 
     async def async_step_host(self, user_input: dict[str, Any] | None = None) -> FlowResult:
