@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import logging
-import time
 from typing import TYPE_CHECKING
 
+from aiohttp.client_exceptions import ClientConnectorError
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
 from homeassistant.exceptions import ConfigEntryError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -63,7 +63,6 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             iv64=config_entry.data.get(CONF_AES_IV, None),
             connection_callback=self._connection_state_callback,
         )
-        self.disconnect_time = time.time()
         if not self.appliance.info:
             msg = "Appliance has no device info"
             raise ConfigEntryError(msg)
@@ -75,34 +74,37 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     async def _async_setup(self) -> None:
         self.config_entry.async_create_task(self.hass, self._connect())
 
+    def _schedule_reconnect(self) -> None:
+        if self._connecting:
+            self.hass.loop.call_later(MAX_RECONECT_TIME, lambda: self.config_entry.async_create_task(self.hass, self._connect()))
+
     async def _connect(self) -> None:
+        if not self._connecting or self._reconnecting:
+            return
         self.logger.debug(
             "Connecting to %s", self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib")
         )
-        first_failure = True
-        while self._connecting:
-            try:
-                await self.appliance.connect()
-                if self.appliance.session.connected:
-                    self.connected = True  # FIX
-                    self.async_set_updated_data(None)  # FIX
-                    return
-            except (ConnectionFailedError, HCHandshakeError):
-                await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
-                if first_failure:
-                    self.logger.error(msg)  # noqa: TRY400
-                else:
-                    self.logger.debug(msg)
-            except AllreadyConnectedError:
-                await self.appliance.close()
-                msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
-                self.logger.error(msg)  # noqa: TRY400
-                return
-            except Exception:
-                await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
-                self.logger.exception(msg)
+        try:
+            await self.appliance.connect()
+            if self.appliance.session.connected:
+                self.connected = True  # FIX
+                self.async_set_updated_data(None)  # FIX
+        except (ConnectionFailedError, HCHandshakeError, ClientConnectorError):
+            await self.appliance.close()
+            self.logger.warning(
+                "Can't connect to %s (offline?), retrying in %ds",
+                self.config_entry.data[CONF_HOST],
+                MAX_RECONECT_TIME,
+            )
+            self._schedule_reconnect()
+        except AllreadyConnectedError:
+            await self.appliance.close()
+            msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
+            self.logger.error(msg)  # noqa: TRY400
+        except Exception:
+            await self.appliance.close()
+            msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
+            self.logger.exception(msg)
 
     async def _async_update_data(self) -> None:
         return None
@@ -111,8 +113,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         if event == ConnectionState.RECONNECTING:
             if not self._reconnecting:
                 self._reconnecting = True
-                reconnect_timeout = int(self.hass.loop.time()) + MAX_RECONECT_TIME
-                self.hass.loop.call_at(reconnect_timeout, self._connection_reconnect_callback)
+                self.hass.loop.call_later(MAX_RECONECT_TIME, self._connection_reconnect_callback)
 
         elif event == ConnectionState.CONNECTED:
             self.connected = True
@@ -131,4 +132,6 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     def _connection_reconnect_callback(self) -> None:
         if not self.appliance.session.connected:
             self.connected = False
+            self._reconnecting = False
             self.async_set_updated_data(None)
+            self.config_entry.async_create_task(self.hass, self._connect())
