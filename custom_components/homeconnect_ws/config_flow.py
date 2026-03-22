@@ -31,9 +31,10 @@ from homeassistant.helpers.selector import (
     SelectSelectorConfig,
 )
 from homeconnect_websocket import (
+    ConnectionFailedError,
     DeviceDescription,
+    HomeAppliance,
     ParserError,
-    hc_socket,
     parse_device_description,
 )
 
@@ -255,28 +256,43 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
     async def async_step_test_connection(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        """Test connection with Appliance."""
+        """Test connection with Appliance and retrieve live device info.
+
+        A full HomeAppliance connection (rather than a raw socket test) is used here
+        intentionally: the coordinator-based setup in async_setup_entry connects
+        asynchronously and never blocks HA startup, so appliance.info (deviceID, mac,
+        hwVersion, swVersion, etc.) is not guaranteed to be populated at setup time.
+        By doing a blocking connect here — at a point where the device is known to be
+        reachable — we store the complete device info into CONF_DESCRIPTION["info"] once,
+        so that every subsequent async_setup_entry call (e.g. on HA restart) can access
+        it without requiring a live connection.
+        """
         host = self.data[CONF_HOST]
         _LOGGER.debug("Testing connection to %s Appliance", self.data[CONF_MODE])
         self.errors = {}
-        if self.data[CONF_MODE] == "AES":
-            socket = hc_socket.AesSocket(host, self.data[CONF_PSK], self.data[CONF_AES_IV])
-        else:
-            socket = hc_socket.TlsSocket(host, self.data[CONF_PSK])
+        appliance = HomeAppliance(
+            description=self.data[CONF_DESCRIPTION],
+            host=host,
+            app_name="Homeassistant",
+            app_id=self.data[CONF_DEVICE_ID],
+            psk64=self.data[CONF_PSK],
+            iv64=self.data.get(CONF_AES_IV),
+        )
         try:
-            await socket.connect()
+            await appliance.connect()
+            self.data[CONF_DESCRIPTION]["info"].update(appliance.info)
         except (ClientConnectorSSLError, BinasciiError) as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             return self.async_abort(reason="auth_failed")
-        except (TimeoutError, ClientConnectionError) as ex:
+        except (TimeoutError, ClientConnectionError, ConnectionFailedError) as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             self.errors["base"] = "cannot_connect"
         finally:
-            await socket.close()
+            await appliance.close()
         if self.errors:
             _LOGGER.debug("Connection error, showing host step")
             return await self.async_step_host()
-        _LOGGER.debug("config vaild, adding config entry")
+        _LOGGER.debug("config valid, adding config entry")
         return await self.async_step_create_entry(self.data)
 
     async def async_step_host(self, user_input: dict[str, Any] | None = None) -> FlowResult:
