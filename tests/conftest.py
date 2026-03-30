@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock, Mock, patch
 from zipfile import ZipFile
@@ -107,7 +108,7 @@ def mock_process_profile_file() -> Generator[MagicMock]:
     }
     with patch(
         "custom_components.homeconnect_ws.config_flow.HomeConnectConfigFlow._process_profile_file",
-        return_value=device_description,
+        return_value=deepcopy(device_description),
     ) as mock_upload:
         yield mock_upload
 
