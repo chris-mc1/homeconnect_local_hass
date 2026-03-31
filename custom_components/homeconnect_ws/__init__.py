@@ -105,12 +105,11 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             translation_placeholders={"code": err.code, "resource": err.resource},
         ) from None
 
-    @error_decorator
-    async def _set_value_or_raise(entity: Entity, relative_time_in_seconds: int) -> Never:
+    async def _set_value_or_raise(entity: Entity, relative_time_in_seconds: int) -> None:
         try:
             await entity.set_value(relative_time_in_seconds)
-        except CodeResponsError as e:
-            _raise_start_error(e)
+        except CodeResponsError as exc:
+            _raise_start_error(exc)
 
     @error_decorator
     async def handle_start_program(call: ServiceCall) -> ServiceResponse:
@@ -133,8 +132,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         if appliance.selected_program:
             try:
                 await appliance.selected_program.start(options)
-            except CodeResponsError as e:
-                _raise_start_error(e)
+            except CodeResponsError as exc:
+                _raise_start_error(exc)
         else:
             raise ServiceValidationError(
                 translation_domain=DOMAIN,
