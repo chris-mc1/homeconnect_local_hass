@@ -2086,6 +2086,9 @@
     "finish_in_not_available": {
       "message": "'Finish in' is not available on this Appliance"
     },
+    "start_program_error": {
+      "message": "Error {code} starting program, resource {resource}"
+    },
     "no_program_selected": {
       "message": "No Program selected"
     },
