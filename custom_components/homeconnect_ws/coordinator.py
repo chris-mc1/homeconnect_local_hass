@@ -87,7 +87,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     self.connected = True  # FIX
                     self.async_set_updated_data(None)  # FIX
                     return
-            except (ConnectionFailedError, HCHandshakeError):
+            except ConnectionFailedError, HCHandshakeError:
                 await self.appliance.close()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
                 if first_failure:

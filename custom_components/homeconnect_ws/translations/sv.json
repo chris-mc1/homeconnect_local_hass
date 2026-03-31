@@ -410,6 +410,9 @@
       },
       "binary_sensor_freezer_low_voltage": {
         "name": "Låg spänning – frys"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarm – tid slut {group_name}"
       }
     },
     "sensor": {
@@ -847,9 +850,6 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Aktuell temperatur {group_name}"
-      },
-      "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarm – tid slut {group_name}"
       },
       "sensor_heatup_progress": {
         "name": "Uppvärmningsförlopp"

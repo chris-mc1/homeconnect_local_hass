@@ -373,6 +373,9 @@
       },
       "binary_sensor_freezer_low_voltage": {
         "name": "Tension faible"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Alarme dépassée {group_name}"
       }
     },
     "sensor": {
@@ -814,9 +817,6 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Température actuelle {group_name}"
-      },
-      "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarme dépassée {group_name}"
       },
       "sensor_heatup_progress": {
         "name": "Progression du chauffage"
