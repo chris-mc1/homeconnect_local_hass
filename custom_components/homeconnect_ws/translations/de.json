@@ -413,6 +413,9 @@
       },
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm abgelaufen{group_name}"
+      },
+	  "binary_sensor_alarm_clock_elapsed": {
+        "name": "Alarm abgelaufen"
       }
     },
     "sensor": {
