@@ -1925,7 +1925,34 @@
           "fahrenheit": "Basic Carbon filter",
           "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
-      }
+      },
+      "select_hob_ventilation": {
+        "name": "Ventilation",
+        "state": {
+          "off": "Off",
+          "automatic": "Auto",
+          "level01": "Level 1",
+          "level02": "Level 2",
+          "level03": "Level 3",
+          "level04": "Level 4",
+          "level05": "Level 5",
+          "level06": "Level 6",
+          "level07": "Level 7",
+          "level08": "Level 8",
+          "level09": "Level 9",
+          "level10": "Level 10",
+          "level11": "Level 11",
+          "level12": "Level 12",
+          "level13": "Level 13",
+          "level14": "Level 14",
+          "level15": "Level 15",
+          "level16": "Level 16",
+          "level17": "Level 17",
+          "boostlevel1": "Boost 1",
+          "boostlevel2": "Boost 2",
+          "afterrun": "After Run"
+        }
+      }      
     },
     "button": {
       "button_abort_program": {
