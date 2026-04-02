@@ -144,11 +144,11 @@ def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
 
 def generate_hob_zones(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Hob Zone status descriptions."""
-    pattern = re.compile(r"^Cooking\.Hob\.Status\.Zone\.([0-9]*)\..*$")
+    pattern = re.compile(r"^Cooking\.Hob\.Status\.Zone\.([A-Z]?[0-9]+)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
     descriptions = EntityDescriptions(sensor=[])
     for group in groups:
-        group_name = f" {int(group[0])}"
+        group_name = f" {group[0]}"
 
         # State
         entity = f"Cooking.Hob.Status.Zone.{group[0]}.State"
