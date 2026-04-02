@@ -1200,7 +1200,34 @@
           "fanstage02": "2",
           "fanstage03": "3"
         }
-      }
+      },
+      "select_hob_ventilation": {
+        "name": "Вытяжка",
+        "state": {
+          "off": "Выкл",
+          "automatic": "Авто",
+          "level01": "Уровень 1",
+          "level02": "Уровень 2",
+          "level03": "Уровень 3",
+          "level04": "Уровень 4",
+          "level05": "Уровень 5",
+          "level06": "Уровень 6",
+          "level07": "Уровень 7",
+          "level08": "Уровень 8",
+          "level09": "Уровень 9",
+          "level10": "Уровень 10",
+          "level11": "Уровень 11",
+          "level12": "Уровень 12",
+          "level13": "Уровень 13",
+          "level14": "Уровень 14",
+          "level15": "Уровень 15",
+          "level16": "Уровень 16",
+          "level17": "Уровень 17",
+          "boostlevel1": "Турбо 1",
+          "boostlevel2": "Турбо 2",
+          "afterrun": "Дотягивание"
+        }
+      }      
     },
     "button": {
       "button_abort_program": {
