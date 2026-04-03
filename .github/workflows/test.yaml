@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ha-version: ["homeassistant==2024.12.*", "homeassistant==2026.3.*"]
+        ha-version: ["homeassistant==2026.3.*", "homeassistant==2026.4.*"]
         experimental: [false]
         include:
           - ha-version: "homeassistant"
