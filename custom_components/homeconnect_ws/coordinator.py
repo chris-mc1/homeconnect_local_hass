@@ -93,6 +93,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
                 if first_failure:
                     self.logger.error(msg)  # noqa: TRY400
+                    first_failure = False  # first_failure_fix
                 else:
                     self.logger.debug(msg)
             except AllreadyConnectedError:
