@@ -17,7 +17,7 @@
     "homeconnect_websocket"
   ],
   "requirements": [
-    "homeconnect-websocket==1.5.2"
+    "homeconnect-websocket==1.5.3"
   ],
   "version": "1.0.5b10",
   "zeroconf": [
