@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from ipaddress import ip_address
 from typing import TYPE_CHECKING
-from unittest.mock import AsyncMock, MagicMock, Mock
+from unittest.mock import ANY, Mock
 from uuid import uuid4
 
 from custom_components.homeconnect_ws import config_flow
@@ -21,6 +21,7 @@ from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
+from . import MockAppliance
 from .const import (
     MOCK_CONFIG_DATA,
     MOCK_TLS_DEVICE_DESCRIPTION,
@@ -29,6 +30,8 @@ from .const import (
 )
 
 if TYPE_CHECKING:
+    from unittest.mock import AsyncMock, MagicMock
+
     import pytest
     from homeassistant.core import HomeAssistant
 
@@ -62,10 +65,12 @@ async def test_zeroconf_init(
     mock_setup_entry: AsyncMock,
 ) -> None:
     """Test setup from zeroconf discovery."""
-    hc_socket = Mock()
-    tls_socket = Mock(return_value=AsyncMock())
-    hc_socket.TlsSocket = tls_socket
-    monkeypatch.setattr(config_flow, "hc_socket", hc_socket)
+    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
+    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
+
+    randbytes = Mock()
+    randbytes.return_value = bytes.fromhex("01020304")
+    monkeypatch.setattr(config_flow.random, "randbytes", randbytes)
 
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": SOURCE_ZEROCONF}, data=MOCK_ZEROCONF_DATA
@@ -80,19 +85,25 @@ async def test_zeroconf_init(
             CONF_FILE: UPLOADED_FILE,
         },
     )
+    assert appliance.description == MOCK_TLS_DEVICE_DESCRIPTION
+    assert appliance.host == "127.0.0.2"
+    assert appliance.app_name == "Homeassistant"
+    assert appliance.app_id == "01020304"
+    assert appliance.psk64 == MOCK_TLS_DEVICE_INFO["key"]
+    assert appliance.iv64 is None
+    assert appliance.connection_callback == ANY
 
-    tls_socket.assert_called_once_with(
-        "127.0.0.2",
-        MOCK_TLS_DEVICE_INFO["key"],
-    )
-    tls_socket.return_value.connect.assert_awaited_once()
-    tls_socket.return_value.close.assert_awaited_once()
+    appliance._connect.assert_awaited_once()
+    appliance._close.assert_awaited_once()
 
     mock_process_profile_file.assert_called_once_with(UPLOADED_FILE)
 
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert result["title"] == "Test_Brand Test_TLS"
-    assert result["data"][CONF_DESCRIPTION] == MOCK_TLS_DEVICE_DESCRIPTION
+    assert result["data"][CONF_DESCRIPTION] == {
+        "info": MOCK_TLS_DEVICE_INFO,
+        "MOCK_TLS_DEVICE_DESCRIPTION": None,
+    }
     assert result["data"][CONF_HOST] == "127.0.0.2"
     assert result["data"][CONF_PSK] == MOCK_TLS_DEVICE_INFO["key"]
     assert CONF_AES_IV not in result["data"]

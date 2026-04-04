@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import time
+from copy import deepcopy
 from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
@@ -55,7 +56,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             always_update=True,
         )
         self.appliance = HomeAppliance(
-            description=config_entry.data[CONF_DESCRIPTION],
+            description=deepcopy(config_entry.data[CONF_DESCRIPTION]),
             host=config_entry.data[CONF_HOST],
             app_name="Homeassistant",
             app_id=config_entry.data[CONF_DEVICE_ID],

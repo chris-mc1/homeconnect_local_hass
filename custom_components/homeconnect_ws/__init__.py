@@ -177,15 +177,21 @@ async def async_setup_entry(
     coordinator = HomeConnectCoordinator(hass, config_entry)
     appliance = coordinator.appliance
     device_info = DeviceInfo(
-        connections={(CONNECTION_NETWORK_MAC, format_mac(appliance.info["mac"]))},
-        hw_version=appliance.info["hwVersion"],
-        identifiers={(DOMAIN, appliance.info["deviceID"])},
-        name=f"{appliance.info['brand'].capitalize()} {appliance.info['type']}",
-        manufacturer=appliance.info["brand"].capitalize(),
-        model=f"{appliance.info['type']}",
-        model_id=appliance.info["vib"],
-        sw_version=appliance.info["swVersion"],
+        hw_version=appliance.info.get("hwVersion"),
+        identifiers={(DOMAIN, config_entry.unique_id)},
+        model=f"{appliance.info.get('type')}",
+        model_id=appliance.info.get("vib"),
+        sw_version=appliance.info.get("swVersion"),
     )
+
+    if mac := appliance.info.get("mac"):
+        device_info["connections"] = {(CONNECTION_NETWORK_MAC, format_mac(mac))}
+
+    if brand := appliance.info.get("brand"):
+        device_info["manufacturer"] = brand.capitalize()
+
+    if (type_ := appliance.info.get("type")) and brand:
+        device_info["name"] = f"{brand.capitalize()} {type_}"
 
     available_entities = get_available_entities(appliance)
 
