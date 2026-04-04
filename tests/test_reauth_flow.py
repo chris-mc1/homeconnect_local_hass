@@ -37,6 +37,7 @@ async def test_reauth(
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
+    mock_setup_entry: AsyncMock,
 ) -> None:
     """Test a reauthentication flow."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -62,6 +63,7 @@ async def test_reauth(
             CONF_FILE: UPLOADED_FILE,
         },
     )
+    await hass.async_block_till_done()
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reauth_successful"
@@ -70,6 +72,7 @@ async def test_reauth(
 
     appliance._connect.assert_awaited_once()
     appliance._close.assert_awaited_once()
+    mock_setup_entry.assert_awaited_once()
 
 
 async def test_reauth_appliance_not_in_profile(
