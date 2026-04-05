@@ -45,6 +45,18 @@
             },
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
+            },
+            "switch_cleaning_robot_carpet_boost": {
+                "default": "mdi:rug"
+            },
+            "switch_cleaning_robot_do_not_disturb": {
+                "default": "mdi:minus-circle"
+            },
+            "binary_cleaning_robot_battery_low": {
+                "default": "mdi:battery-alert"
+            },
+            "binary_cleaning_robot_low_battery_return": {
+                "default": "mdi:battery-alert"
             }
         },
         "binary_sensor": {
@@ -181,9 +193,6 @@
             "sensor_count_frothy_milk": {
                 "default": "mdi:cup"
             },
-            "sensor_count_frothy_milk": {
-                "default": "mdi:cup"
-            },
             "sensor_count_hot_milk": {
                 "default": "mdi:cup"
             },
@@ -210,6 +219,46 @@
             },
             "sensor_coffeemaker_process_phase": {
                 "default": "mdi:state-machine"
+            },
+            "sensor_cleaning_robot_charging_state": {
+                "default": "mdi:battery-charging"
+            },
+            "sensor_cleaning_robot_process_phase": {
+                "default": "mdi:state-machine"
+            },
+            "sensor_cleaning_robot_main_brush_remaining_time": {
+                "default": "mdi:broom"
+            },
+            "sensor_cleaning_robot_main_brush_total_time": {
+                "default": "mdi:broom"
+            },
+            "sensor_cleaning_robot_side_brush_remaining_time": {
+                "default": "mdi:broom"
+            },
+            "sensor_cleaning_robot_side_brush_total_time": {
+                "default": "mdi:broom"
+            },
+            "sensor_cleaning_robot_filter_remaining_time": {
+                "default": "mdi:air-filter"
+            },
+            "sensor_cleaning_robot_filter_total_time": {
+                "default": "mdi:air-filter"
+            },
+            "sensor_cleaning_robot_clean_water_tank": {
+                "default": "mdi:water",
+                "state": {
+                    "malfunction": "mdi:water-alert",
+                    "empty": "mdi:water-alert",
+                    "notinstalled": "mdi:water-remove"
+                }
+            },
+            "sensor_cleaning_robot_dirt_water_tank": {
+                "default": "mdi:water",
+                "state": {
+                    "malfunction": "mdi:water-alert",
+                    "empty": "mdi:water-alert",
+                    "notinstalled": "mdi:water-remove"
+                }
             }
         },
         "select": {
@@ -310,6 +359,9 @@
             },
             "number_light_internal_brightness": {
                 "default": "mdi:lightbulb"
+            },
+            "number_sound_volume": {
+                "default": "mdi:volume-medium"
             }
         }
     },

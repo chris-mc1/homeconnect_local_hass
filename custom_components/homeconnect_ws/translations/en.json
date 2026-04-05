@@ -205,6 +205,21 @@
       },
       "switch_extra_rinse": {
         "name": "Extra Rinse"
+      },
+      "switch_cleaning_robot_carpet_boost": {
+        "name": "Carpet boost"
+      },
+      "switch_cleaning_robot_mop_extension": {
+        "name": "Mop extension"
+      },
+      "switch_cleaning_robot_stain_detection": {
+        "name": "Stain detection"
+      },
+      "switch_cleaning_robot_do_not_disturb": {
+        "name": "Do not disturb"
+      },
+      "switch_cleaning_robot_foot_control": {
+        "name": "Foot control"
       }
     },
     "binary_sensor": {
@@ -412,6 +427,48 @@
       },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed"
+      },
+      "binary_cleaning_robot_empty_dust_box_inprogress": {
+        "name": "Empty Dust Box in progress"
+      },
+      "binary_cleaning_robot_wash_mop_inprogress": {
+        "name": "Wash Mop in progress"
+      },
+      "binary_cleaning_robot_dry_mop_inprogress": {
+        "name": "Dry Mop in progress"
+      },
+      "binary_cleaning_robot_station_self_cleaning_inprogress": {
+        "name": "Station self cleaning in progress"
+      },
+      "binary_cleaning_robot_dust_bin_not_installed": {
+        "name": "Dust Bin not Installed"
+      },
+      "binary_cleaning_robot_battery_low": {
+        "name": "Battery low"
+      },
+      "binary_cleaning_robot_lifted": {
+        "name": "Robot lifted"
+      },
+      "binary_cleaning_robot_stuck": {
+        "name": "Robot stuck"
+      },
+      "binary_cleaning_robot_dropsensor_dirty": {
+        "name": "Dropsensor dirty"
+      },
+      "binary_cleaning_robot_trapped": {
+        "name": "Robot trapped"
+      },
+      "binary_cleaning_robot_bumper_stuck": {
+        "name": "Bumper stuck"
+      },
+      "binary_cleaning_robot_wet_module_stuck": {
+        "name": "Wet module stuck"
+      },
+      "binary_cleaning_robot_return_station_failed": {
+        "name": "Return to Station failed"
+      },
+      "binary_cleaning_robot_low_battery_return": {
+        "name": "Low Battery return"
       }
     },
     "sensor": {
@@ -1029,6 +1086,124 @@
         "state": {
           "poor": "Poor",
           "filled": "Filled"
+        }
+      },
+      "sensor_cleaning_robot_battery_level": {
+        "name": "Battery"
+      },
+      "sensor_cleaning_robot_charging_state": {
+        "name": "Charging state",
+        "state": {
+          "discharging": "Discharging",
+          "charging": "Charging",
+          "keepingbatterylevel": "Keeping Battery level"
+        }
+      },
+      "sensor_cleaning_robot_process_phase": {
+        "name": "Process Phase",
+        "state": {
+          "chargingbreak": "Charging break",
+          "localizing": "Localizing",
+          "vacuuming": "Vacuuming",
+          "vacuumingandmopping": "Vacuuming and Mopping",
+          "mopping": "Mopping",
+          "returningtostation": "Returning to Station",
+          "servicebreak": "Service break",
+          "mapping": "Mapping"
+        }
+      },
+      "sensor_cleaning_robot_main_brush_remaining_time": {
+        "name": "Main Brush Remaining Time"
+      },
+      "sensor_cleaning_robot_main_brush_total_time": {
+        "name": "Main Brush total Time"
+      },
+      "sensor_cleaning_robot_side_brush_remaining_time": {
+        "name": "Side Brush Remaining Time"
+      },
+      "sensor_cleaning_robot_side_brush_total_time": {
+        "name": "Side Brush total Time"
+      },
+      "sensor_cleaning_robot_filter_remaining_time": {
+        "name": "Filter Remaining Time"
+      },
+      "sensor_cleaning_robot_filter_total_time": {
+        "name": "Filter total Time"
+      },
+      "sensor_cleaning_robot_round_mop_remaining_time": {
+        "name": "Round mop Remaining Time"
+      },
+      "sensor_cleaning_robot_round_mop_total_time": {
+        "name": "Round mop total Time"
+      },
+      "sensor_cleaning_robot_other_components_remaining_time": {
+        "name": "Other components Remaining Time"
+      },
+      "sensor_cleaning_robot_other_components_total_time": {
+        "name": "Other components total Time"
+      },
+      "sensor_cleaning_robot_dust_bag_remaining_time": {
+        "name": "Dust bag Remaining Time"
+      },
+      "sensor_cleaning_robot_dust_bag_total_time": {
+        "name": "Dust bag total Time"
+      },
+      "sensor_cleaning_robot_clean_water_tank": {
+        "name": "Clean water tank",
+        "state": {
+          "malfunction": "Malfunction",
+          "empty": "Empty",
+          "notinstalled": "Not Installed",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_sidebrush": {
+        "name": "Side Brush",
+        "state": {
+          "tangled": "Tangled",
+          "worn": "Worn",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_mainbrush": {
+        "name": "Main Brush",
+        "state": {
+          "tangled": "Tangled",
+          "worn": "Worn",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_mopping_pad_plate": {
+        "name": "Mopping pad plate",
+        "state": {
+          "notinstalled": "Not Installed",
+          "tangled": "Tangled",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_cleaning_sink": {
+        "name": "Cleaning sink",
+        "state": {
+          "notinstalled": "Not Installed",
+          "full": "Full",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_dirt_water_tank": {
+        "name": "Dirt water tank",
+        "state": {
+          "malfunction": "Malfunction",
+          "empty": "Empty",
+          "notinstalled": "Not Installed",
+          "ok": "Ok"
+        }
+      },
+      "sensor_cleaning_robot_dust_bag": {
+        "name": "Dust bag",
+        "state": {
+          "notinstalled": "Not Installed",
+          "full": "Full",
+          "ok": "Ok"
         }
       }
     },
@@ -1925,6 +2100,78 @@
           "fahrenheit": "Basic Carbon filter",
           "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
+      },
+      "select_cleaning_robot_suction_power": {
+        "name": "Suction power",
+        "state": {
+          "silent": "Silent",
+          "standard": "Standard",
+          "max": "Max"
+        }
+      },
+      "select_cleaning_robot_water_flow_rate": {
+        "name": "Water flow rate",
+        "state": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        }
+      },
+      "select_cleaning_robot_cleaning_passes": {
+        "name": "Cleaning passes",
+        "state": {
+          "once": "Once",
+          "twice": "Twice"
+        }
+      },
+      "select_cleaning_robot_cleaning_mode": {
+        "name": "Cleaning mode",
+        "state": {
+          "intelligentmode": "Intelligent mode",
+          "vacuumonly": "Vacuum only",
+          "moponly": "Mop only",
+          "vacuumandmop": "Vacuum and Mop",
+          "mopaftervacuum": "Mop after Vacuum"
+        }
+      },
+      "select_cleaning_robot_cleaning_speed": {
+        "name": "Cleaning speed",
+        "state": {
+          "quick": "Quick",
+          "default": "Default",
+          "intensive": "Intensive"
+        }
+      },
+      "select_cleaning_robot_power_saving_mode": {
+        "name": "Power saving mode",
+        "state": {
+          "standard": "Standard",
+          "eco": "Eco"
+        }
+      },
+      "select_cleaning_robot_carpet_cleaning_strategy": {
+        "name": "Carpet cleaning strategy",
+        "state": {
+          "avoidcarpets": "Avoid Carpets",
+          "enterandlift": "Enter and lift",
+          "enternolift": "Enter no lift"
+        }
+      },
+      "select_cleaning_robot_mop_washing_frequency": {
+        "name": "Mop washing frequency",
+        "state": {
+          "every10min": "Every 10 min",
+          "every15min": "Every 15 min",
+          "every25min": "Every 25 min",
+          "everyroom": "Every room"
+        }
+      },
+      "select_cleaning_robot_mop_washing_mode": {
+        "name": "Mop washing mode",
+        "state": {
+          "eco": "Eco",
+          "intensive": "Intensive"
+        }
       }
     },
     "button": {
@@ -1954,6 +2201,21 @@
       },
       "button_hood_regenerative_carbon_filter_lifetime_reset": {
         "name": "Regenerative Carbon filter lifetime reset"
+      },
+      "button_cleaning_robot_play_sound": {
+        "name": "Play sound"
+      },
+      "button_cleaning_robot_empty_dust_box": {
+        "name": "Empty dust box"
+      },
+      "button_cleaning_robot_wash_mop": {
+        "name": "Wash mop"
+      },
+      "button_cleaning_robot_dry_mop": {
+        "name": "Dry mop"
+      },
+      "button_cleaning_robot_station_self_cleaning": {
+        "name": "Station self cleaning"
       }
     },
     "number": {
@@ -2013,6 +2275,9 @@
       },
       "number_setting_alarm_clock": {
         "name": "Alarm Clock"
+      },
+      "number_sound_volume": {
+        "name": "Sound volume"
       }
     },
     "light": {

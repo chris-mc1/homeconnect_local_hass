@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 from custom_components.homeconnect_ws.helpers import merge_dicts
 
+from .cleaning_robot import CLEANING_ROBOT_ENTITY_DESCRIPTIONS
 from .coffee_maker import COFFEE_MAKER_ENTITY_DESCRIPTIONS
 from .common import COMMON_ENTITY_DESCRIPTIONS
 from .cooking import COOKING_ENTITY_DESCRIPTIONS
@@ -44,6 +45,7 @@ def get_all_entity_description() -> _EntityDescriptionsDefinitionsType:
             DISHCARE_ENTITY_DESCRIPTIONS,
             LAUNDRY_ENTITY_DESCRIPTIONS,
             REFRIGERATION_ENTITY_DESCRIPTIONS,
+            CLEANING_ROBOT_ENTITY_DESCRIPTIONS,
         )
     return ALL_ENTITY_DESCRIPTIONS
 

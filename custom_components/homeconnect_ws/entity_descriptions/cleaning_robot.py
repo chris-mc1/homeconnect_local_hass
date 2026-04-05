@@ -1,0 +1,427 @@
+"""Description for CleaningRobot Entities."""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass
+from homeassistant.components.button import ButtonDeviceClass
+from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.components.switch import SwitchDeviceClass
+from homeassistant.const import EntityCategory, UnitOfTime
+
+from .descriptions_definitions import (
+    HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
+    HCSelectEntityDescription,
+    HCSensorEntityDescription,
+    HCSwitchEntityDescription,
+)
+
+if TYPE_CHECKING:
+    from .descriptions_definitions import _EntityDescriptionsDefinitionsType
+
+CLEANING_ROBOT_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
+    "sensor": [
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_process_phase",
+            entity="ConsumerProducts.CleaningRobot.Status.ProcessPhase",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_main_brush_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.MainBrush.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_main_brush_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.MainBrush.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_side_brush_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.SideBrush.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_side_brush_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.SideBrush.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_filter_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.Filter.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_filter_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.Filter.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_round_mop_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.RoundMop.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_round_mop_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.RoundMop.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_other_components_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.OtherComponents.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_other_components_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.OtherComponents.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_dust_bag_remaining_time",
+            entity="ConsumerProducts.CleaningRobot.Status.DustBag.RemainingTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_dust_bag_total_time",
+            entity="ConsumerProducts.CleaningRobot.Status.DustBag.TotalTime",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+    ],
+    "binary_sensor": [
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_empty_dust_box_inprogress",
+            entity="ConsumerProducts.CleaningRobot.Status.EmptyDustBox.InProgress",
+            device_class=BinarySensorDeviceClass.RUNNING,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_wash_mop_inprogress",
+            entity="ConsumerProducts.CleaningRobot.Status.WashMop.InProgress",
+            device_class=BinarySensorDeviceClass.RUNNING,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_dry_mop_inprogress",
+            entity="ConsumerProducts.CleaningRobot.Status.DryMop.InProgress",
+            device_class=BinarySensorDeviceClass.RUNNING,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_station_self_cleaning_inprogress",
+            entity="ConsumerProducts.CleaningRobot.Status.StationSelfCleaning.InProgress",
+            device_class=BinarySensorDeviceClass.RUNNING,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_dust_bin_not_installed",
+            entity="ConsumerProducts.CleaningRobot.Event.DustBin.NotInstalled",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_battery_low",
+            entity="ConsumerProducts.CleaningRobot.Event.Battery.Low",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_lifted",
+            entity="ConsumerProducts.CleaningRobot.Event.Robot.Lifted",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_stuck",
+            entity="ConsumerProducts.CleaningRobot.Event.Robot.Stuck",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_dropsensor_dirty",
+            entity="ConsumerProducts.CleaningRobot.Event.Dropsensor.Dirty",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_trapped",
+            entity="ConsumerProducts.CleaningRobot.Event.Robot.Trapped",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_bumper_stuck",
+            entity="ConsumerProducts.CleaningRobot.Event.Bumper.Stuck",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_wet_module_stuck",
+            entity="ConsumerProducts.CleaningRobot.Event.WetModule.Stuck",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_return_station_failed",
+            entity="ConsumerProducts.CleaningRobot.Event.Robot.ReturnToStationFailed",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_cleaning_robot_low_battery_return",
+            entity="ConsumerProducts.CleaningRobot.Event.Robot.LowBatteryReturn",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present"},
+            value_off={"Off", "Confirmed"},
+        ),
+    ],
+    "select": [
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_suction_power",
+            entity="ConsumerProducts.CleaningRobot.Option.SuctionPower",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_water_flow_rate",
+            entity="ConsumerProducts.CleaningRobot.Option.WaterFlowRate",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_cleaning_passes",
+            entity="ConsumerProducts.CleaningRobot.Option.CleaningPasses",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_cleaning_mode",
+            entity="ConsumerProducts.CleaningRobot.Option.CleaningMode",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_cleaning_speed",
+            entity="ConsumerProducts.CleaningRobot.Option.CleaningSpeed",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_power_saving_mode",
+            entity="ConsumerProducts.CleaningRobot.Setting.PowerSavingMode",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_carpet_cleaning_strategy",
+            entity="ConsumerProducts.CleaningRobot.Setting.CarpetCleaningStrategy",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_mop_washing_frequency",
+            entity="ConsumerProducts.CleaningRobot.Setting.Station.MopWashingFrequency",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_cleaning_robot_mop_washing_mode",
+            entity="ConsumerProducts.CleaningRobot.Setting.Station.MopWashingMode",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+    ],
+    "switch": [
+        HCSwitchEntityDescription(
+            key="switch_cleaning_robot_carpet_boost",
+            entity="ConsumerProducts.CleaningRobot.Option.CarpetBoostEnabled",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_cleaning_robot_mop_extension",
+            entity="ConsumerProducts.CleaningRobot.Option.MopExtensionEnabled",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_cleaning_robot_stain_detection",
+            entity="ConsumerProducts.CleaningRobot.Option.StainDetectionEnabled",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_cleaning_robot_do_not_disturb",
+            entity="ConsumerProducts.CleaningRobot.Setting.DoNotDisturb.Enabled",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_cleaning_robot_foot_control",
+            entity="ConsumerProducts.CleaningRobot.Setting.FootControlEnabled",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+    ],
+    "event_sensor": [
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_clean_water_tank",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Station.CleanWaterTank.Malfunction",
+                "ConsumerProducts.CleaningRobot.Event.CleanWaterTank.Empty",
+                "ConsumerProducts.CleaningRobot.Event.Station.CleanWaterTank.NotInstalled",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["malfunction", "empty", "notinstalled", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_sidebrush",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Sidebrush.Tangled",
+                "ConsumerProducts.CleaningRobot.Event.Sidebrush.Worn",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["tangled", "worn", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_mainbrush",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Mainbrush.Tangled",
+                "ConsumerProducts.CleaningRobot.Event.Mainbrush.Worn",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["tangled", "worn", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_mopping_pad_plate",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.MoppingPadPlate.NotInstalled",
+                "ConsumerProducts.CleaningRobot.Event.MoppingPadPlate.Tangled",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["notinstalled", "tangled", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_cleaning_sink",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Station.CleaningSink.BaseNotInstalled",
+                "ConsumerProducts.CleaningRobot.Event.CleaningSink.Full",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["notinstalled", "full", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_dirt_water_tank",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Station.DirtWaterTank.Malfunction",
+                "ConsumerProducts.CleaningRobot.Event.DirtWaterTank.Empty",
+                "ConsumerProducts.CleaningRobot.Event.Station.DirtWaterTank.NotInstalled",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["malfunction", "empty", "notinstalled", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_cleaning_robot_dust_bag",
+            entities=[
+                "ConsumerProducts.CleaningRobot.Event.Station.DustBag.BaseNotInstalled",
+                "ConsumerProducts.CleaningRobot.Event.DustBag.Full",
+            ],
+            device_class=SensorDeviceClass.ENUM,
+            options=["notinstalled", "full", "ok"],
+        ),
+    ],
+    "button": [
+        HCButtonEntityDescription(
+            key="button_cleaning_robot_play_sound",
+            entity="ConsumerProducts.CleaningRobot.Command.PlaySoundToLocateRobot",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=ButtonDeviceClass.IDENTIFY,
+        ),
+        HCButtonEntityDescription(
+            key="button_cleaning_robot_empty_dust_box",
+            entity="ConsumerProducts.CleaningRobot.Command.EmptyDustBox",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCButtonEntityDescription(
+            key="button_cleaning_robot_wash_mop",
+            entity="ConsumerProducts.CleaningRobot.Command.WashMop",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCButtonEntityDescription(
+            key="button_cleaning_robot_dry_mop",
+            entity="ConsumerProducts.CleaningRobot.Command.DryMop",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCButtonEntityDescription(
+            key="button_cleaning_robot_station_self_cleaning",
+            entity="ConsumerProducts.CleaningRobot.Command.StationSelfCleaning",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+    ],
+}
