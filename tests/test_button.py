@@ -19,11 +19,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("button.fake_brand_homeappliance_activeprogram")
     assert state
@@ -43,7 +43,7 @@ async def test_start(
 ) -> None:
     """Test pressing start button."""
     entity_id = "button.fake_brand_homeappliance_activeprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
     await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
     await hass.async_block_till_done()
 
@@ -73,7 +73,7 @@ async def test_abort(
 ) -> None:
     """Test pressing abort button."""
     entity_id = "button.fake_brand_homeappliance_abortprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         domain=BUTTON_DOMAIN,

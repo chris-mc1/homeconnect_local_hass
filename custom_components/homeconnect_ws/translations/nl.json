@@ -1435,6 +1435,8 @@
           "laundrycare_common_program_memory8": "Opgeslagen 8",
           "laundrycare_dryer_program_blankets": "Dekens",
           "laundrycare_dryer_program_businessshirts": "Overhemden/blouses",
+          "laundrycare_dryer_program_businessshirts_easyiron": "Overhemden/blouses kreukherstellend",
+          "laundrycare_dryer_program_connecteddry": "intelligentDry",
           "laundrycare_dryer_program_cotton": "Katoen",
           "laundrycare_dryer_program_dessous": "Lingerie",
           "laundrycare_dryer_program_delicates": "Delicates",

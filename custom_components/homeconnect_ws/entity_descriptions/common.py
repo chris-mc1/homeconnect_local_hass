@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import sys
 from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import (
@@ -262,6 +263,12 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Status.InteriorIlluminationActive",
             entity_category=EntityCategory.DIAGNOSTIC,
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_alarm_clock_elapsed",
+            entity="BSH.Common.Event.AlarmClockElapsed",
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
     ],
     "select": [
         HCSelectEntityDescription(
@@ -271,13 +278,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_registry_enabled_default=False,
             has_state_translation=True,
         ),
-        HCSelectEntityDescription(
-            key="select_remote_control_level",
-            entity="BSH.Common.Setting.RemoteControlLevel",
-            entity_category=EntityCategory.CONFIG,
-            entity_registry_enabled_default=False,
-            has_state_translation=True,
-        ),
+        # cleanup: duplicate select_remote_control_level entry removed
         generate_temperature_unit,
     ],
     "sensor": [
@@ -339,16 +340,16 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 {
                     "name": "Last Start",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: entity.value["start"]
-                    if entity.value is not None
-                    else None,
+                    "value_fn": lambda entity: (
+                        entity.value["start"] if entity.value is not None else None
+                    ),
                 },
                 {
                     "name": "Last End",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: entity.value["end"]
-                    if entity.value is not None
-                    else None,
+                    "value_fn": lambda entity: (
+                        entity.value["end"] if entity.value is not None else None
+                    ),
                 },
             ],
         ),
@@ -427,6 +428,15 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=UnitOfTime.SECONDS,
             mode=NumberMode.AUTO,
             entity_registry_enabled_default=False,
+        ),
+        HCNumberEntityDescription(
+            key="number_setting_alarm_clock",
+            translation_key="number_setting_alarm_clock",
+            entity="BSH.Common.Setting.AlarmClock",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            native_max_value=sys.float_info.max,
+            mode=NumberMode.BOX,
         ),
     ],
     "wifi": [generate_wifi],

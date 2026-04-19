@@ -101,7 +101,7 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
     return descriptions
 
 
-def generate_oven_settings(appliance: HomeAppliance) -> HCFanEntityDescription:
+def generate_oven_settings(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven status descriptions."""
     pattern = re.compile(r"^Cooking\.Oven\.Setting\.Cavity\.([0-9]*)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
@@ -115,7 +115,7 @@ def generate_oven_settings(appliance: HomeAppliance) -> HCFanEntityDescription:
             descriptions["number"].append(
                 HCNumberEntityDescription(
                     key=f"number_oven_setting_{group[0]}_alarm_clock",
-                    translation_key="number_oven_setting_alarm_clock",
+                    translation_key="number_setting_alarm_clock",
                     translation_placeholders={"group_name": group_name},
                     entity=entity,
                     device_class=NumberDeviceClass.DURATION,
@@ -399,6 +399,21 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Hood.Status.CarbonFilterSaturation",
             native_unit_of_measurement=PERCENTAGE,
         ),
+        HCSensorEntityDescription(
+            key="sensor_oven_water_tank",
+            entities=(
+                "Cooking.Oven.Status.WaterTankUnplugged",
+                "Cooking.Oven.Status.WaterTankEmpty",
+            ),
+            device_class=SensorDeviceClass.ENUM,
+            options=["unplugged", "empty", "ok"],
+        ),
+        HCSensorEntityDescription(
+            key="sensor_oven_current_temperature",
+            entity="Cooking.Oven.Status.CurrentCavityTemperature",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        ),
     ],
     "dynamic": [
         generate_oven_status,
@@ -566,4 +581,5 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
         ),
     ],
+    "binary_sensor": [],
 }

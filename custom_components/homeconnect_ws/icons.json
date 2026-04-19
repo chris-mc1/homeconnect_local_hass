@@ -42,6 +42,9 @@
             },
             "switch_laundry_idos2_active": {
                 "default": "mdi:office-building-cog"
+            },
+            "switch_extra_rinse": {
+                "default": "mdi:water-plus"
             }
         },
         "binary_sensor": {

@@ -17,11 +17,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("sensor.fake_brand_homeappliance_sensor")
     assert state
@@ -59,7 +59,7 @@ async def test_update(
 ) -> None:
     """Test updating entity."""
     entity_id = "sensor.fake_brand_homeappliance_sensor"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Sensor"].update({"value": 5})
     await hass.async_block_till_done()
@@ -75,7 +75,7 @@ async def test_update_enum(
 ) -> None:
     """Test updating entity with enum."""
     entity_id = "sensor.fake_brand_homeappliance_sensor_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Sensor.Enum"].update({"value": 0})
     await hass.async_block_till_done()
@@ -97,7 +97,7 @@ async def test_update_event(
 ) -> None:
     """Test updating event sensor."""
     entity_id = "sensor.fake_brand_homeappliance_sensor_event"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Event1"].update({"value": 0})
     await mock_appliance.entities["Test.Event2"].update({"value": 0})
@@ -132,7 +132,7 @@ async def test_update_active_program(
 ) -> None:
     """Test updating active program entity."""
     entity_id = "sensor.fake_brand_homeappliance_activeprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.ActiveProgram"].update({"value": 500})
     await hass.async_block_till_done()

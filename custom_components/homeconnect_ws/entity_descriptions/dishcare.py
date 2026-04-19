@@ -92,6 +92,36 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        # FlexSpray error events
+        # NOTE: Bosch refers to this feature as "PowerControl" in marketing/UI.
+        # The protocol/API objects use the name "FlexSpray", which is kept here.
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_flexspray_error_blocked",
+            entity="Dishcare.Dishwasher.Event.FlexSpray.Error.Blocked",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_flexspray_error_general",
+            entity="Dishcare.Dishwasher.Event.FlexSpray.Error.General",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_flexspray_error_spray_arm_not_mounted",
+            entity="Dishcare.Dishwasher.Event.FlexSpray.Error.SprayArmNotMounted",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
     ],
     "event_sensor": [
         HCSensorEntityDescription(
@@ -143,6 +173,13 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
+            key="select_sound_level_key",
+            entity="Dishcare.Dishwasher.Setting.SoundLevelKey",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
             key="select_water_hardness",
             entity="Dishcare.Dishwasher.Setting.WaterHardness",
             entity_category=EntityCategory.CONFIG,
@@ -159,6 +196,73 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_eco_as_default",
             entity="Dishcare.Dishwasher.Setting.EcoAsDefault",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        # FlexSpray configuration options
+        # NOTE: Bosch refers to this feature as "PowerControl" in marketing/UI.
+        # The protocol/API objects use the name "FlexSpray", which is kept here.
+        HCSelectEntityDescription(
+            key="select_flexspray_type",
+            entity="Dishcare.Dishwasher.Option.FlexSpray.Type",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_front_left",
+            entity="Dishcare.Dishwasher.Option.FlexSpray.FrontLeft",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_back_left",
+            entity="Dishcare.Dishwasher.Option.FlexSpray.BackLeft",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_back_right",
+            entity="Dishcare.Dishwasher.Option.FlexSpray.BackRight",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_front_right",
+            entity="Dishcare.Dishwasher.Option.FlexSpray.FrontRight",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        # FlexSpray custom settings
+        HCSelectEntityDescription(
+            key="select_flexspray_custom_front_left",
+            entity="Dishcare.Dishwasher.Setting.FlexSpray.Custom.FrontLeft",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_custom_back_left",
+            entity="Dishcare.Dishwasher.Setting.FlexSpray.Custom.BackLeft",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_custom_back_right",
+            entity="Dishcare.Dishwasher.Setting.FlexSpray.Custom.BackRight",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_flexspray_custom_front_right",
+            entity="Dishcare.Dishwasher.Setting.FlexSpray.Custom.FrontRight",
             entity_category=EntityCategory.CONFIG,
             entity_registry_enabled_default=False,
             has_state_translation=True,
@@ -203,6 +307,14 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Dishcare.Dishwasher.Option.BrillianceDry",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        # Also referred to as "CrystalDry"
+        HCSwitchEntityDescription(
+            key="switch_zeolite_dry",
+            entity="Dishcare.Dishwasher.Option.ZeoliteDry",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
         HCSwitchEntityDescription(
             key="switch_extra_dry",
             entity="Dishcare.Dishwasher.Setting.ExtraDry",
@@ -227,6 +339,11 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_half_load",
             entity="Dishcare.Dishwasher.Option.HalfLoad",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_extra_rinse",
+            entity="Dishcare.Dishwasher.Option.ExtraRinse",
             device_class=SwitchDeviceClass.SWITCH,
         ),
     ],

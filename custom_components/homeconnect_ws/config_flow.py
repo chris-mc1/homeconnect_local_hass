@@ -6,7 +6,9 @@ import json
 import logging
 import random
 import re
+from asyncio import Event, wait_for
 from binascii import Error as BinasciiError
+from copy import deepcopy
 from typing import TYPE_CHECKING, Any
 from zipfile import ZipFile
 
@@ -31,9 +33,10 @@ from homeassistant.helpers.selector import (
     SelectSelectorConfig,
 )
 from homeconnect_websocket import (
+    ConnectionState,
     DeviceDescription,
+    HomeAppliance,
     ParserError,
-    hc_socket,
     parse_device_description,
 )
 
@@ -188,7 +191,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                     reason="profile_file_parser_error",
                     description_placeholders={"error": exc.args[0]},
                 )
-            except (KeyError, ValueError):
+            except KeyError, ValueError:
                 return self.async_abort(reason="invalid_profile_file")
 
             if not self.errors:
@@ -256,23 +259,42 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Test connection with Appliance."""
-        host = self.data[CONF_HOST]
         _LOGGER.debug("Testing connection to %s Appliance", self.data[CONF_MODE])
         self.errors = {}
-        if self.data[CONF_MODE] == "AES":
-            socket = hc_socket.AesSocket(host, self.data[CONF_PSK], self.data[CONF_AES_IV])
-        else:
-            socket = hc_socket.TlsSocket(host, self.data[CONF_PSK])
+        event = Event()
+
+        async def connection_callback(state: ConnectionState) -> None:
+            if state == ConnectionState.CONNECTED:
+                event.set()
+
+        appliance = HomeAppliance(
+            description=deepcopy(self.data[CONF_DESCRIPTION]),
+            host=self.data[CONF_HOST],
+            app_name="Homeassistant",
+            app_id=self.data[CONF_DEVICE_ID],
+            psk64=self.data[CONF_PSK],
+            iv64=self.data.get(CONF_AES_IV, None),
+            connection_callback=connection_callback,
+        )
         try:
-            await socket.connect()
-        except (ClientConnectorSSLError, BinasciiError) as ex:
+            await appliance.connect()
+            await wait_for(event.wait(), timeout=20)
+            self.data[CONF_DESCRIPTION]["info"].update(appliance.info)
+
+        except ClientConnectorSSLError as ex:
+            _LOGGER.debug("validate_config failed: %s", ex)
+            if self.data[CONF_MODE] == "TLS":
+                self.errors["base"] = "cannot_connect"
+            else:
+                return self.async_abort(reason="auth_failed")
+        except BinasciiError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             return self.async_abort(reason="auth_failed")
         except (TimeoutError, ClientConnectionError) as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             self.errors["base"] = "cannot_connect"
         finally:
-            await socket.close()
+            await appliance.close()
         if self.errors:
             _LOGGER.debug("Connection error, showing host step")
             return await self.async_step_host()
@@ -330,7 +352,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
 
             self._set_encryption_keys(appliance_info)
-        except (KeyError, ValueError):
+        except KeyError, ValueError:
             return self.async_abort(reason="invalid_profile_file")
 
         return await self.async_step_test_connection()

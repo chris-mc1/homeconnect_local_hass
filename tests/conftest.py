@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock, Mock, patch
 from zipfile import ZipFile
 
 import pytest
 from custom_components import homeconnect_ws
-from custom_components.homeconnect_ws import entity_descriptions
+from custom_components.homeconnect_ws import coordinator, entity_descriptions
 from homeconnect_websocket.testutils import MockAppliance
 
 if TYPE_CHECKING:
@@ -107,7 +108,7 @@ def mock_process_profile_file() -> Generator[MagicMock]:
     }
     with patch(
         "custom_components.homeconnect_ws.config_flow.HomeConnectConfigFlow._process_profile_file",
-        return_value=device_description,
+        return_value=deepcopy(device_description),
     ) as mock_upload:
         yield mock_upload
 
@@ -124,5 +125,8 @@ def mock_appliance(
         psk64 = None
         iv64 = None
     appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", psk64, iv64)
-    monkeypatch.setattr(homeconnect_ws, "HomeAppliance", Mock(return_value=appliance))
+    appliance.session.connected = True
+    monkeypatch.setattr(coordinator, "HomeAppliance", Mock(return_value=appliance))
+    monkeypatch.setattr(coordinator.HomeConnectCoordinator, "connected", True)
+
     return appliance

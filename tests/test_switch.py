@@ -26,11 +26,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,
+    mock_appliance: MockAppliance,  # noqa: ARG001
     patch_entity_description: None,  # noqa: ARG001
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     state = hass.states.get("switch.fake_brand_homeappliance_switch")
     assert state
@@ -52,7 +52,7 @@ async def test_update(
 ) -> None:
     """Test updating entity."""
     entity_id = "switch.fake_brand_homeappliance_switch"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Switch"].update({"value": False})
     await hass.async_block_till_done()
@@ -76,7 +76,7 @@ async def test_update_enum(
 ) -> None:
     """Test updating entity with enum."""
     entity_id = "switch.fake_brand_homeappliance_switch_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await mock_appliance.entities["Test.Switch.Enum"].update({"value": 0})
     await hass.async_block_till_done()
@@ -100,7 +100,7 @@ async def test_turn_on(
 ) -> None:
     """Test turning on."""
     entity_id = "switch.fake_brand_homeappliance_switch"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         domain=SWITCH_DOMAIN,
@@ -125,7 +125,7 @@ async def test_turn_on_enum(
 ) -> None:
     """Test turning on with enum."""
     entity_id = "switch.fake_brand_homeappliance_switch_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         domain=SWITCH_DOMAIN,
@@ -149,7 +149,7 @@ async def test_turn_off(
 ) -> None:
     """Test turning off."""
     entity_id = "switch.fake_brand_homeappliance_switch"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         domain=SWITCH_DOMAIN,
@@ -174,7 +174,7 @@ async def test_turn_off_enum(
 ) -> None:
     """Test turning off with enum."""
     entity_id = "switch.fake_brand_homeappliance_switch_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA, mock_appliance)
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
 
     await hass.services.async_call(
         domain=SWITCH_DOMAIN,
