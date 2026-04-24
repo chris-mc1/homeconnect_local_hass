@@ -250,6 +250,9 @@
       "sensor_remaining_program_time": {
         "name": "Resterende tijd"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Verstreken tijd"
+      },      
       "sensor_program_progress": {
         "name": "Programmavoortgang"
       },
