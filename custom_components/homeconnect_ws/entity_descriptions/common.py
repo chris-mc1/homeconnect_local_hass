@@ -300,7 +300,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Option.ElapsedProgramTime",
             device_class=SensorDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
-            suggested_unit_of_measurement=UnitOfTime.MINUTES,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
         ),        
         HCSensorEntityDescription(
             key="sensor_program_progress",
