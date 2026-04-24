@@ -418,6 +418,9 @@
       "sensor_remaining_program_time": {
         "name": "Remaining Program Time"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Elapsed Program Time"
+      },
       "sensor_program_progress": {
         "name": "Program Progress"
       },
