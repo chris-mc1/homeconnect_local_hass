@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import sys
 from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import (
@@ -21,7 +20,6 @@ from homeassistant.const import (
     EntityCategory,
     UnitOfTime,
 )
-from homeconnect_websocket.entities import Execution
 
 from .descriptions_definitions import (
     EntityDescriptions,
@@ -45,22 +43,6 @@ POWER_SWITCH_VALUE_MAPINGS = (
     ("On", "Standby"),
     ("Standby", "Off"),
 )
-
-
-def generate_start_button(appliance: HomeAppliance) -> EntityDescriptions:
-    """Get Start Button description."""
-    programs = list(
-        filter(
-            lambda program: program.execution == Execution.SELECT_AND_START,
-            appliance.programs.values(),
-        )
-    )
-    if len(programs) > 0:
-        return HCButtonEntityDescription(
-            key="button_start_program",
-            entity="BSH.Common.Root.ActiveProgram",
-        )
-    return None
 
 
 def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
@@ -163,53 +145,12 @@ def generate_program(appliance: HomeAppliance) -> EntityDescriptions:
     return descriptions
 
 
-def generate_wifi(appliance: HomeAppliance) -> EntityDescriptions:
-    """Get WiFi sensor description."""
-    entity = appliance.entities.get("BSH.Common.Status.WiFiSignalStrength")
-    if entity is None:
-        return HCSensorEntityDescription(
-            key="sensor_wifi_signal_strength",
-            device_class=SensorDeviceClass.SIGNAL_STRENGTH,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
-            entity_category=EntityCategory.DIAGNOSTIC,
-            entity_registry_enabled_default=False,
-        )
-    return None
-
-
-def generate_temperature_unit(appliance: HomeAppliance) -> HCSelectEntityDescription | None:
-    """Get Temperature unit description."""
-    entity = appliance.entities.get("BSH.Common.Setting.TemperatureUnit")
-    if entity and len(entity.enum) > 2:
-        return HCSelectEntityDescription(
-            key="select_temperature_unit",
-            entity="BSH.Common.Setting.TemperatureUnit",
-            device_class=SensorDeviceClass.ENUM,
-            entity_category=EntityCategory.CONFIG,
-            entity_registry_enabled_default=False,
-            has_state_translation=True,
-        )
-    return None
-
-
 COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
-    "button": [
+    "abort_button": [
         HCButtonEntityDescription(
             key="button_abort_program",
             entity="BSH.Common.Command.AbortProgram",
-        ),
-        HCButtonEntityDescription(
-            key="button_pause_program",
-            entity="BSH.Common.Command.PauseProgram",
-        ),
-        HCButtonEntityDescription(
-            key="button_resume_program",
-            entity="BSH.Common.Command.ResumeProgram",
-        ),
-        HCButtonEntityDescription(
-            key="button_mains_power_off",
-            entity="BSH.Common.Command.MainsPowerOff",
-        ),
+        )
     ],
     "binary_sensor": [
         HCBinarySensorEntityDescription(
@@ -252,22 +193,9 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Off"},
         ),
         HCBinarySensorEntityDescription(
-            key="binary_sensor_program_finished",
-            entity="BSH.Common.Event.ProgramFinished",
-            entity_category=EntityCategory.DIAGNOSTIC,
-            value_on={"Present", "Confirmed"},
-            value_off={"Off"},
-        ),
-        HCBinarySensorEntityDescription(
             key="binary_sensor_interior_illumination",
             entity="BSH.Common.Status.InteriorIlluminationActive",
             entity_category=EntityCategory.DIAGNOSTIC,
-        ),
-        HCBinarySensorEntityDescription(
-            key="binary_sensor_alarm_clock_elapsed",
-            entity="BSH.Common.Event.AlarmClockElapsed",
-            value_on={"Present", "Confirmed"},
-            value_off={"Off"},
         ),
     ],
     "select": [
@@ -278,8 +206,6 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_registry_enabled_default=False,
             has_state_translation=True,
         ),
-        # cleanup: duplicate select_remote_control_level entry removed
-        generate_temperature_unit,
     ],
     "sensor": [
         HCSensorEntityDescription(
@@ -316,18 +242,10 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="sensor_operation_state",
             entity="BSH.Common.Status.OperationState",
             device_class=SensorDeviceClass.ENUM,
-            has_state_translation=True,
         ),
         HCSensorEntityDescription(
             key="sensor_start_in",
             entity="BSH.Common.Option.StartInRelative",
-            device_class=SensorDeviceClass.DURATION,
-            native_unit_of_measurement=UnitOfTime.SECONDS,
-            suggested_unit_of_measurement=UnitOfTime.HOURS,
-        ),
-        HCSensorEntityDescription(
-            key="sensor_finish_in",
-            entity="BSH.Common.Option.FinishInRelative",
             device_class=SensorDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
             suggested_unit_of_measurement=UnitOfTime.HOURS,
@@ -342,16 +260,12 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 {
                     "name": "Last Start",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: (
-                        entity.value["start"] if entity.value is not None else None
-                    ),
+                    "value_fn": lambda entity: entity.value["start"],
                 },
                 {
                     "name": "Last End",
                     "entity": "BSH.Common.Status.ProgramSessionSummary.Latest",
-                    "value_fn": lambda entity: (
-                        entity.value["end"] if entity.value is not None else None
-                    ),
+                    "value_fn": lambda entity: entity.value["end"],
                 },
             ],
         ),
@@ -399,13 +313,62 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
         generate_door_state,
     ],
-    "start_button": [generate_start_button],
+    "start_button": [
+        HCButtonEntityDescription(
+            key="button_start_program",
+            entity="BSH.Common.Root.ActiveProgram",
+        )
+    ],
     "switch": [
         HCSwitchEntityDescription(
             key="switch_child_lock",
             entity="BSH.Common.Setting.ChildLock",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        # --- Begin local patch: missing Boolean readWrite settings -----------
+        # These switches are only instantiated for appliances that actually
+        # expose the matching setting (the integration filters by
+        # `appliance.entities.get(entity)`), so adding them here is safe.
+        # CoffeeMaker: heated cup tray on top of the appliance
+        HCSwitchEntityDescription(
+            key="switch_cup_warmer",
+            entity="ConsumerProducts.CoffeeMaker.Setting.CupWarmer",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        # CoffeeMaker: water filter installed flag (set after replacing filter)
+        HCSwitchEntityDescription(
+            key="switch_water_filter",
+            entity="ConsumerProducts.CoffeeMaker.Setting.WaterFilter",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        # CoffeeMaker: leave user profiles automatically after a beverage
+        HCSwitchEntityDescription(
+            key="switch_leave_profiles_automatically",
+            entity="ConsumerProducts.CoffeeMaker.Setting.LeaveProfilesAutomatically",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        # CoffeeMaker: playlist mode (sequential beverage queue)
+        HCSwitchEntityDescription(
+            key="switch_playlist_mode",
+            entity="ConsumerProducts.CoffeeMaker.Setting.PlaylistMode",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        # BSH common: allow connection to Home Connect cloud backend.
+        # Disabled by default in the registry because flipping this off when
+        # you don't expect it will sever your Home Connect app.
+        HCSwitchEntityDescription(
+            key="switch_allow_backend_connection",
+            entity="BSH.Common.Setting.AllowBackendConnection",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        # --- End local patch ------------------------------------------------
     ],
     "number": [
         HCNumberEntityDescription(
@@ -415,32 +378,6 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=UnitOfTime.SECONDS,
             mode=NumberMode.AUTO,
         ),
-        HCNumberEntityDescription(
-            key="number_start_in",
-            entity="BSH.Common.Option.StartInRelative",
-            device_class=NumberDeviceClass.DURATION,
-            native_unit_of_measurement=UnitOfTime.SECONDS,
-            mode=NumberMode.AUTO,
-            entity_registry_enabled_default=False,
-        ),
-        HCNumberEntityDescription(
-            key="number_finish_in",
-            entity="BSH.Common.Option.FinishInRelative",
-            device_class=NumberDeviceClass.DURATION,
-            native_unit_of_measurement=UnitOfTime.SECONDS,
-            mode=NumberMode.AUTO,
-            entity_registry_enabled_default=False,
-        ),
-        HCNumberEntityDescription(
-            key="number_setting_alarm_clock",
-            translation_key="number_setting_alarm_clock",
-            entity="BSH.Common.Setting.AlarmClock",
-            device_class=NumberDeviceClass.DURATION,
-            native_unit_of_measurement=UnitOfTime.SECONDS,
-            native_max_value=sys.float_info.max,
-            mode=NumberMode.BOX,
-        ),
     ],
-    "wifi": [generate_wifi],
     "dynamic": [generate_power_switch, generate_program],
 }
