@@ -147,7 +147,7 @@ def generate_program(appliance: HomeAppliance) -> EntityDescriptions:
                 key="sensor_active_program",
                 entity="BSH.Common.Root.ActiveProgram",
                 device_class=SensorDeviceClass.ENUM,
-                has_state_translation=False,
+                has_state_translation=True,
                 mapping=sorted_programs,
             )
         ]
@@ -155,7 +155,7 @@ def generate_program(appliance: HomeAppliance) -> EntityDescriptions:
             HCSelectEntityDescription(
                 key="select_program",
                 entity="BSH.Common.Root.SelectedProgram",
-                has_state_translation=False,
+                has_state_translation=True,
                 mapping=sorted_programs,
             )
         ]
