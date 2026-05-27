@@ -5,6 +5,7 @@ from __future__ import annotations
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.sensor import (
     SensorDeviceClass,
+    SensorStateClass,
 )
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import EntityCategory
@@ -274,6 +275,13 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Dishcare.Dishwasher.Status.ProgramPhase",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_machine_care_reminder",
+            entity="Dishcare.Dishwasher.Status.MachineCareReminder.RemainingProgramRuns",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            native_unit_of_measurement="cycles",
+            state_class=SensorStateClass.MEASUREMENT,
         ),
     ],
     "switch": [

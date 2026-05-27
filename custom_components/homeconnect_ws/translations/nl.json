@@ -705,6 +705,9 @@
           "full": "Vol"
         }
       },
+      "sensor_machine_care_reminder": {
+        "name": "Machineonderhoud herinnering"
+      },
       "sensor_start_in": {
         "name": "Start over"
       },

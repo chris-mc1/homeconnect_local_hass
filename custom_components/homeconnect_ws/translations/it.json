@@ -708,6 +708,9 @@
       "sensor_oven_current_temperature": {
         "name": "Temperatura attuale{group_name}"
       },
+      "sensor_machine_care_reminder": {
+        "name": "Promemoria cura lavastoviglie"
+      },
       "sensor_heatup_progress": {
         "name": "Avanzamento riscaldamento"
       },
