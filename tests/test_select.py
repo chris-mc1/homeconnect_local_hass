@@ -230,10 +230,7 @@ async def test_start_only_program_available_with_read_only_selected_program(
         Message(
             resource="/ro/activeProgram",
             action=Action.POST,
-            data={
-                "program": 501,
-                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
-            },
+            data={"program": 501, "options": []},
         )
     )
 
@@ -284,9 +281,6 @@ async def test_select_program(
         Message(
             resource="/ro/activeProgram",
             action=Action.POST,
-            data={
-                "program": 502,
-                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
-            },
+            data={"program": 502, "options": []},
         )
     )
