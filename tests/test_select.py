@@ -11,6 +11,7 @@ from homeassistant.components.select import (
 )
 from homeassistant.components.select import DOMAIN as SELECT_DOMAIN
 from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME, STATE_UNKNOWN
+from homeconnect_websocket.entities import Access, Execution
 from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
@@ -183,6 +184,58 @@ async def test_update_program(
 
     state = hass.states.get(entity_id)
     assert state.state == "Named Favorite"
+
+
+async def test_update_program_from_active_program(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test updating program select entity from the active program."""
+    entity_id = "select.fake_brand_homeappliance_selectedprogram"
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 501})
+    await hass.async_block_till_done()
+
+    state = hass.states.get(entity_id)
+    assert state.state == "test_program_program2"
+
+
+async def test_start_only_program_available_with_read_only_selected_program(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test selecting start-only programs when SelectedProgram is read-only."""
+    entity_id = "select.fake_brand_homeappliance_selectedprogram"
+    await mock_appliance.entities["Test.SelectedProgram"].update({"access": Access.READ})
+    for program in mock_appliance.programs.values():
+        await program.update({"execution": Execution.START_ONLY})
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+
+    state = hass.states.get(entity_id)
+    assert state.state == STATE_UNKNOWN
+
+    await hass.services.async_call(
+        SELECT_DOMAIN,
+        SERVICE_SELECT_OPTION,
+        {
+            ATTR_ENTITY_ID: entity_id,
+            ATTR_OPTION: "test_program_program2",
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action=Action.POST,
+            data={
+                "program": 501,
+                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
+            },
+        )
+    )
 
 
 async def test_select_program(
