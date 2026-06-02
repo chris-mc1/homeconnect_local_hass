@@ -68,6 +68,9 @@
       "switch_multiple_beverages": {
         "name": "Mehrere Getränke"
       },
+      "switch_cup_warmer": {
+        "name": "Tassenwärmer"
+      },
       "switch_half_load": {
         "name": "Halbe Ladung"
       },

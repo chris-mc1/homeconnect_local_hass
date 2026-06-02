@@ -45,6 +45,9 @@
             },
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
+            },
+            "switch_cup_warmer": {
+                "default": "mdi:heat-wave"
             }
         },
         "binary_sensor": {
