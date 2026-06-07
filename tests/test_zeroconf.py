@@ -22,8 +22,8 @@ from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import MockAppliance
+from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
 from .const import (
-    MOCK_CONFIG_DATA,
     MOCK_TLS_DEVICE_DESCRIPTION,
     MOCK_TLS_DEVICE_ID,
     MOCK_TLS_DEVICE_INFO,

@@ -20,11 +20,8 @@ from homeconnect_websocket import ParserError
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import MockAppliance
-from .const import (
-    MOCK_AES_DEVICE_ID,
-    MOCK_AES_DEVICE_INFO,
-    MOCK_CONFIG_DATA,
-)
+from .const import MOCK_AES_DEVICE_ID, MOCK_AES_DEVICE_INFO
+from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
 
 if TYPE_CHECKING:
     import pytest

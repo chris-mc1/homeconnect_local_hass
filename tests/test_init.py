@@ -5,20 +5,21 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from unittest.mock import ANY, Mock
 
+import pytest
 from custom_components.homeconnect_ws import coordinator
-from custom_components.homeconnect_ws.const import DOMAIN
 from homeassistant.config_entries import ConfigEntryState
 from homeconnect_websocket.testutils import MockAppliance
-from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from .const import DEVICE_DESCRIPTION, MOCK_CONFIG_DATA, MOCK_TLS_DEVICE_ID
+from .const import CONFIG_ENTRIES, DEVICE_DESCRIPTION
 
 if TYPE_CHECKING:
-    import pytest
     from homeassistant.core import HomeAssistant
+    from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 
+@pytest.mark.parametrize(("config_entry"), CONFIG_ENTRIES)
 async def test_load_unload_entry(
+    config_entry: MockConfigEntry,
     hass: HomeAssistant,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -27,17 +28,11 @@ async def test_load_unload_entry(
     appliance_mock = Mock(return_value=appliance)
     monkeypatch.setattr(coordinator, "HomeAppliance", appliance_mock)
 
-    entry = MockConfigEntry(
-        domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
-        unique_id=MOCK_TLS_DEVICE_ID,
-    )
-    entry.add_to_hass(hass)
-
-    await hass.config_entries.async_setup(entry.entry_id)
+    config_entry.add_to_hass(hass)
+    await hass.config_entries.async_setup(config_entry.entry_id)
     await hass.async_block_till_done()
 
-    assert entry.state is ConfigEntryState.LOADED
+    assert config_entry.state is ConfigEntryState.LOADED
 
     appliance_mock.assert_called_once_with(
         description=DEVICE_DESCRIPTION,
@@ -49,9 +44,9 @@ async def test_load_unload_entry(
         connection_callback=ANY,
     )
 
-    assert await hass.config_entries.async_unload(entry.entry_id)
+    assert await hass.config_entries.async_unload(config_entry.entry_id)
     await hass.async_block_till_done()
 
-    assert entry.state is ConfigEntryState.NOT_LOADED
+    assert config_entry.state is ConfigEntryState.NOT_LOADED
 
     appliance.session.close.assert_awaited_once()
