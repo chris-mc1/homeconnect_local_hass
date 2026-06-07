@@ -214,3 +214,8 @@ async def async_unload_entry(hass: HomeAssistant, entry: HCConfigEntry) -> bool:
     if unload_ok:
         await entry.runtime_data.coordinator.close()
     return unload_ok
+
+
+async def async_migrate_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> bool:  # noqa: ARG001
+    """Migrate config entry."""
+    return True
