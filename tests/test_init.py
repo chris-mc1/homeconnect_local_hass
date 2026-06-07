@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import ANY, Mock
 
@@ -50,3 +51,26 @@ async def test_load_unload_entry(
     assert config_entry.state is ConfigEntryState.NOT_LOADED
 
     appliance.session.close.assert_awaited_once()
+
+
+@pytest.mark.parametrize(("config_entry"), CONFIG_ENTRIES)
+async def test_remove_entry(
+    config_entry: MockConfigEntry,
+    hass: HomeAssistant,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Test remove config entry."""
+    unlink_mock = Mock()
+    rmdir_mock = Mock()
+    monkeypatch.setattr(Path, "unlink", unlink_mock)
+    monkeypatch.setattr(Path, "rmdir", rmdir_mock)
+
+    config_entry.add_to_hass(hass)
+
+    assert await hass.config_entries.async_remove(config_entry.entry_id)
+    if config_entry.version == 2:
+        assert unlink_mock.call_count == 2
+        rmdir_mock.assert_called_once()
+    if config_entry.version == 1:
+        unlink_mock.assert_not_called()
+        rmdir_mock.assert_not_called()

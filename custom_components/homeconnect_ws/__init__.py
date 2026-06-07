@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
 from dataclasses import dataclass
+from pathlib import Path
 from typing import TYPE_CHECKING, Never
 
 import voluptuous as vol
@@ -15,13 +17,16 @@ from homeassistant.helpers.device_registry import (
     DeviceInfo,
     format_mac,
 )
+from homeassistant.helpers.storage import STORAGE_DIR
 from homeassistant.util.hass_dict import HassKey
 from homeconnect_websocket import CodeResponsError, Entity
 
 from .const import (
+    CONF_DESCRIPTION_FILENAME,
     CONF_DEV_OVERRIDE_HOST,
     CONF_DEV_OVERRIDE_PSK,
     CONF_DEV_SETUP_FROM_DUMP,
+    CONF_FEATURE_FILENAME,
     DOMAIN,
     PLATFORMS,
 )
@@ -219,3 +224,20 @@ async def async_unload_entry(hass: HomeAssistant, entry: HCConfigEntry) -> bool:
 async def async_migrate_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> bool:  # noqa: ARG001
     """Migrate config entry."""
     return True
+
+
+async def async_remove_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> None:
+    """Remove a config entry."""
+
+    def remove_files(storage_dir: Path, config_entry: HCConfigEntry) -> None:
+        """Remove KNX files."""
+        with contextlib.suppress(FileNotFoundError):
+            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).unlink()
+        with contextlib.suppress(FileNotFoundError):
+            (storage_dir / Path(config_entry.data[CONF_FEATURE_FILENAME])).unlink()
+        with contextlib.suppress(FileNotFoundError, OSError):
+            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).parent.rmdir()
+
+    if config_entry.version >= 2:
+        storage_dir = Path(hass.config.path(STORAGE_DIR, DOMAIN))
+        await hass.async_add_executor_job(remove_files, storage_dir, config_entry)

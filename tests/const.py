@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
     CONF_PSK,
     DOMAIN,
 )
@@ -491,11 +493,27 @@ MOCK_CONFIG_DATA_1 = {
     CONF_NAME: "Fake_Brand HomeAppliance",
 }
 
+MOCK_CONFIG_DATA_2 = {
+    CONF_HOST: "1.2.3.4",
+    CONF_PSK: "PSK_KEY",
+    CONF_AES_IV: "AES_IV",
+    CONF_DEVICE_ID: "Test_Device_ID",
+    CONF_NAME: "Fake_Brand HomeAppliance",
+    CONF_DESCRIPTION_FILENAME: "Test_Device_ID/010203040506070809_FeatureMapping.xml",
+    CONF_FEATURE_FILENAME: "Test_Device_ID/010203040506070809_DeviceDescription.xml",
+}
+
 CONFIG_ENTRIES = [
     MockConfigEntry(
         domain=DOMAIN,
         data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
         version=1,
+    ),
+    MockConfigEntry(
+        domain=DOMAIN,
+        data=MOCK_CONFIG_DATA_2,
+        unique_id=MOCK_AES_DEVICE_ID,
+        version=2,
     ),
 ]
