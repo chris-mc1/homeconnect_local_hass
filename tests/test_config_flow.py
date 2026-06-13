@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from binascii import Error as BinasciiError
 from typing import TYPE_CHECKING
-from unittest.mock import ANY, AsyncMock, MagicMock, Mock, call
+from unittest.mock import ANY, AsyncMock, MagicMock, Mock
 from uuid import uuid4
 
 from aiohttp import ClientConnectionError, ClientConnectorSSLError
@@ -715,36 +715,23 @@ async def test_user_select_all_setup(
 
 
 async def test_process_profile(
-    monkeypatch: pytest.MonkeyPatch,
     hass: HomeAssistant,
     mock_process_uploaded_file: MagicMock,
 ) -> None:
     """Test processing profile file."""
-    mock_parser = MagicMock()
-    monkeypatch.setattr(config_flow, "parse_device_description", mock_parser)
-
-    mock_config_flow = AsyncMock()
-    mock_config_flow.hass = hass
-    result = config_flow.HomeConnectConfigFlow._process_profile_file(
-        mock_config_flow, UPLOADED_FILE
-    )
+    result = config_flow.process_profile_file(hass, UPLOADED_FILE)
 
     assert result == {
-        MOCK_TLS_DEVICE_ID: {
-            "info": MOCK_TLS_DEVICE_INFO,
-            "description": mock_parser.return_value,
-        },
-        MOCK_AES_DEVICE_ID: {
-            "info": MOCK_AES_DEVICE_INFO,
-            "description": mock_parser.return_value,
-        },
+        MOCK_TLS_DEVICE_ID: config_flow.ProfileFileEntry(
+            info=MOCK_TLS_DEVICE_INFO,
+            device_description=b"TLS_DeviceDescription",
+            feature_mapping=b"TLS_FeatureMapping",
+        ),
+        MOCK_AES_DEVICE_ID: config_flow.ProfileFileEntry(
+            info=MOCK_AES_DEVICE_INFO,
+            device_description=b"AES_DeviceDescription",
+            feature_mapping=b"AES_FeatureMapping",
+        ),
     }
 
-    mock_parser.assert_has_calls(
-        [
-            call(b"TLS_DeviceDescription", b"TLS_FeatureMapping"),
-            call(b"AES_DeviceDescription", b"AES_FeatureMapping"),
-        ],
-        any_order=True,
-    )
-    mock_process_uploaded_file.assert_called_with(ANY, UPLOADED_FILE)
+    mock_process_uploaded_file.assert_called_with(hass, UPLOADED_FILE)

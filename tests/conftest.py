@@ -11,6 +11,7 @@ from zipfile import ZipFile
 import pytest
 from custom_components import homeconnect_ws
 from custom_components.homeconnect_ws import coordinator, entity_descriptions
+from custom_components.homeconnect_ws.config_flow import ProfileFileEntry
 from homeconnect_websocket.testutils import MockAppliance
 
 if TYPE_CHECKING:
@@ -20,10 +21,8 @@ if TYPE_CHECKING:
 from .const import (
     DEVICE_DESCRIPTION,
     ENTITY_DESCRIPTIONS,
-    MOCK_AES_DEVICE_DESCRIPTION,
     MOCK_AES_DEVICE_ID,
     MOCK_AES_DEVICE_INFO,
-    MOCK_TLS_DEVICE_DESCRIPTION,
     MOCK_TLS_DEVICE_ID,
     MOCK_TLS_DEVICE_ID_2,
     MOCK_TLS_DEVICE_INFO,
@@ -93,21 +92,24 @@ def mock_process_uploaded_file(
 def mock_process_profile_file() -> Generator[MagicMock]:
     """Mock process profile files."""
     device_description = {
-        MOCK_TLS_DEVICE_ID: {
-            "info": MOCK_TLS_DEVICE_INFO,
-            "description": MOCK_TLS_DEVICE_DESCRIPTION,
-        },
-        MOCK_AES_DEVICE_ID: {
-            "info": MOCK_AES_DEVICE_INFO,
-            "description": MOCK_AES_DEVICE_DESCRIPTION,
-        },
-        MOCK_TLS_DEVICE_ID_2: {
-            "info": MOCK_TLS_DEVICE_INFO,
-            "description": MOCK_TLS_DEVICE_DESCRIPTION,
-        },
+        MOCK_TLS_DEVICE_ID: ProfileFileEntry(
+            info=MOCK_TLS_DEVICE_INFO,
+            device_description=b"TLS_DeviceDescription",
+            feature_mapping=b"TLS_FeatureMapping",
+        ),
+        MOCK_AES_DEVICE_ID: ProfileFileEntry(
+            info=MOCK_AES_DEVICE_INFO,
+            device_description=b"AES_DeviceDescription",
+            feature_mapping=b"AES_FeatureMapping",
+        ),
+        MOCK_TLS_DEVICE_ID_2: ProfileFileEntry(
+            info=MOCK_TLS_DEVICE_INFO,
+            device_description=b"TLS_DeviceDescription",
+            feature_mapping=b"TLS_DeviceDescription",
+        ),
     }
     with patch(
-        "custom_components.homeconnect_ws.config_flow.HomeConnectConfigFlow._process_profile_file",
+        "custom_components.homeconnect_ws.config_flow.process_profile_file",
         return_value=deepcopy(device_description),
     ) as mock_upload:
         yield mock_upload

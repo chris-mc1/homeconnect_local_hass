@@ -9,7 +9,7 @@ import re
 from asyncio import Event, wait_for
 from binascii import Error as BinasciiError
 from copy import deepcopy
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TypedDict
 from zipfile import ZipFile
 
 import homeassistant.helpers.config_validation as cv
@@ -34,10 +34,8 @@ from homeassistant.helpers.selector import (
 )
 from homeconnect_websocket import (
     ConnectionState,
-    DeviceDescription,
     HomeAppliance,
     ParserError,
-    parse_device_description,
 )
 
 from . import HC_KEY, HCConfig
@@ -47,6 +45,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from homeassistant.config_entries import ConfigFlowResult
+    from homeassistant.core import HomeAssistant
     from homeassistant.data_entry_flow import FlowResult
     from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 
@@ -71,7 +70,15 @@ CONFIG_HOST_SCHEMA = vol.Schema(
 )
 
 
-def process_zip_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDescription]]:
+class ProfileFileEntry(TypedDict):
+    """Profile file entry dict."""
+
+    info: dict
+    device_description: bytes
+    feature_mapping: bytes
+
+
+def _process_zip_file(config_path: Path) -> dict[str, ProfileFileEntry]:
     """Process uploaded zip file."""
     profile_file = ZipFile(config_path)
 
@@ -84,23 +91,27 @@ def process_zip_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDesc
 
             description_file_name = appliance_info["deviceDescriptionFileName"]
             feature_file_name = appliance_info["featureMappingFileName"]
-            description_file = profile_file.open(description_file_name).read()
-            feature_file = profile_file.open(feature_file_name).read()
 
-            appliance_description = parse_device_description(description_file, feature_file)
-            appliances[appliance_info["haId"]] = {
-                "info": appliance_info,
-                "description": appliance_description,
-            }
+            appliances[appliance_info["haId"]] = ProfileFileEntry(
+                info=appliance_info,
+                device_description=profile_file.open(description_file_name).read(),
+                feature_mapping=profile_file.open(feature_file_name).read(),
+            )
             _LOGGER.debug("Found Appliance %s", appliance_info["vib"])
     return appliances
 
 
-def process_json_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDescription]]:
-    """Process uploaded json file."""
-    with config_path.open() as file:
-        entry_data = json.load(file)
-    return {"config_entry": entry_data["data"]["entry_data"]}
+def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str, ProfileFileEntry]:
+    """Process uploaded profile file."""
+    with process_uploaded_file(hass, uploaded_file_id) as config_path:
+        if config_path.suffix == ".zip":
+            return _process_zip_file(config_path)
+        if config_path.suffix == ".json":
+            with config_path.open() as file:
+                entry_data = json.load(file)
+            return {"config_entry": entry_data["data"]["entry_data"]}
+        msg = "Unexpected profile file suffix: %s"
+        raise ValueError(msg, config_path.name)
 
 
 class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -110,20 +121,9 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         super().__init__()
         self.errors = {}
         self.data = {}
-        self.appliances: dict[str, dict[str, dict | DeviceDescription]] = {}
+        self.appliances: dict[str, ProfileFileEntry] = {}
         self.reauth_entry: HCConfigEntry = None
         self.global_config: HCConfig | None = None
-
-    def _process_profile_file(
-        self, uploaded_file_id: str
-    ) -> dict[str, dict[str, dict | DeviceDescription]]:
-        with process_uploaded_file(self.hass, uploaded_file_id) as config_path:
-            if config_path.suffix == ".zip":
-                return process_zip_file(config_path)
-            if config_path.suffix == ".json":
-                return process_json_file(config_path)
-            msg = "Unexpected profile file suffix: %s"
-            raise ValueError(msg, config_path.name)
 
     def _set_encryption_keys(self, appliance_info: dict) -> None:
         self.data[CONF_MODE] = appliance_info["connectionType"]
@@ -167,7 +167,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             _LOGGER.debug("Got Profile file")
             try:
                 self.appliances = await self.hass.async_add_executor_job(
-                    self._process_profile_file, user_input[CONF_FILE]
+                    process_profile_file(self.hass, user_input[CONF_FILE])
                 )
                 _LOGGER.debug("Found %s Appliances in Profile file", len(self.appliances))
                 if "config_entry" in self.appliances:
