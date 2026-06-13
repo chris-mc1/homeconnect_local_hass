@@ -24,7 +24,6 @@ CONF_FILE: Final = "file"
 CONF_MANUAL_HOST: Final = "manual_host"
 CONF_DESCRIPTION_FILENAME: Final = "description_filename"
 CONF_FEATURE_FILENAME: Final = "feature_filename"
-CONF_DEV_SETUP_FROM_DUMP: Final = "setup_from_dump_enabled"
 CONF_DEV_OVERRIDE_HOST: Final = "override_host"
 CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
 

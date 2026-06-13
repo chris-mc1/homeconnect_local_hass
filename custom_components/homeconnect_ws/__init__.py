@@ -25,7 +25,6 @@ from .const import (
     CONF_DESCRIPTION_FILENAME,
     CONF_DEV_OVERRIDE_HOST,
     CONF_DEV_OVERRIDE_PSK,
-    CONF_DEV_SETUP_FROM_DUMP,
     CONF_FEATURE_FILENAME,
     DOMAIN,
     PLATFORMS,
@@ -46,7 +45,6 @@ _LOGGER = logging.getLogger(__name__)
 CONFIG_SCHEMA = vol.Schema(
     {
         DOMAIN: {
-            vol.Optional(CONF_DEV_SETUP_FROM_DUMP, default=False): vol.Boolean(),
             vol.Optional(CONF_DEV_OVERRIDE_HOST): str,
             vol.Optional(CONF_DEV_OVERRIDE_PSK): str,
         }
@@ -69,7 +67,6 @@ class HCData:
 class HCConfig:
     """Dataclass for hass.data."""
 
-    setup_from_dump: bool = False
     override_host: str | None = None
     override_psk: str | None = None
 
@@ -83,7 +80,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up integration global config."""
     hass.data.setdefault(DOMAIN, HCConfig())
     if DOMAIN in config:
-        hass.data[HC_KEY].setup_from_dump = config[DOMAIN].get(CONF_DEV_SETUP_FROM_DUMP, False)
         hass.data[HC_KEY].override_host = config[DOMAIN].get(CONF_DEV_OVERRIDE_HOST)
         hass.data[HC_KEY].override_psk = config[DOMAIN].get(CONF_DEV_OVERRIDE_PSK)
 
@@ -230,7 +226,7 @@ async def async_remove_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -
     """Remove a config entry."""
 
     def remove_files(storage_dir: Path, config_entry: HCConfigEntry) -> None:
-        """Remove KNX files."""
+        """Remove profile files."""
         with contextlib.suppress(FileNotFoundError):
             (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).unlink()
         with contextlib.suppress(FileNotFoundError):

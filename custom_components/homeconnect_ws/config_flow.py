@@ -58,11 +58,6 @@ CONFIG_FILE_SCHEMA = vol.Schema(
         vol.Required(CONF_FILE): FileSelector(config=FileSelectorConfig(accept=".zip")),
     }
 )
-CONFIG_FILE_SCHEMA_JSON = vol.Schema(
-    {
-        vol.Required(CONF_FILE): FileSelector(config=FileSelectorConfig(accept=".zip,.json")),
-    }
-)
 CONFIG_HOST_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_HOST): cv.string,
@@ -106,10 +101,6 @@ def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str
     with process_uploaded_file(hass, uploaded_file_id) as config_path:
         if config_path.suffix == ".zip":
             return _process_zip_file(config_path)
-        if config_path.suffix == ".json":
-            with config_path.open() as file:
-                entry_data = json.load(file)
-            return {"config_entry": entry_data["data"]["entry_data"]}
         msg = "Unexpected profile file suffix: %s"
         raise ValueError(msg, config_path.name)
 
@@ -167,24 +158,9 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             _LOGGER.debug("Got Profile file")
             try:
                 self.appliances = await self.hass.async_add_executor_job(
-                    process_profile_file(self.hass, user_input[CONF_FILE])
+                    process_profile_file, self.hass, user_input[CONF_FILE]
                 )
                 _LOGGER.debug("Found %s Appliances in Profile file", len(self.appliances))
-                if "config_entry" in self.appliances:
-                    _LOGGER.debug("Setting up form config entry")
-                    self.data = self.appliances["config_entry"]
-                    if self.global_config:
-                        if self.global_config.override_host is not None:
-                            # Dev mode host override
-                            self.data[CONF_HOST] = self.global_config.override_host
-                            self.data[CONF_MANUAL_HOST] = True
-                            _LOGGER.info("Host override: %s", self.data[CONF_HOST])
-                        if self.global_config.override_psk is not None:
-                            # Dev mode psk override
-                            self.data[CONF_PSK] = self.global_config.override_psk
-                            self.data[CONF_MODE] = "TLS"
-                            self.data[CONF_AES_IV] = None
-                            _LOGGER.info("PSK override")
 
             except ParserError as exc:
                 return self.async_abort(
@@ -195,18 +171,13 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 return self.async_abort(reason="invalid_profile_file")
 
             if not self.errors:
-                if "config_entry" in self.appliances:
-                    return await self.async_step_test_connection()
-
                 if self.unique_id:
                     return await self.async_step_set_data()
                 return await self.async_step_device_select()
 
-        if (global_config := self.hass.data.get(HC_KEY)) and global_config.setup_from_dump:
-            scheam = CONFIG_FILE_SCHEMA_JSON
-        else:
-            scheam = CONFIG_FILE_SCHEMA
-        return self.async_show_form(step_id="upload", data_schema=scheam, errors=self.errors)
+        return self.async_show_form(
+            step_id="upload", data_schema=CONFIG_FILE_SCHEMA, errors=self.errors
+        )
 
     async def async_step_device_select(
         self, user_input: dict[str, Any] | None = None
