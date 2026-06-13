@@ -30,7 +30,8 @@
       "invalid_profile_file": "Profile File is invalid",
       "profile_file_parser_error": "Profile File is invalid: {error}",
       "appliance_not_in_profile_file": "Profile File dose not contain profile for this Appliance",
-      "all_setup": "All Appliances in this Profile File are already setup"
+      "all_setup": "All Appliances in this Profile File are already setup",
+      "failed_to_write_profile_file": "Profile File could not be stored"
     }
   },
   "entity": {

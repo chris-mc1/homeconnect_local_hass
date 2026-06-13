@@ -132,3 +132,23 @@ def mock_appliance(
     monkeypatch.setattr(coordinator.HomeConnectCoordinator, "connected", True)
 
     return appliance
+
+
+@pytest.fixture
+def mock_write_file() -> Generator[MagicMock]:
+    """Mock write file."""
+    with patch(
+        "custom_components.homeconnect_ws.config_flow.write_file",
+        return_value=None,
+    ) as mock_write_file:
+        yield mock_write_file
+
+
+@pytest.fixture
+def mock_parse_device_description() -> Generator[MagicMock]:
+    """Mock parse_device_description."""
+    with patch(
+        "custom_components.homeconnect_ws.config_flow.parse_device_description",
+        return_value=Mock(),
+    ) as mock_parse_device_description:
+        yield mock_parse_device_description

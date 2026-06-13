@@ -8,7 +8,7 @@ import random
 import re
 from asyncio import Event, wait_for
 from binascii import Error as BinasciiError
-from copy import deepcopy
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, TypedDict
 from zipfile import ZipFile
 
@@ -18,7 +18,6 @@ from aiohttp import ClientConnectionError, ClientConnectorSSLError
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
 from homeassistant.const import (
-    CONF_DESCRIPTION,
     CONF_DEVICE,
     CONF_DEVICE_ID,
     CONF_HOST,
@@ -32,18 +31,27 @@ from homeassistant.helpers.selector import (
     SelectSelector,
     SelectSelectorConfig,
 )
+from homeassistant.helpers.storage import STORAGE_DIR
 from homeconnect_websocket import (
     ConnectionState,
     HomeAppliance,
     ParserError,
+    parse_device_description,
 )
 
 from . import HC_KEY, HCConfig
-from .const import CONF_AES_IV, CONF_FILE, CONF_MANUAL_HOST, CONF_PSK, DOMAIN
+from .const import (
+    CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
+    CONF_FILE,
+    CONF_MANUAL_HOST,
+    CONF_PSK,
+    DOMAIN,
+)
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
     from homeassistant.config_entries import ConfigFlowResult
     from homeassistant.core import HomeAssistant
     from homeassistant.data_entry_flow import FlowResult
@@ -105,8 +113,16 @@ def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str
         raise ValueError(msg, config_path.name)
 
 
+def write_file(storage_dir: Path, name: str, file: bytes) -> None:
+    """Write file."""
+    with (storage_dir / name).open("w") as f:
+        f.write(file)
+
+
 class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
     """HomeConnect Config flow."""
+
+    VERSION = 2
 
     def __init__(self) -> None:
         super().__init__()
@@ -234,12 +250,18 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         self.errors = {}
         event = Event()
 
+        appliance_profile = self.appliances[self.unique_id]
+        device_description = parse_device_description(
+            appliance_profile["device_description"],
+            appliance_profile["feature_mapping"],
+        )
+
         async def connection_callback(state: ConnectionState) -> None:
             if state == ConnectionState.CONNECTED:
                 event.set()
 
         appliance = HomeAppliance(
-            description=deepcopy(self.data[CONF_DESCRIPTION]),
+            description=device_description,
             host=self.data[CONF_HOST],
             app_name="Homeassistant",
             app_id=self.data[CONF_DEVICE_ID],
@@ -250,7 +272,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         try:
             await appliance.connect()
             await wait_for(event.wait(), timeout=20)
-            self.data[CONF_DESCRIPTION]["info"].update(appliance.info)
+            self.data[CONF_APPLIANCE_INFO] = appliance.info
 
         except ClientConnectorSSLError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
@@ -297,6 +319,23 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 self.reauth_entry,
                 data_updates=data,
             )
+        storage_dir = Path(self.hass.config.path(STORAGE_DIR, DOMAIN))
+        try:
+            await self.hass.async_add_executor_job(
+                write_file,
+                storage_dir,
+                self.data[CONF_DESCRIPTION_FILENAME],
+                self.appliances[self.unique_id]["device_description"],
+            )
+            await self.hass.async_add_executor_job(
+                write_file,
+                storage_dir,
+                self.data[CONF_FEATURE_FILENAME],
+                self.appliances[self.unique_id]["feature_mapping"],
+            )
+        except OSError:
+            return self.async_abort(reason="failed_to_write_profile_file")
+
         return self.async_create_entry(title=data[CONF_NAME], data=data)
 
     async def async_step_reauth(self, user_input: dict[str, Any]) -> ConfigFlowResult:
@@ -317,11 +356,12 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         try:
             appliance_info = appliance["info"]
 
-            self.data[CONF_DESCRIPTION] = appliance["description"]
-
             self.data[CONF_DEVICE_ID] = random.randbytes(4).hex()  # noqa: S311
             self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
-
+            self.data[CONF_DESCRIPTION_FILENAME] = (
+                self.data[CONF_DEVICE_ID] + "/DeviceDescription.xml"
+            )
+            self.data[CONF_FEATURE_FILENAME] = self.data[CONF_DEVICE_ID] + "/FeatureMapping.xml"
             self._set_encryption_keys(appliance_info)
         except KeyError, ValueError:
             return self.async_abort(reason="invalid_profile_file")
