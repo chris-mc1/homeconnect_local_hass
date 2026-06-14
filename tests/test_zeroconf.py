@@ -10,6 +10,9 @@ from uuid import uuid4
 from custom_components.homeconnect_ws import config_flow
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
     CONF_FILE,
     CONF_MANUAL_HOST,
     CONF_PSK,
@@ -23,11 +26,7 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import MockAppliance
 from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
-from .const import (
-    MOCK_TLS_DEVICE_DESCRIPTION,
-    MOCK_TLS_DEVICE_ID,
-    MOCK_TLS_DEVICE_INFO,
-)
+from .const import MOCK_TLS_DEVICE_ID, MOCK_TLS_DEVICE_INFO
 
 if TYPE_CHECKING:
     from unittest.mock import AsyncMock, MagicMock
@@ -58,11 +57,13 @@ MOCK_ZEROCONF_DATA = ZeroconfServiceInfo(
 UPLOADED_FILE = str(uuid4())
 
 
-async def test_zeroconf_init(
+async def test_zeroconf_init(  # noqa: PLR0913
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_setup_entry: AsyncMock,
+    mock_write_file: MagicMock,
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test setup from zeroconf discovery."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -85,7 +86,7 @@ async def test_zeroconf_init(
             CONF_FILE: UPLOADED_FILE,
         },
     )
-    assert appliance.description == MOCK_TLS_DEVICE_DESCRIPTION
+    assert appliance.description == mock_parse_device_description.return_value
     assert appliance.host == "127.0.0.2"
     assert appliance.app_name == "Homeassistant"
     assert appliance.app_id == "01020304"
@@ -95,20 +96,34 @@ async def test_zeroconf_init(
 
     appliance._connect.assert_awaited_once()
     appliance._close.assert_awaited_once()
-
-    mock_process_profile_file.assert_called_once_with(UPLOADED_FILE)
+    mock_parse_device_description.assert_called_once_with(
+        b"TLS_DeviceDescription",
+        b"TLS_FeatureMapping",
+    )
+    mock_process_profile_file.assert_called_once_with(ANY, UPLOADED_FILE)
 
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert result["title"] == "Test_Brand Test_TLS"
-    assert result["data"][CONF_DESCRIPTION] == {
-        "info": MOCK_TLS_DEVICE_INFO,
-        "MOCK_TLS_DEVICE_DESCRIPTION": None,
-    }
+    assert result["data"][CONF_DESCRIPTION_FILENAME] == "01020304/DeviceDescription.xml"
+    assert result["data"][CONF_FEATURE_FILENAME] == "01020304/FeatureMapping.xml"
     assert result["data"][CONF_HOST] == "127.0.0.2"
     assert result["data"][CONF_PSK] == MOCK_TLS_DEVICE_INFO["key"]
     assert CONF_AES_IV not in result["data"]
     assert result["data"][CONF_NAME] == "Test_Brand Test_TLS"
+    assert result["data"][CONF_DEVICE_ID] == "01020304"
+    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_TLS_DEVICE_INFO
 
+    mock_write_file.assert_any_call(
+        ANY,
+        "01020304/DeviceDescription.xml",
+        b"TLS_DeviceDescription",
+    )
+
+    mock_write_file.assert_any_call(
+        ANY,
+        "01020304/FeatureMapping.xml",
+        b"TLS_FeatureMapping",
+    )
     mock_setup_entry.assert_awaited_once()
 
 

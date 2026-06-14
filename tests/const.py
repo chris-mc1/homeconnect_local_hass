@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
     CONF_DESCRIPTION_FILENAME,
     CONF_FEATURE_FILENAME,
     CONF_PSK,
@@ -501,6 +502,7 @@ MOCK_CONFIG_DATA_2 = {
     CONF_NAME: "Fake_Brand HomeAppliance",
     CONF_DESCRIPTION_FILENAME: "Test_Device_ID/FeatureMapping.xml",
     CONF_FEATURE_FILENAME: "Test_Device_ID/DeviceDescription.xml",
+    CONF_APPLIANCE_INFO: DEVICE_DESCRIPTION["info"],
 }
 
 CONFIG_ENTRIES = [

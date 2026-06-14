@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from unittest.mock import ANY, Mock
 
 import pytest
-from custom_components.homeconnect_ws import coordinator
+from custom_components import homeconnect_ws
 from homeassistant.config_entries import ConfigEntryState
 from homeconnect_websocket.testutils import MockAppliance
 
@@ -27,7 +27,10 @@ async def test_load_unload_entry(
     """Test setup and unload config entry."""
     appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", "PSK_KEY")
     appliance_mock = Mock(return_value=appliance)
-    monkeypatch.setattr(coordinator, "HomeAppliance", appliance_mock)
+    monkeypatch.setattr(homeconnect_ws.coordinator, "HomeAppliance", appliance_mock)
+
+    load_description_mock = Mock(return_value=DEVICE_DESCRIPTION)
+    monkeypatch.setattr(homeconnect_ws, "load_description", load_description_mock)
 
     config_entry.add_to_hass(hass)
     await hass.config_entries.async_setup(config_entry.entry_id)
