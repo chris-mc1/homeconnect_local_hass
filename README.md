@@ -68,6 +68,61 @@ You'll know if you have successfully done it if you see the line between your ap
 
 This integration is soley pushed based with it reciving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
 
+## Supported Functions
+
+The following entities are available. Which ones appear depends on the appliance type and its feature set — not every device supports every entity listed here.
+
+### All Appliances
+
+| Entity | Type | Description |
+| --- | --- | --- |
+| Active Program | Sensor | Currently running program |
+| Operation State | Sensor | Device state (e.g. Ready, Running, Finished) |
+| Remaining Program Time | Sensor | Time left in the current program |
+| Program Progress | Sensor | Progress as a percentage |
+| Start In | Sensor / Number | Delay before the program starts |
+| Finish In | Sensor / Number | Target time until the program finishes |
+| Select Program | Select | Choose a program to run |
+| Start / Abort / Pause / Resume | Button | Control the active program |
+| Power State | Switch / Select | Turn the appliance on or off |
+| Child Lock | Switch | Lock the physical controls |
+| Remote Start Allowed | Binary Sensor | Whether remote control is enabled on the device |
+| Door State | Binary Sensor / Sensor | Whether the door is open or closed |
+| Program Finished | Binary Sensor | Turns on when the current cycle completes |
+| Wi-Fi Signal Strength | Sensor | Device's Wi-Fi signal strength |
+
+### Dishwasher
+
+Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings.
+
+### Washing Machine / Dryer
+
+Program options including temperature, spin speed, prewash, rinse plus, gentle cycle, and hygienic steam; iDos automatic dosing (levels 1 & 2); drum light and door ring LED control (brightness and color mode); anti-wrinkle guard; maintenance reminders (drum clean, lint filter full); condensate container alert (dryer).
+
+### Oven / Hob / Hood
+
+Oven current and setpoint temperature, meat probe temperature, heating mode selection, fast preheat, sabbath mode; hood fan speed control, ambient and work lighting, automatic shutoff delay, interval ventilation, grease and carbon filter saturation sensors and one-tap reset buttons; hob ventilation level.
+
+### Coffee Maker
+
+Bean container and amount, grind coarseness, coffee strength, temperature, brew size, shot count, milk ratio; cup warmer; maintenance countdowns for cleaning, descaling, and water filter replacement; water tank and drip tray level sensors; per-drink brew counters (coffee, espresso, milk-based drinks, and more).
+
+### Refrigerator / Freezer
+
+Fridge, freezer, and chiller setpoint temperatures (°C and °F); door open and door alarm binary sensors; super-freeze and super-cool modes; eco, vacation, and fresh-food modes; interior light with brightness control; water filter alert.
+
+## Use Cases
+
+- **Laundry and dishwasher notifications** — get a push notification the moment a cycle finishes so clothes or dishes don't sit idle.
+- **Scheduled start** — use `homeconnect_ws.start_program` with a `finish_in` delay so laundry or the dishwasher finishes right when you get home, without having to think about it.
+- **Oven monitoring** — track the current oven or meat probe temperature from a dashboard, or trigger automations when the set temperature is reached.
+- **Auto power-off** — switch the oven or coffee maker off automatically via the power state switch after a set time.
+- **Maintenance alerts** — get notified when the dishwasher needs rinse aid or salt, the coffee maker needs descaling, or the dryer's lint filter is full.
+- **Freezer door alarm** — trigger a notification if the freezer door is left open.
+- **Energy and resource tracking** — use the energy and water forecast sensors to log consumption over time in Home Assistant's statistics or energy dashboard.
+- **Child lock automation** — enable or disable the child lock remotely, for example when children arrive home from school.
+- **Hood control** — adjust the extractor hood fan speed and lighting from a dashboard, or automate it based on cooking activity.
+
 ## Actions
 
 This integration provides the following actions:
@@ -75,6 +130,62 @@ This integration provides the following actions:
 - `homeconnect_ws.start_program`: Start the currently selected program. Optionally set a start delay and/or a target finish time.
 - `homeconnect_ws.set_start_in`: Set the start delay of the currently selected program.
 - `homeconnect_ws.set_finish_in`: Set the target finish time of the currently selected program.
+
+## Examples
+
+### Notify when a cycle finishes
+
+Send a notification the moment the washing machine (or any appliance) finishes its program.
+
+```yaml
+automation:
+  - alias: "Notify when washing machine finishes"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.washing_machine_binary_sensor_program_finished
+        to: "on"
+    action:
+      - action: notify.mobile_app_your_phone
+        data:
+          message: "The washing machine has finished!"
+```
+
+### Start a program with a delayed finish time
+
+Start the currently selected dishwasher program and have it finish in 3 hours. The `device_id` can be found by selecting your device in the action's device picker in the UI.
+
+```yaml
+automation:
+  - alias: "Start dishwasher to finish in 3 hours"
+    trigger:
+      - platform: time
+        at: "21:00:00"
+    action:
+      - action: homeconnect_ws.start_program
+        data:
+          device_id: your_device_id
+          finish_in:
+            hours: 3
+```
+
+### Turn off the oven after 2 hours of inactivity
+
+Automatically switch the oven off if it has been on but idle (no program running) for more than 2 hours.
+
+```yaml
+automation:
+  - alias: "Auto power off oven after 2 hours idle"
+    trigger:
+      - platform: state
+        entity_id: sensor.oven_sensor_operation_state
+        to: "Ready"
+        for:
+          hours: 2
+    action:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.oven_switch_power_state
+```
 
 ## Known Limitations
 
