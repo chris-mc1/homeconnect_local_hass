@@ -8,7 +8,10 @@ from copy import deepcopy
 from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
+from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryError
+from homeassistant.helpers import issue_registry as ir
+from homeassistant.helpers.event import async_call_later
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeconnect_websocket import (
     AllreadyConnectedError,
@@ -21,15 +24,19 @@ from homeconnect_websocket import (
 from .const import (
     CONF_AES_IV,
     CONF_PSK,
-    MAX_RECONECT_TIME,
+    DOMAIN,
 )
 
 if TYPE_CHECKING:
-    from homeassistant.core import HomeAssistant
+    from datetime import datetime
+
+    from homeassistant.core import CALLBACK_TYPE, HomeAssistant
 
     from . import HCConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
+
+CONNECTION_LOST_ISSUE_DELAY = 25  # seconds
 
 
 class HomeConnectCoordinator(DataUpdateCoordinator):
@@ -38,8 +45,8 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     config_entry: HCConfigEntry
     appliance: HomeAppliance
     _connecting: bool = True
-    _reconnecting: bool = False
     connected: bool = False
+    _connection_lost_issue_unsub: CALLBACK_TYPE | None = None
 
     def __init__(
         self,
@@ -66,12 +73,18 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         )
         self.disconnect_time = time.time()
         if not self.appliance.info:
-            msg = "Appliance has no device info"
-            raise ConfigEntryError(msg)
+            raise ConfigEntryError(
+                translation_domain=DOMAIN,
+                translation_key="no_device_info",
+            )
 
     async def close(self) -> None:
         self._connecting = False
         await self.appliance.close()
+
+    @property
+    def _connection_lost_issue_id(self) -> str:
+        return f"connection_lost_{self.config_entry.entry_id}"
 
     async def _async_setup(self) -> None:
         self.config_entry.async_create_task(self.hass, self._connect())
@@ -110,27 +123,55 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         return None
 
     async def _connection_state_callback(self, event: ConnectionState) -> None:
-        if event == ConnectionState.RECONNECTING:
-            if not self._reconnecting:
-                self._reconnecting = True
-                reconnect_timeout = int(self.hass.loop.time()) + MAX_RECONECT_TIME
-                self.hass.loop.call_at(reconnect_timeout, self._connection_reconnect_callback)
-
-        elif event == ConnectionState.CONNECTED:
-            self.connected = True
-            if self._reconnecting:
-                self.logger.debug(
-                    "Reconnected to %s",
+        if event == ConnectionState.CONNECTED:
+            if not self.connected:
+                self.logger.info(
+                    "Connection to %s restored",
                     self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
                 )
-                self._reconnecting = False
+            self.connected = True
+            self._cancel_connection_lost_issue_timer()
+            ir.async_delete_issue(self.hass, DOMAIN, self._connection_lost_issue_id)
+
+        elif event == ConnectionState.RECONNECTING:
+            if self.connected:
+                self.logger.warning(
+                    "Connection to %s lost",
+                    self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
+                )
+            self.connected = False
+            if self._connection_lost_issue_unsub is None:
+                self._connection_lost_issue_unsub = async_call_later(
+                    self.hass,
+                    CONNECTION_LOST_ISSUE_DELAY,
+                    self._async_create_connection_lost_issue,
+                )
 
         elif event == ConnectionState.CLOSED:
             self.connected = False
+            self._cancel_connection_lost_issue_timer()
+            ir.async_delete_issue(self.hass, DOMAIN, self._connection_lost_issue_id)
 
         self.async_set_updated_data(None)
 
-    def _connection_reconnect_callback(self) -> None:
-        if not self.appliance.session.connected:
-            self.connected = False
-            self.async_set_updated_data(None)
+    @callback
+    def _cancel_connection_lost_issue_timer(self) -> None:
+        if self._connection_lost_issue_unsub is not None:
+            self._connection_lost_issue_unsub()
+            self._connection_lost_issue_unsub = None
+
+    @callback
+    def _async_create_connection_lost_issue(self, _now: datetime) -> None:
+        self._connection_lost_issue_unsub = None
+        if not self.connected:
+            ir.async_create_issue(
+                self.hass,
+                DOMAIN,
+                self._connection_lost_issue_id,
+                is_fixable=False,
+                severity=ir.IssueSeverity.WARNING,
+                translation_key="connection_lost",
+                translation_placeholders={
+                    "name": self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
+                },
+            )

@@ -34,6 +34,14 @@ To use this integration, you must first create a Home Connect account and connec
 - Select Appliance: Select the Appliance you want to setup
 - Host / IP-Address: Manually enter your Appliance Hostname or IP-Address
 
+## Actions
+
+This integration provides the following actions:
+
+- `homeconnect_ws.start_program`: Start the currently selected program. Optionally set a start delay and/or a target finish time.
+- `homeconnect_ws.set_start_in`: Set the start delay of the currently selected program.
+- `homeconnect_ws.set_finish_in`: Set the target finish time of the currently selected program.
+
 ## Remove integration
 
 This integration follows standard integration removal, no extra steps are required.
