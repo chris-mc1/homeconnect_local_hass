@@ -382,6 +382,9 @@
       "sensor_remaining_program_time": {
         "name": "Gjenværende programtid"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Forløpt programtid"
+      },
       "sensor_program_progress": {
         "name": "Programfremgang"
       },

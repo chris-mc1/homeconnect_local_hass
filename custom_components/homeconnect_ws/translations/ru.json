@@ -246,6 +246,9 @@
       "sensor_remaining_program_time": {
         "name": "Оставшееся время программы"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Прошедшее время программы"
+      },      
       "sensor_program_progress": {
         "name": "Прогресс программы"
       },

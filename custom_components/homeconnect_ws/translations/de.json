@@ -425,6 +425,9 @@
       "sensor_remaining_program_time": {
         "name": "Verbleibende Programmlaufzeit"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Verstrichene Programmlaufzeit"
+      },
       "sensor_program_progress": {
         "name": "Programmfortschritt"
       },
