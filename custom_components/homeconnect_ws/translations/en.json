@@ -71,6 +71,9 @@
       "switch_multiple_beverages": {
         "name": "Multiple Beverages"
       },
+      "switch_cup_warmer": {
+        "name": "Cup warmer"
+      },
       "switch_half_load": {
         "name": "Half load"
       },
