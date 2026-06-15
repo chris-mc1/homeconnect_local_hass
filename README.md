@@ -64,6 +64,10 @@ You'll know if you have successfully done it if you see the line between your ap
 >[!NOTE]
 >Do note that your device will **not** get firmware updates once disconnected, if you want to, you can occasionally (once every 1-3 months) reenable the cloud connection for 1-2 days so the device can check for an update.
 
+## Data Updates
+
+This integration is soley pushed based with it reciving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
+
 ## Actions
 
 This integration provides the following actions:
