@@ -406,6 +406,7 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 "Cooking.Oven.Status.WaterTankEmpty",
             ),
             device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
             options=["unplugged", "empty", "ok"],
         ),
         HCSensorEntityDescription(
