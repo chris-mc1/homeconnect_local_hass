@@ -12,6 +12,7 @@
   "integration_type": "device",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/chris-mc1/homeconnect_local_hass/issues",
+  "quality_scale": "gold",
   "loggers": [
     "custom_components.homeconnect_ws",
     "homeconnect_websocket"
