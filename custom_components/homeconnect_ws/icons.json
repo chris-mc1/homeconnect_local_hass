@@ -45,6 +45,9 @@
             },
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
+            },
+            "switch_cup_warmer": {
+                "default": "mdi:heat-wave"
             }
         },
         "binary_sensor": {
@@ -90,6 +93,9 @@
             "sensor_remaining_program_time": {
                 "default": "mdi:progress-clock"
             },
+            "sensor_elapsed_program_time": {
+                "default": "mdi:progress-clock"
+            },            
             "sensor_program_progress": {
                 "default": "mdi:progress-check"
             },

@@ -68,6 +68,9 @@
       "switch_multiple_beverages": {
         "name": "Mehrere Getränke"
       },
+      "switch_cup_warmer": {
+        "name": "Tassenwärmer"
+      },
       "switch_half_load": {
         "name": "Halbe Ladung"
       },
@@ -421,6 +424,9 @@
     "sensor": {
       "sensor_remaining_program_time": {
         "name": "Verbleibende Programmlaufzeit"
+      },
+      "sensor_elapsed_program_time": {
+        "name": "Verstrichene Programmlaufzeit"
       },
       "sensor_program_progress": {
         "name": "Programmfortschritt"
@@ -1370,7 +1376,9 @@
         "name": "Ausgewähltes Programm",
         "state": {
           "dishcare_dishwasher_program_intensiv70": "Intensiv 70°C",
+		  "dishcare_dishwasher_program_auto1": "Auto 35-45°C",
           "dishcare_dishwasher_program_auto2": "Auto 45-65°C",
+		  "dishcare_dishwasher_program_auto3": "Auto 65-75°C",
           "dishcare_dishwasher_program_eco50": "Eco 50°C",
           "dishcare_dishwasher_program_quick45": "Schnell 45°C",
           "dishcare_dishwasher_program_prerinse": "Vorspülen",
