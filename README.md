@@ -190,7 +190,7 @@ automation:
 ## Known Limitations
 
 - While this integration can (in theory) support all the functions supported in the Home Connect app, in reality, the functions have to reverse engineered
-- The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if I'm on the same Wireless Access Point as the device theres a chance a local connection may fail to establish.
+- The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if the phone is on the same Wireless Access Point as the appliance theres a chance a local connection may fail to establish.
 - Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours.
 
 ## Trouble Shooting
@@ -207,12 +207,7 @@ If Home Assistant cannot connect to your appliance (during setup) despite correc
          3. If the device may be offline check it physically to see if theres no wifi signal indicator on it.
          4. If the device does have a wifi signal then Home Assistant may have overloaded the device's local capacity causing it to not accept new connections for 24 hours. Check back in 24 hours to see if the signal relights up.
 
- If you recieve an error related to the device not accepting commands then this could mean.
- - Depending on what device you have remote start or remote control may not be enabled.
- - You cannot perform that action right now.
-       
-
-
+     
 ###  Reporting Issues and Bugs
 
 - A full debug log of at least reloading the config entry and any actions leading to an error
