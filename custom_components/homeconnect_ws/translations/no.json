@@ -18,11 +18,34 @@
         "data": {
           "host": "Vert / IP-adresse"
         }
+      },
+      "user": {
+        "title": "Add Home Connect Appliance",
+        "description": "Choose how to add your appliance.",
+        "data": {
+          "method": "Setup method"
+        }
+      },
+      "login": {
+        "title": "Home Connect Account",
+        "description": "Select your region to sign in with your Home Connect account.",
+        "data": {
+          "region": "Region"
+        }
+      },
+      "authorize": {
+        "title": "Sign in to Home Connect",
+        "description": "Open the link below, log in with your Home Connect account, and approve access:\n\n{url}\n\nYour browser will then try to open a dead link (it will fail to load, that's expected). Copy that full URL from the address bar and paste it below.",
+        "data": {
+          "redirect_url": "Pasted URL from the failed page"
+        }
       }
     },
     "error": {
       "cannot_connect": "Tilkobling til apparatet mislyktes",
-      "already_configured": "Dette apparatet er allerede konfigurert"
+      "already_configured": "Dette apparatet er allerede konfigurert",
+      "invalid_auth": "Could not sign in. Check the URL you pasted and try again.",
+      "required": "This field is required."
     },
     "abort": {
       "auth_failed": "Autentisering mislyktes",
@@ -30,7 +53,8 @@
       "invalid_profile_file": "Profilfilen er ugyldig",
       "profile_file_parser_error": "Profilfilen er ugyldig: {error}",
       "appliance_not_in_profile_file": "Profilfilen inneholder ikke profil for dette apparatet",
-      "all_setup": "Alle apparater i denne profilfilen er allerede satt opp"
+      "all_setup": "Alle apparater i denne profilfilen er allerede satt opp",
+      "no_appliances": "No appliances found on this account."
     }
   },
   "entity": {

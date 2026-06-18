@@ -18,11 +18,34 @@
         "data": {
           "host": "Host / IP-adres"
         }
+      },
+      "user": {
+        "title": "Home Connect-apparaat toevoegen",
+        "description": "Kies hoe je je apparaat wilt toevoegen.",
+        "data": {
+          "method": "Installatiemethode"
+        }
+      },
+      "login": {
+        "title": "Home Connect-account",
+        "description": "Selecteer je regio om in te loggen met je Home Connect-account.",
+        "data": {
+          "region": "Regio"
+        }
+      },
+      "authorize": {
+        "title": "Inloggen bij Home Connect",
+        "description": "Open de onderstaande link, log in met je Home Connect-account en geef toegang:\n\n{url}\n\nJe browser probeert daarna een dode link te openen (deze laadt niet, dat is normaal). Kopieer die volledige URL uit de adresbalk en plak hem hieronder.",
+        "data": {
+          "redirect_url": "Geplakte URL van de mislukte pagina"
+        }
       }
     },
     "error": {
       "cannot_connect": "Verbinding met het apparaat is mislukt",
-      "already_configured": "Dit apparaat is reeds geconfigureerd"
+      "already_configured": "Dit apparaat is reeds geconfigureerd",
+      "invalid_auth": "Inloggen mislukt. Controleer de geplakte URL en probeer het opnieuw.",
+      "required": "Dit veld is verplicht."
     },
     "abort": {
       "auth_failed": "Authenticatiefout",
@@ -30,7 +53,8 @@
       "invalid_profile_file": "Profielbestand is onjuist",
       "profile_file_parser_error": "Profielbestand is onjuist: {error}",
       "appliance_not_in_profile_file": "Profielbestand bevat geen profiel voor dit apparaat",
-      "all_setup": "Alle apparaten in dit profielbestand zijn al ingesteld"
+      "all_setup": "Alle apparaten in dit profielbestand zijn al ingesteld",
+      "no_appliances": "Geen apparaten gevonden op dit account."
     }
   },
   "entity": {

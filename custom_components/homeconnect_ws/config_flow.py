@@ -42,6 +42,7 @@ from homeconnect_websocket import (
 
 from . import HC_KEY, HCConfig
 from .const import CONF_AES_IV, CONF_FILE, CONF_MANUAL_HOST, CONF_PSK, DOMAIN
+from .hc_auth import HCAuthError, HCProfileDownloader
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -53,6 +54,8 @@ if TYPE_CHECKING:
     from . import HCConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
+
+CONF_REGION = "region"
 
 CONFIG_FILE_SCHEMA = vol.Schema(
     {
@@ -113,6 +116,8 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         self.appliances: dict[str, dict[str, dict | DeviceDescription]] = {}
         self.reauth_entry: HCConfigEntry = None
         self.global_config: HCConfig | None = None
+        self._downloader: HCProfileDownloader | None = None
+        self._access_token: str | None = None
 
     def _process_profile_file(
         self, uploaded_file_id: str
@@ -144,12 +149,10 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
 
         if self.global_config:
             if self.global_config.override_host is not None:
-                # Dev mode host override
                 self.data[CONF_HOST] = self.global_config.override_host
                 self.data[CONF_MANUAL_HOST] = True
                 _LOGGER.info("Host override: %s", self.data[CONF_HOST])
             if self.global_config.override_psk is not None:
-                # Dev mode psk override
                 self.data[CONF_PSK] = self.global_config.override_psk
                 self.data[CONF_MODE] = "TLS"
                 self.data[CONF_AES_IV] = None
@@ -159,7 +162,106 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         """Handle a flow initialized by the user."""
         _LOGGER.debug("Config flow initialized by user")
         self.global_config = self.hass.data.get(HC_KEY)
-        return await self.async_step_upload()
+
+        if user_input is not None:
+            if user_input.get("method") == "upload":
+                return await self.async_step_upload()
+            return await self.async_step_login()
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema({
+                vol.Required("method", default="login"): SelectSelector(
+                    SelectSelectorConfig(options=[
+                        SelectOptionDict(value="login", label="Sign in with Home Connect account"),
+                        SelectOptionDict(value="upload", label="Upload profile ZIP manually"),
+                    ])
+                ),
+            }),
+        )
+
+    async def async_step_login(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Select region and generate authorization URL."""
+        errors: dict[str, str] = {}
+
+        if user_input is not None:
+            try:
+                self._downloader = HCProfileDownloader(region=user_input.get(CONF_REGION, "EU"))
+                return await self.async_step_authorize()
+            except Exception as err:  # noqa: BLE001
+                _LOGGER.exception("Unexpected error: %s", err)
+                errors["base"] = "cannot_connect"
+
+        return self.async_show_form(
+            step_id="login",
+            data_schema=vol.Schema({
+                vol.Optional(CONF_REGION, default="EU"): SelectSelector(
+                    SelectSelectorConfig(options=[
+                        SelectOptionDict(value="EU", label="Europe (EU)"),
+                        SelectOptionDict(value="NA", label="North America (NA)"),
+                        SelectOptionDict(value="CN", label="China (CN)"),
+                    ])
+                ),
+            }),
+            errors=errors,
+        )
+
+    async def async_step_authorize(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Show authorization URL and accept the redirect URL back from the user."""
+        errors: dict[str, str] = {}
+
+        if user_input is not None:
+            redirect_url = (user_input.get("redirect_url") or "").strip()
+            if not redirect_url:
+                errors["redirect_url"] = "required"
+            else:
+                try:
+                    code = self._downloader.extract_code_from_redirect(redirect_url)
+                    self._access_token = await self._downloader.async_get_access_token(code)
+                    return await self.async_step_authorize_finish()
+                except HCAuthError as err:
+                    _LOGGER.error("HC auth error: %s", err)
+                    errors["base"] = "invalid_auth"
+                except Exception as err:  # noqa: BLE001
+                    _LOGGER.exception("Unexpected error: %s", err)
+                    errors["base"] = "cannot_connect"
+
+        authorize_url = self._downloader.get_authorize_url()
+        return self.async_show_form(
+            step_id="authorize",
+            data_schema=vol.Schema({vol.Required("redirect_url"): str}),
+            errors=errors,
+            description_placeholders={"url": authorize_url},
+        )
+
+    async def async_step_authorize_finish(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Fetch appliances after successful auth."""
+        try:
+            hc_appliances = await self._downloader.async_get_appliances(self._access_token)
+            for a in hc_appliances:
+                if not a.device_description_xml or not a.feature_mapping_xml:
+                    _LOGGER.warning(
+                        "Missing XML for %s (description=%d bytes, feature=%d bytes)",
+                        a.ha_id, len(a.device_description_xml), len(a.feature_mapping_xml)
+                    )
+                    continue
+                try:
+                    description = parse_device_description(
+                        a.device_description_xml, a.feature_mapping_xml
+                    )
+                except Exception as err:  # noqa: BLE001
+                    _LOGGER.warning("Could not parse description for %s: %s", a.ha_id, err)
+                    continue
+                self.appliances[a.ha_id] = {
+                    "info": a.to_profile_dict(),
+                    "description": description,
+                }
+            if not self.appliances:
+                return self.async_abort(reason="no_appliances")
+            return await self.async_step_device_select()
+        except HCAuthError as err:
+            _LOGGER.error("HC fetch error: %s", err)
+            return self.async_abort(reason="no_appliances")
 
     async def async_step_upload(self, user_input: dict[str, Any] | None = None) -> FlowResult:
         """Handle profile file upload."""
@@ -175,12 +277,10 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                     self.data = self.appliances["config_entry"]
                     if self.global_config:
                         if self.global_config.override_host is not None:
-                            # Dev mode host override
                             self.data[CONF_HOST] = self.global_config.override_host
                             self.data[CONF_MANUAL_HOST] = True
                             _LOGGER.info("Host override: %s", self.data[CONF_HOST])
                         if self.global_config.override_psk is not None:
-                            # Dev mode psk override
                             self.data[CONF_PSK] = self.global_config.override_psk
                             self.data[CONF_MODE] = "TLS"
                             self.data[CONF_AES_IV] = None
@@ -188,13 +288,11 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
 
             except ParserError as exc:
                 return self.async_abort(
-                    reason="profile_file_parser_error",
-                    description_placeholders={"error": exc.args[0]},
+                    reason="profile_file_parser_error", description_placeholders={"error": str(exc)}
                 )
-            except KeyError, ValueError:
-                return self.async_abort(reason="invalid_profile_file")
-
-            if not self.errors:
+            except (KeyError, ValueError):
+                self.errors["base"] = "invalid_profile_file"
+            else:
                 if "config_entry" in self.appliances:
                     return await self.async_step_test_connection()
 
@@ -352,7 +450,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
 
             self._set_encryption_keys(appliance_info)
-        except KeyError, ValueError:
+        except (KeyError, ValueError):
             return self.async_abort(reason="invalid_profile_file")
 
         return await self.async_step_test_connection()
@@ -383,6 +481,6 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 }
             )
 
-            return await self.async_step_upload()
+            return await self.async_step_user()
         except KeyError:
             return self.async_abort(reason="invalid_discovery_info")

@@ -18,11 +18,34 @@
         "data": {
           "host": "Host / IP-Address"
         }
+      },
+      "user": {
+        "title": "Add Home Connect Appliance",
+        "description": "Choose how to add your appliance.",
+        "data": {
+          "method": "Setup method"
+        }
+      },
+      "login": {
+        "title": "Home Connect Account",
+        "description": "Select your region to sign in with your Home Connect account.",
+        "data": {
+          "region": "Region"
+        }
+      },
+      "authorize": {
+        "title": "Sign in to Home Connect",
+        "description": "Open the link below, log in with your Home Connect account, and approve access:\n\n{url}\n\nYour browser will then try to open a dead link (it will fail to load, that's expected). Copy that full URL from the address bar and paste it below.",
+        "data": {
+          "redirect_url": "Pasted URL from the failed page"
+        }
       }
     },
     "error": {
       "cannot_connect": "Connection to Appliance failed",
-      "already_configured": "This Appliance is already configured"
+      "already_configured": "This Appliance is already configured",
+      "invalid_auth": "Could not sign in. Check the URL you pasted and try again.",
+      "required": "This field is required."
     },
     "abort": {
       "auth_failed": "Authentication failed",
@@ -30,7 +53,8 @@
       "invalid_profile_file": "Profile File is invalid",
       "profile_file_parser_error": "Profile File is invalid: {error}",
       "appliance_not_in_profile_file": "Profile File dose not contain profile for this Appliance",
-      "all_setup": "All Appliances in this Profile File are already setup"
+      "all_setup": "All Appliances in this Profile File are already setup",
+      "no_appliances": "No appliances found on this account."
     }
   },
   "entity": {

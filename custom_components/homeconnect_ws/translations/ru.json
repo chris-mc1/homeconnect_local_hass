@@ -18,11 +18,34 @@
         "data": {
           "host": "Хост / IP-адрес"
         }
+      },
+      "user": {
+        "title": "Add Home Connect Appliance",
+        "description": "Choose how to add your appliance.",
+        "data": {
+          "method": "Setup method"
+        }
+      },
+      "login": {
+        "title": "Home Connect Account",
+        "description": "Select your region to sign in with your Home Connect account.",
+        "data": {
+          "region": "Region"
+        }
+      },
+      "authorize": {
+        "title": "Sign in to Home Connect",
+        "description": "Open the link below, log in with your Home Connect account, and approve access:\n\n{url}\n\nYour browser will then try to open a dead link (it will fail to load, that's expected). Copy that full URL from the address bar and paste it below.",
+        "data": {
+          "redirect_url": "Pasted URL from the failed page"
+        }
       }
     },
     "error": {
       "cannot_connect": "Не удалось подключиться к устройству",
-      "already_configured": "Это устройство уже настроено"
+      "already_configured": "Это устройство уже настроено",
+      "invalid_auth": "Could not sign in. Check the URL you pasted and try again.",
+      "required": "This field is required."
     },
     "abort": {
       "auth_failed": "Ошибка аутентификации",
@@ -30,7 +53,8 @@
       "invalid_profile_file": "Неверный файл профиля",
       "profile_file_parser_error": "Неверный файл профиля: {error}",
       "appliance_not_in_profile_file": "Файл профиля не содержит данных для этого устройства",
-      "all_setup": "Все устройства в этом файле профиля уже настроены"
+      "all_setup": "Все устройства в этом файле профиля уже настроены",
+      "no_appliances": "No appliances found on this account."
     }
   },
   "entity": {
