@@ -1,65 +1,78 @@
-# Home Connect Local — with built-in Profile Downloader
+# Home Connect Local
 
-> **Fork of [chris-mc1/homeconnect_local_hass](https://github.com/chris-mc1/homeconnect_local_hass)**
->
-> This fork adds a built-in profile downloader to the HA setup flow, so you no longer need the separate [bruestel/homeconnect-profile-downloader](https://github.com/bruestel/homeconnect-profile-downloader) desktop tool on Windows, macOS, or Linux.
+The **Home Connect Local** allows users to integrate their home appliances supporting the  [Home Connect](https://www.home-connect.com/global) standard for Bosch and Siemens using direct communication over the local network.
 
-The **Home Connect Local** integration lets you control Bosch and Siemens home appliances directly over your local network — no cloud required after setup.
+## Install the Integration
 
-## What's different in this fork?
+1. Go to the HACS -> Custom Repositories and add this repository as a Custom Repository [See HACS Documentation for help](https://hacs.xyz/docs/faq/custom_repositories/)
 
-The original integration requires you to download your appliance profile using a separate desktop application (Windows/macOS/Linux only). This fork adds a **Sign in with Home Connect** option directly in the HA setup flow. The profile is downloaded automatically — setup works from any device, including Android and iOS.
+2. Click the button bellow and click 'Download' to install the Integration:
 
-The authentication uses the same Authorization Code + PKCE flow as the bruestel desktop tool, with no developer portal registration required.
+    [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=homeconnect_local_hass&owner=chris-mc1)
 
-## Install via HACS
-
-1. Go to **HACS → Custom Repositories** and add:
-   ```
-   https://github.com/SamJongenelen/homeconnect_local_hass_profiledownloader
-   ```
-   as type **Integration**.
-2. Click **Download** to install.
 3. Restart Home Assistant.
+
+## Prerequisites
+
+To use this integration, you must first create a Home Connect account and connect your appliances.
 
 ## Setup
 
-1. Go to **Settings → Devices & Services → Add Integration** and search for **Home Connect Local**.
+1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your Appliance profiles, select "openHAB" as target. The downloaded ZIP-file contains each Appliance encryption Key and feature descriptions
+2. Click the button below or use "Add Integration" in Home Assistant and select "Home Connect Local".
 
-2. Choose your setup method:
-   - **Sign in with Home Connect account** *(recommended)* — no extra tools needed, works on any device
-   - **Upload profile ZIP manually** — use the [bruestel desktop tool](https://github.com/bruestel/homeconnect-profile-downloader) and upload the ZIP
+    [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=homeconnect_ws)
 
-3. **If signing in:**
-   - Select your region (EU, NA, or CN)
-   - Open the link shown, log in with your Home Connect account, and approve access
-   - Your browser will then try to open a dead link — this is expected, it doesn't need to load
-   - Copy that full URL from the address bar and paste it into the HA form
-   - HA will automatically download your appliance profile
+3. Upload the downloaded Profile file.
+4. Select the Appliance you want to setup.
+5. When the initial connection to the Appliance fails, your asked to manually enter your Appliance IP-Address.
+6. Repeat from Step 2 if you want to setup more than one Appliances.
 
-4. Select the appliance to set up.
+### Configuration parameters
 
-5. If the connection test fails, enter your appliance's IP address manually.
+- Profile file: The Profile File you've downloaded with the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader)
+- Select Appliance: Select the Appliance you want to setup
+- Host / IP-Address: Manually enter your Appliance Hostname or IP-Address
 
-6. Repeat from step 1 to add more appliances.
+## Remove integration
 
-## Notes
+This integration follows standard integration removal, no extra steps are required.
 
-- Your credentials are not stored — only the downloaded appliance profile (encryption key + device description) is saved in HA.
-- If your appliance is not discovered automatically, find its IP in your router's DHCP table.
-- The `hcauth://` redirect URL step is a known limitation of the authorization flow. A future improvement could automate this step.
+## Reporting Issues and Bugs
 
-## Reporting Issues
+### Bug report requirements
 
-For issues specific to this fork (profile download / sign-in flow), open an issue here.
+- A full debug log of at least reloading the config entry and any actions leading to an error
+- The [Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) of the Config Entry
+- For reports relating to adding a new Appliance: the `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files from the Profile File
 
-For issues with the core integration (entities, local connection, protocols), please check the upstream repo: [chris-mc1/homeconnect_local_hass](https://github.com/chris-mc1/homeconnect_local_hass).
+### Enabling debug logging
 
-## Debug logging
+Use one of these two methods enable debug logging:
 
-```yaml
-logger:
-  logs:
-    custom_components.homeconnect_ws: debug
-    homeconnect_websocket: debug
-```
+- Through the UI:
+    1. [Enable Debug logging](<https://www.home-assistant.io/docs/configuration/troubleshooting>) on the detail page of the integration
+    2. Reload the config entry
+    3. Perform the actions that lead to an error
+    4. [Disable Debug logging](https://www.home-assistant.io/docs/configuration/troubleshooting/#disable-debug-logging-and-download-logs) on the detail page of the integration
+
+- OR -
+
+- Through configuration.yaml:
+    1. Add the following to your [configuration.yaml](https://www.home-assistant.io/docs/configuration/) file:
+
+        ```yaml
+        logger:
+        logs:
+            custom_components.homeconnect_ws: debug # Home Connect Local Integration
+            homeconnect_ws: debug
+            homeconnect_websocket: debug # Homeconnect websocket Python package
+        ```
+
+    2. Restart Home Assistant
+    3. Perform the actions that lead to an error
+    4. Click the button below or navigate to "Settings" -> "Logs".
+
+        [![Open your Home Assistant instance and show your Home Assistant logs.](https://my.home-assistant.io/badges/logs.svg)](https://my.home-assistant.io/redirect/logs/?)
+
+    5. Download the log file using download button on the left
