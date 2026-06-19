@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from copy import deepcopy
@@ -37,6 +38,8 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 CONNECTION_LOST_ISSUE_DELAY = 25  # seconds
+CONNECT_RETRY_INITIAL_DELAY = 5  # seconds
+CONNECT_RETRY_MAX_DELAY = 60  # seconds
 
 
 class HomeConnectCoordinator(DataUpdateCoordinator):
@@ -94,6 +97,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             "Connecting to %s", self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib")
         )
         first_failure = True
+        retry_delay = CONNECT_RETRY_INITIAL_DELAY
         while self._connecting:
             try:
                 await self.appliance.connect()
@@ -118,6 +122,11 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 await self.appliance.close()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
                 self.logger.exception(msg)
+
+            if not self._connecting:
+                return
+            await asyncio.sleep(retry_delay)
+            retry_delay = min(retry_delay * 2, CONNECT_RETRY_MAX_DELAY)
 
     async def _async_update_data(self) -> None:
         return None
