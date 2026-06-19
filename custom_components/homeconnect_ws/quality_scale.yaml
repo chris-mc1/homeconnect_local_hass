@@ -19,7 +19,20 @@ rules:
   has-entity-name: done
   runtime-data: done
   test-before-configure: done
-  test-before-setup: done
+  test-before-setup:
+    status: exempt
+    comment: |
+      Setup always succeeds and entities are created from the appliance profile
+      cached in the config entry, even if the appliance is unreachable. This is
+      intentional: appliances of this type are frequently and legitimately
+      offline (powered off, in standby, asleep), so raising ConfigEntryNotReady
+      on a temporary connection failure would repeatedly show the whole config
+      entry as "failed to set up" for a normal appliance state. Instead,
+      entities are marked unavailable in real time based on the live websocket
+      connection state (see entity-unavailable) and automatically become
+      available again once the appliance responds to a heartbeat. This was a
+      deliberate design choice made after user complaints (upstream issues
+      #274 and #293) about the previous ConfigEntryNotReady-based behavior.
   unique-config-entry: done
 
   # Silver
