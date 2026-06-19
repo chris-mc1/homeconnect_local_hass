@@ -31,7 +31,7 @@ rules:
       entities are marked unavailable in real time based on the live websocket
       connection state (see entity-unavailable) and automatically become
       available again once the appliance responds to a heartbeat. This was a
-      deliberate design choice made after user complaints (upstream issues
+      deliberate design choice made after user complaints (issues
       #274 and #293) about the previous ConfigEntryNotReady-based behavior.
   unique-config-entry: done
 
@@ -43,7 +43,12 @@ rules:
     comment: |
       The integration does not have configuration options.
   docs-installation-parameters: done
-  entity-unavailable: done
+  entity-unavailable: 
+    status: done
+    comment: |
+      Heartbeat signals are sent to the device every 30 seconds 
+      and if the device doesn't respond it's entites are marked 
+      as unavailable
   integration-owner: done
   log-when-unavailable: done
   parallel-updates: done
