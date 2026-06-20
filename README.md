@@ -2,6 +2,14 @@
 
 The **Home Connect Local** allows users to integrate their home appliances supporting the  [Home Connect](https://www.home-connect.com/global) standard for Bosch and Siemens using direct communication over the local network.
 
+## Use Cases
+[comment]: <> (Stolen directly from the Core Home Connect integration)
+- Monitor the multiple sensors of the appliance and trigger automations based on these sensors.
+- Start programs on your appliances from your dashboard.
+- Monitor the program status of the appliances.
+- Control the light of your appliances.
+- Adjust the appliance settings.
+
 ## Install the Integration
 
 1. Go to the HACS -> Custom Repositories and add this repository as a Custom Repository [See HACS Documentation for help](https://hacs.xyz/docs/faq/custom_repositories/)
@@ -111,18 +119,6 @@ Bean container and amount, grind coarseness, coffee strength, temperature, brew 
 
 Fridge, freezer, and chiller setpoint temperatures (°C and °F); door open and door alarm binary sensors; super-freeze and super-cool modes; eco, vacation, and fresh-food modes; interior light with brightness control; water filter alert.
 
-## Use Cases
-
-- **Laundry and dishwasher notifications** — get a push notification the moment a cycle finishes so clothes or dishes don't sit idle.
-- **Scheduled start** — use `homeconnect_ws.start_program` with a `finish_in` delay so laundry or the dishwasher finishes right when you get home, without having to think about it.
-- **Oven monitoring** — track the current oven or meat probe temperature from a dashboard, or trigger automations when the set temperature is reached.
-- **Auto power-off** — switch the oven or coffee maker off automatically via the power state switch after a set time.
-- **Maintenance alerts** — get notified when the dishwasher needs rinse aid or salt, the coffee maker needs descaling, or the dryer's lint filter is full.
-- **Freezer door alarm** — trigger a notification if the freezer door is left open.
-- **Energy and resource tracking** — use the energy and water forecast sensors to log consumption over time in Home Assistant's statistics or energy dashboard.
-- **Child lock automation** — enable or disable the child lock remotely, for example when children arrive home from school.
-- **Hood control** — adjust the extractor hood fan speed and lighting from a dashboard, or automate it based on cooking activity.
-
 ## Actions
 
 This integration provides the following actions:
@@ -131,60 +127,58 @@ This integration provides the following actions:
 - `homeconnect_ws.set_start_in`: Set the start delay of the currently selected program.
 - `homeconnect_ws.set_finish_in`: Set the target finish time of the currently selected program.
 
-## Examples
+## Automation examples
 
-### Notify when a cycle finishes
+Get started with these automation examples
 
-Send a notification the moment the washing machine (or any appliance) finishes its program.
-
+### Send a notification when the appliance ends the program
+[comment]: <> (Also stolen directly from the Core Home Connect integration)
 ```yaml
-automation:
-  - alias: "Notify when washing machine finishes"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.washing_machine_binary_sensor_program_finished
-        to: "on"
-    action:
-      - action: notify.mobile_app_your_phone
-        data:
-          message: "The washing machine has finished!"
+alias: "Notify when program ends"
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.appliance_operation_state
+    to: finished
+actions:
+  - action: notify.notify
+    data:
+      message: "The appliance has finished the program."
 ```
 
-### Start a program with a delayed finish time
 
-Start the currently selected dishwasher program and have it finish in 3 hours. The `device_id` can be found by selecting your device in the action's device picker in the UI.
+### Start a program when electricity is cheap
+[comment]: <> ( Also also stolen directly from the Core Home Connect integration)
+Because electricity is typically cheaper at night, this automation will activate the silent mode when starting the program at night.
 
 ```yaml
-automation:
-  - alias: "Start dishwasher to finish in 3 hours"
-    trigger:
-      - platform: time
-        at: "21:00:00"
-    action:
-      - action: homeconnect_ws.start_program
+alias: "Start program when electricity is cheap"
+triggers:
+  - trigger: state
+    entity_id: sensor.electricity_price
+    to: "0.10"
+conditions:
+  - condition: state
+    entity_id: sensor.diswasher_door
+    state: closed
+actions:
+  - if:
+      - condition: time
+        after: '22:00:00'
+        before: '06:00:00'
+    then:
+      - action: home_connect.set_program_and_options
         data:
-          device_id: your_device_id
-          finish_in:
-            hours: 3
-```
-
-### Turn off the oven after 2 hours of inactivity
-
-Automatically switch the oven off if it has been on but idle (no program running) for more than 2 hours.
-
-```yaml
-automation:
-  - alias: "Auto power off oven after 2 hours idle"
-    trigger:
-      - platform: state
-        entity_id: sensor.oven_sensor_operation_state
-        to: "Ready"
-        for:
-          hours: 2
-    action:
-      - action: switch.turn_off
-        target:
-          entity_id: switch.oven_switch_power_state
+          device_id: "your_device_id"
+          affects_to: "active_program"
+          program: "dishcare_dishwasher_program_eco_50"
+          dishcare_dishwasher_option_silence_on_demand: true
+    else:
+      - action: home_connect.set_program_and_options
+        data:
+          device_id: "your_device_id"
+          affects_to: "active_program"
+          program: "dishcare_dishwasher_program_eco_50"
 ```
 
 ## Known Limitations
