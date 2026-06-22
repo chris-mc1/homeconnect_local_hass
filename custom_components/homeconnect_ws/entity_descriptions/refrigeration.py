@@ -6,7 +6,7 @@ from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
-from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature
+from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature, UnitOfTime
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
@@ -263,6 +263,20 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.AUTO,
             step=1,
         ),
+        HCNumberEntityDescription(
+            key="number_refrigerator_door_assistant_freezer_timeout",
+            entity="Refrigeration.Common.Setting.Door.AssistantTimeoutFreezer",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_refrigerator_door_assistant_fridge_timeout",
+            entity="Refrigeration.Common.Setting.Door.AssistantTimeoutFridge",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            mode=NumberMode.AUTO,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -323,6 +337,12 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
         ),
         HCSwitchEntityDescription(
+            key="switch_refrigerator_door_assistant_fridge",
+            entity="Refrigeration.Common.Setting.Door.AssistantFridge",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
             key="switch_refrigeration_light_internal",
             entity="Refrigeration.Common.Setting.Light.Internal.Power",
             device_class=SwitchDeviceClass.SWITCH,
@@ -361,6 +381,18 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_refrigerator_door_assistant_freezer_force",
             entity="Refrigeration.Common.Setting.Door.AssistantForceFreezer",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_refrigerator_door_assistant_fridge_trigger",
+            entity="Refrigeration.Common.Setting.Door.AssistantTriggerFridge",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_refrigerator_door_assistant_fridge_force",
+            entity="Refrigeration.Common.Setting.Door.AssistantForceFridge",
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
         ),
