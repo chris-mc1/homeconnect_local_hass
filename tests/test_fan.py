@@ -151,6 +151,26 @@ async def test_turn_off(
     mock_appliance.session.send_sync.assert_not_awaited()
 
 
+async def test_turn_off_when_already_off(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test turning off when no program is active."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 0})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        FAN_DOMAIN,
+        SERVICE_TURN_OFF,
+        {ATTR_ENTITY_ID: "fan.fake_brand_homeappliance_fan"},
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_not_awaited()
+
+
 async def test_set_speed(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,

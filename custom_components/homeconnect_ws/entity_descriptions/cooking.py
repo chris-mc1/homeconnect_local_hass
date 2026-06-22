@@ -26,6 +26,8 @@ from .descriptions_definitions import (
     _EntityDescriptionsDefinitionsType,
 )
 
+from homeconnect_websocket.entities import Access
+
 if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
@@ -184,14 +186,23 @@ HOOD_FAN_ENTITIES = [
 
 def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
     """Get Hood Fan description."""
-    available_entities = [entity for entity in HOOD_FAN_ENTITIES if entity in appliance.entities]
-    if available_entities and _VENTING_PROGRAM in appliance.programs:
-        return HCFanEntityDescription(
-            key="fan_hood",
-            entities=available_entities,
-            default_program=_VENTING_PROGRAM,
-        )
-    return None
+    if _VENTING_PROGRAM not in appliance.programs:
+        return None
+
+    venting = appliance.programs[_VENTING_PROGRAM]
+    available_entities = [
+        option.name
+        for option in venting._options
+        if option.name in HOOD_FAN_ENTITIES and option.access == Access.READ_WRITE
+    ]
+    if not available_entities:
+        return None
+
+    return HCFanEntityDescription(
+        key="fan_hood",
+        entities=available_entities,
+        default_program=_VENTING_PROGRAM,
+    )
 
 
 def generate_hob_zones(appliance: HomeAppliance) -> HCFanEntityDescription:
