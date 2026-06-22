@@ -31,6 +31,14 @@ Deployed fork branch `fix/thermador-us-appliances` to
 `/home/ntableman/docker/ha/config/custom_components/homeconnect_ws`.
 Backup: `homeconnect_ws.bak-20260622-110851`.
 
+**Post-deploy fixes (same day):**
+
+- Fan `turn_off`: `action="DELETE"` crashed `Message.dump()` — fixed to `Action.POST` program 0.
+- Labels: `basiccarbonfilter` typo (`fahrenheit` key), missing `fanstage04`, missing hood program
+  and fridge door-assistant translations in `en.json`.
+- Registry: removed 5 mangled entities (`switch.kitchen_thermador_fridgefreezer` with no name);
+  recreated with proper IDs (`*_fridge_door_assistant*`).
+
 | Metric | Before | After |
 |--------|--------|-------|
 | `homeconnect_ws` entity count | 84 | 92 |
