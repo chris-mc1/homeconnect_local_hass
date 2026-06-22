@@ -68,7 +68,8 @@ If you want to, once you have connected the appliance to Home Assistant you can 
 5. Turn off the toggle and ignore the scare screen (they have it there so they can continue collecting your data)
 6. Then save
 
-You'll know if you have successfully done it if you see the line between your appliance and their cloud grayed out and disconnected.
+You'll know if you have successfully done it if you see the line between your appliance and their cloud is grayed out and disconnected.
+
 >[!NOTE]
 >Do note that your device will **not** get firmware updates once disconnected, if you want to, you can occasionally (once every 1-3 months) reenable the cloud connection for 1-2 days so the device can check for an update.
 
@@ -185,11 +186,12 @@ actions:
 
 - While this integration can (in theory) support all the functions supported in the Home Connect app, in reality, the functions have to reverse engineered
 - The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if the phone is on the same Wireless Access Point as the appliance theres a chance a local connection may fail to establish.
-- Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours.
+- Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours. This is called a **Websocket Shutdown**.
 - The Appliance must be online and reachable on your local network during initial setup. The config flow actively tests the connection before letting you finish adding the device, so it cannot be added while powered off or unreachable. Once added, the appliance can go offline/online freely and its entities will simply go unavailable and recover automatically. See issues (https://github.com/chris-mc1/homeconnect_local_hass/issues/274 and https://github.com/chris-mc1/homeconnect_local_hass/issues/293 for info about why it is like this.
 
 ## Trouble Shooting
 
+### Home Assistant cannot connect to my Appliance, what should I do?
 If Home Assistant cannot connect to your appliance (during setup) despite correctly entering the right profile file and ip address here are some tips
 - Try to see if Home connect can establish a local connection on the same network as Home Assistant
 - To do this Open the Home Connect App go to you appliance(s), then to it's settings, then scroll down to the network section
@@ -200,8 +202,14 @@ If Home Assistant cannot connect to your appliance (during setup) despite correc
          1. If you're on the same wireless access point as the device then your device is most likely offline or does not support a local connection.
          2. If you're not on the same wireless access point then make sure you are.
          3. If the device may be offline check it physically to see if theres no wifi signal indicator on it.
-         4. If the device does have a wifi signal then Home Assistant may have overloaded the device's local capacity causing it to not accept new connections for 24 hours. Check back in 24 hours to see if the signal relights up.
+         4. If the device does have a wifi signal then Home Assistant may have overloaded the device's local capacity causing a websocket shutdown, see below on how to resolve it.
 
+### How to resolve a websocket shutdown
+[comment]: <> (I do not know the exact causes of a websocket shutdown nor do I know why these tricks fix it, but when I [@vemboy200] asked Gemini about it gave a pretty good theory about it. It said that the device can only accept a certain number of unique users, and that if theres too many it will stop accepting new ones. However when no users are connected to the appliance for 24 hours, the appliance runs some kind of internal cleaning cycle that clear all these unique users and starts accepting new ones. I think what Gemini has said so far seems to be lining up with my experience, however the websocket shutdown only seems to happen my Thermador Oven [PRG486WDH] and Freezer[T36IF905SP], but not [as in ive never seen it happen] my Dishwasher [DWHD660WFP]. Right before Home Assistant gives me connection error [which happen next restart of Home Assistant or a reload of the config entry], the Home Connect App always fails to establish a local connection with the appliance, showing that Gemini's theory makes sense. Could meeting the inject websession requirement on platinum help resolve this user overload?)
+There are 3 ways to resolve a websocket shutdown
+1. Disable the cloud: Disabling the cloud (follow the Protip section on how to do it), then waiting 24 hours, can allow the device to reopen it's local websocket. Do note that since you're doing this during a local websocket shutdown, the smart features of the device will be inoperable until the device reopens it's websocket. The device will still stay connected to your Wi-Fi
+2. Power cycle the appliance: Cutting the power from your appliance for 1-5 minutes then reappling it can help resolve the issue.
+3. Repair the apppliance (not recommended): Reseting the device's network settings and repairing to the Home Connect App resolves the issue. However doing that is not only time consuming, but also you have to get a new profile file, and remove the entry and readd it with teh new file.
      
 ###  Reporting Issues and Bugs
 
