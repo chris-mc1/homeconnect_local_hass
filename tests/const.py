@@ -178,6 +178,7 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             key="Test.Fan",
             name="Fan",
             entities=["Test.FanSpeed1", "Test.FanSpeed2"],
+            default_program="Test.Program.Fan1",
         )
     ],
     "light": [
@@ -465,6 +466,26 @@ DEVICE_DESCRIPTION = DeviceDescription(
             uid=503,
             name="BSH.Common.Program.Favorite.002",
             available=True,
+        ),
+        EntityDescription(
+            uid=504,
+            name="Test.Program.Fan1",
+            available=True,
+            options=[
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=401),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=403),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=404),
+            ],
+        ),
+        EntityDescription(
+            uid=505,
+            name="Test.Program.Fan2",
+            available=True,
+            options=[
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=401),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=403),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=404),
+            ],
         ),
     ],
     selectedProgram=EntityDescription(

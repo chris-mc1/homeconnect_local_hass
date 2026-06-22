@@ -12,12 +12,12 @@ from homeconnect_websocket.message import Action, Message
 
 from .const import DOMAIN
 from .entity import HCEntity
-from .helpers import create_entities, error_decorator
+from .helpers import create_entities, entity_is_available, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
-    from homeconnect_websocket.entities import Entity as HcEntity
+    from homeconnect_websocket.entities import ActiveProgram, Entity as HcEntity
 
     from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCFanEntityDescription
@@ -57,7 +57,9 @@ class HCFan(HCEntity, FanEntity):
         runtime_data: HCData,
     ) -> None:
         super().__init__(entity_description, runtime_data)
-        self._attr_supported_features = FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
+        self._attr_supported_features = (
+            FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF | FanEntityFeature.TURN_ON
+        )
         self._speed_mapping = []
         self._speed_entities = {}
         self._attr_speed_count = 0
@@ -78,47 +80,81 @@ class HCFan(HCEntity, FanEntity):
         self._speed_range = (1, self._attr_speed_count)
 
     @property
+    def available(self) -> bool:
+        available = super().available
+        for entity in self._speed_entities.values():
+            available &= entity_is_available(entity, self.entity_description.available_access)
+        return available
+
+    @property
+    def is_on(self) -> bool:
+        return self._runtime_data.appliance.active_program is not None
+
+    @property
     def percentage(self) -> int | None:
+        if not self.is_on:
+            return 0
         for speed in self._speed_mapping:
             if self._speed_entities[speed.entity_name].value_raw == speed.entity_value:
                 return ranged_value_to_percentage(self._speed_range, speed.speed)
         return 0
 
+    def _venting_program(self) -> ActiveProgram:
+        default_program = self.entity_description.default_program
+        if default_program is None:
+            msg = "Hood fan is missing default_program"
+            raise ServiceValidationError(msg)
+        if self._runtime_data.appliance.active_program is not None:
+            return self._runtime_data.appliance.active_program
+        return self._runtime_data.appliance.programs[default_program]
+
     @error_decorator
     async def async_set_percentage(self, percentage: int) -> None:
         new_speed = math.ceil(percentage_to_ranged_value(self._speed_range, percentage))
-        new_speed_entity: str = None
-        new_speed_value: int = None
+        if new_speed == 0:
+            await self.async_turn_off()
+            return
+
+        new_speed_entity: str | None = None
+        new_speed_value: int | None = None
         for speed in self._speed_mapping:
             if speed.speed == new_speed:
                 new_speed_entity = speed.entity_name
                 new_speed_value = speed.entity_value
-        if new_speed_entity or new_speed == 0:
-            data = []
-            for entity in self._speed_entities.values():
-                if entity.name == new_speed_entity:
-                    data.append({"uid": entity.uid, "value": new_speed_value})
-                else:
-                    data.append({"uid": entity.uid, "value": 0})
-            message = Message(
-                resource="/ro/values",
-                action=Action.POST,
-                data=data,
-            )
-            await self._runtime_data.appliance.session.send_sync(message)
-        else:
+
+        if new_speed_entity is None:
             raise ServiceValidationError(
                 translation_domain=DOMAIN,
                 translation_key="speed_invalid",
-                translation_placeholders={"percentage", percentage},
+                translation_placeholders={"percentage": str(percentage)},
             )
+
+        options: dict[int, int] = {}
+        for entity in self._speed_entities.values():
+            if entity.name == new_speed_entity:
+                options[entity.uid] = new_speed_value
+            else:
+                options[entity.uid] = 0
+
+        await self._venting_program().start(options)
+
+    @error_decorator
+    async def async_turn_on(
+        self,
+        percentage: int | None = None,
+        preset_mode: str | None = None,
+        **kwargs: Any,
+    ) -> None:
+        if percentage is None:
+            await self._venting_program().start(options={}, override_options=True)
+        else:
+            await self.async_set_percentage(int(percentage))
 
     @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
-        data = [{"uid": entity.uid, "value": 0} for entity in self._speed_entities.values()]
         message = Message(
-            resource="/ro/values",
-            action=Action.POST,
-            data=data,
+            resource="/ro/activeProgram",
+            action="DELETE",
+            data=[],
         )
         await self._runtime_data.appliance.session.send_sync(message)

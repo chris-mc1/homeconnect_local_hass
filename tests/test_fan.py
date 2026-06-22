@@ -15,6 +15,8 @@ from homeassistant.const import (
     ATTR_ENTITY_ID,
     ATTR_FRIENDLY_NAME,
     ATTR_SUPPORTED_FEATURES,
+    SERVICE_TURN_OFF,
+    SERVICE_TURN_ON,
     STATE_OFF,
     STATE_ON,
 )
@@ -42,7 +44,7 @@ async def test_setup(
     assert state.attributes[ATTR_FRIENDLY_NAME] == "Fake_brand HomeAppliance Fan"
     assert (
         state.attributes[ATTR_SUPPORTED_FEATURES]
-        == FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF
+        == FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_OFF | FanEntityFeature.TURN_ON
     )
     assert state.attributes[ATTR_PERCENTAGE_STEP] == 25
 
@@ -54,10 +56,13 @@ async def test_update(
 ) -> None:
     """Test updating entity."""
     assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 0})
+    await hass.async_block_till_done()
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
     assert state.state == STATE_OFF
 
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 504})
     await mock_appliance.entities["Test.FanSpeed1"].update({"value": 1})
     await hass.async_block_till_done()
 
@@ -89,6 +94,61 @@ async def test_update(
     assert state.attributes[ATTR_PERCENTAGE] == 100
 
 
+async def test_turn_on(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test turning on."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 0})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        FAN_DOMAIN,
+        SERVICE_TURN_ON,
+        {ATTR_ENTITY_ID: "fan.fake_brand_homeappliance_fan"},
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action=Action.POST,
+            data={
+                "program": 504,
+                "options": [],
+            },
+        )
+    )
+
+
+async def test_turn_off(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test turning off."""
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 504})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        FAN_DOMAIN,
+        SERVICE_TURN_OFF,
+        {ATTR_ENTITY_ID: "fan.fake_brand_homeappliance_fan"},
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action="DELETE",
+            data=[],
+        )
+    )
+
+
 async def test_set_speed(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
@@ -96,6 +156,9 @@ async def test_set_speed(
 ) -> None:
     """Test setting a speed."""
     assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 0})
+    await mock_appliance.entities["Test.Option1"].update({"value": True})
+    await hass.async_block_till_done()
 
     await hass.services.async_call(
         FAN_DOMAIN,
@@ -109,12 +172,22 @@ async def test_set_speed(
 
     mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
-            resource="/ro/values",
+            resource="/ro/activeProgram",
             action=Action.POST,
-            data=[{"uid": 403, "value": 1}, {"uid": 404, "value": 0}],
+            data={
+                "program": 504,
+                "options": [
+                    {"uid": 403, "value": 1},
+                    {"uid": 404, "value": 0},
+                    {"uid": 401, "value": True},
+                ],
+            },
         )
     )
     mock_appliance.session.send_sync.reset_mock()
+
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 505})
+    await hass.async_block_till_done()
 
     await hass.services.async_call(
         FAN_DOMAIN,
@@ -128,8 +201,15 @@ async def test_set_speed(
 
     mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
-            resource="/ro/values",
+            resource="/ro/activeProgram",
             action=Action.POST,
-            data=[{"uid": 403, "value": 0}, {"uid": 404, "value": 1}],
+            data={
+                "program": 505,
+                "options": [
+                    {"uid": 403, "value": 0},
+                    {"uid": 404, "value": 1},
+                    {"uid": 401, "value": True},
+                ],
+            },
         )
     )
