@@ -143,8 +143,8 @@ async def test_turn_off(
     mock_appliance.session.send_sync.assert_awaited_once_with(
         Message(
             resource="/ro/activeProgram",
-            action="DELETE",
-            data=[],
+            action=Action.POST,
+            data=[{"program": 0, "options": []}],
         )
     )
 

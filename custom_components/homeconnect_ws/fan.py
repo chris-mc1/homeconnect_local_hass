@@ -154,7 +154,7 @@ class HCFan(HCEntity, FanEntity):
     async def async_turn_off(self, **kwargs: Any) -> None:
         message = Message(
             resource="/ro/activeProgram",
-            action="DELETE",
-            data=[],
+            action=Action.POST,
+            data=[{"program": 0, "options": []}],
         )
         await self._runtime_data.appliance.session.send_sync(message)
