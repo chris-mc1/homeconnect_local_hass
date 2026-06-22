@@ -43,6 +43,12 @@ async def async_setup_entry(
     async_add_entites(entities)
 
 
+_HOOD_FAN_STATE_ENTITIES = (
+    "BSH.Common.Root.ActiveProgram",
+    "BSH.Common.Status.OperationState",
+)
+
+
 class HCFan(HCEntity, FanEntity):
     """Fan Entity."""
 
@@ -79,6 +85,15 @@ class HCFan(HCEntity, FanEntity):
 
         self._speed_range = (1, self._attr_speed_count)
 
+    async def async_added_to_hass(self) -> None:
+        if self.entity_description.key == "fan_hood":
+            appliance = self._runtime_data.appliance
+            for name in _HOOD_FAN_STATE_ENTITIES:
+                entity = appliance.entities.get(name)
+                if entity is not None and entity not in self._entities:
+                    self._entities.append(entity)
+        await super().async_added_to_hass()
+
     @property
     def available(self) -> bool:
         available = super().available
@@ -88,6 +103,11 @@ class HCFan(HCEntity, FanEntity):
 
     @property
     def is_on(self) -> bool:
+        if self._runtime_data.appliance.active_program is None:
+            return False
+        operation = self._runtime_data.appliance.entities.get("BSH.Common.Status.OperationState")
+        if operation is not None and operation.value_raw == 0:
+            return False
         for entity in self._speed_entities.values():
             if entity.value_raw not in (None, 0):
                 return True
@@ -166,6 +186,7 @@ class HCFan(HCEntity, FanEntity):
             )
 
         await program.start(options)
+        self.async_write_ha_state()
 
     @error_decorator
     async def async_turn_on(
@@ -178,6 +199,7 @@ class HCFan(HCEntity, FanEntity):
             await self._venting_program().start(options={}, override_options=True)
         else:
             await self.async_set_percentage(int(percentage))
+        self.async_write_ha_state()
 
     @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
@@ -190,3 +212,4 @@ class HCFan(HCEntity, FanEntity):
             return
 
         await appliance.active_program.start(options)
+        self.async_write_ha_state()
