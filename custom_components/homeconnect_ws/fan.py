@@ -152,9 +152,15 @@ class HCFan(HCEntity, FanEntity):
 
     @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
+        appliance = self._runtime_data.appliance
+        if appliance.active_program is not None:
+            options = {entity.uid: 0 for entity in self._speed_entities.values()}
+            await appliance.active_program.start(options)
+            return
+
         message = Message(
             resource="/ro/activeProgram",
             action=Action.POST,
-            data=[{"program": 0, "options": []}],
+            data={"program": 0, "options": []},
         )
-        await self._runtime_data.appliance.session.send_sync(message)
+        await appliance.session.send_sync(message)

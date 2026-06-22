@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from unittest.mock import AsyncMock
 
 from homeassistant.components.fan import (
     ATTR_PERCENTAGE,
@@ -133,6 +134,10 @@ async def test_turn_off(
     await mock_appliance.entities["Test.ActiveProgram"].update({"value": 504})
     await hass.async_block_till_done()
 
+    active_program = mock_appliance.active_program
+    assert active_program is not None
+    active_program.start = AsyncMock()
+
     await hass.services.async_call(
         FAN_DOMAIN,
         SERVICE_TURN_OFF,
@@ -140,13 +145,10 @@ async def test_turn_off(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_awaited_once_with(
-        Message(
-            resource="/ro/activeProgram",
-            action=Action.POST,
-            data=[{"program": 0, "options": []}],
-        )
+    active_program.start.assert_awaited_once_with(
+        {403: 0, 404: 0},
     )
+    mock_appliance.session.send_sync.assert_not_awaited()
 
 
 async def test_set_speed(
