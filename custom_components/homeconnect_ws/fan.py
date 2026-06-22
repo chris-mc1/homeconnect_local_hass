@@ -105,9 +105,6 @@ class HCFan(HCEntity, FanEntity):
     def is_on(self) -> bool:
         if self._runtime_data.appliance.active_program is None:
             return False
-        operation = self._runtime_data.appliance.entities.get("BSH.Common.Status.OperationState")
-        if operation is not None and operation.value_raw == 0:
-            return False
         for entity in self._speed_entities.values():
             if entity.value_raw not in (None, 0):
                 return True

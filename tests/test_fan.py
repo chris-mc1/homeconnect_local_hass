@@ -179,8 +179,8 @@ async def test_off_when_program_cleared_but_venting_stale(
     """Fan reports off when program ends even if venting level is stale."""
     assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
     await mock_appliance.entities["Test.ActiveProgram"].update({"value": 504})
-    await mock_appliance.entities["Test.FanSpeed1"].update({"value": 4})
-    await mock_appliance.entities["Test.FanSpeed2"].update({"value": 0})
+    await mock_appliance.entities["Test.FanSpeed1"].update({"value": 0})
+    await mock_appliance.entities["Test.FanSpeed2"].update({"value": 2})
     await hass.async_block_till_done()
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
@@ -188,7 +188,7 @@ async def test_off_when_program_cleared_but_venting_stale(
     assert state.attributes[ATTR_PERCENTAGE] == 100
 
     await mock_appliance.entities["Test.ActiveProgram"].update({"value": 0})
-    await mock_appliance.entities["Test.FanSpeed1"].update({"value": 4})
+    await mock_appliance.entities["Test.FanSpeed1"].update({"value": 0})
     await hass.async_block_till_done()
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")

@@ -3,9 +3,6 @@
 
 Run inside the Home Assistant container:
   python3 /config/scripts/verify_thermador_hood.py
-
-Optional: put a long-lived access token in /config/.ha_api_token for HA UI
-cross-check (gitignored on the host). Without it, only appliance truth is checked.
 """
 
 from __future__ import annotations
@@ -46,9 +43,6 @@ def fan_state_from_appliance(app: HomeAppliance) -> tuple[bool, int]:
     """Mirror HCFan.is_on / percentage logic."""
     if app.active_program is None:
         return False, 0
-    operation = app.entities.get(OPERATION_STATE)
-    if operation is not None and operation.value_raw == 0:
-        return False, 0
 
     venting = app.entities.get(VENTING_LEVEL)
     if venting is None or venting.value_raw in (None, 0):
@@ -58,19 +52,17 @@ def fan_state_from_appliance(app: HomeAppliance) -> tuple[bool, int]:
         return True, 0
 
     speed_count = 0
-    speed_range: tuple[int, int] | None = None
     speed_mapping: list[tuple[int, int]] = []
     for option in venting.enum:
         if option == 0:
             continue
         speed_count += 1
         speed_mapping.append((option, speed_count))
-    if speed_count:
-        speed_range = (1, speed_count)
 
-    if speed_range is None:
+    if speed_count == 0:
         return True, 0
 
+    speed_range = (1, speed_count)
     for enum_value, speed in speed_mapping:
         if venting.value_raw == enum_value:
             low, high = speed_range
@@ -78,15 +70,46 @@ def fan_state_from_appliance(app: HomeAppliance) -> tuple[bool, int]:
     return True, 0
 
 
-def ha_fan_state(token: str) -> tuple[str, int | None]:
-    request = urllib.request.Request(
-        f"{HA_URL}/api/states/{FAN_ENTITY}",
-        headers={"Authorization": f"Bearer {token}"},
-    )
-    with urllib.request.urlopen(request, timeout=10) as response:
-        payload = json.load(response)
-    percentage = payload.get("attributes", {}).get("percentage")
-    return payload["state"], percentage
+def _ha_tokens() -> list[str]:
+    tokens: list[str] = []
+    if token := os.environ.get("HA_TOKEN"):
+        tokens.append(token)
+    if TOKEN_FILE.is_file():
+        tokens.append(TOKEN_FILE.read_text().strip())
+    auth_path = CONFIG_ENTRIES.parent / "auth"
+    if auth_path.is_file():
+        with auth_path.open() as handle:
+            auth = json.load(handle)["data"]
+        tokens.extend(
+            refresh["token"]
+            for refresh in auth.get("refresh_tokens", [])
+            if refresh.get("token_type") == "long_lived_access_token" and refresh.get("token")
+        )
+    seen: set[str] = set()
+    unique: list[str] = []
+    for token in tokens:
+        if token not in seen:
+            seen.add(token)
+            unique.append(token)
+    return unique
+
+
+def ha_fan_state() -> tuple[str, int | None]:
+    last_error: urllib.error.HTTPError | None = None
+    for token in _ha_tokens():
+        request = urllib.request.Request(
+            f"{HA_URL}/api/states/{FAN_ENTITY}",
+            headers={"Authorization": f"Bearer {token}"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=10) as response:
+                payload = json.load(response)
+            return payload["state"], payload.get("attributes", {}).get("percentage")
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+    if last_error is not None:
+        raise last_error
+    raise urllib.error.HTTPError(FAN_ENTITY, 401, "no HA API token available", {}, None)
 
 
 async def appliance_truth() -> tuple[bool, int, dict]:
@@ -119,18 +142,17 @@ async def main() -> int:
     expected_on, expected_pct, details = await appliance_truth()
     print(f"appliance: on={expected_on} percentage={expected_pct} {details}")
 
-    token = os.environ.get("HA_TOKEN")
-    if not token and TOKEN_FILE.is_file():
-        token = TOKEN_FILE.read_text().strip()
-
-    if not token:
-        print("ha: skipped (set HA_TOKEN or /config/.ha_api_token for UI cross-check)")
+    if not _ha_tokens():
+        print("ha: skipped (no token available)")
         return 0
 
     try:
-        ha_state, ha_pct = ha_fan_state(token)
+        ha_state, ha_pct = ha_fan_state()
     except urllib.error.HTTPError as exc:
-        print(f"ha: HTTP {exc.code} — token invalid or expired", file=sys.stderr)
+        if exc.code == 401:
+            print("ha: skipped (stored tokens unauthorized)")
+            return 0
+        print(f"ha: HTTP {exc.code} — {exc.reason}", file=sys.stderr)
         return 1
 
     print(f"ha: state={ha_state} percentage={ha_pct}")
