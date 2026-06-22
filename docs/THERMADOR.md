@@ -16,14 +16,17 @@ Verified against Bowman Mtn production appliances (2026-06-22):
 2. **Incomplete refrigeration mappings** — Fridge door-assistant settings exist on the appliance
    but were only mapped for the freezer compartment.
 3. **Hood fan control** — Speed changes require starting the venting program first; turning off
-   uses `DELETE /ro/activeProgram` on Thermador hoods.
+   uses `Action.POST` program 0 on `/ro/activeProgram` (`DELETE` is not a valid `Action` enum in
+   homeconnect-websocket 1.5.3).
 
 ## Fixes in `fix/thermador-us-appliances`
 
 - `cooking.py`: Fahrenheit fallbacks for cavity temperature, meat probe, setpoint; hood
   `default_program`.
 - `refrigeration.py`: Fridge door-assistant switch/select/number entities.
-- `fan.py`: `turn_on`, program-based speed control, `DELETE` turn-off.
+- `fan.py`: `turn_on`, program-based speed control, `Action.POST` turn-off.
+- `translations/en.json`: hood program labels, `fanstage04`, `basiccarbonfilter`, fridge
+  door-assistant entity names and state labels.
 
 ## Production deploy (Bowman Mtn, 2026-06-22)
 
@@ -48,7 +51,18 @@ New entities confirmed in `core.entity_registry`:
 - `sensor.kitchen_thermador_oven_current_temperature` (cavity °F)
 - `sensor.kitchen_thermador_oven_current_meatprobe_temperature`
 - `number.kitchen_thermador_oven_setpoint_temperature` (°F option)
-- Fridge door-assistant switch/select/number (entity_id suffixes truncated by HA naming — see registry unique_ids `*assistant_fridge*`)
+- Fridge door-assistant: `switch.kitchen_thermador_fridgefreezer_fridge_door_assistant` (+ force/trigger/timeout selects)
+
+## PR checklist
+
+- [x] `pytest` — 84 passed (Python 3.14 / HA 2026.5 container)
+- [x] Deploy + reload on Bowman Mtn HA; entity count 84 → 92
+- [x] Oven cavity temp + setpoint + meat-probe entities in registry
+- [x] Fridge door-assistant entities in registry (proper names, not bare device title)
+- [x] Hood/f fridge enum label translations (`fanstage04`, `basiccarbonfilter`, program names)
+- [x] Fan turn-off crash fixed (`Action.POST` program 0)
+- [ ] Attach full config-entry diagnostics export to upstream PR (UI download)
+- [ ] Live hood fan on/off/speed UI test (manual)
 
 Upstream PR: https://github.com/chris-mc1/homeconnect_local_hass/pull/408
 
@@ -77,12 +91,3 @@ for e in ce['data']['entries']:
                 print(s['name'])
 "
 ```
-
-## PR checklist
-
-- [x] `pytest` — 84 passed (Python 3.14 / HA 2026.5 container)
-- [x] Deploy + reload on Bowman Mtn HA; entity count 84 → 92
-- [x] Oven cavity temp + setpoint + meat-probe entities in registry
-- [x] Fridge door-assistant entities in registry
-- [ ] Attach full config-entry diagnostics export to upstream PR (UI download)
-- [ ] Live hood fan on/off/speed UI test
