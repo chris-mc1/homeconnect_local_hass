@@ -88,7 +88,10 @@ class HCFan(HCEntity, FanEntity):
 
     @property
     def is_on(self) -> bool:
-        return self._runtime_data.appliance.active_program is not None
+        for entity in self._speed_entities.values():
+            if entity.value_raw not in (None, 0):
+                return True
+        return False
 
     @property
     def percentage(self) -> int | None:
