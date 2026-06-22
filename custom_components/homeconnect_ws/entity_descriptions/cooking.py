@@ -29,6 +29,40 @@ from .descriptions_definitions import (
 if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
 
+_VENTING_PROGRAM = "Cooking.Common.Program.Hood.Venting"
+
+
+def _temperature_entity(
+    appliance: HomeAppliance,
+    base: str,
+) -> tuple[str, UnitOfTemperature] | None:
+    """Return the first temperature entity present on the appliance."""
+    for suffix, unit in (
+        ("CurrentTemperature", UnitOfTemperature.CELSIUS),
+        ("CurrentTemperatureFahrenheit", UnitOfTemperature.FAHRENHEIT),
+    ):
+        entity = f"{base}{suffix}"
+        if entity in appliance.entities:
+            return entity, unit
+    return None
+
+
+def _meatprobe_entity(
+    appliance: HomeAppliance,
+    cavity: str,
+) -> tuple[str, UnitOfTemperature] | None:
+    """Return the first meat-probe temperature entity present on the appliance."""
+    base = f"Cooking.Oven.Status.Cavity.{cavity}."
+    for suffix, unit in (
+        ("CurrentMeatprobeTemperature", UnitOfTemperature.CELSIUS),
+        ("CurrentMeatprobeTemperatureFahrenheit", UnitOfTemperature.FAHRENHEIT),
+        ("MeatProbeTemperatureFahrenheit", UnitOfTemperature.FAHRENHEIT),
+    ):
+        entity = f"{base}{suffix}"
+        if entity in appliance.entities:
+            return entity, unit
+    return None
+
 
 def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven status descriptions."""
@@ -57,9 +91,10 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
                 )
             )
 
-        # Temperatur
-        entity = f"Cooking.Oven.Status.Cavity.{group[0]}.CurrentTemperature"
-        if entity in appliance.entities:
+        # Temperature (Celsius or Fahrenheit depending on appliance locale)
+        cavity_base = f"Cooking.Oven.Status.Cavity.{group[0]}."
+        if temperature := _temperature_entity(appliance, cavity_base):
+            entity, unit = temperature
             descriptions["sensor"].append(
                 HCSensorEntityDescription(
                     key=f"sensor_oven_current_temperature_{group[0]}",
@@ -67,7 +102,20 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
                     translation_placeholders={"group_name": group_name},
                     entity=entity,
                     device_class=SensorDeviceClass.TEMPERATURE,
-                    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+                    native_unit_of_measurement=unit,
+                )
+            )
+
+        if meatprobe := _meatprobe_entity(appliance, group[0]):
+            entity, unit = meatprobe
+            descriptions["sensor"].append(
+                HCSensorEntityDescription(
+                    key=f"sensor_oven_current_meatprobe_temperature_{group[0]}",
+                    translation_key="sensor_oven_current_meatprobe_temperature",
+                    translation_placeholders={"group_name": group_name},
+                    entity=entity,
+                    device_class=SensorDeviceClass.TEMPERATURE,
+                    native_unit_of_measurement=unit,
                 )
             )
 
@@ -137,8 +185,12 @@ HOOD_FAN_ENTITIES = [
 def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
     """Get Hood Fan description."""
     available_entities = [entity for entity in HOOD_FAN_ENTITIES if entity in appliance.entities]
-    if available_entities:
-        return HCFanEntityDescription(key="fan_hood", entities=available_entities)
+    if available_entities and _VENTING_PROGRAM in appliance.programs:
+        return HCFanEntityDescription(
+            key="fan_hood",
+            entities=available_entities,
+            default_program=_VENTING_PROGRAM,
+        )
     return None
 
 
@@ -420,6 +472,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         ),
+        HCSensorEntityDescription(
+            key="sensor_oven_current_meatprobe_temperature_fahrenheit",
+            translation_key="sensor_oven_current_meatprobe_temperature",
+            entity="Cooking.Oven.Status.CurrentMeatprobeTemperatureFahrenheit",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+        ),
     ],
     "dynamic": [
         generate_oven_status,
@@ -433,6 +492,14 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Oven.Option.SetpointTemperature",
             device_class=NumberDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_oven_setpoint_temperature_fahrenheit",
+            translation_key="number_oven_setpoint_temperature",
+            entity="Cooking.Oven.Option.SetpointTemperatureFahrenheit",
+            device_class=NumberDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
             mode=NumberMode.AUTO,
         ),
         HCNumberEntityDescription(
