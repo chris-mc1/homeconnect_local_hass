@@ -42,6 +42,13 @@ CONNECTION_LOST_ISSUE_DELAY = 25  # seconds
 CONNECT_RETRY_INITIAL_DELAY = 5  # seconds
 CONNECT_RETRY_MAX_DELAY = 60  # seconds
 
+# Appliance types that routinely cut their own WiFi when powered off between
+# cycles. Being unreachable is a normal, expected state for these, not a
+# fault, so we don't escalate connect failures to ERROR or raise a repair
+# issue for them (see upstream chris-mc1/homeconnect_local_hass issues #274
+# and #293).
+EXPECTED_OFFLINE_APPLIANCE_TYPES = frozenset({"Washer", "Dryer", "WasherDryer"})
+
 
 class HomeConnectCoordinator(DataUpdateCoordinator):
     """My custom coordinator."""
@@ -51,6 +58,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     _connecting: bool = True
     connected: bool = False
     _connection_lost_issue_unsub: CALLBACK_TYPE | None = None
+    _track_connectivity_issues: bool
 
     def __init__(
         self,
@@ -81,6 +89,9 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 translation_domain=DOMAIN,
                 translation_key="no_device_info",
             )
+        self._track_connectivity_issues = (
+            self.appliance.info.get("type") not in EXPECTED_OFFLINE_APPLIANCE_TYPES
+        )
 
     async def close(self) -> None:
         self._connecting = False
@@ -116,7 +127,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 await self.appliance.close()
                 self._mark_disconnected()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
-                if first_failure:
+                if first_failure and self._track_connectivity_issues:
                     self.logger.error(msg)  # noqa: TRY400
                     first_failure = False  # first_failure_fix
                 else:
@@ -155,7 +166,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             # (e.g. the appliance is already unreachable when HA starts), since
             # the library only enters RECONNECTING after a prior successful
             # connection drops.
-            if self.connected:
+            if self.connected and self._track_connectivity_issues:
                 self.logger.warning(
                     "Connection to %s lost",
                     self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
@@ -173,7 +184,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     def _mark_disconnected(self) -> None:
         """Mark the appliance as disconnected and schedule the repair issue timer."""
         self.connected = False
-        if self._connection_lost_issue_unsub is None:
+        if self._track_connectivity_issues and self._connection_lost_issue_unsub is None:
             self._connection_lost_issue_unsub = async_call_later(
                 self.hass,
                 CONNECTION_LOST_ISSUE_DELAY,
