@@ -192,17 +192,17 @@ actions:
 ## Trouble Shooting
 
 ### Home Assistant cannot connect to my Appliance, what should I do?
-If Home Assistant cannot connect to your appliance (during setup) despite correctly entering the right profile file and ip address here are some tips
-- Try to see if Home connect can establish a local connection on the same network as Home Assistant
-- To do this Open the Home Connect App go to you appliance(s), then to it's settings, then scroll down to the network section
-   - If you see the bottom line lit up green then this could mean two things.
-         1. You have the wrong/outdated profile file, make sure you have the correct file and if it's outdated get a new one.
-         2. As noted in the known limiations the mDNS on the device is wonky, and if mDNS fails, even a direct IP connection may fail.
-   - If you dont see the bottom line lit up green then this could mean two things.
-         1. If you're on the same wireless access point as the device then your device is most likely offline or does not support a local connection.
-         2. If you're not on the same wireless access point then make sure you are.
-         3. If the device may be offline check it physically to see if theres no wifi signal indicator on it.
-         4. If the device does have a wifi signal then Home Assistant may have overloaded the device's local capacity causing a websocket shutdown, see below on how to resolve it.
+If Home Assistant cannot connect to your appliance (during setup) despite correctly entering the right profile file and IP address, here are some tips:
+- Try to see if Home Connect can establish a local connection on the same network as Home Assistant.
+- To do this, open the Home Connect App, go to your appliance(s), then to its settings, then scroll down to the network section.
+   - If you see the bottom line lit up green, this could mean two things:
+         1. You have the wrong/outdated profile file. Make sure you have the correct file, and if it's outdated, get a new one.
+         2. As noted in the known limitations, the mDNS on the device is wonky, and if mDNS fails, even a direct IP connection may fail.
+   - If you don't see the bottom line lit up green, this could mean a few things:
+         1. If you're on the same wireless access point as the device, your device is most likely offline or does not support a local connection.
+         2. If you're not on the same wireless access point, make sure you are.
+         3. The device may be offline; check it physically to see if there's no Wi-Fi signal indicator on it.
+         4. If the device does have a Wi-Fi signal, then Home Assistant may have overloaded the device's local capacity, causing a websocket shutdown. See below on how to resolve it.
 
 ### How to resolve a websocket shutdown
 [comment]: <> (I do not know the exact causes of a websocket shutdown nor do I know why these tricks fix it, but when I [@vemboy200] asked Gemini about it gave a pretty good theory about it. It said that the device can only accept a certain number of unique users, and that if theres too many it will stop accepting new ones. However when no users are connected to the appliance for 24 hours, the appliance runs some kind of internal cleaning cycle that clear all these unique users and starts accepting new ones. I think what Gemini has said so far seems to be lining up with my experience, however the websocket shutdown only seems to happen my Thermador Oven [PRG486WDH] and Freezer[T36IF905SP], but not [as in ive never seen it happen] my Dishwasher [DWHD660WFP]. Right before Home Assistant gives me connection error [which happen next restart of Home Assistant or a reload of the config entry], the Home Connect App always fails to establish a local connection with the appliance, showing that Gemini's theory makes sense.)
@@ -211,12 +211,12 @@ If Home Assistant cannot connect to your appliance (during setup) despite correc
 
 [comment]: <> (Update 2 [made by Claude]: while a websocket shutdown was actively happening on the Freezer [T36IF905SP], found and fixed three related bugs that were masking the problem instead of fixing the root cause. 1: the repair issue [introduced for the repair-issues Gold rule] never fired for an appliance that hadn't connected even once this session, since the library only enters the RECONNECTING state after a previously successful connection drops — a never-yet-connected appliance instead reports ABNORMAL_CLOSURE, which wasn't handled at all. 2: a websocket shutdown specifically returns a plain HTTP 404 on the websocket upgrade [aiohttp.WSServerHandshakeError, a subclass of ClientResponseError], which the library doesn't catch or wrap, so it fell through to a generic exception handler that logged a full traceback on every single retry forever — fixed to log quietly like the other expected connection failures. 3: added an appliance-type check [Washer/Dryer/WasherDryer] so connect failures and the repair issue are suppressed for appliances that are expected to legitimately power off between cycles [the actual cause of upstream issues #274/#293], while still alerting normally for appliance types like this Freezer that are expected to stay connected. Confirmed live: with the Freezer mid-websocket-shutdown, retries now log quietly on backoff instead of spamming, and a "Connection to T36IF905SP lost" repair issue correctly appears in Settings > Repairs.)
 
-There are 3 ways to resolve a websocket shutdown
-1. Disable the cloud: Disabling the cloud (follow the Protip section on how to do it), then waiting 24 hours, can allow the device to reopen it's local websocket. Do note that since you're doing this during a local websocket shutdown, the smart features of the device will be inoperable until the device reopens it's websocket. The device will still stay connected to your Wi-Fi
-2. Power cycle the appliance: Cutting the power from your appliance for 1-5 minutes then reappling it can help resolve the issue.
-3. Repair the apppliance (not recommended): Reseting the device's network settings and repairing to the Home Connect App resolves the issue. However doing that is not only time consuming, but also you have to get a new profile file, and remove the entry and readd it with teh new file.
-     
-###  Reporting Issues and Bugs
+There are three ways to resolve a websocket shutdown:
+1. Disable the cloud: Disabling the cloud (follow the [protip](#protip) section on how to do it), then waiting 24 hours, can allow the device to reopen its local websocket. Note that since you're doing this during a local websocket shutdown, the smart features of the device will be inoperable until the device reopens its websocket. The device will still stay connected to your Wi-Fi.
+2. Power cycle the appliance: Cutting the power from your appliance for 1-5 minutes, then reapplying it, can help resolve the issue.
+3. Re-pair the appliance (not recommended): Resetting the device's network settings and re-pairing it to the Home Connect App resolves the issue. However, doing that is not only time consuming, but you also have to get a new profile file, remove the entry, and re-add it with the new file.
+
+### Reporting Issues and Bugs
 
 - A full debug log of at least reloading the config entry and any actions leading to an error
 - The [Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) of the Config Entry
