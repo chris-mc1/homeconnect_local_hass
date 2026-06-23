@@ -32,7 +32,7 @@ To use this integration, you must first create a Home Connect account and connec
 
 ## Setup
 
-1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your Appliance profiles, select "openHAB" as target. The downloaded ZIP-file contains each Appliance encryption Key and feature descriptions
+1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your Appliance profiles, select "Home Assistant - Home Connect Local" as target. The downloaded ZIP-file contains each Appliance encryption Key and feature descriptions
 2. Click the button below or use "Add Integration" in Home Assistant and select "Home Connect Local".
 
     [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=homeconnect_ws)
@@ -79,7 +79,7 @@ This integration is soley pushed based with it reciving updates from the applian
 
 ## Supported Functions
 
-The following entities are available. Which ones appear depends on the appliance type and its feature set — not every device supports every entity listed here.
+The following entities are available. Which ones appear depends on the appliance type and its feature set. Not every device supports every entity listed here.
 
 ### All Appliances
 
@@ -187,7 +187,30 @@ actions:
 - While this integration can (in theory) support all the functions supported in the Home Connect app, in reality, the functions have to reverse engineered
 - The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if the phone is on the same Wireless Access Point as the appliance theres a chance a local connection may fail to establish.
 - Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours. This is called a **Websocket Shutdown**.
-- The Appliance must be online and reachable on your local network during initial setup. The config flow actively tests the connection before letting you finish adding the device, so it cannot be added while powered off or unreachable. Once added, the appliance can go offline/online freely and its entities will simply go unavailable and recover automatically. See issues (https://github.com/chris-mc1/homeconnect_local_hass/issues/274 and https://github.com/chris-mc1/homeconnect_local_hass/issues/293 for info about why it is like this.
+- The Appliance must be online and reachable on your local network during initial setup. The config flow actively tests the connection before letting you finish adding the device, so it cannot be added while powered off or unreachable. Once added, the appliance can go offline/online freely and its entities will simply go unavailable and recover automatically. See issues https://github.com/chris-mc1/homeconnect_local_hass/issues/274 and https://github.com/chris-mc1/homeconnect_local_hass/issues/293 for info about why it is like this.
+
+## Requesting a New Feature
+
+Since this integration's functions have to be reverse engineered (see [Known Limitations](#known-limitations)), the more information you provide when requesting a new entity, the easier it is for a developer to add it. There are two ways to do this, depending on how much effort you want to put in.
+
+### Basic method
+
+1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your appliance profile, selecting "Home Assistant - Home Connect Local" as the target.
+2. Unzip the downloaded file. You'll get three files: a `*_DeviceDescription.xml`, a `*_FeatureMapping.xml`, and a `.json` file.
+   - **Do not share the `.json` file.** It contains sensitive info like your appliance's local encryption key.
+3. Rename the `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files to remove the MAC address segment from the filename (e.g. `THERMADOR-PRG486WDH-##MACADDRESS##_DeviceDescription.xml` → `THERMADOR-PRG486WDH_DeviceDescription.xml`). That segment only identifies your specific physical appliance and isn't needed by developers.
+4. Download the [Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) of the appliance's Config Entry.
+5. [Open a feature request](https://github.com/chris-mc1/homeconnect_local_hass/issues/new?template=feature_request.yml) describing, in plain terms, the feature/entity you'd like added (e.g. "I want a sensor for my appliance's door state"), and attach the two renamed XML files along with the Diagnostics.
+
+### Advanced method
+
+If you're comfortable digging a bit deeper, you can help pinpoint exactly which feature maps to the entity you want, which makes it much faster for a developer to add:
+
+1. Follow steps 1-4 of the Basic method above.
+2. [Enable debug logging](#enabling-debug-logging) for the integration.
+3. Trigger the feature on the appliance itself (e.g. open the door, change a setting, start a program) and watch the debug log for the corresponding update message.
+4. Note the UID logged for that update. It will be in **decimal**, while the UIDs inside the `*_DeviceDescription.xml`/`*_FeatureMapping.xml` files are in **hexadecimal** — convert between the two to match them up. For example, on a Thermador oven, the live oven temperature in fahrenheit logs as UID `5959` (decimal), which is `1747` in hex, matching `Cooking.Oven.Status.Cavity.340.CurrentTemperatureFahrenheit` in the FeatureMapping file.
+5. Include that UID/feature name (and what it corresponds to) in your issue, alongside everything from the Basic method, so developers know exactly which feature to wire up.
 
 ## Trouble Shooting
 
