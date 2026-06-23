@@ -24,18 +24,11 @@ body:
         - label: The requested feature is not latest beta release of Home Connect Local.
         - label: The requested feature is available through the HomeConnect App.
         - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
+        - label: I have made sure I have NOT accidentally dropped in my appliance's .json file 
     validations:
       required: true
 
-  - type: textarea
-    attributes:
-      label: Diagnostics information
-      placeholder: "drag-and-drop the diagnostics file here"
-      description: >-
-        [Download the Integration Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) and drag-and-drop that file into the textbox below.
-        Diagnostics contain the current Appliance state, so it is best to download Diagnostics while the Appliance is in a specific state or before and after perform an action through the HomeConnect App.
-    validations:
-      required: true
+
 
   - type: textarea
     attributes:
@@ -44,7 +37,7 @@ body:
       description: >-
         See [Requesting a New Feature](https://github.com/chris-mc1/homeconnect_local_hass#requesting-a-new-feature) in the README for how to get these.
         Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to get your appliance's `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files, rename them to remove the MAC address segment from the filename, and attach them here.
-        **Do not attach the `.json` file** from the same download — it contains your appliance's local encryption key.
+        **Do not attach the `.json` file** from the same download. It contains your appliance's local encryption key.
     validations:
       required: true
 
@@ -56,3 +49,13 @@ body:
         Optional, but speeds things up a lot: if you [enabled debug logging](https://github.com/chris-mc1/homeconnect_local_hass#enabling-debug-logging) and found the UID that corresponds to the feature you want (see the Advanced method in [Requesting a New Feature](https://github.com/chris-mc1/homeconnect_local_hass#requesting-a-new-feature)), include it here, along with what it corresponds to.
     validations:
       required: false
+
+  - type: textarea
+    attributes:
+      label: Diagnostics information
+      placeholder: "drag-and-drop the diagnostics file here"
+      description: >-
+        [Download the Integration Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) and drag-and-drop that file into the textbox below.
+        Diagnostics contain the current Appliance state, so it is best to download Diagnostics while the Appliance is in a specific state or before and after perform an action through the HomeConnect App.
+    validations:
+      required: true
