@@ -8,6 +8,7 @@ import time
 from copy import deepcopy
 from typing import TYPE_CHECKING
 
+import aiohttp
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
 from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryError
@@ -107,8 +108,13 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     self.connected = True  # FIX
                     self.async_set_updated_data(None)  # FIX
                     return
-            except (ConnectionFailedError, HCHandshakeError):
+            except (ConnectionFailedError, HCHandshakeError, aiohttp.ClientResponseError):
+                # aiohttp.ClientResponseError (e.g. a 404 on the websocket upgrade)
+                # isn't wrapped by the library into ConnectionFailedError/
+                # HCHandshakeError, and doesn't trigger a connection state change
+                # either, so it needs to be handled here directly.
                 await self.appliance.close()
+                self._mark_disconnected()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
                 if first_failure:
                     self.logger.error(msg)  # noqa: TRY400
@@ -154,13 +160,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     "Connection to %s lost",
                     self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
                 )
-            self.connected = False
-            if self._connection_lost_issue_unsub is None:
-                self._connection_lost_issue_unsub = async_call_later(
-                    self.hass,
-                    CONNECTION_LOST_ISSUE_DELAY,
-                    self._async_create_connection_lost_issue,
-                )
+            self._mark_disconnected()
 
         elif event == ConnectionState.CLOSED:
             self.connected = False
@@ -168,6 +168,17 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             ir.async_delete_issue(self.hass, DOMAIN, self._connection_lost_issue_id)
 
         self.async_set_updated_data(None)
+
+    @callback
+    def _mark_disconnected(self) -> None:
+        """Mark the appliance as disconnected and schedule the repair issue timer."""
+        self.connected = False
+        if self._connection_lost_issue_unsub is None:
+            self._connection_lost_issue_unsub = async_call_later(
+                self.hass,
+                CONNECTION_LOST_ISSUE_DELAY,
+                self._async_create_connection_lost_issue,
+            )
 
     @callback
     def _cancel_connection_lost_issue_timer(self) -> None:
