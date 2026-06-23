@@ -195,14 +195,14 @@ actions:
 If Home Assistant cannot connect to your appliance (during setup) despite correctly entering the right profile file and IP address, here are some tips:
 - Try to see if Home Connect can establish a local connection on the same network as Home Assistant.
 - To do this, open the Home Connect App, go to your appliance(s), then to its settings, then scroll down to the network section.
-   - If you see the bottom line lit up green, this could mean two things:
-         1. You have the wrong/outdated profile file. Make sure you have the correct file, and if it's outdated, get a new one.
-         2. As noted in the known limitations, the mDNS on the device is wonky, and if mDNS fails, even a direct IP connection may fail.
-   - If you don't see the bottom line lit up green, this could mean a few things:
-         1. If you're on the same wireless access point as the device, your device is most likely offline or does not support a local connection.
-         2. If you're not on the same wireless access point, make sure you are.
-         3. The device may be offline; check it physically to see if there's no Wi-Fi signal indicator on it.
-         4. If the device does have a Wi-Fi signal, then Home Assistant may have overloaded the device's local capacity, causing a websocket shutdown. See below on how to resolve it.
+  - If you see the bottom line lit up green, this could mean two things:
+    1. You have the wrong/outdated profile file. Make sure you have the correct file, and if it's outdated, get a new one.
+    2. As noted in the known limitations, the mDNS on the device is wonky, and if mDNS fails, even a direct IP connection may fail.
+  - If you don't see the bottom line lit up green, this could mean a few things:
+    1. If you're on the same wireless access point as the device, your device is most likely offline or does not support a local connection.
+    2. If you're not on the same wireless access point, make sure you are.
+    3. The device may be offline; check it physically to see if there's no Wi-Fi signal indicator on it.
+    4. If the device does have a Wi-Fi signal, then Home Assistant may have overloaded the device's local capacity, causing a websocket shutdown. See below on how to resolve it.
 
 ### How to resolve a websocket shutdown
 [comment]: <> (I do not know the exact causes of a websocket shutdown nor do I know why these tricks fix it, but when I [@vemboy200] asked Gemini about it gave a pretty good theory about it. It said that the device can only accept a certain number of unique users, and that if theres too many it will stop accepting new ones. However when no users are connected to the appliance for 24 hours, the appliance runs some kind of internal cleaning cycle that clear all these unique users and starts accepting new ones. I think what Gemini has said so far seems to be lining up with my experience, however the websocket shutdown only seems to happen my Thermador Oven [PRG486WDH] and Freezer[T36IF905SP], but not [as in ive never seen it happen] my Dishwasher [DWHD660WFP]. Right before Home Assistant gives me connection error [which happen next restart of Home Assistant or a reload of the config entry], the Home Connect App always fails to establish a local connection with the appliance, showing that Gemini's theory makes sense.)
