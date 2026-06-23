@@ -79,7 +79,7 @@ This integration is soley pushed based with it reciving updates from the applian
 
 ## Supported Functions
 
-The following entities are available. Which ones appear depends on the appliance type and its feature set — not every device supports every entity listed here.
+The following entities are available. Which ones appear depends on the appliance type and its feature set. Not every device supports every entity listed here.
 
 ### All Appliances
 
