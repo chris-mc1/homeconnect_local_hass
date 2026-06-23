@@ -21,10 +21,10 @@ body:
       label: Before submitting a Feature request, please follow these steps
       description: Please confirm that you have completed the following steps
       options:
-        - label: The requested feature is not latest beta release of Home Connect Local.
-        - label: The requested feature is available through the HomeConnect App.
+        - label: The requested feature is not in the latest beta release of Home Connect Local.
+        - label: The requested feature is available through the Home Connect App.
         - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
-        - label: I have made sure I have NOT accidentally dropped in my appliance's .json file 
+        - label: I have made sure I have NOT accidentally dropped in my appliance's .json file .
     validations:
       required: true
 
