@@ -83,6 +83,8 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
 
     async def close(self) -> None:
         self._connecting = False
+        self._cancel_connection_lost_issue_timer()
+        ir.async_delete_issue(self.hass, DOMAIN, self._connection_lost_issue_id)
         await self.appliance.close()
 
     @property
@@ -142,7 +144,11 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             self._cancel_connection_lost_issue_timer()
             ir.async_delete_issue(self.hass, DOMAIN, self._connection_lost_issue_id)
 
-        elif event == ConnectionState.RECONNECTING:
+        elif event in (ConnectionState.RECONNECTING, ConnectionState.ABNORMAL_CLOSURE):
+            # ABNORMAL_CLOSURE covers a connection that has never succeeded yet
+            # (e.g. the appliance is already unreachable when HA starts), since
+            # the library only enters RECONNECTING after a prior successful
+            # connection drops.
             if self.connected:
                 self.logger.warning(
                     "Connection to %s lost",
