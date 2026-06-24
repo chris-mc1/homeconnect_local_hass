@@ -6,10 +6,12 @@ import re
 import sys
 from typing import TYPE_CHECKING
 
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature, UnitOfTime
+from homeconnect_websocket.entities import Access
 
 from custom_components.homeconnect_ws.helpers import get_groups_from_regex
 
@@ -25,8 +27,6 @@ from .descriptions_definitions import (
     HCSwitchEntityDescription,
     _EntityDescriptionsDefinitionsType,
 )
-
-from homeconnect_websocket.entities import Access
 
 if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
@@ -70,7 +70,7 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven status descriptions."""
     pattern = re.compile(r"^Cooking\.Oven\.Status\.Cavity\.(\d+)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
-    descriptions = EntityDescriptions(event_sensor=[], sensor=[])
+    descriptions = EntityDescriptions(event_sensor=[], sensor=[], binary_sensor=[])
     for group in groups:
         group_name = f" {int(group[0])}"
         if len(groups) == 1:
@@ -118,6 +118,20 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
                     entity=entity,
                     device_class=SensorDeviceClass.TEMPERATURE,
                     native_unit_of_measurement=unit,
+                )
+            )
+
+        # Meat probe plugged
+        entity = f"Cooking.Oven.Status.Cavity.{group[0]}.MeatprobePlugged"
+        if entity in appliance.entities:
+            descriptions["binary_sensor"].append(
+                HCBinarySensorEntityDescription(
+                    key=f"binary_sensor_oven_meatprobe_plugged_{group[0]}",
+                    translation_key="binary_sensor_oven_meatprobe_plugged",
+                    translation_placeholders={"group_name": group_name},
+                    entity=entity,
+                    device_class=BinarySensorDeviceClass.PLUG,
+                    entity_category=EntityCategory.DIAGNOSTIC,
                 )
             )
 
@@ -550,6 +564,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
+            key="select_oven_clock_display",
+            entity="Cooking.Oven.Setting.ClockDisplay",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSelectEntityDescription(
             key="select_oven_used_heating_mode",
             entity="Cooking.Oven.Option.UsedHeatingMode",
             has_state_translation=True,
@@ -631,6 +652,20 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
         ),
         HCSwitchEntityDescription(
+            key="switch_oven_convection_conversion",
+            entity="Cooking.Oven.Setting.ConvectionConversion",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_display_standby_dimmed",
+            entity="Cooking.Oven.Setting.DisplayStandbyDimmed",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
             key="switch_hood_boost",
             entity="Cooking.Common.Option.Hood.Boost",
             device_class=SwitchDeviceClass.SWITCH,
@@ -665,5 +700,12 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
         ),
     ],
-    "binary_sensor": [],
+    "binary_sensor": [
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_oven_meatprobe_plugged",
+            entity="Cooking.Oven.Status.MeatprobePlugged",
+            device_class=BinarySensorDeviceClass.PLUG,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+    ],
 }

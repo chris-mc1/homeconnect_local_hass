@@ -277,6 +277,16 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=UnitOfTime.SECONDS,
             mode=NumberMode.AUTO,
         ),
+        HCNumberEntityDescription(
+            key="number_refrigerator_sabbath_mode_duration",
+            entity="Refrigeration.Common.Setting.SabbathModeDuration",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.HOURS,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            mode=NumberMode.BOX,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(

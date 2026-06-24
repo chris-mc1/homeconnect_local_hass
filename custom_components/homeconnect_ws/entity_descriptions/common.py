@@ -271,6 +271,25 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_local_control_active",
+            entity="BSH.Common.Status.LocalControlActive",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_remote_control_active",
+            entity="BSH.Common.Status.RemoteControlActive",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_backend_connected",
+            entity="BSH.Common.Status.BackendConnected",
+            device_class=BinarySensorDeviceClass.CONNECTIVITY,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "select": [
         HCSelectEntityDescription(
@@ -281,6 +300,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         # cleanup: duplicate select_remote_control_level entry removed
+        HCSelectEntityDescription(
+            key="select_time_format",
+            entity="BSH.Common.Setting.TimeFormat",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
         generate_temperature_unit,
     ],
     "sensor": [
@@ -415,6 +441,27 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Setting.ChildLock",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_allow_backend_connection",
+            entity="BSH.Common.Setting.AllowBackendConnection",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_allow_consumer_insights",
+            entity="BSH.Common.Setting.AllowConsumerInsights",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_synchronize_with_time_server",
+            entity="BSH.Common.Setting.SynchronizeWithTimeServer",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "number": [
         HCNumberEntityDescription(
@@ -429,7 +476,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Option.StartInRelative",
             device_class=NumberDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
-            mode=NumberMode.AUTO,
+            mode=NumberMode.BOX,
             entity_registry_enabled_default=False,
         ),
         HCNumberEntityDescription(

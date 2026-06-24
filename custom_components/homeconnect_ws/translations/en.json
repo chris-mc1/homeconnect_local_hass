@@ -35,6 +35,27 @@
   },
   "entity": {
     "switch": {
+      "switch_allow_backend_connection": {
+        "name": "Allow Cloud Connection"
+      },
+      "switch_allow_consumer_insights": {
+        "name": "Allow Consumer Insights"
+      },
+      "switch_synchronize_with_time_server": {
+        "name": "Synchronize Time with Server"
+      },
+      "switch_oven_convection_conversion": {
+        "name": "Convection Conversion"
+      },
+      "switch_oven_display_standby_dimmed": {
+        "name": "Dim Display on Standby"
+      },
+      "switch_dishwasher_sanitation": {
+        "name": "Sanitize"
+      },
+      "switch_dishwasher_time_light": {
+        "name": "Time Light"
+      },
       "switch_power_state": {
         "name": "Power"
       },
@@ -214,6 +235,18 @@
       }
     },
     "binary_sensor": {
+      "binary_sensor_local_control_active": {
+        "name": "Local Control Active"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Remote Control Active"
+      },
+      "binary_sensor_backend_connected": {
+        "name": "Cloud Connection"
+      },
+      "binary_sensor_oven_meatprobe_plugged": {
+        "name": "Meat Probe Plugged{group_name}"
+      },
       "connection": {
         "name": "Connection"
       },
@@ -1774,6 +1807,28 @@
       }
     },
     "select": {
+      "select_time_format": {
+        "name": "Time Format",
+        "state": {
+          "24hours": "24 Hours",
+          "12hours": "12 Hours"
+        }
+      },
+      "select_oven_clock_display": {
+        "name": "Clock Display",
+        "state": {
+          "clock01": "Analogue",
+          "clock02": "Digital"
+        }
+      },
+      "select_dishwasher_auto_power_off": {
+        "name": "Auto Power Off",
+        "state": {
+          "off": "Off",
+          "oneminute": "After 1 Minute",
+          "120minutes": "After 2 Hours"
+        }
+      },
       "select_drying_assistant_all_programs": {
         "name": "Drying Assistant All Programs",
         "state": {
@@ -1802,7 +1857,7 @@
         }
       },
       "select_sound_level_signal": {
-        "name": "Sound Level Signal",
+        "name": "Signal Volume",
         "state": {
           "high": "High",
           "low": "Low",
@@ -1811,7 +1866,7 @@
         }
       },
       "select_sound_level_key": {
-        "name": "Sound Level Key",
+        "name": "Button Volume",
         "state": {
           "off": "Off",
           "low": "Low",
@@ -2822,7 +2877,7 @@
         "name": "Default Program",
         "state": {
           "lastprogram": "Last Program",
-          "ecoasdefault": "Eco 50"
+          "auto45asdefault": "Auto"
         }
       },
       "select_power_state": {
@@ -3447,6 +3502,9 @@
     "number": {
       "number_fill_quantity": {
         "name": "Fill quantity"
+      },
+      "number_refrigerator_sabbath_mode_duration": {
+        "name": "Sabbath Mode Duration"
       },
       "number_laundry_brightness": {
         "name": "Brightness"
