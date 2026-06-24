@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import sys
 from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
@@ -184,7 +183,7 @@ def generate_oven_settings(appliance: HomeAppliance) -> EntityDescriptions:
                     entity=entity,
                     device_class=NumberDeviceClass.DURATION,
                     native_unit_of_measurement=UnitOfTime.SECONDS,
-                    native_max_value=sys.float_info.max,
+                    native_max_value=86400,  # 24 hours, matching the Home Connect App's limit
                     mode=NumberMode.BOX,
                 )
             )
