@@ -99,10 +99,17 @@ The following entities are available. Which ones appear depends on the appliance
 | Door State | Binary Sensor / Sensor | Whether the door is open or closed |
 | Program Finished | Binary Sensor | Turns on when the current cycle completes |
 | Wi-Fi Signal Strength | Sensor | Device's Wi-Fi signal strength |
+| Cloud Connection | Binary Sensor | Whether the appliance is currently connected to the Home Connect cloud |
+| Allow Cloud Connection | Switch | Enable or disable the appliance's connection to the Home Connect cloud |
+| Allow Consumer Insights | Switch | Enable or disable usage data collection by the Home Connect cloud |
+| Synchronize Time with Server | Switch | Whether the appliance keeps its clock in sync with a time server |
+| Time Format | Select | 12-hour or 24-hour clock display |
+
+A few additional diagnostic entities (Local Control Active, Remote Control Active) are also available, disabled by default.
 
 ### Dishwasher
 
-Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings.
+Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand, sanitize), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings, auto power off, and time light (floor projector).
 
 ### Washing Machine / Dryer
 
@@ -110,7 +117,7 @@ Program options including temperature, spin speed, prewash, rinse plus, gentle c
 
 ### Oven / Hob / Hood
 
-Oven current and setpoint temperature, meat probe temperature, heating mode selection, fast preheat, sabbath mode; hood fan speed control, ambient and work lighting, automatic shutoff delay, interval ventilation, grease and carbon filter saturation sensors and one-tap reset buttons; hob ventilation level.
+Oven current and setpoint temperature, meat probe temperature and plugged-in status, heating mode selection, fast preheat, sabbath mode, convection conversion, dim display on standby, clock display (analogue/digital); hood fan speed control, ambient and work lighting, automatic shutoff delay, interval ventilation, grease and carbon filter saturation sensors and one-tap reset buttons; hob ventilation level.
 
 ### Coffee Maker
 
@@ -118,7 +125,7 @@ Bean container and amount, grind coarseness, coffee strength, temperature, brew 
 
 ### Refrigerator / Freezer
 
-Fridge, freezer, and chiller setpoint temperatures (°C and °F); door open and door alarm binary sensors; super-freeze and super-cool modes; eco, vacation, and fresh-food modes; interior light with brightness control; water filter alert.
+Fridge, freezer, and chiller setpoint temperatures (°C and °F); door open and door alarm binary sensors; super-freeze and super-cool modes; eco, vacation, and fresh-food modes; interior light with brightness control; water filter alert; sabbath mode duration.
 
 ## Actions
 
