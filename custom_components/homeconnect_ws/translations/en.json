@@ -245,7 +245,7 @@
         "name": "Cloud Connection"
       },
       "binary_sensor_oven_meatprobe_plugged": {
-        "name": "Meat Probe Plugged{group_name}"
+        "name": "Meat Probe Plugged"
       },
       "connection": {
         "name": "Connection"
