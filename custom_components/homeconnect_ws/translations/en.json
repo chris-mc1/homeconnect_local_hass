@@ -1817,8 +1817,8 @@
       "select_oven_clock_display": {
         "name": "Clock Display",
         "state": {
-          "clock01": "Analogue",
-          "clock02": "Digital"
+          "clock01": "Digital",
+          "clock02": "Analog"
         }
       },
       "select_dishwasher_auto_power_off": {
