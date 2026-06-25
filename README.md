@@ -104,8 +104,12 @@ The following entities are available. Which ones appear depends on the appliance
 | Allow Consumer Insights | Switch | Enable or disable usage data collection by the Home Connect cloud |
 | Synchronize Time with Server | Switch | Whether the appliance keeps its clock in sync with a time server |
 | Time Format | Select | 12-hour or 24-hour clock display |
+| Software Update | Update | Tracks/triggers installing an available firmware update |
+| Software Download | Update | Tracks/triggers downloading an available firmware update (only on appliances that support a separate download stage) |
 
 A few additional diagnostic entities (Local Control Active, Remote Control Active) are also available, disabled by default.
+
+The Home Connect protocol only signals that a firmware update exists, not which version it is, so the Update entities show a generic "New Version" placeholder rather than a real version number when one is available.
 
 ### Dishwasher
 
