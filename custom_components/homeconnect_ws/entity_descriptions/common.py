@@ -14,6 +14,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.components.switch import SwitchDeviceClass
+from homeassistant.components.update import UpdateDeviceClass
 from homeassistant.const import (
     PERCENTAGE,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
@@ -30,6 +31,7 @@ from .descriptions_definitions import (
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    HCUpdateEntityDescription,
     _EntityDescriptionsDefinitionsType,
 )
 
@@ -189,6 +191,38 @@ def generate_temperature_unit(appliance: HomeAppliance) -> HCSelectEntityDescrip
             entity_category=EntityCategory.CONFIG,
             entity_registry_enabled_default=False,
             has_state_translation=True,
+        )
+    return None
+
+
+def generate_software_download_update(
+    appliance: HomeAppliance,
+) -> HCUpdateEntityDescription | None:
+    """Get Software Download update description, if a separate download stage exists."""
+    if (
+        "BSH.Common.Event.SoftwareDownloadAvailable" in appliance.entities
+        and "BSH.Common.Command.AllowSoftwareDownload" in appliance.entities
+    ):
+        return HCUpdateEntityDescription(
+            key="update_software_download",
+            entity="BSH.Common.Event.SoftwareDownloadAvailable",
+            command_entity="BSH.Common.Command.AllowSoftwareDownload",
+            device_class=UpdateDeviceClass.FIRMWARE,
+        )
+    return None
+
+
+def generate_software_update(appliance: HomeAppliance) -> HCUpdateEntityDescription | None:
+    """Get Software Update (install) description."""
+    if (
+        "BSH.Common.Event.SoftwareUpdateAvailable" in appliance.entities
+        and "BSH.Common.Command.AllowSoftwareUpdateLocalWiFi" in appliance.entities
+    ):
+        return HCUpdateEntityDescription(
+            key="update_software_update",
+            entity="BSH.Common.Event.SoftwareUpdateAvailable",
+            command_entity="BSH.Common.Command.AllowSoftwareUpdateLocalWiFi",
+            device_class=UpdateDeviceClass.FIRMWARE,
         )
     return None
 
@@ -497,5 +531,6 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
     ],
     "wifi": [generate_wifi],
+    "update": [generate_software_download_update, generate_software_update],
     "dynamic": [generate_power_switch, generate_program],
 }

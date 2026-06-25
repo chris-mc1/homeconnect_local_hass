@@ -3591,6 +3591,14 @@
       "fan_hood": {
         "name": "Fan"
       }
+    },
+    "update": {
+      "update_software_download": {
+        "name": "Software Download"
+      },
+      "update_software_update": {
+        "name": "Software Update"
+      }
     }
   },
   "services": {

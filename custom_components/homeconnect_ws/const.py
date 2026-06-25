@@ -16,6 +16,7 @@ PLATFORMS: Final = [
     Platform.NUMBER,
     Platform.LIGHT,
     Platform.FAN,
+    Platform.UPDATE,
 ]
 
 CONF_PSK: Final = "psk"
