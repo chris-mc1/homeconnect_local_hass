@@ -63,7 +63,7 @@ If you want to, once you have connected the appliance to Home Assistant you can 
 
 Through Home Assistant
 
-1.(OPTIONAL) Before starting, in the Home Connect app, make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
+1. (OPTIONAL) Before starting, in the Home Connect app, make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
 2. In the configuration section there is a disabled entity called " Allow Cloud Connection" enable it and turn off the switch
 3. (OPTIONAL) Enable the "Cloud Connection" diagnostic entity to verify its disconnected from the cloud.
 
