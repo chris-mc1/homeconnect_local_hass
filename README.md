@@ -84,7 +84,50 @@ You'll know if you have successfully done it if you see the line between your ap
 
 Heres an example automation you can do with Home Assistant to occasionally reenable the cloud then do a firmware update (incase if theres one) then disable it.
 ```yaml
-will add later
+alias: Periodically check for and install Home Connect firmware updates
+description: >-
+  Re-enables the appliance's cloud connection on the 1st of every month so it
+  has a chance to check in, then downloads (if supported) and installs any
+  available firmware update via the Update entities before disabling cloud
+  access again.
+triggers:
+  - trigger: time
+    at: "03:00:00"
+conditions:
+  - condition: template
+    value_template: "{{ now().day == 1 }}"
+actions:
+  - action: switch.turn_on
+    target:
+      # Replace with your appliance's "Allow Cloud Connection" entity
+      entity_id: switch.dishwasher_allow_cloud_connection
+  - delay:
+      hours: 24
+  - if:
+      # Skip if your appliance has no separate download stage
+      - condition: state
+        entity_id: update.dishwasher_software_download
+        state: "on"
+    then:
+      - action: update.install
+        target:
+          entity_id: update.dishwasher_software_download
+      - delay:
+          minutes: 10
+  - if:
+      - condition: state
+        entity_id: update.dishwasher_software_update
+        state: "on"
+    then:
+      - action: update.install
+        target:
+          entity_id: update.dishwasher_software_update
+      - delay:
+          minutes: 10
+  - action: switch.turn_off
+    target:
+      entity_id: switch.dishwasher_allow_cloud_connection
+mode: single
 ```
 ## Data Updates
 
