@@ -63,7 +63,7 @@ If you want to, once you have connected the appliance to Home Assistant you can 
 
 1. Open the Home Connect app and go to your appliance's settings.
 2. Scroll down until you get the "network" and tap the details button.
-3. (OPTIONAL) Make sure the bottom line (direct connection between your phone and device is green in case if something goes wrong.
+3. (OPTIONAL) Make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
 4. Scroll down (again) until you see the connection to the server toggle.
 5. Turn off the toggle and ignore the scare screen (they have it there so they can continue collecting your data)
 6. Then save
@@ -75,7 +75,7 @@ You'll know if you have successfully done it if you see the line between your ap
 
 ## Data Updates
 
-This integration is soley pushed based with it reciving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
+This integration is soley pushed based with it receiving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
 
 ## Supported Functions
 
