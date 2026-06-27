@@ -3577,5 +3577,11 @@
     "not_connected": {
       "message": "Client is not Connected"
     }
+  },
+  "issues": {
+    "connection_lost": {
+      "title": "Connection to {name} lost",
+      "description": "Home Assistant lost the connection to your {name} appliance and was unable to reconnect.\n\nMake sure the appliance is powered on and connected to your network. This issue will be resolved automatically once the connection is restored."
+    }
   }
 }

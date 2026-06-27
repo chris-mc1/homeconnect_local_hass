@@ -21,11 +21,34 @@ body:
       label: Before submitting a Feature request, please follow these steps
       description: Please confirm that you have completed the following steps
       options:
-        - label: The requested feature is not latest beta release of Home Connect Local.
-        - label: The requested feature is available through the HomeConnect App.
+        - label: The requested feature is not in the latest beta release of Home Connect Local.
+        - label: The requested feature is available through the Home Connect App.
         - label: I have checked the [open issues](https://github.com/chris-mc1/homeconnect_local_hass/issues) to ensure my issue isn't a duplicate.
+        - label: I have made sure I have NOT accidentally dropped in my appliance's .json file .
     validations:
       required: true
+
+
+
+  - type: textarea
+    attributes:
+      label: Device Description / Feature Mapping files
+      placeholder: "drag-and-drop the *_DeviceDescription.xml and *_FeatureMapping.xml files here"
+      description: >-
+        See [Requesting a New Feature](https://github.com/chris-mc1/homeconnect_local_hass#requesting-a-new-feature) in the README for how to get these.
+        Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to get your appliance's `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files, rename them to remove the MAC address segment from the filename, and attach them here.
+        **Do not attach the `.json` file** from the same download. It contains your appliance's local encryption key.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Feature UID (advanced, optional)
+      placeholder: "e.g. 5959 (decimal), which is 1747 in hex"
+      description: >-
+        Optional, but speeds things up a lot: if you [enabled debug logging](https://github.com/chris-mc1/homeconnect_local_hass#enabling-debug-logging) and found the UID that corresponds to the feature you want (see the Advanced method in [Requesting a New Feature](https://github.com/chris-mc1/homeconnect_local_hass#requesting-a-new-feature)), include it here, along with what it corresponds to.
+    validations:
+      required: false
 
   - type: textarea
     attributes:

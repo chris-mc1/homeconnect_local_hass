@@ -2,6 +2,14 @@
 
 The **Home Connect Local** allows users to integrate their home appliances supporting the  [Home Connect](https://www.home-connect.com/global) standard for Bosch and Siemens using direct communication over the local network.
 
+## Use Cases
+[comment]: <> (Stolen directly from the Core Home Connect integration)
+- Monitor the multiple sensors of the appliance and trigger automations based on these sensors.
+- Start programs on your appliances from your dashboard.
+- Monitor the program status of the appliances.
+- Control the light of your appliances.
+- Adjust the appliance settings.
+
 ## Install the Integration
 
 1. Go to the HACS -> Custom Repositories and add this repository as a Custom Repository [See HACS Documentation for help](https://hacs.xyz/docs/faq/custom_repositories/)
@@ -12,13 +20,19 @@ The **Home Connect Local** allows users to integrate their home appliances suppo
 
 3. Restart Home Assistant.
 
+## Supported Devices
+
+Any Home Connect device that 
+1. Allows a local connection (not all do) (View trouble shooting for more info to make sure your device supports a local connection)
+2. On the same local network as your Home Assistant instance
+
 ## Prerequisites
 
 To use this integration, you must first create a Home Connect account and connect your appliances.
 
 ## Setup
 
-1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your Appliance profiles, select "openHAB" as target. The downloaded ZIP-file contains each Appliance encryption Key and feature descriptions
+1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your Appliance profiles, select "Home Assistant - Home Connect Local" as target. The downloaded ZIP-file contains each Appliance encryption Key and feature descriptions
 2. Click the button below or use "Add Integration" in Home Assistant and select "Home Connect Local".
 
     [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=homeconnect_ws)
@@ -28,19 +42,204 @@ To use this integration, you must first create a Home Connect account and connec
 5. When the initial connection to the Appliance fails, your asked to manually enter your Appliance IP-Address.
 6. Repeat from Step 2 if you want to setup more than one Appliances.
 
+> [!IMPORTANT]
+> Do <ins> **NOT**</ins> delete your Home Connect account after this. If you do then
+> 
+> - The device may disconnect itself from your Wi-Fi
+> - You cannot troubleshoot if the appliance does not connect to Home Assistant
+> - You cannot connect any more devices to it
+>
+> If you value your privacy you can instead go to the app settings an disable all the data collection stuff in the "Privacy and Legal" section of the app
+
 ### Configuration parameters
 
 - Profile file: The Profile File you've downloaded with the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader)
 - Select Appliance: Select the Appliance you want to setup
-- Host / IP-Address: Manually enter your Appliance Hostname or IP-Address
+- Host / IP-Address: Manually enter your Appliance Hostname or IP-Address if auto discovery did not work
 
-## Remove integration
+### Protip!
 
-This integration follows standard integration removal, no extra steps are required.
+If you want to, once you have connected the appliance to Home Assistant you can disable its cloud access.
 
-## Reporting Issues and Bugs
+1. Open the Home Connect app and go to your appliance's settings.
+2. Scroll down until you get the "network" and tap the details button.
+3. (OPTIONAL) Make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
+4. Scroll down (again) until you see the connection to the server toggle.
+5. Turn off the toggle and ignore the scare screen (they have it there so they can continue collecting your data)
+6. Then save
 
-### Bug report requirements
+You'll know if you have successfully done it if you see the line between your appliance and their cloud is grayed out and disconnected.
+
+>[!NOTE]
+>Do note that your device will **not** get firmware updates once disconnected, if you want to, you can occasionally (once every 1-3 months) reenable the cloud connection for 1-2 days so the device can check for an update.
+
+## Data Updates
+
+This integration is soley pushed based with it receiving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
+
+## Supported Functions
+
+The following entities are available. Which ones appear depends on the appliance type and its feature set. Not every device supports every entity listed here.
+
+### All Appliances
+
+| Entity | Type | Description |
+| --- | --- | --- |
+| Active Program | Sensor | Currently running program |
+| Operation State | Sensor | Device state (e.g. Ready, Running, Finished) |
+| Remaining Program Time | Sensor | Time left in the current program |
+| Program Progress | Sensor | Progress as a percentage |
+| Start In | Sensor / Number | Delay before the program starts |
+| Finish In | Sensor / Number | Target time until the program finishes |
+| Select Program | Select | Choose a program to run |
+| Start / Abort / Pause / Resume | Button | Control the active program |
+| Power State | Switch / Select | Turn the appliance on or off |
+| Child Lock | Switch | Lock the physical controls |
+| Remote Start Allowed | Binary Sensor | Whether remote control is enabled on the device |
+| Door State | Binary Sensor / Sensor | Whether the door is open or closed |
+| Program Finished | Binary Sensor | Turns on when the current cycle completes |
+| Wi-Fi Signal Strength | Sensor | Device's Wi-Fi signal strength |
+
+### Dishwasher
+
+Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings.
+
+### Washing Machine / Dryer
+
+Program options including temperature, spin speed, prewash, rinse plus, gentle cycle, and hygienic steam; iDos automatic dosing (levels 1 & 2); drum light and door ring LED control (brightness and color mode); anti-wrinkle guard; maintenance reminders (drum clean, lint filter full); condensate container alert (dryer).
+
+### Oven / Hob / Hood
+
+Oven current and setpoint temperature, meat probe temperature, heating mode selection, fast preheat, sabbath mode; hood fan speed control, ambient and work lighting, automatic shutoff delay, interval ventilation, grease and carbon filter saturation sensors and one-tap reset buttons; hob ventilation level.
+
+### Coffee Maker
+
+Bean container and amount, grind coarseness, coffee strength, temperature, brew size, shot count, milk ratio; cup warmer; maintenance countdowns for cleaning, descaling, and water filter replacement; water tank and drip tray level sensors; per-drink brew counters (coffee, espresso, milk-based drinks, and more).
+
+### Refrigerator / Freezer
+
+Fridge, freezer, and chiller setpoint temperatures (°C and °F); door open and door alarm binary sensors; super-freeze and super-cool modes; eco, vacation, and fresh-food modes; interior light with brightness control; water filter alert.
+
+## Actions
+
+This integration provides the following actions:
+
+- `homeconnect_ws.start_program`: Start the currently selected program. Optionally set a start delay and/or a target finish time.
+- `homeconnect_ws.set_start_in`: Set the start delay of the currently selected program.
+- `homeconnect_ws.set_finish_in`: Set the target finish time of the currently selected program.
+
+## Automation examples
+
+Get started with these automation examples
+
+### Send a notification when the appliance ends the program
+[comment]: <> (Also stolen directly from the Core Home Connect integration)
+```yaml
+alias: "Notify when program ends"
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.appliance_operation_state
+    to: finished
+actions:
+  - action: notify.notify
+    data:
+      message: "The appliance has finished the program."
+```
+
+
+### Start a program when electricity is cheap
+[comment]: <> ( Also also stolen directly from the Core Home Connect integration)
+Because electricity is typically cheaper at night, this automation will activate the silent mode when starting the program at night.
+
+```yaml
+alias: "Start program when electricity is cheap"
+triggers:
+  - trigger: state
+    entity_id: sensor.electricity_price
+    to: "0.10"
+conditions:
+  - condition: state
+    entity_id: sensor.diswasher_door
+    state: closed
+actions:
+  - if:
+      - condition: time
+        after: '22:00:00'
+        before: '06:00:00'
+    then:
+      - action: home_connect.set_program_and_options
+        data:
+          device_id: "your_device_id"
+          affects_to: "active_program"
+          program: "dishcare_dishwasher_program_eco_50"
+          dishcare_dishwasher_option_silence_on_demand: true
+    else:
+      - action: home_connect.set_program_and_options
+        data:
+          device_id: "your_device_id"
+          affects_to: "active_program"
+          program: "dishcare_dishwasher_program_eco_50"
+```
+
+## Known Limitations
+
+- While this integration can (in theory) support all the functions supported in the Home Connect app, in reality, the functions have to reverse engineered
+- The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if the phone is on the same Wireless Access Point as the appliance theres a chance a local connection may fail to establish.
+- Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours. This is called a **Websocket Shutdown**.
+- The Appliance must be online and reachable on your local network during initial setup. The config flow actively tests the connection before letting you finish adding the device, so it cannot be added while powered off or unreachable. Once added, the appliance can go offline/online freely and its entities will simply go unavailable and recover automatically. See issues https://github.com/chris-mc1/homeconnect_local_hass/issues/274 and https://github.com/chris-mc1/homeconnect_local_hass/issues/293 for info about why it is like this.
+
+## Requesting a New Feature
+
+Since this integration's functions have to be reverse engineered (see [Known Limitations](#known-limitations)), the more information you provide when requesting a new entity, the easier it is for a developer to add it. There are two ways to do this, depending on how much effort you want to put in.
+
+### Basic method
+
+1. Use the [Home Connect Profile Downloader](https://github.com/bruestel/homeconnect-profile-downloader) to download your appliance profile, selecting "Home Assistant - Home Connect Local" as the target.
+2. Unzip the downloaded file. You'll get three files: a `*_DeviceDescription.xml`, a `*_FeatureMapping.xml`, and a `.json` file.
+   - **Do not share the `.json` file.** It contains sensitive info like your appliance's local encryption key.
+3. Rename the `*_DeviceDescription.xml` and `*_FeatureMapping.xml` files to remove the MAC address segment from the filename (e.g. `THERMADOR-PRG486WDH-##MACADDRESS##_DeviceDescription.xml` → `THERMADOR-PRG486WDH_DeviceDescription.xml`). That segment only identifies your specific physical appliance and isn't needed by developers.
+4. Download the [Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) of the appliance's Config Entry.
+5. [Open a feature request](https://github.com/chris-mc1/homeconnect_local_hass/issues/new?template=feature_request.yml) describing, in plain terms, the feature/entity you'd like added (e.g. "I want a sensor for my appliance's door state"), and attach the two renamed XML files along with the Diagnostics.
+
+### Advanced method
+
+If you're comfortable digging a bit deeper, you can help pinpoint exactly which feature maps to the entity you want, which makes it much faster for a developer to add:
+
+1. Follow steps 1-4 of the Basic method above.
+2. [Enable debug logging](#enabling-debug-logging) for the integration.
+3. Trigger the feature on the appliance itself (e.g. open the door, change a setting, start a program) and watch the debug log for the corresponding update message.
+4. Note the UID logged for that update. It will be in **decimal**, while the UIDs inside the `*_DeviceDescription.xml`/`*_FeatureMapping.xml` files are in **hexadecimal** — convert between the two to match them up. For example, on a Thermador oven, the live oven temperature in fahrenheit logs as UID `5959` (decimal), which is `1747` in hex, matching `Cooking.Oven.Status.Cavity.340.CurrentTemperatureFahrenheit` in the FeatureMapping file.
+5. Include that UID/feature name (and what it corresponds to) in your issue, alongside everything from the Basic method, so developers know exactly which feature to wire up.
+
+## Trouble Shooting
+
+### Home Assistant cannot connect to my Appliance, what should I do?
+If Home Assistant cannot connect to your appliance (during setup) despite correctly entering the right profile file and IP address, here are some tips:
+- Try to see if Home Connect can establish a local connection on the same network as Home Assistant.
+- To do this, open the Home Connect App, go to your appliance(s), then to its settings, then scroll down to the network section.
+  - If you see the bottom line lit up green, this could mean two things:
+    1. You have the wrong/outdated profile file. Make sure you have the correct file, and if it's outdated, get a new one.
+    2. As noted in the known limitations, the mDNS on the device is wonky, and if mDNS fails, even a direct IP connection may fail.
+  - If you don't see the bottom line lit up green, this could mean a few things:
+    1. If you're on the same wireless access point as the device, your device is most likely offline or does not support a local connection.
+    2. If you're not on the same wireless access point, make sure you are.
+    3. The device may be offline; check it physically to see if there's no Wi-Fi signal indicator on it.
+    4. If the device does have a Wi-Fi signal, then Home Assistant may have overloaded the device's local capacity, causing a websocket shutdown. See below on how to resolve it.
+
+### How to resolve a websocket shutdown
+[comment]: <> (I do not know the exact causes of a websocket shutdown nor do I know why these tricks fix it, but when I [@vemboy200] asked Gemini about it gave a pretty good theory about it. It said that the device can only accept a certain number of unique users, and that if theres too many it will stop accepting new ones. However when no users are connected to the appliance for 24 hours, the appliance runs some kind of internal cleaning cycle that clear all these unique users and starts accepting new ones. I think what Gemini has said so far seems to be lining up with my experience, however the websocket shutdown only seems to happen my Thermador Oven [PRG486WDH] and Freezer[T36IF905SP], but not [as in ive never seen it happen] my Dishwasher [DWHD660WFP]. Right before Home Assistant gives me connection error [which happen next restart of Home Assistant or a reload of the config entry], the Home Connect App always fails to establish a local connection with the appliance, showing that Gemini's theory makes sense.)
+
+[comment]: <> (Update [made by Claude]: looked into this further. The "inject websession" Platinum rule isn't the cause — that's about sharing Home Assistant's aiohttp ClientSession for resource tracking, not about how many websocket connections reach the appliance or whether they're closed cleanly. What was actually missing: this integration never closed its connection to the appliance on a full Home Assistant restart [only on a manual reload/disable of the config entry], so every HA restart could leave a half-dead connection sitting in the appliance's connection table instead of a clean close. Premium appliances with cheap WiFi chips [small connection tables] would hit that limit fastest, which matches what I'm seeing. Added a Home Assistant shutdown listener in 1.0.6 to close the connection cleanly on every HA stop, not just on entry unload. Leaving the workarounds below in place until this is confirmed to actually fix it in practice.)
+
+[comment]: <> (Update 2 [made by Claude]: while a websocket shutdown was actively happening on the Freezer [T36IF905SP], found and fixed three related bugs that were masking the problem instead of fixing the root cause. 1: the repair issue [introduced for the repair-issues Gold rule] never fired for an appliance that hadn't connected even once this session, since the library only enters the RECONNECTING state after a previously successful connection drops — a never-yet-connected appliance instead reports ABNORMAL_CLOSURE, which wasn't handled at all. 2: a websocket shutdown specifically returns a plain HTTP 404 on the websocket upgrade [aiohttp.WSServerHandshakeError, a subclass of ClientResponseError], which the library doesn't catch or wrap, so it fell through to a generic exception handler that logged a full traceback on every single retry forever — fixed to log quietly like the other expected connection failures. 3: added an appliance-type check [Washer/Dryer/WasherDryer] so connect failures and the repair issue are suppressed for appliances that are expected to legitimately power off between cycles [the actual cause of upstream issues #274/#293], while still alerting normally for appliance types like this Freezer that are expected to stay connected. Confirmed live: with the Freezer mid-websocket-shutdown, retries now log quietly on backoff instead of spamming, and a "Connection to T36IF905SP lost" repair issue correctly appears in Settings > Repairs.)
+
+There are three ways to resolve a websocket shutdown:
+1. Disable the cloud: Disabling the cloud (follow the [protip](#protip) section on how to do it), then waiting 24 hours, can allow the device to reopen its local websocket. Note that since you're doing this during a local websocket shutdown, the smart features of the device will be inoperable until the device reopens its websocket. The device will still stay connected to your Wi-Fi.
+2. Power cycle the appliance: Cutting the power from your appliance for 1-5 minutes, then reapplying it, can help resolve the issue.
+3. Re-pair the appliance (not recommended): Resetting the device's network settings and re-pairing it to the Home Connect App resolves the issue. However, doing that is not only time consuming, but you also have to get a new profile file, remove the entry, and re-add it with the new file.
+
+### Reporting Issues and Bugs
 
 - A full debug log of at least reloading the config entry and any actions leading to an error
 - The [Diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#download-diagnostics) of the Config Entry
@@ -76,3 +275,10 @@ Use one of these two methods enable debug logging:
         [![Open your Home Assistant instance and show your Home Assistant logs.](https://my.home-assistant.io/badges/logs.svg)](https://my.home-assistant.io/redirect/logs/?)
 
     5. Download the log file using download button on the left
+
+## Integration Removal
+
+This integration follows standard integration removal, no extra steps are required.
+1. Select the Config entry you want to delete
+2. Click the 3 dots in the top right of the entry
+3. Click the delete button
