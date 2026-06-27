@@ -208,6 +208,7 @@ def generate_software_download_update(
             entity="BSH.Common.Event.SoftwareDownloadAvailable",
             command_entity="BSH.Common.Command.AllowSoftwareDownload",
             device_class=UpdateDeviceClass.FIRMWARE,
+            entity_category=EntityCategory.CONFIG,
         )
     return None
 
@@ -223,6 +224,7 @@ def generate_software_update(appliance: HomeAppliance) -> HCUpdateEntityDescript
             entity="BSH.Common.Event.SoftwareUpdateAvailable",
             command_entity="BSH.Common.Command.AllowSoftwareUpdateLocalWiFi",
             device_class=UpdateDeviceClass.FIRMWARE,
+            entity_category=EntityCategory.CONFIG,
         )
     return None
 
