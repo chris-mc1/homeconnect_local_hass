@@ -10,14 +10,18 @@
             "switch_extra_dry_option": {
                 "default": "mdi:heat-wave"
             },
-            "switch_intensiv_zone": {},
+            "switch_intensiv_zone": {
+                "default": "mdi:pot-steam"
+            },
             "switch_vario_speed_plus": {
                 "default": "mdi:timer-play-outline"
             },
             "switch_silence_on_demand": {
                 "default": "mdi:volume-off"
             },
-            "switch_extra_dry": {},
+            "switch_extra_dry": {
+                "default": "mdi:heat-wave"
+            },
             "switch_speed_on_demand": {
                 "default": "mdi:speedometer"
             },
@@ -48,6 +52,51 @@
             },
             "switch_cup_warmer": {
                 "default": "mdi:heat-wave"
+            },
+            "switch_allow_backend_connection": {
+                "default": "mdi:cloud"
+            },
+            "switch_allow_consumer_insights": {
+                "default": "mdi:eye-outline"
+            },
+            "switch_synchronize_with_time_server": {
+                "default": "mdi:clock-check-outline"
+            },
+            "switch_oven_convection_conversion": {
+                "default": "mdi:autorenew"
+            },
+            "switch_oven_display_standby_dimmed": {
+                "default": "mdi:brightness-4"
+            },
+            "switch_dishwasher_sanitation": {
+                "default": "mdi:bacteria-outline"
+            },
+            "switch_dishwasher_time_light": {
+                "default": "mdi:clock-digital"
+            },
+            "switch_refrigerator_dispenser_enabled": {
+                "default": "mdi:snowflake"
+            },
+            "switch_refrigerator_eco": {
+                "default": "mdi:sprout"
+            },
+            "switch_refrigeration_light_theater_mode": {
+                "default": "mdi:theater"
+            },
+            "switch_super_freezer": {
+                "default": "mdi:speedometer"
+            },
+            "switch_super_refrigerator": {
+                "default": "mdi:speedometer"
+            },
+            "switch_refrigerator_door_assistant_freezer": {
+                "default": "mdi:door"
+            },
+            "switch_refrigerator_sabbath_mode": {
+                "default": "mdi:star-david"
+            },
+            "switch_oven_sabbath_mode": {
+                "default": "mdi:star-david"
             }
         },
         "binary_sensor": {
@@ -84,6 +133,27 @@
                     "off": "mdi:snowflake-off",
                     "on": "mdi:snowflake-melt"
                 }
+            },
+            "binary_sensor_local_control_active": {
+                "default": "mdi:gesture-tap-button"
+            },
+            "binary_sensor_remote_control_active": {
+                "state": {
+                    "on": "mdi:remote",
+                    "off": "mdi:remote-off"
+                }
+            },
+            "binary_sensor_backend_connected": {
+                "state": {
+                    "on": "mdi:cloud-check",
+                    "off": "mdi:cloud-off-outline"
+                }
+            },
+            "binary_sensor_oven_meatprobe_plugged": {
+                "state": {
+                    "on": "mdi:thermometer-probe",
+                    "off": "mdi:thermometer-probe-off"
+                }
             }
         },
         "sensor": {
@@ -95,7 +165,7 @@
             },
             "sensor_elapsed_program_time": {
                 "default": "mdi:progress-clock"
-            },            
+            },
             "sensor_program_progress": {
                 "default": "mdi:progress-check"
             },
@@ -112,8 +182,22 @@
                 "default": "mdi:progress-check"
             },
             "sensor_active_program": {},
-            "sensor_rinse_aid": {},
-            "sensor_salt": {},
+            "sensor_rinse_aid": {
+                "default": "mdi:water-plus",
+                "state": {
+                    "full": "mdi:water-plus",
+                    "nearly_empty": "mdi:water-plus-outline",
+                    "empty": "mdi:water-alert-outline"
+                }
+            },
+            "sensor_salt": {
+                "default": "mdi:shaker",
+                "state": {
+                    "full": "mdi:shaker",
+                    "nearly_empty": "mdi:shaker-outline",
+                    "empty": "mdi:shaker-outline"
+                }
+            },
             "sensor_water_tank": {
                 "default": "mdi:water",
                 "state": {
@@ -187,9 +271,6 @@
             "sensor_count_frothy_milk": {
                 "default": "mdi:cup"
             },
-            "sensor_count_frothy_milk": {
-                "default": "mdi:cup"
-            },
             "sensor_count_hot_milk": {
                 "default": "mdi:cup"
             },
@@ -223,7 +304,9 @@
             "select_hot_water": {
                 "default": "mdi:water-thermometer-outline"
             },
-            "select_rinse_aid": {},
+            "select_rinse_aid": {
+                "default": "mdi:water-plus"
+            },
             "select_sound_level_signal": {
                 "default": "mdi:volume-high",
                 "state": {
@@ -233,7 +316,9 @@
                     "off": "mdi:volume-off"
                 }
             },
-            "select_water_hardness": {},
+            "select_water_hardness": {
+                "default": "mdi:water-circle"
+            },
             "select_shot_count": {
                 "default": "mdi:coffee"
             },
@@ -275,6 +360,30 @@
                     "celsius": "mdi:temperature-celsius",
                     "fahrenheit": "mdi:temperature-fahrenheit"
                 }
+            },
+            "select_time_format": {
+                "default": "mdi:clock-outline"
+            },
+            "select_oven_clock_display": {
+                "default": "mdi:clock-digital"
+            },
+            "select_dishwasher_auto_power_off": {
+                "default": "mdi:power-sleep"
+            },
+            "select_sound_level_key": {
+                "default": "mdi:volume-high",
+                "state": {
+                    "high": "mdi:volume-high",
+                    "low": "mdi:volume-low",
+                    "medium": "mdi:volume-medium",
+                    "off": "mdi:volume-off"
+                }
+            },
+            "select_refrigerator_door_assistant_freezer_force": {
+                "default": "mdi:door"
+            },
+            "select_refrigerator_door_assistant_freezer_trigger": {
+                "default": "mdi:door"
             }
         },
         "button": {
@@ -316,6 +425,9 @@
             },
             "number_light_internal_brightness": {
                 "default": "mdi:lightbulb"
+            },
+            "number_refrigerator_sabbath_mode_duration": {
+                "default": "mdi:timer-outline"
             }
         }
     },

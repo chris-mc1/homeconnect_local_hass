@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Never
 
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_DESCRIPTION
+from homeassistant.const import CONF_DESCRIPTION, EVENT_HOMEASSISTANT_STOP
 from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers.device_registry import (
     CONNECTION_NETWORK_MAC,
@@ -30,7 +30,7 @@ from .entity_descriptions import get_available_entities
 from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
-    from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
+    from homeassistant.core import Event, HomeAssistant, ServiceCall, ServiceResponse
     from homeassistant.helpers.typing import ConfigType
     from homeconnect_websocket import HomeAppliance
 
@@ -204,6 +204,14 @@ async def async_setup_entry(
 
     await coordinator.async_config_entry_first_refresh()
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
+
+    async def _async_stop_listener(_event: Event) -> None:
+        """Close the connection on Home Assistant shutdown."""
+        await coordinator.close()
+
+    config_entry.async_on_unload(
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _async_stop_listener)
+    )
     return True
 
 

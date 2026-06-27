@@ -35,6 +35,27 @@
   },
   "entity": {
     "switch": {
+      "switch_allow_backend_connection": {
+        "name": "Allow Cloud Connection"
+      },
+      "switch_allow_consumer_insights": {
+        "name": "Allow Consumer Insights"
+      },
+      "switch_synchronize_with_time_server": {
+        "name": "Synchronize Time with Server"
+      },
+      "switch_oven_convection_conversion": {
+        "name": "Convection Conversion"
+      },
+      "switch_oven_display_standby_dimmed": {
+        "name": "Dim Display on Standby"
+      },
+      "switch_dishwasher_sanitation": {
+        "name": "Sanitize"
+      },
+      "switch_dishwasher_time_light": {
+        "name": "Time Light"
+      },
       "switch_power_state": {
         "name": "Power"
       },
@@ -191,6 +212,9 @@
       "switch_refrigerator_door_assistant_freezer": {
         "name": "Freezer Door Assistant"
       },
+      "switch_refrigerator_door_assistant_fridge": {
+        "name": "Fridge Door Assistant"
+      },
       "switch_refrigeration_light_internal": {
         "name": "Internal Light"
       },
@@ -211,6 +235,18 @@
       }
     },
     "binary_sensor": {
+      "binary_sensor_local_control_active": {
+        "name": "Local Control Active"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Remote Control Active"
+      },
+      "binary_sensor_backend_connected": {
+        "name": "Cloud Connection"
+      },
+      "binary_sensor_oven_meatprobe_plugged": {
+        "name": "Meat Probe Plugged"
+      },
       "connection": {
         "name": "Connection"
       },
@@ -1227,6 +1263,9 @@
           "cooking_oven_program_subsequentmode_keepwarm": "Subsequent Mode: Keep Warm",
           "cooking_oven_program_subsequentmode_leavetorest": "Subsequent Mode: Leave to Rest",
           "cooking_oven_program_subsequentmode_startbaking": "Subsequent Mode: Start Baking",
+          "cooking_common_program_hood_automatic": "Automatic",
+          "cooking_common_program_hood_delayedshutoff": "Delayed shut-off",
+          "cooking_common_program_hood_venting": "Venting",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_auto60": "Wash - Automatic 60",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
@@ -1768,6 +1807,28 @@
       }
     },
     "select": {
+      "select_time_format": {
+        "name": "Time Format",
+        "state": {
+          "24hours": "24 Hours",
+          "12hours": "12 Hours"
+        }
+      },
+      "select_oven_clock_display": {
+        "name": "Clock Display",
+        "state": {
+          "clock01": "Digital",
+          "clock02": "Analog"
+        }
+      },
+      "select_dishwasher_auto_power_off": {
+        "name": "Auto Power Off",
+        "state": {
+          "off": "Off",
+          "oneminute": "After 1 Minute",
+          "120minutes": "After 2 Hours"
+        }
+      },
       "select_drying_assistant_all_programs": {
         "name": "Drying Assistant All Programs",
         "state": {
@@ -1796,7 +1857,7 @@
         }
       },
       "select_sound_level_signal": {
-        "name": "Sound Level Signal",
+        "name": "Signal Volume",
         "state": {
           "high": "High",
           "low": "Low",
@@ -1805,7 +1866,7 @@
         }
       },
       "select_sound_level_key": {
-        "name": "Sound Level Key",
+        "name": "Button Volume",
         "state": {
           "off": "Off",
           "low": "Low",
@@ -2677,6 +2738,9 @@
           "cooking_oven_program_subsequentmode_keepwarm": "Subsequent Mode: Keep Warm",
           "cooking_oven_program_subsequentmode_leavetorest": "Subsequent Mode: Leave to Rest",
           "cooking_oven_program_subsequentmode_startbaking": "Subsequent Mode: Start Baking",
+          "cooking_common_program_hood_automatic": "Automatic",
+          "cooking_common_program_hood_delayedshutoff": "Delayed shut-off",
+          "cooking_common_program_hood_venting": "Venting",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_auto60": "Wash - Automatic 60",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
@@ -2813,7 +2877,7 @@
         "name": "Default Program",
         "state": {
           "lastprogram": "Last Program",
-          "ecoasdefault": "Eco 50"
+          "auto45asdefault": "Auto"
         }
       },
       "select_power_state": {
@@ -3329,6 +3393,22 @@
           "highforce": "High"
         }
       },
+      "select_refrigerator_door_assistant_fridge_trigger": {
+        "name": "Fridge Door Assistant trigger",
+        "state": {
+          "push": "Push",
+          "pull": "Pull",
+          "pushpull": "Push/Pull"
+        }
+      },
+      "select_refrigerator_door_assistant_fridge_force": {
+        "name": "Fridge Door Assistant force",
+        "state": {
+          "lowforce": "Low",
+          "middleforce": "Medium",
+          "highforce": "High"
+        }
+      },
       "select_chiller_common_preset": {
         "name": "Chiller preset",
         "state": {
@@ -3360,7 +3440,8 @@
           "fanoff": "Off",
           "fanstage01": "1",
           "fanstage02": "2",
-          "fanstage03": "3"
+          "fanstage03": "3",
+          "fanstage04": "4"
         }
       },
       "select_hob_delaye_shutoff_stage": {
@@ -3369,7 +3450,8 @@
           "fanoff": "Off",
           "fanstage01": "1",
           "fanstage02": "2",
-          "fanstage03": "3"
+          "fanstage03": "3",
+          "fanstage04": "4"
         }
       },
       "select_temperature_unit": {
@@ -3383,8 +3465,8 @@
         "name": "Carbon filter type",
         "state": {
           "none": "None",
-          "fahrenheit": "Basic Carbon filter",
-          "regenerativecarbonfilter": "Regenerative Carbon filter"
+          "basiccarbonfilter": "Basic carbon filter",
+          "regenerativecarbonfilter": "Regenerative carbon filter"
         }
       }
     },
@@ -3420,6 +3502,9 @@
     "number": {
       "number_fill_quantity": {
         "name": "Fill quantity"
+      },
+      "number_refrigerator_sabbath_mode_duration": {
+        "name": "Sabbath Mode Duration"
       },
       "number_laundry_brightness": {
         "name": "Brightness"
@@ -3466,6 +3551,12 @@
       "number_hood_delayed_shutoff_time": {
         "name": "Delayed Shutoff Time"
       },
+      "number_refrigerator_door_assistant_freezer_timeout": {
+        "name": "Freezer door assistant timeout"
+      },
+      "number_refrigerator_door_assistant_fridge_timeout": {
+        "name": "Fridge door assistant timeout"
+      },
       "number_hood_sensor_sensitivity": {
         "name": "Auto Sensor Sensitivity"
       },
@@ -3499,6 +3590,14 @@
     "fan": {
       "fan_hood": {
         "name": "Fan"
+      }
+    },
+    "update": {
+      "update_software_download": {
+        "name": "Software Download"
+      },
+      "update_software_update": {
+        "name": "Software Update"
       }
     }
   },
@@ -3576,6 +3675,12 @@
     },
     "not_connected": {
       "message": "Client is not Connected"
+    }
+  },
+  "issues": {
+    "connection_lost": {
+      "title": "Connection to {name} lost",
+      "description": "Home Assistant lost the connection to your {name} appliance and was unable to reconnect.\n\nMake sure the appliance is powered on and connected to your network. This issue will be resolved automatically once the connection is restored."
     }
   }
 }

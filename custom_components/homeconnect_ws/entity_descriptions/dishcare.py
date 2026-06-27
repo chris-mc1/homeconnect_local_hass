@@ -200,6 +200,13 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_registry_enabled_default=False,
             has_state_translation=True,
         ),
+        HCSelectEntityDescription(
+            key="select_dishwasher_auto_power_off",
+            entity="Dishcare.Dishwasher.Setting.AutoPowerOff",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
         # FlexSpray configuration options
         # NOTE: Bosch refers to this feature as "PowerControl" in marketing/UI.
         # The protocol/API objects use the name "FlexSpray", which is kept here.
@@ -345,6 +352,20 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="switch_extra_rinse",
             entity="Dishcare.Dishwasher.Option.ExtraRinse",
             device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_dishwasher_sanitation",
+            entity="Dishcare.Dishwasher.Option.SanitationUC",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        # Bosch/Siemens call this "TimeLight" (projects remaining time on the floor).
+        HCSwitchEntityDescription(
+            key="switch_dishwasher_time_light",
+            entity="Dishcare.Dishwasher.Setting.TimeLight",
+            device_class=SwitchDeviceClass.SWITCH,
+            value_mapping=("On", "Off"),
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
         ),
     ],
 }

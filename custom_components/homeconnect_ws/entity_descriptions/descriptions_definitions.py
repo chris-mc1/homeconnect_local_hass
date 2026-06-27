@@ -13,6 +13,7 @@ from homeassistant.components.number import NumberEntityDescription
 from homeassistant.components.select import SelectEntityDescription
 from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.components.switch import SwitchEntityDescription
+from homeassistant.components.update import UpdateEntityDescription
 from homeassistant.helpers.entity import EntityDescription
 from homeconnect_websocket import HomeAppliance
 from homeconnect_websocket.entities import Access
@@ -110,6 +111,16 @@ class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_o
     """Description for Fan Entity."""
 
     available_access: tuple[Access] = (Access.READ_WRITE,)
+    default_program: str | None = None
+
+
+class HCUpdateEntityDescription(
+    HCEntityDescription, UpdateEntityDescription, frozen_or_thawed=True
+):
+    """Description for Update Entity."""
+
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
+    command_entity: str | None = None
 
 
 class EntityDescriptions(TypedDict):
@@ -128,6 +139,7 @@ class EntityDescriptions(TypedDict):
     wifi: list[HCSensorEntityDescription]
     light: list[HCLightEntityDescription]
     fan: list[HCFanEntityDescription]
+    update: list[HCUpdateEntityDescription]
 
 
 _EntityDescriptionsDefinitionsType = dict[
@@ -145,6 +157,7 @@ _EntityDescriptionsDefinitionsType = dict[
         "wifi",
         "light",
         "fan",
+        "update",
         "dynamic",
     ],
     list[
@@ -168,6 +181,7 @@ _EntityDescriptionsType = dict[
         "wifi",
         "light",
         "fan",
+        "update",
     ],
     list[HCEntityDescription],
 ]

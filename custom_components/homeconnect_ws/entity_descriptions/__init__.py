@@ -20,6 +20,7 @@ from .descriptions_definitions import (
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    HCUpdateEntityDescription,
     _EntityDescriptionsDefinitionsType,
     _EntityDescriptionsType,
 )
@@ -64,6 +65,7 @@ def get_available_entities(appliance: HomeAppliance) -> EntityDescriptions:
         "wifi": [],
         "light": [],
         "fan": [],
+        "update": [],
     }
     appliance_entities = set(appliance.entities)
     for description_type, descriptions in get_all_entity_description().items():
@@ -100,6 +102,7 @@ __all__ = [
     "HCSelectEntityDescription",
     "HCSensorEntityDescription",
     "HCSwitchEntityDescription",
+    "HCUpdateEntityDescription",
     "_EntityDescriptionsType",
     "get_available_entities",
 ]

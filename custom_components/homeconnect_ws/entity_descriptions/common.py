@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import sys
 from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import (
@@ -15,6 +14,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.components.switch import SwitchDeviceClass
+from homeassistant.components.update import UpdateDeviceClass
 from homeassistant.const import (
     PERCENTAGE,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
@@ -31,6 +31,7 @@ from .descriptions_definitions import (
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
+    HCUpdateEntityDescription,
     _EntityDescriptionsDefinitionsType,
 )
 
@@ -67,6 +68,8 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Power switch description."""
     entity_descriptions = EntityDescriptions()
     if entity := appliance.entities.get("BSH.Common.Setting.PowerState"):
+        # Hood power toggles return 400 while venting; fan entity controls the hood.
+        skip_switch = "Cooking.Common.Program.Hood.Venting" in appliance.programs
         if entity.min and entity.max:
             # has min/max
             settable_states = set()
@@ -76,7 +79,7 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
         else:
             settable_states = set(entity.enum.values())
 
-        if len(settable_states) == 2:
+        if len(settable_states) == 2 and not skip_switch:
             # only two power states
             for mapping in POWER_SWITCH_VALUE_MAPINGS:
                 if settable_states == set(mapping):
@@ -192,6 +195,40 @@ def generate_temperature_unit(appliance: HomeAppliance) -> HCSelectEntityDescrip
     return None
 
 
+def generate_software_download_update(
+    appliance: HomeAppliance,
+) -> HCUpdateEntityDescription | None:
+    """Get Software Download update description, if a separate download stage exists."""
+    if (
+        "BSH.Common.Event.SoftwareDownloadAvailable" in appliance.entities
+        and "BSH.Common.Command.AllowSoftwareDownload" in appliance.entities
+    ):
+        return HCUpdateEntityDescription(
+            key="update_software_download",
+            entity="BSH.Common.Event.SoftwareDownloadAvailable",
+            command_entity="BSH.Common.Command.AllowSoftwareDownload",
+            device_class=UpdateDeviceClass.FIRMWARE,
+            entity_category=EntityCategory.CONFIG,
+        )
+    return None
+
+
+def generate_software_update(appliance: HomeAppliance) -> HCUpdateEntityDescription | None:
+    """Get Software Update (install) description."""
+    if (
+        "BSH.Common.Event.SoftwareUpdateAvailable" in appliance.entities
+        and "BSH.Common.Command.AllowSoftwareUpdateLocalWiFi" in appliance.entities
+    ):
+        return HCUpdateEntityDescription(
+            key="update_software_update",
+            entity="BSH.Common.Event.SoftwareUpdateAvailable",
+            command_entity="BSH.Common.Command.AllowSoftwareUpdateLocalWiFi",
+            device_class=UpdateDeviceClass.FIRMWARE,
+            entity_category=EntityCategory.CONFIG,
+        )
+    return None
+
+
 COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "button": [
         HCButtonEntityDescription(
@@ -269,6 +306,25 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_local_control_active",
+            entity="BSH.Common.Status.LocalControlActive",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_remote_control_active",
+            entity="BSH.Common.Status.RemoteControlActive",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_backend_connected",
+            entity="BSH.Common.Status.BackendConnected",
+            device_class=BinarySensorDeviceClass.CONNECTIVITY,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "select": [
         HCSelectEntityDescription(
@@ -279,6 +335,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         # cleanup: duplicate select_remote_control_level entry removed
+        HCSelectEntityDescription(
+            key="select_time_format",
+            entity="BSH.Common.Setting.TimeFormat",
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
         generate_temperature_unit,
     ],
     "sensor": [
@@ -413,6 +476,27 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Setting.ChildLock",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_allow_backend_connection",
+            entity="BSH.Common.Setting.AllowBackendConnection",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_allow_consumer_insights",
+            entity="BSH.Common.Setting.AllowConsumerInsights",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_synchronize_with_time_server",
+            entity="BSH.Common.Setting.SynchronizeWithTimeServer",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        ),
     ],
     "number": [
         HCNumberEntityDescription(
@@ -427,7 +511,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Option.StartInRelative",
             device_class=NumberDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
-            mode=NumberMode.AUTO,
+            mode=NumberMode.BOX,
             entity_registry_enabled_default=False,
         ),
         HCNumberEntityDescription(
@@ -444,10 +528,11 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Setting.AlarmClock",
             device_class=NumberDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
-            native_max_value=sys.float_info.max,
+            native_max_value=86400,  # 24 hours, matching the Home Connect App's limit
             mode=NumberMode.BOX,
         ),
     ],
     "wifi": [generate_wifi],
+    "update": [generate_software_download_update, generate_software_update],
     "dynamic": [generate_power_switch, generate_program],
 }
