@@ -64,7 +64,7 @@ If you want to, once you have connected the appliance to Home Assistant you can 
 Through Home Assistant
 
 1. (OPTIONAL) Before starting, in the Home Connect app, make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
-2. In the configuration section there is a disabled entity called " Allow Cloud Connection" enable it and turn off the switch
+2. In the configuration section there is a disabled entity called "Allow Cloud Connection" enable it and turn off the switch
 3. (OPTIONAL) Enable the "Cloud Connection" diagnostic entity to verify its disconnected from the cloud.
 
 If you see the "Cloud Connection" entity saying disconnected then you have succesfully disabled cloud access for your appliance.
@@ -82,6 +82,10 @@ You'll know if you have successfully done it if you see the line between your ap
 >[!NOTE]
 >Do note that your device will **not** get firmware updates once disconnected, if you want to, you can occasionally (once every 1-3 months) reenable the cloud connection for 1-2 days so the device can check for an update.
 
+Heres an example automation you can do with Home Assistant to occasionally reenable the cloud then do a firmware update (incase if theres one) then disable it.
+```yaml
+will add later
+```
 ## Data Updates
 
 This integration is soley pushed based with it receiving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
@@ -118,7 +122,7 @@ The following entities are available. Which ones appear depends on the appliance
 
 A few additional diagnostic entities (Local Control Active, Remote Control Active) are also available, disabled by default.
 
-The Home Connect protocol only signals that a firmware update exists, not which version it is, so the Update entities show a generic "New Version" placeholder rather than a real version number when one is available.
+The Home Connect protocol only signals that a firmware update exists, not which version it is, so the Update entities show a generic "New Version" placeholder rather than a real version number when one is available. Also, as mentioned before, if you [disabled cloud access](#protip) for your appliance, or it cannot reach the Home Connect Cloud, then it cannot get new firmware updates.
 
 Some entites are excluded from this integration on purpose, even though the Home Connect Protocol Supports it
 | Entity/featureDescription | UID (hex) | Reason for exclusion |
@@ -126,6 +130,7 @@ Some entites are excluded from this integration on purpose, even though the Home
 |BSH.Common.Command.ApplyFactoryReset|0229|Irreversible change|
 |BSH.Common.Command.ApplyNetworkReset|022A|Also an irreversible change|
 |BSH.Common.Command.DeactivateWiFi|0001|Reversible, but will prevent HA from accessing the appliance until physically activated again|
+
 ### Dishwasher
 
 Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand, sanitize), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings, auto power off, and time light (floor projector).
