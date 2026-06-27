@@ -61,9 +61,18 @@ To use this integration, you must first create a Home Connect account and connec
 
 If you want to, once you have connected the appliance to Home Assistant you can disable its cloud access.
 
+Through Home Assistant
+
+1.(OPTIONAL) Before starting, in the Home Connect app, make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
+2. In the configuration section there is a disabled entity called " Allow Cloud Connection" enable it and turn off the switch
+3. (OPTIONAL) Enable the "Cloud Connection" diagnostic entity to verify its disconnected from the cloud.
+
+If you see the "Cloud Connection" entity saying disconnected then you have succesfully disabled cloud access for your appliance.
+
+Through Home Connect
 1. Open the Home Connect app and go to your appliance's settings.
 2. Scroll down until you get the "network" and tap the details button.
-3. (OPTIONAL) Make sure the bottom line (direct connection between your phone and device is green in case if something goes wrong.
+3. (OPTIONAL) Make sure the bottom line (direct connection between your phone and device) is green in case if something goes wrong.
 4. Scroll down (again) until you see the connection to the server toggle.
 5. Turn off the toggle and ignore the scare screen (they have it there so they can continue collecting your data)
 6. Then save
@@ -75,7 +84,7 @@ You'll know if you have successfully done it if you see the line between your ap
 
 ## Data Updates
 
-This integration is soley pushed based with it reciving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
+This integration is soley pushed based with it receiving updates from the appliance the moment something happens to it. Post setup, this integration can work completely offline, unlike the Home Connect app.
 
 ## Supported Functions
 
@@ -111,6 +120,12 @@ A few additional diagnostic entities (Local Control Active, Remote Control Activ
 
 The Home Connect protocol only signals that a firmware update exists, not which version it is, so the Update entities show a generic "New Version" placeholder rather than a real version number when one is available.
 
+Some entites are excluded from this integration on purpose, even though the Home Connect Protocol Supports it
+| Entity/featureDescription | UID (hex) | Reason for exclusion |
+| --- | --- | --- |
+|BSH.Common.Command.ApplyFactoryReset|0229|Irreversible change|
+|BSH.Common.Command.ApplyNetworkReset|022A|Also an irreversible change|
+|BSH.Common.Command.DeactivateWiFi|0001|Reversible, but will prevent HA from accessing the appliance until physically activated again|
 ### Dishwasher
 
 Wash program selection and options (half load, hygiene plus, extra dry, extra rinse, speed-on-demand, silence-on-demand, sanitize), FlexSpray zone configuration, rinse aid and salt level sensors, maintenance reminders (filter check, machine care, smart filter), water hardness and rinse aid dose settings, auto power off, and time light (floor projector).
@@ -197,7 +212,7 @@ actions:
 
 - While this integration can (in theory) support all the functions supported in the Home Connect app, in reality, the functions have to reverse engineered
 - The mDNS on Home Connect devices is wonky and fail to connect. The best example of this is that in the App, unless if the phone is on the same Wireless Access Point as the appliance theres a chance a local connection may fail to establish.
-- Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours. This is called a **Websocket Shutdown**.
+- Home Assistant may overload the device's local capacity causing it to not accept new connections for 24 hours. This is called a **Websocket Shutdown**. See this section](#how-to-resolve-a-websocket-shutdown) for more info and how to resolve it.
 - The Appliance must be online and reachable on your local network during initial setup. The config flow actively tests the connection before letting you finish adding the device, so it cannot be added while powered off or unreachable. Once added, the appliance can go offline/online freely and its entities will simply go unavailable and recover automatically. See issues https://github.com/chris-mc1/homeconnect_local_hass/issues/274 and https://github.com/chris-mc1/homeconnect_local_hass/issues/293 for info about why it is like this.
 
 ## Requesting a New Feature
@@ -239,11 +254,8 @@ If Home Assistant cannot connect to your appliance (during setup) despite correc
     4. If the device does have a Wi-Fi signal, then Home Assistant may have overloaded the device's local capacity, causing a websocket shutdown. See below on how to resolve it.
 
 ### How to resolve a websocket shutdown
-[comment]: <> (I do not know the exact causes of a websocket shutdown nor do I know why these tricks fix it, but when I [@vemboy200] asked Gemini about it gave a pretty good theory about it. It said that the device can only accept a certain number of unique users, and that if theres too many it will stop accepting new ones. However when no users are connected to the appliance for 24 hours, the appliance runs some kind of internal cleaning cycle that clear all these unique users and starts accepting new ones. I think what Gemini has said so far seems to be lining up with my experience, however the websocket shutdown only seems to happen my Thermador Oven [PRG486WDH] and Freezer[T36IF905SP], but not [as in ive never seen it happen] my Dishwasher [DWHD660WFP]. Right before Home Assistant gives me connection error [which happen next restart of Home Assistant or a reload of the config entry], the Home Connect App always fails to establish a local connection with the appliance, showing that Gemini's theory makes sense.)
 
-[comment]: <> (Update [made by Claude]: looked into this further. The "inject websession" Platinum rule isn't the cause — that's about sharing Home Assistant's aiohttp ClientSession for resource tracking, not about how many websocket connections reach the appliance or whether they're closed cleanly. What was actually missing: this integration never closed its connection to the appliance on a full Home Assistant restart [only on a manual reload/disable of the config entry], so every HA restart could leave a half-dead connection sitting in the appliance's connection table instead of a clean close. Premium appliances with cheap WiFi chips [small connection tables] would hit that limit fastest, which matches what I'm seeing. Added a Home Assistant shutdown listener in 1.0.6 to close the connection cleanly on every HA stop, not just on entry unload. Leaving the workarounds below in place until this is confirmed to actually fix it in practice.)
-
-[comment]: <> (Update 2 [made by Claude]: while a websocket shutdown was actively happening on the Freezer [T36IF905SP], found and fixed three related bugs that were masking the problem instead of fixing the root cause. 1: the repair issue [introduced for the repair-issues Gold rule] never fired for an appliance that hadn't connected even once this session, since the library only enters the RECONNECTING state after a previously successful connection drops — a never-yet-connected appliance instead reports ABNORMAL_CLOSURE, which wasn't handled at all. 2: a websocket shutdown specifically returns a plain HTTP 404 on the websocket upgrade [aiohttp.WSServerHandshakeError, a subclass of ClientResponseError], which the library doesn't catch or wrap, so it fell through to a generic exception handler that logged a full traceback on every single retry forever — fixed to log quietly like the other expected connection failures. 3: added an appliance-type check [Washer/Dryer/WasherDryer] so connect failures and the repair issue are suppressed for appliances that are expected to legitimately power off between cycles [the actual cause of upstream issues #274/#293], while still alerting normally for appliance types like this Freezer that are expected to stay connected. Confirmed live: with the Freezer mid-websocket-shutdown, retries now log quietly on backoff instead of spamming, and a "Connection to T36IF905SP lost" repair issue correctly appears in Settings > Repairs.)
+This integration has built in measures (measures not fully tested yet) to prevent a websocket shutdown, however unexpectedly shutting down Home Assistant bypasses these measures. If enough unexpected shutdowns of Home Assistant happen, then Home Assistant will leave half-dead sessions that overload the device's session capacity, leading to a websocket shutdown.
 
 There are three ways to resolve a websocket shutdown:
 1. Disable the cloud: Disabling the cloud (follow the [protip](#protip) section on how to do it), then waiting 24 hours, can allow the device to reopen its local websocket. Note that since you're doing this during a local websocket shutdown, the smart features of the device will be inoperable until the device reopens its websocket. The device will still stay connected to your Wi-Fi.
