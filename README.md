@@ -101,32 +101,45 @@ actions:
     target:
       # Replace with your appliance's "Allow Cloud Connection" entity
       entity_id: switch.dishwasher_allow_cloud_connection
-  - delay:
+    data: {}
+  - wait_template: |-
+      {{ is_state('update.dishwasher_software_download', 'on')
+         or is_state('update.dishwasher_software_update', 'on') }}
+    timeout:
       hours: 24
+    continue_on_timeout: true
   - if:
-      # Skip if your appliance has no separate download stage
       - condition: state
         entity_id: update.dishwasher_software_download
         state: "on"
     then:
       - action: update.install
         target:
-          entity_id: update.dishwasher_software_download
-      - delay:
-          minutes: 10
+          entity_id:
+            - update.dishwasher_software_download
+        data: {}
+      - wait_template: "{{ is_state('update.dishwasher_software_download', 'off') }}"
+        timeout:
+          minutes: 30
+        continue_on_timeout: true
   - if:
       - condition: state
         entity_id: update.dishwasher_software_update
         state: "on"
     then:
       - action: update.install
+        data: {}
         target:
           entity_id: update.dishwasher_software_update
-      - delay:
-          minutes: 10
+      - wait_template: "{{ is_state('update.dishwasher_software_update', 'off') }}"
+        timeout:
+          minutes: 30
+        continue_on_timeout: true
   - action: switch.turn_off
     target:
-      entity_id: switch.dishwasher_allow_cloud_connection
+      entity_id:
+        - switch.dishwasher_allow_cloud_connection
+    data: {}
 mode: single
 ```
 ## Data Updates
