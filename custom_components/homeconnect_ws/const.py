@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import timedelta
 from typing import Final
 
 from homeassistant.const import Platform
@@ -26,4 +27,9 @@ CONF_DEV_SETUP_FROM_DUMP: Final = "setup_from_dump_enabled"
 CONF_DEV_OVERRIDE_HOST: Final = "override_host"
 CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
 
-MAX_RECONECT_TIME: Final = 300
+# Watchdog: how often the coordinator verifies the live websocket connection.
+WATCHDOG_INTERVAL: Final = timedelta(seconds=30)
+
+# How long to let the library's own reconnect loop work after a drop before the
+# coordinator forces a clean reconnect as a backstop (seconds).
+RECONNECT_GRACE_TIME: Final = 60

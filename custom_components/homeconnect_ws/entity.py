@@ -70,8 +70,10 @@ class HCEntity(CoordinatorEntity, Entity):
 
     @property
     def available(self) -> bool:
-        # FIX: session.connected fallback prevents unavailable during reconnects
-        # and initial load before coordinator callback. 300s timeout still applies.
+        # The session.connected fallback keeps the entity available during the initial
+        # load (before the first coordinator callback) and during brief reconnects.
+        # The coordinator's watchdog clears `connected` once the connection has been
+        # down past the grace period (see HomeConnectCoordinator).
         conn = (
             self._runtime_data.coordinator.connected
             or self._runtime_data.appliance.session.connected
