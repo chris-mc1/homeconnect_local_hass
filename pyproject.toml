@@ -17,7 +17,7 @@ dev = [
     "homeassistant==2026.5.3",
     "pytest-homeassistant-custom-component==0.13.332",
     "voluptuous-stubs==0.1.1",
-    "ruff==0.15.17",
+    "ruff==0.15.22",
     "pre-commit==4.6.0",
 ]
 
