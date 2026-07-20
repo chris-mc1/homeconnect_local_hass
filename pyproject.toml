@@ -13,7 +13,7 @@ Issues = "https://github.com/chris-mc1/homeconnect_local_hass/issues"
 
 [dependency-groups]
 dev = [
-    "colorlog==6.10.1",
+    "colorlog==6.11.0",
     "homeassistant==2026.5.3",
     "pytest-homeassistant-custom-component==0.13.332",
     "voluptuous-stubs==0.1.1",
