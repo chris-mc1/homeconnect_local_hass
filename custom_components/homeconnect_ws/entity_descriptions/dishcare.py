@@ -346,5 +346,10 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Dishcare.Dishwasher.Option.ExtraRinse",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_pretreatment",
+            entity="Dishcare.Dishwasher.Option.Pretreatment",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
     ],
 }

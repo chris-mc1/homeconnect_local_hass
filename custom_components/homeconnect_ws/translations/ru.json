@@ -44,6 +44,9 @@
       "switch_intensiv_zone": {
         "name": "Интенсивная зона"
       },
+      "switch_pretreatment": {
+        "name": "Предварительное ополаскивание"
+      },
       "switch_vario_speed_plus": {
         "name": "VariospeedPlus"
       },
