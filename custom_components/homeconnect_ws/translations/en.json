@@ -3383,7 +3383,7 @@
         "name": "Carbon filter type",
         "state": {
           "none": "None",
-          "fahrenheit": "Basic Carbon filter",
+          "basiccarbonfilter": "Basic Carbon filter",
           "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
       }

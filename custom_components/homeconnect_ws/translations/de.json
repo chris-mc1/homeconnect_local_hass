@@ -2500,7 +2500,7 @@
         "name": "Kohlefiltertyp",
         "state": {
           "none": "Keine",
-          "fahrenheit": "Standard-Kohlefilter",
+          "basiccarbonfilter": "Standard-Kohlefilter",
           "regenerativecarbonfilter": "Regenerierbarer Kohlefilter"
         }
       }
