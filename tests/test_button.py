@@ -45,6 +45,8 @@ async def test_start(
     entity_id = "button.fake_brand_homeappliance_activeprogram"
     assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
     await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await mock_appliance.entities["Test.Option1"].update({"value": 1})
+    await mock_appliance.entities["Test.Option2"].update({"value": 2})
     await hass.async_block_till_done()
 
     await hass.services.async_call(
@@ -60,8 +62,37 @@ async def test_start(
             action=Action.POST,
             data={
                 "program": 500,
-                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
+                "options": [{"uid": 401, "value": 1}, {"uid": 402, "value": 2}],
             },
+        )
+    )
+
+
+async def test_start_skips_options_without_value(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,  # noqa: ARG001
+) -> None:
+    """Test options without a value are not send when starting a program."""
+    entity_id = "button.fake_brand_homeappliance_activeprogram"
+    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await mock_appliance.entities["Test.Option1"].update({"value": 1})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        domain=BUTTON_DOMAIN,
+        service=SERVICE_PRESS,
+        service_data={ATTR_ENTITY_ID: entity_id},
+        blocking=True,
+    )
+
+    # Test.Option2 has no value, sending it as null gets the request rejected
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action=Action.POST,
+            data={"program": 500, "options": [{"uid": 401, "value": 1}]},
         )
     )
 

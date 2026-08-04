@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers.service import async_extract_config_entry_ids
+from homeconnect_websocket.entities import Access
 from homeconnect_websocket.errors import AccessError, CodeResponsError, NotConnectedError
 
 from .const import DOMAIN
@@ -18,8 +19,8 @@ if TYPE_CHECKING:
 
     from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
-    from homeconnect_websocket.entities import Access
     from homeconnect_websocket.entities import Entity as HcEntity
+    from homeconnect_websocket.entities import Program
 
     from . import HCConfigEntry, HCData
     from .entity import HCEntity
@@ -106,6 +107,23 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     if hasattr(entity, "access"):
         available &= entity.access in available_access
     return available
+
+
+def build_program_options(program: Program) -> dict[int, Any]:
+    """
+    Build the option set used to select or start a program.
+
+    Only writable options with a known value are included. An option without a value is
+    serialized as JSON null, which makes the appliance reject the whole request with
+    400 BadRequest. Every CoffeeMaker beverage program is affected, because
+    ConsumerProducts.CoffeeMaker.Option.DisplayName is part of its option set but never
+    reports a value.
+    """
+    return {
+        option.uid: option.value_shadow
+        for option in program._options  # noqa: SLF001 Program has no public accessor for its options
+        if option.access == Access.READ_WRITE and option.value_shadow is not None
+    }
 
 
 def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Coroutine[T]]:

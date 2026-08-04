@@ -27,7 +27,7 @@ from .const import (
 )
 from .coordinator import HomeConnectCoordinator
 from .entity_descriptions import get_available_entities
-from .helpers import error_decorator, get_config_entry_from_call
+from .helpers import build_program_options, error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
@@ -130,8 +130,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             options[entity.uid] = _duration_to_seconds(call.data["finish_in"])
 
         if appliance.selected_program:
+            program_options = build_program_options(appliance.selected_program)
+            program_options.update(options)
             try:
-                await appliance.selected_program.start(options)
+                await appliance.selected_program.start(program_options, override_options=True)
             except CodeResponsError as exc:
                 _raise_start_error(exc)
         else:
