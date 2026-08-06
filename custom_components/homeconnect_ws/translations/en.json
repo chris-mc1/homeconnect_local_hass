@@ -217,6 +217,18 @@
       "binary_sensor_door_state": {
         "name": "Door"
       },
+      "binary_sensor_intensiv_zone_active": {
+        "name": "Intensive Zone Active"
+      },
+      "binary_sensor_half_load_active": {
+        "name": "Half Load Active"
+      },
+      "binary_sensor_hygiene_plus_active": {
+        "name": "Hygiene Plus Active"
+      },
+      "binary_sensor_pretreatment_active": {
+        "name": "Pre-Treatment Active"
+      },
       "binary_sensor_eco_dry_active": {
         "name": "EcoDry Active"
       },
