@@ -90,7 +90,11 @@
         "name": "Time Light"
       },
       "switch_power_state": {
-        "name": "Power"
+        "name": "Power",
+        "state": {
+          "off": "Off",
+          "on": "On"
+        }
       },
       "switch_hygiene_plus": {
         "name": "Hygiene Plus"
@@ -1420,7 +1424,42 @@
           "laundrycare_common_program_memory5": "Memory 5",
           "laundrycare_common_program_memory6": "Memory 6",
           "laundrycare_common_program_memory7": "Memory 7",
-          "laundrycare_common_program_memory8": "Memory 8"
+          "laundrycare_common_program_memory8": "Memory 8",
+          "cooking_hob_program_dish_fryingsensor_creamsauce": "Frying Sensor: Cream Sauce",
+          "cooking_hob_program_dish_fryingsensor_dumplings": "Frying Sensor: Dumplings",
+          "cooking_hob_program_dish_fryingsensor_fondue": "Frying Sensor: Fondue",
+          "cooking_hob_program_dish_fryingsensor_meltingbutter": "Frying Sensor: Melting Butter",
+          "cooking_hob_program_dish_fryingsensor_meltingcheese": "Frying Sensor: Melting Cheese",
+          "cooking_hob_program_dish_fryingsensor_meltingchocolate": "Frying Sensor: Melting Chocolate",
+          "cooking_hob_program_dish_fryingsensor_mussels": "Frying Sensor: Mussels",
+          "cooking_hob_program_dish_fryingsensor_onionrings": "Frying Sensor: Onion Rings",
+          "cooking_hob_program_dish_fryingsensor_ribeyemedium": "Frying Sensor: Ribeye (Medium)",
+          "cooking_hob_program_dish_fryingsensor_ribeyerare": "Frying Sensor: Ribeye (Rare)",
+          "cooking_hob_program_dish_fryingsensor_sardines": "Frying Sensor: Sardines",
+          "cooking_hob_program_dish_fryingsensor_skewers": "Frying Sensor: Skewers",
+          "cooking_hob_program_dish_fryingsensor_squid": "Frying Sensor: Squid",
+          "cooking_hob_program_dish_fryingsensor_tempuravegetables": "Frying Sensor: Tempura Vegetables",
+          "cooking_hob_program_dish_fryingsensor_toastingbread": "Frying Sensor: Toasting Bread",
+          "favorite_011": "Favorite 11",
+          "favorite_012": "Favorite 12",
+          "favorite_013": "Favorite 13",
+          "favorite_014": "Favorite 14",
+          "favorite_015": "Favorite 15",
+          "favorite_016": "Favorite 16",
+          "favorite_017": "Favorite 17",
+          "favorite_018": "Favorite 18",
+          "favorite_019": "Favorite 19",
+          "favorite_020": "Favorite 20",
+          "favorite_021": "Favorite 21",
+          "favorite_022": "Favorite 22",
+          "favorite_023": "Favorite 23",
+          "favorite_024": "Favorite 24",
+          "favorite_025": "Favorite 25",
+          "favorite_026": "Favorite 26",
+          "favorite_027": "Favorite 27",
+          "favorite_028": "Favorite 28",
+          "favorite_029": "Favorite 29",
+          "favorite_030": "Favorite 30"
         }
       },
       "sensor_rinse_aid": {
@@ -2895,7 +2934,43 @@
           "laundrycare_common_program_memory5": "Memory 5",
           "laundrycare_common_program_memory6": "Memory 6",
           "laundrycare_common_program_memory7": "Memory 7",
-          "laundrycare_common_program_memory8": "Memory 8"
+          "laundrycare_common_program_memory8": "Memory 8",
+          "cooking_hob_program_dish_fryingsensor_creamsauce": "Frying Sensor: Cream Sauce",
+          "cooking_hob_program_dish_fryingsensor_dumplings": "Frying Sensor: Dumplings",
+          "cooking_hob_program_dish_fryingsensor_fondue": "Frying Sensor: Fondue",
+          "cooking_hob_program_dish_fryingsensor_meltingbutter": "Frying Sensor: Melting Butter",
+          "cooking_hob_program_dish_fryingsensor_meltingcheese": "Frying Sensor: Melting Cheese",
+          "cooking_hob_program_dish_fryingsensor_meltingchocolate": "Frying Sensor: Melting Chocolate",
+          "cooking_hob_program_dish_fryingsensor_mussels": "Frying Sensor: Mussels",
+          "cooking_hob_program_dish_fryingsensor_onionrings": "Frying Sensor: Onion Rings",
+          "cooking_hob_program_dish_fryingsensor_ribeyemedium": "Frying Sensor: Ribeye (Medium)",
+          "cooking_hob_program_dish_fryingsensor_ribeyerare": "Frying Sensor: Ribeye (Rare)",
+          "cooking_hob_program_dish_fryingsensor_sardines": "Frying Sensor: Sardines",
+          "cooking_hob_program_dish_fryingsensor_skewers": "Frying Sensor: Skewers",
+          "cooking_hob_program_dish_fryingsensor_squid": "Frying Sensor: Squid",
+          "cooking_hob_program_dish_fryingsensor_tempuravegetables": "Frying Sensor: Tempura Vegetables",
+          "cooking_hob_program_dish_fryingsensor_toastingbread": "Frying Sensor: Toasting Bread",
+          "favorite_011": "Favorite 11",
+          "favorite_012": "Favorite 12",
+          "favorite_013": "Favorite 13",
+          "favorite_014": "Favorite 14",
+          "favorite_015": "Favorite 15",
+          "favorite_016": "Favorite 16",
+          "favorite_017": "Favorite 17",
+          "favorite_018": "Favorite 18",
+          "favorite_019": "Favorite 19",
+          "favorite_020": "Favorite 20",
+          "favorite_021": "Favorite 21",
+          "favorite_022": "Favorite 22",
+          "favorite_023": "Favorite 23",
+          "favorite_024": "Favorite 24",
+          "favorite_025": "Favorite 25",
+          "favorite_026": "Favorite 26",
+          "favorite_027": "Favorite 27",
+          "favorite_028": "Favorite 28",
+          "favorite_029": "Favorite 29",
+          "favorite_030": "Favorite 30",
+          "unknown": "Unknown"
         }
       },
       "select_sensitivity_turbidity": {
@@ -3399,7 +3474,10 @@
         "name": "Coolingfan runtime",
         "state": {
           "short": "Short",
-          "recommended": "Recommended"
+          "recommended": "Recommended",
+          "long": "Long",
+          "middle": "Recommended",
+          "verylong": "Very Long"
         }
       },
       "select_oven_signal_duration": {
@@ -3407,7 +3485,8 @@
         "state": {
           "short": "Short",
           "medium": "Medium",
-          "long": "Long"
+          "long": "Long",
+          "onlyonetime": "Only Once"
         }
       },
       "select_refrigerator_door_assistant_freezer_trigger": {
