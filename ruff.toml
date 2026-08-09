@@ -17,6 +17,7 @@ ignore = [
     "ISC001",  # incompatible with formatter
     "ARG002",  # unused-method-argument
     "PLR2004", # magic-value-comparison
+    "CPY",
 ]
 
 [lint.flake8-pytest-style]
