@@ -208,6 +208,9 @@
       },
       "switch_extra_rinse": {
         "name": "Extra Rinse"
+      },
+      "switch_pretreatment": {
+        "name": "Pre-Treatment"
       }
     },
     "binary_sensor": {

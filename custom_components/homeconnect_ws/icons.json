@@ -46,6 +46,9 @@
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
             },
+            "switch_pretreatment": {
+                "default": "mdi:pot-steam-outline"
+            },
             "switch_cup_warmer": {
                 "default": "mdi:heat-wave"
             }
