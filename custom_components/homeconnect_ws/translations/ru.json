@@ -169,6 +169,18 @@
       "binary_sensor_door_state": {
         "name": "Дверь"
       },
+      "binary_sensor_intensiv_zone_active": {
+        "name": "Интенсивная зона активна"
+      },
+      "binary_sensor_half_load_active": {
+        "name": "Половинная загрузка активна"
+      },
+      "binary_sensor_hygiene_plus_active": {
+        "name": "Гигиена+ активна"
+      },
+      "binary_sensor_pretreatment_active": {
+        "name": "Замачивание активно"
+      },
       "binary_sensor_eco_dry_active": {
         "name": "EcoDry активен"
       },

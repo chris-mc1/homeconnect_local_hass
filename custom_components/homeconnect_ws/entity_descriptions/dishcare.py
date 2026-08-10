@@ -20,6 +20,22 @@ from .descriptions_definitions import (
 DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "binary_sensor": [
         HCBinarySensorEntityDescription(
+            key="binary_sensor_intensiv_zone_active",
+            entity="Dishcare.Dishwasher.Option.IntensivZone",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_half_load_active",
+            entity="Dishcare.Dishwasher.Option.HalfLoad",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_hygiene_plus_active",
+            entity="Dishcare.Dishwasher.Option.HygienePlus",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_pretreatment_active",
+            entity="Dishcare.Dishwasher.Option.Pretreatment",
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_eco_dry_active",
             entity="Dishcare.Dishwasher.Status.EcoDryActive",
             entity_registry_enabled_default=False,
