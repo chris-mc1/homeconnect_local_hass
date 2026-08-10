@@ -1751,7 +1751,7 @@
         "name": "Kullfiltertype",
         "state": {
           "none": "Ingen",
-          "fahrenheit": "Grunnleggende kullfilter",
+          "basiccarbonfilter": "Grunnleggende kullfilter",
           "regenerativecarbonfilter": "Regenerativt kullfilter"
         }
       }

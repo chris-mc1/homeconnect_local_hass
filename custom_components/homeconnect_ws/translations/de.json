@@ -542,6 +542,10 @@
           "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
           "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
           "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
+          "cooking_common_program_hood_venting": "Lüfterstufe",
+          "cooking_common_program_hood_automatic": "Automatikbetrieb",
+          "cooking_common_program_hood_interval": "Intervall-Lüftung",
+          "cooking_common_program_hood_delayedshutoff": "Lüfternachlauf",
           "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
           "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
           "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
@@ -1455,6 +1459,10 @@
           "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
           "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
           "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
+          "cooking_common_program_hood_venting": "Lüfterstufe",
+          "cooking_common_program_hood_automatic": "Automatikbetrieb",
+          "cooking_common_program_hood_interval": "Intervall-Lüftung",
+          "cooking_common_program_hood_delayedshutoff": "Lüfternachlauf",
           "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
           "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
           "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
@@ -2500,7 +2508,7 @@
         "name": "Kohlefiltertyp",
         "state": {
           "none": "Keine",
-          "fahrenheit": "Standard-Kohlefilter",
+          "basiccarbonfilter": "Standard-Kohlefilter",
           "regenerativecarbonfilter": "Regenerierbarer Kohlefilter"
         }
       }
