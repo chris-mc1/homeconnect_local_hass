@@ -27,7 +27,7 @@ class MockAppliance:
         self._connect = AsyncMock()
         self._close = AsyncMock()
 
-    def __call__(  # noqa: PLR0913
+    def __call__(  # noqa: PLR0913, PLR0917
         self,
         description: DeviceDescription,
         host: str,
