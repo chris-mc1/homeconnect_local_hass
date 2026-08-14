@@ -7,23 +7,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        ha-version: ["homeassistant==2026.3.*", "homeassistant==2026.4.*"]
-        experimental: [false]
-        include:
-          - ha-version: "homeassistant"
-            experimental: true
+        ha-version: ["homeassistant==2026.4.0", "homeassistant==2026.8.1"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
         with:
-          python-version: "3.14"
-      - run: |
-          sudo pip install uv
-          sudo uv sync --no-install-project --prerelease=allow --no-dev --group test
-          sudo uv pip install --prerelease=allow ${{ matrix.ha-version }} pytest-homeassistant-custom-component
-      - run: sudo uv pip show homeassistant
-      - run: sudo uv run pytest tests/
+          enable-cache: true
+      - run: uv run --with ${{ matrix.ha-version }} --with pytest-homeassistant-custom-component pytest

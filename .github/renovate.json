@@ -1,0 +1,28 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended"
+    ],
+    "enabledManagers": [
+        "pep621",
+        "github-actions",
+        "pre-commit",
+        "homeassistant-manifest"
+    ],
+    "minimumReleaseAge": "3 days",
+    "osvVulnerabilityAlerts": true,
+    "dependencyDashboardOSVVulnerabilitySummary": "all",
+    "timezone": "Europe/Berlin",
+    "customManagers": [],
+    "packageRules": [
+        {
+            "matchPackageNames": [
+                "homeassistant"
+            ],
+            "enabled": false
+        }
+    ],
+    "pre-commit": {
+        "enabled": true
+    }
+}

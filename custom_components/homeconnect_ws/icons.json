@@ -10,7 +10,9 @@
             "switch_extra_dry_option": {
                 "default": "mdi:heat-wave"
             },
-            "switch_intensiv_zone": {},
+            "switch_intensiv_zone": {
+                "default": "mdi:arrow-decision"
+            },
             "switch_vario_speed_plus": {
                 "default": "mdi:timer-play-outline"
             },
@@ -45,11 +47,29 @@
             },
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
+            },
+            "switch_pretreatment": {
+                "default": "mdi:pot-steam-outline"
+            },
+            "switch_cup_warmer": {
+                "default": "mdi:heat-wave"
             }
         },
         "binary_sensor": {
             "connection": {},
             "binary_sensor_door_state": {},
+            "binary_sensor_intensiv_zone_active": {
+                "default": "mdi:arrow-decision"
+            },
+            "binary_sensor_half_load_active": {
+                "default": "mdi:fraction-one-half"
+            },
+            "binary_sensor_hygiene_plus_active": {
+                "default": "mdi:thermometer-plus"
+            },
+            "binary_sensor_pretreatment_active": {
+                "default": "mdi:pot-steam-outline"
+            },
             "binary_sensor_eco_dry_active": {},
             "binary_sensor_aqua_stop": {
                 "default": "mdi:water-check-outline",
@@ -90,6 +110,9 @@
             "sensor_remaining_program_time": {
                 "default": "mdi:progress-clock"
             },
+            "sensor_elapsed_program_time": {
+                "default": "mdi:progress-clock"
+            },            
             "sensor_program_progress": {
                 "default": "mdi:progress-check"
             },

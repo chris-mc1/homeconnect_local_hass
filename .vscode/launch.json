@@ -8,12 +8,13 @@
             "name": "Home Assistant",
             "type": "debugpy",
             "request": "launch",
-            "justMyCode": false,
             "module": "homeassistant",
+            "justMyCode": false,
+            "subProcess": false,
             "args": [
                 "--debug",
                 "-c",
-                "/workspaces/homeconnect-local",
+                "config"
             ]
         },
     ]

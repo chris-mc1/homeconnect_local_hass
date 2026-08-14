@@ -360,6 +360,9 @@
       "sensor_remaining_program_time": {
         "name": "Tempo programma rimanente"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Tempo programma trascorso"
+      },
       "sensor_program_progress": {
         "name": "Avanzamento programma"
       },
@@ -706,7 +709,10 @@
         }
       },
       "sensor_oven_current_temperature": {
-        "name": "Temperatura attuale{group_name}"
+        "name": "Temperatura attuale"
+      },
+      "sensor_oven_current_meatprobe_temperature": {
+        "name": "Temperatura attuale della sonda carne"
       },
       "sensor_heatup_progress": {
         "name": "Avanzamento riscaldamento"

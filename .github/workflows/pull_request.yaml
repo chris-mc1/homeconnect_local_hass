@@ -7,9 +7,9 @@ on:
 jobs:
   lint:
     uses: ./.github/workflows/lint.yaml
-  validate:
-    needs: lint
-    uses: ./.github/workflows/validate.yaml
   test:
     needs: [lint, validate]
     uses: ./.github/workflows/test.yaml
+  validate:
+    needs: lint
+    uses: ./.github/workflows/validate.yaml

@@ -414,6 +414,12 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         ),
+        HCSensorEntityDescription(
+            key="sensor_oven_current_meatprobe_temperature",
+            entity="Cooking.Oven.Status.CurrentMeatprobeTemperature",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        ),
     ],
     "dynamic": [
         generate_oven_status,
@@ -562,22 +568,22 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "button": [
         HCButtonEntityDescription(
             key="button_hood_carbon_filter_reset",
-            entity="Cooking.Common.Command.Hood.CarbonFilterReset ",
+            entity="Cooking.Common.Command.Hood.CarbonFilterReset",
             entity_category=EntityCategory.CONFIG,
         ),
         HCButtonEntityDescription(
             key="button_hood_grease_filter_reset",
-            entity="Cooking.Common.Command.Hood.GreaseFilterReset ",
+            entity="Cooking.Common.Command.Hood.GreaseFilterReset",
             entity_category=EntityCategory.CONFIG,
         ),
         HCButtonEntityDescription(
             key="button_hood_regenerative_carbon_filter_reset",
-            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterReset ",
+            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterReset",
             entity_category=EntityCategory.CONFIG,
         ),
         HCButtonEntityDescription(
             key="button_hood_regenerative_carbon_filter_lifetime_reset",
-            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterLifeTimeReset ",
+            entity="Cooking.Common.Command.Hood.RegenerativeCarbonFilterLifeTimeReset",
             entity_category=EntityCategory.CONFIG,
         ),
     ],

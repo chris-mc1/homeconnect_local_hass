@@ -419,6 +419,9 @@
       "sensor_remaining_program_time": {
         "name": "Återstående programtid"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Förfluten programtid"
+      },
       "sensor_program_progress": {
         "name": "Programförlopp"
       },
@@ -849,7 +852,10 @@
         }
       },
       "sensor_oven_current_temperature": {
-        "name": "Aktuell temperatur {group_name}"
+        "name": "Aktuell temperatur"
+      },
+      "sensor_oven_current_meatprobe_temperature": {
+        "name": "Aktuell Köttprobe temperatuur"
       },
       "sensor_heatup_progress": {
         "name": "Uppvärmningsförlopp"

@@ -132,6 +132,11 @@ CONSUMER_PRODUCTS_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="ConsumerProducts.CoffeeMaker.Option.MultipleBeverages",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_cup_warmer",
+            entity="ConsumerProducts.CoffeeMaker.Setting.CupWarmer",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
     ],
     "number": [
         HCNumberEntityDescription(

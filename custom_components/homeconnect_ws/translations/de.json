@@ -68,6 +68,9 @@
       "switch_multiple_beverages": {
         "name": "Mehrere Getränke"
       },
+      "switch_cup_warmer": {
+        "name": "Tassenwärmer"
+      },
       "switch_half_load": {
         "name": "Halbe Ladung"
       },
@@ -422,6 +425,9 @@
       "sensor_remaining_program_time": {
         "name": "Verbleibende Programmlaufzeit"
       },
+      "sensor_elapsed_program_time": {
+        "name": "Verstrichene Programmlaufzeit"
+      },
       "sensor_program_progress": {
         "name": "Programmfortschritt"
       },
@@ -536,6 +542,10 @@
           "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
           "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
           "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
+          "cooking_common_program_hood_venting": "Lüfterstufe",
+          "cooking_common_program_hood_automatic": "Automatikbetrieb",
+          "cooking_common_program_hood_interval": "Intervall-Lüftung",
+          "cooking_common_program_hood_delayedshutoff": "Lüfternachlauf",
           "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
           "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
           "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
@@ -1107,7 +1117,10 @@
         }
       },
       "sensor_oven_current_temperature": {
-        "name": "Aktuelle Temperatur{group_name}"
+        "name": "Aktuelle Temperatur"
+      },
+      "sensor_oven_current_meatprobe_temperature": {
+        "name": "Aktuelle Bratenthermometer Temperatur"
       },
       "sensor_heatup_progress": {
         "name": "Aufwärmprozess"
@@ -1367,7 +1380,9 @@
         "name": "Ausgewähltes Programm",
         "state": {
           "dishcare_dishwasher_program_intensiv70": "Intensiv 70°C",
+		  "dishcare_dishwasher_program_auto1": "Auto 35-45°C",
           "dishcare_dishwasher_program_auto2": "Auto 45-65°C",
+		  "dishcare_dishwasher_program_auto3": "Auto 65-75°C",
           "dishcare_dishwasher_program_eco50": "Eco 50°C",
           "dishcare_dishwasher_program_quick45": "Schnell 45°C",
           "dishcare_dishwasher_program_prerinse": "Vorspülen",
@@ -1444,6 +1459,10 @@
           "laundrycare_washerdryer_program_sportfitness_sportfitness": "Waschen & Trocknen - Sportbekleidung",
           "laundrycare_washerdryer_program_washanddry_60": "Waschen & Trocknen - 60'",
           "laundrycare_washerdryer_program_downduvet_down": "Waschen & Trocknen - Daunen",
+          "cooking_common_program_hood_venting": "Lüfterstufe",
+          "cooking_common_program_hood_automatic": "Automatikbetrieb",
+          "cooking_common_program_hood_interval": "Intervall-Lüftung",
+          "cooking_common_program_hood_delayedshutoff": "Lüfternachlauf",
           "cooking_hob_program_dish_fryingsensor_aubergines": "Auberginen",
           "cooking_hob_program_dish_fryingsensor_bacon": "Speck",
           "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Béchamelsauce",
@@ -2489,7 +2508,7 @@
         "name": "Kohlefiltertyp",
         "state": {
           "none": "Keine",
-          "fahrenheit": "Standard-Kohlefilter",
+          "basiccarbonfilter": "Standard-Kohlefilter",
           "regenerativecarbonfilter": "Regenerierbarer Kohlefilter"
         }
       }
