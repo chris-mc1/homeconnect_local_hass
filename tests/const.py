@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
     CONF_PSK,
+    DOMAIN,
 )
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
@@ -26,6 +30,7 @@ from homeconnect_websocket.entities import (
     Execution,
     OptionDescription,
 )
+from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 MOCK_APPLIANCE_INFO = {
     "brand": "Fake_Brand",
@@ -480,7 +485,7 @@ DEVICE_DESCRIPTION = DeviceDescription(
     info=MOCK_APPLIANCE_INFO,
 )
 
-MOCK_CONFIG_DATA = {
+MOCK_CONFIG_DATA_1 = {
     CONF_DESCRIPTION: DEVICE_DESCRIPTION,
     CONF_HOST: "1.2.3.4",
     CONF_PSK: "PSK_KEY",
@@ -488,3 +493,29 @@ MOCK_CONFIG_DATA = {
     CONF_DEVICE_ID: "Test_Device_ID",
     CONF_NAME: "Fake_Brand HomeAppliance",
 }
+
+MOCK_CONFIG_DATA_2 = {
+    CONF_HOST: "1.2.3.4",
+    CONF_PSK: "PSK_KEY",
+    CONF_AES_IV: "AES_IV",
+    CONF_DEVICE_ID: "Test_Device_ID",
+    CONF_NAME: "Fake_Brand HomeAppliance",
+    CONF_DESCRIPTION_FILENAME: "Test_Device_ID/FeatureMapping.xml",
+    CONF_FEATURE_FILENAME: "Test_Device_ID/DeviceDescription.xml",
+    CONF_APPLIANCE_INFO: DEVICE_DESCRIPTION["info"],
+}
+
+CONFIG_ENTRIES = [
+    MockConfigEntry(
+        domain=DOMAIN,
+        data=MOCK_CONFIG_DATA_1,
+        unique_id=MOCK_AES_DEVICE_ID,
+        version=1,
+    ),
+    MockConfigEntry(
+        domain=DOMAIN,
+        data=MOCK_CONFIG_DATA_2,
+        unique_id=MOCK_AES_DEVICE_ID,
+        version=2,
+    ),
+]

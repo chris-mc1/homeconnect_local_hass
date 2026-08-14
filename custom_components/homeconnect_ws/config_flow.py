@@ -8,8 +8,8 @@ import random
 import re
 from asyncio import Event, wait_for
 from binascii import Error as BinasciiError
-from copy import deepcopy
-from typing import TYPE_CHECKING, Any
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, TypedDict
 from zipfile import ZipFile
 
 import homeassistant.helpers.config_validation as cv
@@ -18,7 +18,6 @@ from aiohttp import ClientConnectionError, ClientConnectorSSLError
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
 from homeassistant.const import (
-    CONF_DESCRIPTION,
     CONF_DEVICE,
     CONF_DEVICE_ID,
     CONF_HOST,
@@ -32,21 +31,29 @@ from homeassistant.helpers.selector import (
     SelectSelector,
     SelectSelectorConfig,
 )
+from homeassistant.helpers.storage import STORAGE_DIR
 from homeconnect_websocket import (
     ConnectionState,
-    DeviceDescription,
     HomeAppliance,
     ParserError,
     parse_device_description,
 )
 
 from . import HC_KEY, HCConfig
-from .const import CONF_AES_IV, CONF_FILE, CONF_MANUAL_HOST, CONF_PSK, DOMAIN
+from .const import (
+    CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
+    CONF_FILE,
+    CONF_MANUAL_HOST,
+    CONF_PSK,
+    DOMAIN,
+)
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
     from homeassistant.config_entries import ConfigFlowResult
+    from homeassistant.core import HomeAssistant
     from homeassistant.data_entry_flow import FlowResult
     from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 
@@ -59,11 +66,6 @@ CONFIG_FILE_SCHEMA = vol.Schema(
         vol.Required(CONF_FILE): FileSelector(config=FileSelectorConfig(accept=".zip")),
     }
 )
-CONFIG_FILE_SCHEMA_JSON = vol.Schema(
-    {
-        vol.Required(CONF_FILE): FileSelector(config=FileSelectorConfig(accept=".zip,.json")),
-    }
-)
 CONFIG_HOST_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_HOST): cv.string,
@@ -71,7 +73,15 @@ CONFIG_HOST_SCHEMA = vol.Schema(
 )
 
 
-def process_zip_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDescription]]:
+class ProfileFileEntry(TypedDict):
+    """Profile file entry dict."""
+
+    info: dict
+    device_description: bytes
+    feature_mapping: bytes
+
+
+def _process_zip_file(config_path: Path) -> dict[str, ProfileFileEntry]:
     """Process uploaded zip file."""
     profile_file = ZipFile(config_path)
 
@@ -84,46 +94,43 @@ def process_zip_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDesc
 
             description_file_name = appliance_info["deviceDescriptionFileName"]
             feature_file_name = appliance_info["featureMappingFileName"]
-            description_file = profile_file.open(description_file_name).read()
-            feature_file = profile_file.open(feature_file_name).read()
 
-            appliance_description = parse_device_description(description_file, feature_file)
-            appliances[appliance_info["haId"]] = {
-                "info": appliance_info,
-                "description": appliance_description,
-            }
+            appliances[appliance_info["haId"]] = ProfileFileEntry(
+                info=appliance_info,
+                device_description=profile_file.open(description_file_name).read(),
+                feature_mapping=profile_file.open(feature_file_name).read(),
+            )
             _LOGGER.debug("Found Appliance %s", appliance_info["vib"])
     return appliances
 
 
-def process_json_file(config_path: Path) -> dict[str, dict[str, dict | DeviceDescription]]:
-    """Process uploaded json file."""
-    with config_path.open() as file:
-        entry_data = json.load(file)
-    return {"config_entry": entry_data["data"]["entry_data"]}
+def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str, ProfileFileEntry]:
+    """Process uploaded profile file."""
+    with process_uploaded_file(hass, uploaded_file_id) as config_path:
+        if config_path.suffix == ".zip":
+            return _process_zip_file(config_path)
+        msg = "Unexpected profile file suffix: %s"
+        raise ValueError(msg, config_path.name)
+
+
+def write_file(storage_dir: Path, name: str, file: bytes) -> None:
+    """Write file."""
+    with (storage_dir / name).open("w") as f:
+        f.write(file)
 
 
 class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
     """HomeConnect Config flow."""
 
+    VERSION = 2
+
     def __init__(self) -> None:
         super().__init__()
         self.errors = {}
         self.data = {}
-        self.appliances: dict[str, dict[str, dict | DeviceDescription]] = {}
+        self.appliances: dict[str, ProfileFileEntry] = {}
         self.reauth_entry: HCConfigEntry = None
         self.global_config: HCConfig | None = None
-
-    def _process_profile_file(
-        self, uploaded_file_id: str
-    ) -> dict[str, dict[str, dict | DeviceDescription]]:
-        with process_uploaded_file(self.hass, uploaded_file_id) as config_path:
-            if config_path.suffix == ".zip":
-                return process_zip_file(config_path)
-            if config_path.suffix == ".json":
-                return process_json_file(config_path)
-            msg = "Unexpected profile file suffix: %s"
-            raise ValueError(msg, config_path.name)
 
     def _set_encryption_keys(self, appliance_info: dict) -> None:
         self.data[CONF_MODE] = appliance_info["connectionType"]
@@ -167,24 +174,9 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             _LOGGER.debug("Got Profile file")
             try:
                 self.appliances = await self.hass.async_add_executor_job(
-                    self._process_profile_file, user_input[CONF_FILE]
+                    process_profile_file, self.hass, user_input[CONF_FILE]
                 )
                 _LOGGER.debug("Found %s Appliances in Profile file", len(self.appliances))
-                if "config_entry" in self.appliances:
-                    _LOGGER.debug("Setting up form config entry")
-                    self.data = self.appliances["config_entry"]
-                    if self.global_config:
-                        if self.global_config.override_host is not None:
-                            # Dev mode host override
-                            self.data[CONF_HOST] = self.global_config.override_host
-                            self.data[CONF_MANUAL_HOST] = True
-                            _LOGGER.info("Host override: %s", self.data[CONF_HOST])
-                        if self.global_config.override_psk is not None:
-                            # Dev mode psk override
-                            self.data[CONF_PSK] = self.global_config.override_psk
-                            self.data[CONF_MODE] = "TLS"
-                            self.data[CONF_AES_IV] = None
-                            _LOGGER.info("PSK override")
 
             except ParserError as exc:
                 return self.async_abort(
@@ -195,18 +187,13 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 return self.async_abort(reason="invalid_profile_file")
 
             if not self.errors:
-                if "config_entry" in self.appliances:
-                    return await self.async_step_test_connection()
-
                 if self.unique_id:
                     return await self.async_step_set_data()
                 return await self.async_step_device_select()
 
-        if (global_config := self.hass.data.get(HC_KEY)) and global_config.setup_from_dump:
-            scheam = CONFIG_FILE_SCHEMA_JSON
-        else:
-            scheam = CONFIG_FILE_SCHEMA
-        return self.async_show_form(step_id="upload", data_schema=scheam, errors=self.errors)
+        return self.async_show_form(
+            step_id="upload", data_schema=CONFIG_FILE_SCHEMA, errors=self.errors
+        )
 
     async def async_step_device_select(
         self, user_input: dict[str, Any] | None = None
@@ -263,12 +250,18 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         self.errors = {}
         event = Event()
 
+        appliance_profile = self.appliances[self.unique_id]
+        device_description = parse_device_description(
+            appliance_profile["device_description"],
+            appliance_profile["feature_mapping"],
+        )
+
         async def connection_callback(state: ConnectionState) -> None:
             if state == ConnectionState.CONNECTED:
                 event.set()
 
         appliance = HomeAppliance(
-            description=deepcopy(self.data[CONF_DESCRIPTION]),
+            description=device_description,
             host=self.data[CONF_HOST],
             app_name="Homeassistant",
             app_id=self.data[CONF_DEVICE_ID],
@@ -279,7 +272,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         try:
             await appliance.connect()
             await wait_for(event.wait(), timeout=20)
-            self.data[CONF_DESCRIPTION]["info"].update(appliance.info)
+            self.data[CONF_APPLIANCE_INFO] = appliance.info
 
         except ClientConnectorSSLError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
@@ -326,6 +319,23 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 self.reauth_entry,
                 data_updates=data,
             )
+        storage_dir = Path(self.hass.config.path(STORAGE_DIR, DOMAIN))
+        try:
+            await self.hass.async_add_executor_job(
+                write_file,
+                storage_dir,
+                self.data[CONF_DESCRIPTION_FILENAME],
+                self.appliances[self.unique_id]["device_description"],
+            )
+            await self.hass.async_add_executor_job(
+                write_file,
+                storage_dir,
+                self.data[CONF_FEATURE_FILENAME],
+                self.appliances[self.unique_id]["feature_mapping"],
+            )
+        except OSError:
+            return self.async_abort(reason="failed_to_write_profile_file")
+
         return self.async_create_entry(title=data[CONF_NAME], data=data)
 
     async def async_step_reauth(self, user_input: dict[str, Any]) -> ConfigFlowResult:
@@ -346,11 +356,12 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         try:
             appliance_info = appliance["info"]
 
-            self.data[CONF_DESCRIPTION] = appliance["description"]
-
             self.data[CONF_DEVICE_ID] = random.randbytes(4).hex()  # noqa: S311
             self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
-
+            self.data[CONF_DESCRIPTION_FILENAME] = (
+                self.data[CONF_DEVICE_ID] + "/DeviceDescription.xml"
+            )
+            self.data[CONF_FEATURE_FILENAME] = self.data[CONF_DEVICE_ID] + "/FeatureMapping.xml"
             self._set_encryption_keys(appliance_info)
         except (KeyError, ValueError):
             return self.async_abort(reason="invalid_profile_file")

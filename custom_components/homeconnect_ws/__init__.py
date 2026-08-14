@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
+from copy import deepcopy
 from dataclasses import dataclass
+from pathlib import Path
 from typing import TYPE_CHECKING, Never
 
 import voluptuous as vol
@@ -15,13 +18,21 @@ from homeassistant.helpers.device_registry import (
     DeviceInfo,
     format_mac,
 )
+from homeassistant.helpers.storage import STORAGE_DIR
 from homeassistant.util.hass_dict import HassKey
-from homeconnect_websocket import CodeResponsError, Entity
+from homeconnect_websocket import (
+    CodeResponsError,
+    DeviceDescription,
+    Entity,
+    parse_device_description,
+)
 
 from .const import (
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
     CONF_DEV_OVERRIDE_HOST,
     CONF_DEV_OVERRIDE_PSK,
-    CONF_DEV_SETUP_FROM_DUMP,
+    CONF_FEATURE_FILENAME,
     DOMAIN,
     PLATFORMS,
 )
@@ -41,7 +52,6 @@ _LOGGER = logging.getLogger(__name__)
 CONFIG_SCHEMA = vol.Schema(
     {
         DOMAIN: {
-            vol.Optional(CONF_DEV_SETUP_FROM_DUMP, default=False): vol.Boolean(),
             vol.Optional(CONF_DEV_OVERRIDE_HOST): str,
             vol.Optional(CONF_DEV_OVERRIDE_PSK): str,
         }
@@ -64,7 +74,6 @@ class HCData:
 class HCConfig:
     """Dataclass for hass.data."""
 
-    setup_from_dump: bool = False
     override_host: str | None = None
     override_psk: str | None = None
 
@@ -78,7 +87,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up integration global config."""
     hass.data.setdefault(DOMAIN, HCConfig())
     if DOMAIN in config:
-        hass.data[HC_KEY].setup_from_dump = config[DOMAIN].get(CONF_DEV_SETUP_FROM_DUMP, False)
         hass.data[HC_KEY].override_host = config[DOMAIN].get(CONF_DEV_OVERRIDE_HOST)
         hass.data[HC_KEY].override_psk = config[DOMAIN].get(CONF_DEV_OVERRIDE_PSK)
 
@@ -168,13 +176,30 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 
 
+def load_description(storage_dir: Path, config_entry: HCConfigEntry) -> DeviceDescription:
+    """Load device description from file."""
+    with (storage_dir / config_entry.data[CONF_DESCRIPTION_FILENAME]).open() as file:
+        device_description_xml = file.read()
+    with (storage_dir / config_entry.data[CONF_FEATURE_FILENAME]).open() as file:
+        feature_mapping_xml = file.read()
+    return parse_device_description(device_description_xml, feature_mapping_xml)
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: HCConfigEntry,
 ) -> bool:
     """Set up this integration using config entry."""
-    _LOGGER.debug("Setting up %s", config_entry.data[CONF_DESCRIPTION]["info"].get("model"))
-    coordinator = HomeConnectCoordinator(hass, config_entry)
+    if config_entry.version == 1:
+        _LOGGER.debug("Setting up %s", config_entry.data[CONF_DESCRIPTION]["info"].get("model"))
+        description = deepcopy(config_entry.data[CONF_DESCRIPTION])
+    else:
+        _LOGGER.debug("Setting up %s", config_entry.data[CONF_APPLIANCE_INFO].get("model"))
+        storage_dir = Path(hass.config.path(STORAGE_DIR, DOMAIN))
+        description = await hass.async_add_executor_job(load_description, storage_dir, config_entry)
+
+    coordinator = HomeConnectCoordinator(hass, config_entry, description)
+
     appliance = coordinator.appliance
     device_info = DeviceInfo(
         hw_version=appliance.info.get("hwVersion"),
@@ -209,8 +234,34 @@ async def async_setup_entry(
 
 async def async_unload_entry(hass: HomeAssistant, entry: HCConfigEntry) -> bool:
     """Unload a config entry."""
-    _LOGGER.debug("Unloading %s", entry.data[CONF_DESCRIPTION]["info"].get("vib"))
+    if entry.version == 1:
+        _LOGGER.debug("Unloading %s", entry.data[CONF_DESCRIPTION]["info"].get("vib"))
+    else:
+        _LOGGER.debug("Unloading %s", entry.data[CONF_APPLIANCE_INFO].get("vib"))
+
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
         await entry.runtime_data.coordinator.close()
     return unload_ok
+
+
+async def async_migrate_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> bool:  # noqa: ARG001
+    """Migrate config entry."""
+    return True
+
+
+async def async_remove_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> None:
+    """Remove a config entry."""
+
+    def remove_files(storage_dir: Path, config_entry: HCConfigEntry) -> None:
+        """Remove profile files."""
+        with contextlib.suppress(FileNotFoundError):
+            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).unlink()
+        with contextlib.suppress(FileNotFoundError):
+            (storage_dir / Path(config_entry.data[CONF_FEATURE_FILENAME])).unlink()
+        with contextlib.suppress(FileNotFoundError, OSError):
+            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).parent.rmdir()
+
+    if config_entry.version >= 2:
+        storage_dir = Path(hass.config.path(STORAGE_DIR, DOMAIN))
+        await hass.async_add_executor_job(remove_files, storage_dir, config_entry)

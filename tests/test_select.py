@@ -14,7 +14,7 @@ from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME, STATE_UNKNOW
 from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
-from .const import MOCK_CONFIG_DATA
+from .const import CONFIG_ENTRIES
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -23,11 +23,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,  # noqa: ARG001
-    patch_entity_description: None,  # noqa: ARG001
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("select.fake_brand_homeappliance_select")
     assert state
@@ -63,13 +63,13 @@ async def test_setup(
 async def test_update(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating entity."""
     entity_id = "select.fake_brand_homeappliance_select"
     entity_id_translated = "select.fake_brand_homeappliance_select_translated"
     entity_id_options = "select.fake_brand_homeappliance_select_options"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Select"].update({"value": 0})
     await hass.async_block_till_done()
@@ -99,13 +99,13 @@ async def test_update(
 async def test_select(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test selecting an option."""
     entity_id = "select.fake_brand_homeappliance_select"
     entity_id_translated = "select.fake_brand_homeappliance_select_translated"
     entity_id_options = "select.fake_brand_homeappliance_select_options"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await hass.services.async_call(
         SELECT_DOMAIN,
@@ -167,11 +167,11 @@ async def test_select(
 async def test_update_program(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating program select entity."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
     await hass.async_block_till_done()
 
@@ -188,11 +188,11 @@ async def test_update_program(
 async def test_select_program(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test selecting an program."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await hass.services.async_call(
         SELECT_DOMAIN,

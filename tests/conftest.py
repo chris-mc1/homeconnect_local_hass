@@ -11,6 +11,7 @@ from zipfile import ZipFile
 import pytest
 from custom_components import homeconnect_ws
 from custom_components.homeconnect_ws import coordinator, entity_descriptions
+from custom_components.homeconnect_ws.config_flow import ProfileFileEntry
 from homeconnect_websocket.testutils import MockAppliance
 
 if TYPE_CHECKING:
@@ -20,10 +21,8 @@ if TYPE_CHECKING:
 from .const import (
     DEVICE_DESCRIPTION,
     ENTITY_DESCRIPTIONS,
-    MOCK_AES_DEVICE_DESCRIPTION,
     MOCK_AES_DEVICE_ID,
     MOCK_AES_DEVICE_INFO,
-    MOCK_TLS_DEVICE_DESCRIPTION,
     MOCK_TLS_DEVICE_ID,
     MOCK_TLS_DEVICE_ID_2,
     MOCK_TLS_DEVICE_INFO,
@@ -33,7 +32,7 @@ pytest_plugins = ["homeconnect_websocket.testutils"]
 
 
 @pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:  # noqa: ARG001
+def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:
     """Enable custom integrations defined in the test dir."""
     return
 
@@ -93,21 +92,24 @@ def mock_process_uploaded_file(
 def mock_process_profile_file() -> Generator[MagicMock]:
     """Mock process profile files."""
     device_description = {
-        MOCK_TLS_DEVICE_ID: {
-            "info": MOCK_TLS_DEVICE_INFO,
-            "description": MOCK_TLS_DEVICE_DESCRIPTION,
-        },
-        MOCK_AES_DEVICE_ID: {
-            "info": MOCK_AES_DEVICE_INFO,
-            "description": MOCK_AES_DEVICE_DESCRIPTION,
-        },
-        MOCK_TLS_DEVICE_ID_2: {
-            "info": MOCK_TLS_DEVICE_INFO,
-            "description": MOCK_TLS_DEVICE_DESCRIPTION,
-        },
+        MOCK_TLS_DEVICE_ID: ProfileFileEntry(
+            info=MOCK_TLS_DEVICE_INFO,
+            device_description=b"TLS_DeviceDescription",
+            feature_mapping=b"TLS_FeatureMapping",
+        ),
+        MOCK_AES_DEVICE_ID: ProfileFileEntry(
+            info=MOCK_AES_DEVICE_INFO,
+            device_description=b"AES_DeviceDescription",
+            feature_mapping=b"AES_FeatureMapping",
+        ),
+        MOCK_TLS_DEVICE_ID_2: ProfileFileEntry(
+            info=MOCK_TLS_DEVICE_INFO,
+            device_description=b"TLS_DeviceDescription",
+            feature_mapping=b"TLS_DeviceDescription",
+        ),
     }
     with patch(
-        "custom_components.homeconnect_ws.config_flow.HomeConnectConfigFlow._process_profile_file",
+        "custom_components.homeconnect_ws.config_flow.process_profile_file",
         return_value=deepcopy(device_description),
     ) as mock_upload:
         yield mock_upload
@@ -130,3 +132,23 @@ def mock_appliance(
     monkeypatch.setattr(coordinator.HomeConnectCoordinator, "connected", True)
 
     return appliance
+
+
+@pytest.fixture
+def mock_write_file() -> Generator[MagicMock]:
+    """Mock write file."""
+    with patch(
+        "custom_components.homeconnect_ws.config_flow.write_file",
+        return_value=None,
+    ) as mock_write_file:
+        yield mock_write_file
+
+
+@pytest.fixture
+def mock_parse_device_description() -> Generator[MagicMock]:
+    """Mock parse_device_description."""
+    with patch(
+        "custom_components.homeconnect_ws.config_flow.parse_device_description",
+        return_value=Mock(),
+    ) as mock_parse_device_description:
+        yield mock_parse_device_description
