@@ -23,8 +23,8 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,  # noqa: ARG001
-    patch_entity_description: None,  # noqa: ARG001
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -63,7 +63,7 @@ async def test_setup(
 async def test_update(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating entity."""
     entity_id = "select.fake_brand_homeappliance_select"
@@ -99,7 +99,7 @@ async def test_update(
 async def test_select(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test selecting an option."""
     entity_id = "select.fake_brand_homeappliance_select"
@@ -167,7 +167,7 @@ async def test_select(
 async def test_update_program(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating program select entity."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"
@@ -188,7 +188,7 @@ async def test_update_program(
 async def test_select_program(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test selecting an program."""
     entity_id = "select.fake_brand_homeappliance_selectedprogram"

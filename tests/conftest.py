@@ -32,7 +32,7 @@ pytest_plugins = ["homeconnect_websocket.testutils"]
 
 
 @pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:  # noqa: ARG001
+def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:
     """Enable custom integrations defined in the test dir."""
     return
 

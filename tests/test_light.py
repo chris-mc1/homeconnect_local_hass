@@ -37,7 +37,7 @@ if TYPE_CHECKING:
 async def test_setup(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -76,7 +76,7 @@ async def test_setup(
 async def test_update_on_off(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test On/Off."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -97,7 +97,7 @@ async def test_update_on_off(
 async def test_on(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Set On/Off."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -126,7 +126,7 @@ async def test_on(
 async def test_update_brightness(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Brightness."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -160,7 +160,7 @@ async def test_update_brightness(
 async def test_set_brightness(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Brightness."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -247,7 +247,7 @@ async def test_set_brightness(
 async def test_update_color_temp(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
@@ -278,7 +278,7 @@ async def test_update_color_temp(
 async def test_set_color_temp(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
@@ -348,7 +348,7 @@ async def test_set_color_temp(
 async def test_set_brightness_color_temp(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Brightness and Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
@@ -413,7 +413,7 @@ async def test_set_brightness_color_temp(
 async def test_update_color_temp_inverted(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Color temp."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -443,7 +443,7 @@ async def test_update_color_temp_inverted(
 async def test_set_color_temp_inverted(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Color temp."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -512,7 +512,7 @@ async def test_set_color_temp_inverted(
 async def test_set_brightness_color_temp_inverted(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test Brightness and Color temp."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -576,7 +576,7 @@ async def test_set_brightness_color_temp_inverted(
 async def test_update_color(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test update RGB."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -602,7 +602,7 @@ async def test_update_color(
 async def test_set_color(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test set RGB."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])

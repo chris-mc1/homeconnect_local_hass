@@ -19,8 +19,8 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,  # noqa: ARG001
-    patch_entity_description: None,  # noqa: ARG001
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
@@ -39,7 +39,7 @@ async def test_setup(
 async def test_start(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test pressing start button."""
     entity_id = "button.fake_brand_homeappliance_activeprogram"
@@ -69,7 +69,7 @@ async def test_start(
 async def test_abort(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test pressing abort button."""
     entity_id = "button.fake_brand_homeappliance_abortprogram"

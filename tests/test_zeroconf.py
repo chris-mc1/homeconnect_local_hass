@@ -57,7 +57,7 @@ MOCK_ZEROCONF_DATA = ZeroconfServiceInfo(
 UPLOADED_FILE = str(uuid4())
 
 
-async def test_zeroconf_init(  # noqa: PLR0913
+async def test_zeroconf_init(
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,

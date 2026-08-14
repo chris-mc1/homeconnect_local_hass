@@ -35,7 +35,7 @@ async def test_reauth(
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_setup_entry: AsyncMock,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a reauthentication flow."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -75,7 +75,7 @@ async def test_reauth(
 
 async def test_reauth_appliance_not_in_profile(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -103,10 +103,10 @@ async def test_reauth_appliance_not_in_profile(
 
 async def test_reauth_auth_failed_ssl_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a reauthentication flow with ClientConnectorSSLError."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -137,10 +137,10 @@ async def test_reauth_auth_failed_ssl_error(
 
 async def test_reauth_auth_failed_binascii_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a reauthentication flow with BinasciiError."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -171,10 +171,10 @@ async def test_reauth_auth_failed_binascii_error(
 
 async def test_reauth_connection_failed_timeout(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a reauthentication flow with TimeoutError."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -208,10 +208,10 @@ async def test_reauth_connection_failed_timeout(
 
 async def test_reauth_connection_failed_connection_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a reauthentication flow with ClientConnectionError."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)

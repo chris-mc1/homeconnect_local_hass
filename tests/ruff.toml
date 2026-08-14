@@ -7,4 +7,7 @@ extend-ignore = [
     "SLF001",  # private-member-access
     "S101",    # assert
     "PLR2004", # magic-value-comparison
+    "PLR0913", # too-many-arguments
+    "PLR0917", # too-many-positional-arguments
+    "ARG001",  # unused-function-argument
 ]

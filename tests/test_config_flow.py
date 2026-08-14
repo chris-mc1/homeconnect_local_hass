@@ -45,7 +45,7 @@ UPLOADED_FILE = str(uuid4())
 
 async def test_user_init(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_setup_entry: AsyncMock,
 ) -> None:
@@ -88,7 +88,7 @@ async def test_user_init(
     mock_setup_entry.assert_not_awaited()
 
 
-async def test_user_tls(  # noqa: PLR0913
+async def test_user_tls(
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
@@ -166,7 +166,7 @@ async def test_user_tls(  # noqa: PLR0913
     mock_setup_entry.assert_awaited_once()
 
 
-async def test_user_aes(  # noqa: PLR0913
+async def test_user_aes(
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
@@ -246,7 +246,7 @@ async def test_user_aes(  # noqa: PLR0913
 
 async def test_user_select_device(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
 ) -> None:
     """Test select device."""
     mock_config = MockConfigEntry(
@@ -285,13 +285,13 @@ async def test_user_select_device(
     hass.config_entries.flow.async_abort(result["flow_id"])
 
 
-async def test_user_select_device_one(  # noqa: PLR0913
+async def test_user_select_device_one(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
-    mock_setup_entry: AsyncMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
+    mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_write_file: MagicMock,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test select device when only one device left to setup."""
     appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
@@ -353,7 +353,7 @@ async def test_user_select_device_one(  # noqa: PLR0913
 
 async def test_user_select_device_ignore(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
 ) -> None:
     """Test select device when one discovered device was ignored."""
     mock_config = MockConfigEntry(
@@ -397,13 +397,13 @@ async def test_user_select_device_ignore(
     hass.config_entries.flow.async_abort(result["flow_id"])
 
 
-async def test_user_set_host(  # noqa: PLR0913
+async def test_user_set_host(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_write_file: MagicMock,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test set host."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -493,10 +493,10 @@ async def test_user_set_host(  # noqa: PLR0913
 
 async def test_user_auth_failed_ssl_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a config flow with ClientConnectorSSLError."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -530,10 +530,10 @@ async def test_user_auth_failed_ssl_error(
 
 async def test_user_auth_failed_binascii_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a config flow with BinasciiError."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -564,10 +564,10 @@ async def test_user_auth_failed_binascii_error(
 
 async def test_user_connection_failed_timeout(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a config flow with TimeoutError."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -600,10 +600,10 @@ async def test_user_connection_failed_timeout(
 
 async def test_user_connection_failed_connection_error(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,  # noqa: ARG001
+    mock_parse_device_description: Mock,
 ) -> None:
     """Test a config flow with ClientConnectionError."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
@@ -718,7 +718,7 @@ async def test_user_invalid_profile_info(
 
 async def test_user_select_all_setup(
     hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,  # noqa: ARG001
+    mock_process_profile_file: MagicMock,
     mock_setup_entry: AsyncMock,
 ) -> None:
     """Test a config flow with all devices setup."""
