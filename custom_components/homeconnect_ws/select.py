@@ -50,17 +50,31 @@ class HCSelect(HCEntity, SelectEntity):
         if entity_description.options:
             self._attr_options = entity_description.options
         elif self._entity.enum:
+            enum_values = self._settable_enum_values()
             self._attr_options = []
             if self.entity_description.has_state_translation:
-                for value in self._entity.enum.values():
+                for value in enum_values:
                     self._attr_options.append(str(value).lower())
             else:
-                for value in self._entity.enum.values():
+                for value in enum_values:
                     self._attr_options.append(str(value))
 
         if self.entity_description.has_state_translation and self._entity.enum:
-            for value in self._entity.enum.values():
+            for value in self._settable_enum_values():
                 self._rev_options[str(value).lower()] = value
+
+    def _settable_enum_values(self) -> list[str]:
+        """Return enum values allowed by the appliance min/max range."""
+        if not self._entity.enum:
+            return []
+        values: list[str] = []
+        for key, enum_value in self._entity.enum.items():
+            if self._entity.min is not None and int(key) < self._entity.min:
+                continue
+            if self._entity.max is not None and int(key) > self._entity.max:
+                continue
+            values.append(enum_value)
+        return values
 
     @property
     def current_option(self) -> str:

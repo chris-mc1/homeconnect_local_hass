@@ -191,6 +191,9 @@
       "switch_refrigerator_door_assistant_freezer": {
         "name": "Freezer Door Assistant"
       },
+      "switch_refrigerator_door_assistant_fridge": {
+        "name": "Fridge Door Assistant"
+      },
       "switch_refrigeration_light_internal": {
         "name": "Internal Light"
       },
@@ -1227,6 +1230,9 @@
           "cooking_oven_program_subsequentmode_keepwarm": "Subsequent Mode: Keep Warm",
           "cooking_oven_program_subsequentmode_leavetorest": "Subsequent Mode: Leave to Rest",
           "cooking_oven_program_subsequentmode_startbaking": "Subsequent Mode: Start Baking",
+          "cooking_common_program_hood_automatic": "Automatic",
+          "cooking_common_program_hood_delayedshutoff": "Delayed shut-off",
+          "cooking_common_program_hood_venting": "Venting",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_auto60": "Wash - Automatic 60",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
@@ -2677,6 +2683,9 @@
           "cooking_oven_program_subsequentmode_keepwarm": "Subsequent Mode: Keep Warm",
           "cooking_oven_program_subsequentmode_leavetorest": "Subsequent Mode: Leave to Rest",
           "cooking_oven_program_subsequentmode_startbaking": "Subsequent Mode: Start Baking",
+          "cooking_common_program_hood_automatic": "Automatic",
+          "cooking_common_program_hood_delayedshutoff": "Delayed shut-off",
+          "cooking_common_program_hood_venting": "Venting",
           "laundrycare_washer_program_automatic30_auto30_auto30": "Wash - Automatic soft/30",
           "laundrycare_washer_program_auto60": "Wash - Automatic 60",
           "laundrycare_washer_program_automatic4060_auto40_auto40": "Wash - Automatic 40-60",
@@ -3329,6 +3338,22 @@
           "highforce": "High"
         }
       },
+      "select_refrigerator_door_assistant_fridge_trigger": {
+        "name": "Fridge Door Assistant trigger",
+        "state": {
+          "push": "Push",
+          "pull": "Pull",
+          "pushpull": "Push/Pull"
+        }
+      },
+      "select_refrigerator_door_assistant_fridge_force": {
+        "name": "Fridge Door Assistant force",
+        "state": {
+          "lowforce": "Low",
+          "middleforce": "Medium",
+          "highforce": "High"
+        }
+      },
       "select_chiller_common_preset": {
         "name": "Chiller preset",
         "state": {
@@ -3360,7 +3385,8 @@
           "fanoff": "Off",
           "fanstage01": "1",
           "fanstage02": "2",
-          "fanstage03": "3"
+          "fanstage03": "3",
+          "fanstage04": "4"
         }
       },
       "select_hob_delaye_shutoff_stage": {
@@ -3369,7 +3395,8 @@
           "fanoff": "Off",
           "fanstage01": "1",
           "fanstage02": "2",
-          "fanstage03": "3"
+          "fanstage03": "3",
+          "fanstage04": "4"
         }
       },
       "select_temperature_unit": {
@@ -3383,8 +3410,8 @@
         "name": "Carbon filter type",
         "state": {
           "none": "None",
-          "fahrenheit": "Basic Carbon filter",
-          "regenerativecarbonfilter": "Regenerative Carbon filter"
+          "basiccarbonfilter": "Basic carbon filter",
+          "regenerativecarbonfilter": "Regenerative carbon filter"
         }
       }
     },
@@ -3465,6 +3492,12 @@
       },
       "number_hood_delayed_shutoff_time": {
         "name": "Delayed Shutoff Time"
+      },
+      "number_refrigerator_door_assistant_freezer_timeout": {
+        "name": "Freezer door assistant timeout"
+      },
+      "number_refrigerator_door_assistant_fridge_timeout": {
+        "name": "Fridge door assistant timeout"
       },
       "number_hood_sensor_sensitivity": {
         "name": "Auto Sensor Sensitivity"
