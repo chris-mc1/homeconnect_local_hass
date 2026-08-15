@@ -27,43 +27,6 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 
-# #region agent log
-def _agent_dbg(hypothesis_id: str, location: str, message: str, data: dict) -> None:
-    """Write one NDJSON debug line for session b70755."""
-    try:
-        import json
-        import time
-        from pathlib import Path
-
-        rec = {
-            "sessionId": "b70755",
-            "hypothesisId": hypothesis_id,
-            "location": location,
-            "message": message,
-            "data": data,
-            "timestamp": int(time.time() * 1000),
-        }
-        line = json.dumps(rec, default=str) + "\n"
-        for path in (
-            Path("/config/.cursor_debug_b70755.ndjson"),
-            Path(
-                "/Users/ntableman/Documents/GitHub/home-assistant/"
-                "homeconnect_local_hass/homeconnect_local_hass/.cursor/debug-b70755.log"
-            ),
-        ):
-            try:
-                path.parent.mkdir(parents=True, exist_ok=True)
-                with path.open("a", encoding="utf-8") as handle:
-                    handle.write(line)
-            except OSError:
-                continue
-    except Exception:  # noqa: BLE001
-        pass
-
-
-# #endregion
-
-
 def create_entities(
     entities_classes: dict[str, type[HCEntity]], runtime_data: HCData
 ) -> set[HCEntity]:

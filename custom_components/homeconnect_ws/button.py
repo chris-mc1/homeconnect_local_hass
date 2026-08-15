@@ -8,7 +8,7 @@ from homeassistant.components.button import ButtonEntity
 from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
-from .helpers import _agent_dbg, create_entities, error_decorator
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -82,55 +82,7 @@ class HCButton(HCEntity, ButtonEntity):
 
     @error_decorator
     async def async_press(self) -> None:
-        # #region agent log
-        _agent_dbg(
-            "H4",
-            "button.py:HCButton.async_press",
-            "press start",
-            {
-                "key": self.entity_description.key,
-                "entity": getattr(self._entity, "name", None),
-                "entity_avail": getattr(self._entity, "available", None),
-                "entity_access": str(getattr(self._entity, "access", None)),
-                "ha_available": self.available,
-                "session_connected": bool(
-                    getattr(self._runtime_data.appliance.session, "connected", False)
-                ),
-                "connection_state": str(
-                    getattr(self._runtime_data.appliance.session, "connection_state", None)
-                ),
-                "operation": getattr(
-                    self._runtime_data.appliance.entities.get("BSH.Common.Status.OperationState"),
-                    "value",
-                    None,
-                ),
-                "remote_start": getattr(
-                    self._runtime_data.appliance.entities.get(
-                        "BSH.Common.Status.RemoteControlStartAllowed"
-                    ),
-                    "value",
-                    None,
-                ),
-            },
-        )
-        # #endregion
-        try:
-            await self._entity.set_value(True)
-        except Exception as exc:
-            # #region agent log
-            _agent_dbg(
-                "H4",
-                "button.py:HCButton.async_press",
-                "press failed",
-                {
-                    "key": self.entity_description.key,
-                    "entity": getattr(self._entity, "name", None),
-                    "error_type": type(exc).__name__,
-                    "error": str(exc),
-                },
-            )
-            # #endregion
-            raise
+        await self._entity.set_value(True)
 
 
 class HCStartButton(HCEntity, ButtonEntity):
