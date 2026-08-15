@@ -115,7 +115,9 @@ def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str
 
 def write_file(storage_dir: Path, name: str, file: bytes) -> None:
     """Write file."""
-    with (storage_dir / name).open("w") as f:
+    path = storage_dir / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("wb") as f:
         f.write(file)
 
 
@@ -333,7 +335,8 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 self.data[CONF_FEATURE_FILENAME],
                 self.appliances[self.unique_id]["feature_mapping"],
             )
-        except OSError:
+        except OSError as exc:
+            _LOGGER.debug("write_file failed: %s", exc)
             return self.async_abort(reason="failed_to_write_profile_file")
 
         return self.async_create_entry(title=data[CONF_NAME], data=data)
