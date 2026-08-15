@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from unittest.mock import MagicMock
 
+from custom_components.homeconnect_ws.button import program_button_is_available
 from homeassistant.components.button import DOMAIN as BUTTON_DOMAIN
 from homeassistant.components.button import SERVICE_PRESS
 from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME
@@ -89,3 +91,54 @@ async def test_abort(
             data={"uid": 300, "value": True},
         )
     )
+
+
+def test_program_button_unavailable_when_idle() -> None:
+    """Abort/pause/resume must not be valid when no program is running."""
+    appliance = MagicMock()
+    appliance.active_program = None
+    operation = MagicMock()
+    operation.value = "Inactive"
+    appliance.entities = {"BSH.Common.Status.OperationState": operation}
+
+    assert program_button_is_available("button_abort_program", appliance) is False
+    assert program_button_is_available("button_pause_program", appliance) is False
+    assert program_button_is_available("button_resume_program", appliance) is False
+    assert program_button_is_available("button_mains_power_off", appliance) is True
+
+
+def test_program_button_available_while_running() -> None:
+    """Abort and pause are valid during Run; resume is not."""
+    appliance = MagicMock()
+    appliance.active_program = object()
+    operation = MagicMock()
+    operation.value = "Run"
+    appliance.entities = {"BSH.Common.Status.OperationState": operation}
+
+    assert program_button_is_available("button_abort_program", appliance) is True
+    assert program_button_is_available("button_pause_program", appliance) is True
+    assert program_button_is_available("button_resume_program", appliance) is False
+
+
+def test_abort_ignores_stale_active_program() -> None:
+    """A leftover active_program must not keep abort available when idle."""
+    appliance = MagicMock()
+    appliance.active_program = object()
+    operation = MagicMock()
+    operation.value = "Inactive"
+    appliance.entities = {"BSH.Common.Status.OperationState": operation}
+
+    assert program_button_is_available("button_abort_program", appliance) is False
+
+
+def test_program_button_available_while_paused() -> None:
+    """Abort and resume are valid during Pause."""
+    appliance = MagicMock()
+    appliance.active_program = object()
+    operation = MagicMock()
+    operation.value = "Pause"
+    appliance.entities = {"BSH.Common.Status.OperationState": operation}
+
+    assert program_button_is_available("button_abort_program", appliance) is True
+    assert program_button_is_available("button_pause_program", appliance) is False
+    assert program_button_is_available("button_resume_program", appliance) is True
