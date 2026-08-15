@@ -7,14 +7,12 @@ import logging
 import random
 import re
 from asyncio import Event, wait_for
-from binascii import Error as BinasciiError
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, TypedDict
 from zipfile import ZipFile
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from aiohttp import ClientConnectionError, ClientConnectorSSLError
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
 from homeassistant.const import (
@@ -33,6 +31,8 @@ from homeassistant.helpers.selector import (
 )
 from homeassistant.helpers.storage import STORAGE_DIR
 from homeconnect_websocket import (
+    AuthenticationError,
+    ConnectionFailedError,
     ConnectionState,
     HomeAppliance,
     ParserError,
@@ -276,16 +276,13 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             await wait_for(event.wait(), timeout=20)
             self.data[CONF_APPLIANCE_INFO] = appliance.info
 
-        except ClientConnectorSSLError as ex:
+        except AuthenticationError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             if self.data[CONF_MODE] == "TLS":
                 self.errors["base"] = "cannot_connect"
             else:
                 return self.async_abort(reason="auth_failed")
-        except BinasciiError as ex:
-            _LOGGER.debug("validate_config failed: %s", ex)
-            return self.async_abort(reason="auth_failed")
-        except (TimeoutError, ClientConnectionError) as ex:
+        except ConnectionFailedError as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             self.errors["base"] = "cannot_connect"
         finally:
