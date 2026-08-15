@@ -45,7 +45,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
-            name=description["info"]["vib"],
+            name=description["info"]["model"],
             config_entry=config_entry,
             always_update=True,
         )
