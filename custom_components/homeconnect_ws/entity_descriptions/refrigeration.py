@@ -4,12 +4,13 @@ from __future__ import annotations
 
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
-from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
     HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
@@ -162,6 +163,74 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_appliance_error",
+            entity="Refrigeration.Common.Event.ApplianceError",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_low_voltage",
+            entity="Refrigeration.Common.Event.LowVoltageHint",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_temperature_alarm_chiller_common",
+            entity="Refrigeration.Common.Event.ChillerCommon.TemperatureAlarm",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_ice_hopper_full",
+            entity="Refrigeration.Common.Status.Dispenser.IceHopperFull",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_water_filter_almost_full",
+            entity="Refrigeration.Common.Event.Dispenser.WaterFilterAlmostFull",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_ice_expired",
+            entity="Refrigeration.Common.Event.Dispenser.IceExpired",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_water_expired",
+            entity="Refrigeration.Common.Event.WaterExpired",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_party_mode_empty_ice_hopper",
+            entity="Refrigeration.Common.Event.Dispenser.PartyModeEmptyIceHopper",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+    ],
+    "button": [
+        HCButtonEntityDescription(
+            key="button_water_filter_reset",
+            entity="Refrigeration.Common.Command.Dispenser.WaterFilterReset",
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "sensor": [
         HCSensorEntityDescription(
@@ -175,6 +244,12 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Refrigeration.Common.Status.TemperatureAmbient",
             device_class=SensorDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_water_filter_saturation",
+            entity="Refrigeration.Common.Status.Dispenser.WaterFilterSaturation",
+            native_unit_of_measurement=PERCENTAGE,
+            state_class=SensorStateClass.MEASUREMENT,
         ),
         HCSensorEntityDescription(
             key="sensor_temperature_memory_freezer",
@@ -308,6 +383,11 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_refrigerator_dispenser_enabled",
             entity="Refrigeration.Common.Setting.Dispenser.Enabled",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_refrigerator_dispenser_party_mode",
+            entity="Refrigeration.Common.Setting.Dispenser.PartyMode",
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(

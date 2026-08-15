@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
@@ -216,3 +218,41 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
     )
 
     appliance = await mock_homeconnect_appliance(description={})
+
+
+TRANSLATION_DOMAINS = {
+    "active_program": "sensor",
+    "binary_sensor": "binary_sensor",
+    "button": "button",
+    "event_sensor": "sensor",
+    "fan": "fan",
+    "light": "light",
+    "number": "number",
+    "program": "select",
+    "select": "select",
+    "sensor": "sensor",
+    "start_button": "button",
+    "switch": "switch",
+    "wifi": "sensor",
+}
+
+
+def test_descriptions_have_english_name() -> None:
+    """Test every entity description resolves to a name in en.json."""
+    translations = json.loads(
+        Path("custom_components/homeconnect_ws/translations/en.json").read_text(encoding="utf-8")
+    )["entity"]
+
+    missing = []
+    for description_type, descriptions in entity_descriptions.get_all_entity_description().items():
+        if description_type == "dynamic":
+            continue
+        domain = TRANSLATION_DOMAINS[description_type]
+        for description in descriptions:
+            if callable(description):
+                continue
+            key = description.translation_key or description.key
+            if key not in translations.get(domain, {}):
+                missing.append(f"{domain}.{key}")
+
+    assert sorted(set(missing)) == []

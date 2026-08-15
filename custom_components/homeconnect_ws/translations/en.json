@@ -189,6 +189,9 @@
       "switch_refrigerator_dispenser_enabled": {
         "name": "Dispenser"
       },
+      "switch_refrigerator_dispenser_party_mode": {
+        "name": "Dispenser Party mode"
+      },
       "switch_refrigerator_door_assistant_freezer": {
         "name": "Freezer Door Assistant"
       },
@@ -390,6 +393,12 @@
       "binary_sensor_idos_unit_defect": {
         "name": "i-DOS Defect"
       },
+      "binary_sensor_idos_open_tray": {
+        "name": "i-DOS Open Tray"
+      },
+      "binary_sensor_release_rinse_hold_pending": {
+        "name": "Release Rinse Hold Pending"
+      },
       "binary_sensor_pump_error": {
         "name": "Pump Error"
       },
@@ -419,6 +428,24 @@
       },
       "binary_sensor_water_filter_full": {
         "name": "Water filter full"
+      },
+      "binary_sensor_water_filter_almost_full": {
+        "name": "Water filter almost full"
+      },
+      "binary_sensor_ice_hopper_full": {
+        "name": "Ice hopper full"
+      },
+      "binary_sensor_ice_expired": {
+        "name": "Ice expired"
+      },
+      "binary_sensor_water_expired": {
+        "name": "Water expired"
+      },
+      "binary_sensor_party_mode_empty_ice_hopper": {
+        "name": "Party mode ice hopper empty"
+      },
+      "binary_sensor_temperature_alarm_chiller_common": {
+        "name": "Temperature alarm Chiller"
       },
       "binary_sensor_freezer_appliance_error": {
         "name": "Appliance Error"
@@ -1566,6 +1593,9 @@
       },
       "sensor_laundry_load_recommendation": {
         "name": "Load Recommendation"
+      },
+      "sensor_water_filter_saturation": {
+        "name": "Water filter saturation"
       },
       "sensor_temperature_memory_freezer": {
         "name": "Memory Temperature Freezer"
@@ -3387,6 +3417,9 @@
           "fanstage03": "3"
         }
       },
+      "select_hob_ventilation": {
+        "name": "Ventilation"
+      },
       "select_hob_delaye_shutoff_stage": {
         "name": "Delayed ShutOff Stage",
         "state": {
@@ -3439,6 +3472,9 @@
       },
       "button_hood_regenerative_carbon_filter_lifetime_reset": {
         "name": "Regenerative Carbon filter lifetime reset"
+      },
+      "button_water_filter_reset": {
+        "name": "Water filter reset"
       }
     },
     "number": {
@@ -3495,6 +3531,9 @@
       },
       "number_start_in": {
         "name": "Start in"
+      },
+      "number_finish_in": {
+        "name": "Finish in"
       },
       "number_setting_alarm_clock": {
         "name": "Alarm Clock"
