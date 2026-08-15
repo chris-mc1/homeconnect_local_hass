@@ -211,6 +211,24 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
 DEVICE_DESCRIPTION = DeviceDescription(
     status=[
         EntityDescription(
+            uid=552,
+            name="BSH.Common.Status.OperationState",
+            available=True,
+            access=Access.READ,
+            enumeration={
+                "0": "Inactive",
+                "1": "Ready",
+                "2": "DelayedStart",
+                "3": "Run",
+                "4": "Pause",
+                "5": "ActionRequired",
+                "6": "Finished",
+                "7": "Error",
+                "8": "Aborting",
+            },
+            protocolType="Integer",
+        ),
+        EntityDescription(
             uid=100,
             name="Test.BinarySensor",
             available=True,
