@@ -69,7 +69,9 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         await self.appliance.close()
 
     async def _async_setup(self) -> None:
-        self.config_entry.async_create_task(self.hass, self._connect())
+        self.config_entry.async_create_background_task(
+            self.hass, self._connect(), f"homeconnect_ws_{self.name}"
+        )
 
     async def _connect(self) -> None:
         self.logger.debug("Connecting to %s", self.appliance.info.get("vib"))
