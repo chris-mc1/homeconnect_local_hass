@@ -562,6 +562,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Hood.Setting.NoiseReduction",
             device_class=SwitchDeviceClass.SWITCH,
         ),
+        HCSwitchEntityDescription(
+            key="switch_hob_energy_consumption_indication",
+            entity="Cooking.Hob.Setting.EnergyConsumptionIndication",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            value_mapping=("IndicationOn", "IndicationOff"),
+        ),
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
     "fan": [generate_hood_fan],

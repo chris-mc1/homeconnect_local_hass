@@ -212,6 +212,9 @@
       },
       "switch_pretreatment": {
         "name": "Pre-Treatment"
+      },
+      "switch_hob_energy_consumption_indication": {
+        "name": "Energy Consumption indication"
       }
     },
     "binary_sensor": {
