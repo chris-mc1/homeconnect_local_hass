@@ -1599,6 +1599,14 @@
         "name": "Estimated total program time"
       },
       "sensor_oven_water_tank": {
+        "name": "Water Tank",
+        "state": {
+          "ok": "OK",
+          "empty": "Empty",
+          "unplugged": "Unplugged"
+        }
+      },
+      "sensor_oven_water_tank_group": {
         "name": "Water Tank{group_name}",
         "state": {
           "ok": "OK",
@@ -1608,6 +1616,9 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Current Temperature"
+      },
+      "sensor_oven_current_temperature_group": {
+        "name": "Current Temperature{group_name}"
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Current Meatprobe Temperature"
@@ -1625,7 +1636,7 @@
         "name": "Carbon Filter Saturation"
       },
       "sensor_hob_zone_state": {
-        "name": "Zone {group_name} State",
+        "name": "Zone{group_name} State",
         "state": {
           "notselectable": "Not Selectable",
           "off": "Off",
@@ -1634,7 +1645,7 @@
         }
       },
       "sensor_hob_zone_operationstate": {
-        "name": "Zone {group_name} Operation State",
+        "name": "Zone{group_name} Operation State",
         "state": {
           "inactive": "Inactive",
           "ready": "Ready",
@@ -1648,7 +1659,7 @@
         }
       },
       "sensor_hob_zone_power_level": {
-        "name": "Zone {group_name} Power Level",
+        "name": "Zone{group_name} Power Level",
         "state": {
           "off": "Off",
           "keepwarm": "KeepWarm",
@@ -1674,7 +1685,7 @@
         }
       },
       "sensor_hob_zone_frying_sensor_level": {
-        "name": "Zone {group_name} Frying Sensor level",
+        "name": "Zone{group_name} Frying Sensor level",
         "state": {
           "off": "Off",
           "70dc": "70 °C",
@@ -1691,22 +1702,22 @@
         }
       },
       "sensor_hob_zone_current_temperature": {
-        "name": "Zone {group_name} Current Temperature"
+        "name": "Zone{group_name} Current Temperature"
       },
       "sensor_hob_zone_heatup_progress": {
-        "name": "Zone {group_name} Heatup Progress"
+        "name": "Zone{group_name} Heatup Progress"
       },
       "sensor_hob_zone_duration": {
-        "name": "Zone {group_name} Duration"
+        "name": "Zone{group_name} Duration"
       },
       "sensor_hob_zone_elapsed_program_time": {
-        "name": "Zone {group_name} Elapsed Program Time"
+        "name": "Zone{group_name} Elapsed Program Time"
       },
       "sensor_hob_zone_remaining_program_time": {
-        "name": "Zone {group_name} Remaining Program Time"
+        "name": "Zone{group_name} Remaining Program Time"
       },
       "sensor_hob_zone_program_progress": {
-        "name": "Zone {group_name} Program Progress"
+        "name": "Zone{group_name} Program Progress"
       },
       "sensor_count_ristretto_espresso": {
         "name": "Ristretto Espresso count"
@@ -3510,6 +3521,9 @@
       },
       "number_setting_alarm_clock": {
         "name": "Alarm Clock"
+      },
+      "number_setting_alarm_clock_groupe": {
+        "name": "Alarm Clock{group_name}"
       }
     },
     "light": {

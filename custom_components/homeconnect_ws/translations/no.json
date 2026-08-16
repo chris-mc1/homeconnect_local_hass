@@ -790,6 +790,14 @@
         "name": "Estimert total programtid"
       },
       "sensor_oven_water_tank": {
+        "name": "Vanntank",
+        "state": {
+          "ok": "OK",
+          "empty": "Tom",
+          "unplugged": "Ikke koblet til"
+        }
+      },
+      "sensor_oven_water_tank_group": {
         "name": "Vanntank{group_name}",
         "state": {
           "ok": "OK",
@@ -799,6 +807,9 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Gjeldende temperatur"
+      },
+      "sensor_oven_current_temperature_group": {
+        "name": "Gjeldende temperatur{group_name}"
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Gjeldende temperatur Kjøtttermometer"
@@ -816,7 +827,7 @@
         "name": "Kullfiltersmetning"
       },
       "sensor_hob_zone_state": {
-        "name": "Sone {group_name} tilstand",
+        "name": "Sone{group_name} tilstand",
         "state": {
           "notselectable": "Ikke valgbar",
           "off": "Av",
@@ -825,7 +836,7 @@
         }
       },
       "sensor_hob_zone_operationstate": {
-        "name": "Sone {group_name} driftstilstand",
+        "name": "Sone{group_name} driftstilstand",
         "state": {
           "inactive": "Inaktiv",
           "ready": "Klar",
@@ -839,7 +850,7 @@
         }
       },
       "sensor_hob_zone_power_level": {
-        "name": "Sone {group_name} effektnivå",
+        "name": "Sone{group_name} effektnivå",
         "state": {
           "off": "Av",
           "keepwarm": "Hold varmt",
@@ -865,7 +876,7 @@
         }
       },
       "sensor_hob_zone_frying_sensor_level": {
-        "name": "Sone {group_name} stekesensornivå",
+        "name": "Sone{group_name} stekesensornivå",
         "state": {
           "off": "Av",
           "70dc": "70 °C",
@@ -882,22 +893,22 @@
         }
       },
       "sensor_hob_zone_current_temperature": {
-        "name": "Sone {group_name} gjeldende temperatur"
+        "name": "Sone{group_name} gjeldende temperatur"
       },
       "sensor_hob_zone_heatup_progress": {
-        "name": "Sone {group_name} oppvarmingsfremgang"
+        "name": "Sone{group_name} oppvarmingsfremgang"
       },
       "sensor_hob_zone_duration": {
-        "name": "Sone {group_name} varighet"
+        "name": "Sone{group_name} varighet"
       },
       "sensor_hob_zone_elapsed_program_time": {
-        "name": "Sone {group_name} forløpt programtid"
+        "name": "Sone{group_name} forløpt programtid"
       },
       "sensor_hob_zone_remaining_program_time": {
-        "name": "Sone {group_name} gjenværende programtid"
+        "name": "Sone{group_name} gjenværende programtid"
       },
       "sensor_hob_zone_program_progress": {
-        "name": "Sone {group_name} programfremgang"
+        "name": "Sone{group_name} programfremgang"
       },
       "sensor_count_ristretto_espresso": {
         "name": "Ristretto Espresso-teller"
