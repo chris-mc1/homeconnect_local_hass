@@ -451,9 +451,10 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(
-            key="switch_laundry_speed_perfect",
+            key="switch_laundry_common_speed_perfect",
             entity="LaundryCare.Common.Option.SpeedPerfect",
             device_class=SwitchDeviceClass.SWITCH,
+            translation_key="switch_laundry_speed_perfect",
         ),
         HCSwitchEntityDescription(
             key="switch_laundry_low_temperature_hygiene",
