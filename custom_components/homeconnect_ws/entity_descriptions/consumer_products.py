@@ -40,7 +40,6 @@ CONSUMER_PRODUCTS_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 "ConsumerProducts.CoffeeMaker.Event.WaterTankNotInserted",
             ],
             device_class=SensorDeviceClass.ENUM,
-            has_state_translation=True,
             options=["empty", "nearly_empty", "not_inserted", "full"],
         ),
         HCSensorEntityDescription(
@@ -50,7 +49,6 @@ CONSUMER_PRODUCTS_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
                 "ConsumerProducts.CoffeeMaker.Event.DripTrayNotInserted",
             ],
             device_class=SensorDeviceClass.ENUM,
-            has_state_translation=True,
             options=["full", "not_inserted", "ok"],
         ),
     ],
