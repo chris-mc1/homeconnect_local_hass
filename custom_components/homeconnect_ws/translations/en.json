@@ -1803,6 +1803,9 @@
           "poor": "Poor",
           "filled": "Filled"
         }
+      },
+      "sensor_machinecare_remaining_runs": {
+        "name": "MachineCare remaining runs"
       }
     },
     "select": {
