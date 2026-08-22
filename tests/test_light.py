@@ -465,7 +465,7 @@ async def test_set_color_temp_inverted(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data=[{"uid": 110, "value": 0}],
+            data=[{"uid": 113, "value": 0}, {"uid": 110, "value": 0}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -484,7 +484,7 @@ async def test_set_color_temp_inverted(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data=[{"uid": 110, "value": 100}],
+            data=[{"uid": 113, "value": 0}, {"uid": 110, "value": 100}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -503,7 +503,7 @@ async def test_set_color_temp_inverted(
         Message(
             resource="/ro/values",
             action=Action.POST,
-            data=[{"uid": 110, "value": 50}],
+            data=[{"uid": 113, "value": 0}, {"uid": 110, "value": 50}],
         )
     )
     mock_appliance.session.send_sync.reset_mock()
@@ -538,6 +538,7 @@ async def test_set_brightness_color_temp_inverted(
             action=Action.POST,
             data=[
                 {"uid": 109, "value": 100},
+                {"uid": 113, "value": 0},
                 {"uid": 110, "value": 0},
                 {"uid": 108, "value": True},
             ],
@@ -567,6 +568,7 @@ async def test_set_brightness_color_temp_inverted(
             action=Action.POST,
             data=[
                 {"uid": 109, "value": 2},
+                {"uid": 113, "value": 0},
                 {"uid": 110, "value": 100},
             ],
         )
