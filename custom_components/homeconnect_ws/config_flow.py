@@ -282,7 +282,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
                 self.errors["base"] = "cannot_connect"
             else:
                 return self.async_abort(reason="auth_failed")
-        except ConnectionFailedError as ex:
+        except (ConnectionFailedError, TimeoutError) as ex:
             _LOGGER.debug("validate_config failed: %s", ex)
             self.errors["base"] = "cannot_connect"
         finally:

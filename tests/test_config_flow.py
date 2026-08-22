@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-from binascii import Error as BinasciiError
 from typing import TYPE_CHECKING
 from unittest.mock import ANY, AsyncMock, MagicMock, Mock
 from uuid import uuid4
 
-from aiohttp import ClientConnectionError, ClientConnectorSSLError
 from custom_components.homeconnect_ws import config_flow
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
@@ -23,7 +21,7 @@ from homeassistant.config_entries import SOURCE_IGNORE, SOURCE_USER
 from homeassistant.const import CONF_DEVICE, CONF_DEVICE_ID, CONF_HOST, CONF_NAME
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers.selector import SelectOptionDict
-from homeconnect_websocket import ParserError
+from homeconnect_websocket import AuthenticationError, ConnectionFailedError, ParserError
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import MockAppliance
@@ -408,7 +406,7 @@ async def test_user_set_host(
     """Test set host."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
     monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = ClientConnectionError()
+    appliance._connect.side_effect = ConnectionFailedError()
 
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
@@ -502,7 +500,7 @@ async def test_user_auth_failed_ssl_error(
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
     monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
 
-    appliance._connect.side_effect = ClientConnectorSSLError(MagicMock(), MagicMock())
+    appliance._connect.side_effect = AuthenticationError()
 
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
     result = await hass.config_entries.flow.async_configure(
@@ -525,40 +523,6 @@ async def test_user_auth_failed_ssl_error(
 
     appliance._close.assert_awaited_once()
     hass.config_entries.flow.async_abort(result["flow_id"])
-    mock_setup_entry.assert_not_awaited()
-
-
-async def test_user_auth_failed_binascii_error(
-    hass: HomeAssistant,
-    mock_process_profile_file: MagicMock,
-    mock_setup_entry: AsyncMock,
-    monkeypatch: pytest.MonkeyPatch,
-    mock_parse_device_description: Mock,
-) -> None:
-    """Test a config flow with BinasciiError."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = BinasciiError()
-
-    result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        user_input={
-            CONF_FILE: UPLOADED_FILE,
-        },
-    )
-
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        user_input={
-            CONF_DEVICE: MOCK_TLS_DEVICE_ID,
-        },
-    )
-
-    assert result["type"] is FlowResultType.ABORT
-    assert result["reason"] == "auth_failed"
-
-    appliance._close.assert_awaited_once()
     mock_setup_entry.assert_not_awaited()
 
 
@@ -608,7 +572,7 @@ async def test_user_connection_failed_connection_error(
     """Test a config flow with ClientConnectionError."""
     appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
     monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = ClientConnectionError()
+    appliance._connect.side_effect = ConnectionFailedError()
 
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
     result = await hass.config_entries.flow.async_configure(

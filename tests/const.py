@@ -42,6 +42,7 @@ MOCK_APPLIANCE_INFO = {
     "swVersion": "3.3",
     "mac": "78-43-F2-23-C8-D7",
     "serialNumber": "Fake_serialNumber",
+    "model": "Fake_vib",
 }
 
 MOCK_TLS_DEVICE_ID = "010203040506070809"
