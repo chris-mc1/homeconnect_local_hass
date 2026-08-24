@@ -17,7 +17,7 @@ dev = [
     { include-group = "test" },
     "colorlog==6.10.1",
     "homeassistant==2026.8.1",
-    "prek==0.4.12",
+    "prek==0.4.14",
 ]
 lint = ["ruff==0.16.2"]
 test = ["pytest-homeassistant-custom-component"]
