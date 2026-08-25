@@ -1070,16 +1070,16 @@ wheels = [
 
 [[package]]
 name = "homeconnect-websocket"
-version = "1.5.3"
+version = "1.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
     { name = "pycryptodome" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1c/73/cf599fe17b3abd6549335c0cbbbdd5ca764b8aa71b8557bde37bf5fdc853/homeconnect_websocket-1.5.3.tar.gz", hash = "sha256:109d659587be3d2a9be1d0b6d43324ee6d42f4dc712bb70cdeda0a24664066ac", size = 30697, upload-time = "2026-03-21T19:52:42.742Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/1c/07644136d9d7db5c47ff06f2637b930479074b1d2d89c5db3a76458b56be/homeconnect_websocket-1.5.4.tar.gz", hash = "sha256:34174355c20327e0173c6db7057e4a9e0939e0c45e3d537f2e19cf389f78f223", size = 31006, upload-time = "2026-08-24T19:16:50.122Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/38/16940c9c342a8bd0978a82ed2200b9f181fc5509f66f4ffa1647d4198b14/homeconnect_websocket-1.5.3-py3-none-any.whl", hash = "sha256:379c99f79851b1c8e6b47ee519b3da66b2f1034971a860d336e41ec9398adb64", size = 28076, upload-time = "2026-03-21T19:52:40.394Z" },
+    { url = "https://files.pythonhosted.org/packages/3b/dd/9ce23057a2721de96f4e69415af976bd9fba1bc267a75e2356cbca633f39/homeconnect_websocket-1.5.4-py3-none-any.whl", hash = "sha256:ac5e599f66537458b4d92c1dcc85382ce757e60d884e545be56617e6439a25a1", size = 28093, upload-time = "2026-08-24T19:16:48.858Z" },
 ]
 
 [[package]]
@@ -1106,7 +1106,7 @@ test = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "homeconnect-websocket", specifier = "==1.5.3" }]
+requires-dist = [{ name = "homeconnect-websocket", specifier = "==1.5.4" }]
 
 [package.metadata.requires-dev]
 dev = [
