@@ -11,6 +11,7 @@ from homeassistant.components.light import (
     ATTR_COLOR_TEMP_KELVIN,
     ATTR_RGB_COLOR,
     ATTR_SUPPORTED_COLOR_MODES,
+    SERVICE_TURN_OFF,
     SERVICE_TURN_ON,
     ColorMode,
 )
@@ -99,7 +100,7 @@ async def test_on(
     mock_appliance: MockAppliance,
     patch_entity_description: None,
 ) -> None:
-    """Test Set On/Off."""
+    """Test Set On."""
     assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": False})
     await hass.async_block_till_done()
@@ -120,7 +121,34 @@ async def test_on(
             data=[{"uid": 108, "value": True}],
         )
     )
-    mock_appliance.session.send_sync.reset_mock()
+
+
+async def test_off(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test Set Off."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await mock_appliance.entities["Test.Lighting"].update({"value": True})
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_OFF,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_1",
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data={"uid": 108, "value": False},
+        )
+    )
 
 
 async def test_update_brightness(
