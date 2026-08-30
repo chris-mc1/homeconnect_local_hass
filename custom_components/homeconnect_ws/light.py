@@ -24,7 +24,7 @@ from homeconnect_websocket.message import Action
 from homeconnect_websocket.message import Message as HC_Message
 
 from .entity import HCEntity
-from .helpers import create_entities, entity_is_available, error_decorator
+from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -105,22 +105,9 @@ class HCLight(HCEntity, LightEntity):
             self._attr_supported_color_modes = {ColorMode.ONOFF}
             self._attr_color_mode = ColorMode.ONOFF
 
-    @property
-    def available(self) -> bool:
-        available = super().available
-        if self._brightness_entity:
-            available &= entity_is_available(
-                self._brightness_entity, self.entity_description.available_access
-            )
-        if self._color_temperature_entity:
-            available &= entity_is_available(
-                self._color_temperature_entity, self.entity_description.available_access
-            )
-        if self._color_entity:
-            available &= entity_is_available(
-                self._color_entity, self.entity_description.available_access
-            )
-        return available
+    # Availability deliberately follows the power entity alone. Appliances
+    # mark attribute entities such as brightness unavailable while the light
+    # is off, and losing an attribute must not remove the on/off control.
 
     @property
     def is_on(self) -> bool | None:
@@ -128,16 +115,19 @@ class HCLight(HCEntity, LightEntity):
 
     @property
     def brightness(self) -> int | None:
-        if self._color_entity is not None:
+        if self._color_entity is not None and self._color_entity.value is not None:
             rgb = rgb_hex_to_rgb_list(self._color_entity.value.strip("#"))
             return max(rgb)
-        if self._brightness_entity is not None:
+        if self._brightness_entity is not None and self._brightness_entity.value is not None:
             return value_to_brightness((1, 100), self._brightness_entity.value)
         return None
 
     @property
     def color_temp_kelvin(self) -> int | None:
-        if self._color_temperature_entity is not None:
+        if (
+            self._color_temperature_entity is not None
+            and self._color_temperature_entity.value is not None
+        ):
             if self._color_temp_inverted:
                 return scale_ranged_value_to_int_range(
                     (101, 0),
@@ -154,7 +144,7 @@ class HCLight(HCEntity, LightEntity):
 
     @property
     def rgb_color(self) -> tuple[int, int, int] | None:
-        if self._color_entity is not None:
+        if self._color_entity is not None and self._color_entity.value is not None:
             rgb = rgb_hex_to_rgb_list(self._color_entity.value.strip("#"))
             return match_max_scale((255,), rgb)
         return None
