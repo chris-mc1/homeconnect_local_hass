@@ -531,6 +531,18 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        HCSelectEntityDescription(
+            key="select_hood_light_startup",
+            entity="Cooking.Hood.Setting.WorkingLightStartupSetting",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hood_light_shutdown",
+            entity="Cooking.Hood.Setting.WorkingLightShutdownSetting",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(

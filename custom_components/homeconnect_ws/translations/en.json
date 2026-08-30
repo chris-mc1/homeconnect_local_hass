@@ -3436,6 +3436,20 @@
           "basiccarbonfilter": "Basic Carbon filter",
           "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
+      },
+      "select_hood_light_startup": {
+        "name": "Light startup setting",
+        "state": {
+          "TurnOnLight": "Turn on",
+          "KeepLightOff": "Keep off"
+        }
+      },
+      "select_hood_light_shutdown": {
+        "name": "Light shutdown setting",
+        "state": {
+          "TurnOffLight": "Turn off",
+          "KeepLightOn": "Keep on"
+        }
       }
     },
     "button": {
