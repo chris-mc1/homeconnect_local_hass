@@ -19,6 +19,6 @@ jobs:
       - run: |
           cd ${{ github.workspace }}/custom_components/homeconnect_ws
           zip homeconnect_ws.zip -r ./
-      - uses: softprops/action-gh-release@v3.0.2
+      - uses: softprops/action-gh-release@v3.0.3
         with:
           files: ${{ github.workspace }}/custom_components/homeconnect_ws/homeconnect_ws.zip
