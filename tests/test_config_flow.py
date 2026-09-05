@@ -37,6 +37,8 @@ from .const import (
 from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import pytest
     from homeassistant.core import HomeAssistant
 
@@ -775,3 +777,15 @@ async def test_process_profile(
     }
 
     mock_process_uploaded_file.assert_called_with(hass, UPLOADED_FILE)
+
+
+async def test_write_file(tmp_path: Path) -> None:
+    """Test write_file writes bytes and creates the missing storage directory."""
+    storage_dir = tmp_path / "homeconnect_ws"
+    name = f"{MOCK_TLS_DEVICE_ID}/DeviceDescription.xml"
+
+    assert not storage_dir.exists()
+
+    config_flow.write_file(storage_dir, name, b"TLS_DeviceDescription")
+
+    assert (storage_dir / name).read_bytes() == b"TLS_DeviceDescription"

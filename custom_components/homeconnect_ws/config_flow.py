@@ -115,7 +115,9 @@ def process_profile_file(hass: HomeAssistant, uploaded_file_id: str) -> dict[str
 
 def write_file(storage_dir: Path, name: str, file: bytes) -> None:
     """Write file."""
-    with (storage_dir / name).open("w") as f:
+    file_path = storage_dir / name
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    with file_path.open("wb") as f:
         f.write(file)
 
 
