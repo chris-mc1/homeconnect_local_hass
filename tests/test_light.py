@@ -740,3 +740,60 @@ async def test_set_color(
         )
     )
     mock_appliance.session.send_sync.reset_mock()
+
+
+async def test_available_when_brightness_unavailable(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test the light stays controllable when only brightness goes unavailable."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await mock_appliance.entities["Test.Lighting"].update({"value": False})
+    await hass.async_block_till_done()
+
+    # Appliances mark brightness unavailable while the light is off; the light
+    # itself must stay available so it can be switched back on.
+    await mock_appliance.entities["Test.LightingBrightness"].update({"available": False})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_2")
+    assert state
+    assert state.state == STATE_OFF
+
+
+async def test_turn_on_when_brightness_has_no_value(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test turning on while the appliance reports no brightness value."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    # The appliance drops the brightness value while the light is off. The
+    # entity cannot be updated to None, so clear it the way a never-received
+    # value leaves it.
+    await mock_appliance.entities["Test.Lighting"].update({"value": False})
+    mock_appliance.entities["Test.LightingBrightness"]._value = None
+    await hass.async_block_till_done()
+
+    state = hass.states.get("light.fake_brand_homeappliance_light_2")
+    assert state
+    assert state.attributes[ATTR_BRIGHTNESS] is None
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {
+            ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_2",
+            ATTR_BRIGHTNESS_PCT: 100,
+        },
+        blocking=True,
+    )
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data=[{"uid": 109, "value": 100}, {"uid": 108, "value": True}],
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()

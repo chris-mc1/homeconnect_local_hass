@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
-from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature
 
 from .descriptions_definitions import (
     HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
     HCLightEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
@@ -17,6 +20,49 @@ from .descriptions_definitions import (
     HCSwitchEntityDescription,
     _EntityDescriptionsDefinitionsType,
 )
+
+if TYPE_CHECKING:
+    from homeconnect_websocket import HomeAppliance
+
+
+def generate_internal_light(appliance: HomeAppliance) -> HCLightEntityDescription | None:
+    """Get internal light description."""
+    if "Refrigeration.Common.Setting.Light.Internal.Power" not in appliance.entities:
+        return None
+
+    if "Refrigeration.Common.Setting.Light.Internal.Brightness" in appliance.entities:
+        return HCLightEntityDescription(
+            key="light_internal",
+            entity="Refrigeration.Common.Setting.Light.Internal.Power",
+            brightness_entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
+        )
+
+    return HCLightEntityDescription(
+        key="light_internal",
+        entity="Refrigeration.Common.Setting.Light.Internal.Power",
+    )
+
+
+def generate_internal_light_brightness(
+    appliance: HomeAppliance,
+) -> HCNumberEntityDescription | None:
+    """Get internal light brightness description."""
+    if "Refrigeration.Common.Setting.Light.Internal.Brightness" not in appliance.entities:
+        return None
+
+    # The light entity already exposes brightness, so this would be a
+    # second control for the same setting.
+    owned_by_light = "Refrigeration.Common.Setting.Light.Internal.Power" in appliance.entities
+
+    return HCNumberEntityDescription(
+        key="number_light_internal_brightness",
+        entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
+        native_unit_of_measurement=PERCENTAGE,
+        mode=NumberMode.AUTO,
+        step=1,
+        entity_registry_enabled_default=not owned_by_light,
+    )
+
 
 REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "binary_sensor": [
@@ -162,6 +208,74 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_appliance_error",
+            entity="Refrigeration.Common.Event.ApplianceError",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_freezer_low_voltage",
+            entity="Refrigeration.Common.Event.LowVoltageHint",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_temperature_alarm_chiller_common",
+            entity="Refrigeration.Common.Event.ChillerCommon.TemperatureAlarm",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_ice_hopper_full",
+            entity="Refrigeration.Common.Status.Dispenser.IceHopperFull",
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_water_filter_almost_full",
+            entity="Refrigeration.Common.Event.Dispenser.WaterFilterAlmostFull",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_ice_expired",
+            entity="Refrigeration.Common.Event.Dispenser.IceExpired",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_water_expired",
+            entity="Refrigeration.Common.Event.WaterExpired",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_party_mode_empty_ice_hopper",
+            entity="Refrigeration.Common.Event.Dispenser.PartyModeEmptyIceHopper",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+    ],
+    "button": [
+        HCButtonEntityDescription(
+            key="button_water_filter_reset",
+            entity="Refrigeration.Common.Command.Dispenser.WaterFilterReset",
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "sensor": [
         HCSensorEntityDescription(
@@ -175,6 +289,12 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Refrigeration.Common.Status.TemperatureAmbient",
             device_class=SensorDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_water_filter_saturation",
+            entity="Refrigeration.Common.Status.Dispenser.WaterFilterSaturation",
+            native_unit_of_measurement=PERCENTAGE,
+            state_class=SensorStateClass.MEASUREMENT,
         ),
         HCSensorEntityDescription(
             key="sensor_temperature_memory_freezer",
@@ -256,13 +376,7 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             mode=NumberMode.AUTO,
             step=1,
         ),
-        HCNumberEntityDescription(
-            key="number_light_internal_brightness",
-            entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
-            native_unit_of_measurement=PERCENTAGE,
-            mode=NumberMode.AUTO,
-            step=1,
-        ),
+        generate_internal_light_brightness,
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -308,6 +422,11 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_refrigerator_dispenser_enabled",
             entity="Refrigeration.Common.Setting.Dispenser.Enabled",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_refrigerator_dispenser_party_mode",
+            entity="Refrigeration.Common.Setting.Dispenser.PartyMode",
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(
@@ -389,10 +508,7 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
     ],
     "light": [
-        HCLightEntityDescription(
-            key="light_internal",
-            entity="Refrigeration.Common.Setting.Light.Internal.Power",
-        ),
+        generate_internal_light,
         HCLightEntityDescription(
             key="light_logo",
             entity="Refrigeration.Common.Setting.Light.Logo.Power",
