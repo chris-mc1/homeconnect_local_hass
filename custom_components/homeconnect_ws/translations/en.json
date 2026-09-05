@@ -3473,15 +3473,15 @@
       "select_hood_light_startup": {
         "name": "Light startup setting",
         "state": {
-          "TurnOnLight": "Turn on",
-          "KeepLightOff": "Keep off"
+          "turnonlight": "Turn on",
+          "keeplightoff": "Keep off"
         }
       },
       "select_hood_light_shutdown": {
         "name": "Light shutdown setting",
         "state": {
-          "TurnOffLight": "Turn off",
-          "KeepLightOn": "Keep on"
+          "turnofflight": "Turn off",
+          "keeplighton": "Keep on"
         }
       }
     },
