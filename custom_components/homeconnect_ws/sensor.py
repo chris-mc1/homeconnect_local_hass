@@ -54,7 +54,7 @@ class HCSensor(HCEntity, SensorEntity):
     ) -> None:
         super().__init__(entity_description, runtime_data)
 
-        if self._entity.enum:
+        if self._entity is not None and self._entity.enum:
             if self.entity_description.has_state_translation:
                 self._attr_options = [str(value).lower() for value in self._entity.enum.values()]
             else:

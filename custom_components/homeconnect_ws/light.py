@@ -55,7 +55,7 @@ class HCLight(HCEntity, LightEntity):
     _color_temperature_entity: HcEntity | None = None
     _color_entity: HcEntity | None = None
     _color_mode_entity: HcEntity | None = None
-    _color_temp_inverted: bool = False
+    _color_temp_presets_entity: HcEntity | None = None
 
     def __init__(
         self,
@@ -74,8 +74,8 @@ class HCLight(HCEntity, LightEntity):
                 entity_description.color_temperature_entity
             ]
             self._entities.append(self._color_temperature_entity)
-            self._color_temp_inverted = (
-                "Cooking.Hood.Setting.ColorTemperature" in self._runtime_data.appliance.entities
+            self._color_temp_presets_entity = self._runtime_data.appliance.entities.get(
+                "Cooking.Hood.Setting.ColorTemperature"
             )
 
         if entity_description.color_entity is not None:
@@ -128,7 +128,7 @@ class HCLight(HCEntity, LightEntity):
             self._color_temperature_entity is not None
             and self._color_temperature_entity.value is not None
         ):
-            if self._color_temp_inverted:
+            if self._color_temp_presets_entity:
                 return scale_ranged_value_to_int_range(
                     (101, 0),
                     (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
@@ -187,7 +187,7 @@ class HCLight(HCEntity, LightEntity):
             message.data.append({"uid": self._brightness_entity.uid, "value": value_in_range})
 
         if ATTR_COLOR_TEMP_KELVIN in kwargs:
-            if self._color_temp_inverted:
+            if self._color_temp_presets_entity:
                 value_in_range = int(
                     scale_ranged_value_to_int_range(
                         (DEFAULT_MIN_KELVIN + 1, DEFAULT_MAX_KELVIN),
@@ -195,6 +195,7 @@ class HCLight(HCEntity, LightEntity):
                         kwargs[ATTR_COLOR_TEMP_KELVIN],
                     )
                 )
+                message.data.append({"uid": self._color_temp_presets_entity.uid, "value": 0})
             else:
                 value_in_range = int(
                     scale_ranged_value_to_int_range(

@@ -291,6 +291,10 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.ENUM,
             has_state_translation=True,
         ),
+        HCSensorEntityDescription(
+            key="sensor_machinecare_remaining_runs",
+            entity="Dishcare.Dishwasher.Status.MachineCareReminder.RemainingProgramRuns",
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(

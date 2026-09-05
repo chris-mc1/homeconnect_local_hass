@@ -412,7 +412,7 @@
         "name": "Låg spänning – frys"
       },
       "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarm – tid slut {group_name}"
+        "name": "Alarm – tid slut{group_name}"
       }
     },
     "sensor": {
@@ -844,7 +844,15 @@
         "name": "Beräknad total programtid"
       },
       "sensor_oven_water_tank": {
-        "name": "Vattentank {group_name}",
+        "name": "Vattentank",
+        "state": {
+          "ok": "OK",
+          "empty": "Tom",
+          "unplugged": "Urkopplad"
+        }
+      },
+      "sensor_oven_water_tank_group": {
+        "name": "Vattentank{group_name}",
         "state": {
           "ok": "OK",
           "empty": "Tom",
@@ -853,6 +861,9 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Aktuell temperatur"
+      },
+      "sensor_oven_current_temperature_group": {
+        "name": "Aktuell temperatur{group_name}"
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Aktuell Köttprobe temperatuur"
@@ -870,7 +881,7 @@
         "name": "Mättnadsgrad – kolfilter"
       },
       "sensor_hob_zone_state": {
-        "name": "Zon {group_name} – status",
+        "name": "Zon{group_name} – status",
         "state": {
           "notselectable": "Ej valbar",
           "off": "Av",
@@ -879,7 +890,7 @@
         }
       },
       "sensor_hob_zone_operationstate": {
-        "name": "Zon {group_name} – driftstatus",
+        "name": "Zon{group_name} – driftstatus",
         "state": {
           "inactive": "Inaktiv",
           "ready": "Redo",
@@ -893,7 +904,7 @@
         }
       },
       "sensor_hob_zone_power_level": {
-        "name": "Zon {group_name} – effektnivå",
+        "name": "Zon{group_name} – effektnivå",
         "state": {
           "off": "Av",
           "keepwarm": "Varmhållning",
@@ -919,7 +930,7 @@
         }
       },
       "sensor_hob_zone_frying_sensor_level": {
-        "name": "Zon {group_name} – steksensornivå",
+        "name": "Zon{group_name} – steksensornivå",
         "state": {
           "off": "Av",
           "70dc": "70 °C",
@@ -936,22 +947,22 @@
         }
       },
       "sensor_hob_zone_current_temperature": {
-        "name": "Zon {group_name} – aktuell temperatur"
+        "name": "Zon{group_name} – aktuell temperatur"
       },
       "sensor_hob_zone_heatup_progress": {
-        "name": "Zon {group_name} – uppvärmningsförlopp"
+        "name": "Zon{group_name} – uppvärmningsförlopp"
       },
       "sensor_hob_zone_duration": {
-        "name": "Zon {group_name} – varaktighet"
+        "name": "Zon{group_name} – varaktighet"
       },
       "sensor_hob_zone_elapsed_program_time": {
-        "name": "Zon {group_name} – förfluten programtid"
+        "name": "Zon{group_name} – förfluten programtid"
       },
       "sensor_hob_zone_remaining_program_time": {
-        "name": "Zon {group_name} – återstående programtid"
+        "name": "Zon{group_name} – återstående programtid"
       },
       "sensor_hob_zone_program_progress": {
-        "name": "Zon {group_name} – programförlopp"
+        "name": "Zon{group_name} – programförlopp"
       },
       "sensor_count_ristretto_espresso": {
         "name": "Ristretto/espresso – antal"

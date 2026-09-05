@@ -375,7 +375,7 @@
         "name": "Tension faible"
       },
       "binary_sensor_oven_alarm_clock_elapsed": {
-        "name": "Alarme dépassée {group_name}"
+        "name": "Alarme dépassée{group_name}"
       }
     },
     "sensor": {
@@ -811,6 +811,14 @@
         "name": "Durée totale estimée"
       },
       "sensor_oven_water_tank": {
+        "name": "Réservoir d'eau",
+        "state": {
+          "ok": "OK",
+          "empty": "Vide",
+          "unplugged": "Absent"
+        }
+      },
+      "sensor_oven_water_tank_group": {
         "name": "Réservoir d'eau{group_name}",
         "state": {
           "ok": "OK",
@@ -820,6 +828,9 @@
       },
       "sensor_oven_current_temperature": {
         "name": "Température actuelle"
+      },
+      "sensor_oven_current_temperature_group": {
+        "name": "Température actuelle{group_name}"
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Température actuelle de la sonde à viande"
@@ -837,7 +848,7 @@
         "name": "Saturation du filtre carbone"
       },
       "sensor_hob_zone_state": {
-        "name": "État de la zone {group_name}",
+        "name": "État de la zone{group_name}",
         "state": {
           "notselectable": "Non disponible",
           "off": "Éteint",
@@ -846,7 +857,7 @@
         }
       },
       "sensor_hob_zone_operationstate": {
-        "name": "Zone {group_name} Operation State",
+        "name": "Zone{group_name} Operation State",
         "state": {
           "inactive": "Inactif",
           "ready": "Prêt",
@@ -860,7 +871,7 @@
         }
       },
       "sensor_hob_zone_power_level": {
-        "name": "Zone {group_name} Puissance",
+        "name": "Zone{group_name} Puissance",
         "state": {
           "off": "Éteint",
           "keepwarm": "Maintient au chaud",
@@ -886,7 +897,7 @@
         }
       },
       "sensor_hob_zone_frying_sensor_level": {
-        "name": "Zone {group_name} Frying Sensor level",
+        "name": "Zone{group_name} Frying Sensor level",
         "state": {
           "off": "Éteint",
           "70dc": "70 °C",
@@ -903,22 +914,22 @@
         }
       },
       "sensor_hob_zone_current_temperature": {
-        "name": "Zone {group_name} Température actuelle"
+        "name": "Zone{group_name} Température actuelle"
       },
       "sensor_hob_zone_heatup_progress": {
-        "name": "Zone {group_name} Progression du chauffage"
+        "name": "Zone{group_name} Progression du chauffage"
       },
       "sensor_hob_zone_duration": {
-        "name": "Zone {group_name} Durée"
+        "name": "Zone{group_name} Durée"
       },
       "sensor_hob_zone_elapsed_program_time": {
-        "name": "Zone {group_name} Temps écoulé"
+        "name": "Zone{group_name} Temps écoulé"
       },
       "sensor_hob_zone_remaining_program_time": {
-        "name": "Zone {group_name} Temps restant"
+        "name": "Zone{group_name} Temps restant"
       },
       "sensor_hob_zone_program_progress": {
-        "name": "Zone {group_name} Progression du programme"
+        "name": "Zone{group_name} Progression du programme"
       },
       "sensor_count_ristretto_espresso": {
         "name": "Nombre de Ristrettos"

@@ -182,7 +182,9 @@ def load_description(storage_dir: Path, config_entry: HCConfigEntry) -> DeviceDe
         device_description_xml = file.read()
     with (storage_dir / config_entry.data[CONF_FEATURE_FILENAME]).open() as file:
         feature_mapping_xml = file.read()
-    return parse_device_description(device_description_xml, feature_mapping_xml)
+    description = parse_device_description(device_description_xml, feature_mapping_xml)
+    description["info"].update(config_entry.data[CONF_APPLIANCE_INFO])
+    return description
 
 
 async def async_setup_entry(

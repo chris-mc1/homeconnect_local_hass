@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from homeassistant.components.button import ButtonEntity
-from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
 from .helpers import create_entities, error_decorator
@@ -53,11 +52,6 @@ class HCStartButton(HCEntity, ButtonEntity):
     def available(self) -> bool:
         available = super().available
         available &= self._runtime_data.appliance.selected_program is not None
-        if self._runtime_data.appliance.selected_program is not None:
-            available &= (
-                self._runtime_data.appliance.selected_program.execution
-                == Execution.SELECT_AND_START
-            )
         return available
 
     @error_decorator
