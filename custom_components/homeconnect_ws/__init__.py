@@ -197,6 +197,10 @@ async def async_setup_entry(
         _LOGGER.debug("Setting up %s", config_entry.data[CONF_APPLIANCE_INFO].get("model"))
         storage_dir = Path(hass.config.path(STORAGE_DIR, DOMAIN))
         description = await hass.async_add_executor_job(load_description, storage_dir, config_entry)
+        description["info"] = {
+            **description.get("info", {}),
+            **config_entry.data[CONF_APPLIANCE_INFO],
+        }
 
     coordinator = HomeConnectCoordinator(hass, config_entry, description)
 

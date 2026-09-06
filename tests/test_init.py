@@ -77,3 +77,41 @@ async def test_remove_entry(
     if config_entry.version == 1:
         unlink_mock.assert_not_called()
         rmdir_mock.assert_not_called()
+
+
+async def test_setup_entry_merges_appliance_info(
+    hass: HomeAssistant,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Test stored appliance info is merged into the description loaded from disk."""
+    # parse_device_description only emits brand/type/model/version/revision, so a
+    # description loaded from disk has no "vib". It has to come from the appliance
+    # info captured during the config flow and stored on the entry.
+    config_entry = CONFIG_ENTRIES[1]
+    assert config_entry.version == 2
+
+    parsed_description = {
+        **DEVICE_DESCRIPTION,
+        "info": {
+            "brand": "Fake_Brand",
+            "type": "HomeAppliance",
+            "model": "Fake_model",
+            "version": 1,
+            "revision": 2,
+        },
+    }
+
+    appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", "PSK_KEY")
+    appliance_mock = Mock(return_value=appliance)
+    monkeypatch.setattr(homeconnect_ws.coordinator, "HomeAppliance", appliance_mock)
+    monkeypatch.setattr(homeconnect_ws, "load_description", Mock(return_value=parsed_description))
+
+    config_entry.add_to_hass(hass)
+    await hass.config_entries.async_setup(config_entry.entry_id)
+    await hass.async_block_till_done()
+
+    assert config_entry.state is ConfigEntryState.LOADED
+
+    description = appliance_mock.call_args.kwargs["description"]
+    assert description["info"]["vib"] == "Fake_vib"
+    assert description["info"]["model"] == "Fake_model"
