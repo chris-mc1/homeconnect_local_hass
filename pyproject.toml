@@ -19,7 +19,7 @@ dev = [
     "homeassistant==2026.8.1",
     "prek==0.5.3",
 ]
-lint = ["ruff==0.16.7"]
+lint = ["ruff==0.16.8"]
 test = ["pytest-homeassistant-custom-component"]
 
 [tool.uv]
