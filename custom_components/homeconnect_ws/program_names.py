@@ -47,3 +47,35 @@ def program_labels(appliance: HomeAppliance, mapping: Mapping[str, str]) -> dict
             labels[program] = candidate
             reserved.add(candidate)
     return labels
+
+
+def favorite_settings(appliance: HomeAppliance, mapping: Mapping[str, str]) -> list[Setting]:
+    """Observe names and saved-state flags for favourite option updates."""
+    result = favorite_name_entities(appliance, mapping)
+    for program in mapping:
+        if program.startswith(PREFIX):
+            key = f"BSH.Common.Setting.Favorite.{program[len(PREFIX) :]}.Functionality"
+            if key in appliance.settings:
+                result.append(appliance.settings[key])
+    return result
+
+
+def selectable_program_labels(
+    appliance: HomeAppliance, mapping: Mapping[str, str]
+) -> dict[str, str]:
+    """Hide explicitly empty slots; use a nonblank name if no flag is supplied."""
+    labels = program_labels(appliance, mapping)
+    for program in list(labels):
+        if not program.startswith(PREFIX):
+            continue
+        slot = program[len(PREFIX) :]
+        setting = appliance.settings.get(f"BSH.Common.Setting.Favorite.{slot}.Functionality")
+        flag = setting.value if setting is not None else None
+        name = appliance.settings.get(f"BSH.Common.Setting.Favorite.{slot}.Name")
+        value = name.value if name is not None else None
+        saved = flag == "Program" or (
+            flag is None and isinstance(value, str) and bool(value.strip())
+        )
+        if not saved:
+            del labels[program]
+    return labels

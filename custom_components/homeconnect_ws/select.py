@@ -7,9 +7,10 @@ from typing import TYPE_CHECKING
 from homeassistant.components.select import SelectEntity
 from homeconnect_websocket.entities import Execution
 
+from .const import CONF_FILTER_UNSAVED_FAVORITES
 from .entity import HCEntity
 from .helpers import create_entities, error_decorator
-from .program_names import favorite_name_entities, program_labels
+from .program_names import favorite_settings, program_labels, selectable_program_labels
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -93,25 +94,27 @@ class HCProgram(HCSelect):
     ) -> None:
         super().__init__(entity_description, runtime_data)
         self._programs = entity_description.mapping
-        self._entities.extend(favorite_name_entities(runtime_data.appliance, self._programs))
+        self._entities.extend(favorite_settings(runtime_data.appliance, self._programs))
+
+    def _program_labels(self) -> dict[str, str]:
+        if self.coordinator.config_entry.options.get(CONF_FILTER_UNSAVED_FAVORITES, False):
+            return selectable_program_labels(self._runtime_data.appliance, self._programs)
+        return program_labels(self._runtime_data.appliance, self._programs)
 
     @property
     def options(self) -> list[str] | None:
-        return list(program_labels(self._runtime_data.appliance, self._programs).values())
+        return list(self._program_labels().values())
 
     @property
-    def current_option(self) -> list[str] | None:
-        if self._runtime_data.appliance.selected_program:
-            if self._runtime_data.appliance.selected_program.name in self._programs:
-                return program_labels(self._runtime_data.appliance, self._programs)[
-                    self._runtime_data.appliance.selected_program.name
-                ]
-            return self._runtime_data.appliance.selected_program.name
+    def current_option(self) -> str | None:
+        selected = self._runtime_data.appliance.selected_program
+        if selected:
+            return self._program_labels().get(selected.name)
         return None
 
     @error_decorator
     async def async_select_option(self, option: str) -> None:
-        labels = program_labels(self._runtime_data.appliance, self._programs)
+        labels = self._program_labels()
         reverse = {value: key for key, value in labels.items()}
         selected_program = self._runtime_data.appliance.programs[reverse[option]]
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):
