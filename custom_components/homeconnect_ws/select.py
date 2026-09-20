@@ -9,6 +9,7 @@ from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
 from .helpers import create_entities, error_decorator
+from .program_names import favorite_name_entities, program_labels
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -92,23 +93,27 @@ class HCProgram(HCSelect):
     ) -> None:
         super().__init__(entity_description, runtime_data)
         self._programs = entity_description.mapping
-        self._rev_programs = {value: key for key, value in self._programs.items()}
+        self._entities.extend(favorite_name_entities(runtime_data.appliance, self._programs))
 
     @property
     def options(self) -> list[str] | None:
-        return list(self._programs.values())
+        return list(program_labels(self._runtime_data.appliance, self._programs).values())
 
     @property
     def current_option(self) -> list[str] | None:
         if self._runtime_data.appliance.selected_program:
             if self._runtime_data.appliance.selected_program.name in self._programs:
-                return self._programs[self._runtime_data.appliance.selected_program.name]
+                return program_labels(self._runtime_data.appliance, self._programs)[
+                    self._runtime_data.appliance.selected_program.name
+                ]
             return self._runtime_data.appliance.selected_program.name
         return None
 
     @error_decorator
     async def async_select_option(self, option: str) -> None:
-        selected_program = self._runtime_data.appliance.programs[self._rev_programs[option]]
+        labels = program_labels(self._runtime_data.appliance, self._programs)
+        reverse = {value: key for key, value in labels.items()}
+        selected_program = self._runtime_data.appliance.programs[reverse[option]]
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):
             await selected_program.select()
         elif selected_program.execution == Execution.START_ONLY:
