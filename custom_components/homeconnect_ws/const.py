@@ -29,3 +29,5 @@ CONF_DEV_OVERRIDE_HOST: Final = "override_host"
 CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
 
 MAX_RECONECT_TIME: Final = 300
+INITIAL_RECONNECT_DELAY: Final = 5
+MAX_RECONNECT_DELAY: Final = 300
