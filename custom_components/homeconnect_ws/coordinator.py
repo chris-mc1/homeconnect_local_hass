@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from typing import TYPE_CHECKING
@@ -18,7 +19,13 @@ from homeconnect_websocket import (
     HomeAppliance,
 )
 
-from .const import CONF_AES_IV, CONF_PSK, MAX_RECONECT_TIME
+from .const import (
+    CONF_AES_IV,
+    CONF_PSK,
+    INITIAL_RECONNECT_DELAY,
+    MAX_RECONECT_TIME,
+    MAX_RECONNECT_DELAY,
+)
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -76,6 +83,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     async def _connect(self) -> None:
         self.logger.debug("Connecting to %s", self.appliance.info.get("vib"))
         first_failure = True
+        backoff = INITIAL_RECONNECT_DELAY
         while self._connecting:
             try:
                 await self.appliance.connect()
@@ -85,12 +93,17 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     return
             except (ConnectionFailedError, HCHandshakeError):
                 await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
+                msg = (
+                    f"Can't connect to {self.config_entry.data[CONF_HOST]}, "
+                    f"retrying in {backoff}s"
+                )
                 if first_failure:
                     self.logger.error(msg)  # noqa: TRY400
                     first_failure = False  # first_failure_fix
                 else:
                     self.logger.debug(msg)
+                await asyncio.sleep(backoff)
+                backoff = min(backoff * 2, MAX_RECONNECT_DELAY)
             except AllreadyConnectedError:
                 await self.appliance.close()
                 msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
@@ -98,8 +111,10 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 return
             except Exception:
                 await self.appliance.close()
-                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
+                msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying in {backoff}s"
                 self.logger.exception(msg)
+                await asyncio.sleep(backoff)
+                backoff = min(backoff * 2, MAX_RECONNECT_DELAY)
 
     async def _async_update_data(self) -> None:
         return None

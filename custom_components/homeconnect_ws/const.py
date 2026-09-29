@@ -29,3 +29,8 @@ CONF_DEV_OVERRIDE_HOST: Final = "override_host"
 CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
 
 MAX_RECONECT_TIME: Final = 300
+
+# Backoff for the initial connect retry loop in HomeConnectCoordinator._connect().
+# Without a delay the loop retries as fast as the network stack fails, pegging a CPU core.
+INITIAL_RECONNECT_DELAY: Final = 5
+MAX_RECONNECT_DELAY: Final = 300
