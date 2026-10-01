@@ -14,7 +14,7 @@ from zipfile import ZipFile
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.file_upload import process_uploaded_file
-from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
+from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow, OptionsFlow
 from homeassistant.const import (
     CONF_DEVICE,
     CONF_DEVICE_ID,
@@ -22,6 +22,7 @@ from homeassistant.const import (
     CONF_MODE,
     CONF_NAME,
 )
+from homeassistant.core import callback
 from homeassistant.helpers.selector import (
     FileSelector,
     FileSelectorConfig,
@@ -46,6 +47,7 @@ from .const import (
     CONF_DESCRIPTION_FILENAME,
     CONF_FEATURE_FILENAME,
     CONF_FILE,
+    CONF_FILTER_UNSAVED_FAVORITES,
     CONF_MANUAL_HOST,
     CONF_PSK,
     DOMAIN,
@@ -123,6 +125,12 @@ def write_file(storage_dir: Path, name: str, file: bytes) -> None:
 
 class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
     """HomeConnect Config flow."""
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry: HCConfigEntry) -> HomeConnectOptionsFlow:  # noqa: ARG004
+        """Return appliance display options."""
+        return HomeConnectOptionsFlow()
 
     VERSION = 2
 
@@ -397,3 +405,25 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             return await self.async_step_upload()
         except KeyError:
             return self.async_abort(reason="invalid_discovery_info")
+
+
+class HomeConnectOptionsFlow(OptionsFlow):
+    """Manage optional favourite filtering for each appliance."""
+
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+        """Show and save the favourite filtering option."""
+        if user_input is not None:
+            return self.async_create_entry(
+                title="", data={**self.config_entry.options, **user_input}
+            )
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Optional(
+                        CONF_FILTER_UNSAVED_FAVORITES,
+                        default=self.config_entry.options.get(CONF_FILTER_UNSAVED_FAVORITES, False),
+                    ): bool,
+                }
+            ),
+        )

@@ -11,6 +11,7 @@ from homeconnect_websocket import NotConnectedError
 
 from .entity import HCEntity
 from .helpers import create_entities
+from .program_names import favorite_name_entities, program_labels
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -100,15 +101,23 @@ class HCActiveProgram(HCSensor):
         runtime_data: HCData,
     ) -> None:
         super().__init__(entity_description, runtime_data)
-        self._attr_options = list(entity_description.mapping.values())
+        self._entities.extend(
+            favorite_name_entities(runtime_data.appliance, entity_description.mapping)
+        )
+
+    @property
+    def options(self) -> list[str]:
+        return list(
+            program_labels(self._runtime_data.appliance, self.entity_description.mapping).values()
+        )
 
     @property
     def native_value(self) -> str | None:
         if self._runtime_data.appliance.active_program:
             if self._runtime_data.appliance.active_program.name in self.entity_description.mapping:
-                return self.entity_description.mapping[
-                    self._runtime_data.appliance.active_program.name
-                ]
+                return program_labels(
+                    self._runtime_data.appliance, self.entity_description.mapping
+                )[self._runtime_data.appliance.active_program.name]
             return self._runtime_data.appliance.active_program.name
         return None
 
