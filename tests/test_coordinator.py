@@ -382,3 +382,24 @@ async def test_unstable_connection_backoff(
         await coordinator._connect_task
     assert clock.delays == [5, 10, 20, 40]
     assert coordinator.connected
+
+
+async def test_recv_loop_error_handled(
+    coordinator: HomeConnectCoordinator, appliance: MagicMock, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Connection errors of the library receive loop are not left in an unawaited task."""
+    caplog.set_level(logging.DEBUG, logger=coordinator_module.__name__)
+    error = ConnectionFailedError()
+    error.__cause__ = aiohttp.ServerTimeoutError("No PONG received after 10.0 seconds")
+    recv_loop = AsyncMock(side_effect=error)
+
+    appliance.session._wrap_recv_loop = recv_loop
+    coordinator._wrap_library_recv_loop()
+
+    task = asyncio.create_task(appliance.session._wrap_recv_loop())
+    await task
+
+    recv_loop.assert_awaited_once()
+    assert task.exception() is None
+    assert f"Receive loop for {HOST} ended" in caplog.text
+    assert "No PONG received" in caplog.text

@@ -118,11 +118,32 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             reconect=False,
             connection_callback=self._connection_state_callback,
         )
+        self._wrap_library_recv_loop()
         self.disconnect_time = time.time()
         if not self.appliance.info:
             self._client_session.detach()
             msg = "Appliance has no device info"
             raise ConfigEntryError(msg)
+
+    def _wrap_library_recv_loop(self) -> None:
+        """
+        Handle connection errors raised by the library receive loop.
+
+        Without reconnect, HCSession re-raises connection errors (e.g. "No PONG received")
+        from its receive loop, which runs in a background task nobody awaits. asyncio then
+        logs "Task exception was never retrieved". The lost connection is handled via the
+        connection state callback, so the error is only logged at debug level.
+        """
+        session = self.appliance.session
+        recv_loop = session._wrap_recv_loop  # noqa: SLF001
+
+        async def wrap_recv_loop() -> None:
+            try:
+                await recv_loop()
+            except HCConnectionError as exc:
+                self.logger.debug("Receive loop for %s ended: %s", self._host, _describe_error(exc))
+
+        session._wrap_recv_loop = wrap_recv_loop  # noqa: SLF001
 
     async def close(self) -> None:
         """Stop connecting and close the connection, safe to call multiple times."""
