@@ -44,6 +44,7 @@ if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
     from homeassistant.helpers.typing import ConfigType
     from homeconnect_websocket import HomeAppliance
+    from homeconnect_websocket.entities import Program
 
     from .entity_descriptions import _EntityDescriptionsType
 
@@ -81,6 +82,25 @@ class HCConfig:
 type HCConfigEntry = ConfigEntry[HCData]
 
 HC_KEY: HassKey[HCConfig] = HassKey(DOMAIN)
+
+
+def _program_to_start(appliance: HomeAppliance, name: str | None) -> tuple[Program | None, bool]:
+    """
+    Get the Program for start_program and whether to send only the given options.
+
+    A named Program is started directly with only the given options. This is needed for
+    start-only Programs (no selectable Program) and for options like a hood's VentingLevel,
+    which are ignored when written to a running Program.
+    """
+    if name is None:
+        return appliance.selected_program, False
+    program = appliance.programs.get(name)
+    if program is None:
+        raise ServiceValidationError(
+            translation_domain=DOMAIN,
+            translation_key="program_not_available",
+        )
+    return program, True
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
@@ -137,9 +157,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
             options[entity.uid] = _duration_to_seconds(call.data["finish_in"])
 
-        if appliance.selected_program:
+        for key, value in call.data.get("options", {}).items():
+            options[_get_entity_or_raise(appliance, key, "option_not_available").uid] = value
+
+        program, override_options = _program_to_start(appliance, call.data.get("program"))
+        if program:
             try:
-                await appliance.selected_program.start(options)
+                await program.start(options, override_options=override_options)
             except CodeResponsError as exc:
                 _raise_start_error(exc)
         else:

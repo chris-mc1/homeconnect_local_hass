@@ -13,6 +13,14 @@ start_program:
       required: false
       selector:
         duration:
+    program:
+      required: false
+      selector:
+        text:
+    options:
+      required: false
+      selector:
+        object:
 
 set_start_in:
   fields:
