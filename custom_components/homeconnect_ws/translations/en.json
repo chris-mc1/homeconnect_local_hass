@@ -1564,6 +1564,21 @@
       "sensor_count_completed": {
         "name": "Completed count"
       },
+      "sensor_energy_consumed": {
+        "name": "Energy consumed"
+      },
+      "sensor_water_consumed": {
+        "name": "Water consumed"
+      },
+      "sensor_laundry_load": {
+        "name": "Laundry load"
+      },
+      "sensor_laundry_detergent_consumed": {
+        "name": "Detergent consumed"
+      },
+      "sensor_laundry_softener_consumed": {
+        "name": "Softener consumed"
+      },
       "sensor_flex_start": {
         "name": "Flex start",
         "state": {
