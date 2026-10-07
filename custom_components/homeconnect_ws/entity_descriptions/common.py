@@ -27,6 +27,7 @@ from .descriptions_definitions import (
     EntityDescriptions,
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
+    HCDateTimeEntityDescription,
     HCNumberEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -209,6 +210,14 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCButtonEntityDescription(
             key="button_mains_power_off",
             entity="BSH.Common.Command.MainsPowerOff",
+        ),
+    ],
+    "datetime": [
+        HCDateTimeEntityDescription(
+            key="datetime_local_time",
+            name="Local time",
+            entity="BSH.Common.Setting.LocalTime",
+            entity_category=EntityCategory.CONFIG,
         ),
     ],
     "binary_sensor": [
