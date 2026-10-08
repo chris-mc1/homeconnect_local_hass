@@ -2043,7 +2043,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "Lautstärke Tastenton",
+        "name": "Lautstärke",
         "state": {
           "off": "Aus",
           "volume1": "Lautstärke 1",

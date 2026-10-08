@@ -3099,7 +3099,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "Key Signal volume",
+        "name": "Sound volume",
         "state": {
           "off": "Off",
           "volume1": "Volume 1",
