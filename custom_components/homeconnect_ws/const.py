@@ -14,6 +14,7 @@ PLATFORMS: Final = [
     Platform.SELECT,
     Platform.BUTTON,
     Platform.NUMBER,
+    Platform.DATETIME,
     Platform.LIGHT,
     Platform.FAN,
 ]
