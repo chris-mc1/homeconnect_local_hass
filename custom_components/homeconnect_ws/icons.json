@@ -302,6 +302,9 @@
             }
         },
         "select": {
+            "select_oven_meat_probe_temperature": {
+                "default": "mdi:thermometer-probe"
+            },
             "select_drying_assistant_all_programs": {},
             "select_hot_water": {
                 "default": "mdi:water-thermometer-outline"
