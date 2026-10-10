@@ -459,6 +459,9 @@
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed{group_name}"
       },
+      "binary_sensor_oven_meatprobe_plugged_group": {
+        "name": "Meat Probe Connected{group_name}"
+      },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed"
       }
@@ -1652,6 +1655,9 @@
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Current Meatprobe Temperature"
+      },
+      "sensor_oven_current_meatprobe_temperature_group": {
+        "name": "Current Meatprobe Temperature{group_name}"
       },
       "sensor_heatup_progress": {
         "name": "Heatup progress"
@@ -3313,6 +3319,82 @@
           "plus1": "Plus 1",
           "plus2": "Plus 2",
           "plus3": "Plus 3"
+        }
+      },
+      "select_oven_meat_probe_temperature": {
+        "name": "Meat Probe Target Temperature",
+        "state": {
+          "off": "Off",
+          "30dc": "30 °C",
+          "31dc": "31 °C",
+          "32dc": "32 °C",
+          "33dc": "33 °C",
+          "34dc": "34 °C",
+          "35dc": "35 °C",
+          "36dc": "36 °C",
+          "37dc": "37 °C",
+          "38dc": "38 °C",
+          "39dc": "39 °C",
+          "40dc": "40 °C",
+          "41dc": "41 °C",
+          "42dc": "42 °C",
+          "43dc": "43 °C",
+          "44dc": "44 °C",
+          "45dc": "45 °C",
+          "46dc": "46 °C",
+          "47dc": "47 °C",
+          "48dc": "48 °C",
+          "49dc": "49 °C",
+          "50dc": "50 °C",
+          "51dc": "51 °C",
+          "52dc": "52 °C",
+          "53dc": "53 °C",
+          "54dc": "54 °C",
+          "55dc": "55 °C",
+          "56dc": "56 °C",
+          "57dc": "57 °C",
+          "58dc": "58 °C",
+          "59dc": "59 °C",
+          "60dc": "60 °C",
+          "61dc": "61 °C",
+          "62dc": "62 °C",
+          "63dc": "63 °C",
+          "64dc": "64 °C",
+          "65dc": "65 °C",
+          "66dc": "66 °C",
+          "67dc": "67 °C",
+          "68dc": "68 °C",
+          "69dc": "69 °C",
+          "70dc": "70 °C",
+          "71dc": "71 °C",
+          "72dc": "72 °C",
+          "73dc": "73 °C",
+          "74dc": "74 °C",
+          "75dc": "75 °C",
+          "76dc": "76 °C",
+          "77dc": "77 °C",
+          "78dc": "78 °C",
+          "79dc": "79 °C",
+          "80dc": "80 °C",
+          "81dc": "81 °C",
+          "82dc": "82 °C",
+          "83dc": "83 °C",
+          "84dc": "84 °C",
+          "85dc": "85 °C",
+          "86dc": "86 °C",
+          "87dc": "87 °C",
+          "88dc": "88 °C",
+          "89dc": "89 °C",
+          "90dc": "90 °C",
+          "91dc": "91 °C",
+          "92dc": "92 °C",
+          "93dc": "93 °C",
+          "94dc": "94 °C",
+          "95dc": "95 °C",
+          "96dc": "96 °C",
+          "97dc": "97 °C",
+          "98dc": "98 °C",
+          "99dc": "99 °C"
         }
       },
       "select_oven_level": {
