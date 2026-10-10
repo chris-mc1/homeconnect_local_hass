@@ -34,6 +34,17 @@ To use this integration, you must first create a Home Connect account and connec
 - Select Appliance: Select the Appliance you want to setup
 - Host / IP-Address: Manually enter your Appliance Hostname or IP-Address
 
+## Connection handling
+
+- The integration connects to each Appliance in a background task. If the Appliance is not reachable
+  (switched off, offline, or refusing the connection e.g. with HTTP 503 like some hobs), the connection
+  is retried with exponential backoff: 5 s, 10 s, 20 s, ... up to 300 s, with up to 20 % random jitter.
+  The backoff is reset after a successful connection.
+- The first failed attempt is logged as a warning with host and reason, further attempts only at debug
+  level. A successful connection after failed attempts is logged at info level.
+- When an established connection is lost, the integration reconnects with the same backoff.
+  Entities stay available for up to 5 minutes while reconnecting.
+
 ## Remove integration
 
 This integration follows standard integration removal, no extra steps are required.
