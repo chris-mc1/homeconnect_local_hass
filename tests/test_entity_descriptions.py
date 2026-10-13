@@ -335,4 +335,5 @@ def test_oven_preheat_finished_description() -> None:
     )
     assert preheat.entity == "Cooking.Common.Event.PreheatFinished"
     assert preheat.value_on == {"Present", "Confirmed"}
-    assert preheat.value_off == {"Off"}
+    # None: the oven has not reported the event yet
+    assert preheat.value_off == {"Off", None}

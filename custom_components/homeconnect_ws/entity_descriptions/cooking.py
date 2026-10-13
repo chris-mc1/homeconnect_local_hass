@@ -612,12 +612,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     ],
     "binary_sensor": [
         # Event of the oven: Off / Present / Confirmed. Seen on Gaggenau BO470112 and BS474112
-        # as uid 53260, value null until the oven has finished preheating.
+        # as uid 53260. The value is null (None) until the oven has finished preheating for the
+        # first time, that is off.
         HCBinarySensorEntityDescription(
             key="binary_sensor_oven_preheat_finished",
             entity="Cooking.Common.Event.PreheatFinished",
             value_on={"Present", "Confirmed"},
-            value_off={"Off"},
+            value_off={"Off", None},
         ),
     ],
 }
