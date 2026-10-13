@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
+import pytest
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
@@ -18,6 +19,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
 from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
+    wifi_signal_strength_dbm,
 )
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
@@ -29,7 +31,6 @@ from homeassistant.components.switch import SwitchDeviceClass
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
 
 if TYPE_CHECKING:
-    import pytest
     from homeconnect_websocket.testutils import MockAppliance, MockApplianceType
 
 
@@ -322,3 +323,21 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+@pytest.mark.parametrize(
+    ("raw_value", "expected"),
+    [
+        (191, -65),  # unsigned byte reported by Gaggenau BS474112
+        (197, -59),  # unsigned byte reported by Gaggenau BO470112
+        (128, -128),  # lowest value that is a negative signed byte
+        (127, 127),  # highest value that is a positive signed byte, unchanged
+        (-60, -60),  # already a dBm value, unchanged
+        (None, None),  # no value known yet
+    ],
+)
+def test_wifi_signal_strength_dbm(raw_value: int | None, expected: int | None) -> None:
+    """Test conversion of the unsigned WiFiSignalStrength byte to dBm."""
+    entity = Mock()
+    entity.value = raw_value
+    assert wifi_signal_strength_dbm(entity) == expected
