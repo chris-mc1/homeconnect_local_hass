@@ -13,13 +13,14 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .entity import HCEntity
 from .entity_descriptions.descriptions_definitions import HCBinarySensorEntityDescription
-from .helpers import create_entities
+from .helpers import EventStaleTracker, create_entities
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.device_registry import DeviceInfo
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
     from homeconnect_websocket import HomeAppliance
+    from homeconnect_websocket.entities import Entity as HcEntity
 
     from . import HCConfigEntry, HCData
 
@@ -48,8 +49,32 @@ class HCBinarySensor(HCEntity, BinarySensorEntity):
 
     entity_description: HCBinarySensorEntityDescription
 
+    def __init__(
+        self,
+        entity_description: HCBinarySensorEntityDescription,
+        runtime_data: HCData,
+    ) -> None:
+        super().__init__(entity_description, runtime_data)
+        self._alarm_clock: HcEntity | None = None
+        self._tracker: EventStaleTracker | None = None
+        name = entity_description.alarm_clock_entity
+        if name and name in runtime_data.appliance.entities:
+            self._alarm_clock = runtime_data.appliance.entities[name]
+            self._tracker = EventStaleTracker(
+                self._entity, self._alarm_clock, entity_description.value_on or set()
+            )
+            # Also update the state when this entity changes
+            self._entities.append(self._alarm_clock)
+
+    async def callback(self, entity: HcEntity) -> None:
+        if self._tracker is not None:
+            self._tracker.update(entity)
+        await super().callback(entity)
+
     @property
     def is_on(self) -> bool:
+        if self._alarm_clock is not None and (self._alarm_clock.value == 0 or self._tracker.stale):
+            return False
         if self.entity_description.value_on:
             if self._entity.value in self.entity_description.value_on:
                 return True
