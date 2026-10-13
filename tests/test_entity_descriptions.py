@@ -322,3 +322,17 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+def test_oven_preheat_finished_description() -> None:
+    """Test oven PreheatFinished binary sensor exists."""
+    descriptions = entity_descriptions.get_all_entity_description()
+
+    preheat = next(
+        d
+        for d in descriptions["binary_sensor"]
+        if not callable(d) and d.key == "binary_sensor_oven_preheat_finished"
+    )
+    assert preheat.entity == "Cooking.Common.Event.PreheatFinished"
+    assert preheat.value_on == {"Present", "Confirmed"}
+    assert preheat.value_off == {"Off"}
