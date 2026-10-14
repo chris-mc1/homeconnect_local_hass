@@ -64,6 +64,11 @@ class HCNumber(HCEntity, NumberEntity):
 
     @property
     def native_step(self) -> float | None:
+        if self.entity_description.step_for_brands:
+            step, brands = self.entity_description.step_for_brands
+            brand = self._runtime_data.appliance.info.get("brand", "")
+            if brand.upper() in brands:
+                return step
         if hasattr(self._entity, "step") and self._entity.step is not None:
             return self._entity.step
         return None
