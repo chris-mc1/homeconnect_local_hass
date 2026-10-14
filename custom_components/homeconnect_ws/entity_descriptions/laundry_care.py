@@ -366,6 +366,31 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
+            key="select_washerdryer_program_mode",
+            entity="LaundryCare.WasherDryer.Option.ProgramMode",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_washerdryer_drying_target",
+            entity="LaundryCare.WasherDryer.Option.DryingTarget",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_washerdryer_activity_after_washing",
+            entity="LaundryCare.WasherDryer.Option.ActivityAfterWashing",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_washerdryer_refresh_intensity",
+            entity="LaundryCare.WasherDryer.Option.RefreshIntensity",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_washerdryer_refresh_textile_type",
+            entity="LaundryCare.WasherDryer.Option.RefreshTextileType",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
             key="select_laundry_option_water_and_rinse_plus",
             entity="LaundryCare.Washer.Option.WaterAndRinsePlus",
             has_state_translation=True,
@@ -459,6 +484,16 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_laundry_low_temperature_hygiene",
             entity="LaundryCare.Common.Option.LowTemperatureHygiene",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_washerdryer_low_temperature_hygiene",
+            entity="LaundryCare.WasherDryer.Option.LowTemperatureHygiene",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_washerdryer_wrinkle_guard_boost",
+            entity="LaundryCare.WasherDryer.Option.WrinkleGuardBoost",
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(

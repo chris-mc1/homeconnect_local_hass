@@ -108,6 +108,12 @@
       "switch_laundry_vario_perfect": {
         "name": "Vario perfect"
       },
+      "switch_washerdryer_low_temperature_hygiene": {
+        "name": "Low Temperature Hygiene"
+      },
+      "switch_washerdryer_wrinkle_guard_boost": {
+        "name": "Wrinkle guard boost"
+      },
       "switch_laundry_gentle": {
         "name": "Gentle"
       },
@@ -3182,6 +3188,51 @@
           "shirt1": "Shirt 1",
           "shirt5": "Shirt 5",
           "business": "Business"
+        }
+      },
+      "select_washerdryer_program_mode": {
+        "name": "Program mode",
+        "state": {
+          "washing": "Washing",
+          "washinganddrying": "Washing and drying",
+          "drying": "Drying"
+        }
+      },
+      "select_washerdryer_drying_target": {
+        "name": "Drying target",
+        "state": {
+          "irondry": "Iron dry",
+          "cupboarddry": "Cupboard dry",
+          "cupboarddryplus": "Cupboard dry plus"
+        }
+      },
+      "select_washerdryer_activity_after_washing": {
+        "name": "Activity after washing",
+        "state": {
+          "programoverview": "Program overview",
+          "continuedrying": "Continue drying",
+          "drumdry": "Drum dry"
+        }
+      },
+      "select_washerdryer_refresh_intensity": {
+        "name": "Refresh intensity",
+        "state": {
+          "light": "Light",
+          "normal": "Normal",
+          "intensive": "Intensive"
+        }
+      },
+      "select_washerdryer_refresh_textile_type": {
+        "name": "Refresh textile type",
+        "state": {
+          "cotton": "Cotton",
+          "down": "Down",
+          "suit": "Suit",
+          "cashmere": "Cashmere",
+          "shirt": "Shirt",
+          "silk": "Silk",
+          "waterproof": "Waterproof",
+          "woolcoat": "Wool coat"
         }
       },
       "select_laundry_idos2_content": {
