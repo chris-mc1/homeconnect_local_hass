@@ -1976,6 +1976,12 @@
       "button_abort_program": {
         "name": "Stop"
       },
+      "button_acknowledge_alarm_clock": {
+        "name": "Wekker bevestigen"
+      },
+      "button_cancel_alarm_clock": {
+        "name": "Wekker annuleren"
+      },
       "button_start_program": {
         "name": "Start"
       },
