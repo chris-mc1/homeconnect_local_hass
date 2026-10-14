@@ -83,31 +83,42 @@ async def test_set_native_value_writes_raw_value(value: float, expected_raw: int
     number._entity.set_value.assert_not_called()
 
 
-def _with_power_state(number: HCNumber, power_state: str | None) -> HCNumber:
-    """Give the number a mocked appliance with the given PowerState value."""
-    power = Mock(value=power_state)
+def _with_conditions(
+    number: HCNumber,
+    power_state: str | None,
+    local_control: bool | None,  # noqa: FBT001
+) -> HCNumber:
+    """Give the number a mocked appliance with the given PowerState and LocalControlActive."""
     number._runtime_data = Mock()
     number._runtime_data.coordinator.connected = True
-    number._runtime_data.appliance.entities = {"BSH.Common.Setting.PowerState": power}
+    number._runtime_data.appliance.entities = {
+        "BSH.Common.Setting.PowerState": Mock(value=power_state),
+        "BSH.Common.Status.LocalControlActive": Mock(value=local_control),
+    }
     number._entity.available = True
     number._entity.access = Access.READ_WRITE
     return number
 
 
 @pytest.mark.parametrize(
-    ("power_state", "expected"),
+    ("power_state", "local_control", "expected"),
     [
-        ("On", True),
-        ("Off", False),  # the oven answers 516 for the meat probe temperature
-        ("Standby", False),
-        (None, True),  # unknown, do not hide the entity
+        ("On", False, True),
+        ("Off", False, False),  # can only be set while the oven is on
+        ("Standby", False, False),
+        ("On", True, False),  # the oven answers 516 while it is operated on the oven itself
+        ("Off", True, False),
+        (None, None, True),  # unknown, do not hide the entity
+        ("On", None, True),
+        (None, False, True),
     ],
 )
-def test_meatprobe_available_only_when_oven_is_on(
+def test_meatprobe_available_only_when_oven_is_on_and_not_operated_locally(
     power_state: str | None,
+    local_control: bool | None,  # noqa: FBT001
     expected: bool,  # noqa: FBT001
 ) -> None:
-    """Test the meat probe temperature is unavailable while the oven is switched off."""
-    number = _with_power_state(_number(60), power_state)
+    """Test the meat probe temperature is only available when the oven accepts writes."""
+    number = _with_conditions(_number(60), power_state, local_control)
 
     assert number.available is expected
