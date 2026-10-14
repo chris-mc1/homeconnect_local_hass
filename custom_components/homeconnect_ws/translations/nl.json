@@ -212,6 +212,9 @@
       "binary_sensor_program_aborted": {
         "name": "Programma afgebroken"
       },
+      "binary_sensor_oven_preheat_finished": {
+        "name": "Voorverwarmen gereed"
+      },
       "binary_sensor_foam_detection": {
         "name": "Schuimdetectie"
       },
