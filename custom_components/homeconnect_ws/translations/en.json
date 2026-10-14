@@ -464,6 +464,17 @@
       }
     },
     "sensor": {
+      "sensor_stopwatch_time": {
+        "name": "Stopwatch time"
+      },
+      "sensor_stopwatch_state": {
+        "name": "Stopwatch state",
+        "state": {
+          "off": "Off",
+          "running": "Running",
+          "paused": "Paused"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Remaining Program Time"
       },
@@ -3486,6 +3497,12 @@
       }
     },
     "button": {
+      "button_stopwatch_start_pause_resume": {
+        "name": "Stopwatch start/pause/resume"
+      },
+      "button_stopwatch_reset": {
+        "name": "Stopwatch reset"
+      },
       "button_abort_program": {
         "name": "Abort"
       },
