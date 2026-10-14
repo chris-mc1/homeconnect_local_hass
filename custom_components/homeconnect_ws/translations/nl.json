@@ -244,6 +244,51 @@
       },
       "binary_sensor_freezer_low_voltage": {
         "name": "Lage voedingsspanning"
+      },
+      "binary_sensor_software_update_available": {
+        "name": "Software-update beschikbaar"
+      },
+      "binary_sensor_software_download_available": {
+        "name": "Software-download beschikbaar"
+      },
+      "binary_sensor_software_update_successful": {
+        "name": "Software-update geslaagd"
+      },
+      "binary_sensor_customer_service_request": {
+        "name": "Verzoek klantenservice"
+      },
+      "binary_sensor_oven_lock_while_cooling_down": {
+        "name": "Vergrendeld tijdens afkoelen"
+      },
+      "binary_sensor_oven_cavity_temperature_too_high": {
+        "name": "Temperatuur ovenruimte te hoog"
+      },
+      "binary_sensor_oven_user_interaction_required": {
+        "name": "Bediening vereist"
+      },
+      "binary_sensor_oven_cavity_heatup": {
+        "name": "Ovenruimte warmt op"
+      },
+      "binary_sensor_oven_operating_time_limit_reached": {
+        "name": "Maximale bedrijfstijd bereikt"
+      },
+      "binary_sensor_oven_cleaning_request": {
+        "name": "Reiniging gevraagd"
+      },
+      "binary_sensor_oven_force_flushing": {
+        "name": "Spoelen vereist"
+      },
+      "binary_sensor_oven_descaling_request": {
+        "name": "Ontkalken gevraagd"
+      },
+      "binary_sensor_oven_empty_water_container": {
+        "name": "Watertank leeg"
+      },
+      "binary_sensor_oven_water_supply_closed": {
+        "name": "Watertoevoer afgesloten"
+      },
+      "binary_sensor_cooking_appliance_module_error": {
+        "name": "Fout in apparaatmodule"
       }
     },
     "sensor": {
