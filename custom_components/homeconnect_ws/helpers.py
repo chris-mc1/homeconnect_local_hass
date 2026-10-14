@@ -109,15 +109,24 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     return available
 
 
-def valid_program_options(program: Program) -> dict[int, Any]:
+# Brands (in capitals) that get no options when a program is selected or started. The last
+# known values of the options belong to another program (for example the setpoint of the hot
+# air program for the keep warm program); the Gaggenau ovens use the values of the program.
+NO_PROGRAM_OPTIONS_BRANDS = {"GAGGENAU"}
+
+
+def valid_program_options(program: Program, brand: str = "") -> dict[int, Any]:
     """
     Get the options that can be sent when a program is selected or started.
 
     The appliance answers "400 BadRequest" when an option has no value (None), is not
     available or has a value outside of its minimum and maximum. For example a Gaggenau
     oven reported the Fahrenheit setpoint (None) and a duration of 0 (minimum 1). Those
-    options are left out, the appliance then uses its own default.
+    options are left out, the appliance then uses its own default. Gaggenau ovens get no
+    options at all, see NO_PROGRAM_OPTIONS_BRANDS.
     """
+    if brand.upper() in NO_PROGRAM_OPTIONS_BRANDS:
+        return {}
     options = {}
     for option in program._options:  # noqa: SLF001
         if option.access != Access.READ_WRITE or option.available is False:

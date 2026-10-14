@@ -136,7 +136,9 @@ class HCProgram(HCSelect):
         self._check_no_program_running()
         # Only send the options the appliance accepts, the shadow values of options that are not
         # available (or have no value) are rejected with "400 BadRequest".
-        options = valid_program_options(selected_program)
+        options = valid_program_options(
+            selected_program, self._runtime_data.appliance.info.get("brand", "")
+        )
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):
             await selected_program.select(options=options, override_options=True)
         elif selected_program.execution == Execution.START_ONLY:

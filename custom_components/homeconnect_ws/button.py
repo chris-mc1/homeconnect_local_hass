@@ -58,4 +58,5 @@ class HCStartButton(HCEntity, ButtonEntity):
     async def async_press(self) -> None:
         program = self._runtime_data.appliance.selected_program
         # Only send the options the appliance accepts, see valid_program_options.
-        await program.start(options=valid_program_options(program), override_options=True)
+        options = valid_program_options(program, self._runtime_data.appliance.info.get("brand", ""))
+        await program.start(options=options, override_options=True)
