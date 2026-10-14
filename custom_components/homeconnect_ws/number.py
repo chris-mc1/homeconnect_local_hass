@@ -41,34 +41,6 @@ class HCNumber(HCEntity, NumberEntity):
     ) -> None:
         super().__init__(entity_description, runtime_data)
         self._entity._type = int  # noqa: SLF001 Force integer type
-        for name, _ in entity_description.available_when or []:
-            # Also update this entity when an entity that decides the availability changes.
-            condition_entity = runtime_data.appliance.entities.get(name)
-            if condition_entity is not None:
-                self._entities.append(condition_entity)
-
-    def _available_when_applies(self) -> bool:
-        """Check if the available_when condition applies to the brand of this appliance."""
-        brands = self.entity_description.available_when_brands
-        if brands is None:
-            return True
-        return self._runtime_data.appliance.info.get("brand", "").upper() in brands
-
-    @property
-    def available(self) -> bool:
-        if not super().available:
-            return False
-        if self.entity_description.available_when and self._available_when_applies():
-            for name, allowed_values in self.entity_description.available_when:
-                condition_entity = self._runtime_data.appliance.entities.get(name)
-                # An unknown value (None) does not make the entity unavailable.
-                if (
-                    condition_entity is not None
-                    and condition_entity.value is not None
-                    and condition_entity.value not in allowed_values
-                ):
-                    return False
-        return True
 
     @property
     def native_value(self) -> int | float | None:
