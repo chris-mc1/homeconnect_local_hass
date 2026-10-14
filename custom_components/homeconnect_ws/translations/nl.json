@@ -2089,6 +2089,9 @@
       "number_hood_interval_off": {
         "name": "Tijdsinterval uitschakelen"
       },
+      "number_oven_meatprobe_temperature": {
+        "name": "Doeltemperatuur vleesthermometer"
+      },
       "number_hood_interval_on": {
         "name": "Tijdsinterval inschakelen"
       },

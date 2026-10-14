@@ -432,6 +432,29 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         generate_oven_settings,
     ],
     "number": [
+        # Target temperature of the meat probe. Gaggenau BO470112 and BS474112 report it as
+        # an enumeration (uid 5144): 0 is "Off", 15 ... 99 are "15dC" ... "99dC" and the
+        # entries from 1059 are Fahrenheit. The raw value is the temperature in degrees
+        # Celsius. The oven makes this entity available only while the probe is plugged in.
+        HCNumberEntityDescription(
+            key="number_oven_meatprobe_temperature",
+            entity="Cooking.Oven.Option.MeatProbeTemperatureV2",
+            device_class=NumberDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            native_min_value=0,
+            native_max_value=99,
+            use_raw_value=True,
+            raw_value_off_below=15,
+            # The oven answers "WriteRequest Busy" (516) for every write while it is operated on
+            # the oven itself (LocalControlActive, until about 10 seconds after the last touch).
+            # Reported on the issue: it can also only be set while the oven is switched on.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
+            # Input box instead of a slider: a slider sends a value for every step it passes.
+            mode=NumberMode.BOX,
+        ),
         HCNumberEntityDescription(
             key="number_oven_setpoint_temperature",
             entity="Cooking.Oven.Option.SetpointTemperature",
