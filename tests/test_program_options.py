@@ -50,3 +50,14 @@ def test_valid_program_options() -> None:
         5131: False,
         5146: "Medium",
     }
+
+
+def test_gaggenau_gets_no_options() -> None:
+    """Test a Gaggenau oven gets no options, it uses the values of the program."""
+    program = Mock(
+        _options=[_option(5120, 50, minimum=30, maximum=300), _option(5131, value=False)]
+    )
+
+    assert valid_program_options(program, "GAGGENAU") == {}
+    assert valid_program_options(program, "Gaggenau") == {}
+    assert valid_program_options(program, "BOSCH") == {5120: 50, 5131: False}
