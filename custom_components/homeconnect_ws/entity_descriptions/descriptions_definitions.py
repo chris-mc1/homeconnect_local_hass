@@ -103,6 +103,9 @@ class HCNumberEntityDescription(
     # (entity name, allowed values): the entity is unavailable while the other entity has a
     # value that is not in the allowed values, because the appliance refuses to write it then.
     available_when: tuple[str, set[str]] | None = None
+    # With available_when: only apply it to appliances of these brands (in capitals, as the
+    # appliance reports them). None applies it to every appliance.
+    available_when_brands: set[str] | None = None
 
 
 class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, frozen_or_thawed=True):

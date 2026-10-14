@@ -49,11 +49,18 @@ class HCNumber(HCEntity, NumberEntity):
             if condition_entity is not None:
                 self._entities.append(condition_entity)
 
+    def _available_when_applies(self) -> bool:
+        """Check if the available_when condition applies to the brand of this appliance."""
+        brands = self.entity_description.available_when_brands
+        if brands is None:
+            return True
+        return self._runtime_data.appliance.info.get("brand", "").upper() in brands
+
     @property
     def available(self) -> bool:
         if not super().available:
             return False
-        if self.entity_description.available_when:
+        if self.entity_description.available_when and self._available_when_applies():
             name, allowed_values = self.entity_description.available_when
             condition_entity = self._runtime_data.appliance.entities.get(name)
             # An unknown value (None) does not make the entity unavailable.

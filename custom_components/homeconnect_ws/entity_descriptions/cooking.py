@@ -457,6 +457,10 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Oven.Option.SetpointTemperature",
             device_class=NumberDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            # Gaggenau BO470112 (reported on the issue): the setpoint can only be changed
+            # while the oven is on. Only applied to Gaggenau, other brands were not tried.
+            available_when=("BSH.Common.Setting.PowerState", {"On"}),
+            available_when_brands={"GAGGENAU"},
             mode=NumberMode.AUTO,
         ),
         HCNumberEntityDescription(
