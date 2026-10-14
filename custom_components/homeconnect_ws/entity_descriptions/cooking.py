@@ -589,6 +589,11 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "light": [generate_hood_light, generate_hood_ambient_light],
     "fan": [generate_hood_fan],
     "button": [
+        # Opens the door of the appliance (uid 33 on Gaggenau BO470112 and BS474112).
+        HCButtonEntityDescription(
+            key="button_open_door",
+            entity="BSH.Common.Command.OpenDoor",
+        ),
         HCButtonEntityDescription(
             key="button_hood_carbon_filter_reset",
             entity="Cooking.Common.Command.Hood.CarbonFilterReset",
