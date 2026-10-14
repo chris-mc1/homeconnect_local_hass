@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -154,6 +155,18 @@ async def test_power_switch(mock_homeconnect_appliance: MockApplianceType) -> No
         device_class=SwitchDeviceClass.SWITCH,
         value_mapping=("Standby", "Off"),
     )
+
+
+async def test_power_switch_read_only(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test no Power switch or select when the power state is read only."""
+    device_description = copy.deepcopy(POWER_SWITCH)
+    # reported by the Gaggenau BO470112 and BS474112
+    device_description["setting"][0]["access"] = "read"
+    device_description["setting"][0]["min"] = 0
+    device_description["setting"][0]["max"] = 3
+    appliance = await mock_homeconnect_appliance(description=device_description)
+
+    assert generate_power_switch(appliance) == {}
 
 
 PROGRAM = DeviceDescription(
