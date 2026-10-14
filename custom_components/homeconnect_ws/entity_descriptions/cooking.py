@@ -543,6 +543,25 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        # Display settings of Gaggenau BO470112 / BS474112 (uid 4412, 4355, 4413).
+        HCSelectEntityDescription(
+            key="select_oven_idle_screen",
+            entity="Cooking.Oven.Setting.IdleScreen",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_oven_touchkey_color",
+            entity="Cooking.Oven.Setting.TouchkeyColor",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_oven_standby_display",
+            entity="Cooking.Oven.Setting.StandbyDisplay",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -584,6 +603,29 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
             entity_category=EntityCategory.CONFIG,
             value_mapping=("IndicationOn", "IndicationOff"),
+        ),
+        # Settings and options of Gaggenau BO470112 / BS474112 (uid 4414, 4375, 5131, 5132).
+        HCSwitchEntityDescription(
+            key="switch_oven_heating_signal",
+            entity="Cooking.Oven.Setting.HeatingSignal",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_door_opener_delay",
+            entity="Cooking.Oven.Setting.DoorOpenerDelay",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_rotary_spit",
+            entity="Cooking.Oven.Option.RotarySpit",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_quick_roast",
+            entity="Cooking.Oven.Option.QuickRoast",
+            device_class=SwitchDeviceClass.SWITCH,
         ),
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
