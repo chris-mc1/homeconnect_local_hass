@@ -3656,6 +3656,9 @@
     "start_program_error": {
       "message": "Error {code} starting program, resource {resource}"
     },
+    "program_running": {
+      "message": "The program cannot be changed while a program is running, stop it first"
+    },
     "no_program_selected": {
       "message": "No Program selected"
     },
