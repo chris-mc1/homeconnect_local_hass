@@ -35,3 +35,15 @@ def test_description_exists(description_type: str, key: str, entity: str) -> Non
         d for d in descriptions[description_type] if not callable(d) and d.key == key
     )
     assert description.entity == entity
+
+
+@pytest.mark.parametrize("key", ["switch_oven_rotary_spit", "switch_oven_quick_roast"])
+def test_options_switches_need_oven_on_and_not_operated_locally(key: str) -> None:
+    """Test Rotary spit and Quick roast (options) are unavailable when the oven refuses writes."""
+    descriptions = entity_descriptions.get_all_entity_description()
+
+    description = next(d for d in descriptions["switch"] if not callable(d) and d.key == key)
+    assert description.available_when == [
+        ("BSH.Common.Setting.PowerState", {"On"}),
+        ("BSH.Common.Status.LocalControlActive", {False}),
+    ]

@@ -644,11 +644,23 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="switch_oven_rotary_spit",
             entity="Cooking.Oven.Option.RotarySpit",
             device_class=SwitchDeviceClass.SWITCH,
+            # The Options group of the oven (uid 262) is read-only while the oven is switched off
+            # (seen in descriptionChange messages) and while it is operated on the oven itself.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
         ),
         HCSwitchEntityDescription(
             key="switch_oven_quick_roast",
             entity="Cooking.Oven.Option.QuickRoast",
             device_class=SwitchDeviceClass.SWITCH,
+            # The Options group of the oven (uid 262) is read-only while the oven is switched off
+            # (seen in descriptionChange messages) and while it is operated on the oven itself.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
         ),
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
