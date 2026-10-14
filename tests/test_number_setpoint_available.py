@@ -10,7 +10,11 @@ from custom_components.homeconnect_ws.number import HCNumber
 from homeconnect_websocket.entities import Access
 
 
-def _setpoint_number(brand: str, power_state: str | None) -> HCNumber:
+def _setpoint_number(
+    brand: str,
+    power_state: str | None,
+    local_control: bool | None,  # noqa: FBT001
+) -> HCNumber:
     """Create the oven setpoint number around a mocked appliance."""
     descriptions = entity_descriptions.get_all_entity_description()
     description = next(
@@ -25,25 +29,28 @@ def _setpoint_number(brand: str, power_state: str | None) -> HCNumber:
     number._runtime_data.coordinator.connected = True
     number._runtime_data.appliance.info = {"brand": brand}
     number._runtime_data.appliance.entities = {
-        "BSH.Common.Setting.PowerState": Mock(value=power_state)
+        "BSH.Common.Setting.PowerState": Mock(value=power_state),
+        "BSH.Common.Status.LocalControlActive": Mock(value=local_control),
     }
     return number
 
 
 @pytest.mark.parametrize(
-    ("brand", "power_state", "expected"),
+    ("brand", "power_state", "local_control", "expected"),
     [
-        ("GAGGENAU", "On", True),
-        ("GAGGENAU", "Off", False),  # can only be set while the oven is on
-        ("Gaggenau", "Standby", False),
-        ("GAGGENAU", None, True),  # unknown, do not hide the entity
-        ("BOSCH", "Off", True),  # other brands were not tried, nothing changes
+        ("GAGGENAU", "On", False, True),
+        ("GAGGENAU", "Off", False, False),  # can only be set while the oven is on
+        ("Gaggenau", "Standby", False, False),
+        ("GAGGENAU", "On", True, False),  # the oven answers 516 while it is operated locally
+        ("GAGGENAU", None, None, True),  # unknown, do not hide the entity
+        ("BOSCH", "Off", True, True),  # other brands were not tried, nothing changes
     ],
 )
-def test_setpoint_available_only_when_gaggenau_oven_is_on(
+def test_setpoint_available_only_when_gaggenau_oven_is_on_and_not_operated_locally(
     brand: str,
     power_state: str | None,
+    local_control: bool | None,  # noqa: FBT001
     expected: bool,  # noqa: FBT001
 ) -> None:
-    """Test the setpoint of a Gaggenau oven is unavailable while the oven is off."""
-    assert _setpoint_number(brand, power_state).available is expected
+    """Test the setpoint of a Gaggenau oven is only available when the oven accepts writes."""
+    assert _setpoint_number(brand, power_state, local_control).available is expected

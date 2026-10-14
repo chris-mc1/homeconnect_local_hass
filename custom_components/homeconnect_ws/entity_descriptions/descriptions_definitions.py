@@ -100,9 +100,10 @@ class HCNumberEntityDescription(
     # With use_raw_value: values below this limit are written as 0 (the "Off" entry of the
     # enumeration), because the enumeration has no entries between 0 and this limit.
     raw_value_off_below: int | None = None
-    # (entity name, allowed values): the entity is unavailable while the other entity has a
-    # value that is not in the allowed values, because the appliance refuses to write it then.
-    available_when: tuple[str, set[str]] | None = None
+    # Conditions as (entity name, allowed values): the entity is unavailable while one of the
+    # other entities has a value that is not in its allowed values, because the appliance
+    # refuses to write then. An unknown value (None) does not make the entity unavailable.
+    available_when: list[tuple[str, set[str | bool]]] | None = None
     # With available_when: only apply it to appliances of these brands (in capitals, as the
     # appliance reports them). None applies it to every appliance.
     available_when_brands: set[str] | None = None

@@ -445,10 +445,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_max_value=99,
             use_raw_value=True,
             raw_value_off_below=15,
-            # Gaggenau BO470112: the oven answers "WriteRequest Busy" (516) for this setting
-            # while it is switched off, also when it was not operated for a while. Writing
-            # works while it is on (seen in a debug log).
-            available_when=("BSH.Common.Setting.PowerState", {"On"}),
+            # The oven answers "WriteRequest Busy" (516) for every write while it is operated on
+            # the oven itself (LocalControlActive, until about 10 seconds after the last touch).
+            # Reported on the issue: it can also only be set while the oven is switched on.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
             # Input box instead of a slider: a slider sends a value for every step it passes.
             mode=NumberMode.BOX,
         ),
@@ -457,9 +460,14 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Oven.Option.SetpointTemperature",
             device_class=NumberDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-            # Gaggenau BO470112 (reported on the issue): the setpoint can only be changed
-            # while the oven is on. Only applied to Gaggenau, other brands were not tried.
-            available_when=("BSH.Common.Setting.PowerState", {"On"}),
+            # Gaggenau BO470112: the oven answers "WriteRequest Busy" (516) while it is operated
+            # on the oven itself (LocalControlActive). Reported on the issue: it can also only be
+            # set while the oven is switched on. Only applied to Gaggenau, other brands were not
+            # tried.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
             available_when_brands={"GAGGENAU"},
             mode=NumberMode.AUTO,
         ),
