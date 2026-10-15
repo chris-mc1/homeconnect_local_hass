@@ -44,7 +44,7 @@ class HCSelectEntityDescription(
 ):
     """Description for Select Entity."""
 
-    available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE, Access.WRITE_ONLY)
     has_state_translation: bool = False
     mapping: dict[str, str] = None
 
@@ -55,7 +55,7 @@ class HCSwitchEntityDescription(
     """Description for Switch Entity."""
 
     value_mapping: tuple[str, str] | None = None
-    available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE, Access.WRITE_ONLY)
 
 
 class HCSensorEntityDescription(
@@ -85,7 +85,7 @@ class HCButtonEntityDescription(
 ):
     """Description for Button Entity."""
 
-    available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE, Access.WRITE_ONLY)
 
 
 class HCNumberEntityDescription(
@@ -93,13 +93,13 @@ class HCNumberEntityDescription(
 ):
     """Description for Number Entity."""
 
-    available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE, Access.WRITE_ONLY)
 
 
 class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, frozen_or_thawed=True):
     """Description for Number Entity."""
 
-    available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE, Access.WRITE_ONLY)
     brightness_entity: str | None = None
     color_temperature_entity: str | None = None
     color_entity: str | None = None
@@ -109,7 +109,7 @@ class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, froz
 class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_or_thawed=True):
     """Description for Fan Entity."""
 
-    available_access: tuple[Access] = (Access.READ_WRITE,)
+    available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
 
 
 class EntityDescriptions(TypedDict):

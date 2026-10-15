@@ -12,6 +12,7 @@ from homeassistant.const import (
     SERVICE_TURN_ON,
     STATE_OFF,
     STATE_ON,
+    STATE_UNAVAILABLE,
     STATE_UNKNOWN,
 )
 from homeconnect_websocket.message import Action, Message
@@ -189,3 +190,49 @@ async def test_turn_off_enum(
             data={"uid": 202, "value": 0},
         )
     )
+
+
+async def test_available_during_read_access_blip(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """
+    Control stays available when the appliance briefly reports read-only access.
+
+    Some appliances (e.g. Siemens coffee makers) momentarily downgrade a
+    writable setting to ``access: read`` during state transitions. The value is
+    still known, so the switch must not flap to ``unavailable`` (which would
+    punch holes in history and fire ``to: unavailable`` automations).
+    """
+    entity_id = "switch.fake_brand_homeappliance_switch"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await mock_appliance.entities["Test.Switch"].update({"value": True})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON
+
+    # Appliance downgrades the setting to read-only for a few seconds.
+    await mock_appliance.entities["Test.Switch"].update({"access": "read"})
+    await hass.async_block_till_done()
+    state = hass.states.get(entity_id)
+    assert state.state == STATE_ON, "read-only blip must not make the switch unavailable"
+
+    # Access recovers.
+    await mock_appliance.entities["Test.Switch"].update({"access": "readwrite"})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON
+
+
+async def test_unavailable_when_access_none(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """A genuine loss of access (``none``) still marks the control unavailable."""
+    entity_id = "switch.fake_brand_homeappliance_switch"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await mock_appliance.entities["Test.Switch"].update({"access": "none"})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_UNAVAILABLE
