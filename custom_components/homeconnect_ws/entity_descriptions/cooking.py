@@ -112,19 +112,34 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
         if len(groups) == 1:
             group_name = ""
 
-        # AlarmClockElapsed
-        entity = f"Cooking.Oven.Event.Cavity.{group[0]}.AlarmClockElapsed"
-        if entity in appliance.entities:
-            descriptions["binary_sensor"].append(
-                HCBinarySensorEntityDescription(
-                    key=f"binary_sensor_oven_alarm_clock_elapsed_{group[0]}",
-                    translation_key="binary_sensor_oven_alarm_clock_elapsed",
-                    translation_placeholders={"group_name": group_name},
-                    entity=entity,
-                    value_on={"Present", "Confirmed"},
-                    value_off={"Off"},
+        for event, key in (
+            ("AlarmClockElapsed", "alarm_clock_elapsed"),
+            ("ProgramFinished", "program_finished"),
+            ("ProgramAborted", "program_aborted"),
+            ("RegularPreheatFinished", "regular_preheat_finished"),
+            ("FastPreheatFinished", "fast_preheat_finished"),
+            ("MeatprobeTemperatureReached", "meatprobe_temperature_reached"),
+        ):
+            entity = f"Cooking.Oven.Event.Cavity.{group[0]}.{event}"
+            if entity in appliance.entities:
+                descriptions["binary_sensor"].append(
+                    HCBinarySensorEntityDescription(
+                        key=f"binary_sensor_oven_{key}_{group[0]}",
+                        translation_key=f"binary_sensor_oven_{key}",
+                        translation_placeholders={"group_name": group_name},
+                        entity=entity,
+                        value_on={"Present", "Confirmed"},
+                        value_off={"Off"},
+                        device_class=(
+                            BinarySensorDeviceClass.PROBLEM if event == "ProgramAborted" else None
+                        ),
+                        entity_category=(
+                            EntityCategory.DIAGNOSTIC
+                            if event in {"ProgramFinished", "ProgramAborted"}
+                            else None
+                        ),
+                    )
                 )
-            )
 
     return descriptions
 

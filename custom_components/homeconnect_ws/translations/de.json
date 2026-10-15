@@ -417,6 +417,21 @@
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm abgelaufen{group_name}"
       },
+      "binary_sensor_oven_program_finished": {
+        "name": "Programm beendet{group_name}"
+      },
+      "binary_sensor_oven_program_aborted": {
+        "name": "Programm abgebrochen{group_name}"
+      },
+      "binary_sensor_oven_regular_preheat_finished": {
+        "name": "Reguläres Vorheizen beendet{group_name}"
+      },
+      "binary_sensor_oven_fast_preheat_finished": {
+        "name": "Schnellaufheizen beendet{group_name}"
+      },
+      "binary_sensor_oven_meatprobe_temperature_reached": {
+        "name": "Bratenthermometer-Zieltemperatur erreicht{group_name}"
+      },
       "binary_sensor_oven_meatprobe_plugged_group": {
         "name": "Bratenthermometer angeschlossen{group_name}"
       },
