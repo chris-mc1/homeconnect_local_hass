@@ -152,7 +152,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async def handle_set_start_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
-        _set_value_or_raise(
+        await _set_value_or_raise(
             _get_entity_or_raise(
                 appliance, "BSH.Common.Option.StartInRelative", "start_in_not_available"
             ),
@@ -163,7 +163,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async def handle_set_finish_in(call: ServiceCall) -> ServiceResponse:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
-        _set_value_or_raise(
+        await _set_value_or_raise(
             _get_entity_or_raise(
                 appliance, "BSH.Common.Option.FinishInRelative", "finish_in_not_available"
             ),
