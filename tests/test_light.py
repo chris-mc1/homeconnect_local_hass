@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from unittest.mock import call
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
@@ -397,17 +398,27 @@ async def test_set_brightness_color_temp(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_awaited_once_with(
-        Message(
-            resource="/ro/values",
-            action=Action.POST,
-            data=[
-                {"uid": 109, "value": 100},
-                {"uid": 110, "value": 100},
-                {"uid": 108, "value": True},
-            ],
-        )
-    )
+    # Switched on first, attributes in a second message: appliances reset the
+    # brightness to their power-on default when both arrive together.
+    assert mock_appliance.session.send_sync.await_args_list == [
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[{"uid": 108, "value": True}],
+            )
+        ),
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[
+                    {"uid": 109, "value": 100},
+                    {"uid": 110, "value": 100},
+                ],
+            )
+        ),
+    ]
     mock_appliance.session.send_sync.reset_mock()
 
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
@@ -560,18 +571,26 @@ async def test_set_brightness_color_temp_inverted(
         blocking=True,
     )
 
-    mock_appliance.session.send_sync.assert_awaited_once_with(
-        Message(
-            resource="/ro/values",
-            action=Action.POST,
-            data=[
-                {"uid": 109, "value": 100},
-                {"uid": 113, "value": 0},
-                {"uid": 110, "value": 0},
-                {"uid": 108, "value": True},
-            ],
-        )
-    )
+    assert mock_appliance.session.send_sync.await_args_list == [
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[{"uid": 108, "value": True}],
+            )
+        ),
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[
+                    {"uid": 109, "value": 100},
+                    {"uid": 113, "value": 0},
+                    {"uid": 110, "value": 0},
+                ],
+            )
+        ),
+    ]
     mock_appliance.session.send_sync.reset_mock()
 
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
@@ -789,11 +808,20 @@ async def test_turn_on_when_brightness_has_no_value(
         },
         blocking=True,
     )
-    mock_appliance.session.send_sync.assert_awaited_once_with(
-        Message(
-            resource="/ro/values",
-            action=Action.POST,
-            data=[{"uid": 109, "value": 100}, {"uid": 108, "value": True}],
-        )
-    )
+    assert mock_appliance.session.send_sync.await_args_list == [
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[{"uid": 108, "value": True}],
+            )
+        ),
+        call(
+            Message(
+                resource="/ro/values",
+                action=Action.POST,
+                data=[{"uid": 109, "value": 100}],
+            )
+        ),
+    ]
     mock_appliance.session.send_sync.reset_mock()

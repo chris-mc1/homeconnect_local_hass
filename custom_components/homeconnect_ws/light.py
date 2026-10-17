@@ -209,8 +209,21 @@ class HCLight(HCEntity, LightEntity):
             )
 
         if self._entity.value is not True:
-            message.data.append({"uid": self._entity.uid, "value": True})
-        await self._runtime_data.appliance.session.send_sync(message)
+            # Switch the light on in its own message before sending any
+            # attributes. Hoods apply their power-on default (100 % brightness)
+            # after the attribute writes when Lighting and LightingBrightness
+            # arrive in the same message, so turning the light on at a low
+            # brightness ended at full brightness (Siemens LR99CQS25). Sent
+            # separately, the brightness sticks.
+            await self._runtime_data.appliance.session.send_sync(
+                HC_Message(
+                    resource="/ro/values",
+                    action=Action.POST,
+                    data=[{"uid": self._entity.uid, "value": True}],
+                )
+            )
+        if message.data:
+            await self._runtime_data.appliance.session.send_sync(message)
 
     @error_decorator
     async def async_turn_off(self, **kwargs: Any) -> None:
