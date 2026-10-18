@@ -1,5 +1,7 @@
 {
     "name": "Home Connect Local",
     "render_readme": true,
-    "homeassistant": "2025.3.0"
+    "homeassistant": "2026.4.0",
+    "zip_release": true,
+    "filename": "homeconnect_ws.zip"
 }

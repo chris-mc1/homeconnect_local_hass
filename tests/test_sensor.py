@@ -8,7 +8,7 @@ from homeassistant.components.sensor import ATTR_OPTIONS
 from homeassistant.const import ATTR_FRIENDLY_NAME
 
 from . import setup_config_entry
-from .const import MOCK_CONFIG_DATA
+from .const import CONFIG_ENTRIES
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -17,11 +17,11 @@ if TYPE_CHECKING:
 
 async def test_setup(
     hass: HomeAssistant,
-    mock_appliance: MockAppliance,  # noqa: ARG001
-    patch_entity_description: None,  # noqa: ARG001
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("sensor.fake_brand_homeappliance_sensor")
     assert state
@@ -55,11 +55,11 @@ async def test_setup(
 async def test_update(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating entity."""
     entity_id = "sensor.fake_brand_homeappliance_sensor"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Sensor"].update({"value": 5})
     await hass.async_block_till_done()
@@ -71,11 +71,11 @@ async def test_update(
 async def test_update_enum(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating entity with enum."""
     entity_id = "sensor.fake_brand_homeappliance_sensor_enum"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Sensor.Enum"].update({"value": 0})
     await hass.async_block_till_done()
@@ -93,11 +93,11 @@ async def test_update_enum(
 async def test_update_event(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating event sensor."""
     entity_id = "sensor.fake_brand_homeappliance_sensor_event"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Event1"].update({"value": 0})
     await mock_appliance.entities["Test.Event2"].update({"value": 0})
@@ -128,11 +128,11 @@ async def test_update_event(
 async def test_update_active_program(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
-    patch_entity_description: None,  # noqa: ARG001
+    patch_entity_description: None,
 ) -> None:
     """Test updating active program entity."""
     entity_id = "sensor.fake_brand_homeappliance_activeprogram"
-    assert await setup_config_entry(hass, MOCK_CONFIG_DATA)
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.ActiveProgram"].update({"value": 500})
     await hass.async_block_till_done()

@@ -86,7 +86,7 @@ class HCEntity(CoordinatorEntity, Entity):
             if "value_fn" in description:
                 try:
                     extra_state_attributes[description["name"]] = description["value_fn"](entity)
-                except Exception as exc:  # noqa: BLE001
+                except Exception as exc:
                     _LOGGER.debug(
                         "Failed to set extra attribute %s for %s: %s",
                         description["name"],

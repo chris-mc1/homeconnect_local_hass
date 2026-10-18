@@ -10,7 +10,9 @@
             "switch_extra_dry_option": {
                 "default": "mdi:heat-wave"
             },
-            "switch_intensiv_zone": {},
+            "switch_intensiv_zone": {
+                "default": "mdi:arrow-decision"
+            },
             "switch_vario_speed_plus": {
                 "default": "mdi:timer-play-outline"
             },
@@ -45,11 +47,32 @@
             },
             "switch_extra_rinse": {
                 "default": "mdi:water-plus"
+            },
+            "switch_pretreatment": {
+                "default": "mdi:pot-steam-outline"
+            },
+            "switch_cup_warmer": {
+                "default": "mdi:heat-wave"
+            },
+            "switch_refrigerator_dispenser_party_mode": {
+                "default": "mdi:party-popper"
             }
         },
         "binary_sensor": {
             "connection": {},
             "binary_sensor_door_state": {},
+            "binary_sensor_intensiv_zone_active": {
+                "default": "mdi:arrow-decision"
+            },
+            "binary_sensor_half_load_active": {
+                "default": "mdi:fraction-one-half"
+            },
+            "binary_sensor_hygiene_plus_active": {
+                "default": "mdi:thermometer-plus"
+            },
+            "binary_sensor_pretreatment_active": {
+                "default": "mdi:pot-steam-outline"
+            },
             "binary_sensor_eco_dry_active": {},
             "binary_sensor_aqua_stop": {
                 "default": "mdi:water-check-outline",
@@ -81,6 +104,66 @@
                     "off": "mdi:snowflake-off",
                     "on": "mdi:snowflake-melt"
                 }
+            },
+            "binary_sensor_temperature_alarm_freezer": {
+                "default": "mdi:thermometer",
+                "state": {
+                    "on": "mdi:thermometer-alert"
+                }
+            },
+            "binary_sensor_temperature_alarm_chiller_common": {
+                "default": "mdi:thermometer",
+                "state": {
+                    "on": "mdi:thermometer-alert"
+                }
+            },
+            "binary_sensor_freezer_appliance_error": {
+                "default": "mdi:fridge-outline",
+                "state": {
+                    "on": "mdi:fridge-alert-outline"
+                }
+            },
+            "binary_sensor_freezer_low_voltage": {
+                "default": "mdi:flash-outline",
+                "state": {
+                    "on": "mdi:flash-alert-outline"
+                }
+            },
+            "binary_sensor_ice_hopper_full": {
+                "default": "mdi:snowflake",
+                "state": {
+                    "on": "mdi:snowflake-check"
+                }
+            },
+            "binary_sensor_ice_expired": {
+                "default": "mdi:snowflake",
+                "state": {
+                    "on": "mdi:snowflake-alert"
+                }
+            },
+            "binary_sensor_party_mode_empty_ice_hopper": {
+                "default": "mdi:party-popper",
+                "state": {
+                    "on": "mdi:snowflake-off"
+                }
+            },
+            "binary_sensor_water_filter_full": {
+                "default": "mdi:water-check-outline",
+                "state": {
+                    "on": "mdi:water-alert-outline"
+                }
+            },
+            "binary_sensor_water_filter_almost_full": {
+                "default": "mdi:water-check-outline",
+                "state": {
+                    "on": "mdi:water-percent-alert"
+                }
+            },
+            "binary_sensor_water_expired": {
+                "default": "mdi:water-outline",
+                "state": {
+                    "on": "mdi:water-alert"
+                }
             }
         },
         "sensor": {
@@ -90,6 +173,9 @@
             "sensor_remaining_program_time": {
                 "default": "mdi:progress-clock"
             },
+            "sensor_elapsed_program_time": {
+                "default": "mdi:progress-clock"
+            },            
             "sensor_program_progress": {
                 "default": "mdi:progress-check"
             },
@@ -168,6 +254,9 @@
             },
             "sensor_carbon_filter_saturation": {
                 "default": "mdi:air-filter"
+            },
+            "sensor_water_filter_saturation": {
+                "default": "mdi:water-percent"
             },
             "sensor_count_ristretto_espresso": {
                 "default": "mdi:coffee"
@@ -297,6 +386,9 @@
                 "default": "mdi:restore"
             },
             "button_hood_regenerative_carbon_filter_lifetime_reset": {
+                "default": "mdi:restore"
+            },
+            "button_water_filter_reset": {
                 "default": "mdi:restore"
             }
         },

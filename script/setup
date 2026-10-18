@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+uv sync --no-install-project --all-extras
+mkdir -p "${PWD}/config"
+prek install
+hass --config "${PWD}/config" --script ensure_config

@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
+    HCLightEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
     HCSwitchEntityDescription,
@@ -15,6 +18,10 @@ from custom_components.homeconnect_ws.entity_descriptions import (
 from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
+)
+from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
+    generate_internal_light,
+    generate_internal_light_brightness,
 )
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
@@ -216,3 +223,102 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
     )
 
     appliance = await mock_homeconnect_appliance(description={})
+
+
+INTERNAL_LIGHT = DeviceDescription(
+    setting=[
+        EntityDescription(
+            uid=0x5001,
+            name="Refrigeration.Common.Setting.Light.Internal.Power",
+            access=Access.READ_WRITE,
+            available=True,
+        ),
+        EntityDescription(
+            uid=0x5002,
+            name="Refrigeration.Common.Setting.Light.Internal.Brightness",
+            access=Access.READ_WRITE,
+            available=True,
+            max=100,
+            min=0,
+        ),
+    ]
+)
+
+
+async def test_internal_light(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test dynamic internal light."""
+    # Power + Brightness
+    appliance = await mock_homeconnect_appliance(description=INTERNAL_LIGHT)
+    assert generate_internal_light(appliance) == HCLightEntityDescription(
+        key="light_internal",
+        entity="Refrigeration.Common.Setting.Light.Internal.Power",
+        brightness_entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
+    )
+
+    # Power only
+    power_only = DeviceDescription(setting=[INTERNAL_LIGHT["setting"][0]])
+    appliance = await mock_homeconnect_appliance(description=power_only)
+    assert generate_internal_light(appliance) == HCLightEntityDescription(
+        key="light_internal",
+        entity="Refrigeration.Common.Setting.Light.Internal.Power",
+    )
+
+    # No internal light
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_internal_light(appliance) is None
+
+
+async def test_internal_light_brightness(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test the brightness number defers to the light entity."""
+    # Light entity owns brightness, so the number is opt-in
+    appliance = await mock_homeconnect_appliance(description=INTERNAL_LIGHT)
+    description = generate_internal_light_brightness(appliance)
+    assert description.entity_registry_enabled_default is False
+
+    # No light entity to own it, so the number is the only control
+    brightness_only = DeviceDescription(setting=[INTERNAL_LIGHT["setting"][1]])
+    appliance = await mock_homeconnect_appliance(description=brightness_only)
+    description = generate_internal_light_brightness(appliance)
+    assert description.entity_registry_enabled_default is True
+
+    # No brightness at all
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_internal_light_brightness(appliance) is None
+
+
+TRANSLATION_DOMAINS = {
+    "active_program": "sensor",
+    "binary_sensor": "binary_sensor",
+    "button": "button",
+    "event_sensor": "sensor",
+    "fan": "fan",
+    "light": "light",
+    "number": "number",
+    "program": "select",
+    "select": "select",
+    "sensor": "sensor",
+    "start_button": "button",
+    "switch": "switch",
+    "wifi": "sensor",
+}
+
+
+def test_descriptions_have_english_name() -> None:
+    """Test every entity description resolves to a name in en.json."""
+    translations = json.loads(
+        Path("custom_components/homeconnect_ws/translations/en.json").read_text(encoding="utf-8")
+    )["entity"]
+
+    missing = []
+    for description_type, descriptions in entity_descriptions.get_all_entity_description().items():
+        if description_type == "dynamic":
+            continue
+        domain = TRANSLATION_DOMAINS[description_type]
+        for description in descriptions:
+            if callable(description):
+                continue
+            key = description.translation_key or description.key
+            if key not in translations.get(domain, {}):
+                missing.append(f"{domain}.{key}")
+
+    assert sorted(set(missing)) == []

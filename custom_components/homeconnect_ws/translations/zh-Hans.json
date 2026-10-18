@@ -1,0 +1,1990 @@
+{
+  "config": {
+    "step": {
+      "upload": {
+        "title": "Add new Home Connect Appliances",
+        "description": "Upload your Profile file",
+        "data": {
+          "file": "Profile file"
+        }
+      },
+      "device_select": {
+        "title": "Select your Appliance",
+        "description": "Select the Appliance you want to setup"
+      },
+      "host": {
+        "title": "Enter Hostname",
+        "description": "Try manually entering your Appliance Hostname or IP-Address",
+        "data": {
+          "host": "Host / IP-Address"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connection to Appliance failed",
+      "already_configured": "This Appliance is already configured"
+    },
+    "abort": {
+      "auth_failed": "Authentication failed",
+      "reauth_successful": "Re-authentication successful",
+      "invalid_profile_file": "Profile File is invalid",
+      "profile_file_parser_error": "Profile File is invalid: {error}",
+      "appliance_not_in_profile_file": "Profile File dose not contain profile for this Appliance",
+      "all_setup": "All Appliances in this Profile File are already setup"
+    }
+  },
+  "entity": {
+    "switch": {
+      "switch_power_state": {
+        "name": "电源"
+      },
+      "switch_hygiene_plus": {
+        "name": "卫生增强"
+      },
+      "switch_extra_dry_option": {
+        "name": "额外烘干"
+      },
+      "switch_intensiv_zone": {
+        "name": "强力区域"
+      },
+      "switch_vario_speed_plus": {
+        "name": "变速加速"
+      },
+      "switch_silence_on_demand": {
+        "name": "静音模式"
+      },
+      "switch_brilliance_dry": {
+        "name": "晶亮烘干"
+      },
+      "switch_zeolite_dry": {
+        "name": "晶亮烘干"
+      },
+      "switch_extra_dry": {
+        "name": "额外烘干"
+      },
+      "switch_speed_on_demand": {
+        "name": "按需加速"
+      },
+      "switch_info_light": {
+        "name": "信息指示灯"
+      },
+      "switch_multiple_beverages": {
+        "name": "多杯饮品"
+      },
+      "switch_half_load": {
+        "name": "半载洗涤"
+      },
+      "switch_child_lock": {
+        "name": "童锁"
+      },
+      "switch_door_light_ring": {
+        "name": "门环形灯"
+      },
+      "switch_drum_light": {
+        "name": "滚筒灯"
+      },
+      "switch_laundry_end_signal": {
+        "name": "结束提示音"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "静音"
+      },
+      "switch_laundry_time_light": {
+        "name": "时间指示灯"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "防皱保护"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "静音模式"
+      },
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "低温除菌"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "变速洗"
+      },
+      "switch_laundry_gentle": {
+        "name": "轻柔模式"
+      },
+      "switch_laundry_hygiene": {
+        "name": "除菌模式"
+      },
+      "switch_super_freezer": {
+        "name": "超级冷冻"
+      },
+      "switch_super_refrigerator": {
+        "name": "超级冷藏"
+      },
+      "switch_refrigerator_eco": {
+        "name": "节能模式"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "度假模式"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "i-DOS 液体洗涤剂（容器1）"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "i-DOS 液体洗涤剂（容器2）"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "加强洗"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "防皱"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "静音洗"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "快速洗涤"
+      },
+      "switch_laundry_soak": {
+        "name": "浸泡"
+      },
+      "switch_laundry_prewash": {
+        "name": "预洗"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "防皱免排水"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "加漂洗1次"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "加漂洗3次"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "加水加漂洗1次"
+      },
+      "switch_laundry_water_plus": {
+        "name": "加水量"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "消毒"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "除菌蒸汽"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "快速预热"
+      },
+      "switch_oven_button_tones": {
+        "name": "按键提示音"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "运行时炉灯"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "安息日模式"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "安息日模式"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "分配器"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "冷冻室门助手"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "内部照明"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "剧场模式照明"
+      },
+      "switch_hood_boost": {
+        "name": "增压"
+      },
+      "switch_hood_silence_mode": {
+        "name": "静音模式"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "生鲜模式"
+      },
+      "switch_extra_rinse": {
+        "name": "额外漂洗"
+      }
+    },
+    "binary_sensor": {
+      "connection": {
+        "name": "连接"
+      },
+      "binary_sensor_door_state": {
+        "name": "门"
+      },
+      "binary_sensor_eco_dry_active": {
+        "name": "节能烘干激活"
+      },
+      "binary_sensor_aqua_stop": {
+        "name": "漏水保护触发"
+      },
+      "binary_sensor_low_water_pressure": {
+        "name": "水压过低"
+      },
+      "binary_sensor_bean_container_empty": {
+        "name": "豆仓已空"
+      },
+      "binary_remote_start_allowed": {
+        "name": "允许远程启动"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "清新剂余量",
+        "state": {
+          "on": "不足",
+          "off": "充足"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "冷凝水盒",
+        "state": {
+          "on": "已满",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_machinecareandfiltercleaningreminder": {
+        "name": "机器保养和滤网清洁提醒"
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "绒毛过滤器",
+        "state": {
+          "on": "已满",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_low_voltage": {
+        "name": "低电压"
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "建议保养清洗"
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "机器保养提醒",
+        "state": {
+          "on": "需要保养",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "机器保养和滤网提醒",
+        "state": {
+          "on": "需要保养",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "热水器结垢",
+        "state": {
+          "on": "已结垢",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "智能滤网清洁提醒",
+        "state": {
+          "on": "需要清洁",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "检查过滤系统",
+        "state": {
+          "on": "需要检查",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "无法排水",
+        "state": {
+          "on": "无法排水",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "排水泵堵塞",
+        "state": {
+          "on": "排水泵堵塞",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_flexspray_error_blocked": {
+        "name": "FlexSpray堵塞",
+        "state": {
+          "on": "堵塞",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_flexspray_error_general": {
+        "name": "FlexSpray故障",
+        "state": {
+          "on": "故障",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_flexspray_error_spray_arm_not_mounted": {
+        "name": "喷臂未安装",
+        "state": {
+          "on": "未安装",
+          "off": "正常"
+        }
+      },
+      "binary_sensor_program_finished": {
+        "name": "程序完成"
+      },
+      "binary_sensor_program_aborted": {
+        "name": "程序已中止"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "泡沫检测"
+      },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "供电电压过低"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "水位过高"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "门无法上锁"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "门无法解锁"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "严重故障"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "滚筒清洁提醒"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "i-DOS 2 液位低"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "i-DOS 1 液位低"
+      },
+      "binary_sensor_chiller_common_door_state": {
+        "name": "冷藏室门"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "冷冻室门"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "i-DOS 故障"
+      },
+      "binary_sensor_pump_error": {
+        "name": "水泵故障"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "脱水中止"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "冷藏室门"
+      },
+      "binary_sensor_door_alarm_chiller_common": {
+        "name": "冷藏室门报警"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "冷冻室门报警"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "冷藏室门报警"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "冷冻室温度报警"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "内部照明"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "化霜"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "滤水器已满"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "设备故障"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "低电压"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "闹钟已响{group_name}"
+      },
+      "binary_sensor_alarm_clock_elapsed": {
+        "name": "闹钟已响"
+      }
+    },
+    "sensor": {
+      "sensor_remaining_program_time": {
+        "name": "剩余程序时间"
+      },
+      "sensor_program_progress": {
+        "name": "程序进度"
+      },
+      "sensor_water_forecast": {
+        "name": "预计用水量"
+      },
+      "sensor_energy_forecast": {
+        "name": "预计用电量"
+      },
+      "sensor_operation_state": {
+        "name": "运行状态",
+        "state": {
+          "inactive": "未激活",
+          "ready": "就绪",
+          "delayedstart": "延时启动",
+          "run": "运行中",
+          "pause": "暂停",
+          "actionrequired": "需要操作",
+          "finished": "已完成",
+          "error": "错误",
+          "aborting": "中止中",
+          "running": "运行中",
+          "paused": "已暂停"
+        }
+      },
+      "sensor_program_phase": {
+        "name": "程序阶段",
+        "state": {
+          "none": "无",
+          "prerinse": "预冲洗",
+          "mainwash": "主洗",
+          "finalrinse": "最终漂洗",
+          "drying": "烘干"
+        }
+      },
+      "sensor_active_program": {
+        "name": "当前程序",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "强力 70",
+          "dishcare_dishwasher_program_auto2": "自动 2",
+          "dishcare_dishwasher_program_eco50": "节能 50",
+          "dishcare_dishwasher_program_quick45": "快洗 45",
+          "dishcare_dishwasher_program_prerinse": "预冲洗",
+          "dishcare_dishwasher_program_quick65": "快洗 65",
+          "dishcare_dishwasher_program_machinecare": "机器保养",
+          "favorite_001": "收藏 1",
+          "favorite_002": "收藏 2",
+          "favorite_003": "收藏 3",
+          "favorite_004": "收藏 4",
+          "favorite_005": "收藏 5",
+          "favorite_006": "收藏 6",
+          "favorite_007": "收藏 7",
+          "favorite_008": "收藏 8",
+          "favorite_009": "收藏 9",
+          "favorite_010": "收藏 10",
+          "laundrycare_common_program_memory1": "记忆 1",
+          "laundrycare_dryer_program_blankets": "毛毯",
+          "laundrycare_dryer_program_businessshirts_cupboarddry": "商务衬衫 收纳干",
+          "laundrycare_dryer_program_cotton": "棉织物",
+          "laundrycare_dryer_program_delicates": "精细织物",
+          "laundrycare_dryer_program_downfeathers": "羽绒",
+          "laundrycare_dryer_program_hygiene_withdrylaundry": "卫生干衣",
+          "laundrycare_dryer_program_inbasket_woolbasket": "羊毛篮",
+          "laundrycare_dryer_program_maintenance_depthcare": "深度保养",
+          "laundrycare_dryer_program_maintenance_quickcare": "快速保养",
+          "laundrycare_dryer_program_mix": "混合",
+          "laundrycare_dryer_program_outdoor": "户外",
+          "laundrycare_dryer_program_super40": "超快 40",
+          "laundrycare_dryer_program_synthetic": "化纤",
+          "laundrycare_dryer_program_timecold": "定时冷风",
+          "laundrycare_dryer_program_timewarm": "定时暖风",
+          "laundrycare_dryer_program_timewarmfix_minload": "定时暖风（少量）",
+          "laundrycare_washer_program_cotton": "棉织物",
+          "laundrycare_washer_program_delicatessilk": "精细/丝绸",
+          "laundrycare_washer_program_downduvet_down": "羽绒被",
+          "laundrycare_washer_program_easycare_antistainlight_butteroil": "易护理-去渍 黄油油渍",
+          "laundrycare_washer_program_easycare_antistainlight_cosmetics": "易护理-去渍 化妆品",
+          "laundrycare_washer_program_easycare_antistainlight_orange": "易护理-去渍 橙汁",
+          "laundrycare_washer_program_easycare_antistainlight_redwine": "易护理-去渍 红酒",
+          "laundrycare_washer_program_hygienicsteam_drumclean": "蒸汽除菌-筒清洁",
+          "laundrycare_washer_program_hygienicsteam_hygienicwash": "蒸汽除菌-卫生洗",
+          "laundrycare_washer_program_mix": "混合",
+          "laundrycare_washer_program_mytime": "我的时间",
+          "laundrycare_washer_program_rinse_rinsespin": "漂洗+脱水",
+          "laundrycare_washer_program_sensitive": "敏感",
+          "laundrycare_washer_program_sensofresh": "免洗清新",
+          "laundrycare_washer_program_shirtsblouses": "衬衫",
+          "laundrycare_washer_program_super153045_super15": "超快 15",
+          "laundrycare_washer_program_wool": "羊毛",
+          "dishcare_dishwasher_program_babycare": "婴儿护理",
+          "dishcare_dishwasher_program_glas40": "玻璃 40",
+          "dishcare_dishwasher_program_magicdaily": "每日快洗",
+          "dishcare_dishwasher_program_maximumcleaning": "强力清洗",
+          "dishcare_dishwasher_program_nightwash": "夜间洗涤",
+          "dishcare_dishwasher_program_quickd": "快洗干",
+          "dishcare_dishwasher_program_steamfresh": "蒸汽清新",
+          "laundrycare_dryer_program_wool": "羊毛",
+          "laundrycare_dryer_program_shirts": "衬衫",
+          "laundrycare_dryer_program_towels": "毛巾",
+          "laundrycare_dryer_program_pillow": "枕头",
+          "laundrycare_dryer_program_down_feather": "羽绒",
+          "laundrycare_dryer_program_time_program_cold": "冷风定时",
+          "laundrycare_dryer_program_time_program_warm": "暖风定时",
+          "laundrycare_dryer_program_super_40": "快干40",
+          "laundrycare_dryer_program_hygiene": "除菌",
+          "laundrycare_dryer_program_jeans": "牛仔裤",
+          "laundrycare_dryer_program_sportswear": "运动服",
+          "laundrycare_dryer_program_business_shirts": "商务衬衫",
+          "laundrycare_washer_program_cotton_eco": "棉织物节能",
+          "laundrycare_washer_program_easy_care": "易护理",
+          "laundrycare_washer_program_delicates_silk": "精细/丝绸",
+          "laundrycare_washer_program_sensorsensitive": "敏感",
+          "laundrycare_washer_program_dark_wash": "深色洗涤",
+          "laundrycare_washer_program_super_15_30": "快洗15/30",
+          "laundrycare_washer_program_sportswear": "运动服",
+          "laundrycare_washer_program_spincare_1400": "单脱水1400",
+          "laundrycare_washer_program_rinse": "漂洗",
+          "laundrycare_washer_program_drain_spin": "排水脱水",
+          "laundrycare_washer_program_shirts": "衬衫",
+          "laundrycare_washer_program_outdoor": "户外",
+          "laundrycare_washer_program_automatic": "自动",
+          "laundrycare_washer_program_down_feather": "羽绒",
+          "laundrycare_washer_program_drum_clean": "筒清洁",
+          "laundrycare_program_memory1": "收藏1",
+          "laundrycare_program_memory2": "收藏2",
+          "laundrycare_program_memory3": "收藏3",
+          "laundrycare_program_favorite": "收藏",
+          "laundrycare_program_my_time": "我的时间",
+          "laundrycare_program_auto": "自动",
+          "laundrycare_program_eco": "节能",
+          "laundrycare_program_express": "快速",
+          "laundrycare_program_intensive": "加强"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "漂洗剂",
+        "state": {
+          "empty": "已空",
+          "nearly_empty": "即将用完",
+          "full": "充足"
+        }
+      },
+      "sensor_salt": {
+        "name": "软水盐",
+        "state": {
+          "empty": "已空",
+          "nearly_empty": "即将用完",
+          "full": "充足"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "水箱",
+        "state": {
+          "empty": "空",
+          "nearly_empty": "即将空",
+          "not_inserted": "未安装",
+          "full": "满"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "接水盘",
+        "state": {
+          "full": "满",
+          "not_inserted": "未安装",
+          "ok": "正常"
+        }
+      },
+      "sensor_start_in": {
+        "name": "延时启动"
+      },
+      "sensor_finish_in": {
+        "name": "预计完成时间"
+      },
+      "sensor_count_started": {
+        "name": "启动次数"
+      },
+      "sensor_end_trigger": {
+        "name": "程序结束原因",
+        "state": {
+          "programfinished": "正常结束",
+          "programabortedbyuser": "用户中止",
+          "programabortedbyappliance": "设备中止",
+          "programabortedbyappliancecriticalerror": "严重错误"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "间隔关闭时间"
+      },
+      "sensor_interval_time_on": {
+        "name": "间隔开启时间"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "延时关机"
+      },
+      "sensor_power_state": {
+        "name": "电源状态",
+        "state": {
+          "mainsoff": "断电",
+          "off": "关闭",
+          "on": "开启",
+          "standby": "待机"
+        }
+      },
+      "sensor_door_state": {
+        "name": "门状态",
+        "state": {
+          "open": "打开",
+          "closed": "关闭",
+          "locked": "已锁",
+          "ajar": "虚掩"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "添衣状态",
+        "state": {
+          "impossible": "不可添加",
+          "possiblepauseprogram": "暂停后可添加",
+          "possibleopendoor": "开门可添加"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "洗涤阶段",
+        "state": {
+          "nophase": "无",
+          "prewash": "预洗",
+          "intermediatespin": "中间脱水",
+          "fillingdetergent": "注入洗涤剂",
+          "detectingload": "检测负载",
+          "heating": "加热",
+          "washing": "洗涤",
+          "cooldown": "冷却",
+          "rinsingfoam": "消泡漂洗",
+          "rinsing": "漂洗",
+          "rinsingaquasensor": "传感漂洗",
+          "rinseonly": "仅漂洗",
+          "waterproofing": "防水处理",
+          "rinsingsoftener": "柔顺剂漂洗",
+          "holdafterrinse": "漂洗后保持",
+          "pumping": "排水",
+          "spinningfinal": "最终脱水",
+          "lessironing": "免熊烫",
+          "fluffing": "蓬松",
+          "soaking": "浸泡",
+          "hygienicsteamfogging": "除菌蒸汽",
+          "guardingoxy": "氧护",
+          "generatingozone": "产生臭氧",
+          "degradingozone": "分解臭氧",
+          "drying": "烘干",
+          "coolingdown": "冷却",
+          "additionalcoolingdown": "额外冷却",
+          "guardingwrinkle": "防皱保护",
+          "detectingtextile": "检测面料",
+          "detectingsoil": "检测污渍",
+          "disinfecting": "消毒",
+          "lowtemperaturehygiene": "低温除菌",
+          "steamingactive": "蒸汽激活",
+          "irondryreached": "已达熊烫干",
+          "cupboarddryreached": "已达收纳干",
+          "cupboarddryplusreached": "已达收纳干+",
+          "cleaningheatexchanger": "清洁热交换器",
+          "slightlydampreached": "已达微潮",
+          "extradryreached": "已达超干",
+          "gentlydryreached": "已达柔干",
+          "quickcare": "快速护理",
+          "depthcarephase1": "深度护理阶段1",
+          "depthcarephase2": "深度护理阶段2",
+          "coldrefreshing": "冷风清新",
+          "steaming": "蒸汽",
+          "foam": "泡沫",
+          "testprogramdummytextfinalspeedreached": "测试程序终速达成",
+          "rinsingfoamf21": "消泡漂洗 F21",
+          "handsoak": "手洗浸泡",
+          "vacant": "空闲",
+          "spinning": "脱水",
+          "displayspinabortnospin": "显示脱水-取消免脱水",
+          "multiplesoak": "多次浸泡",
+          "laundryrefreshing": "衣物清新",
+          "reload": "添衣",
+          "hotmoistheatingwetting": "湿热润湿",
+          "hotmoistheatingheating": "湿热加热",
+          "hotmoistheatingwashing": "热湿洗涤",
+          "moistureremoval": "除湿",
+          "selfcleaning": "自清洁",
+          "hygiene": "除菌",
+          "smartsoak": "智能浸泡",
+          "soakpause": "浸泡暂停",
+          "soakfinished": "浸泡完成",
+          "anyphase": "任意阶段"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "完成次数"
+      },
+      "sensor_flex_start": {
+        "name": "灵活启动",
+        "state": {
+          "disabled": "已禁用",
+          "enabled": "已启用",
+          "pending": "等待中",
+          "scheduled": "已排程",
+          "started": "已启动",
+          "finished": "已完成"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "烘干阶段",
+        "state": {
+          "steamactive": "蒸汽激活",
+          "progstarted": "程序已启动",
+          "drying": "烘干",
+          "irondryreached": "已达熊烫干",
+          "cupboarddryreached": "已达收纳干",
+          "cubboarddryplusreached": "已达收纳干+",
+          "cooling": "冷却",
+          "finishedanticrease": "防皱结束",
+          "heatexchangercleaning": "热交换器清洁",
+          "slightlydampreached": "已达微潮",
+          "extradryreached": "已达超干",
+          "quickcare": "快速护理",
+          "depthcarephase1": "深度护理阶段1",
+          "depthcarephase2": "深度护理阶段2",
+          "spare": "备用"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "环境温度"
+      },
+      "sensor_laundry_load_recommendation": {
+        "name": "负载建议"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "冷冻室记忆温度"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "脱水转速",
+        "state": {
+          "off": "关闭",
+          "rpm400": "400 转/分",
+          "rpm600": "600 转/分",
+          "rpm700": "700 转/分",
+          "rpm800": "800 转/分",
+          "rpm900": "900 转/分",
+          "rpm1000": "1000 转/分",
+          "rpm1200": "1200 转/分",
+          "rpm1400": "1400 转/分",
+          "rpm1500": "1500 转/分",
+          "rpm1600": "1600 转/分",
+          "rinsehold": "免脱水",
+          "auto": "自动"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "预计剩余程序时间"
+      },
+      "sensor_oven_water_tank": {
+        "name": "水箱{group_name}",
+        "state": {
+          "unplugged": "未连接",
+          "empty": "空",
+          "ok": "正常"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "当前温度{group_name}"
+      },
+      "sensor_heatup_progress": {
+        "name": "预热进度"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "WiFi 信号强度"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "油脂滤网饱和度"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "活性炭滤网饱和度"
+      },
+      "sensor_hob_zone_state": {
+        "name": "{group_name}区域状态",
+        "state": {
+          "notselectable": "不可选",
+          "off": "关闭",
+          "active": "活跃",
+          "residuelheat": "余热"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "{group_name}区域运行状态",
+        "state": {
+          "inactive": "未激活",
+          "ready": "就绪",
+          "delayedstart": "延时启动",
+          "run": "运行中",
+          "pause": "暂停",
+          "actionrequired": "需要操作",
+          "finished": "已完成",
+          "error": "错误",
+          "aborting": "中止中"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "{group_name}区域功率等级",
+        "state": {
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "off": "Off",
+          "keepwarm": "KeepWarm",
+          "boost1": "Boost 1",
+          "boost2": "Boost 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "{group_name}区域煎炸传感器等级",
+        "state": {
+          "off": "Off",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "{group_name}区域当前温度"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "{group_name}区域加热进度"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "{group_name}区域持续时间"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "{group_name}区域已用时间"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "{group_name}区域剩余时间"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "{group_name}区域程序进度"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "浓缩咖啡计数"
+      },
+      "sensor_count_coffee": {
+        "name": "咖啡计数"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "拿铁计数"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "奶泡计数"
+      },
+      "sensor_count_hot_milk": {
+        "name": "热奶计数"
+      },
+      "sensor_count_hot_water": {
+        "name": "热水计数"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "热水杯数"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "粉状咖啡计数"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "除垢清洁提醒"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "清洁提醒"
+      },
+      "sensor_countdown_descaling": {
+        "name": "除垢提醒"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "滤水器更换提醒"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "制作阶段",
+        "state": {
+          "none": "空闲",
+          "beverageaborting": "取消饮品",
+          "grinding": "研磨咖啡豆",
+          "brewingunitmovesup": "准备冲泡组件",
+          "coffeebrewing": "冲泡咖啡",
+          "brewingunitmovesdown": "冲泡完成",
+          "milkfroth": "打发奶泡",
+          "cleaningmilksystem": "清洁奶路",
+          "hotwaterdispensing": "出热水",
+          "cleaningmode": "清洁模式",
+          "descalephase": "除垢",
+          "rinsephase": "冲洗",
+          "cleanphase": "清洁",
+          "warmmilk": "加热牛奶",
+          "frostprotection": "防冻保护",
+          "specialrinsing": "特别冲洗",
+          "waterfilteractivation": "激活滤水器",
+          "lattemacpause": "拿铁暂停",
+          "startphase": "启动中",
+          "skipphase": "跳过步骤",
+          "preliminary": "预步骤",
+          "autodescalephase": "自动除垢",
+          "autocleanphase": "自动清洁",
+          "drainingdescalephase": "除垢后排空",
+          "milkdescalephase": "奶路除垢",
+          "coldbrew": "冷萃",
+          "dripbrew": "滴滤",
+          "emptypowdersources": "清空粉仓",
+          "roundrobinflush": "系统冲洗",
+          "initializenewcartridge": "初始化滤芯"
+        }
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "i-DOS 1 液位",
+        "state": {
+          "poor": "不足",
+          "filled": "充足"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "i-DOS 2 液位",
+        "state": {
+          "poor": "不足",
+          "filled": "充足"
+        }
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "烘干助手全部程序",
+        "state": {
+          "off": "关闭",
+          "allprograms": "全部程序",
+          "ecoasdefault": "节能 50"
+        }
+      },
+      "select_hot_water": {
+        "name": "水温选择",
+        "state": {
+          "coldwater": "冷水",
+          "hotwater": "热水"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "漂洗剂",
+        "state": {
+          "off": "关闭",
+          "r01": "R01",
+          "r02": "R02",
+          "r03": "R03",
+          "r04": "R04",
+          "r05": "R05",
+          "r06": "R06"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "信号音量",
+        "state": {
+          "high": "高",
+          "low": "低",
+          "medium": "中",
+          "off": "关"
+        }
+      },
+      "select_sound_level_key": {
+        "name": "按键音量",
+        "state": {
+          "off": "关",
+          "low": "低",
+          "medium": "中",
+          "high": "高"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "PowerControl类型",
+        "state": {
+          "front": "前",
+          "back": "后",
+          "custom": "自定义",
+          "individual": "独立"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl左前",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl左后",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl右后",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl右前",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "自定义左前",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "自定义左后",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "自定义右后",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "自定义右前",
+        "state": {
+          "delicate": "精细",
+          "normal": "标准",
+          "heavy": "强力"
+        }
+      },
+      "select_water_hardness": {
+        "name": "水质硬度",
+        "state": {
+          "h00": "H00",
+          "h01": "H01",
+          "h02": "H02",
+          "h03": "H03",
+          "h04": "H04",
+          "h05": "H05",
+          "h06": "H06",
+          "h07": "H07"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "远程控制",
+        "state": {
+          "monitoring": "关闭",
+          "manualremotestart": "手动远程启动",
+          "permanentremotestart": "永久远程启动"
+        }
+      },
+      "select_program": {
+        "name": "选择程序",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "强力 70",
+          "dishcare_dishwasher_program_auto2": "自动 2",
+          "dishcare_dishwasher_program_eco50": "节能 50",
+          "dishcare_dishwasher_program_quick45": "快洗 45",
+          "dishcare_dishwasher_program_prerinse": "预冲洗",
+          "dishcare_dishwasher_program_quick65": "快洗 65",
+          "dishcare_dishwasher_program_machinecare": "机器保养",
+          "favorite_001": "收藏 1",
+          "favorite_002": "收藏 2",
+          "favorite_003": "收藏 3",
+          "favorite_004": "收藏 4",
+          "favorite_005": "收藏 5",
+          "favorite_006": "收藏 6",
+          "favorite_007": "收藏 7",
+          "favorite_008": "收藏 8",
+          "favorite_009": "收藏 9",
+          "favorite_010": "收藏 10",
+          "laundrycare_common_program_memory1": "记忆 1",
+          "laundrycare_dryer_program_blankets": "毛毯",
+          "laundrycare_dryer_program_businessshirts_cupboarddry": "商务衬衫 收纳干",
+          "laundrycare_dryer_program_cotton": "棉织物",
+          "laundrycare_dryer_program_delicates": "精细织物",
+          "laundrycare_dryer_program_downfeathers": "羽绒",
+          "laundrycare_dryer_program_hygiene_withdrylaundry": "卫生干衣",
+          "laundrycare_dryer_program_inbasket_woolbasket": "羊毛篮",
+          "laundrycare_dryer_program_maintenance_depthcare": "深度保养",
+          "laundrycare_dryer_program_maintenance_quickcare": "快速保养",
+          "laundrycare_dryer_program_mix": "混合",
+          "laundrycare_dryer_program_outdoor": "户外",
+          "laundrycare_dryer_program_super40": "超快 40",
+          "laundrycare_dryer_program_synthetic": "化纤",
+          "laundrycare_dryer_program_timecold": "定时冷风",
+          "laundrycare_dryer_program_timewarm": "定时暖风",
+          "laundrycare_dryer_program_timewarmfix_minload": "定时暖风（少量）",
+          "laundrycare_washer_program_cotton": "棉织物",
+          "laundrycare_washer_program_delicatessilk": "精细/丝绸",
+          "laundrycare_washer_program_downduvet_down": "羽绒被",
+          "laundrycare_washer_program_easycare_antistainlight_butteroil": "易护理-去渍 黄油油渍",
+          "laundrycare_washer_program_easycare_antistainlight_cosmetics": "易护理-去渍 化妆品",
+          "laundrycare_washer_program_easycare_antistainlight_orange": "易护理-去渍 橙汁",
+          "laundrycare_washer_program_easycare_antistainlight_redwine": "易护理-去渍 红酒",
+          "laundrycare_washer_program_hygienicsteam_drumclean": "蒸汽除菌-筒清洁",
+          "laundrycare_washer_program_hygienicsteam_hygienicwash": "蒸汽除菌-卫生洗",
+          "laundrycare_washer_program_mix": "混合",
+          "laundrycare_washer_program_mytime": "我的时间",
+          "laundrycare_washer_program_rinse_rinsespin": "漂洗+脱水",
+          "laundrycare_washer_program_sensitive": "敏感",
+          "laundrycare_washer_program_sensofresh": "免洗清新",
+          "laundrycare_washer_program_shirtsblouses": "衬衫",
+          "laundrycare_washer_program_super153045_super15": "超快 15",
+          "laundrycare_washer_program_wool": "羊毛",
+          "dishcare_dishwasher_program_babycare": "婴儿护理",
+          "dishcare_dishwasher_program_glas40": "玻璃 40",
+          "dishcare_dishwasher_program_magicdaily": "每日快洗",
+          "dishcare_dishwasher_program_maximumcleaning": "强力清洗",
+          "dishcare_dishwasher_program_nightwash": "夜间洗涤",
+          "dishcare_dishwasher_program_quickd": "快洗干",
+          "dishcare_dishwasher_program_steamfresh": "蒸汽清新",
+          "laundrycare_dryer_program_wool": "羊毛",
+          "laundrycare_dryer_program_shirts": "衬衫",
+          "laundrycare_dryer_program_towels": "毛巾",
+          "laundrycare_dryer_program_pillow": "枕头",
+          "laundrycare_dryer_program_down_feather": "羽绒",
+          "laundrycare_dryer_program_time_program_cold": "冷风定时",
+          "laundrycare_dryer_program_time_program_warm": "暖风定时",
+          "laundrycare_dryer_program_super_40": "快干40",
+          "laundrycare_dryer_program_hygiene": "除菌",
+          "laundrycare_dryer_program_jeans": "牛仔裤",
+          "laundrycare_dryer_program_sportswear": "运动服",
+          "laundrycare_dryer_program_business_shirts": "商务衬衫",
+          "laundrycare_washer_program_cotton_eco": "棉织物节能",
+          "laundrycare_washer_program_easy_care": "易护理",
+          "laundrycare_washer_program_delicates_silk": "精细/丝绸",
+          "laundrycare_washer_program_sensorsensitive": "敏感",
+          "laundrycare_washer_program_dark_wash": "深色洗涤",
+          "laundrycare_washer_program_super_15_30": "快洗15/30",
+          "laundrycare_washer_program_sportswear": "运动服",
+          "laundrycare_washer_program_spincare_1400": "单脱水1400",
+          "laundrycare_washer_program_rinse": "漂洗",
+          "laundrycare_washer_program_drain_spin": "排水脱水",
+          "laundrycare_washer_program_shirts": "衬衫",
+          "laundrycare_washer_program_outdoor": "户外",
+          "laundrycare_washer_program_automatic": "自动",
+          "laundrycare_washer_program_down_feather": "羽绒",
+          "laundrycare_washer_program_drum_clean": "筒清洁",
+          "laundrycare_program_memory1": "收藏1",
+          "laundrycare_program_memory2": "收藏2",
+          "laundrycare_program_memory3": "收藏3",
+          "laundrycare_program_favorite": "收藏",
+          "laundrycare_program_my_time": "我的时间",
+          "laundrycare_program_auto": "自动",
+          "laundrycare_program_eco": "节能",
+          "laundrycare_program_express": "快速",
+          "laundrycare_program_intensive": "加强"
+        }
+      },
+      "select_sensitivity_turbidity": {
+        "name": "浊度传感器灵敏度",
+        "state": {
+          "standard": "标准",
+          "sensitive": "灵敏",
+          "verysensitive": "非常灵敏"
+        }
+      },
+      "select_eco_as_default": {
+        "name": "默认程序",
+        "state": {
+          "lastprogram": "上次程序",
+          "ecoasdefault": "节能 50"
+        }
+      },
+      "select_power_state": {
+        "name": "电源状态",
+        "state": {
+          "mainsoff": "断电",
+          "off": "关闭",
+          "on": "开启",
+          "standby": "待机"
+        }
+      },
+      "select_coffee_temperature": {
+        "name": "咖啡温度",
+        "state": {
+          "88c": "88 °C",
+          "90c": "90 °C",
+          "92c": "92 °C",
+          "94c": "94 °C",
+          "95c": "95 °C",
+          "96c": "96 °C",
+          "98c": "98 °C"
+        }
+      },
+      "select_bean_amount": {
+        "name": "咖啡豆量",
+        "state": {
+          "verymild": "极淡",
+          "mild": "淡",
+          "mildplus": "淡+",
+          "normal": "标准",
+          "normalplus": "标准+",
+          "strong": "浓",
+          "strongplus": "浓+",
+          "verystrong": "极浓",
+          "verystrongplus": "极浓+",
+          "extrastrong": "超浓",
+          "doubleshot": "双倍",
+          "doubleshotplus": "双倍+",
+          "doubleshotplusplus": "双倍++",
+          "tripleshot": "三倍",
+          "tripleshotplus": "三倍+",
+          "coffeeground": "咖啡粉"
+        }
+      },
+      "select_beverage_size": {
+        "name": "饮品容量",
+        "state": {
+          "small": "小杯",
+          "medium": "中杯",
+          "large": "大杯",
+          "verylarge": "超大杯"
+        }
+      },
+      "select_coffee_milk_ratio": {
+        "name": "奶咖比",
+        "state": {
+          "10percent": "10%",
+          "20percent": "20%",
+          "25percent": "25%",
+          "30percent": "30%",
+          "40percent": "40%",
+          "50percent": "50%",
+          "55percent": "55%",
+          "60percent": "60%",
+          "65percent": "65%",
+          "67percent": "67%",
+          "70percent": "70%",
+          "75percent": "75%",
+          "80percent": "80%",
+          "85percent": "85%",
+          "90percent": "90%"
+        }
+      },
+      "select_hot_water_temperature": {
+        "name": "热水温度",
+        "state": {
+          "60c": "60 °C",
+          "70c": "70 °C",
+          "75c": "75 °C",
+          "80c": "80 °C",
+          "85c": "85 °C",
+          "90c": "90 °C",
+          "95c": "95 °C",
+          "97c": "97 °C"
+        }
+      },
+      "select_flow_rate": {
+        "name": "流速",
+        "state": {
+          "normal": "标准",
+          "intense": "浓郁",
+          "intenseplus": "浓郁+"
+        }
+      },
+      "select_coarsness": {
+        "name": "研磨粗细",
+        "state": {
+          "coarsness1": "粗细度 1",
+          "coarsness2": "粗细度 2",
+          "coarsness3": "粗细度 3",
+          "coarsness4": "粗细度 4",
+          "coarsness5": "粗细度 5",
+          "coarsness6": "粗细度 6"
+        }
+      },
+      "select_coffee_strength": {
+        "name": "咖啡浓度",
+        "state": {
+          "strength1": "浓度 1",
+          "strength2": "浓度 2",
+          "strength3": "浓度 3",
+          "strength4": "浓度 4",
+          "strength5": "浓度 5",
+          "strength6": "浓度 6",
+          "strength7": "浓度 7",
+          "strength8": "浓度 8",
+          "strength9": "浓度 9"
+        }
+      },
+      "select_aroma_select": {
+        "name": "香气选择",
+        "state": {
+          "fine": "细腻",
+          "balanced": "均衡",
+          "distinctive": "浓郁"
+        }
+      },
+      "select_bean_container": {
+        "name": "豆仓选择",
+        "state": {
+          "right": "右",
+          "left": "左"
+        }
+      },
+      "select_shot_count": {
+        "name": "萃取次数",
+        "state": {
+          "double": "双份",
+          "triple": "三份"
+        }
+      },
+      "select_cups": {
+        "name": "杯数",
+        "state": {
+          "two": "2杯",
+          "four": "4杯",
+          "six": "6杯"
+        }
+      },
+      "select_auto_power_off": {
+        "name": "自动关机",
+        "state": {
+          "off": "关闭",
+          "15min": "15 分钟",
+          "30min": "30 分钟",
+          "60min": "60 分钟"
+        }
+      },
+      "select_laundry_brightness": {
+        "name": "亮度等级",
+        "state": {
+          "low": "低",
+          "medium": "中",
+          "high": "高",
+          "veryhigh": "极高"
+        }
+      },
+      "select_door_light_ring_mode": {
+        "name": "门环形灯模式",
+        "state": {
+          "off": "关闭",
+          "on": "开启",
+          "auto": "自动"
+        }
+      },
+      "select_door_light_ring_brightness": {
+        "name": "门环形灯亮度",
+        "state": {
+          "low": "低",
+          "medium": "中",
+          "high": "高",
+          "veryhigh": "极高"
+        }
+      },
+      "select_laundry_end_signal_volume": {
+        "name": "结束提示音量",
+        "state": {
+          "off": "关闭",
+          "low": "低",
+          "medium": "中",
+          "loud": "响",
+          "veryloud": "极响"
+        }
+      },
+      "select_laundry_key_signal_volume": {
+        "name": "按键提示音量",
+        "state": {
+          "off": "关闭",
+          "low": "低",
+          "medium": "中",
+          "loud": "响",
+          "veryloud": "极响"
+        }
+      },
+      "select_laundry_sound_volume": {
+        "name": "按键提示音量",
+        "state": {
+          "off": "关闭",
+          "volume1": "音量 1",
+          "volume2": "音量 2",
+          "volume3": "音量 3",
+          "volume4": "音量 4"
+        }
+      },
+      "select_laundry_power_rating": {
+        "name": "供电功率",
+        "state": {
+          "10a": "10A",
+          "16a": "16A"
+        }
+      },
+      "select_laundry_wrinkle_guard": {
+        "name": "防皱保护",
+        "state": {
+          "off": "关闭",
+          "min30": "30 分钟",
+          "min60": "60 分钟",
+          "min90": "90 分钟",
+          "min120": "120 分钟",
+          "min180": "180 分钟"
+        }
+      },
+      "select_laundry_cupboard_dry_fine_adjust": {
+        "name": "收纳干微调",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_cupboard_dry_plus_fine_adjust": {
+        "name": "收纳干+微调",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_iron_dry_fine_adjust": {
+        "name": "熊烫干微调",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_spin_speed_before_drying": {
+        "name": "烘干前脱水转速",
+        "state": {
+          "off": "关闭",
+          "rpm400": "400 转/分",
+          "rpm600": "600 转/分",
+          "rpm700": "700 转/分",
+          "rpm800": "800 转/分",
+          "rpm900": "900 转/分",
+          "rpm1000": "1000 转/分",
+          "rpm1200": "1200 转/分",
+          "rpm1400": "1400 转/分",
+          "rpm1500": "1500 转/分",
+          "rpm1600": "1600 转/分",
+          "auto": "自动"
+        }
+      },
+      "select_laundry_drying_target": {
+        "name": "烘干目标",
+        "state": {
+          "irondry": "熊烫干",
+          "gentledry": "柔干",
+          "cupboarddry": "收纳干",
+          "cupboarddryplus": "收纳干+",
+          "extradry": "超干"
+        }
+      },
+      "select_laundry_refresher": {
+        "name": "烘干目标",
+        "state": {
+          "shirt1": "衬衫 1",
+          "shirt5": "衬衫 5",
+          "business": "商务"
+        }
+      },
+      "select_laundry_idos2_content": {
+        "name": "i-DOS 2 内容",
+        "state": {
+          "softener": "柔顺剂",
+          "detergent": "洗涤剂"
+        }
+      },
+      "select_laundry_idos2_level": {
+        "name": "i-DOS 2 用量",
+        "state": {
+          "off": "关闭",
+          "light": "少量",
+          "normal": "标准",
+          "strong": "加量"
+        }
+      },
+      "select_laundry_idos1_level": {
+        "name": "i-DOS 1 用量",
+        "state": {
+          "off": "关闭",
+          "light": "少量",
+          "normal": "标准",
+          "strong": "加量"
+        }
+      },
+      "select_laundry_vario_perfect": {
+        "name": "变速洗模式",
+        "state": {
+          "off": "关闭",
+          "ecoperfect": "节能",
+          "speedperfect": "快速"
+        }
+      },
+      "select_laundry_hygienic_steam_intensity": {
+        "name": "除菌蒸汽强度",
+        "state": {
+          "middle": "中",
+          "high": "高"
+        }
+      },
+      "select_laundry_multiple_soak": {
+        "name": "多次浸泡",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_rinseplus": {
+        "name": "加漂洗",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_laundry_spin_speed": {
+        "name": "脱水转速",
+        "state": {
+          "off": "关闭",
+          "uloff": "关闭",
+          "rpm1000": "1000转",
+          "ulhigh": "高",
+          "rpm1200": "1200转",
+          "rpm1400": "1400转",
+          "rpm1500": "1500转",
+          "rpm1600": "1600转",
+          "auto": "自动",
+          "max": "最大",
+          "ullow": "低",
+          "rpm400": "400转",
+          "rpm600": "600转",
+          "rpm700": "700转",
+          "ulmedium": "中",
+          "rpm800": "800转",
+          "rpm900": "900转"
+        }
+      },
+      "select_laundry_option_stains": {
+        "name": "污渍类型",
+        "state": {
+          "off": "关闭",
+          "babyfood": "婴儿食品",
+          "perspiration": "汗渍",
+          "socks": "袜子",
+          "butteroil": "黄油油渍",
+          "tea": "茶渍",
+          "tomatosauce": "番茄酱",
+          "strawberry": "草莓",
+          "orange": "橙汁",
+          "blood": "血渍",
+          "egg": "蛋渍",
+          "mud": "泥渍",
+          "grass": "草渍",
+          "coffee": "咖啡渍",
+          "cosmetics": "化妆品",
+          "redwine": "红酒",
+          "chocolate": "巧克力"
+        }
+      },
+      "select_laundry_option_temperature": {
+        "name": "洗涤温度",
+        "state": {
+          "cold": "冷水",
+          "gc20": "20°C",
+          "ulcold": "超冷",
+          "ulwarm": "超温",
+          "ulhot": "超热",
+          "ulextrahot": "超高温",
+          "gc30": "30°C",
+          "auto": "自动",
+          "max": "最高",
+          "gc40": "40°C",
+          "gc50": "50°C",
+          "gc60": "60°C",
+          "gc70": "70°C",
+          "gc80": "80°C",
+          "gc90": "90°C"
+        }
+      },
+      "select_laundry_option_water_and_rinse_plus": {
+        "name": "加水和漂洗",
+        "state": {
+          "off": "关闭",
+          "plus1": "+1",
+          "plus2": "+2",
+          "plus3": "+3"
+        }
+      },
+      "select_oven_level": {
+        "name": "等级",
+        "state": {
+          "level01": "等级 1",
+          "level02": "等级 2",
+          "level03": "等级 3"
+        }
+      },
+      "select_oven_used_heating_mode": {
+        "name": "加热模式",
+        "state": {
+          "automaticoperation": "自动操作",
+          "automaticoperationwithmicrowave": "微波自动操作",
+          "bakingsensoroperation": "烘焙传感操作",
+          "bottomheating": "底部加热",
+          "defrosting": "解冻",
+          "desiccation": "干燥",
+          "doughproving": "面团发酵",
+          "frozenheatupspecial": "冷冻加热特快",
+          "grilllargearea": "大面烧烤",
+          "grillsmallarea": "小面烧烤",
+          "hotair": "热风",
+          "hotaireco": "热风节能",
+          "hotairgrilling": "热风烧烤",
+          "intensiveheat": "强热",
+          "keepwarm": "保温",
+          "microwave": "微波",
+          "pizzasetting": "披萨模式",
+          "preheatovenware": "预热烤具",
+          "reheat": "复热",
+          "sabbathprogramme": "安息日程序",
+          "slowcook": "慢炖",
+          "steam": "蒸汽",
+          "topbottomheating": "上下加热",
+          "topbottomheatingeco": "上下加热节能",
+          "breadbaking": "面包烘焙",
+          "steamwithsteamset": "蒸汽套装"
+        }
+      },
+      "select_pyrolysis_level": {
+        "name": "自清洁等级",
+        "state": {
+          "level01": "等级 1",
+          "level02": "等级 2",
+          "level03": "等级 3"
+        }
+      },
+      "select_oven_child_lock_setting": {
+        "name": "童锁设置",
+        "state": {
+          "deactivated": "已关闭",
+          "activated": "已开启",
+          "activatedwithdoorlock": "已开启（含门锁）"
+        }
+      },
+      "select_oven_switch_on_delay": {
+        "name": "开机延迟",
+        "state": {
+          "short": "短",
+          "medium": "中",
+          "long": "长"
+        }
+      },
+      "select_oven_cooling_fan_runtime": {
+        "name": "冷却风扇运行时间",
+        "state": {
+          "short": "短",
+          "medium": "中",
+          "long": "长",
+          "verylong": "极长"
+        }
+      },
+      "select_oven_signal_duration": {
+        "name": "信号持续时间",
+        "state": {
+          "short": "短",
+          "medium": "中",
+          "long": "长"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_trigger": {
+        "name": "冷冻室门触发",
+        "state": {
+          "push": "推",
+          "pull": "拉",
+          "pushpull": "推拉"
+        }
+      },
+      "select_refrigerator_door_assistant_freezer_force": {
+        "name": "冷冻室门强制",
+        "state": {
+          "lowforce": "低",
+          "middleforce": "中",
+          "highforce": "高"
+        }
+      },
+      "select_chiller_common_preset": {
+        "name": "冷藏室预设",
+        "state": {
+          "meatfish": "肉/鱼 (-2°C)",
+          "fruit": "水果 (0°C)",
+          "vegetables": "蔬菜 (0°C)",
+          "beverages": "饮料 (1°C)",
+          "snacks": "零食 (4°C)",
+          "custom": "自定义"
+        }
+      },
+      "select_chiller_left_humidity": {
+        "name": "冷藏室左侧湿度",
+        "state": {
+          "low": "低",
+          "high": "高"
+        }
+      },
+      "select_chiller_right_humidity": {
+        "name": "冷藏室右侧湿度",
+        "state": {
+          "low": "低",
+          "high": "高"
+        }
+      },
+      "select_hood_interval_stage": {
+        "name": "间歇档位",
+        "state": {
+          "fanoff": "关闭",
+          "fanstage01": "1档",
+          "fanstage02": "2档",
+          "fanstage03": "3档"
+        }
+      },
+      "select_hob_delaye_shutoff_stage": {
+        "name": "延时关机档位",
+        "state": {
+          "fanoff": "关闭",
+          "fanstage01": "1档",
+          "fanstage02": "2档",
+          "fanstage03": "3档"
+        }
+      },
+      "select_temperature_unit": {
+        "name": "温度单位",
+        "state": {
+          "celsius": "摄氏度",
+          "fahrenheit": "华氏度"
+        }
+      },
+      "select_hood_carbon_filter_type": {
+        "name": "活性炭滤网类型",
+        "state": {
+          "none": "无",
+          "fahrenheit": "基础活性炭滤网",
+          "regenerativecarbonfilter": "再生活性炭滤网"
+        }
+      }
+    },
+    "button": {
+      "button_abort_program": {
+        "name": "中止"
+      },
+      "button_start_program": {
+        "name": "启动"
+      },
+      "button_pause_program": {
+        "name": "暂停"
+      },
+      "button_resume_program": {
+        "name": "继续"
+      },
+      "button_mains_power_off": {
+        "name": "关机"
+      },
+      "button_hood_carbon_filter_reset": {
+        "name": "活性炭滤网重置"
+      },
+      "button_hood_grease_filter_reset": {
+        "name": "油脂滤网重置"
+      },
+      "button_hood_regenerative_carbon_filter_reset": {
+        "name": "再生活性炭滤网重置"
+      },
+      "button_hood_regenerative_carbon_filter_lifetime_reset": {
+        "name": "再生活性炭滤网寿命重置"
+      }
+    },
+    "number": {
+      "number_fill_quantity": {
+        "name": "注水量"
+      },
+      "number_laundry_brightness": {
+        "name": "亮度"
+      },
+      "number_door_light_ring_brightness": {
+        "name": "门环形灯亮度"
+      },
+      "number_duration": {
+        "name": "持续时间"
+      },
+      "number_laundry_spin_class": {
+        "name": "脱水等级"
+      },
+      "number_setpoint_freezer": {
+        "name": "冷冻室温度"
+      },
+      "number_setpoint_refrigerator": {
+        "name": "冷藏室温度"
+      },
+      "number_setpoint_chiller_common": {
+        "name": "冷藏室温度"
+      },
+      "number_light_internal_brightness": {
+        "name": "内部照明亮度"
+      },
+      "number_idos1_base_level": {
+        "name": "i-DOS 投放量：洗涤剂"
+      },
+      "number_idos2_base_level": {
+        "name": "i-DOS 投放量：洗涤剂或柔顺剂"
+      },
+      "number_oven_setpoint_temperature": {
+        "name": "设定温度"
+      },
+      "number_oven_display_brightness": {
+        "name": "显示屏亮度"
+      },
+      "number_hood_interval_off": {
+        "name": "间歇关闭时间"
+      },
+      "number_hood_interval_on": {
+        "name": "间歇开启时间"
+      },
+      "number_hood_delayed_shutoff_time": {
+        "name": "延时关机时间"
+      },
+      "number_hood_sensor_sensitivity": {
+        "name": "自动传感器灵敏度"
+      },
+      "number_start_in": {
+        "name": "延时启动"
+      },
+      "number_setting_alarm_clock": {
+        "name": "闹钟"
+      }
+    },
+    "light": {
+      "light_door_ring": {
+        "name": "门环灯"
+      },
+      "light_drum_light": {
+        "name": "滚筒灯"
+      },
+      "light_internal": {
+        "name": "内部照明"
+      },
+      "light_logo": {
+        "name": "Logo灯"
+      },
+      "light_cooking_lighting": {
+        "name": "照明"
+      },
+      "light_cooking_ambient_lighting": {
+        "name": "氛围灯"
+      }
+    },
+    "fan": {
+      "fan_hood": {
+        "name": "油烟机风扇"
+      }
+    }
+  },
+  "services": {
+    "start_program": {
+      "name": "Start Program",
+      "description": "Start the selected Program",
+      "fields": {
+        "device_id": {
+          "name": "Appliance",
+          "description": "The Appliance to start the Program on"
+        },
+        "start_in": {
+          "name": "Start in",
+          "description": "Delay the Program start"
+        },
+        "finish_in": {
+          "name": "Finish in",
+          "description": "Time the Program should be finished in"
+        }
+      }
+    },
+    "set_start_in": {
+      "name": "Set start delay",
+      "description": "Set the start delay",
+      "fields": {
+        "device_id": {
+          "name": "Appliance",
+          "description": "The Appliance to set the start delay on"
+        },
+        "start_in": {
+          "name": "Delay",
+          "description": "Set the start delay"
+        },
+        "finish_in": {
+          "name": "Finish in",
+          "description": "Set the time the Program should be finished in"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "start_in_not_available": {
+      "message": "'Start in' is not available on this Appliance"
+    },
+    "finish_in_not_available": {
+      "message": "'Finish in' is not available on this Appliance"
+    },
+    "start_program_error": {
+      "message": "Error {code} starting program, resource {resource}"
+    },
+    "no_program_selected": {
+      "message": "No Program selected"
+    },
+    "auth_failed": {
+      "message": "Authentication failed {host}"
+    },
+    "cannot_connect": {
+      "message": "Can't connect to {host}"
+    },
+    "no_device_info": {
+      "message": "Appliance has no device info"
+    },
+    "speed_invalid": {
+      "message": "Speed {percentage} is invalid"
+    },
+    "not_appliance": {
+      "message": "Not a Homeconnect Appliance"
+    },
+    "access_error": {
+      "message": "Entity is not Accessible"
+    },
+    "code_respons": {
+      "message": "Error response from Appliance: {message}"
+    },
+    "not_connected": {
+      "message": "Client is not Connected"
+    }
+  }
+}

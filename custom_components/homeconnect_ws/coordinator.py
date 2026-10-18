@@ -4,25 +4,21 @@ from __future__ import annotations
 
 import logging
 import time
-from copy import deepcopy
 from typing import TYPE_CHECKING
 
-from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST
+from homeassistant.const import CONF_DEVICE_ID, CONF_HOST
 from homeassistant.exceptions import ConfigEntryError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeconnect_websocket import (
     AllreadyConnectedError,
     ConnectionFailedError,
     ConnectionState,
+    DeviceDescription,
     HCHandshakeError,
     HomeAppliance,
 )
 
-from .const import (
-    CONF_AES_IV,
-    CONF_PSK,
-    MAX_RECONECT_TIME,
-)
+from .const import CONF_AES_IV, CONF_PSK, MAX_RECONECT_TIME
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -42,21 +38,20 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     connected: bool = False
 
     def __init__(
-        self,
-        hass: HomeAssistant,
-        config_entry: HCConfigEntry,
+        self, hass: HomeAssistant, config_entry: HCConfigEntry, description: DeviceDescription
     ) -> None:
         """Initialize the coordinator."""
         super().__init__(
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
-            name=config_entry.data["description"]["info"]["vib"],
+            name=description["info"]["model"],
             config_entry=config_entry,
             always_update=True,
         )
+
         self.appliance = HomeAppliance(
-            description=deepcopy(config_entry.data[CONF_DESCRIPTION]),
+            description=description,
             host=config_entry.data[CONF_HOST],
             app_name="Homeassistant",
             app_id=config_entry.data[CONF_DEVICE_ID],
@@ -74,12 +69,12 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         await self.appliance.close()
 
     async def _async_setup(self) -> None:
-        self.config_entry.async_create_task(self.hass, self._connect())
+        self.config_entry.async_create_background_task(
+            self.hass, self._connect(), f"homeconnect_ws_{self.name}"
+        )
 
     async def _connect(self) -> None:
-        self.logger.debug(
-            "Connecting to %s", self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib")
-        )
+        self.logger.debug("Connecting to %s", self.appliance.info.get("vib"))
         first_failure = True
         while self._connecting:
             try:
@@ -88,7 +83,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     self.connected = True  # FIX
                     self.async_set_updated_data(None)  # FIX
                     return
-            except ConnectionFailedError, HCHandshakeError:
+            except (ConnectionFailedError, HCHandshakeError):
                 await self.appliance.close()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}, retrying"
                 if first_failure:
@@ -119,10 +114,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
         elif event == ConnectionState.CONNECTED:
             self.connected = True
             if self._reconnecting:
-                self.logger.debug(
-                    "Reconnected to %s",
-                    self.config_entry.data[CONF_DESCRIPTION]["info"].get("vib"),
-                )
+                self.logger.debug("Reconnected to %s", self.appliance.info.get("vib"))
                 self._reconnecting = False
 
         elif event == ConnectionState.CLOSED:

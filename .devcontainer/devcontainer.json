@@ -1,21 +1,20 @@
 {
     "name": "homeconnect_local",
-    "image": "mcr.microsoft.com/devcontainers/python:3.14",
-    "postCreateCommand": [
-        "script/setup.sh"
-    ],
+    "dockerFile": "../Dockerfile",
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && script/setup",
     "forwardPorts": [
         8123
     ],
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-python.python",
-                "eamodio.gitlens",
                 "charliermarsh.ruff",
+                "github.vscode-pull-request-github",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
                 "ryanluker.vscode-coverage-gutters",
+                "mhutchie.git-graph",
                 "tamasfe.even-better-toml",
-                "DavidAnson.vscode-markdownlint",
                 "redhat.vscode-yaml"
             ],
             "settings": {
@@ -25,7 +24,8 @@
                 "editor.formatOnSave": true,
                 "editor.formatOnType": false,
                 "files.trimTrailingWhitespace": true,
-                "editor.defaultFormatter": "charliermarsh.ruff",
+                "python.analysis.typeCheckingMode": "off",
+                "python.analysis.autoImportCompletions": true,
                 "[python]": {
                     "editor.defaultFormatter": "charliermarsh.ruff"
                 },
@@ -36,16 +36,31 @@
                 "python.testing.pytestEnabled": true,
                 "python.testing.pytestArgs": [
                     "tests"
-                ]
+                ],
+                "pylint.importStrategy": "fromEnvironment",
+                "python-envs.terminal.autoActivationType": "shellStartup"
             }
         }
     },
     "remoteUser": "root",
+    "features": {
+        "ghcr.io/devcontainers-extra/features/apt-packages:1": {
+            "packages": "ffmpeg,libturbojpeg0,libpcap-dev"
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "containerEnv": {
+        "UV_CACHE_DIR": "/.uv"
+    },
     "runArgs": [
         "--env-file",
         "./devcontainer.env"
     ],
-    "features": {
-        "ghcr.io/devcontainers/features/github-cli:1": {}
-    }
+    "mounts": [
+        {
+            "source": "uv_cache",
+            "target": "/.uv",
+            "type": "volume"
+        }
+    ]
 }
