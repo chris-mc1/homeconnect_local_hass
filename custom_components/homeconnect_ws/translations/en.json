@@ -3513,6 +3513,9 @@
       "button_hood_regenerative_carbon_filter_lifetime_reset": {
         "name": "Regenerative Carbon filter lifetime reset"
       },
+      "button_open_door": {
+        "name": "Open door"
+      },
       "button_water_filter_reset": {
         "name": "Water filter reset"
       }
