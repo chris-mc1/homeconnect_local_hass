@@ -38,6 +38,7 @@ from .descriptions_definitions import (
 
 if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
+    from homeconnect_websocket.entities import Entity as HcEntity
 
 
 POWER_SWITCH_VALUE_MAPINGS = (
@@ -198,24 +199,24 @@ def _parse_session_timestamp(value: str | None) -> datetime | None:
     """Parse an ISO timestamp from a program session summary."""
     if not value:
         return None
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
-def _session_start(entity) -> datetime | None:
+def _session_start(entity: HcEntity) -> datetime | None:
     """Return the latest program session start timestamp."""
     if not isinstance(entity.value, dict):
         return None
     return _parse_session_timestamp(entity.value.get("start"))
 
 
-def _session_end(entity) -> datetime | None:
+def _session_end(entity: HcEntity) -> datetime | None:
     """Return the latest program session end timestamp."""
     if not isinstance(entity.value, dict):
         return None
     return _parse_session_timestamp(entity.value.get("end"))
 
 
-def _session_duration(entity) -> float | None:
+def _session_duration(entity: HcEntity) -> float | None:
     """Return the latest completed program duration in seconds."""
     start = _session_start(entity)
     end = _session_end(entity)
@@ -224,7 +225,7 @@ def _session_duration(entity) -> float | None:
     return max(0.0, (end - start).total_seconds())
 
 
-def _expected_finish(entity) -> datetime | None:
+def _expected_finish(entity: HcEntity) -> datetime | None:
     """Calculate an estimated finish timestamp from remaining seconds."""
     if entity.value is None:
         return None
