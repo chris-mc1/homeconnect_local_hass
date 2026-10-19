@@ -27,7 +27,7 @@ jobs:
         run: uv python install 3.14
       - name: Install project and test dependencies
         run: uv sync --group dev --python 3.14
-      - name: Run dishwasher regression tests
-        run: uv run --python 3.14 pytest -q tests/test_sensor.py tests/test_entity_descriptions.py
+      - name: Run full integration test suite
+        run: uv run --python 3.14 pytest -q tests
       - name: Lint changed Python files
         run: uv run --python 3.14 ruff check custom_components/homeconnect_ws/sensor.py custom_components/homeconnect_ws/entity_descriptions
