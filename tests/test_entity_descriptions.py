@@ -355,9 +355,7 @@ def test_descriptions_have_english_name() -> None:
 def test_dishwasher_vario_speed_option_is_writable_switch() -> None:
     """Test VarioSpeed is sourced from the writable program option."""
     description = next(
-        item
-        for item in DISHCARE_ENTITY_DESCRIPTIONS["switch"]
-        if item.key == "switch_vario_speed"
+        item for item in DISHCARE_ENTITY_DESCRIPTIONS["switch"] if item.key == "switch_vario_speed"
     )
     assert description.entity == "Dishcare.Dishwasher.Option.VarioSpeed"
 
