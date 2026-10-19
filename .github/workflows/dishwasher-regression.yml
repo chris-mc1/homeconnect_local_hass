@@ -1,0 +1,33 @@
+name: Dishwasher timing and options regression
+
+on:
+  push:
+    branches:
+      - feature/dishwasher-time-and-options
+  pull_request:
+    paths:
+      - 'custom_components/homeconnect_ws/**'
+      - 'tests/test_sensor.py'
+      - 'tests/test_entity_descriptions.py'
+      - '.github/workflows/dishwasher-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install 3.14
+      - name: Install project and test dependencies
+        run: uv sync --group dev --python 3.14
+      - name: Run dishwasher regression tests
+        run: uv run --python 3.14 pytest -q tests/test_sensor.py tests/test_entity_descriptions.py
+      - name: Lint changed Python files
+        run: uv run --python 3.14 ruff check custom_components/homeconnect_ws/sensor.py custom_components/homeconnect_ws/entity_descriptions
