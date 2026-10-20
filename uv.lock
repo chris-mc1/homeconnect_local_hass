@@ -1070,16 +1070,17 @@ wheels = [
 
 [[package]]
 name = "homeconnect-websocket"
-version = "1.5.4"
+version = "1.5.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
+    { name = "json-repair" },
     { name = "pycryptodome" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/eb/1c/07644136d9d7db5c47ff06f2637b930479074b1d2d89c5db3a76458b56be/homeconnect_websocket-1.5.4.tar.gz", hash = "sha256:34174355c20327e0173c6db7057e4a9e0939e0c45e3d537f2e19cf389f78f223", size = 31006, upload-time = "2026-08-24T19:16:50.122Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9c/0c/295800e6f9b727ccf9833b8372244e1ef1da3f5e29c4623f20adcdcc0789/homeconnect_websocket-1.5.5.tar.gz", hash = "sha256:90a4f591637887dd9fbc8209580c8a061e352a4cfc307fb98509638196e6ef7f", size = 34075, upload-time = "2026-10-19T19:31:40.903Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3b/dd/9ce23057a2721de96f4e69415af976bd9fba1bc267a75e2356cbca633f39/homeconnect_websocket-1.5.4-py3-none-any.whl", hash = "sha256:ac5e599f66537458b4d92c1dcc85382ce757e60d884e545be56617e6439a25a1", size = 28093, upload-time = "2026-08-24T19:16:48.858Z" },
+    { url = "https://files.pythonhosted.org/packages/89/4f/2017bc1b3bb7f3039c90b03eb7f532e94573c8a0d21d1ffd2bd4a3393a28/homeconnect_websocket-1.5.5-py3-none-any.whl", hash = "sha256:b4b01bd12a1fb003c8ff3dbab48f0cb823c6c59c058c782a5a1f63170f6776fc", size = 30800, upload-time = "2026-10-19T19:31:39.377Z" },
 ]
 
 [[package]]
@@ -1106,7 +1107,7 @@ test = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "homeconnect-websocket", specifier = "==1.5.4" }]
+requires-dist = [{ name = "homeconnect-websocket", specifier = "==1.5.5" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -1214,6 +1215,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/7f/ad/6f520aee9cc9618d33430380741e9ef859b2c560b1e7915e755c084f6bc0/josepy-2.2.0.tar.gz", hash = "sha256:74c033151337c854f83efe5305a291686cef723b4b970c43cfe7270cf4a677a9", size = 56500, upload-time = "2025-10-14T14:54:42.108Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f8/b2/b5caed897fbb1cc286c62c01feca977e08d99a17230ff3055b9a98eccf1d/josepy-2.2.0-py3-none-any.whl", hash = "sha256:63e9dd116d4078778c25ca88f880cc5d95f1cab0099bebe3a34c2e299f65d10b", size = 29211, upload-time = "2025-10-14T14:54:41.144Z" },
+]
+
+[[package]]
+name = "json-repair"
+version = "0.64.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0b/d8/aed287ba5549e07f9688e88ba3e531cb41c966c6c44980d05e5560020b7b/json_repair-0.64.1.tar.gz", hash = "sha256:7640f80e70c15862ad262cabe91d20afc3248f3187a9811b8c8d0fddd2d62f19", size = 54226, upload-time = "2026-10-19T09:38:37.711Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/ba/af2d648f80e4c6400c2e596a79c4fab71be8c0690d15c2c0ea3eac66df1e/json_repair-0.64.1-py3-none-any.whl", hash = "sha256:1e1022f8d9b5a24433f7e28c2ee5c4ef42256e11ff0eef8abf7cad17fc8b9e0a", size = 52649, upload-time = "2026-10-19T09:38:36.295Z" },
 ]
 
 [[package]]
