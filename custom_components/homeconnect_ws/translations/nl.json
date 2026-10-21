@@ -35,6 +35,9 @@
   },
   "entity": {
     "switch": {
+      "switch_show_dish_programs": {
+        "name": "Programma's voor gerechten tonen"
+      },
       "switch_power_state": {
         "name": "Voedingsstatus"
       },

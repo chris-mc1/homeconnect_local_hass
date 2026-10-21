@@ -8,7 +8,7 @@ from homeassistant.components.select import SelectEntity
 from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
-from .helpers import create_entities, error_decorator
+from .helpers import create_entities, error_decorator, is_dish_program
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -96,7 +96,13 @@ class HCProgram(HCSelect):
 
     @property
     def options(self) -> list[str] | None:
-        return list(self._programs.values())
+        # The switch "show automatic dishes" leaves the dishes out of the list when it is off. The
+        # mapping is not changed: a dish that is selected or started on the appliance is still
+        # translated by current_option, and the active program sensor has all programs.
+        show_dishes = self._runtime_data.show_dish_programs
+        if show_dishes:
+            return list(self._programs.values())
+        return [name for program, name in self._programs.items() if not is_dish_program(program)]
 
     @property
     def current_option(self) -> list[str] | None:
