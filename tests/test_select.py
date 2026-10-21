@@ -237,3 +237,43 @@ async def test_select_program(
             },
         )
     )
+
+
+async def test_favorite_name_arrives_and_changes(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Refresh both program entities when a favourite name arrives after setup."""
+    favorite = mock_appliance.settings["BSH.Common.Setting.Favorite.001.Name"]
+    await favorite.update({"value": ""})
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 502})
+    await mock_appliance.entities["Test.ActiveProgram"].update({"value": 502})
+    await hass.async_block_till_done()
+    select_id = "select.fake_brand_homeappliance_selectedprogram"
+    sensor_id = "sensor.fake_brand_homeappliance_activeprogram"
+    assert hass.states.get(select_id).state == "favorite_001"
+    assert hass.states.get(sensor_id).state == "favorite_001"
+
+    for name in ("Large Cappuccino", "Small Cappuccino", ""):
+        await favorite.update({"value": name})
+        await hass.async_block_till_done()
+        expected = name or "favorite_001"
+        for entity_id in (select_id, sensor_id):
+            state = hass.states.get(entity_id)
+            assert state.state == expected
+            assert expected in state.attributes[ATTR_OPTIONS]
+
+    await favorite.update({"value": "Renamed Cappuccino"})
+    await hass.async_block_till_done()
+    mock_appliance.session.send_sync.reset_mock()
+    await hass.services.async_call(
+        SELECT_DOMAIN,
+        SERVICE_SELECT_OPTION,
+        {ATTR_ENTITY_ID: select_id, ATTR_OPTION: "Renamed Cappuccino"},
+        blocking=True,
+    )
+    message = mock_appliance.session.send_sync.call_args.args[0]
+    assert message.resource == "/ro/selectedProgram"
+    assert message.data["program"] == 502

@@ -3683,5 +3683,18 @@
     "not_connected": {
       "message": "Client is not Connected"
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Favourite Display Options",
+        "data": {
+          "filter_unsaved_favorites": "Filter Unsaved Favourites"
+        },
+        "data_description": {
+          "filter_unsaved_favorites": "Only show saved favourites in the program selector. Standard programs are unaffected."
+        }
+      }
+    }
   }
 }
