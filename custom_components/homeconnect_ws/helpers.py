@@ -97,6 +97,22 @@ async def get_config_entry_from_call(
     raise ServiceValidationError(translation_domain=DOMAIN, translation_key="not_appliance")
 
 
+# Prefix of the programs that are automatic dishes (for example the Gaggenau
+# Cooking.Oven.Program.Dish.Automatic.Conv.SeaBream). An oven has many of these (the Gaggenau
+# BO470112 has 58, the BS474112 has 96), they fill the program select.
+DISH_PROGRAM_PREFIX = "Cooking.Oven.Program.Dish."
+
+
+def is_dish_program(program: str) -> bool:
+    """Check if the program (name of the program entity) is an automatic dish."""
+    return program.startswith(DISH_PROGRAM_PREFIX)
+
+
+def has_dish_programs(appliance: HomeAppliance) -> bool:
+    """Check if the appliance has automatic dishes, otherwise the option has no effect."""
+    return any(is_dish_program(program) for program in appliance.programs)
+
+
 def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bool:
     """Check is HC entity is available."""
     available = True

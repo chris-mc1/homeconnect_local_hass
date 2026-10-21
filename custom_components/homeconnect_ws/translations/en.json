@@ -36,6 +36,9 @@
   },
   "entity": {
     "switch": {
+      "switch_show_dish_programs": {
+        "name": "Show programs for dishes"
+      },
       "switch_power_state": {
         "name": "Power"
       },
