@@ -97,7 +97,7 @@ class HCShowDishProgramsSwitch(HCEntity, SwitchEntity, RestoreEntity):
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
-        # Restore the last value, the default (off) leaves the automatic dishes out of the select.
+        # Restore the last value, the default (on) shows all programs as before.
         if (last_state := await self.async_get_last_state()) is not None and (
             last_state.state in (STATE_ON, STATE_OFF)
         ):

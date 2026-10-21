@@ -83,7 +83,7 @@ def test_select_options_show_dishes() -> None:
 
 
 def test_select_options_hide_dishes() -> None:
-    """With the switch off (the default) the dishes are left out, the other programs stay."""
+    """With the switch off the dishes are left out, the other programs stay."""
     assert _program_select(show_dish_programs=False).options == [
         "cooking_oven_program_heatingmode_hotair"
     ]
@@ -114,18 +114,12 @@ async def test_switch(
     patch_entity_description: None,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The switch is off by default and changes the value that the program select reads."""
+    """The switch is on by default and changes the value that the program select reads."""
     monkeypatch.setattr(switch, "has_dish_programs", lambda _appliance: True)
     entry = CONFIG_ENTRIES[0]
     assert await setup_config_entry(hass, entry)
     entity_id = _switch_entity_id(hass)
     assert entity_id is not None
-    assert hass.states.get(entity_id).state == STATE_OFF
-    assert entry.runtime_data.show_dish_programs is False
-
-    await hass.services.async_call(
-        SWITCH_DOMAIN, SERVICE_TURN_ON, {ATTR_ENTITY_ID: entity_id}, blocking=True
-    )
     assert hass.states.get(entity_id).state == STATE_ON
     assert entry.runtime_data.show_dish_programs is True
 
@@ -135,6 +129,12 @@ async def test_switch(
     assert hass.states.get(entity_id).state == STATE_OFF
     assert entry.runtime_data.show_dish_programs is False
 
+    await hass.services.async_call(
+        SWITCH_DOMAIN, SERVICE_TURN_ON, {ATTR_ENTITY_ID: entity_id}, blocking=True
+    )
+    assert hass.states.get(entity_id).state == STATE_ON
+    assert entry.runtime_data.show_dish_programs is True
+
 
 async def test_switch_restores_state(
     hass: HomeAssistant,
@@ -142,7 +142,7 @@ async def test_switch_restores_state(
     patch_entity_description: None,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A switch that was on before a restart is on again (the default is off)."""
+    """A switch that was off before a restart is off again (the default is on)."""
     monkeypatch.setattr(switch, "has_dish_programs", lambda _appliance: True)
     entry = CONFIG_ENTRIES[0]
     assert await setup_config_entry(hass, entry)
@@ -150,9 +150,9 @@ async def test_switch_restores_state(
 
     # Restart: unload the entry, put the last state in the cache and set the entry up again.
     assert await hass.config_entries.async_unload(entry.entry_id)
-    mock_restore_cache(hass, [State(entity_id, STATE_ON)])
+    mock_restore_cache(hass, [State(entity_id, STATE_OFF)])
     assert await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()
 
-    assert hass.states.get(entity_id).state == STATE_ON
-    assert entry.runtime_data.show_dish_programs is True
+    assert hass.states.get(entity_id).state == STATE_OFF
+    assert entry.runtime_data.show_dish_programs is False
