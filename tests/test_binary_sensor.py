@@ -77,3 +77,23 @@ async def test_update_enum(
 
     state = hass.states.get(entity_id)
     assert state.state == STATE_ON
+
+
+async def test_none_is_off(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test an event that was not reported yet is off, not unknown."""
+    entity_id = "binary_sensor.fake_brand_homeappliance_binarysensor_noneisoff"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    assert hass.states.get(entity_id).state == STATE_OFF
+
+    await mock_appliance.entities["Test.Event2"].update({"value": 1})  # Present
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON
+
+    await mock_appliance.entities["Test.Event2"].update({"value": 0})  # Off
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_OFF
