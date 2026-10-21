@@ -16,6 +16,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
     HCSwitchEntityDescription,
 )
 from custom_components.homeconnect_ws.entity_descriptions.common import (
+    generate_child_lock_switch,
     generate_power_switch,
     generate_program,
 )
@@ -154,6 +155,46 @@ async def test_power_switch(mock_homeconnect_appliance: MockApplianceType) -> No
         device_class=SwitchDeviceClass.SWITCH,
         value_mapping=("Standby", "Off"),
     )
+
+
+CHILD_LOCK = DeviceDescription(
+    setting=[
+        EntityDescription(
+            uid=524,
+            name="BSH.Common.Setting.ChildLock",
+            access=Access.READ_WRITE,
+            available=True,
+        ),
+    ]
+)
+
+
+async def test_child_lock_switch(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test the child lock switch is created when the appliance reports a value."""
+    appliance = await mock_homeconnect_appliance(description=CHILD_LOCK)
+    await appliance.entities["BSH.Common.Setting.ChildLock"].update({"value": False})
+
+    description = generate_child_lock_switch(appliance)
+
+    assert description is not None
+    assert description.key == "switch_child_lock"
+    assert description.entity == "BSH.Common.Setting.ChildLock"
+
+
+async def test_child_lock_switch_no_value(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test no child lock switch when the appliance reports no value (Gaggenau ovens)."""
+    appliance = await mock_homeconnect_appliance(description=CHILD_LOCK)
+    # BO470112 and BS474112: value null, never updated
+    assert appliance.entities["BSH.Common.Setting.ChildLock"].value is None
+
+    assert generate_child_lock_switch(appliance) is None
+
+
+async def test_child_lock_switch_missing(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test no child lock switch when the appliance has no child lock."""
+    appliance = await mock_homeconnect_appliance(description=DeviceDescription())
+
+    assert generate_child_lock_switch(appliance) is None
 
 
 PROGRAM = DeviceDescription(

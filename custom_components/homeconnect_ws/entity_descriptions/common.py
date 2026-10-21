@@ -102,6 +102,25 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
     return entity_descriptions
 
 
+def generate_child_lock_switch(appliance: HomeAppliance) -> HCSwitchEntityDescription | None:
+    """
+    Get Child lock switch description.
+
+    The Gaggenau ovens BO470112 and BS474112 list `BSH.Common.Setting.ChildLock` in their
+    description, but never report a value for it (diagnostics: value null, available false) and
+    set it to read only as soon as the oven is switched on. A switch for it would do nothing, so
+    it is only created when the appliance reports a value for the child lock.
+    """
+    entity = appliance.entities.get("BSH.Common.Setting.ChildLock")
+    if entity is not None and entity.value is not None:
+        return HCSwitchEntityDescription(
+            key="switch_child_lock",
+            entity="BSH.Common.Setting.ChildLock",
+            device_class=SwitchDeviceClass.SWITCH,
+        )
+    return None
+
+
 def generate_door_state(appliance: HomeAppliance) -> HCSensorEntityDescription | None:
     """Get Door sensor description."""
     entity = appliance.entities.get("BSH.Common.Status.DoorState")
@@ -408,11 +427,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     ],
     "start_button": [generate_start_button],
     "switch": [
-        HCSwitchEntityDescription(
-            key="switch_child_lock",
-            entity="BSH.Common.Setting.ChildLock",
-            device_class=SwitchDeviceClass.SWITCH,
-        ),
+        generate_child_lock_switch,
     ],
     "number": [
         HCNumberEntityDescription(
