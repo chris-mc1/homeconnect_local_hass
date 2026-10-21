@@ -78,6 +78,12 @@ class HCBinarySensorEntityDescription(
     value_on: set[str] | None = None
     value_off: set[str] | None = None
     available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
+    # Name of the alarm clock setting of the appliance, for `entity` an alarm clock event. Ignored
+    # when the appliance does not have this entity. Some ovens leave the event on after the alarm
+    # was confirmed, and do not report it again for the next timer. When set, the sensor is off:
+    # - when the alarm clock is 0 (confirmed or no timer set), whatever the value of `entity`.
+    # - when a timer was started after `entity` was last reported as on: the "on" is old.
+    alarm_clock_entity: str | None = None
 
 
 class HCButtonEntityDescription(
@@ -86,6 +92,17 @@ class HCButtonEntityDescription(
     """Description for Button Entity."""
 
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    # When True, `entity` is an Event and pressing the button acknowledges that event with
+    # BSH.Common.Command.AcknowledgeEvent instead of writing True to the entity.
+    acknowledge_event: bool = False
+    # Name of the alarm clock setting of the appliance, for `entity` an alarm clock event. Ignored
+    # when the appliance does not have this entity. With `alarm_state` the button is only available
+    # when the alarm clock is not 0 and the alarm is in that state:
+    # - "elapsed": the alarm has elapsed and is not confirmed yet.
+    # - "running": a timer is running. An event that is still on from a confirmed alarm does not
+    #   make an elapsed alarm when a timer was started after it was reported.
+    alarm_clock_entity: str | None = None
+    alarm_state: Literal["elapsed", "running"] | None = None
 
 
 class HCNumberEntityDescription(
