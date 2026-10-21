@@ -279,6 +279,31 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         # cleanup: duplicate select_remote_control_level entry removed
+        # Regional settings (uid 7, 580, 585, 533). The language is shown with the names the
+        # appliance reports, because the list of languages differs per appliance.
+        HCSelectEntityDescription(
+            key="select_date_format",
+            entity="BSH.Common.Setting.DateFormat",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_time_format",
+            entity="BSH.Common.Setting.TimeFormat",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_weight_unit",
+            entity="BSH.Common.Setting.WeightUnit",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_language",
+            entity="BSH.Common.Setting.Language",
+            entity_category=EntityCategory.CONFIG,
+        ),
         generate_temperature_unit,
     ],
     "sensor": [
@@ -412,6 +437,13 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="switch_child_lock",
             entity="BSH.Common.Setting.ChildLock",
             device_class=SwitchDeviceClass.SWITCH,
+        ),
+        # Uid 547: let the appliance set its clock from the time server.
+        HCSwitchEntityDescription(
+            key="switch_synchronize_with_time_server",
+            entity="BSH.Common.Setting.SynchronizeWithTimeServer",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
         ),
     ],
     "number": [

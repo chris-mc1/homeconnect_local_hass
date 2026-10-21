@@ -213,6 +213,21 @@
       "switch_extra_rinse": {
         "name": "Extra Rinse"
       },
+      "switch_oven_heating_signal": {
+        "name": "Heating signal"
+      },
+      "switch_oven_door_opener_delay": {
+        "name": "Door opener delay"
+      },
+      "switch_oven_rotary_spit": {
+        "name": "Rotary spit"
+      },
+      "switch_oven_quick_roast": {
+        "name": "Quick roast"
+      },
+      "switch_synchronize_with_time_server": {
+        "name": "Synchronize with time server"
+      },
       "switch_pretreatment": {
         "name": "Pre-Treatment"
       },
@@ -3469,6 +3484,57 @@
           "basiccarbonfilter": "Basic Carbon filter",
           "regenerativecarbonfilter": "Regenerative Carbon filter"
         }
+      },
+      "select_oven_idle_screen": {
+        "name": "Idle screen",
+        "state": {
+          "standard": "Standard",
+          "reduced": "Reduced"
+        }
+      },
+      "select_oven_touchkey_color": {
+        "name": "Touch key color",
+        "state": {
+          "grey": "Grey",
+          "white": "White"
+        }
+      },
+      "select_oven_standby_display": {
+        "name": "Standby display",
+        "state": {
+          "off": "Off",
+          "clock": "Clock",
+          "clockandlogo": "Clock and logo",
+          "date": "Date",
+          "dateandlogo": "Date and logo",
+          "clockanddate": "Clock and date",
+          "clockanddateandlogo": "Clock, date and logo"
+        }
+      },
+      "select_date_format": {
+        "name": "Date format",
+        "state": {
+          "dddotmmdotyy": "DD.MM.YY",
+          "ddslashmmslashyy": "DD/MM/YY",
+          "mmslashddslashyy": "MM/DD/YY"
+        }
+      },
+      "select_time_format": {
+        "name": "Time format",
+        "state": {
+          "24hours": "24 hours",
+          "12hours": "12 hours"
+        }
+      },
+      "select_weight_unit": {
+        "name": "Weight unit",
+        "state": {
+          "gram": "Gram",
+          "ounces": "Ounces"
+        }
+      },
+      "select_language": {
+        "name": "Language"
       },
       "select_hood_light_startup": {
         "name": "Light startup setting",
