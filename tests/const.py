@@ -13,6 +13,7 @@ from custom_components.homeconnect_ws.const import (
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
+    HCDateTimeEntityDescription,
     HCFanEntityDescription,
     HCLightEntityDescription,
     HCNumberEntityDescription,
@@ -84,6 +85,13 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "button": [
         HCButtonEntityDescription(
             key="Test.AbortProgram", name="AbortProgram", entity="Test.AbortProgram"
+        )
+    ],
+    "datetime": [
+        HCDateTimeEntityDescription(
+            key="Test.DateTime",
+            name="Local time",
+            entity="BSH.Common.Setting.LocalTime",
         )
     ],
     "active_program": [
@@ -294,6 +302,14 @@ DEVICE_DESCRIPTION = DeviceDescription(
             stepSize=2,
             available=True,
             access=Access.READ_WRITE,
+        ),
+        EntityDescription(
+            uid=205,
+            name="BSH.Common.Setting.LocalTime",
+            available=True,
+            access=Access.READ_WRITE,
+            default="2026-10-07T15:22:08",
+            protocolType="String",
         ),
         EntityDescription(
             uid=104,
