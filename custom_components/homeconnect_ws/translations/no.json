@@ -379,6 +379,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Brukt oppvarmingsmodus",
+        "state": {
+          "automaticoperation": "Automatisk drift",
+          "automaticoperationwithmicrowave": "Automatisk drift med mikrobølgeovn",
+          "bakingsensoroperation": "Baking sensor drift",
+          "bottomheating": "Bunnvarme",
+          "defrosting": "Tining",
+          "desiccation": "Tørking",
+          "doughproving": "Deigheving",
+          "frozenheatupspecial": "Frossen oppvarming spesiell",
+          "grilllargearea": "Grill stor flate",
+          "grillsmallarea": "Grill liten flate",
+          "hotair": "Varmluft",
+          "hotaireco": "Varmluft Eco",
+          "hotairgrilling": "Varmluft grilling",
+          "intensiveheat": "Intensiv varme",
+          "keepwarm": "Hold varmt",
+          "microwave": "Mikrobølgeovn",
+          "pizzasetting": "Pizza-innstilling",
+          "preheatovenware": "Forvarm stekeutstyr",
+          "reheat": "Varm opp",
+          "sabbathprogramme": "Sabbatsprogram",
+          "slowcook": "Saktekok",
+          "steam": "Damp",
+          "topbottomheating": "Over/under varme",
+          "topbottomheatingeco": "Over/under varme Eco",
+          "breadbaking": "Brødbaking",
+          "steamwithsteamset": "Damp med dampsett"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Gjenværende programtid"
       },
@@ -1645,37 +1676,6 @@
           "level01": "Nivå 1",
           "level02": "Nivå 2",
           "level03": "Nivå 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Brukt oppvarmingsmodus",
-        "state": {
-          "automaticoperation": "Automatisk drift",
-          "automaticoperationwithmicrowave": "Automatisk drift med mikrobølgeovn",
-          "bakingsensoroperation": "Baking sensor drift",
-          "bottomheating": "Bunnvarme",
-          "defrosting": "Tining",
-          "desiccation": "Tørking",
-          "doughproving": "Deigheving",
-          "frozenheatupspecial": "Frossen oppvarming spesiell",
-          "grilllargearea": "Grill stor flate",
-          "grillsmallarea": "Grill liten flate",
-          "hotair": "Varmluft",
-          "hotaireco": "Varmluft Eco",
-          "hotairgrilling": "Varmluft grilling",
-          "intensiveheat": "Intensiv varme",
-          "keepwarm": "Hold varmt",
-          "microwave": "Mikrobølgeovn",
-          "pizzasetting": "Pizza-innstilling",
-          "preheatovenware": "Forvarm stekeutstyr",
-          "reheat": "Varm opp",
-          "sabbathprogramme": "Sabbatsprogram",
-          "slowcook": "Saktekok",
-          "steam": "Damp",
-          "topbottomheating": "Over/under varme",
-          "topbottomheatingeco": "Over/under varme Eco",
-          "breadbaking": "Brødbaking",
-          "steamwithsteamset": "Damp med dampsett"
         }
       },
       "select_pyrolysis_level": {

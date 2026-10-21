@@ -379,6 +379,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Used Heating mode",
+        "state": {
+          "automaticoperation": "Automatic Operation",
+          "automaticoperationwithmicrowave": "Automatic Operation with Microwave",
+          "bakingsensoroperation": "Baking Sensor Operation",
+          "bottomheating": "Bottom Heating",
+          "defrosting": "Defrosting",
+          "desiccation": "Desiccation",
+          "doughproving": "Dough Proving",
+          "frozenheatupspecial": "Frozen Heatup Special",
+          "grilllargearea": "Grill large area",
+          "grillsmallarea": "Grill small area",
+          "hotair": "HotAir",
+          "hotaireco": "HotAir Eco",
+          "hotairgrilling": "HotAir grilling",
+          "intensiveheat": "Intensive heat",
+          "keepwarm": "Keep warm",
+          "microwave": "Microwave",
+          "pizzasetting": "Pizza setting",
+          "preheatovenware": "Preheat Ovenware",
+          "reheat": "Reheat",
+          "sabbathprogramme": "Sabbath Programme",
+          "slowcook": "Slow Cook",
+          "steam": "Steam",
+          "topbottomheating": "Top/Bottom Heating",
+          "topbottomheatingeco": "Top/Bottom Heating Eco",
+          "breadbaking": "Bread baking",
+          "steamwithsteamset": "Steam with Steamset"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Temps restant"
       },
@@ -1689,37 +1720,6 @@
           "level01": "Niveau 1",
           "level02": "Niveau 2",
           "level03": "Niveau 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Used Heating mode",
-        "state": {
-          "automaticoperation": "Automatic Operation",
-          "automaticoperationwithmicrowave": "Automatic Operation with Microwave",
-          "bakingsensoroperation": "Baking Sensor Operation",
-          "bottomheating": "Bottom Heating",
-          "defrosting": "Defrosting",
-          "desiccation": "Desiccation",
-          "doughproving": "Dough Proving",
-          "frozenheatupspecial": "Frozen Heatup Special",
-          "grilllargearea": "Grill large area",
-          "grillsmallarea": "Grill small area",
-          "hotair": "HotAir",
-          "hotaireco": "HotAir Eco",
-          "hotairgrilling": "HotAir grilling",
-          "intensiveheat": "Intensive heat",
-          "keepwarm": "Keep warm",
-          "microwave": "Microwave",
-          "pizzasetting": "Pizza setting",
-          "preheatovenware": "Preheat Ovenware",
-          "reheat": "Reheat",
-          "sabbathprogramme": "Sabbath Programme",
-          "slowcook": "Slow Cook",
-          "steam": "Steam",
-          "topbottomheating": "Top/Bottom Heating",
-          "topbottomheatingeco": "Top/Bottom Heating Eco",
-          "breadbaking": "Bread baking",
-          "steamwithsteamset": "Steam with Steamset"
         }
       },
       "select_pyrolysis_level": {
