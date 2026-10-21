@@ -110,6 +110,6 @@ class HCProgram(HCSelect):
     async def async_select_option(self, option: str) -> None:
         selected_program = self._runtime_data.appliance.programs[self._rev_programs[option]]
         if selected_program.execution in (Execution.SELECT_ONLY, Execution.SELECT_AND_START):
-            await selected_program.select()
+            await selected_program.select(override_options=True)
         elif selected_program.execution == Execution.START_ONLY:
             await selected_program.start()
