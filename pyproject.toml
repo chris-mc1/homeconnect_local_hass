@@ -5,7 +5,7 @@ authors = [{ name = "chris-mc1" }]
 description = "Home Connect Local for Homeassistant"
 readme = "README.md"
 requires-python = ">=3.14.2"
-dependencies = ["homeconnect-websocket==1.5.4"]
+dependencies = ["homeconnect-websocket==1.5.5"]
 
 [project.urls]
 Homepage = "https://github.com/chris-mc1/homeconnect_local_hass"
@@ -19,7 +19,7 @@ dev = [
     "homeassistant==2026.8.1",
     "prek==0.5.5",
 ]
-lint = ["ruff==0.16.10"]
+lint = ["ruff==0.17.1"]
 test = ["pytest-homeassistant-custom-component"]
 
 [tool.uv]
