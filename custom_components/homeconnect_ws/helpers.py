@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers.service import async_extract_config_entry_ids
+from homeconnect_websocket.entities import Access
 from homeconnect_websocket.errors import AccessError, CodeResponsError, NotConnectedError
 
 from .const import DOMAIN
@@ -18,8 +19,8 @@ if TYPE_CHECKING:
 
     from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
-    from homeconnect_websocket.entities import Access
     from homeconnect_websocket.entities import Entity as HcEntity
+    from homeconnect_websocket.entities import Program
 
     from . import HCConfigEntry, HCData
     from .entity import HCEntity
@@ -106,6 +107,40 @@ def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bo
     if hasattr(entity, "access"):
         available &= entity.access in available_access
     return available
+
+
+# Brands (in capitals) that get no options when a program is selected or started. The last
+# known values of the options belong to another program (for example the setpoint of the hot
+# air program for the keep warm program); the Gaggenau ovens use the values of the program.
+NO_PROGRAM_OPTIONS_BRANDS = {"GAGGENAU"}
+
+
+def valid_program_options(program: Program, brand: str = "") -> dict[int, Any]:
+    """
+    Get the options that can be sent when a program is selected or started.
+
+    The appliance answers "400 BadRequest" when an option has no value (None), is not
+    available or has a value outside of its minimum and maximum. For example a Gaggenau
+    oven reported the Fahrenheit setpoint (None) and a duration of 0 (minimum 1). Those
+    options are left out, the appliance then uses its own default. Gaggenau ovens get no
+    options at all, see NO_PROGRAM_OPTIONS_BRANDS.
+    """
+    if brand.upper() in NO_PROGRAM_OPTIONS_BRANDS:
+        return {}
+    options = {}
+    for option in program._options:  # noqa: SLF001
+        if option.access != Access.READ_WRITE or option.available is False:
+            continue
+        value = option.value_shadow
+        if value is None:
+            continue
+        if isinstance(value, int | float) and not isinstance(value, bool):
+            if option.min is not None and value < option.min:
+                continue
+            if option.max is not None and value > option.max:
+                continue
+        options[option.uid] = value
+    return options
 
 
 def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Coroutine[T]]:
