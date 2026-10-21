@@ -514,11 +514,6 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     ],
     "select": [
         HCSelectEntityDescription(
-            key="select_oven_meat_probe_temperature",
-            entity="Cooking.Oven.Option.MeatProbeTemperatureV2",
-            has_state_translation=True,
-        ),
-        HCSelectEntityDescription(
             key="select_oven_level",
             entity="Cooking.Oven.Option.Level",
             has_state_translation=True,

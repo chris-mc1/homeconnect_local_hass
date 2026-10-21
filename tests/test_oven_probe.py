@@ -1,4 +1,4 @@
-"""Tests for oven meat probe discovery, readings and target selection."""
+"""Tests for oven meat probe discovery and readings."""
 
 from __future__ import annotations
 
@@ -12,11 +12,9 @@ from custom_components.homeconnect_ws.const import DOMAIN
 from custom_components.homeconnect_ws.entity_descriptions import get_available_entities
 from custom_components.homeconnect_ws.entity_descriptions.cooking import generate_oven_status
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
-from homeassistant.components.select import ATTR_OPTION, ATTR_OPTIONS, SERVICE_SELECT_OPTION
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import (
     ATTR_DEVICE_CLASS,
-    ATTR_ENTITY_ID,
     ATTR_UNIT_OF_MEASUREMENT,
     STATE_OFF,
     STATE_ON,
@@ -25,7 +23,6 @@ from homeassistant.const import (
 )
 from homeassistant.helpers import entity_registry as er
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
-from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
 from .const import CONFIG_ENTRIES, DEVICE_DESCRIPTION
@@ -168,25 +165,7 @@ async def test_probe_readings(hass: HomeAssistant, oven_appliance: MockAppliance
     assert hass.states.get(plugged_id).state == STATE_OFF
 
 
-@pytest.mark.parametrize(("option", "value"), [("off", 0), ("60dc", 60)])
-async def test_probe_target(
-    hass: HomeAssistant, oven_appliance: MockAppliance, option: str, value: int
-) -> None:
-    """Decode Off and Celsius targets and send the correct raw enum value."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
-    target_id = entity_id(hass, oven_appliance, "select", "select_oven_meat_probe_temperature")
-    await oven_appliance.entities[TARGET_TEMPERATURE].update({"value": value})
-    await hass.async_block_till_done()
-    state = hass.states.get(target_id)
-    assert state.state == option
-    assert state.attributes[ATTR_OPTIONS] == ["off", *[f"{value}dc" for value in range(30, 100)]]
-
-    await hass.services.async_call(
-        "select",
-        SERVICE_SELECT_OPTION,
-        {ATTR_ENTITY_ID: target_id, ATTR_OPTION: option},
-        blocking=True,
-    )
-    oven_appliance.session.send_sync.assert_awaited_once_with(
-        Message(resource="/ro/values", action=Action.POST, data={"uid": 0x1418, "value": value})
-    )
+async def test_probe_target_has_no_select(oven_appliance: MockAppliance) -> None:
+    """Leave the target option to the number platform without adding a duplicate select."""
+    descriptions = get_available_entities(oven_appliance)
+    assert all(entity.entity != TARGET_TEMPERATURE for entity in descriptions["select"])
