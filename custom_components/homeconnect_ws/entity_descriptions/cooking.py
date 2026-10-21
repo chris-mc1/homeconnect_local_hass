@@ -10,6 +10,7 @@ from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature, UnitOfTime
+from homeconnect_websocket.entities import Access
 
 from custom_components.homeconnect_ws.helpers import get_groups_from_regex
 
@@ -403,6 +404,17 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Hood.Status.CarbonFilterSaturation",
             native_unit_of_measurement=PERCENTAGE,
         ),
+        # The heating mode that an automatic dish uses. The oven reports this option as access
+        # "none" in all of its programs and makes it available (with a value) only while an
+        # automatic dish runs, so it can only be read: a sensor instead of a select (a select
+        # needs write access, so it was always unavailable). Access NONE is allowed because of that.
+        HCSensorEntityDescription(
+            key="sensor_oven_used_heating_mode",
+            entity="Cooking.Oven.Option.UsedHeatingMode",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+            available_access=(Access.NONE, Access.READ, Access.READ_WRITE),
+        ),
         HCSensorEntityDescription(
             key="sensor_oven_water_tank",
             entities=(
@@ -473,11 +485,6 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_oven_level",
             entity="Cooking.Oven.Option.Level",
-            has_state_translation=True,
-        ),
-        HCSelectEntityDescription(
-            key="select_oven_used_heating_mode",
-            entity="Cooking.Oven.Option.UsedHeatingMode",
             has_state_translation=True,
         ),
         HCSelectEntityDescription(

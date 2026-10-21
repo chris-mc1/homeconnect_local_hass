@@ -416,6 +416,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Använt värmeläge",
+        "state": {
+          "automaticoperation": "Automatiskt läge",
+          "automaticoperationwithmicrowave": "Automatiskt läge med mikrovåg",
+          "bakingsensoroperation": "Bakningssensor",
+          "bottomheating": "Undervärme",
+          "defrosting": "Upptining",
+          "desiccation": "Torkning",
+          "doughproving": "Jäsning",
+          "frozenheatupspecial": "Special – fryst uppvärmning",
+          "grilllargearea": "Grill – stor yta",
+          "grillsmallarea": "Grill – liten yta",
+          "hotair": "Varmluft",
+          "hotaireco": "Varmluft Eco",
+          "hotairgrilling": "Varmluftsgrill",
+          "intensiveheat": "Intensiv värme",
+          "keepwarm": "Varmhållning",
+          "microwave": "Mikrovåg",
+          "pizzasetting": "Pizzaläge",
+          "preheatovenware": "Förvärmning av kärl",
+          "reheat": "Uppvärmning",
+          "sabbathprogramme": "Sabbatsprogram",
+          "slowcook": "Långsam tillagning",
+          "steam": "Ånga",
+          "topbottomheating": "Över-/undervärme",
+          "topbottomheatingeco": "Över-/undervärme Eco",
+          "breadbaking": "Brödbakning",
+          "steamwithsteamset": "Ånga med SteamSet"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Återstående programtid"
       },
@@ -1653,37 +1684,6 @@
           "level01": "Nivå 1",
           "level02": "Nivå 2",
           "level03": "Nivå 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Använt värmeläge",
-        "state": {
-          "automaticoperation": "Automatiskt läge",
-          "automaticoperationwithmicrowave": "Automatiskt läge med mikrovåg",
-          "bakingsensoroperation": "Bakningssensor",
-          "bottomheating": "Undervärme",
-          "defrosting": "Upptining",
-          "desiccation": "Torkning",
-          "doughproving": "Jäsning",
-          "frozenheatupspecial": "Special – fryst uppvärmning",
-          "grilllargearea": "Grill – stor yta",
-          "grillsmallarea": "Grill – liten yta",
-          "hotair": "Varmluft",
-          "hotaireco": "Varmluft Eco",
-          "hotairgrilling": "Varmluftsgrill",
-          "intensiveheat": "Intensiv värme",
-          "keepwarm": "Varmhållning",
-          "microwave": "Mikrovåg",
-          "pizzasetting": "Pizzaläge",
-          "preheatovenware": "Förvärmning av kärl",
-          "reheat": "Uppvärmning",
-          "sabbathprogramme": "Sabbatsprogram",
-          "slowcook": "Långsam tillagning",
-          "steam": "Ånga",
-          "topbottomheating": "Över-/undervärme",
-          "topbottomheatingeco": "Över-/undervärme Eco",
-          "breadbaking": "Brödbakning",
-          "steamwithsteamset": "Ånga med SteamSet"
         }
       },
       "select_pyrolysis_level": {
