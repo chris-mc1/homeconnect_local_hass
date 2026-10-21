@@ -21,7 +21,7 @@ from homeassistant.const import (
     EntityCategory,
     UnitOfTime,
 )
-from homeconnect_websocket.entities import Execution
+from homeconnect_websocket.entities import Access, Execution
 
 from .descriptions_definitions import (
     EntityDescriptions,
@@ -67,6 +67,11 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Power switch description."""
     entity_descriptions = EntityDescriptions()
     if entity := appliance.entities.get("BSH.Common.Setting.PowerState"):
+        if entity.access not in (Access.READ_WRITE, Access.WRITE_ONLY):
+            # The appliance does not allow to change the power state (for example the
+            # Gaggenau BO470112 and BS474112 report it as read only), a switch or select
+            # would always be unavailable. The read only sensor_power_state shows the state.
+            return entity_descriptions
         if entity.min and entity.max:
             # has min/max
             settable_states = set()
