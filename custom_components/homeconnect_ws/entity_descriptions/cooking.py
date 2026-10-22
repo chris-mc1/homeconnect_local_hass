@@ -6,6 +6,7 @@ import re
 import sys
 from typing import TYPE_CHECKING
 
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
@@ -34,7 +35,7 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Oven status descriptions."""
     pattern = re.compile(r"^Cooking\.Oven\.Status\.Cavity\.(\d+)\..*$")
     groups = get_groups_from_regex(appliance, pattern)
-    descriptions = EntityDescriptions(event_sensor=[], sensor=[])
+    descriptions = EntityDescriptions(event_sensor=[], sensor=[], binary_sensor=[])
     for group in groups:
         group_name = f" {int(group[0])}"
         if len(groups) == 1:
@@ -71,6 +72,33 @@ def generate_oven_status(appliance: HomeAppliance) -> EntityDescriptions:
                 )
             )
 
+        # Measured core temperature uses a scalar rather than the MeatProbeTemperatureV2 enum.
+        entity = f"Cooking.Oven.Status.Cavity.{group[0]}.CurrentMeatprobeTemperature"
+        if entity in appliance.entities:
+            descriptions["sensor"].append(
+                HCSensorEntityDescription(
+                    key=f"sensor_oven_current_meatprobe_temperature_{group[0]}",
+                    translation_key="sensor_oven_current_meatprobe_temperature_group",
+                    translation_placeholders={"group_name": group_name},
+                    entity=entity,
+                    device_class=SensorDeviceClass.TEMPERATURE,
+                    native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+                )
+            )
+
+        entity = f"Cooking.Oven.Status.Cavity.{group[0]}.MeatprobePlugged"
+        if entity in appliance.entities:
+            descriptions["binary_sensor"].append(
+                HCBinarySensorEntityDescription(
+                    key=f"binary_sensor_oven_meatprobe_plugged_{group[0]}",
+                    translation_key="binary_sensor_oven_meatprobe_plugged_group",
+                    translation_placeholders={"group_name": group_name},
+                    entity=entity,
+                    device_class=BinarySensorDeviceClass.PLUG,
+                    entity_category=EntityCategory.DIAGNOSTIC,
+                )
+            )
+
     return descriptions
 
 
@@ -84,19 +112,34 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
         if len(groups) == 1:
             group_name = ""
 
-        # AlarmClockElapsed
-        entity = f"Cooking.Oven.Event.Cavity.{group[0]}.AlarmClockElapsed"
-        if entity in appliance.entities:
-            descriptions["binary_sensor"].append(
-                HCBinarySensorEntityDescription(
-                    key=f"binary_sensor_oven_alarm_clock_elapsed_{group[0]}",
-                    translation_key="binary_sensor_oven_alarm_clock_elapsed",
-                    translation_placeholders={"group_name": group_name},
-                    entity=entity,
-                    value_on={"Present", "Confirmed"},
-                    value_off={"Off"},
+        for event, key in (
+            ("AlarmClockElapsed", "alarm_clock_elapsed"),
+            ("ProgramFinished", "program_finished"),
+            ("ProgramAborted", "program_aborted"),
+            ("RegularPreheatFinished", "regular_preheat_finished"),
+            ("FastPreheatFinished", "fast_preheat_finished"),
+            ("MeatprobeTemperatureReached", "meatprobe_temperature_reached"),
+        ):
+            entity = f"Cooking.Oven.Event.Cavity.{group[0]}.{event}"
+            if entity in appliance.entities:
+                descriptions["binary_sensor"].append(
+                    HCBinarySensorEntityDescription(
+                        key=f"binary_sensor_oven_{key}_{group[0]}",
+                        translation_key=f"binary_sensor_oven_{key}",
+                        translation_placeholders={"group_name": group_name},
+                        entity=entity,
+                        value_on={"Present", "Confirmed"},
+                        value_off={"Off"},
+                        device_class=(
+                            BinarySensorDeviceClass.PROBLEM if event == "ProgramAborted" else None
+                        ),
+                        entity_category=(
+                            EntityCategory.DIAGNOSTIC
+                            if event in {"ProgramFinished", "ProgramAborted"}
+                            else None
+                        ),
+                    )
                 )
-            )
 
     return descriptions
 
