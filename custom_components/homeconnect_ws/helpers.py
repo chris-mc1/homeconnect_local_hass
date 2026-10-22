@@ -8,7 +8,12 @@ from typing import TYPE_CHECKING, Any
 
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers.service import async_extract_config_entry_ids
-from homeconnect_websocket.errors import AccessError, CodeResponsError, NotConnectedError
+from homeconnect_websocket.errors import (
+    AccessError,
+    CodeResponsError,
+    HCConnectionError,
+    NotConnectedError,
+)
 
 from .const import DOMAIN
 
@@ -130,5 +135,10 @@ def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Corou
                 translation_domain=DOMAIN,
                 translation_key="not_connected",
             ) from None
+        except HCConnectionError as exc:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="connection_error",
+            ) from exc
 
     return wrap

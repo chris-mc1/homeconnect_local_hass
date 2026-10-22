@@ -3682,6 +3682,9 @@
     },
     "not_connected": {
       "message": "Client is not Connected"
+    },
+    "connection_error": {
+      "message": "Connection Error"
     }
   }
 }
