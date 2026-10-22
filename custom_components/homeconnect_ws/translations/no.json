@@ -1423,7 +1423,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "Nøkkelsignal volum",
+        "name": "Lydvolum",
         "state": {
           "off": "Av",
           "volume1": "Volum 1",

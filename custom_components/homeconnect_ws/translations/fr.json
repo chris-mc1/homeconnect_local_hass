@@ -1467,7 +1467,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "Volume de la tonalité des touches",
+        "name": "Volume sonore",
         "state": {
           "off": "Désactivé",
           "volume1": "Volume 1",

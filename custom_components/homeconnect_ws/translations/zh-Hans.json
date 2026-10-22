@@ -1422,7 +1422,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "按键提示音量",
+        "name": "音量",
         "state": {
           "off": "关闭",
           "volume1": "音量 1",
