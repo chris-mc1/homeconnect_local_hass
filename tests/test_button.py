@@ -60,7 +60,7 @@ async def test_start(
             action=Action.POST,
             data={
                 "program": 500,
-                "options": [{"uid": 401, "value": None}, {"uid": 402, "value": None}],
+                "options": [],
             },
         )
     )
