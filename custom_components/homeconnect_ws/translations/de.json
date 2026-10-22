@@ -1327,6 +1327,21 @@
           "poor": "Poor",
           "filled": "Gefüllt"
         }
+      },
+      "sensor_energy_consumed": {
+        "name": "Energieverbrauch"
+      },
+      "sensor_water_consumed": {
+        "name": "Wasserverbrauch"
+      },
+      "sensor_laundry_load": {
+        "name": "Beladung"
+      },
+      "sensor_laundry_detergent_consumed": {
+        "name": "Waschmittelverbrauch"
+      },
+      "sensor_laundry_softener_consumed": {
+        "name": "Weichspülerverbrauch"
       }
     },
     "select": {
