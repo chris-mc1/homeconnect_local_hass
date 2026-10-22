@@ -159,7 +159,8 @@ class HCLight(HCEntity, LightEntity):
         brightness = kwargs.get(ATTR_BRIGHTNESS, self.brightness)
         rgb = kwargs.get(ATTR_RGB_COLOR, self.rgb_color)
 
-        if self._attr_color_mode == ColorMode.RGB:
+        if self._attr_color_mode == ColorMode.RGB and rgb is not None:
+            brightness = brightness if brightness is not None else 255
             rgb_with_brightness = tuple(color * brightness // 255 for color in rgb)
             message.data.append(
                 {
