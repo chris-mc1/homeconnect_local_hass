@@ -158,6 +158,13 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     ],
     "sensor": [
         HCSensorEntityDescription(key="Test.Sensor", name="Sensor", entity="Test.Sensor"),
+        # Same appliance entity as above, but with a value_fn that converts the raw value
+        HCSensorEntityDescription(
+            key="Test.Sensor.ValueFn",
+            name="Sensor.ValueFn",
+            entity="Test.Sensor",
+            value_fn=lambda entity: entity.value * 2,
+        ),
         HCSensorEntityDescription(
             key="Test.Sensor.Enum",
             name="Sensor.Enum",
