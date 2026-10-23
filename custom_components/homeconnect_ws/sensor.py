@@ -116,8 +116,6 @@ class HCActiveProgram(HCSensor):
 class HCWiFI(HCEntity, SensorEntity):
     """WiFi signal Sensor Entity with push-like updates."""
 
-    _attr_should_poll = True
-
     def __init__(
         self,
         entity_description: HCSensorEntityDescription,
@@ -125,11 +123,21 @@ class HCWiFI(HCEntity, SensorEntity):
     ) -> None:
         super().__init__(entity_description, runtime_data)
 
+    @property
+    def should_poll(self) -> bool:
+        # HCEntity is a CoordinatorEntity, which defines should_poll as a property that always
+        # returns False. That property takes precedence over _attr_should_poll, so setting
+        # _attr_should_poll = True has no effect and async_update was never called (the sensor
+        # stayed "unknown"). Overriding the property is the only way to get the default 30 second
+        # polling of the sensor platform.
+        return True
+
     async def async_update(self) -> None:
         try:
             network_info = await self._runtime_data.appliance.get_network_config()
             if network_info and isinstance(network_info, list) and "rssi" in network_info[0]:
                 self._attr_native_value = network_info[0]["rssi"]
+                _LOGGER.debug("WiFi signal strength of %s: %s", self.entity_id, self.native_value)
             else:
                 _LOGGER.debug("WiFi update failed: unexpected response format: %s", network_info)
         except ClientConnectionResetError:
