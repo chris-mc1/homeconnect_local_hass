@@ -37,6 +37,10 @@ class HCEntityDescription(EntityDescription, frozen_or_thawed=True):
     entities: list[str] | None = None
     available_access: tuple[Access] | None = None
     extra_attributes: list[ExtraAttributeDict] = None
+    # Conditions as (entity name, allowed values): the entity is unavailable while one of the
+    # other entities has a value that is not in its allowed values, because the appliance
+    # refuses to write then. An unknown value (None) does not make the entity unavailable.
+    available_when: list[tuple[str, set[str | bool]]] | None = None
 
 
 class HCSelectEntityDescription(
@@ -94,6 +98,12 @@ class HCNumberEntityDescription(
     """Description for Number Entity."""
 
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
+    # Read and write the raw value of an enumeration entity as a number. Used for entities
+    # whose enumeration maps a number to a label, for example 60 to "60dC".
+    use_raw_value: bool = False
+    # With use_raw_value: values below this limit are written as 0 (the "Off" entry of the
+    # enumeration), because the enumeration has no entries between 0 and this limit.
+    raw_value_off_below: int | None = None
 
 
 class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, frozen_or_thawed=True):
