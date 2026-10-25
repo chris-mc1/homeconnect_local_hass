@@ -31,3 +31,7 @@ CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
 MAX_RECONECT_TIME: Final = 300
 INITIAL_RECONNECT_DELAY: Final = 5
 MAX_RECONNECT_DELAY: Final = 300
+
+SERVICE_START_PROGRAM: Final = "start_program"
+SERVICE_SET_START_IN: Final = "set_start_in"
+SERVICE_SET_FINISH_IN: Final = "set_finish_in"

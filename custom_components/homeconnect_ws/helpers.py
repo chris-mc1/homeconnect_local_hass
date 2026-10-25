@@ -6,8 +6,7 @@ import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
-from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
-from homeassistant.helpers.service import async_extract_config_entry_ids
+from homeassistant.exceptions import HomeAssistantError
 from homeconnect_websocket.errors import (
     AccessError,
     CodeResponsError,
@@ -21,12 +20,11 @@ if TYPE_CHECKING:
     import re
     from collections.abc import Callable, Coroutine
 
-    from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
     from homeconnect_websocket.entities import Access
     from homeconnect_websocket.entities import Entity as HcEntity
 
-    from . import HCConfigEntry, HCData
+    from . import HCData
     from .entity import HCEntity
 
 _LOGGER = logging.getLogger(__name__)
@@ -90,16 +88,13 @@ def get_groups_from_regex(appliance: HomeAppliance, pattern: re.Pattern) -> set[
     return groups
 
 
-async def get_config_entry_from_call(
-    hass: HomeAssistant, service_call: ServiceCall
-) -> HCConfigEntry | None:
-    """Get the config entry from a service call."""
-    config_entry_ids = await async_extract_config_entry_ids(service_call)
-    for config_entry_id in config_entry_ids:
-        config_entry = hass.config_entries.async_get_entry(config_entry_id)
-        if config_entry.domain == DOMAIN:
-            return config_entry
-    raise ServiceValidationError(translation_domain=DOMAIN, translation_key="not_appliance")
+def duration_to_seconds(data: dict) -> int:
+    """Turn hours/minutes/seconds duration into seconds."""
+    return (
+        int(data.get("hours", 0)) * 3600
+        + int(data.get("minutes", 0)) * 60
+        + int(data.get("seconds", 0))
+    )
 
 
 def entity_is_available(entity: HcEntity, available_access: tuple[Access]) -> bool:
