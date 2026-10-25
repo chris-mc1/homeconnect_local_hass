@@ -25,10 +25,8 @@ ACKNOWLEDGE_MESSAGE = Message(
 
 
 @pytest.fixture(autouse=True)
-def patch_entities(monkeypatch: pytest.MonkeyPatch, mock_appliance: MockAppliance) -> None:
-    """Use the entities of the test appliance, make it an oven and do not wait between attempts."""
-    # setitem: the info dict is shared by all tests, monkeypatch puts the old value back
-    monkeypatch.setitem(mock_appliance.info, "type", "Oven")
+def patch_entities(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Use the entities of the test appliance and do not wait between attempts."""
     monkeypatch.setattr(alarm_clock, "EVENT", "Test.Event1")
     monkeypatch.setattr(alarm_clock, "ALARM_CLOCK", "Test.AlarmClock")
     monkeypatch.setattr(alarm_clock, "LOCAL_CONTROL", "Test.LocalControlActive")

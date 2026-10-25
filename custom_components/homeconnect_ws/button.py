@@ -16,6 +16,7 @@ from .helpers import (
     acknowledge_with_retry,
     create_entities,
     error_decorator,
+    leaves_alarm_event_on,
 )
 
 if TYPE_CHECKING:
@@ -62,6 +63,12 @@ class HCButton(HCEntity, ButtonEntity):
         self._retry_task: asyncio.Task | None = None
         self._alarm_clock: HcEntity | None = None
         self._tracker: EventStaleTracker | None = None
+        # A hob sets the alarm clock to 0 in the same message as the event, so the alarm clock
+        # cannot tell whether an alarm has elapsed: there the event itself decides.
+        self._event_decides = (
+            entity_description.alarm_state == "elapsed"
+            and not leaves_alarm_event_on(runtime_data.appliance)
+        )
         name = entity_description.alarm_clock_entity
         if name and name in runtime_data.appliance.entities:
             self._alarm_clock = runtime_data.appliance.entities[name]
@@ -77,6 +84,9 @@ class HCButton(HCEntity, ButtonEntity):
     @property
     def available(self) -> bool:
         available = super().available
+        if self._event_decides:
+            # The alarm has elapsed as long as the event is Present, whatever the alarm clock is
+            return available and self._entity.value == "Present"
         if self._alarm_clock is not None:
             # Only when the alarm clock is set: a timer is running or an alarm has elapsed
             available &= bool(self._alarm_clock.value)

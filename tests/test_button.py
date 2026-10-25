@@ -249,3 +249,29 @@ async def test_cancel_alarm_clock_retry_stops_when_alarm_clock_is_0(
     await hass.async_block_till_done(wait_background_tasks=True)
 
     assert mock_appliance.session.send_sync.await_count == 1
+
+
+async def test_acknowledge_alarm_clock_hob(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Test a hob: the alarm clock is 0 when the alarm has elapsed, the event decides."""
+    # setitem: the info dict is shared by all tests, monkeypatch puts the old value back
+    monkeypatch.setitem(mock_appliance.info, "type", "Hob")
+    # The entity id contains the type of the appliance
+    hob_entity = ACKNOWLEDGE_ENTITY.replace("homeappliance", "hob")
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await _set(hass, mock_appliance, "Test.AlarmClock", 0)
+    await _set(hass, mock_appliance, "Test.Event1", 1)  # Present, in the same message as the 0
+
+    assert hass.states.get(hob_entity).state != STATE_UNAVAILABLE
+
+    await _press(hass, hob_entity)
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(ACKNOWLEDGE_MESSAGE)
+
+    # Nothing to acknowledge when the event is off again
+    await _set(hass, mock_appliance, "Test.Event1", 0)
+    assert hass.states.get(hob_entity).state == STATE_UNAVAILABLE

@@ -32,6 +32,20 @@ _LOGGER = logging.getLogger(__name__)
 WRITE_REQUEST_BUSY = 516
 # Values of an Event that mean that it is on
 EVENT_ON_VALUES = {"Present", "Confirmed"}
+# Appliance types (appliance.info["type"]) that do not leave AlarmClockElapsed on "Present" after
+# the alarm was confirmed. A hob (Gaggenau CI282102) sets the alarm clock to 0 in the same message
+# as the event and only keeps the event on until the alarm is confirmed.
+APPLIANCE_TYPES_WITHOUT_STALE_ALARM = {"Hob"}
+
+
+def leaves_alarm_event_on(appliance: HomeAppliance) -> bool:
+    """
+    Check if the appliance can leave AlarmClockElapsed on after the alarm was confirmed.
+
+    This is assumed for every appliance except the types in APPLIANCE_TYPES_WITHOUT_STALE_ALARM:
+    only these ovens were seen leaving the event on, so they are the default.
+    """
+    return appliance.info.get("type") not in APPLIANCE_TYPES_WITHOUT_STALE_ALARM
 
 
 def create_entities(

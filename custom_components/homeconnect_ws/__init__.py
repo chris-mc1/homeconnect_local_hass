@@ -234,6 +234,12 @@ async def async_setup_entry(
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
 
     # Resets the alarm clock event of ovens that leave it on, no entity
+    _LOGGER.debug(
+        "Alarm clock cleaner for %s (type %s): %s",
+        appliance.info.get("model"),
+        appliance.info.get("type"),
+        "on" if AlarmClockCleaner.is_supported(appliance) else "off",
+    )
     if AlarmClockCleaner.is_supported(appliance):
         alarm_clock_cleaner = AlarmClockCleaner(hass, appliance)
         alarm_clock_cleaner.start()

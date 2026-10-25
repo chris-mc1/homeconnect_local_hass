@@ -5,7 +5,7 @@ Some ovens (Gaggenau BO470112, BS474112) leave BSH.Common.Event.AlarmClockElapse
 after the alarm is confirmed on the oven. The oven does not report the event again when the next
 timer elapses, because the value does not change. Acknowledging the event resets it.
 
-This is only done for ovens. A hob (Gaggenau CI282102) sets the alarm clock to 0 in the same message
+This is not done for hobs. A hob (Gaggenau CI282102) sets the alarm clock to 0 in the same message
 as the event, so acknowledging at once would confirm the alarm before anybody heard it: there is
 no beep and no way to confirm it on the hob.
 
@@ -29,7 +29,7 @@ import logging
 import time
 from typing import TYPE_CHECKING
 
-from .helpers import acknowledge_with_retry
+from .helpers import acknowledge_with_retry, leaves_alarm_event_on
 
 if TYPE_CHECKING:
     import asyncio
@@ -39,9 +39,6 @@ if TYPE_CHECKING:
     from homeconnect_websocket.entities import Entity as HcEntity
 
 _LOGGER = logging.getLogger(__name__)
-
-# Only appliances of this type (appliance.info["type"]) are cleaned
-APPLIANCE_TYPE = "Oven"
 
 # Entities of the appliance
 EVENT = "BSH.Common.Event.AlarmClockElapsed"
@@ -75,7 +72,7 @@ class AlarmClockCleaner:
     def is_supported(appliance: HomeAppliance) -> bool:
         """Check if the appliance has everything that is needed."""
         return (
-            appliance.info.get("type") == APPLIANCE_TYPE
+            leaves_alarm_event_on(appliance)
             and EVENT in appliance.entities
             and ALARM_CLOCK in appliance.entities
             and LOCAL_CONTROL in appliance.entities
