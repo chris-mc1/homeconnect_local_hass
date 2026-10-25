@@ -3638,6 +3638,16 @@
         "start_in": {
           "name": "Delay",
           "description": "Set the start delay"
+        }
+      }
+    },
+    "set_finish_in": {
+      "name": "Set finish delay",
+      "description": "Set the finish delay",
+      "fields": {
+        "device_id": {
+          "name": "Appliance",
+          "description": "The Appliance to set the finish delay on"
         },
         "finish_in": {
           "name": "Finish in",
