@@ -60,6 +60,12 @@
         },
         "binary_sensor": {
             "connection": {},
+            "binary_sensor_child_lock": {
+                "default": "mdi:lock",
+                "state": {
+                    "off": "mdi:lock-open"
+                }
+            },
             "binary_sensor_door_state": {},
             "binary_sensor_intensiv_zone_active": {
                 "default": "mdi:arrow-decision"
