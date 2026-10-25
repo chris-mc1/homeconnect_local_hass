@@ -25,8 +25,10 @@ ACKNOWLEDGE_MESSAGE = Message(
 
 
 @pytest.fixture(autouse=True)
-def patch_entities(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Use the entities of the test appliance and do not wait between attempts."""
+def patch_entities(monkeypatch: pytest.MonkeyPatch, mock_appliance: MockAppliance) -> None:
+    """Use the entities of the test appliance, make it an oven and do not wait between attempts."""
+    # setitem: the info dict is shared by all tests, monkeypatch puts the old value back
+    monkeypatch.setitem(mock_appliance.info, "type", "Oven")
     monkeypatch.setattr(alarm_clock, "EVENT", "Test.Event1")
     monkeypatch.setattr(alarm_clock, "ALARM_CLOCK", "Test.AlarmClock")
     monkeypatch.setattr(alarm_clock, "LOCAL_CONTROL", "Test.LocalControlActive")
@@ -170,6 +172,24 @@ async def test_not_set_up_without_commands(
 
     await oven.set("event", 1)  # Present
     await oven.set("alarm_clock", 0)
+    await oven.set("local", value=False)
+    await hass.async_block_till_done(wait_background_tasks=True)
+
+    mock_appliance.session.send_sync.assert_not_awaited()
+
+
+async def test_not_set_up_for_hob(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Test a hob is left alone: it has to be confirmed on the hob, with a beep."""
+    monkeypatch.setitem(mock_appliance.info, "type", "Hob")
+    oven = await _setup(hass, mock_appliance)
+
+    await oven.set("event", 1)  # Present
+    await oven.set("alarm_clock", 0)  # The hob sets this in the same message as the event
     await oven.set("local", value=False)
     await hass.async_block_till_done(wait_background_tasks=True)
 
