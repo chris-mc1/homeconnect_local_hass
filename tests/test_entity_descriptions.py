@@ -122,6 +122,8 @@ async def test_power_switch(mock_homeconnect_appliance: MockApplianceType) -> No
         device_class=SwitchDeviceClass.SWITCH,
         value_mapping=("On", "Off"),
     )
+    # The select would only repeat the switch, so there is none
+    assert "select" not in switch_description
 
     # No Switch
     device_description["setting"][0]["min"] = 0
@@ -130,6 +132,9 @@ async def test_power_switch(mock_homeconnect_appliance: MockApplianceType) -> No
     switch_description = generate_power_switch(appliance)
 
     assert "switch" not in switch_description
+    # More than two states: only the select (enabled by default) can set them
+    assert switch_description["select"][0].key == "select_power_state"
+    assert switch_description["select"][0].entity_registry_enabled_default is True
 
     # On/MainsOff Switch
     device_description["setting"][0]["enumeration"] = {"0": "MainsOff", "2": "On"}

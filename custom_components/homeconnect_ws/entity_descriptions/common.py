@@ -89,16 +89,19 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
                         )
                     ]
 
-        entity_descriptions["select"] = [
-            HCSelectEntityDescription(
-                key="select_power_state",
-                entity="BSH.Common.Setting.PowerState",
-                options=[value.lower() for value in settable_states],
-                has_state_translation=True,
-                # more then two power states
-                entity_registry_enabled_default=len(settable_states) > 2,
-            )
-        ]
+        # With a switch the select would only repeat it (it can only choose between the same two
+        # states), so the select is only created when there is no switch.
+        if "switch" not in entity_descriptions:
+            entity_descriptions["select"] = [
+                HCSelectEntityDescription(
+                    key="select_power_state",
+                    entity="BSH.Common.Setting.PowerState",
+                    options=[value.lower() for value in settable_states],
+                    has_state_translation=True,
+                    # more then two power states
+                    entity_registry_enabled_default=len(settable_states) > 2,
+                )
+            ]
     return entity_descriptions
 
 
