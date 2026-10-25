@@ -163,6 +163,9 @@
       "connection": {
         "name": "Verbinding"
       },
+      "binary_sensor_child_lock": {
+        "name": "Kinderslot"
+      },
       "binary_sensor_door_state": {
         "name": "Deur"
       },

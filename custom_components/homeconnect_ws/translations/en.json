@@ -224,6 +224,9 @@
       "connection": {
         "name": "Connection"
       },
+      "binary_sensor_child_lock": {
+        "name": "Child lock"
+      },
       "binary_sensor_door_state": {
         "name": "Door"
       },
