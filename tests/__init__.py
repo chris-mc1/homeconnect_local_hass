@@ -60,9 +60,10 @@ class MockAppliance:
 async def setup_config_entry(
     hass: HomeAssistant,
     config_entry: MockConfigEntry,
-) -> bool:
+) -> MockConfigEntry:
     """Do setup of a MockConfigEntry."""
     config_entry.add_to_hass(hass)
     result = await hass.config_entries.async_setup(config_entry.entry_id)
+    assert result
     await hass.async_block_till_done()
-    return result
+    return config_entry

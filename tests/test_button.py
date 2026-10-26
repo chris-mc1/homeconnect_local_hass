@@ -23,7 +23,7 @@ async def test_setup(
     patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("button.fake_brand_homeappliance_activeprogram")
     assert state
@@ -43,7 +43,7 @@ async def test_start(
 ) -> None:
     """Test pressing start button."""
     entity_id = "button.fake_brand_homeappliance_activeprogram"
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
     await hass.async_block_till_done()
 
@@ -73,7 +73,7 @@ async def test_abort(
 ) -> None:
     """Test pressing abort button."""
     entity_id = "button.fake_brand_homeappliance_abortprogram"
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await hass.services.async_call(
         domain=BUTTON_DOMAIN,

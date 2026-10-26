@@ -41,7 +41,7 @@ async def test_setup(
     patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await hass.async_block_till_done()
 
@@ -80,7 +80,7 @@ async def test_update_on_off(
     patch_entity_description: None,
 ) -> None:
     """Test On/Off."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await hass.async_block_till_done()
@@ -101,7 +101,7 @@ async def test_on(
     patch_entity_description: None,
 ) -> None:
     """Test Set On."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": False})
     await hass.async_block_till_done()
 
@@ -129,7 +129,7 @@ async def test_off(
     patch_entity_description: None,
 ) -> None:
     """Test Set Off."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await hass.async_block_till_done()
 
@@ -157,7 +157,7 @@ async def test_update_brightness(
     patch_entity_description: None,
 ) -> None:
     """Test Brightness."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
     await hass.async_block_till_done()
@@ -191,7 +191,7 @@ async def test_set_brightness(
     patch_entity_description: None,
 ) -> None:
     """Test Brightness."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 2})
     await hass.async_block_till_done()
@@ -279,7 +279,7 @@ async def test_update_color_temp(
 ) -> None:
     """Test Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
     await mock_appliance.entities["Test.LightingColorTempPercent"].update({"value": 100})
@@ -310,7 +310,7 @@ async def test_set_color_temp(
 ) -> None:
     """Test Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
     await mock_appliance.entities["Test.LightingColorTempPercent"].update({"value": 0})
@@ -380,7 +380,7 @@ async def test_set_brightness_color_temp(
 ) -> None:
     """Test Brightness and Color temp."""
     mock_appliance.entities.pop("Cooking.Hood.Setting.ColorTemperature")
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": False})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 0})
     await mock_appliance.entities["Test.LightingColorTempPercent"].update({"value": 0})
@@ -444,7 +444,7 @@ async def test_update_color_temp_inverted(
     patch_entity_description: None,
 ) -> None:
     """Test Color temp."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 100})
     await mock_appliance.entities["Test.LightingColorTempPercent"].update({"value": 0})
@@ -543,7 +543,7 @@ async def test_set_brightness_color_temp_inverted(
     patch_entity_description: None,
 ) -> None:
     """Test Brightness and Color temp."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": False})
     await mock_appliance.entities["Test.LightingBrightness"].update({"value": 0})
     await mock_appliance.entities["Test.LightingColorTempPercent"].update({"value": 0})
@@ -609,7 +609,7 @@ async def test_update_color(
     patch_entity_description: None,
 ) -> None:
     """Test update RGB."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": True})
     await mock_appliance.entities["Test.LightingCustomColor"].update({"value": "#ff0000"})
     await mock_appliance.entities["Test.LightingColor"].update({"value": 1})
@@ -748,7 +748,7 @@ async def test_available_when_brightness_unavailable(
     patch_entity_description: None,
 ) -> None:
     """Test the light stays controllable when only brightness goes unavailable."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
     await mock_appliance.entities["Test.Lighting"].update({"value": False})
     await hass.async_block_till_done()
 

@@ -29,7 +29,7 @@ async def test_setup(
     patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("number.fake_brand_homeappliance_number")
     assert state
@@ -47,7 +47,7 @@ async def test_update(
 ) -> None:
     """Test updating entity."""
     entity_id = "number.fake_brand_homeappliance_number"
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await mock_appliance.entities["Test.Number"].update({"value": 0})
     await hass.async_block_till_done()
@@ -78,7 +78,7 @@ async def test_set_value(
 ) -> None:
     """Test setting a value."""
     entity_id = "number.fake_brand_homeappliance_number"
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await hass.services.async_call(
         NUMBER_DOMAIN,

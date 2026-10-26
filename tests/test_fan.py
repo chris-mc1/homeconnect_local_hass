@@ -34,7 +34,7 @@ async def test_setup(
     patch_entity_description: None,
 ) -> None:
     """Test setting up entity."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
     assert state
@@ -53,7 +53,7 @@ async def test_update(
     patch_entity_description: None,
 ) -> None:
     """Test updating entity."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     state = hass.states.get("fan.fake_brand_homeappliance_fan")
     assert state.state == STATE_OFF
@@ -95,7 +95,7 @@ async def test_set_speed(
     patch_entity_description: None,
 ) -> None:
     """Test setting a speed."""
-    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await setup_config_entry(hass, CONFIG_ENTRIES[0])
 
     await hass.services.async_call(
         FAN_DOMAIN,
