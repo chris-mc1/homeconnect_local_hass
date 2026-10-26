@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
@@ -18,13 +19,33 @@ if TYPE_CHECKING:
 
     from homeassistant.core import HomeAssistant, ServiceCall
     from homeconnect_websocket import HomeAppliance
-    from homeconnect_websocket.entities import Access
+    from homeconnect_websocket.entities import Access, Event
     from homeconnect_websocket.entities import Entity as HcEntity
 
     from . import HCConfigEntry, HCData
     from .entity import HCEntity
 
 _LOGGER = logging.getLogger(__name__)
+
+# Code the appliance responds with when it refuses a write: "WriteRequest Busy". It does this while
+# it is operated locally, until about 10 seconds after the last touch.
+WRITE_REQUEST_BUSY = 516
+# Values of an Event that mean that it is on
+EVENT_ON_VALUES = {"Present", "Confirmed"}
+# Appliance types (appliance.info["type"]) that do not leave AlarmClockElapsed on "Present" after
+# the alarm was confirmed. A hob (Gaggenau CI282102) sets the alarm clock to 0 in the same message
+# as the event and only keeps the event on until the alarm is confirmed.
+APPLIANCE_TYPES_WITHOUT_STALE_ALARM = {"Hob"}
+
+
+def leaves_alarm_event_on(appliance: HomeAppliance) -> bool:
+    """
+    Check if the appliance can leave AlarmClockElapsed on after the alarm was confirmed.
+
+    This is assumed for every appliance except the types in APPLIANCE_TYPES_WITHOUT_STALE_ALARM:
+    only these ovens were seen leaving the event on, so they are the default.
+    """
+    return appliance.info.get("type") not in APPLIANCE_TYPES_WITHOUT_STALE_ALARM
 
 
 def create_entities(
@@ -132,3 +153,87 @@ def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Corou
             ) from None
 
     return wrap
+
+
+class EventStaleTracker:
+    """
+    Tracks if an Event that is on belongs to an earlier alarm.
+
+    Some ovens (Gaggenau BO470112, BS474112) leave AlarmClockElapsed on "Present" after the alarm
+    is confirmed on the oven. When a new timer is started the event is still "Present" and the
+    oven does not report it again when the new timer elapses.
+
+    The event is "stale" when a timer was started (the timer entity went from 0 to a value)
+    after the event was last reported as on.
+    """
+
+    def __init__(self, event: HcEntity, timer: HcEntity, on_values: set[str]) -> None:
+        """
+        Track an event and the timer that belongs to it.
+
+        Args:
+        ----
+            event (HcEntity): The event, e.g. BSH.Common.Event.AlarmClockElapsed
+            timer (HcEntity): The timer, e.g. BSH.Common.Setting.AlarmClock, 0 when not set
+            on_values (set[str]): Values of the event that mean that it is on
+
+        """
+        self._event = event
+        self._timer = timer
+        self._on_values = on_values
+        self._timer_running = bool(timer.value)
+        self.stale = False
+
+    def update(self, entity: HcEntity) -> None:
+        """Process an update of the event or the timer."""
+        if entity is self._timer:
+            running = bool(entity.value)
+            if running and not self._timer_running:
+                self.stale = True
+            self._timer_running = running
+        elif entity is self._event and entity.value in self._on_values:
+            self.stale = False
+
+
+async def acknowledge_with_retry(
+    event: Event,
+    *,
+    still_needed: Callable[[], bool],
+    attempts: int,
+    delay: float,
+) -> bool:
+    """
+    Acknowledge an Event, try again when the appliance is busy.
+
+    Args:
+    ----
+        event (Event): The event to acknowledge
+        still_needed (Callable[[], bool]): Checked before every attempt, stops when it is False
+        attempts (int): Maximum number of attempts
+        delay (float): Pause between two attempts in seconds
+
+    Returns:
+    -------
+        bool: True when the appliance accepted the acknowledge
+
+    """
+    for attempt in range(1, attempts + 1):
+        if not still_needed():
+            return False
+        try:
+            await event.acknowledge()
+        except CodeResponsError as exc:
+            if exc.code != WRITE_REQUEST_BUSY:
+                _LOGGER.warning("Failed to acknowledge %s: %s", event.name, exc)
+                return False
+            _LOGGER.debug(
+                "Appliance busy, acknowledge %s attempt %s/%s", event.name, attempt, attempts
+            )
+        except (AccessError, NotConnectedError) as exc:
+            _LOGGER.debug("Failed to acknowledge %s: %s", event.name, exc)
+            return False
+        else:
+            return True
+        if attempt < attempts:
+            await asyncio.sleep(delay)
+    return False

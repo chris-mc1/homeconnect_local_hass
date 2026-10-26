@@ -84,7 +84,25 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
     "button": [
         HCButtonEntityDescription(
             key="Test.AbortProgram", name="AbortProgram", entity="Test.AbortProgram"
-        )
+        ),
+        HCButtonEntityDescription(
+            key="Test.AcknowledgeEvent",
+            name="AcknowledgeEvent",
+            entity="Test.Event1",
+            entities=["BSH.Common.Command.AcknowledgeEvent"],
+            acknowledge_event=True,
+            alarm_clock_entity="Test.AlarmClock",
+            alarm_state="elapsed",
+        ),
+        HCButtonEntityDescription(
+            key="Test.CancelEvent",
+            name="CancelEvent",
+            entity="Test.Event1",
+            entities=["BSH.Common.Command.AcknowledgeEvent"],
+            acknowledge_event=True,
+            alarm_clock_entity="Test.AlarmClock",
+            alarm_state="running",
+        ),
     ],
     "active_program": [
         HCSensorEntityDescription(
@@ -111,6 +129,15 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             entity="Test.BinarySensor.Enum",
             value_on={"On"},
             value_off={"Off"},
+        ),
+        # Event that is off when the alarm clock setting is 0
+        HCBinarySensorEntityDescription(
+            key="Test.BinarySensor.OffWhenZero",
+            name="BinarySensor.OffWhenZero",
+            entity="Test.Event1",
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+            alarm_clock_entity="Test.AlarmClock",
         ),
     ],
     "event_sensor": [
@@ -217,6 +244,12 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
 DEVICE_DESCRIPTION = DeviceDescription(
     status=[
         EntityDescription(
+            uid=150,
+            name="Test.LocalControlActive",
+            available=True,
+            access=Access.READ,
+        ),
+        EntityDescription(
             uid=100,
             name="Test.BinarySensor",
             available=True,
@@ -259,6 +292,12 @@ DEVICE_DESCRIPTION = DeviceDescription(
         ),
     ],
     setting=[
+        EntityDescription(
+            uid=250,
+            name="Test.AlarmClock",
+            available=True,
+            access=Access.READ_WRITE,
+        ),
         EntityDescription(
             uid=200,
             name="Test.PowerState",
@@ -404,7 +443,13 @@ DEVICE_DESCRIPTION = DeviceDescription(
             name="Test.AbortProgram",
             available=True,
             access=Access.READ_WRITE,
-        )
+        ),
+        EntityDescription(
+            uid=6,
+            name="BSH.Common.Command.AcknowledgeEvent",
+            available=True,
+            access=Access.WRITE_ONLY,
+        ),
     ],
     option=[
         EntityDescription(

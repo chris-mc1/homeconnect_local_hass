@@ -210,6 +210,26 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="button_mains_power_off",
             entity="BSH.Common.Command.MainsPowerOff",
         ),
+        # Confirm an alarm that has elapsed, like on the oven. Acknowledging the event ends the
+        # alarm clock (seen on Gaggenau BO470112: the alarm clock setting goes to 0).
+        HCButtonEntityDescription(
+            key="button_acknowledge_alarm_clock",
+            entity="BSH.Common.Event.AlarmClockElapsed",
+            entities=["BSH.Common.Command.AcknowledgeEvent"],
+            acknowledge_event=True,
+            alarm_clock_entity="BSH.Common.Setting.AlarmClock",
+            alarm_state="elapsed",
+        ),
+        # Cancel a timer that is running, like on the oven. Acknowledging the event ends the
+        # alarm clock without an alarm.
+        HCButtonEntityDescription(
+            key="button_cancel_alarm_clock",
+            entity="BSH.Common.Event.AlarmClockElapsed",
+            entities=["BSH.Common.Command.AcknowledgeEvent"],
+            acknowledge_event=True,
+            alarm_clock_entity="BSH.Common.Setting.AlarmClock",
+            alarm_state="running",
+        ),
     ],
     "binary_sensor": [
         HCBinarySensorEntityDescription(
@@ -268,6 +288,9 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="BSH.Common.Event.AlarmClockElapsed",
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
+            # Some ovens (Gaggenau BO470112, BS474112) keep the event on "Present" after the alarm
+            # is confirmed on the oven, see alarm_clock_entity.
+            alarm_clock_entity="BSH.Common.Setting.AlarmClock",
         ),
     ],
     "select": [
