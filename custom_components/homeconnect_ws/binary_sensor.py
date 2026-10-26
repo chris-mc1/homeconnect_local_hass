@@ -13,7 +13,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .entity import HCEntity
 from .entity_descriptions.descriptions_definitions import HCBinarySensorEntityDescription
-from .helpers import EventStaleTracker, create_entities
+from .helpers import EventStaleTracker, create_entities, leaves_alarm_event_on
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -58,7 +58,14 @@ class HCBinarySensor(HCEntity, BinarySensorEntity):
         self._alarm_clock: HcEntity | None = None
         self._tracker: EventStaleTracker | None = None
         name = entity_description.alarm_clock_entity
-        if name and name in runtime_data.appliance.entities:
+        # A hob sets the alarm clock to 0 in the same message as the event and only keeps the event
+        # on until the alarm is confirmed: the sensor would never be on if the alarm clock decided,
+        # so for a hob the event alone decides.
+        if (
+            name
+            and name in runtime_data.appliance.entities
+            and leaves_alarm_event_on(runtime_data.appliance)
+        ):
             self._alarm_clock = runtime_data.appliance.entities[name]
             self._tracker = EventStaleTracker(
                 self._entity, self._alarm_clock, entity_description.value_on or set()

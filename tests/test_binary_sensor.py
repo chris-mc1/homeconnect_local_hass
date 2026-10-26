@@ -10,6 +10,7 @@ from . import setup_config_entry
 from .const import CONFIG_ENTRIES
 
 if TYPE_CHECKING:
+    import pytest
     from homeassistant.core import HomeAssistant
     from homeconnect_websocket.testutils import MockAppliance
 
@@ -156,3 +157,30 @@ async def test_off_when_zero_entity_missing(
     await hass.async_block_till_done()
 
     assert hass.states.get(entity_id).state == STATE_ON
+
+
+async def test_hob_event_decides(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Test a hob: the alarm clock is 0 when the alarm elapses, the event alone decides."""
+    # setitem: the info dict is shared by all tests, monkeypatch puts the old value back
+    monkeypatch.setitem(mock_appliance.info, "type", "Hob")
+    # The entity id contains the type of the appliance
+    entity_id = "binary_sensor.fake_brand_hob_binarysensor_offwhenzero"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    event = mock_appliance.entities["Test.Event1"]
+    alarm_clock = mock_appliance.entities["Test.AlarmClock"]
+
+    # The alarm elapses: the hob sets the alarm clock to 0 and reports Present
+    await alarm_clock.update({"value": 0})
+    await event.update({"value": 1})  # Present
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_ON
+
+    # Confirmed on the hob: the event is Off
+    await event.update({"value": 0})  # Off
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_OFF
