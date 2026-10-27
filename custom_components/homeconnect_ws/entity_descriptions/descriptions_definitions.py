@@ -66,6 +66,7 @@ class HCSensorEntityDescription(
     available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
     has_state_translation: bool = False
     mapping: dict[str, str] = None
+    value_fn: Callable[[HcEntity], object] | None = None
 
 
 class HCBinarySensorEntityDescription(

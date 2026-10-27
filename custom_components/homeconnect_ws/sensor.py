@@ -64,6 +64,16 @@ class HCSensor(HCEntity, SensorEntity):
     def native_value(self) -> int | float | str:
         if self._entity.value is None:
             return None
+        if self.entity_description.value_fn is not None:
+            try:
+                return self.entity_description.value_fn(self._entity)
+            except (KeyError, TypeError, ValueError):
+                _LOGGER.debug(
+                    "Failed to derive value for %s",
+                    self.entity_description.key,
+                    exc_info=True,
+                )
+                return None
         if self._entity.enum and self.entity_description.has_state_translation:
             return str(self._entity.value).lower()
         return self._entity.value

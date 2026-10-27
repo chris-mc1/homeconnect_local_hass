@@ -145,3 +145,20 @@ async def test_update_active_program(
 
     state = hass.states.get(entity_id)
     assert state.state == "Named Favorite"
+
+
+async def test_derived_sensor_value(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test a sensor value derived from another Home Connect entity."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    entity_id = "sensor.fake_brand_homeappliance_sensor_derived"
+    await mock_appliance.entities["Test.Sensor"].update({"value": 7})
+    await hass.async_block_till_done()
+
+    state = hass.states.get(entity_id)
+    assert state
+    assert state.state == "14"

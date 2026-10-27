@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import sys
+from datetime import datetime, timedelta
 from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import (
@@ -21,6 +22,7 @@ from homeassistant.const import (
     EntityCategory,
     UnitOfTime,
 )
+from homeassistant.util import dt as dt_util
 from homeconnect_websocket.entities import Execution
 
 from .descriptions_definitions import (
@@ -36,6 +38,7 @@ from .descriptions_definitions import (
 
 if TYPE_CHECKING:
     from homeconnect_websocket import HomeAppliance
+    from homeconnect_websocket.entities import Entity as HcEntity
 
 
 POWER_SWITCH_VALUE_MAPINGS = (
@@ -192,6 +195,46 @@ def generate_temperature_unit(appliance: HomeAppliance) -> HCSelectEntityDescrip
     return None
 
 
+def _parse_session_timestamp(value: str | None) -> datetime | None:
+    """Parse an ISO timestamp from a program session summary."""
+    if not value:
+        return None
+    return datetime.fromisoformat(value)
+
+
+def _session_start(entity: HcEntity) -> datetime | None:
+    """Return the latest program session start timestamp."""
+    if not isinstance(entity.value, dict):
+        return None
+    return _parse_session_timestamp(entity.value.get("start"))
+
+
+def _session_end(entity: HcEntity) -> datetime | None:
+    """Return the latest program session end timestamp."""
+    if not isinstance(entity.value, dict):
+        return None
+    return _parse_session_timestamp(entity.value.get("end"))
+
+
+def _session_duration(entity: HcEntity) -> float | None:
+    """Return the latest completed program duration in seconds."""
+    start = _session_start(entity)
+    end = _session_end(entity)
+    if start is None or end is None:
+        return None
+    return max(0.0, (end - start).total_seconds())
+
+
+def _expected_finish(entity: HcEntity) -> datetime | None:
+    """Calculate an estimated finish timestamp from remaining seconds."""
+    if entity.value is None:
+        return None
+    seconds = float(entity.value)
+    if seconds < 0:
+        return None
+    return dt_util.now() + timedelta(seconds=seconds)
+
+
 COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "button": [
         HCButtonEntityDescription(
@@ -301,6 +344,38 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.DURATION,
             native_unit_of_measurement=UnitOfTime.SECONDS,
             suggested_unit_of_measurement=UnitOfTime.HOURS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_expected_finish_time",
+            entity="BSH.Common.Option.RemainingProgramTime",
+            device_class=SensorDeviceClass.TIMESTAMP,
+            value_fn=_expected_finish,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_last_program_start",
+            entity="BSH.Common.Status.ProgramSessionSummary.Latest",
+            device_class=SensorDeviceClass.TIMESTAMP,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+            value_fn=_session_start,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_last_program_end",
+            entity="BSH.Common.Status.ProgramSessionSummary.Latest",
+            device_class=SensorDeviceClass.TIMESTAMP,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+            value_fn=_session_end,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_last_program_duration",
+            entity="BSH.Common.Status.ProgramSessionSummary.Latest",
+            device_class=SensorDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.SECONDS,
+            suggested_unit_of_measurement=UnitOfTime.MINUTES,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+            value_fn=_session_duration,
         ),
         HCSensorEntityDescription(
             key="sensor_program_progress",
