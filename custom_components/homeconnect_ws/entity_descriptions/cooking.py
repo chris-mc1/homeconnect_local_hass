@@ -6,6 +6,7 @@ import re
 import sys
 from typing import TYPE_CHECKING
 
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberDeviceClass, NumberMode
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
@@ -424,6 +425,26 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         ),
+        HCSensorEntityDescription(
+            key="sensor_hob_wifi_signal_strength",
+            entity="BSH.Common.Status.WiFiSignalStrength",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_hob_favorite_001_functionality",
+            entity="BSH.Common.Setting.Favorite.001.Functionality",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_hob_favorite_002_functionality",
+            entity="BSH.Common.Setting.Favorite.002.Functionality",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
     ],
     "dynamic": [
         generate_oven_status,
@@ -467,6 +488,20 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="number_hood_sensor_sensitivity",
             entity="Cooking.Hood.Setting.SensorSensitivity",
             mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_hob_signal_volume",
+            entity="Cooking.Common.Setting.SignalVolume",
+            entity_category=EntityCategory.CONFIG,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_hob_automatic_timer",
+            entity="Cooking.Hob.Setting.AutomaticTimer",
+            device_class=NumberDeviceClass.DURATION,
+            native_unit_of_measurement=UnitOfTime.MINUTES,
+            entity_category=EntityCategory.CONFIG,
+            mode=NumberMode.BOX,
         ),
     ],
     "select": [
@@ -543,6 +578,42 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        HCSelectEntityDescription(
+            key="select_hob_automatic_key_lock",
+            entity="Cooking.Hob.Setting.AutomaticKeyLock",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hob_buzzer_beep_level",
+            entity="Cooking.Hob.Setting.BuzzerBeepLevel",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hob_timer_selection",
+            entity="Cooking.Hob.Setting.TimerSelection",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hob_power_management",
+            entity="Cooking.Hob.Setting.PowerManagement",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hob_hood_automatic_start",
+            entity="Cooking.Hob.Setting.HoodAutomaticStart",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_hob_hood_after_run",
+            entity="Cooking.Hob.Setting.HoodAfterRun",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -585,6 +656,26 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
             value_mapping=("IndicationOn", "IndicationOff"),
         ),
+        HCSwitchEntityDescription(
+            key="switch_hob_automatic_zone_selection",
+            entity="Cooking.Hob.Setting.AutomaticZoneSelection",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_hob_hood_automatic_light_on",
+            entity="Cooking.Hob.Setting.HoodAutomaticLightOn",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            value_mapping=("On", "Off"),
+        ),
+        HCSwitchEntityDescription(
+            key="switch_hob_hood_automatic_light_off",
+            entity="Cooking.Hob.Setting.HoodAutomaticLightOff",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            value_mapping=("On", "Off"),
+        ),
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
     "fan": [generate_hood_fan],
@@ -610,5 +701,38 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
         ),
     ],
-    "binary_sensor": [],
+    "binary_sensor": [
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_appliance_overheated",
+            entity="Cooking.Common.Event.ApplianceOverheated",
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_hob_operating_time_limit",
+            entity="Cooking.Hob.Event.Error.OperatingTimeLimitReached",
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_hob_operating_voltage_error",
+            entity="Cooking.Hob.Event.Error.OperatingVoltageError",
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_hob_iabo_temperature",
+            entity="Cooking.Hob.Event.Error.IABOTemperatureTooHigh",
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+    ],
 }

@@ -170,7 +170,53 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             _duration_to_seconds(call.data["finish_in"]),
         )
 
+    @error_decorator
+    async def handle_set_hob_power_level(call: ServiceCall) -> ServiceResponse:
+        config_entry = await get_config_entry_from_call(hass, call)
+        appliance = config_entry.runtime_data.appliance
+        zone_entity = _get_entity_or_raise(
+            appliance, "Cooking.Hob.Option.ZoneSelector", "hob_power_not_available"
+        )
+        level_entity = _get_entity_or_raise(
+            appliance, "Cooking.Hob.Option.PowerLevel", "hob_power_not_available"
+        )
+        program = appliance.programs.get("Cooking.Hob.Program.PowerLevelMode")
+        if program is None:
+            raise ServiceValidationError(
+                translation_domain=DOMAIN, translation_key="hob_power_not_available"
+            )
+        zone_raw = int(call.data["zone"])
+        level_raw = next(
+            (
+                raw
+                for raw, name in (level_entity.enum or {}).items()
+                if str(name).lower() == str(call.data["level"]).lower()
+            ),
+            None,
+        )
+        if zone_raw not in (zone_entity.enum or {}) or level_raw is None:
+            raise ServiceValidationError(
+                translation_domain=DOMAIN, translation_key="hob_power_invalid"
+            )
+        options = {zone_entity.uid: zone_raw, level_entity.uid: level_raw}
+        # The appliance expects the full option set (as the phone app sends it):
+        # zone + level + duration. Omitting the duration option makes the hob
+        # silently discard the remote selection, so always include it (0 = no
+        # timer) and override it with the optional cooking timer in minutes.
+        duration_entity = appliance.entities.get("BSH.Common.Option.Duration")
+        if duration_entity is not None:
+            options[duration_entity.uid] = int(call.data.get("duration", 0)) * 60
+        # The hob uses execution="selectAndStart" with RemoteControlLevel
+        # PresenceRemoteStart: the command must be *selected* and then confirmed
+        # at the appliance (blinking check mark). A direct start is silently
+        # ignored until remote control has been unlocked by that confirmation.
+        try:
+            await program.select(options, override_options=True)
+        except CodeResponsError as exc:
+            _raise_start_error(exc)
+
     hass.services.async_register(DOMAIN, "start_program", handle_start_program)
+    hass.services.async_register(DOMAIN, "set_hob_power_level", handle_set_hob_power_level)
     hass.services.async_register(DOMAIN, "set_start_in", handle_set_start_in)
     hass.services.async_register(DOMAIN, "set_finish_in", handle_set_finish_in)
     return True
