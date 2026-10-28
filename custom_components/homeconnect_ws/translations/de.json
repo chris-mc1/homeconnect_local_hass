@@ -208,6 +208,15 @@
       },
       "switch_extra_rinse": {
         "name": "Extra Spülen"
+      },
+      "switch_hob_automatic_zone_selection": {
+        "name": "Automatische Zonenwahl"
+      },
+      "switch_hob_hood_automatic_light_on": {
+        "name": "Haube: Licht automatisch ein"
+      },
+      "switch_hob_hood_automatic_light_off": {
+        "name": "Haube: Licht automatisch aus"
       }
     },
     "binary_sensor": {
@@ -419,6 +428,18 @@
       },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm abgelaufen"
+      },
+      "binary_sensor_appliance_overheated": {
+        "name": "Überhitzt"
+      },
+      "binary_sensor_hob_operating_time_limit": {
+        "name": "Betriebszeitbegrenzung erreicht"
+      },
+      "binary_sensor_hob_operating_voltage_error": {
+        "name": "Betriebsspannungsfehler"
+      },
+      "binary_sensor_hob_iabo_temperature": {
+        "name": "Elektroniktemperatur zu hoch"
       }
     },
     "sensor": {
@@ -1326,6 +1347,31 @@
         "state": {
           "poor": "Poor",
           "filled": "Gefüllt"
+        }
+      },
+      "sensor_hob_wifi_signal_strength": {
+        "name": "WLAN-Signalstärke"
+      },
+      "sensor_hob_favorite_001_functionality": {
+        "name": "Favoritentaste 1 Funktion",
+        "state": {
+          "off": "Aus",
+          "program": "Programm",
+          "hoodfullcontrol": "Haube volle Steuerung",
+          "hoodonoff": "Haube ein/aus",
+          "workinglightonoff": "Arbeitslicht ein/aus",
+          "externaltrigger": "Externer Auslöser"
+        }
+      },
+      "sensor_hob_favorite_002_functionality": {
+        "name": "Favoritentaste 2 Funktion",
+        "state": {
+          "off": "Aus",
+          "program": "Programm",
+          "hoodfullcontrol": "Haube volle Steuerung",
+          "hoodonoff": "Haube ein/aus",
+          "workinglightonoff": "Arbeitslicht ein/aus",
+          "externaltrigger": "Externer Auslöser"
         }
       }
     },
@@ -2522,6 +2568,71 @@
           "basiccarbonfilter": "Standard-Kohlefilter",
           "regenerativecarbonfilter": "Regenerierbarer Kohlefilter"
         }
+      },
+      "select_hob_automatic_key_lock": {
+        "name": "Automatische Tastensperre",
+        "state": {
+          "deactivated": "Deaktiviert",
+          "activated": "Aktiviert",
+          "keylockfunctiondeactivated": "Tastensperre-Funktion deaktiviert"
+        }
+      },
+      "select_hob_buzzer_beep_level": {
+        "name": "Signaltöne",
+        "state": {
+          "alloff": "Alle aus",
+          "allactive": "Alle aktiv",
+          "acknowledgemaloff": "Bestätigungstöne aus",
+          "warningoff": "Warntöne aus"
+        }
+      },
+      "select_hob_timer_selection": {
+        "name": "Timer-Art",
+        "state": {
+          "switchofftimer": "Abschalt-Timer",
+          "eggtimer": "Kurzzeitwecker",
+          "countuptimer": "Stoppuhr"
+        }
+      },
+      "select_hob_power_management": {
+        "name": "Leistungsbegrenzung",
+        "state": {
+          "off": "Aus",
+          "1000w": "1000 W",
+          "1500w": "1500 W",
+          "2000w": "2000 W",
+          "2500w": "2500 W",
+          "3000w": "3000 W",
+          "3500w": "3500 W",
+          "4000w": "4000 W",
+          "4500w": "4500 W",
+          "5000w": "5000 W",
+          "5500w": "5500 W",
+          "6000w": "6000 W",
+          "6500w": "6500 W",
+          "7000w": "7000 W",
+          "7500w": "7500 W",
+          "8000w": "8000 W",
+          "8500w": "8500 W",
+          "9000w": "9000 W"
+        }
+      },
+      "select_hob_hood_automatic_start": {
+        "name": "Haube: automatischer Start",
+        "state": {
+          "off": "Aus",
+          "automaticmode": "Automatisch",
+          "manualmode": "Manuell"
+        }
+      },
+      "select_hob_hood_after_run": {
+        "name": "Haube: Nachlauf",
+        "state": {
+          "off": "Aus",
+          "automaticmode": "Automatisch",
+          "manualmode": "Manuell",
+          "donothing": "Nichts tun"
+        }
       }
     },
     "button": {
@@ -2610,6 +2721,12 @@
       },
       "number_hood_sensor_sensitivity": {
         "name": "Automatische Sensorempfindlichkeit"
+      },
+      "number_hob_signal_volume": {
+        "name": "Signallautstärke"
+      },
+      "number_hob_automatic_timer": {
+        "name": "Automatik-Timer"
       }
     },
     "light": {
@@ -2674,6 +2791,36 @@
           "description": "Zeit einstellen, in der das Programm fertig sein soll"
         }
       }
+    },
+    "set_hob_power_level": {
+      "name": "Kochstufe setzen",
+      "description": "Wählt eine Kochstufe für eine Zone aus (zu bestätigen am Gerät über den blinkenden Haken; danach gilt die Fernsteuerung als freigeschaltet).",
+      "fields": {
+        "device_id": {
+          "name": "Gerät",
+          "description": "Das Kochfeld"
+        },
+        "zone": {
+          "name": "Zone",
+          "description": "Zonennummer (100, 200, 300, 340, 400, 500)"
+        },
+        "level": {
+          "name": "Stufe",
+          "description": "off, keepwarm, 10-90 in 5er-Schritten, boost1, boost2"
+        },
+        "duration": {
+          "name": "Kochzeit-Timer",
+          "description": "Optionaler Abschalt-Timer in Minuten (0 oder weggelassen = kein Timer)"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "hob_power_not_available": {
+      "message": "Stufensteuerung ist auf diesem Gerät nicht verfügbar"
+    },
+    "hob_power_invalid": {
+      "message": "Ungültige Zone oder Stufe"
     }
   }
 }

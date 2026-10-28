@@ -218,6 +218,15 @@
       },
       "switch_hob_energy_consumption_indication": {
         "name": "Energy Consumption indication"
+      },
+      "switch_hob_automatic_zone_selection": {
+        "name": "Automatic zone selection"
+      },
+      "switch_hob_hood_automatic_light_on": {
+        "name": "Hood: light on automatically"
+      },
+      "switch_hob_hood_automatic_light_off": {
+        "name": "Hood: light off automatically"
       }
     },
     "binary_sensor": {
@@ -461,6 +470,18 @@
       },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed"
+      },
+      "binary_sensor_appliance_overheated": {
+        "name": "Overheated"
+      },
+      "binary_sensor_hob_operating_time_limit": {
+        "name": "Operating time limit reached"
+      },
+      "binary_sensor_hob_operating_voltage_error": {
+        "name": "Operating voltage error"
+      },
+      "binary_sensor_hob_iabo_temperature": {
+        "name": "Electronics temperature too high"
       }
     },
     "sensor": {
@@ -1836,6 +1857,31 @@
       },
       "sensor_machinecare_remaining_runs": {
         "name": "MachineCare remaining runs"
+      },
+      "sensor_hob_wifi_signal_strength": {
+        "name": "WiFi signal strength"
+      },
+      "sensor_hob_favorite_001_functionality": {
+        "name": "Favorite button 1 function",
+        "state": {
+          "off": "Off",
+          "program": "Program",
+          "hoodfullcontrol": "Hood full control",
+          "hoodonoff": "Hood on/off",
+          "workinglightonoff": "Working light on/off",
+          "externaltrigger": "External trigger"
+        }
+      },
+      "sensor_hob_favorite_002_functionality": {
+        "name": "Favorite button 2 function",
+        "state": {
+          "off": "Off",
+          "program": "Program",
+          "hoodfullcontrol": "Hood full control",
+          "hoodonoff": "Hood on/off",
+          "workinglightonoff": "Working light on/off",
+          "externaltrigger": "External trigger"
+        }
       }
     },
     "select": {
@@ -3483,6 +3529,71 @@
           "turnofflight": "Turn off",
           "keeplighton": "Keep on"
         }
+      },
+      "select_hob_automatic_key_lock": {
+        "name": "Automatic key lock",
+        "state": {
+          "deactivated": "Deactivated",
+          "activated": "Activated",
+          "keylockfunctiondeactivated": "Key lock function deactivated"
+        }
+      },
+      "select_hob_buzzer_beep_level": {
+        "name": "Buzzer tones",
+        "state": {
+          "alloff": "All off",
+          "allactive": "All active",
+          "acknowledgemaloff": "Acknowledge tones off",
+          "warningoff": "Warnings off"
+        }
+      },
+      "select_hob_timer_selection": {
+        "name": "Timer type",
+        "state": {
+          "switchofftimer": "Switch-off timer",
+          "eggtimer": "Egg timer",
+          "countuptimer": "Count-up timer"
+        }
+      },
+      "select_hob_power_management": {
+        "name": "Power management",
+        "state": {
+          "off": "Off",
+          "1000w": "1000 W",
+          "1500w": "1500 W",
+          "2000w": "2000 W",
+          "2500w": "2500 W",
+          "3000w": "3000 W",
+          "3500w": "3500 W",
+          "4000w": "4000 W",
+          "4500w": "4500 W",
+          "5000w": "5000 W",
+          "5500w": "5500 W",
+          "6000w": "6000 W",
+          "6500w": "6500 W",
+          "7000w": "7000 W",
+          "7500w": "7500 W",
+          "8000w": "8000 W",
+          "8500w": "8500 W",
+          "9000w": "9000 W"
+        }
+      },
+      "select_hob_hood_automatic_start": {
+        "name": "Hood: automatic start",
+        "state": {
+          "off": "Off",
+          "automaticmode": "Automatic",
+          "manualmode": "Manual"
+        }
+      },
+      "select_hob_hood_after_run": {
+        "name": "Hood: after-run",
+        "state": {
+          "off": "Off",
+          "automaticmode": "Automatic",
+          "manualmode": "Manual",
+          "donothing": "Do nothing"
+        }
       }
     },
     "button": {
@@ -3580,6 +3691,12 @@
       },
       "number_setting_alarm_clock_groupe": {
         "name": "Alarm Clock{group_name}"
+      },
+      "number_hob_signal_volume": {
+        "name": "Signal volume"
+      },
+      "number_hob_automatic_timer": {
+        "name": "Automatic timer"
       }
     },
     "light": {
@@ -3644,6 +3761,28 @@
           "description": "Set the time the Program should be finished in"
         }
       }
+    },
+    "set_hob_power_level": {
+      "name": "Set hob power level",
+      "description": "Select a power level for a hob zone (confirm at the appliance via the blinking check mark; remote control is then unlocked).",
+      "fields": {
+        "device_id": {
+          "name": "Appliance",
+          "description": "The hob"
+        },
+        "zone": {
+          "name": "Zone",
+          "description": "Zone number (100, 200, 300, 340, 400, 500)"
+        },
+        "level": {
+          "name": "Level",
+          "description": "off, keepwarm, 10-90 in steps of 5, boost1, boost2"
+        },
+        "duration": {
+          "name": "Cooking timer",
+          "description": "Optional switch-off timer in minutes (0 or omitted = no timer)"
+        }
+      }
     }
   },
   "exceptions": {
@@ -3682,6 +3821,12 @@
     },
     "not_connected": {
       "message": "Client is not Connected"
+    },
+    "hob_power_not_available": {
+      "message": "Power level control is not available on this appliance"
+    },
+    "hob_power_invalid": {
+      "message": "Invalid zone or power level"
     }
   }
 }
