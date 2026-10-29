@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.number import NumberMode
-from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeassistant.const import (
     PERCENTAGE,
@@ -60,6 +60,30 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SensorDeviceClass.WEIGHT,
             native_unit_of_measurement=UnitOfMass.GRAMS,
             suggested_unit_of_measurement=UnitOfMass.KILOGRAMS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_load",
+            entity="LaundryCare.Washer.Status.ProcessingData.LaundryLoad",
+            device_class=SensorDeviceClass.WEIGHT,
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement=UnitOfMass.GRAMS,
+            suggested_unit_of_measurement=UnitOfMass.KILOGRAMS,
+            # 0 means the load has not been measured yet
+            value_fn=lambda value: value or None,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_detergent_consumed",
+            entity="LaundryCare.Washer.Status.Detergent.All.Consumed",
+            device_class=SensorDeviceClass.VOLUME,
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            native_unit_of_measurement=UnitOfVolume.MILLILITERS,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_laundry_softener_consumed",
+            entity="LaundryCare.Washer.Status.Softener.All.Consumed",
+            device_class=SensorDeviceClass.VOLUME,
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            native_unit_of_measurement=UnitOfVolume.MILLILITERS,
         ),
         HCSensorEntityDescription(
             key="sensor_laundry_status_idos1_fill_level",
