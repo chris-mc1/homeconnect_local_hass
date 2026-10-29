@@ -21,6 +21,8 @@ from homeconnect_websocket import (
 from .const import CONF_AES_IV, CONF_PSK, MAX_RECONECT_TIME
 
 if TYPE_CHECKING:
+    from asyncio import TimerHandle
+
     from homeassistant.core import HomeAssistant
 
     from . import HCConfigEntry
@@ -35,6 +37,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     appliance: HomeAppliance
     _connecting: bool = True
     _reconnecting: bool = False
+    _reconnect_timeout: TimerHandle | None = None
     connected: bool = False
 
     def __init__(
@@ -66,6 +69,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
 
     async def close(self) -> None:
         self._connecting = False
+        self._cancel_reconnect_timeout()
         await self.appliance.close()
 
     async def _async_setup(self) -> None:
@@ -109,20 +113,31 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             if not self._reconnecting:
                 self._reconnecting = True
                 reconnect_timeout = int(self.hass.loop.time()) + MAX_RECONECT_TIME
-                self.hass.loop.call_at(reconnect_timeout, self._connection_reconnect_callback)
+                self._reconnect_timeout = self.hass.loop.call_at(
+                    reconnect_timeout, self._connection_reconnect_callback
+                )
 
         elif event == ConnectionState.CONNECTED:
             self.connected = True
             if self._reconnecting:
                 self.logger.debug("Reconnected to %s", self.appliance.info.get("vib"))
                 self._reconnecting = False
+            # a timeout left from a recovered outage would hit a later, shorter one
+            self._cancel_reconnect_timeout()
 
         elif event == ConnectionState.CLOSED:
             self.connected = False
+            self._cancel_reconnect_timeout()
 
         self.async_set_updated_data(None)
 
+    def _cancel_reconnect_timeout(self) -> None:
+        if self._reconnect_timeout is not None:
+            self._reconnect_timeout.cancel()
+            self._reconnect_timeout = None
+
     def _connection_reconnect_callback(self) -> None:
+        self._reconnect_timeout = None
         if not self.appliance.session.connected:
             self.connected = False
             self.async_set_updated_data(None)
