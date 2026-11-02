@@ -450,6 +450,12 @@
       "binary_sensor_temperature_alarm_chiller_common": {
         "name": "Temperature alarm Chiller"
       },
+      "binary_sensor_temperature_alarm_chiller_left": {
+        "name": "Temperature alarm Chiller left"
+      },
+      "binary_sensor_temperature_alarm_chiller_right": {
+        "name": "Temperature alarm Chiller right"
+      },
       "binary_sensor_freezer_appliance_error": {
         "name": "Appliance Error"
       },
@@ -1606,6 +1612,12 @@
       },
       "sensor_temperature_memory_freezer": {
         "name": "Memory Temperature Freezer"
+      },
+      "sensor_chiller_left_temperature": {
+        "name": "Chiller left temperature"
+      },
+      "sensor_chiller_right_temperature": {
+        "name": "Chiller right temperature"
       },
       "sensor_laundry_spin_speed": {
         "name": "Spin Speed",
@@ -3420,6 +3432,28 @@
           "custom": "Custom"
         }
       },
+      "select_chiller_left_preset": {
+        "name": "Chiller left preset",
+        "state": {
+          "meatfish": "29°F 💧 (Meat/Fish)",
+          "fruit": "32°F 💧 (Fruit)",
+          "vegetables": "32°F 💧💧 (Vegetables)",
+          "beverages": "34°F 💧 (Beverages)",
+          "snacks": "40°F 💧 (Snacks/Misc.)",
+          "custom": "Custom"
+        }
+      },
+      "select_chiller_right_preset": {
+        "name": "Chiller right preset",
+        "state": {
+          "meatfish": "29°F 💧 (Meat/Fish)",
+          "fruit": "32°F 💧 (Fruit)",
+          "vegetables": "32°F 💧💧 (Vegetables)",
+          "beverages": "34°F 💧 (Beverages)",
+          "snacks": "40°F 💧 (Snacks/Misc.)",
+          "custom": "Custom"
+        }
+      },
       "select_chiller_left_humidity": {
         "name": "Chiller left humidity",
         "state": {
@@ -3541,6 +3575,12 @@
       },
       "number_setpoint_chiller_common": {
         "name": "Chiller Temperature"
+      },
+      "number_setpoint_chiller_left": {
+        "name": "Chiller left temperature"
+      },
+      "number_setpoint_chiller_right": {
+        "name": "Chiller right temperature"
       },
       "number_light_internal_brightness": {
         "name": "Internal Light Brightness"

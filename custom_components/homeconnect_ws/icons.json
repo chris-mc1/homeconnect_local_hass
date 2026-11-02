@@ -117,6 +117,18 @@
                     "on": "mdi:thermometer-alert"
                 }
             },
+            "binary_sensor_temperature_alarm_chiller_left": {
+                "default": "mdi:thermometer",
+                "state": {
+                    "on": "mdi:thermometer-alert"
+                }
+            },
+            "binary_sensor_temperature_alarm_chiller_right": {
+                "default": "mdi:thermometer",
+                "state": {
+                    "on": "mdi:thermometer-alert"
+                }
+            },
             "binary_sensor_freezer_appliance_error": {
                 "default": "mdi:fridge-outline",
                 "state": {
