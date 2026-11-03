@@ -457,7 +457,9 @@
         "name": "当前程序",
         "state": {
           "dishcare_dishwasher_program_intensiv70": "强力 70",
+          "dishcare_dishwasher_program_auto1": "自动 1",
           "dishcare_dishwasher_program_auto2": "自动 2",
+          "dishcare_dishwasher_program_auto3": "自动 3",
           "dishcare_dishwasher_program_eco50": "节能 50",
           "dishcare_dishwasher_program_quick45": "快洗 45",
           "dishcare_dishwasher_program_prerinse": "预冲洗",
@@ -1109,7 +1111,9 @@
         "name": "选择程序",
         "state": {
           "dishcare_dishwasher_program_intensiv70": "强力 70",
+          "dishcare_dishwasher_program_auto1": "自动 1",
           "dishcare_dishwasher_program_auto2": "自动 2",
+          "dishcare_dishwasher_program_auto3": "自动 3",
           "dishcare_dishwasher_program_eco50": "节能 50",
           "dishcare_dishwasher_program_quick45": "快洗 45",
           "dishcare_dishwasher_program_prerinse": "预冲洗",
