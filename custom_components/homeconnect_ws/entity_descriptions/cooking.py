@@ -98,6 +98,24 @@ def generate_oven_event(appliance: HomeAppliance) -> EntityDescriptions:
                 )
             )
 
+        # RegularPreheatFinished / FastPreheatFinished
+        for event, key in (
+            ("RegularPreheatFinished", "regular_preheat_finished"),
+            ("FastPreheatFinished", "fast_preheat_finished"),
+        ):
+            entity = f"Cooking.Oven.Event.Cavity.{group[0]}.{event}"
+            if entity in appliance.entities:
+                descriptions["binary_sensor"].append(
+                    HCBinarySensorEntityDescription(
+                        key=f"binary_sensor_oven_{key}_{group[0]}",
+                        translation_key=f"binary_sensor_oven_{key}",
+                        translation_placeholders={"group_name": group_name},
+                        entity=entity,
+                        value_on={"Present", "Confirmed"},
+                        value_off={"Off"},
+                    )
+                )
+
     return descriptions
 
 

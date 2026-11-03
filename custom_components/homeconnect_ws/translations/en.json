@@ -456,6 +456,12 @@
       "binary_sensor_freezer_low_voltage": {
         "name": "Low Voltage"
       },
+      "binary_sensor_oven_regular_preheat_finished": {
+        "name": "Regular Preheat Finished{group_name}"
+      },
+      "binary_sensor_oven_fast_preheat_finished": {
+        "name": "Fast Preheat Finished{group_name}"
+      },
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed{group_name}"
       },
