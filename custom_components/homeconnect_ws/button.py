@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from homeassistant.components.button import ButtonEntity
+from homeconnect_websocket.entities import Execution
 
 from .entity import HCEntity
 from .helpers import create_entities, error_decorator
@@ -51,7 +52,12 @@ class HCStartButton(HCEntity, ButtonEntity):
     @property
     def available(self) -> bool:
         available = super().available
-        available &= self._runtime_data.appliance.selected_program is not None
+        program = self._runtime_data.appliance.selected_program
+        # The start button is also created for programs that have execution "none" in
+        # the stored device description, because some appliances report the actual
+        # execution type only at runtime. Programs that really can't be started
+        # remotely stay "none" at runtime, so the button is not available for them.
+        available &= program is not None and program.execution != Execution.NONE
         return available
 
     @error_decorator
