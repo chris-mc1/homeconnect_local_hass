@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeconnect_websocket.entities import Option
 
 from .helpers import entity_is_available
 
@@ -58,6 +59,12 @@ class HCEntity(CoordinatorEntity, Entity):
             for extra_attribute in entity_description.extra_attributes:
                 if extra_attribute["entity"] in self._runtime_data.appliance.entities:
                     self._extra_attributes.append(extra_attribute)
+        if isinstance(self._entity, Option):
+            # Availability of an option depends on the selected and the active program
+            appliance = self._runtime_data.appliance
+            for program_root in (appliance._selected_program, appliance._active_program):  # noqa: SLF001
+                if program_root is not None and program_root not in self._entities:
+                    self._entities.append(program_root)
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
@@ -76,7 +83,31 @@ class HCEntity(CoordinatorEntity, Entity):
             self._runtime_data.coordinator.connected
             or self._runtime_data.appliance.session.connected
         )
-        return conn and entity_is_available(self._entity, self.entity_description.available_access)
+        return (
+            conn
+            and entity_is_available(self._entity, self.entity_description.available_access)
+            and self._used_by_program()
+        )
+
+    def _used_by_program(self) -> bool:
+        """
+        Return False if the active or selected program does not use this option.
+
+        The device description lists the options of each program, e.g. an oven's hot air
+        program has a setpoint temperature but no grill level, and a microwave program has
+        neither. Without a program, or for a program without an option list, nothing changes.
+        """
+        if not isinstance(self._entity, Option):
+            return True
+        appliance = self._runtime_data.appliance
+        try:
+            program = appliance.active_program or appliance.selected_program
+        except KeyError:
+            # program uid not in the description
+            return True
+        if program is None or not program._options:  # noqa: SLF001
+            return True
+        return self._entity in program._options  # noqa: SLF001
 
     @property
     def extra_state_attributes(self) -> dict:
