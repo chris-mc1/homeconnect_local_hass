@@ -96,7 +96,15 @@ class HCProgram(HCSelect):
 
     @property
     def options(self) -> list[str] | None:
-        return list(self._programs.values())
+        # Leave out programs the appliance reports as unavailable, selecting them fails
+        # with 400 BadRequest. The selected program stays, it must be one of the options.
+        programs = self._runtime_data.appliance.programs
+        selected = self.current_option
+        return [
+            option
+            for name, option in self._programs.items()
+            if option == selected or name not in programs or programs[name].available is not False
+        ]
 
     @property
     def current_option(self) -> list[str] | None:
