@@ -3583,6 +3583,9 @@
       }
     },
     "light": {
+      "light_oven_cavity_groupe": {
+        "name": "Cavity light{group_name}"
+      },
       "light_door_ring": {
         "name": "Door Ring light"
       },

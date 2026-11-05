@@ -2613,6 +2613,9 @@
       }
     },
     "light": {
+      "light_oven_cavity_groupe": {
+        "name": "Garraumbeleuchtung{group_name}"
+      },
       "light_door_ring": {
         "name": "Tür Ringlicht"
       },
