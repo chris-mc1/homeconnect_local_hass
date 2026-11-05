@@ -130,6 +130,26 @@ def generate_oven_settings(appliance: HomeAppliance) -> EntityDescriptions:
     return descriptions
 
 
+def generate_oven_cavity_light(appliance: HomeAppliance) -> EntityDescriptions:
+    """Get Oven cavity light descriptions."""
+    pattern = re.compile(r"^Cooking\.Oven\.Setting\.Light\.Cavity\.([0-9]*)\.Power$")
+    groups = get_groups_from_regex(appliance, pattern)
+    descriptions = EntityDescriptions(light=[])
+    for group in groups:
+        group_name = f" {int(group[0])}"
+        if len(groups) == 1:
+            group_name = ""
+        descriptions["light"].append(
+            HCLightEntityDescription(
+                key=f"light_oven_cavity_{group[0]}",
+                translation_key="light_oven_cavity_groupe",
+                translation_placeholders={"group_name": group_name},
+                entity=f"Cooking.Oven.Setting.Light.Cavity.{group[0]}.Power",
+            )
+        )
+    return descriptions
+
+
 HOOD_FAN_ENTITIES = [
     "Cooking.Common.Option.Hood.VentingLevel",
     "Cooking.Common.Option.Hood.IntensiveLevel",
@@ -430,6 +450,7 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         generate_hob_zones,
         generate_oven_event,
         generate_oven_settings,
+        generate_oven_cavity_light,
     ],
     "number": [
         HCNumberEntityDescription(

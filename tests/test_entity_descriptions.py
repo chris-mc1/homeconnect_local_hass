@@ -19,6 +19,9 @@ from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
 )
+from custom_components.homeconnect_ws.entity_descriptions.cooking import (
+    generate_oven_cavity_light,
+)
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
     generate_internal_light_brightness,
@@ -322,3 +325,55 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+def _cavity_light(uid: int, cavity: str) -> EntityDescription:
+    return EntityDescription(
+        uid=uid,
+        name=f"Cooking.Oven.Setting.Light.Cavity.{cavity}.Power",
+        access=Access.READ_WRITE,
+        available=True,
+    )
+
+
+async def test_oven_cavity_light(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test dynamic oven cavity light."""
+    # One cavity: no number in the name
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(setting=[_cavity_light(6112, "001")])
+    )
+    assert generate_oven_cavity_light(appliance) == {
+        "light": [
+            HCLightEntityDescription(
+                key="light_oven_cavity_001",
+                translation_key="light_oven_cavity_groupe",
+                translation_placeholders={"group_name": ""},
+                entity="Cooking.Oven.Setting.Light.Cavity.001.Power",
+            )
+        ]
+    }
+
+    # Two cavities: numbered
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(
+            setting=[_cavity_light(6112, "001"), _cavity_light(6212, "002")]
+        )
+    )
+    lights = sorted(generate_oven_cavity_light(appliance)["light"], key=lambda d: d.key)
+    assert [light.key for light in lights] == ["light_oven_cavity_001", "light_oven_cavity_002"]
+    assert [light.translation_placeholders for light in lights] == [
+        {"group_name": " 1"},
+        {"group_name": " 2"},
+    ]
+
+    # No cavity light
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_oven_cavity_light(appliance) == {"light": []}
+
+
+def test_oven_cavity_light_translation() -> None:
+    """Test the oven cavity light has an English name with the group placeholder."""
+    translations = json.loads(
+        Path("custom_components/homeconnect_ws/translations/en.json").read_text(encoding="utf-8")
+    )["entity"]
+    assert "{group_name}" in translations["light"]["light_oven_cavity_groupe"]["name"]
