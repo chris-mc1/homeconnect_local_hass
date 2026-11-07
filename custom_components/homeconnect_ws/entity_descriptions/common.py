@@ -47,20 +47,32 @@ POWER_SWITCH_VALUE_MAPINGS = (
 )
 
 
+ACTIVE_PROGRAM = "BSH.Common.Root.ActiveProgram"
+SELECTED_PROGRAM = "BSH.Common.Root.SelectedProgram"
+REMOTE_START_ALLOWED = "BSH.Common.Status.RemoteControlStartAllowed"
+
+
 def generate_start_button(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Start Button description."""
-    programs = list(
-        filter(
-            lambda program: program.execution == Execution.SELECT_AND_START,
-            appliance.programs.values(),
-        )
+    if ACTIVE_PROGRAM not in appliance.entities:
+        return None
+    startable = any(
+        program.execution == Execution.SELECT_AND_START for program in appliance.programs.values()
     )
-    if len(programs) > 0:
-        return HCButtonEntityDescription(
-            key="button_start_program",
-            entity="BSH.Common.Root.ActiveProgram",
-        )
-    return None
+    # Some appliances (e.g. washers) describe every program with execution "none" and only
+    # allow starting at runtime, once Remote Start has been enabled on the appliance.
+    remote_start = REMOTE_START_ALLOWED in appliance.entities and len(appliance.programs) > 0
+    if not (startable or remote_start):
+        return None
+    # Subscribe to the entities the button's availability depends on
+    entities = [
+        name for name in (SELECTED_PROGRAM, REMOTE_START_ALLOWED) if name in appliance.entities
+    ]
+    return HCButtonEntityDescription(
+        key="button_start_program",
+        entity=ACTIVE_PROGRAM,
+        entities=entities or None,
+    )
 
 
 def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
