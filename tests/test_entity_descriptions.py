@@ -396,3 +396,23 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+def _translation_keys(data: dict, path: tuple[str, ...] = ()) -> set[tuple[str, ...]]:
+    keys = set()
+    for key, value in data.items():
+        if isinstance(value, dict):
+            keys |= _translation_keys(value, (*path, key))
+        else:
+            keys.add((*path, key))
+    return keys
+
+
+def test_german_translation_complete() -> None:
+    """Test de.json has every non-state string of en.json (names, config, exceptions)."""
+    translations = Path("custom_components/homeconnect_ws/translations")
+    en = _translation_keys(json.loads((translations / "en.json").read_text(encoding="utf-8")))
+    de = _translation_keys(json.loads((translations / "de.json").read_text(encoding="utf-8")))
+
+    missing = sorted(".".join(key) for key in en - de if "state" not in key)
+    assert missing == []
