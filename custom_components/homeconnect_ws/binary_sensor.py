@@ -49,11 +49,11 @@ class HCBinarySensor(HCEntity, BinarySensorEntity):
     entity_description: HCBinarySensorEntityDescription
 
     @property
-    def is_on(self) -> bool:
+    def is_on(self) -> bool | None:
         if self.entity_description.value_on:
             if self._entity.value in self.entity_description.value_on:
                 return True
-            if self._entity.value in self.entity_description.value_off:
+            if self._entity.value in (self.entity_description.value_off or ()):
                 return False
             return None
         return bool(self._entity.value)
