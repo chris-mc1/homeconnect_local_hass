@@ -461,6 +461,30 @@
       },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Remote control active"
+      },
+      "binary_sensor_local_control_active": {
+        "name": "Local control active"
+      },
+      "binary_sensor_customer_service_request": {
+        "name": "Customer service request"
+      },
+      "binary_sensor_laundry_door_open": {
+        "name": "Door open"
+      },
+      "binary_sensor_supply_power_blacked_out": {
+        "name": "Power outage"
+      },
+      "binary_sensor_warm_water_absent": {
+        "name": "Warm water absent"
+      },
+      "binary_sensor_circulation_pump_locked_rotor": {
+        "name": "Circulation pump blocked"
+      },
+      "binary_sensor_circulation_pump_max_torque": {
+        "name": "Circulation pump overloaded"
       }
     },
     "sensor": {
@@ -1622,7 +1646,12 @@
           "rpm1500": "1500 rpm",
           "rpm1600": "1600 rpm",
           "rinsehold": "Rinse Hold",
-          "auto": "Auto"
+          "auto": "Auto",
+          "uloff": "Off (US)",
+          "ullow": "Low (US)",
+          "ulmedium": "Medium (US)",
+          "ulhigh": "High (US)",
+          "max": "Max"
         }
       },
       "sensor_estimated_remaining_program_time": {
@@ -3261,7 +3290,8 @@
           "rpm700": "RPM700",
           "ulmedium": "UlMedium",
           "rpm800": "RPM800",
-          "rpm900": "RPM900"
+          "rpm900": "RPM900",
+          "rinsehold": "Rinse Hold"
         }
       },
       "select_laundry_option_stains": {

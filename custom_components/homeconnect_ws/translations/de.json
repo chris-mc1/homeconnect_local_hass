@@ -419,6 +419,30 @@
       },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm abgelaufen"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Fernsteuerung aktiv"
+      },
+      "binary_sensor_local_control_active": {
+        "name": "Lokale Bedienung aktiv"
+      },
+      "binary_sensor_customer_service_request": {
+        "name": "Kundendienst erforderlich"
+      },
+      "binary_sensor_laundry_door_open": {
+        "name": "Tür offen"
+      },
+      "binary_sensor_supply_power_blacked_out": {
+        "name": "Stromausfall"
+      },
+      "binary_sensor_warm_water_absent": {
+        "name": "Kein Warmwasser"
+      },
+      "binary_sensor_circulation_pump_locked_rotor": {
+        "name": "Umwälzpumpe blockiert"
+      },
+      "binary_sensor_circulation_pump_max_torque": {
+        "name": "Umwälzpumpe überlastet"
       }
     },
     "sensor": {
@@ -1102,7 +1126,12 @@
           "rpm1500": "1500 U/min",
           "rpm1600": "1600 U/min",
           "rinsehold": "Spülstopp",
-          "auto": "Auto"
+          "auto": "Auto",
+          "uloff": "Aus (US)",
+          "ullow": "Niedrig (US)",
+          "ulmedium": "Mittel (US)",
+          "ulhigh": "Hoch (US)",
+          "max": "Max"
         }
       },
       "sensor_estimated_remaining_program_time": {
@@ -2395,7 +2424,8 @@
           "rpm700": "RPM700",
           "ulmedium": "UlMittel",
           "rpm800": "RPM800",
-          "rpm900": "RPM900"
+          "rpm900": "RPM900",
+          "rinsehold": "Spülstopp"
         }
       },
       "select_laundry_option_stains": {
