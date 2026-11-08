@@ -184,7 +184,13 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             key="Test.Fan",
             name="Fan",
             entities=["Test.FanSpeed1", "Test.FanSpeed2"],
-        )
+        ),
+        HCFanEntityDescription(
+            key="Test.FanProgram",
+            name="Fan Program",
+            entities=["Test.FanSpeed1", "Test.FanSpeed2"],
+            program="Test.Program.Fan",
+        ),
     ],
     "light": [
         HCLightEntityDescription(
@@ -259,6 +265,13 @@ DEVICE_DESCRIPTION = DeviceDescription(
         ),
     ],
     setting=[
+        EntityDescription(
+            uid=539,
+            name="BSH.Common.Setting.PowerState",
+            enumeration={"1": "Off", "2": "On"},
+            available=True,
+            access=Access.READ_WRITE,
+        ),
         EntityDescription(
             uid=200,
             name="Test.PowerState",
@@ -459,6 +472,16 @@ DEVICE_DESCRIPTION = DeviceDescription(
             options=[
                 OptionDescription(access=Access.READ_WRITE, available=True, refUID=401),
                 OptionDescription(access=Access.READ_WRITE, available=True, refUID=402),
+            ],
+            execution=Execution.START_ONLY,
+        ),
+        EntityDescription(
+            uid=504,
+            name="Test.Program.Fan",
+            available=True,
+            options=[
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=403),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=404),
             ],
             execution=Execution.START_ONLY,
         ),
