@@ -258,6 +258,27 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        # Status of the connection to the appliance. Seen on Gaggenau BO470112 and BS474112:
+        # BackendConnected (uid 5), RemoteControlActive (uid 523) and LocalControlActive
+        # (uid 535, true while the appliance is operated on the appliance itself).
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_backend_connected",
+            entity="BSH.Common.Status.BackendConnected",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_remote_control_active",
+            entity="BSH.Common.Status.RemoteControlActive",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_local_control_active",
+            entity="BSH.Common.Status.LocalControlActive",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_interior_illumination",
             entity="BSH.Common.Status.InteriorIlluminationActive",

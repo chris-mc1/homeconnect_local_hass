@@ -224,6 +224,18 @@
       "connection": {
         "name": "Connection"
       },
+      "binary_sensor_backend_connected": {
+        "name": "Backend connected"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Remote control active"
+      },
+      "binary_sensor_local_control_active": {
+        "name": "Local control active"
+      },
+      "binary_sensor_oven_meatprobe_plugged": {
+        "name": "Meat probe plugged in"
+      },
       "binary_sensor_door_state": {
         "name": "Door"
       },
