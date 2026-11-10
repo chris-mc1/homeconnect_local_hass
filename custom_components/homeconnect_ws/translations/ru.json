@@ -258,6 +258,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Используемый режим нагрева",
+        "state": {
+          "automaticoperation": "Автоматическая работа",
+          "automaticoperationwithmicrowave": "Автоматическая работа с микроволновкой",
+          "bakingsensoroperation": "Работа с сенсором выпечки",
+          "bottomheating": "Нижний нагрев",
+          "defrosting": "Разморозка",
+          "desiccation": "Обезвоживание",
+          "doughproving": "Поднятие теста",
+          "frozenheatupspecial": "Специальный нагрев замороженного",
+          "grilllargearea": "Гриль большая площадь",
+          "grillsmallarea": "Гриль малая площадь",
+          "hotair": "Горячий воздух",
+          "hotaireco": "Горячий воздух эко",
+          "hotairgrilling": "Гриль горячим воздухом",
+          "intensiveheat": "Интенсивный нагрев",
+          "keepwarm": "Подогрев",
+          "microwave": "Микроволновка",
+          "pizzasetting": "Настройка пиццы",
+          "preheatovenware": "Предварительный нагрев посуды",
+          "reheat": "Подогрев",
+          "sabbathprogramme": "Программа Шаббат",
+          "slowcook": "Медленное приготовление",
+          "steam": "Пар",
+          "topbottomheating": "Верхний/нижний нагрев",
+          "topbottomheatingeco": "Верхний/нижний нагрев эко",
+          "breadbaking": "Выпечка хлеба",
+          "steamwithsteamset": "Пар с паровым набором"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Оставшееся время программы"
       },
@@ -1534,37 +1565,6 @@
           "level01": "Уровень 1",
           "level02": "Уровень 2",
           "level03": "Уровень 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Используемый режим нагрева",
-        "state": {
-          "automaticoperation": "Автоматическая работа",
-          "automaticoperationwithmicrowave": "Автоматическая работа с микроволновкой",
-          "bakingsensoroperation": "Работа с сенсором выпечки",
-          "bottomheating": "Нижний нагрев",
-          "defrosting": "Разморозка",
-          "desiccation": "Обезвоживание",
-          "doughproving": "Поднятие теста",
-          "frozenheatupspecial": "Специальный нагрев замороженного",
-          "grilllargearea": "Гриль большая площадь",
-          "grillsmallarea": "Гриль малая площадь",
-          "hotair": "Горячий воздух",
-          "hotaireco": "Горячий воздух эко",
-          "hotairgrilling": "Гриль горячим воздухом",
-          "intensiveheat": "Интенсивный нагрев",
-          "keepwarm": "Подогрев",
-          "microwave": "Микроволновка",
-          "pizzasetting": "Настройка пиццы",
-          "preheatovenware": "Предварительный нагрев посуды",
-          "reheat": "Подогрев",
-          "sabbathprogramme": "Программа Шаббат",
-          "slowcook": "Медленное приготовление",
-          "steam": "Пар",
-          "topbottomheating": "Верхний/нижний нагрев",
-          "topbottomheatingeco": "Верхний/нижний нагрев эко",
-          "breadbaking": "Выпечка хлеба",
-          "steamwithsteamset": "Пар с паровым набором"
         }
       },
       "select_pyrolysis_level": {

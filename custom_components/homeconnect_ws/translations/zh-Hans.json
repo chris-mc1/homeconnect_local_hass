@@ -415,6 +415,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "加热模式",
+        "state": {
+          "automaticoperation": "自动操作",
+          "automaticoperationwithmicrowave": "微波自动操作",
+          "bakingsensoroperation": "烘焙传感操作",
+          "bottomheating": "底部加热",
+          "defrosting": "解冻",
+          "desiccation": "干燥",
+          "doughproving": "面团发酵",
+          "frozenheatupspecial": "冷冻加热特快",
+          "grilllargearea": "大面烧烤",
+          "grillsmallarea": "小面烧烤",
+          "hotair": "热风",
+          "hotaireco": "热风节能",
+          "hotairgrilling": "热风烧烤",
+          "intensiveheat": "强热",
+          "keepwarm": "保温",
+          "microwave": "微波",
+          "pizzasetting": "披萨模式",
+          "preheatovenware": "预热烤具",
+          "reheat": "复热",
+          "sabbathprogramme": "安息日程序",
+          "slowcook": "慢炖",
+          "steam": "蒸汽",
+          "topbottomheating": "上下加热",
+          "topbottomheatingeco": "上下加热节能",
+          "breadbaking": "面包烘焙",
+          "steamwithsteamset": "蒸汽套装"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "剩余程序时间"
       },
@@ -1648,37 +1679,6 @@
           "level01": "等级 1",
           "level02": "等级 2",
           "level03": "等级 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "加热模式",
-        "state": {
-          "automaticoperation": "自动操作",
-          "automaticoperationwithmicrowave": "微波自动操作",
-          "bakingsensoroperation": "烘焙传感操作",
-          "bottomheating": "底部加热",
-          "defrosting": "解冻",
-          "desiccation": "干燥",
-          "doughproving": "面团发酵",
-          "frozenheatupspecial": "冷冻加热特快",
-          "grilllargearea": "大面烧烤",
-          "grillsmallarea": "小面烧烤",
-          "hotair": "热风",
-          "hotaireco": "热风节能",
-          "hotairgrilling": "热风烧烤",
-          "intensiveheat": "强热",
-          "keepwarm": "保温",
-          "microwave": "微波",
-          "pizzasetting": "披萨模式",
-          "preheatovenware": "预热烤具",
-          "reheat": "复热",
-          "sabbathprogramme": "安息日程序",
-          "slowcook": "慢炖",
-          "steam": "蒸汽",
-          "topbottomheating": "上下加热",
-          "topbottomheatingeco": "上下加热节能",
-          "breadbaking": "面包烘焙",
-          "steamwithsteamset": "蒸汽套装"
         }
       },
       "select_pyrolysis_level": {
