@@ -243,6 +243,41 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_registry_enabled_default=False,
             entity_category=EntityCategory.DIAGNOSTIC,
         ),
+        # Events of the appliance (Off / Present / Confirmed). Events that did not occur yet
+        # can be reported as null (None) by the appliance; that is off.
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_software_update_available",
+            entity="BSH.Common.Event.SoftwareUpdateAvailable",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off", None},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_software_download_available",
+            entity="BSH.Common.Event.SoftwareDownloadAvailable",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off", None},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_software_update_successful",
+            entity="BSH.Common.Event.SoftwareUpdateSuccessful",
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off", None},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_customer_service_request",
+            entity="BSH.Common.Event.CustomerServiceRequest",
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off", None},
+        ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_program_aborted",
             entity="BSH.Common.Event.ProgramAborted",

@@ -453,6 +453,51 @@
       "binary_sensor_freezer_appliance_error": {
         "name": "Appliance Error"
       },
+      "binary_sensor_software_update_available": {
+        "name": "Software update available"
+      },
+      "binary_sensor_software_download_available": {
+        "name": "Software download available"
+      },
+      "binary_sensor_software_update_successful": {
+        "name": "Software update successful"
+      },
+      "binary_sensor_customer_service_request": {
+        "name": "Customer service request"
+      },
+      "binary_sensor_oven_lock_while_cooling_down": {
+        "name": "Locked while cooling down"
+      },
+      "binary_sensor_oven_cavity_temperature_too_high": {
+        "name": "Cavity temperature too high"
+      },
+      "binary_sensor_oven_user_interaction_required": {
+        "name": "User interaction required"
+      },
+      "binary_sensor_oven_cavity_heatup": {
+        "name": "Cavity heating up"
+      },
+      "binary_sensor_oven_operating_time_limit_reached": {
+        "name": "Operating time limit reached"
+      },
+      "binary_sensor_oven_cleaning_request": {
+        "name": "Cleaning requested"
+      },
+      "binary_sensor_oven_force_flushing": {
+        "name": "Flushing required"
+      },
+      "binary_sensor_oven_descaling_request": {
+        "name": "Descaling requested"
+      },
+      "binary_sensor_oven_empty_water_container": {
+        "name": "Water container empty"
+      },
+      "binary_sensor_oven_water_supply_closed": {
+        "name": "Water supply closed"
+      },
+      "binary_sensor_cooking_appliance_module_error": {
+        "name": "Appliance module error"
+      },
       "binary_sensor_freezer_low_voltage": {
         "name": "Low Voltage"
       },
