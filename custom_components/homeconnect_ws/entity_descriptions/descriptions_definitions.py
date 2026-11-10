@@ -47,6 +47,14 @@ class HCSelectEntityDescription(
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
     has_state_translation: bool = False
     mapping: dict[str, str] = None
+    # Program select: do not select another program while a program is running, for appliances
+    # of these brands (in capitals, as the appliance reports them). Gaggenau ovens accept the
+    # selection while a program runs, but ignore it until the program has ended.
+    block_change_while_running_for_brands: set[str] | None = None
+    # Program select: show the active program (when there is one) instead of the selected
+    # program, for appliances of these brands. A Gaggenau oven changes the active program
+    # when it is operated on the oven itself, but keeps the program that was selected before.
+    prefer_active_program_for_brands: set[str] | None = None
 
 
 class HCSwitchEntityDescription(

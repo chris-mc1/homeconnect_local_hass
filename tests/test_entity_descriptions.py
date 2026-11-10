@@ -209,6 +209,8 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
             "BSH.Common.Program.Favorite.002": "favorite_002",
             "BSH.Common.Program.Program1": "bsh_common_program_program1",
         },
+        block_change_while_running_for_brands={"GAGGENAU"},
+        prefer_active_program_for_brands={"GAGGENAU"},
     )
     assert program_description["active_program"][0] == HCSensorEntityDescription(
         key="sensor_active_program",
