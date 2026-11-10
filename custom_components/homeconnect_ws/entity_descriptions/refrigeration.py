@@ -472,6 +472,12 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     ],
     "select": [
         HCSelectEntityDescription(
+            key="select_refrigerator_dispenser_function",
+            entity="Refrigeration.Common.Setting.Dispenser.Function",
+            device_class=SensorDeviceClass.ENUM,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
             key="select_refrigerator_door_assistant_freezer_trigger",
             entity="Refrigeration.Common.Setting.Door.AssistantTriggerFreezer",
             device_class=SensorDeviceClass.ENUM,

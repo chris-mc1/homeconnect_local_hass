@@ -302,6 +302,9 @@
             }
         },
         "select": {
+            "select_refrigerator_dispenser_function": {
+                "default": "mdi:cup-water"
+            },
             "select_drying_assistant_all_programs": {},
             "select_hot_water": {
                 "default": "mdi:water-thermometer-outline"

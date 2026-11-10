@@ -1763,6 +1763,14 @@
           "long": "Long"
         }
       },
+      "select_refrigerator_dispenser_function": {
+        "name": "Fonction du distributeur",
+        "state": {
+          "cubes": "Glaçons",
+          "crushed": "Glace pilée",
+          "water": "Eau"
+        }
+      },
       "select_refrigerator_door_assistant_freezer_trigger": {
         "name": "Freezer Door Assistant trigger",
         "state": {
