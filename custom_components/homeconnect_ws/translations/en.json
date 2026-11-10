@@ -3385,6 +3385,14 @@
           "recommended": "Recommended"
         }
       },
+      "select_cooking_button_tone_type": {
+        "name": "Button tone",
+        "state": {
+          "off": "Off",
+          "tone01": "Tone 1",
+          "tone02": "Tone 2"
+        }
+      },
       "select_oven_signal_duration": {
         "name": "Signal duration",
         "state": {
@@ -3556,6 +3564,12 @@
       },
       "number_oven_display_brightness": {
         "name": "Display brightness"
+      },
+      "number_cooking_button_tone_volume": {
+        "name": "Button tone volume"
+      },
+      "number_cooking_signal_volume": {
+        "name": "Signal volume"
       },
       "number_hood_interval_off": {
         "name": "Interval time off"

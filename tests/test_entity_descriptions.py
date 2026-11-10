@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
+import pytest
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
@@ -29,7 +30,6 @@ from homeassistant.components.switch import SwitchDeviceClass
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
 
 if TYPE_CHECKING:
-    import pytest
     from homeconnect_websocket.testutils import MockAppliance, MockApplianceType
 
 
@@ -322,3 +322,30 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+@pytest.mark.parametrize(
+    ("description_type", "key", "entity"),
+    [
+        # Gaggenau BO470112 and BS474112 report these settings under other names than the
+        # Cooking.Oven.* entities that were already supported (uid 4411, 53256, 53257,
+        # 53258 and 53261 in the diagnostics of issue #513).
+        ("switch", "switch_oven_fast_pre_heat_setting", "Cooking.Oven.Setting.FastPreHeat"),
+        ("select", "select_cooking_button_tone_type", "Cooking.Common.Setting.ButtonToneType"),
+        (
+            "number",
+            "number_cooking_button_tone_volume",
+            "Cooking.Common.Setting.ButtonToneVolume",
+        ),
+        ("number", "number_cooking_display_brightness", "Cooking.Common.Setting.DisplayBrightness"),
+        ("number", "number_cooking_signal_volume", "Cooking.Common.Setting.SignalVolume"),
+    ],
+)
+def test_oven_common_setting_descriptions(description_type: str, key: str, entity: str) -> None:
+    """Test the oven settings that are reported as Cooking.Common.* / Setting.* exist."""
+    descriptions = entity_descriptions.get_all_entity_description()
+
+    description = next(
+        d for d in descriptions[description_type] if not callable(d) and d.key == key
+    )
+    assert description.entity == entity
