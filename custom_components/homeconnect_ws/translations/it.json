@@ -544,7 +544,7 @@
         "name": "Spegnimento ritardato"
       },
       "sensor_power_state": {
-        "name": "Stato funzionamento",
+        "name": "Stato alimentazione",
         "state": {
           "mainsoff": "Alimentazione spenta",
           "off": "Spento",
@@ -1099,7 +1099,7 @@
         }
       },
       "select_laundry_sound_volume": {
-        "name": "Volume segnale tastiera",
+        "name": "Volume suoni",
         "state": {
           "off": "Spento",
           "volume1": "Volume 1",
