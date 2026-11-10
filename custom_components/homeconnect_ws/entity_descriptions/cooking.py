@@ -437,6 +437,9 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="Cooking.Oven.Option.SetpointTemperature",
             device_class=NumberDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            # Gaggenau BO470112 reports a step of 1, but rounds up to a multiple of 5: a
+            # requested 141 was reported back as 145, 140 stayed 140 (seen in a debug log).
+            step_for_brands=(5, {"GAGGENAU"}),
             mode=NumberMode.AUTO,
         ),
         HCNumberEntityDescription(
