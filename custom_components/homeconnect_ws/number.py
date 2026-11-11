@@ -43,7 +43,15 @@ class HCNumber(HCEntity, NumberEntity):
         self._entity._type = int  # noqa: SLF001 Force integer type
 
     @property
-    def native_value(self) -> int | float:
+    def native_value(self) -> int | float | None:
+        if self.entity_description.use_raw_value:
+            # The enumeration label (for example "60dC") is not a number, use the raw value.
+            # Raw values outside of the range of this entity (for example the Fahrenheit
+            # entries of the enumeration) are unknown here.
+            value = self._entity.value_raw
+            if value is None or value > self.native_max_value:
+                return None
+            return value
         return self._entity.value
 
     @property
@@ -70,4 +78,12 @@ class HCNumber(HCEntity, NumberEntity):
 
     @error_decorator
     async def async_set_native_value(self, value: float) -> None:
+        if self.entity_description.use_raw_value:
+            raw_value = int(value)
+            limit = self.entity_description.raw_value_off_below
+            if limit is not None and raw_value < limit:
+                # Not in the enumeration, 0 is the "Off" entry.
+                raw_value = 0
+            await self._entity.set_value_raw(raw_value)
+            return
         await self._entity.set_value(int(value))

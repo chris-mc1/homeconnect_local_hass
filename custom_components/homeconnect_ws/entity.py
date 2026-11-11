@@ -54,6 +54,10 @@ class HCEntity(CoordinatorEntity, Entity):
         if entity_description.entities:
             for entity_name in entity_description.entities:
                 self._entities.append(self._runtime_data.appliance.entities[entity_name])
+        for name, _ in entity_description.available_when or []:
+            # Also update this entity when an entity that decides the availability changes.
+            if name in self._runtime_data.appliance.entities and self._conditions_apply():
+                self._entities.append(self._runtime_data.appliance.entities[name])
         if entity_description.extra_attributes:
             for extra_attribute in entity_description.extra_attributes:
                 if extra_attribute["entity"] in self._runtime_data.appliance.entities:
@@ -76,7 +80,32 @@ class HCEntity(CoordinatorEntity, Entity):
             self._runtime_data.coordinator.connected
             or self._runtime_data.appliance.session.connected
         )
-        return conn and entity_is_available(self._entity, self.entity_description.available_access)
+        return (
+            conn
+            and entity_is_available(self._entity, self.entity_description.available_access)
+            and self._conditions_met()
+        )
+
+    def _conditions_apply(self) -> bool:
+        """Check if the available_when conditions apply to the brand of this appliance."""
+        brands = getattr(self.entity_description, "available_when_brands", None)
+        if brands is None:
+            return True
+        return self._runtime_data.appliance.info.get("brand", "").upper() in brands
+
+    def _conditions_met(self) -> bool:
+        """Check the available_when conditions, an unknown value (None) is not a failure."""
+        if not self.entity_description.available_when or not self._conditions_apply():
+            return True
+        for name, allowed_values in self.entity_description.available_when:
+            entity = self._runtime_data.appliance.entities.get(name)
+            if (
+                entity is not None
+                and entity.value is not None
+                and entity.value not in allowed_values
+            ):
+                return False
+        return True
 
     @property
     def extra_state_attributes(self) -> dict:
