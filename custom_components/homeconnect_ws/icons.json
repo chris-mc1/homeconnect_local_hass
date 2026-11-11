@@ -59,6 +59,18 @@
             }
         },
         "binary_sensor": {
+            "binary_sensor_oven_program_finished": {
+                "default": "mdi:check-circle-outline"
+            },
+            "binary_sensor_oven_regular_preheat_finished": {
+                "default": "mdi:thermometer-check"
+            },
+            "binary_sensor_oven_fast_preheat_finished": {
+                "default": "mdi:thermometer-check"
+            },
+            "binary_sensor_oven_meatprobe_temperature_reached": {
+                "default": "mdi:thermometer-probe"
+            },
             "connection": {},
             "binary_sensor_door_state": {},
             "binary_sensor_intensiv_zone_active": {

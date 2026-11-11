@@ -459,6 +459,24 @@
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed{group_name}"
       },
+      "binary_sensor_oven_program_finished": {
+        "name": "Program Finished{group_name}"
+      },
+      "binary_sensor_oven_program_aborted": {
+        "name": "Program Aborted{group_name}"
+      },
+      "binary_sensor_oven_regular_preheat_finished": {
+        "name": "Regular Preheat Finished{group_name}"
+      },
+      "binary_sensor_oven_fast_preheat_finished": {
+        "name": "Fast Preheat Finished{group_name}"
+      },
+      "binary_sensor_oven_meatprobe_temperature_reached": {
+        "name": "Meat Probe Temperature Reached{group_name}"
+      },
+      "binary_sensor_oven_meatprobe_plugged_group": {
+        "name": "Meat Probe Connected{group_name}"
+      },
       "binary_sensor_alarm_clock_elapsed": {
         "name": "Alarm Clock Elapsed"
       }
@@ -1652,6 +1670,9 @@
       },
       "sensor_oven_current_meatprobe_temperature": {
         "name": "Current Meatprobe Temperature"
+      },
+      "sensor_oven_current_meatprobe_temperature_group": {
+        "name": "Current Meatprobe Temperature{group_name}"
       },
       "sensor_heatup_progress": {
         "name": "Heatup progress"
