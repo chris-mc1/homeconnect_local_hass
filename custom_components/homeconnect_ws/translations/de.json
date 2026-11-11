@@ -414,6 +414,12 @@
       "binary_sensor_freezer_low_voltage": {
         "name": "Niederspannung"
       },
+      "binary_sensor_oven_regular_preheat_finished": {
+        "name": "Vorheizen beendet{group_name}"
+      },
+      "binary_sensor_oven_fast_preheat_finished": {
+        "name": "Schnellaufheizen beendet{group_name}"
+      },
       "binary_sensor_oven_alarm_clock_elapsed": {
         "name": "Alarm abgelaufen{group_name}"
       },
