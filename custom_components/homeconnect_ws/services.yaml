@@ -37,3 +37,57 @@ set_finish_in:
       required: true
       selector:
         duration:
+
+set_hob_power_level:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: homeconnect_ws
+    zone:
+      required: true
+      selector:
+        select:
+          options:
+            - "100"
+            - "200"
+            - "300"
+            - "340"
+            - "400"
+            - "500"
+    level:
+      required: true
+      selector:
+        select:
+          options:
+            - "off"
+            - "keepwarm"
+            - "10"
+            - "15"
+            - "20"
+            - "25"
+            - "30"
+            - "35"
+            - "40"
+            - "45"
+            - "50"
+            - "55"
+            - "60"
+            - "65"
+            - "70"
+            - "75"
+            - "80"
+            - "85"
+            - "90"
+            - "boost1"
+            - "boost2"
+    duration:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 599
+          step: 1
+          unit_of_measurement: min
+          mode: box
