@@ -35,7 +35,9 @@ from .descriptions_definitions import (
 )
 
 if TYPE_CHECKING:
+    from homeassistant.helpers.typing import StateType
     from homeconnect_websocket import HomeAppliance
+    from homeconnect_websocket.entities import Entity as HcEntity
 
 
 POWER_SWITCH_VALUE_MAPINGS = (
@@ -45,6 +47,21 @@ POWER_SWITCH_VALUE_MAPINGS = (
     ("On", "Standby"),
     ("Standby", "Off"),
 )
+
+
+def wifi_signal_strength_dbm(entity: HcEntity) -> StateType:
+    """
+    Convert the raw WiFiSignalStrength value to dBm.
+
+    Some appliances (e.g. Gaggenau ovens) report the signal strength as an unsigned byte,
+    e.g. 191 or 197, instead of a negative dBm value. Interpreted as a signed 8-bit integer
+    these are -65 dBm and -59 dBm. Values that are already negative are left untouched.
+    """
+    value = entity.value
+    if isinstance(value, int | float) and value > 127:
+        # Two's complement: unsigned byte -> signed 8-bit integer
+        return value - 256
+    return value
 
 
 def generate_start_button(appliance: HomeAppliance) -> EntityDescriptions:
@@ -403,6 +420,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
             entity_category=EntityCategory.DIAGNOSTIC,
             entity_registry_enabled_default=False,
+            value_fn=wifi_signal_strength_dbm,
         ),
         generate_door_state,
     ],

@@ -66,6 +66,9 @@ class HCSensorEntityDescription(
     available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
     has_state_translation: bool = False
     mapping: dict[str, str] = None
+    # Optional conversion of the raw appliance value to the value shown in Home Assistant.
+    # When set, it is only called with an entity that has a value (not None).
+    value_fn: Callable[[HcEntity], StateType] | None = None
 
 
 class HCBinarySensorEntityDescription(
