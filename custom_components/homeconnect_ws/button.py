@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 from homeassistant.components.button import ButtonEntity
 
 from .entity import HCEntity
+from .entity_descriptions.common import REMOTE_START_ALLOWED
 from .helpers import create_entities, error_decorator
 
 if TYPE_CHECKING:
@@ -50,8 +51,12 @@ class HCStartButton(HCEntity, ButtonEntity):
 
     @property
     def available(self) -> bool:
+        appliance = self._runtime_data.appliance
         available = super().available
-        available &= self._runtime_data.appliance.selected_program is not None
+        available &= appliance.selected_program is not None
+        if remote_start := appliance.entities.get(REMOTE_START_ALLOWED):
+            # The appliance rejects remote starts until Remote Start is enabled on it
+            available &= remote_start.value is True
         return available
 
     @error_decorator

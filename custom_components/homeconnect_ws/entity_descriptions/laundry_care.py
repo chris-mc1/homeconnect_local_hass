@@ -26,7 +26,35 @@ from .descriptions_definitions import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from homeconnect_websocket import HomeAppliance
+
     from .descriptions_definitions import _EntityDescriptionsDefinitionsType
+
+
+def _generate_idos_active(
+    index: int,
+) -> Callable[[HomeAppliance], HCSwitchEntityDescription | None]:
+    """Get i-Dos active switch description."""
+    # Depending on the appliance the option is named "IDos{n}Active" or "IDos{n}.Active".
+    # Only one Entity is created, so the unique_id stays stable and can't collide.
+
+    def generate(appliance: HomeAppliance) -> HCSwitchEntityDescription | None:
+        for entity in (
+            f"LaundryCare.Washer.Option.IDos{index}Active",
+            f"LaundryCare.Washer.Option.IDos{index}.Active",
+        ):
+            if entity in appliance.entities:
+                return HCSwitchEntityDescription(
+                    key=f"switch_laundry_idos{index}_active",
+                    entity=entity,
+                    device_class=SwitchDeviceClass.SWITCH,
+                )
+        return None
+
+    return generate
+
 
 LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
     "sensor": [
@@ -82,8 +110,8 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="LaundryCare.Dryer.Status.RefresherFillLevel",
             entity_category=EntityCategory.DIAGNOSTIC,
             device_class=BinarySensorDeviceClass.PROBLEM,
-            value_on=("Poor"),
-            value_off=("Filled"),
+            value_on={"Poor"},
+            value_off={"Filled"},
         ),
         HCBinarySensorEntityDescription(
             key="binary_sensor_condensate_container_full",
@@ -230,6 +258,51 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_on={"Present", "Confirmed"},
             value_off={"Off"},
         ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_laundry_door_open",
+            entity="LaundryCare.Common.Event.DoorOpen",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_supply_power_blacked_out",
+            entity="LaundryCare.Common.Event.SupplyPower.BlackedOut",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_warm_water_absent",
+            entity="LaundryCare.Washer.Event.WaterSupply.WarmWaterAbsent",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_circulation_pump_locked_rotor",
+            entity="LaundryCare.Washer.Event.Circulation.Pump.ErrorLockedRotor",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_circulation_pump_max_torque",
+            entity="LaundryCare.Washer.Event.Circulation.Pump.ErrorMaxTorque",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            entity_registry_enabled_default=False,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
     ],
     "select": [
         HCSelectEntityDescription(
@@ -338,6 +411,12 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_laundry_hygienic_steam_intensity",
             entity="LaundryCare.Common.Option.HygienicSteamIntensity",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_washer_hygienic_steam_intensity",
+            translation_key="select_laundry_hygienic_steam_intensity",
+            entity="LaundryCare.Washer.Option.HygienicSteamIntensity",
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
@@ -476,26 +555,8 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity="LaundryCare.Dryer.Option.Hygiene",
             device_class=SwitchDeviceClass.SWITCH,
         ),
-        HCSwitchEntityDescription(
-            key="switch_laundry_idos1_active",
-            entity="LaundryCare.Washer.Option.IDos1Active",
-            device_class=SwitchDeviceClass.SWITCH,
-        ),
-        HCSwitchEntityDescription(
-            key="switch_laundry_idos2_active",
-            entity="LaundryCare.Washer.Option.IDos2Active",
-            device_class=SwitchDeviceClass.SWITCH,
-        ),
-        HCSwitchEntityDescription(
-            key="switch_laundry_idos1_active",
-            entity="LaundryCare.Washer.Option.IDos1.Active",
-            device_class=SwitchDeviceClass.SWITCH,
-        ),
-        HCSwitchEntityDescription(
-            key="switch_laundry_idos2_active",
-            entity="LaundryCare.Washer.Option.IDos2.Active",
-            device_class=SwitchDeviceClass.SWITCH,
-        ),
+        _generate_idos_active(1),
+        _generate_idos_active(2),
         HCSwitchEntityDescription(
             key="switch_laundry_intensive_plus",
             entity="LaundryCare.Washer.Option.IntensivePlus",

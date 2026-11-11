@@ -10,6 +10,7 @@ from unittest.mock import Mock
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
     HCLightEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -18,6 +19,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
 from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
+    generate_start_button,
 )
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
@@ -26,7 +28,12 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
-from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
+from homeconnect_websocket.entities import (
+    Access,
+    DeviceDescription,
+    EntityDescription,
+    Execution,
+)
 
 if TYPE_CHECKING:
     import pytest
@@ -225,6 +232,73 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
     appliance = await mock_homeconnect_appliance(description={})
 
 
+def _start_button_description(
+    execution: Execution, *, remote_start: bool, active_program: bool = True
+) -> DeviceDescription:
+    description = DeviceDescription(
+        program=[
+            EntityDescription(uid=500, name="BSH.Common.Program.Program1", execution=execution),
+        ],
+        selectedProgram=EntityDescription(
+            uid=600, name="BSH.Common.Root.SelectedProgram", access=Access.READ_WRITE
+        ),
+    )
+    if active_program:
+        description["activeProgram"] = EntityDescription(
+            uid=700, name="BSH.Common.Root.ActiveProgram", access=Access.READ
+        )
+    if remote_start:
+        description["status"] = [
+            EntityDescription(
+                uid=800,
+                name="BSH.Common.Status.RemoteControlStartAllowed",
+                access=Access.READ,
+                available=True,
+            )
+        ]
+    return description
+
+
+async def test_start_button(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test dynamic Start button."""
+    # Program startable according to the static description
+    appliance = await mock_homeconnect_appliance(
+        description=_start_button_description(Execution.SELECT_AND_START, remote_start=False)
+    )
+    assert generate_start_button(appliance) == HCButtonEntityDescription(
+        key="button_start_program",
+        entity="BSH.Common.Root.ActiveProgram",
+        entities=["BSH.Common.Root.SelectedProgram"],
+    )
+
+    # No startable Program and no Remote Start
+    appliance = await mock_homeconnect_appliance(
+        description=_start_button_description(Execution.NONE, remote_start=False)
+    )
+    assert generate_start_button(appliance) is None
+
+    # No startable Program in the static description, but Remote Start can be enabled
+    appliance = await mock_homeconnect_appliance(
+        description=_start_button_description(Execution.NONE, remote_start=True)
+    )
+    assert generate_start_button(appliance) == HCButtonEntityDescription(
+        key="button_start_program",
+        entity="BSH.Common.Root.ActiveProgram",
+        entities=[
+            "BSH.Common.Root.SelectedProgram",
+            "BSH.Common.Status.RemoteControlStartAllowed",
+        ],
+    )
+
+    # No ActiveProgram
+    appliance = await mock_homeconnect_appliance(
+        description=_start_button_description(
+            Execution.SELECT_AND_START, remote_start=True, active_program=False
+        )
+    )
+    assert generate_start_button(appliance) is None
+
+
 INTERNAL_LIGHT = DeviceDescription(
     setting=[
         EntityDescription(
@@ -322,3 +396,23 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+def _translation_keys(data: dict, path: tuple[str, ...] = ()) -> set[tuple[str, ...]]:
+    keys = set()
+    for key, value in data.items():
+        if isinstance(value, dict):
+            keys |= _translation_keys(value, (*path, key))
+        else:
+            keys.add((*path, key))
+    return keys
+
+
+def test_german_translation_complete() -> None:
+    """Test de.json has every non-state string of en.json (names, config, exceptions)."""
+    translations = Path("custom_components/homeconnect_ws/translations")
+    en = _translation_keys(json.loads((translations / "en.json").read_text(encoding="utf-8")))
+    de = _translation_keys(json.loads((translations / "de.json").read_text(encoding="utf-8")))
+
+    missing = sorted(".".join(key) for key in en - de if "state" not in key)
+    assert missing == []

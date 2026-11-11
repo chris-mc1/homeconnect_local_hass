@@ -41,7 +41,7 @@ from .entity_descriptions import get_available_entities
 from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
-    from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
+    from homeassistant.core import HomeAssistant, ServiceCall
     from homeassistant.helpers.typing import ConfigType
     from homeconnect_websocket import HomeAppliance
 
@@ -120,7 +120,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             _raise_start_error(exc)
 
     @error_decorator
-    async def handle_start_program(call: ServiceCall) -> ServiceResponse:
+    async def handle_start_program(call: ServiceCall) -> None:
         config_entry = await get_config_entry_from_call(hass, call)
 
         options = {}
@@ -149,10 +149,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             )
 
     @error_decorator
-    async def handle_set_start_in(call: ServiceCall) -> ServiceResponse:
+    async def handle_set_start_in(call: ServiceCall) -> None:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
-        _set_value_or_raise(
+        await _set_value_or_raise(
             _get_entity_or_raise(
                 appliance, "BSH.Common.Option.StartInRelative", "start_in_not_available"
             ),
@@ -160,10 +160,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         )
 
     @error_decorator
-    async def handle_set_finish_in(call: ServiceCall) -> ServiceResponse:
+    async def handle_set_finish_in(call: ServiceCall) -> None:
         config_entry = await get_config_entry_from_call(hass, call)
         appliance = config_entry.runtime_data.appliance
-        _set_value_or_raise(
+        await _set_value_or_raise(
             _get_entity_or_raise(
                 appliance, "BSH.Common.Option.FinishInRelative", "finish_in_not_available"
             ),
