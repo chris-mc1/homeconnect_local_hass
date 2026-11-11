@@ -112,6 +112,14 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             value_on={"On"},
             value_off={"Off"},
         ),
+        # An event that is None until it was reported for the first time is off
+        HCBinarySensorEntityDescription(
+            key="Test.BinarySensor.NoneIsOff",
+            name="BinarySensor.NoneIsOff",
+            entity="Test.Event2",
+            value_on={"Present", "Confirmed"},
+            value_off={"Off", None},
+        ),
     ],
     "event_sensor": [
         HCSensorEntityDescription(
