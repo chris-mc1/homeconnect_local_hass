@@ -66,6 +66,8 @@ class HCSensor(HCEntity, SensorEntity):
             return None
         if self._entity.enum and self.entity_description.has_state_translation:
             return str(self._entity.value).lower()
+        if self.entity_description.value_fn is not None:
+            return self.entity_description.value_fn(self._entity.value)
         return self._entity.value
 
 
