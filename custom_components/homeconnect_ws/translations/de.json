@@ -2675,5 +2675,15 @@
         }
       }
     }
+  },
+  "issues": {
+    "wrong_device": {
+      "title": "{name}: {host} antwortet nicht als dieses Gerät",
+      "description": "Das Gerät unter `{host}` hat die Verbindung wiederholt abgelehnt oder meldet eine andere Identität als **{name}**. Vermutlich gehört die IP-Adresse inzwischen einem anderen Gerät, oder das Gerät wurde neu gekoppelt und der Schlüssel hat sich geändert.\n\nHome Assistant versucht es nur noch alle 10 Minuten. Prüfe die IP-Adresse des Geräts oder richte den Eintrag mit einer aktuellen Profildatei neu ein. Diese Meldung verschwindet, sobald die Verbindung wieder funktioniert."
+    },
+    "reconnect_storm": {
+      "title": "{name}: Verbindung zu {host} ist instabil",
+      "description": "Die Verbindung zu **{name}** unter `{host}` wurde innerhalb einer Minute zu oft neu aufgebaut. Der Verbindungsaufbau pausiert 10 Minuten, um Home Assistant zu schützen. Diese Meldung verschwindet, sobald die Verbindung wieder stabil ist."
+    }
   }
 }
