@@ -380,7 +380,15 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             config_entry = self.hass.config_entries.async_entry_for_domain_unique_id(
                 self.handler, self.unique_id
             )
-            if config_entry and not config_entry.data.get(CONF_MANUAL_HOST, False):
+            if (
+                config_entry
+                and not config_entry.data.get(CONF_MANUAL_HOST, False)
+                # Appliances announce several addresses (IPv4 + IPv6). Keep the
+                # current host while it is still announced: every host change
+                # reloads the entry and drops the connection.
+                and config_entry.data.get(CONF_HOST)
+                not in {str(address) for address in discovery_info.ip_addresses}
+            ):
                 updates = {CONF_HOST: str(discovery_info.ip_address)}
             self._abort_if_unique_id_configured(updates=updates)
             self.data[CONF_HOST] = str(discovery_info.ip_address)

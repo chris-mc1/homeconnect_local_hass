@@ -3683,5 +3683,15 @@
     "not_connected": {
       "message": "Client is not Connected"
     }
+  },
+  "issues": {
+    "wrong_device": {
+      "title": "{name}: {host} is not answering as this appliance",
+      "description": "The device at `{host}` repeatedly rejected the connection or reported a different identity than **{name}**. The IP address probably belongs to another device now, or the appliance was re-paired and the encryption key changed.\n\nHome Assistant now only retries every 10 minutes. Check the IP address of the appliance, or reconfigure the entry with a current profile file. This issue disappears once the connection works again."
+    },
+    "reconnect_storm": {
+      "title": "{name}: connection to {host} is unstable",
+      "description": "The connection to **{name}** at `{host}` was re-established too many times within a minute. Connecting is paused for 10 minutes to protect Home Assistant. This issue disappears once the connection is stable again."
+    }
   }
 }
