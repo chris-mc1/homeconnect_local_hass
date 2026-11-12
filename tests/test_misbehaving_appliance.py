@@ -18,7 +18,7 @@ from aiohttp import web
 from custom_components import homeconnect_ws
 from custom_components.homeconnect_ws import const
 from custom_components.homeconnect_ws.const import CONF_AES_IV, CONF_PSK, DOMAIN
-from homeassistant.config_entries import ConfigEntryState
+from homeassistant.config_entries import SOURCE_REAUTH, ConfigEntryState
 from homeassistant.const import CONF_HOST
 from homeassistant.helpers import issue_registry as ir
 from homeconnect_websocket import hc_socket
@@ -251,7 +251,11 @@ async def test_other_appliance_answers(
     behaviour: str,
     server_psk64: str,
 ) -> None:
-    """Another appliance (other key or other MAC) at the address: issue, rare retries."""
+    """
+    Another key or another MAC at the address: rare retries.
+
+    Another key asks for a new profile file (reauth), another MAC raises an issue.
+    """
     if behaviour == "wrong_mac":
         # homeconnect-websocket 1.5.5 needs 20 s to close a session while its
         # initial requests are unanswered, only wait for that once.
@@ -261,9 +265,22 @@ async def test_other_appliance_answers(
     issue_id = f"{const.ISSUE_WRONG_DEVICE}_{entry.entry_id}"
     monitor = LoopMonitor()
 
-    await wait_for(
-        lambda: ir.async_get(hass).async_get_issue(DOMAIN, issue_id) is not None, timeout=40
-    )
+    def has_issue() -> bool:
+        return ir.async_get(hass).async_get_issue(DOMAIN, issue_id) is not None
+
+    def has_reauth() -> bool:
+        return any(
+            flow["context"].get("source") == SOURCE_REAUTH
+            and flow["context"].get("entry_id") == entry.entry_id
+            for flow in hass.config_entries.flow.async_progress_by_handler(DOMAIN)
+        )
+
+    if behaviour == "wrong_mac":
+        await wait_for(has_issue, timeout=40)
+        assert not has_reauth()
+    else:
+        await wait_for(has_reauth, timeout=40)
+        assert not has_issue()
     await wait_for(lambda: appliance.open_connections == 0)
     connections = appliance.connections
     await asyncio.sleep(0.5)

@@ -7,7 +7,7 @@ import logging
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Never
+from typing import TYPE_CHECKING, Any, Never
 
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
@@ -41,6 +41,8 @@ from .entity_descriptions import get_available_entities
 from .helpers import error_decorator, get_config_entry_from_call
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
+
     from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
     from homeassistant.helpers.typing import ConfigType
     from homeconnect_websocket import HomeAppliance
@@ -252,18 +254,19 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: HCConfigEntry) 
     return True
 
 
+def remove_profile_files(storage_dir: Path, data: Mapping[str, Any]) -> None:
+    """Remove the profile files of a config entry."""
+    for key in (CONF_DESCRIPTION_FILENAME, CONF_FEATURE_FILENAME):
+        if filename := data.get(key):
+            with contextlib.suppress(FileNotFoundError):
+                (storage_dir / Path(filename)).unlink()
+    if filename := data.get(CONF_DESCRIPTION_FILENAME):
+        with contextlib.suppress(FileNotFoundError, OSError):
+            (storage_dir / Path(filename)).parent.rmdir()
+
+
 async def async_remove_entry(hass: HomeAssistant, config_entry: HCConfigEntry) -> None:
     """Remove a config entry."""
-
-    def remove_files(storage_dir: Path, config_entry: HCConfigEntry) -> None:
-        """Remove profile files."""
-        with contextlib.suppress(FileNotFoundError):
-            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).unlink()
-        with contextlib.suppress(FileNotFoundError):
-            (storage_dir / Path(config_entry.data[CONF_FEATURE_FILENAME])).unlink()
-        with contextlib.suppress(FileNotFoundError, OSError):
-            (storage_dir / Path(config_entry.data[CONF_DESCRIPTION_FILENAME])).parent.rmdir()
-
     if config_entry.version >= 2:
         storage_dir = Path(hass.config.path(STORAGE_DIR, DOMAIN))
-        await hass.async_add_executor_job(remove_files, storage_dir, config_entry)
+        await hass.async_add_executor_job(remove_profile_files, storage_dir, config_entry.data)

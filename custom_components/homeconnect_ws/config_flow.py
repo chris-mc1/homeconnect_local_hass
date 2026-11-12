@@ -16,6 +16,7 @@ import voluptuous as vol
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
 from homeassistant.const import (
+    CONF_DESCRIPTION,
     CONF_DEVICE,
     CONF_DEVICE_ID,
     CONF_HOST,
@@ -39,7 +40,7 @@ from homeconnect_websocket import (
     parse_device_description,
 )
 
-from . import HC_KEY, HCConfig
+from . import HC_KEY, HCConfig, remove_profile_files
 from .const import (
     CONF_AES_IV,
     CONF_APPLIANCE_INFO,
@@ -313,11 +314,6 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
 
     async def async_step_create_entry(self, data: dict) -> ConfigFlowResult:
         """Create an config entry or update existing entry for reauth."""
-        if self.reauth_entry:
-            return self.async_update_reload_and_abort(
-                self.reauth_entry,
-                data_updates=data,
-            )
         storage_dir = Path(self.hass.config.path(STORAGE_DIR, DOMAIN))
         try:
             await self.hass.async_add_executor_job(
@@ -335,6 +331,19 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         except OSError as exc:
             _LOGGER.debug("write_file failed: %s", exc)
             return self.async_abort(reason="failed_to_write_profile_file")
+
+        if self.reauth_entry:
+            # The profile files of the new profile were written above. Replace
+            # the data, so an entry of version 1 (description stored in the
+            # entry) becomes a version 2 entry that uses these files.
+            old_data = dict(self.reauth_entry.data)
+            new_data = {**old_data, **data}
+            new_data.pop(CONF_DESCRIPTION, None)
+            if self.reauth_entry.version != self.VERSION:
+                self.hass.config_entries.async_update_entry(self.reauth_entry, version=self.VERSION)
+            elif old_data.get(CONF_DESCRIPTION_FILENAME) != new_data[CONF_DESCRIPTION_FILENAME]:
+                await self.hass.async_add_executor_job(remove_profile_files, storage_dir, old_data)
+            return self.async_update_reload_and_abort(self.reauth_entry, data=new_data)
 
         return self.async_create_entry(title=data[CONF_NAME], data=data)
 

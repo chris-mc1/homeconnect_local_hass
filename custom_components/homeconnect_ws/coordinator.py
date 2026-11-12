@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
+import ssl
 import time
 from collections import deque
 from typing import TYPE_CHECKING
@@ -55,13 +56,43 @@ def _normalize_mac(mac: object) -> str | None:
     return normalized if len(normalized) == 12 else None
 
 
+# TLS alerts an appliance sends when the PSK of the config entry is not its key
+_PSK_MISMATCH_REASONS = frozenset(
+    {
+        "SSLV3_ALERT_BAD_RECORD_MAC",
+        "TLSV1_ALERT_DECRYPT_ERROR",
+        "TLSV1_ALERT_UNKNOWN_PSK_IDENTITY",
+        "DECRYPTION_FAILED_OR_BAD_RECORD_MAC",
+    }
+)
+
+
+def _is_psk_mismatch(exc: BaseException) -> bool:
+    """Return True if the TLS handshake failed because the key does not match."""
+    seen: set[int] = set()
+    current: BaseException | None = exc
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        if (
+            isinstance(current, ssl.SSLError)
+            and getattr(current, "reason", None) in _PSK_MISMATCH_REASONS
+        ):
+            return True
+        if isinstance(current, aiohttp.ClientConnectorError) and _is_psk_mismatch(current.os_error):
+            return True
+        current = current.__cause__ or current.__context__
+    return False
+
+
 class _ConnectFailure:
     """Reason a connection attempt failed."""
 
-    def __init__(self, reason: str, *, identity: bool = False) -> None:
+    def __init__(self, reason: str, *, identity: bool = False, auth: bool = False) -> None:
         self.reason = reason
-        self.identity = identity
+        self.identity = identity or auth
         """The appliance did not authenticate or is not the expected appliance."""
+        self.auth = auth
+        """The appliance rejected the keys of the config entry."""
 
 
 class HomeConnectCoordinator(DataUpdateCoordinator):
@@ -190,10 +221,13 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             async with asyncio.timeout(const.CONNECT_TIMEOUT):
                 await self.appliance.connect()
         except AuthenticationError as exc:
-            return _ConnectFailure(f"authentication failed ({exc})", identity=True)
+            return _ConnectFailure(f"authentication failed ({exc})", auth=True)
         except TimeoutError:
             return _ConnectFailure(f"no answer within {const.CONNECT_TIMEOUT} s")
         except (HomeConnectError, aiohttp.ClientError, OSError) as exc:
+            if _is_psk_mismatch(exc):
+                # homeconnect-websocket <= 1.5.5 reports this as a connection error
+                return _ConnectFailure("appliance rejected the key (TLS PSK)", auth=True)
             return _ConnectFailure(f"{type(exc).__name__}: {exc}".rstrip(": "))
         except Exception as exc:
             self.logger.debug("Unexpected error connecting to %s", self._host, exc_info=True)
@@ -290,7 +324,12 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 failure.reason,
                 const.IDENTITY_RETRY_DELAY,
             )
-        self._create_issue(ISSUE_WRONG_DEVICE)
+        if failure.auth:
+            # New keys are needed: ask for a new profile file. Home Assistant
+            # starts at most one reauth flow per entry.
+            self.config_entry.async_start_reauth(self.hass)
+        else:
+            self._create_issue(ISSUE_WRONG_DEVICE)
         self._mark_unavailable()
 
     def _create_issue(self, issue: str) -> None:

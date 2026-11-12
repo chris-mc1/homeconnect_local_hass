@@ -4,18 +4,20 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import ssl
 import time
 from copy import deepcopy
 from ipaddress import ip_address
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
+import aiohttp
 import pytest
 from custom_components import homeconnect_ws
 from custom_components.homeconnect_ws import const
 from custom_components.homeconnect_ws.const import DOMAIN
-from custom_components.homeconnect_ws.coordinator import HomeConnectCoordinator
-from homeassistant.config_entries import SOURCE_ZEROCONF, ConfigEntryState
+from custom_components.homeconnect_ws.coordinator import HomeConnectCoordinator, _is_psk_mismatch
+from homeassistant.config_entries import SOURCE_REAUTH, SOURCE_ZEROCONF, ConfigEntryState
 from homeassistant.const import CONF_HOST
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers import issue_registry as ir
@@ -104,6 +106,14 @@ async def auth_error(device: FakeDevice) -> None:
     """Reject the PSK."""
     msg = "Authentication with Appliance failed"
     raise AuthenticationError(msg)
+
+
+async def psk_mismatch(device: FakeDevice) -> None:
+    """Reject the PSK, reported as in production by homeconnect-websocket 1.5.5."""
+    os_error = ssl.SSLError(1, "[SSL: SSLV3_ALERT_BAD_RECORD_MAC] ssl/tls alert bad record mac")
+    os_error.reason = "SSLV3_ALERT_BAD_RECORD_MAC"
+    msg = "Failed to connect to Appliance"
+    raise ConnectionFailedError(msg) from aiohttp.ClientConnectorSSLError(Mock(ssl=True), os_error)
 
 
 async def accept(device: FakeDevice) -> None:
@@ -301,7 +311,68 @@ async def test_slow_close_is_cut_off(
     assert not connection_tasks()
 
 
-@pytest.mark.parametrize("behaviour", [auth_error, wrong_identity])
+def reauth_flows(hass: HomeAssistant, entry: MockConfigEntry) -> list[dict]:
+    """Return the reauth flows in progress for entry."""
+    return [
+        flow
+        for flow in hass.config_entries.flow.async_progress_by_handler(DOMAIN)
+        if flow["context"].get("source") == SOURCE_REAUTH
+        and flow["context"].get("entry_id") == entry.entry_id
+    ]
+
+
+@pytest.mark.parametrize("behaviour", [auth_error, psk_mismatch])
+async def test_rejected_key_starts_reauth(
+    hass: HomeAssistant,
+    setup_device: Callable[[Behaviour], Awaitable[tuple[FakeDevice, MockConfigEntry]]],
+    fast: None,
+    behaviour: Behaviour,
+) -> None:
+    """The appliance rejects the key: ask for a new profile file, retry rarely."""
+    device, entry = await setup_device(behaviour)
+    coordinator = entry.runtime_data.coordinator
+
+    await wait_for(lambda: device.connects >= 2)
+    assert not reauth_flows(hass, entry)
+
+    await wait_for(lambda: bool(reauth_flows(hass, entry)))
+    assert device.connects == const.IDENTITY_FAILURE_THRESHOLD
+    assert not coordinator.connected
+    assert not issue_exists(hass, const.ISSUE_WRONG_DEVICE, entry)
+
+    # Following attempts are rare and don't start more flows
+    await wait_for(lambda: device.connects >= const.IDENTITY_FAILURE_THRESHOLD + 2)
+    gaps = [b - a for a, b in zip(device.connect_times[2:], device.connect_times[3:], strict=False)]
+    assert all(gap >= const.IDENTITY_RETRY_DELAY * 0.8 for gap in gaps)
+    assert len(reauth_flows(hass, entry)) == 1
+    assert not issue_exists(hass, const.ISSUE_WRONG_DEVICE, entry)
+
+    # The key works again (e.g. the appliance was paired back)
+    device.behaviour = accept
+    await wait_for(lambda: coordinator.connected)
+
+
+def test_psk_mismatch_detection() -> None:
+    """Only TLS alerts about the key count as a rejected key."""
+
+    def failed(reason: str | None) -> ConnectionFailedError:
+        os_error = ssl.SSLError(1, f"[SSL: {reason}] alert")
+        if reason:
+            os_error.reason = reason
+        exc = ConnectionFailedError("Failed to connect to Appliance")
+        exc.__cause__ = aiohttp.ClientConnectorSSLError(Mock(ssl=True), os_error)
+        return exc
+
+    assert _is_psk_mismatch(failed("SSLV3_ALERT_BAD_RECORD_MAC"))
+    assert _is_psk_mismatch(failed("TLSV1_ALERT_DECRYPT_ERROR"))
+    assert not _is_psk_mismatch(failed("CERTIFICATE_VERIFY_FAILED"))
+    assert not _is_psk_mismatch(failed(None))
+    assert not _is_psk_mismatch(ConnectionFailedError())
+    refused = ConnectionRefusedError(61, "Connection refused")
+    assert not _is_psk_mismatch(aiohttp.ClientConnectorError(Mock(ssl=True), refused))
+
+
+@pytest.mark.parametrize("behaviour", [wrong_identity])
 async def test_wrong_device_creates_issue(
     hass: HomeAssistant,
     setup_device: Callable[[Behaviour], Awaitable[tuple[FakeDevice, MockConfigEntry]]],
