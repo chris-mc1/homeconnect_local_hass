@@ -10,6 +10,7 @@ from unittest.mock import Mock
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
+    HCFanEntityDescription,
     HCLightEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -19,6 +20,7 @@ from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
 )
+from custom_components.homeconnect_ws.entity_descriptions.cooking import generate_hood_fan
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
     generate_internal_light_brightness,
@@ -26,7 +28,12 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
-from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
+from homeconnect_websocket.entities import (
+    Access,
+    DeviceDescription,
+    EntityDescription,
+    OptionDescription,
+)
 
 if TYPE_CHECKING:
     import pytest
@@ -322,3 +329,64 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+HOOD_FAN = DeviceDescription(
+    option=[
+        EntityDescription(
+            uid=55308,
+            name="Cooking.Common.Option.Hood.VentingLevel",
+            access=Access.READ_WRITE,
+            available=True,
+            enumeration={"0": "FanOff", "1": "FanStage01", "2": "FanStage02", "3": "FanStage03"},
+        ),
+        EntityDescription(
+            uid=55305,
+            name="Cooking.Common.Option.Hood.IntensiveLevel",
+            access=Access.READ_WRITE,
+            available=True,
+            enumeration={"0": "IntensiveStageOff", "1": "IntensiveStage1", "2": "IntensiveStage2"},
+        ),
+    ],
+    program=[
+        EntityDescription(
+            uid=55307,
+            name="Cooking.Common.Program.Hood.Venting",
+            available=True,
+            options=[
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=55308),
+                OptionDescription(access=Access.READ_WRITE, available=True, refUID=55305),
+            ],
+        ),
+    ],
+)
+
+
+async def test_hood_fan(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test dynamic Hood fan."""
+    # Venting program available
+    appliance = await mock_homeconnect_appliance(description=HOOD_FAN)
+    assert generate_hood_fan(appliance) == HCFanEntityDescription(
+        key="fan_hood",
+        entities=[
+            "Cooking.Common.Option.Hood.VentingLevel",
+            "Cooking.Common.Option.Hood.IntensiveLevel",
+        ],
+        program="Cooking.Common.Program.Hood.Venting",
+    )
+
+    # No Venting program
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(option=HOOD_FAN["option"])
+    )
+    assert generate_hood_fan(appliance) == HCFanEntityDescription(
+        key="fan_hood",
+        entities=[
+            "Cooking.Common.Option.Hood.VentingLevel",
+            "Cooking.Common.Option.Hood.IntensiveLevel",
+        ],
+    )
+
+    # No Hood fan
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_hood_fan(appliance) is None

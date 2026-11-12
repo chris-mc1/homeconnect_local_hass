@@ -110,6 +110,14 @@ class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_o
     """Description for Fan Entity."""
 
     available_access: tuple[Access] = (Access.READ_WRITE,)
+    program: str | None = None
+    """
+    Program the speed entities are options of.
+
+    If set, speed changes are sent as options of the active program (or by starting
+    this program if no program carrying the options is active) instead of being
+    written to /ro/values.
+    """
 
 
 class EntityDescriptions(TypedDict):
