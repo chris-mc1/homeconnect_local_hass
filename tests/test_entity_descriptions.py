@@ -26,6 +26,7 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
+from homeassistant.const import EntityCategory
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
 
 if TYPE_CHECKING:
@@ -284,6 +285,33 @@ async def test_internal_light_brightness(mock_homeconnect_appliance: MockApplian
     # No brightness at all
     appliance = await mock_homeconnect_appliance(description={})
     assert generate_internal_light_brightness(appliance) is None
+
+
+GAP_ILLUMINATION = DeviceDescription(
+    setting=[
+        EntityDescription(
+            uid=0x5101,
+            name="Dishcare.Dishwasher.Setting.GapIllumination",
+            access=Access.READ_WRITE,
+            available=True,
+        ),
+    ]
+)
+
+
+async def test_gap_illumination(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test the dishwasher gap illumination becomes an on/off switch."""
+    appliance = await mock_homeconnect_appliance(description=GAP_ILLUMINATION)
+    switches = entity_descriptions.get_available_entities(appliance)["switch"]
+    assert switches == [
+        HCSwitchEntityDescription(
+            key="switch_gap_illumination",
+            entity="Dishcare.Dishwasher.Setting.GapIllumination",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            entity_registry_enabled_default=False,
+        )
+    ]
 
 
 TRANSLATION_DOMAINS = {

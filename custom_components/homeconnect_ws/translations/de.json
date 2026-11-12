@@ -65,6 +65,9 @@
       "switch_info_light": {
         "name": "Info-Licht"
       },
+      "switch_gap_illumination": {
+        "name": "Gap Illumination"
+      },
       "switch_multiple_beverages": {
         "name": "Mehrere Getränke"
       },
