@@ -318,6 +318,11 @@ DISHCARE_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(
+            key="switch_vario_speed",
+            entity="Dishcare.Dishwasher.Option.VarioSpeed",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        HCSwitchEntityDescription(
             key="switch_silence_on_demand",
             entity="Dishcare.Dishwasher.Option.SilenceOnDemand",
             device_class=SwitchDeviceClass.SWITCH,

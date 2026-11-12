@@ -164,6 +164,12 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             entity="Test.Sensor.Enum",
             device_class=SensorDeviceClass.ENUM,
         ),
+        HCSensorEntityDescription(
+            key="Test.Sensor.Derived",
+            name="Sensor.Derived",
+            entity="Test.Sensor",
+            value_fn=lambda entity: entity.value * 2 if entity.value is not None else None,
+        ),
     ],
     "start_button": [
         HCButtonEntityDescription(
