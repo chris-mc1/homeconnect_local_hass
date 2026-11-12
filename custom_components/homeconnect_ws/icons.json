@@ -24,6 +24,7 @@
                 "default": "mdi:speedometer"
             },
             "switch_info_light": {},
+            "switch_gap_illumination": {},
             "switch_brilliance_dry": {
                 "default": "mdi:shimmer"
             },
