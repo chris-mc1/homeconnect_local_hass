@@ -101,6 +101,12 @@
       "switch_laundry_speed_perfect": {
         "name": "SpeedPerfect"
       },
+      "switch_washerdryer_low_temperature_hygiene": {
+        "name": "Niedrigtemperatur-Hygiene"
+      },
+      "switch_washerdryer_wrinkle_guard_boost": {
+        "name": "Knitterschutz-Boost"
+      },
       "switch_laundry_gentle": {
         "name": "Sanft"
       },
@@ -2316,6 +2322,51 @@
           "delicate": "Fein",
           "normal": "Normal",
           "heavy": "Stark"
+        }
+      },
+      "select_washerdryer_program_mode": {
+        "name": "Programmmodus",
+        "state": {
+          "washing": "Waschen",
+          "washinganddrying": "Waschen und Trocknen",
+          "drying": "Trocknen"
+        }
+      },
+      "select_washerdryer_drying_target": {
+        "name": "Trockenziel",
+        "state": {
+          "irondry": "Mangelfeucht",
+          "cupboarddry": "Schranktrocken",
+          "cupboarddryplus": "Schranktrocken Plus"
+        }
+      },
+      "select_washerdryer_activity_after_washing": {
+        "name": "Aktion nach dem Waschen",
+        "state": {
+          "programoverview": "Programmübersicht",
+          "continuedrying": "Weiter trocknen",
+          "drumdry": "Trommel trocknen"
+        }
+      },
+      "select_washerdryer_refresh_intensity": {
+        "name": "Auffrischintensität",
+        "state": {
+          "light": "Leicht",
+          "normal": "Normal",
+          "intensive": "Intensiv"
+        }
+      },
+      "select_washerdryer_refresh_textile_type": {
+        "name": "Auffrisch-Textilart",
+        "state": {
+          "cotton": "Baumwolle",
+          "down": "Daunen",
+          "suit": "Anzug",
+          "cashmere": "Kaschmir",
+          "shirt": "Hemd",
+          "silk": "Seide",
+          "waterproof": "Wasserdicht",
+          "woolcoat": "Wollmantel"
         }
       },
       "select_laundry_idos2_content": {
