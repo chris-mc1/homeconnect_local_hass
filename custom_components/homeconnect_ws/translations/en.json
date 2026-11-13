@@ -3638,6 +3638,16 @@
         "start_in": {
           "name": "Delay",
           "description": "Set the start delay"
+        }
+      }
+    },
+    "set_finish_in": {
+      "name": "Set finish time",
+      "description": "Set the time the Program should be finished in",
+      "fields": {
+        "device_id": {
+          "name": "Appliance",
+          "description": "The Appliance to set the finish time on"
         },
         "finish_in": {
           "name": "Finish in",
