@@ -233,6 +233,22 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             value_off={"Off"},
         ),
         HCBinarySensorEntityDescription(
+            key="binary_sensor_temperature_alarm_chiller_left",
+            entity="Refrigeration.Common.Event.ChillerLeft.TemperatureAlarm",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
+            key="binary_sensor_temperature_alarm_chiller_right",
+            entity="Refrigeration.Common.Event.ChillerRight.TemperatureAlarm",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            device_class=BinarySensorDeviceClass.PROBLEM,
+            value_on={"Present", "Confirmed"},
+            value_off={"Off"},
+        ),
+        HCBinarySensorEntityDescription(
             key="binary_sensor_ice_hopper_full",
             entity="Refrigeration.Common.Status.Dispenser.IceHopperFull",
         ),
@@ -303,6 +319,18 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
             entity_registry_enabled_default=False,
         ),
+        HCSensorEntityDescription(
+            key="sensor_chiller_left_temperature",
+            entity="Refrigeration.Common.Setting.ChillerLeft.SetpointTemperatureFahrenheit",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+        ),
+        HCSensorEntityDescription(
+            key="sensor_chiller_right_temperature",
+            entity="Refrigeration.Common.Setting.ChillerRight.SetpointTemperatureFahrenheit",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+        ),
     ],
     "number": [
         HCNumberEntityDescription(
@@ -370,6 +398,48 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="number_setpoint_chiller_common_fahrenheit",
             translation_key="number_setpoint_chiller_common",
             entity="Refrigeration.Common.Setting.ChillerCommon.SetpointTemperatureFahrenheit",
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_registry_enabled_default=False,
+            mode=NumberMode.AUTO,
+            step=1,
+        ),
+        # This is only available when the `ChillerLeft.Preset` is `custom`.
+        HCNumberEntityDescription(
+            key="number_setpoint_chiller_left",
+            entity="Refrigeration.Common.Setting.ChillerLeft.SetpointTemperature",
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_registry_enabled_default=False,
+            mode=NumberMode.AUTO,
+            step=1,
+        ),
+        # Read-only (set by the preset) unless the `ChillerLeft.Preset` is `custom`.
+        HCNumberEntityDescription(
+            key="number_setpoint_chiller_left_fahrenheit",
+            translation_key="number_setpoint_chiller_left",
+            entity="Refrigeration.Common.Setting.ChillerLeft.SetpointTemperatureFahrenheit",
+            native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_registry_enabled_default=False,
+            mode=NumberMode.AUTO,
+            step=1,
+        ),
+        # This is only available when the `ChillerRight.Preset` is `custom`.
+        HCNumberEntityDescription(
+            key="number_setpoint_chiller_right",
+            entity="Refrigeration.Common.Setting.ChillerRight.SetpointTemperature",
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_registry_enabled_default=False,
+            mode=NumberMode.AUTO,
+            step=1,
+        ),
+        # Read-only (set by the preset) unless the `ChillerRight.Preset` is `custom`.
+        HCNumberEntityDescription(
+            key="number_setpoint_chiller_right_fahrenheit",
+            translation_key="number_setpoint_chiller_right",
+            entity="Refrigeration.Common.Setting.ChillerRight.SetpointTemperatureFahrenheit",
             native_unit_of_measurement=UnitOfTemperature.FAHRENHEIT,
             device_class=NumberDeviceClass.TEMPERATURE,
             entity_registry_enabled_default=False,
@@ -486,6 +556,20 @@ REFRIGERATION_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSelectEntityDescription(
             key="select_chiller_common_preset",
             entity="Refrigeration.Common.Setting.ChillerCommon.Preset",
+            device_class=SensorDeviceClass.ENUM,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_chiller_left_preset",
+            entity="Refrigeration.Common.Setting.ChillerLeft.Preset",
+            device_class=SensorDeviceClass.ENUM,
+            entity_registry_enabled_default=False,
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
+            key="select_chiller_right_preset",
+            entity="Refrigeration.Common.Setting.ChillerRight.Preset",
             device_class=SensorDeviceClass.ENUM,
             entity_registry_enabled_default=False,
             has_state_translation=True,
