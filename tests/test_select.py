@@ -237,3 +237,36 @@ async def test_select_program(
             },
         )
     )
+
+
+async def test_unavailable_program_not_in_options(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test programs the appliance reports as unavailable are not offered."""
+    entity_id = "select.fake_brand_homeappliance_selectedprogram"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await mock_appliance.entities["Test.Program.Program2"].update({"available": False})
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await hass.async_block_till_done()
+
+    options = hass.states.get(entity_id).attributes[ATTR_OPTIONS]
+    assert "test_program_program1" in options
+    assert "test_program_program2" not in options
+
+    # The selected program stays an option, also when it is unavailable
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 501})
+    await hass.async_block_till_done()
+
+    state = hass.states.get(entity_id)
+    assert state.state == "test_program_program2"
+    assert "test_program_program2" in state.attributes[ATTR_OPTIONS]
+
+    # Available again
+    await mock_appliance.entities["Test.Program.Program2"].update({"available": True})
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await hass.async_block_till_done()
+
+    assert "test_program_program2" in hass.states.get(entity_id).attributes[ATTR_OPTIONS]
