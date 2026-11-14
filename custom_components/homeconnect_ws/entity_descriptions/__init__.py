@@ -13,6 +13,7 @@ from .descriptions_definitions import (
     EntityDescriptions,
     HCBinarySensorEntityDescription,
     HCButtonEntityDescription,
+    HCDateTimeEntityDescription,
     HCEntityDescription,
     HCFanEntityDescription,
     HCLightEntityDescription,
@@ -52,6 +53,7 @@ def get_available_entities(appliance: HomeAppliance) -> EntityDescriptions:
     """Get all available Entity descriptions."""
     available_entities: _EntityDescriptionsType = {
         "button": [],
+        "datetime": [],
         "active_program": [],
         "binary_sensor": [],
         "event_sensor": [],
@@ -93,6 +95,7 @@ __all__ = [
     "EntityDescriptions",
     "HCBinarySensorEntityDescription",
     "HCButtonEntityDescription",
+    "HCDateTimeEntityDescription",
     "HCEntityDescription",
     "HCFanEntityDescription",
     "HCLightEntityDescription",

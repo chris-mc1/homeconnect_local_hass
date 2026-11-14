@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Literal, NotRequired, TypedDict
 
 from homeassistant.components.binary_sensor import BinarySensorEntityDescription
 from homeassistant.components.button import ButtonEntityDescription
+from homeassistant.components.datetime import DateTimeEntityDescription
 from homeassistant.components.fan import FanEntityDescription
 from homeassistant.components.light import LightEntityDescription
 from homeassistant.components.number import NumberEntityDescription
@@ -96,6 +97,14 @@ class HCNumberEntityDescription(
     available_access: tuple[Access] = (Access.READ_WRITE, Access.WRITE_ONLY)
 
 
+class HCDateTimeEntityDescription(
+    HCEntityDescription, DateTimeEntityDescription, frozen_or_thawed=True
+):
+    """Description for DateTime Entity."""
+
+    available_access: tuple[Access] = (Access.READ_WRITE,)
+
+
 class HCLightEntityDescription(HCEntityDescription, LightEntityDescription, frozen_or_thawed=True):
     """Description for Number Entity."""
 
@@ -116,6 +125,7 @@ class EntityDescriptions(TypedDict):
     """Entity descriptions by type."""
 
     button: list[HCButtonEntityDescription]
+    datetime: list[HCDateTimeEntityDescription]
     active_program: list[HCSensorEntityDescription]
     binary_sensor: list[HCBinarySensorEntityDescription]
     event_sensor: list[HCSensorEntityDescription]
@@ -133,6 +143,7 @@ class EntityDescriptions(TypedDict):
 _EntityDescriptionsDefinitionsType = dict[
     Literal[
         "button",
+        "datetime",
         "active_program",
         "binary_sensor",
         "event_sensor",
@@ -156,6 +167,7 @@ _EntityDescriptionsDefinitionsType = dict[
 _EntityDescriptionsType = dict[
     Literal[
         "button",
+        "datetime",
         "active_program",
         "binary_sensor",
         "event_sensor",
