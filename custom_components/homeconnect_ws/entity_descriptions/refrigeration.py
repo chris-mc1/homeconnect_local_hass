@@ -34,12 +34,14 @@ def generate_internal_light(appliance: HomeAppliance) -> HCLightEntityDescriptio
         return HCLightEntityDescription(
             key="light_internal",
             entity="Refrigeration.Common.Setting.Light.Internal.Power",
+            entity_category=EntityCategory.CONFIG,
             brightness_entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
         )
 
     return HCLightEntityDescription(
         key="light_internal",
         entity="Refrigeration.Common.Setting.Light.Internal.Power",
+        entity_category=EntityCategory.CONFIG,
     )
 
 
