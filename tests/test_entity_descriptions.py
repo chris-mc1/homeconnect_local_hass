@@ -16,6 +16,8 @@ from custom_components.homeconnect_ws.entity_descriptions import (
     HCSwitchEntityDescription,
 )
 from custom_components.homeconnect_ws.entity_descriptions.common import (
+    generate_binary_door_state,
+    generate_door_state,
     generate_power_switch,
     generate_program,
 )
@@ -24,6 +26,7 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light_brightness,
 )
 from custom_components.homeconnect_ws.helpers import merge_dicts
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
@@ -223,6 +226,55 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
     )
 
     appliance = await mock_homeconnect_appliance(description={})
+
+
+GENERIC_DOOR = EntityDescription(
+    uid=527,
+    name="BSH.Common.Status.DoorState",
+    access=Access.READ,
+    available=True,
+    enumeration={"0": "Open", "1": "Closed", "2": "Locked", "3": "Ajar"},
+)
+FRIDGE_DOOR = EntityDescription(
+    uid=4097,
+    name="Refrigeration.Common.Status.Door.Refrigerator",
+    access=Access.READ,
+    available=True,
+    enumeration={"0": "Closed", "1": "Open"},
+)
+
+
+async def test_door_state(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test the generic door entities."""
+    # Generic door only (dishwasher, oven, washer...)
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(status=[GENERIC_DOOR])
+    )
+    assert generate_binary_door_state(appliance) == HCBinarySensorEntityDescription(
+        key="binary_sensor_door_state",
+        entity="BSH.Common.Status.DoorState",
+        device_class=BinarySensorDeviceClass.DOOR,
+        value_on={"Open", "Ajar"},
+        value_off={"Closed", "Locked"},
+    )
+    assert generate_door_state(appliance) == HCSensorEntityDescription(
+        key="sensor_door_state",
+        entity="BSH.Common.Status.DoorState",
+        device_class=SensorDeviceClass.ENUM,
+        has_state_translation=True,
+    )
+
+    # Fridge with its own door status: the generic one is left out
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(status=[GENERIC_DOOR, FRIDGE_DOOR])
+    )
+    assert generate_binary_door_state(appliance) is None
+    assert generate_door_state(appliance) is None
+
+    # No door
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_binary_door_state(appliance) is None
+    assert generate_door_state(appliance) is None
 
 
 INTERNAL_LIGHT = DeviceDescription(
