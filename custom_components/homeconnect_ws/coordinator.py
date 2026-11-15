@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import time
+from datetime import timedelta
 from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_DEVICE_ID, CONF_HOST
@@ -17,8 +18,12 @@ from homeconnect_websocket import (
     HCHandshakeError,
     HomeAppliance,
 )
+from homeconnect_websocket.message import Message
 
 from .const import CONF_AES_IV, CONF_PSK, MAX_RECONECT_TIME
+
+# The appliance only pushes changes; re-read all values periodically.
+REFRESH_INTERVAL = timedelta(seconds=60)
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -48,6 +53,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             name=description["info"]["model"],
             config_entry=config_entry,
             always_update=True,
+            update_interval=REFRESH_INTERVAL,
         )
 
         self.appliance = HomeAppliance(
@@ -102,6 +108,17 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 self.logger.exception(msg)
 
     async def _async_update_data(self) -> None:
+        if not self.appliance.session.connected:
+            return None
+        try:
+            response = await self.appliance.session.send_sync(
+                Message(resource="/ro/allMandatoryValues")
+            )
+            if response is not None and response.data:
+                async with self.appliance.callback_manager:
+                    await self.appliance._update_entities(response.data)  # noqa: SLF001
+        except Exception:  # noqa: BLE001
+            self.logger.debug("Periodic refresh failed", exc_info=True)
         return None
 
     async def _connection_state_callback(self, event: ConnectionState) -> None:
