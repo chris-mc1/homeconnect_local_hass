@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from homeassistant.components.button import DOMAIN as BUTTON_DOMAIN
 from homeassistant.components.button import SERVICE_PRESS
-from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME
+from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME, STATE_UNAVAILABLE
 from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
@@ -89,3 +89,26 @@ async def test_abort(
             data={"uid": 300, "value": True},
         )
     )
+
+
+async def test_start_available_follows_selected_program(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test the start button availability updates when the selected program changes."""
+    entity_id = "button.fake_brand_homeappliance_activeprogram"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 0})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_UNAVAILABLE
+
+    # Only the selected program changes, the active program stays the same
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state != STATE_UNAVAILABLE
+
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 0})
+    await hass.async_block_till_done()
+    assert hass.states.get(entity_id).state == STATE_UNAVAILABLE

@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
     from homeconnect_websocket.entities import ActiveProgram, Command
 
-    from . import HCConfigEntry
+    from . import HCConfigEntry, HCData
     from .entity_descriptions.descriptions_definitions import HCButtonEntityDescription
 
 PARALLEL_UPDATES = 0
@@ -47,6 +47,18 @@ class HCStartButton(HCEntity, ButtonEntity):
 
     _entity: ActiveProgram
     entity_description: HCButtonEntityDescription
+
+    def __init__(
+        self,
+        entity_description: HCButtonEntityDescription,
+        runtime_data: HCData,
+    ) -> None:
+        super().__init__(entity_description, runtime_data)
+        # Availability depends on the selected program, so update the state
+        # when the selected program changes, not only the active program.
+        selected_program = runtime_data.appliance._selected_program  # noqa: SLF001
+        if selected_program is not None and selected_program not in self._entities:
+            self._entities.append(selected_program)
 
     @property
     def available(self) -> bool:
