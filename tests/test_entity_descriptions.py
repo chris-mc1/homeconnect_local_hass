@@ -26,6 +26,7 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
+from homeassistant.const import EntityCategory
 from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
 
 if TYPE_CHECKING:
@@ -252,6 +253,7 @@ async def test_internal_light(mock_homeconnect_appliance: MockApplianceType) -> 
     assert generate_internal_light(appliance) == HCLightEntityDescription(
         key="light_internal",
         entity="Refrigeration.Common.Setting.Light.Internal.Power",
+        entity_category=EntityCategory.CONFIG,
         brightness_entity="Refrigeration.Common.Setting.Light.Internal.Brightness",
     )
 
@@ -261,6 +263,7 @@ async def test_internal_light(mock_homeconnect_appliance: MockApplianceType) -> 
     assert generate_internal_light(appliance) == HCLightEntityDescription(
         key="light_internal",
         entity="Refrigeration.Common.Setting.Light.Internal.Power",
+        entity_category=EntityCategory.CONFIG,
     )
 
     # No internal light
