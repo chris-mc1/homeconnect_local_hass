@@ -21,7 +21,7 @@ from homeassistant.const import (
     EntityCategory,
     UnitOfTime,
 )
-from homeconnect_websocket.entities import Execution
+from homeconnect_websocket.entities import Access, Execution
 
 from .descriptions_definitions import (
     EntityDescriptions,
@@ -100,6 +100,27 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
             )
         ]
     return entity_descriptions
+
+
+def generate_child_lock_sensor(appliance: HomeAppliance) -> HCBinarySensorEntityDescription | None:
+    """
+    Get Child lock binary sensor description for a child lock that can not be changed.
+
+    The Gaggenau hob CI282102 reports the child lock (`BSH.Common.Setting.ChildLock`, value false
+    or true) but with access read, so it can only be shown, not switched. An appliance with a
+    child lock that can be changed has the switch `switch_child_lock` instead.
+    The device class lock is not used: it shows "on" as unlocked, here "on" is a locked child lock.
+
+    The value is not checked: the entities are created before the appliance is connected, so no
+    entity has a value yet. The sensor is unavailable until the appliance reports one.
+    """
+    entity = appliance.entities.get("BSH.Common.Setting.ChildLock")
+    if entity is not None and entity.access not in (Access.READ_WRITE, Access.WRITE_ONLY):
+        return HCBinarySensorEntityDescription(
+            key="binary_sensor_child_lock",
+            entity="BSH.Common.Setting.ChildLock",
+        )
+    return None
 
 
 def generate_door_state(appliance: HomeAppliance) -> HCSensorEntityDescription | None:
@@ -212,6 +233,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
     ],
     "binary_sensor": [
+        generate_child_lock_sensor,
         HCBinarySensorEntityDescription(
             key="binary_sensor_door_state",
             entity="BSH.Common.Status.DoorState",
