@@ -102,10 +102,42 @@ def generate_power_switch(appliance: HomeAppliance) -> EntityDescriptions:
     return entity_descriptions
 
 
+# Fridges and freezers report each door in its own status. On some of them the generic
+# BSH.Common.Status.DoorState is never updated and stays at its first value ("Open").
+REFRIGERATION_DOORS = frozenset(
+    {
+        "Refrigeration.Common.Status.Door.ChillerCommon",
+        "Refrigeration.Common.Status.Door.Freezer",
+        "Refrigeration.Common.Status.Door.Refrigerator",
+        "Refrigeration.FridgeFreezer.Status.ChillerCommon",
+        "Refrigeration.FridgeFreezer.Status.DoorFreezer",
+        "Refrigeration.FridgeFreezer.Status.DoorRefrigerator",
+    }
+)
+
+
+def _has_own_doors(appliance: HomeAppliance) -> bool:
+    """Return True if the appliance reports its doors in their own status."""
+    return not REFRIGERATION_DOORS.isdisjoint(appliance.entities)
+
+
+def generate_binary_door_state(appliance: HomeAppliance) -> HCBinarySensorEntityDescription | None:
+    """Get Door binary sensor description."""
+    if "BSH.Common.Status.DoorState" in appliance.entities and not _has_own_doors(appliance):
+        return HCBinarySensorEntityDescription(
+            key="binary_sensor_door_state",
+            entity="BSH.Common.Status.DoorState",
+            device_class=BinarySensorDeviceClass.DOOR,
+            value_on={"Open", "Ajar"},
+            value_off={"Closed", "Locked"},
+        )
+    return None
+
+
 def generate_door_state(appliance: HomeAppliance) -> HCSensorEntityDescription | None:
     """Get Door sensor description."""
     entity = appliance.entities.get("BSH.Common.Status.DoorState")
-    if entity and len(entity.enum) > 2:
+    if entity and len(entity.enum) > 2 and not _has_own_doors(appliance):
         return HCSensorEntityDescription(
             key="sensor_door_state",
             entity="BSH.Common.Status.DoorState",
@@ -212,13 +244,7 @@ COMMON_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         ),
     ],
     "binary_sensor": [
-        HCBinarySensorEntityDescription(
-            key="binary_sensor_door_state",
-            entity="BSH.Common.Status.DoorState",
-            device_class=BinarySensorDeviceClass.DOOR,
-            value_on={"Open", "Ajar"},
-            value_off={"Closed", "Locked"},
-        ),
+        generate_binary_door_state,
         HCBinarySensorEntityDescription(
             key="binary_sensor_aqua_stop",
             device_class=BinarySensorDeviceClass.PROBLEM,
