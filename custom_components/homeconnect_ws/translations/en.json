@@ -3624,6 +3624,14 @@
         "finish_in": {
           "name": "Finish in",
           "description": "Time the Program should be finished in"
+        },
+        "program": {
+          "name": "Program",
+          "description": "Start this Program directly instead of the selected Program, e.g. Cooking.Common.Program.Hood.Venting"
+        },
+        "options": {
+          "name": "Options",
+          "description": "Program option values by option name, e.g. Cooking.Common.Option.Hood.VentingLevel: 3"
         }
       }
     },
@@ -3658,6 +3666,12 @@
     },
     "no_program_selected": {
       "message": "No Program selected"
+    },
+    "option_not_available": {
+      "message": "Option is not available on this Appliance"
+    },
+    "program_not_available": {
+      "message": "Program is not available on this Appliance"
     },
     "auth_failed": {
       "message": "Authentication failed {host}"
