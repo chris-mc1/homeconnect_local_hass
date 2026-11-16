@@ -247,6 +247,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Verwarmingsmodus",
+        "state": {
+          "automaticoperation": "Automatisch bedrijf",
+          "automaticoperationwithmicrowave": "Automatisch bedrijf met magnetron",
+          "bakingsensoroperation": "Baksensor",
+          "bottomheating": "Onderverwarming",
+          "defrosting": "Ontdooien",
+          "desiccation": "Uitdrogen",
+          "doughproving": "Deeg laten rijzen",
+          "frozenheatupspecial": "CoolStart functie",
+          "grilllargearea": "Grill, groot gebied",
+          "grillsmallarea": "Grill, klein gebied",
+          "hotair": "Hetelucht",
+          "hotaireco": "Hetelucht eco",
+          "hotairgrilling": "Hetelucht grillen",
+          "intensiveheat": "Intensief verwarmen",
+          "keepwarm": "Warmhouden",
+          "microwave": "Magnetron",
+          "pizzasetting": "Pizzastand",
+          "preheatovenware": "Voorverwarmen van ovenschalen",
+          "reheat": "Her-verwarmen",
+          "sabbathprogramme": "Sabbat Programma",
+          "slowcook": "Langzaam garen",
+          "steam": "Stomen",
+          "topbottomheating": "Boven/onderverwarming",
+          "topbottomheatingeco": "Boven/onderverwarming eco",
+          "breadbaking": "Broodbakken",
+          "steamwithsteamset": "Stomen met stoomset"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Resterende tijd"
       },
@@ -1838,37 +1869,6 @@
           "level01": "Niveau 1",
           "level02": "Niveau 2",
           "level03": "Niveau 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Verwarmingsmodus",
-        "state": {
-          "automaticoperation": "Automatisch bedrijf",
-          "automaticoperationwithmicrowave": "Automatisch bedrijf met magnetron",
-          "bakingsensoroperation": "Baksensor",
-          "bottomheating": "Onderverwarming",
-          "defrosting": "Ontdooien",
-          "desiccation": "Uitdrogen",
-          "doughproving": "Deeg laten rijzen",
-          "frozenheatupspecial": "CoolStart functie",
-          "grilllargearea": "Grill, groot gebied",
-          "grillsmallarea": "Grill, klein gebied",
-          "hotair": "Hetelucht",
-          "hotaireco": "Hetelucht eco",
-          "hotairgrilling": "Hetelucht grillen",
-          "intensiveheat": "Intensief verwarmen",
-          "keepwarm": "Warmhouden",
-          "microwave": "Magnetron",
-          "pizzasetting": "Pizzastand",
-          "preheatovenware": "Voorverwarmen van ovenschalen",
-          "reheat": "Her-verwarmen",
-          "sabbathprogramme": "Sabbat Programma",
-          "slowcook": "Langzaam garen",
-          "steam": "Stomen",
-          "topbottomheating": "Boven/onderverwarming",
-          "topbottomheatingeco": "Boven/onderverwarming eco",
-          "breadbaking": "Broodbakken",
-          "steamwithsteamset": "Stomen met stoomset"
         }
       },
       "select_pyrolysis_level": {

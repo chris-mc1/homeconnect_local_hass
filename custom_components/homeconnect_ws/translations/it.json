@@ -357,6 +357,37 @@
       }
     },
     "sensor": {
+      "sensor_oven_used_heating_mode": {
+        "name": "Modalità di riscaldamento utilizzata",
+        "state": {
+          "automaticoperation": "Automatica",
+          "automaticoperationwithmicrowave": "Automatica con microonde",
+          "bakingsensoroperation": "Funzionamento con sensore di cottura",
+          "bottomheating": "Riscaldamento inferiore",
+          "defrosting": "Scongelamento",
+          "desiccation": "Essiccazione",
+          "doughproving": "Lievitazione dell'impasto",
+          "frozenheatupspecial": "Riscaldamento congelato speciale",
+          "grilllargearea": "Griglia grande area",
+          "grillsmallarea": "Griglia piccola area",
+          "hotair": "Aria calda",
+          "hotaireco": "Aria calda Eco",
+          "hotairgrilling": "Aria calda griglia",
+          "intensiveheat": "Calore intensivo",
+          "keepwarm": "Mantenere caldo",
+          "microwave": "Microonde",
+          "pizzasetting": "Impostazione pizza",
+          "preheatovenware": "Preriscaldare la teglia da forno",
+          "reheat": "Riscaldare",
+          "sabbathprogramme": "Programma Sabbath",
+          "slowcook": "Cottura lenta",
+          "steam": "Vapore",
+          "topbottomheating": "Riscaldamento superiore e inferiore",
+          "topbottomheatingeco": "Riscaldamento superiore e inferiore Eco",
+          "breadbaking": "Cottura pane",
+          "steamwithsteamset": "Vapore con Steamset"
+        }
+      },
       "sensor_remaining_program_time": {
         "name": "Tempo programma rimanente"
       },
@@ -1321,37 +1352,6 @@
           "level01": "Livello 1",
           "level02": "Livello 2",
           "level03": "Livello 3"
-        }
-      },
-      "select_oven_used_heating_mode": {
-        "name": "Modalità di riscaldamento utilizzata",
-        "state": {
-          "automaticoperation": "Automatica",
-          "automaticoperationwithmicrowave": "Automatica con microonde",
-          "bakingsensoroperation": "Funzionamento con sensore di cottura",
-          "bottomheating": "Riscaldamento inferiore",
-          "defrosting": "Scongelamento",
-          "desiccation": "Essiccazione",
-          "doughproving": "Lievitazione dell'impasto",
-          "frozenheatupspecial": "Riscaldamento congelato speciale",
-          "grilllargearea": "Griglia grande area",
-          "grillsmallarea": "Griglia piccola area",
-          "hotair": "Aria calda",
-          "hotaireco": "Aria calda Eco",
-          "hotairgrilling": "Aria calda griglia",
-          "intensiveheat": "Calore intensivo",
-          "keepwarm": "Mantenere caldo",
-          "microwave": "Microonde",
-          "pizzasetting": "Impostazione pizza",
-          "preheatovenware": "Preriscaldare la teglia da forno",
-          "reheat": "Riscaldare",
-          "sabbathprogramme": "Programma Sabbath",
-          "slowcook": "Cottura lenta",
-          "steam": "Vapore",
-          "topbottomheating": "Riscaldamento superiore e inferiore",
-          "topbottomheatingeco": "Riscaldamento superiore e inferiore Eco",
-          "breadbaking": "Cottura pane",
-          "steamwithsteamset": "Vapore con Steamset"
         }
       },
       "select_pyrolysis_level": {
