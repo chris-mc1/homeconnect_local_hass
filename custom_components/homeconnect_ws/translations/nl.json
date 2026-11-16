@@ -160,6 +160,18 @@
       }
     },
     "binary_sensor": {
+      "binary_sensor_backend_connected": {
+        "name": "Verbonden met backend"
+      },
+      "binary_sensor_remote_control_active": {
+        "name": "Bediening op afstand actief"
+      },
+      "binary_sensor_local_control_active": {
+        "name": "Lokale bediening actief"
+      },
+      "binary_sensor_oven_meatprobe_plugged": {
+        "name": "Vleesthermometer aangesloten"
+      },
       "connection": {
         "name": "Verbinding"
       },
