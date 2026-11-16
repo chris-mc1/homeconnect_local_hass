@@ -1982,6 +1982,9 @@
       "button_pause_program": {
         "name": "Pauzeren"
       },
+      "button_open_door": {
+        "name": "Deur openen"
+      },
       "button_resume_program": {
         "name": "Hervatten"
       }
