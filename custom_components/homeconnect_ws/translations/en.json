@@ -3486,6 +3486,12 @@
       }
     },
     "button": {
+      "button_acknowledge_alarm_clock": {
+        "name": "Acknowledge Alarm Clock"
+      },
+      "button_cancel_alarm_clock": {
+        "name": "Cancel Alarm Clock"
+      },
       "button_abort_program": {
         "name": "Abort"
       },

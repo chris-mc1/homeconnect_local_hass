@@ -27,6 +27,7 @@ from homeconnect_websocket import (
     parse_device_description,
 )
 
+from .alarm_clock import AlarmClockCleaner
 from .const import (
     CONF_APPLIANCE_INFO,
     CONF_DESCRIPTION_FILENAME,
@@ -231,6 +232,18 @@ async def async_setup_entry(
 
     await coordinator.async_config_entry_first_refresh()
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
+
+    # Resets the alarm clock event of ovens that leave it on, no entity
+    _LOGGER.debug(
+        "Alarm clock cleaner for %s (type %s): %s",
+        appliance.info.get("model"),
+        appliance.info.get("type"),
+        "on" if AlarmClockCleaner.is_supported(appliance) else "off",
+    )
+    if AlarmClockCleaner.is_supported(appliance):
+        alarm_clock_cleaner = AlarmClockCleaner(hass, appliance)
+        alarm_clock_cleaner.start()
+        config_entry.async_on_unload(alarm_clock_cleaner.stop)
     return True
 
 
