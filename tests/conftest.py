@@ -31,12 +31,6 @@ from .const import (
 pytest_plugins = ["homeconnect_websocket.testutils"]
 
 
-@pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:
-    """Enable custom integrations defined in the test dir."""
-    return
-
-
 @pytest.fixture
 def patch_entity_description(monkeypatch: pytest.MonkeyPatch) -> None:
     """Patch entity_description for testing."""

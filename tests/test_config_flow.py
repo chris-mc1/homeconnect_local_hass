@@ -22,7 +22,7 @@ from homeassistant.const import CONF_DEVICE, CONF_DEVICE_ID, CONF_HOST, CONF_NAM
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers.selector import SelectOptionDict
 from homeconnect_websocket import AuthenticationError, ConnectionFailedError, ParserError
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant.common import MockConfigEntry
 
 from . import MockAppliance
 from .const import (

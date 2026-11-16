@@ -14,7 +14,7 @@ from custom_components.homeconnect_ws.const import (
 )
 from homeassistant.data_entry_flow import FlowResultType
 from homeconnect_websocket import AuthenticationError, ConnectionFailedError, ParserError
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant.common import MockConfigEntry
 
 from . import MockAppliance
 from .const import MOCK_AES_DEVICE_ID, MOCK_AES_DEVICE_INFO

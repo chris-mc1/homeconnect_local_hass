@@ -30,7 +30,7 @@ from homeconnect_websocket.entities import (
     Execution,
     OptionDescription,
 )
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant.common import MockConfigEntry
 
 MOCK_APPLIANCE_INFO = {
     "brand": "Fake_Brand",

@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable
 
     from homeassistant.core import HomeAssistant
-    from pytest_homeassistant_custom_component.common import MockConfigEntry
+    from pytest_homeassistant.common import MockConfigEntry
 
 
 class MockAppliance:

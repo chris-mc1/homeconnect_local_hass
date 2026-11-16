@@ -16,11 +16,11 @@ dev = [
     { include-group = "lint" },
     { include-group = "test" },
     "colorlog==6.12.0",
-    "homeassistant==2026.8.1",
+    "homeassistant==2026.11.1",
     "prek==0.5.1",
 ]
 lint = ["ruff==0.16.5"]
-test = ["pytest-homeassistant-custom-component"]
+test = ["pytest-homeassistant==2026.11.1"]
 
 [tool.uv]
 constraint-dependencies = ["cffi==2.0.0"]
@@ -35,3 +35,6 @@ exclude_lines = ["if TYPE_CHECKING:"]
 pythonpath = ["."]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+# Let Home Assistant install its httpx alias before respx is imported.
+addopts = "-p no:respx"
+testpaths = ["tests"]
