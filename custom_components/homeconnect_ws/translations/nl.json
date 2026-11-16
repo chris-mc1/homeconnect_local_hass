@@ -2037,6 +2037,9 @@
       }
     },
     "light": {
+      "light_oven_cavity_groupe": {
+        "name": "Ovenlamp{group_name}"
+      },
       "light_door_ring": {
         "name": "Deur ringlicht"
       },
