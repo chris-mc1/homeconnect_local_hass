@@ -445,6 +445,29 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             entity_category=EntityCategory.CONFIG,
             mode=NumberMode.AUTO,
         ),
+        # Gaggenau BO470112 and BS474112 report the display brightness, the button tone
+        # volume and the signal volume as Cooking.Common.Setting.* (uid 53258, 53257 and
+        # 53261, all 1 - 8), not as Cooking.Oven.Setting.*. Minimum and maximum are read
+        # from the appliance. The translation of the existing display brightness is reused.
+        HCNumberEntityDescription(
+            key="number_cooking_display_brightness",
+            translation_key="number_oven_display_brightness",
+            entity="Cooking.Common.Setting.DisplayBrightness",
+            entity_category=EntityCategory.CONFIG,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_cooking_button_tone_volume",
+            entity="Cooking.Common.Setting.ButtonToneVolume",
+            entity_category=EntityCategory.CONFIG,
+            mode=NumberMode.AUTO,
+        ),
+        HCNumberEntityDescription(
+            key="number_cooking_signal_volume",
+            entity="Cooking.Common.Setting.SignalVolume",
+            entity_category=EntityCategory.CONFIG,
+            mode=NumberMode.AUTO,
+        ),
         HCNumberEntityDescription(
             key="number_hood_interval_off",
             entity="Cooking.Hood.Setting.IntervalTimeOn",
@@ -509,6 +532,13 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        # Gaggenau ovens (uid 53256): enum Off / Tone01 / Tone02.
+        HCSelectEntityDescription(
+            key="select_cooking_button_tone_type",
+            entity="Cooking.Common.Setting.ButtonToneType",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
         HCSelectEntityDescription(
             key="select_hood_interval_stage",
             entity="Cooking.Hood.Setting.IntervalStage",
@@ -548,6 +578,14 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         HCSwitchEntityDescription(
             key="switch_oven_fast_pre_heat",
             entity="Cooking.Oven.Option.FastPreHeat",
+            device_class=SwitchDeviceClass.SWITCH,
+        ),
+        # Gaggenau ovens (uid 4411) report FastPreHeat as a setting, not as an option. The
+        # translation of the existing Fast Preheat switch is reused.
+        HCSwitchEntityDescription(
+            key="switch_oven_fast_pre_heat_setting",
+            translation_key="switch_oven_fast_pre_heat",
+            entity="Cooking.Oven.Setting.FastPreHeat",
             device_class=SwitchDeviceClass.SWITCH,
         ),
         HCSwitchEntityDescription(
