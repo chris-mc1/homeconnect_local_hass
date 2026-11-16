@@ -432,11 +432,43 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
         generate_oven_settings,
     ],
     "number": [
+        # Target temperature of the meat probe. Gaggenau BO470112 and BS474112 report it as
+        # an enumeration (uid 5144): 0 is "Off", 15 ... 99 are "15dC" ... "99dC" and the
+        # entries from 1059 are Fahrenheit. The raw value is the temperature in degrees
+        # Celsius. The oven makes this entity available only while the probe is plugged in.
+        HCNumberEntityDescription(
+            key="number_oven_meatprobe_temperature",
+            entity="Cooking.Oven.Option.MeatProbeTemperatureV2",
+            device_class=NumberDeviceClass.TEMPERATURE,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            native_min_value=0,
+            native_max_value=99,
+            use_raw_value=True,
+            raw_value_off_below=15,
+            # The oven answers "WriteRequest Busy" (516) for every write while it is operated on
+            # the oven itself (LocalControlActive, until about 10 seconds after the last touch).
+            # Reported on the issue: it can also only be set while the oven is switched on.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
+            # Input box instead of a slider: a slider sends a value for every step it passes.
+            mode=NumberMode.BOX,
+        ),
         HCNumberEntityDescription(
             key="number_oven_setpoint_temperature",
             entity="Cooking.Oven.Option.SetpointTemperature",
             device_class=NumberDeviceClass.TEMPERATURE,
             native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            # Gaggenau BO470112: the oven answers "WriteRequest Busy" (516) while it is operated
+            # on the oven itself (LocalControlActive). Reported on the issue: it can also only be
+            # set while the oven is switched on. Only applied to Gaggenau, other brands were not
+            # tried.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
+            available_when_brands={"GAGGENAU"},
             mode=NumberMode.AUTO,
         ),
         HCNumberEntityDescription(
@@ -543,6 +575,25 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
             entity_category=EntityCategory.CONFIG,
         ),
+        # Display settings of Gaggenau BO470112 / BS474112 (uid 4412, 4355, 4413).
+        HCSelectEntityDescription(
+            key="select_oven_idle_screen",
+            entity="Cooking.Oven.Setting.IdleScreen",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_oven_touchkey_color",
+            entity="Cooking.Oven.Setting.TouchkeyColor",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSelectEntityDescription(
+            key="select_oven_standby_display",
+            entity="Cooking.Oven.Setting.StandbyDisplay",
+            has_state_translation=True,
+            entity_category=EntityCategory.CONFIG,
+        ),
     ],
     "switch": [
         HCSwitchEntityDescription(
@@ -584,6 +635,41 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             device_class=SwitchDeviceClass.SWITCH,
             entity_category=EntityCategory.CONFIG,
             value_mapping=("IndicationOn", "IndicationOff"),
+        ),
+        # Settings and options of Gaggenau BO470112 / BS474112 (uid 4414, 4375, 5131, 5132).
+        HCSwitchEntityDescription(
+            key="switch_oven_heating_signal",
+            entity="Cooking.Oven.Setting.HeatingSignal",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_door_opener_delay",
+            entity="Cooking.Oven.Setting.DoorOpenerDelay",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_rotary_spit",
+            entity="Cooking.Oven.Option.RotarySpit",
+            device_class=SwitchDeviceClass.SWITCH,
+            # The Options group of the oven (uid 262) is read-only while the oven is switched off
+            # (seen in descriptionChange messages) and while it is operated on the oven itself.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
+        ),
+        HCSwitchEntityDescription(
+            key="switch_oven_quick_roast",
+            entity="Cooking.Oven.Option.QuickRoast",
+            device_class=SwitchDeviceClass.SWITCH,
+            # The Options group of the oven (uid 262) is read-only while the oven is switched off
+            # (seen in descriptionChange messages) and while it is operated on the oven itself.
+            available_when=[
+                ("BSH.Common.Setting.PowerState", {"On"}),
+                ("BSH.Common.Status.LocalControlActive", {False}),
+            ],
         ),
     ],
     "light": [generate_hood_light, generate_hood_ambient_light],
