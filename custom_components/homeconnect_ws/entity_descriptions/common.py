@@ -49,9 +49,12 @@ POWER_SWITCH_VALUE_MAPINGS = (
 
 def generate_start_button(appliance: HomeAppliance) -> EntityDescriptions:
     """Get Start Button description."""
+    # Programs with execution "none" in the device description are included,
+    # because some appliances report the actual execution type ("selectandstart")
+    # only at runtime via /ro/allDescriptionChanges.
     programs = list(
         filter(
-            lambda program: program.execution == Execution.SELECT_AND_START,
+            lambda program: program.execution in (Execution.SELECT_AND_START, Execution.NONE),
             appliance.programs.values(),
         )
     )

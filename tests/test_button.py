@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
 from homeassistant.components.button import DOMAIN as BUTTON_DOMAIN
 from homeassistant.components.button import SERVICE_PRESS
-from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME
+from homeassistant.const import ATTR_ENTITY_ID, ATTR_FRIENDLY_NAME, STATE_UNAVAILABLE
 from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
@@ -64,6 +65,36 @@ async def test_start(
             },
         )
     )
+
+
+@pytest.mark.parametrize(
+    ("execution", "available"),
+    [
+        ("selectandstart", True),
+        # the program can't be started remotely, see issue #400
+        ("none", False),
+    ],
+)
+async def test_start_available(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+    execution: str,
+    *,
+    available: bool,
+) -> None:
+    """Test start button availability depends on the runtime execution type."""
+    entity_id = "button.fake_brand_homeappliance_activeprogram"
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await mock_appliance.entities["Test.SelectedProgram"].update({"value": 500})
+    await mock_appliance.entities["Test.Program.Program1"].update({"execution": execution})
+    # the button only listens to the ActiveProgram entity, trigger a state update
+    await mock_appliance.entities["Test.ActiveProgram"].update({})
+    await hass.async_block_till_done()
+
+    state = hass.states.get(entity_id)
+    assert state
+    assert (state.state != STATE_UNAVAILABLE) is available
 
 
 async def test_abort(

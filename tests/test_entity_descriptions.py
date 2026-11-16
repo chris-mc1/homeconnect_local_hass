@@ -7,9 +7,11 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
+import pytest
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
+    HCButtonEntityDescription,
     HCLightEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -18,6 +20,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
 from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
+    generate_start_button,
 )
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
@@ -26,10 +29,14 @@ from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
 from custom_components.homeconnect_ws.helpers import merge_dicts
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.switch import SwitchDeviceClass
-from homeconnect_websocket.entities import Access, DeviceDescription, EntityDescription
+from homeconnect_websocket.entities import (
+    Access,
+    DeviceDescription,
+    EntityDescription,
+    Execution,
+)
 
 if TYPE_CHECKING:
-    import pytest
     from homeconnect_websocket.testutils import MockAppliance, MockApplianceType
 
 
@@ -223,6 +230,55 @@ async def test_program(mock_homeconnect_appliance: MockApplianceType) -> None:
     )
 
     appliance = await mock_homeconnect_appliance(description={})
+
+
+def _start_button_description(*executions: Execution | None) -> DeviceDescription:
+    """Build a device description with one program per given execution type."""
+    programs = []
+    for index, execution in enumerate(executions):
+        program = EntityDescription(uid=600 + index, name=f"Test.Program.Program{index}")
+        if execution is not None:
+            program["execution"] = execution
+        programs.append(program)
+    return DeviceDescription(
+        program=programs,
+        activeProgram=EntityDescription(uid=700, name="BSH.Common.Root.ActiveProgram"),
+        selectedProgram=EntityDescription(uid=701, name="BSH.Common.Root.SelectedProgram"),
+    )
+
+
+@pytest.mark.parametrize(
+    ("executions", "has_start_button"),
+    [
+        # no execution attribute, library default is "selectandstart"
+        ((None,), True),
+        ((Execution.SELECT_AND_START,), True),
+        # execution "none" in the stored description, the appliance reports
+        # the actual execution at runtime (issue #400)
+        ((Execution.NONE, Execution.NONE), True),
+        ((Execution.START_ONLY, Execution.NONE), True),
+        # programs that can't be selected and started remotely
+        ((Execution.START_ONLY,), False),
+        ((Execution.START_ONLY, Execution.SELECT_ONLY), False),
+        ((), False),
+    ],
+)
+async def test_start_button(
+    mock_homeconnect_appliance: MockApplianceType,
+    executions: tuple[Execution | None, ...],
+    *,
+    has_start_button: bool,
+) -> None:
+    """Test dynamic Start button."""
+    appliance = await mock_homeconnect_appliance(description=_start_button_description(*executions))
+    start_button_description = generate_start_button(appliance)
+    if has_start_button:
+        assert start_button_description == HCButtonEntityDescription(
+            key="button_start_program",
+            entity="BSH.Common.Root.ActiveProgram",
+        )
+    else:
+        assert start_button_description is None
 
 
 INTERNAL_LIGHT = DeviceDescription(
