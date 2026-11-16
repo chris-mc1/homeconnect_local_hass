@@ -2088,5 +2088,10 @@
         }
       }
     }
+  },
+  "exceptions": {
+    "program_running": {
+      "message": "Het programma kan niet worden gewijzigd zolang er een programma loopt, stop het eerst"
+    }
   }
 }

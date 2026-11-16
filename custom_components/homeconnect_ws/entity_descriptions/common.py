@@ -157,6 +157,8 @@ def generate_program(appliance: HomeAppliance) -> EntityDescriptions:
                 entity="BSH.Common.Root.SelectedProgram",
                 has_state_translation=False,
                 mapping=sorted_programs,
+                block_change_while_running_for_brands={"GAGGENAU"},
+                prefer_active_program_for_brands={"GAGGENAU"},
             )
         ]
 
