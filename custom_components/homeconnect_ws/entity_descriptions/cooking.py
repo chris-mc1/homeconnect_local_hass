@@ -140,7 +140,13 @@ def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
     """Get Hood Fan description."""
     available_entities = [entity for entity in HOOD_FAN_ENTITIES if entity in appliance.entities]
     if available_entities:
-        return HCFanEntityDescription(key="fan_hood", entities=available_entities)
+        # A hood keeps its last VentingLevel when switched off: its power state says the fan is off
+        power_entity = "BSH.Common.Setting.PowerState"
+        return HCFanEntityDescription(
+            key="fan_hood",
+            entities=available_entities,
+            power_entity=power_entity if power_entity in appliance.entities else None,
+        )
     return None
 
 

@@ -110,6 +110,8 @@ class HCFanEntityDescription(HCEntityDescription, FanEntityDescription, frozen_o
     """Description for Fan Entity."""
 
     available_access: tuple[Access] = (Access.READ_WRITE,)
+    # The appliance's power state: the fan is off while it is off, whatever its speed options hold
+    power_entity: str | None = None
 
 
 class EntityDescriptions(TypedDict):

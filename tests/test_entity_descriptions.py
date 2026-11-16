@@ -10,6 +10,7 @@ from unittest.mock import Mock
 from custom_components.homeconnect_ws import entity_descriptions
 from custom_components.homeconnect_ws.entity_descriptions import (
     HCBinarySensorEntityDescription,
+    HCFanEntityDescription,
     HCLightEntityDescription,
     HCSelectEntityDescription,
     HCSensorEntityDescription,
@@ -19,6 +20,7 @@ from custom_components.homeconnect_ws.entity_descriptions.common import (
     generate_power_switch,
     generate_program,
 )
+from custom_components.homeconnect_ws.entity_descriptions.cooking import generate_hood_fan
 from custom_components.homeconnect_ws.entity_descriptions.refrigeration import (
     generate_internal_light,
     generate_internal_light_brightness,
@@ -284,6 +286,51 @@ async def test_internal_light_brightness(mock_homeconnect_appliance: MockApplian
     # No brightness at all
     appliance = await mock_homeconnect_appliance(description={})
     assert generate_internal_light_brightness(appliance) is None
+
+
+HOOD_FAN = DeviceDescription(
+    option=[
+        EntityDescription(
+            uid=1,
+            name="Cooking.Common.Option.Hood.VentingLevel",
+            access=Access.READ_WRITE,
+            available=True,
+            enumeration={"0": "FanOff", "1": "FanStage01", "2": "FanStage02"},
+        ),
+    ],
+    setting=[
+        EntityDescription(
+            uid=2,
+            name="BSH.Common.Setting.PowerState",
+            access=Access.READ_WRITE,
+            available=True,
+            enumeration={"1": "Off", "2": "On"},
+        ),
+    ],
+)
+
+
+async def test_hood_fan(mock_homeconnect_appliance: MockApplianceType) -> None:
+    """Test the hood fan follows the hood's power state when it has one."""
+    appliance = await mock_homeconnect_appliance(description=HOOD_FAN)
+    assert generate_hood_fan(appliance) == HCFanEntityDescription(
+        key="fan_hood",
+        entities=["Cooking.Common.Option.Hood.VentingLevel"],
+        power_entity="BSH.Common.Setting.PowerState",
+    )
+
+    # No power state
+    appliance = await mock_homeconnect_appliance(
+        description=DeviceDescription(option=HOOD_FAN["option"])
+    )
+    assert generate_hood_fan(appliance) == HCFanEntityDescription(
+        key="fan_hood",
+        entities=["Cooking.Common.Option.Hood.VentingLevel"],
+    )
+
+    # No fan
+    appliance = await mock_homeconnect_appliance(description={})
+    assert generate_hood_fan(appliance) is None
 
 
 TRANSLATION_DOMAINS = {

@@ -89,6 +89,39 @@ async def test_update(
     assert state.attributes[ATTR_PERCENTAGE] == 100
 
 
+async def test_power_off(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test the fan is off while the appliance is off, although its speed option keeps its value."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await mock_appliance.entities["Test.PowerState"].update({"value": 2})
+    await mock_appliance.entities["Test.FanSpeed1"].update({"value": 1})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("fan.fake_brand_homeappliance_fan")
+    assert state.state == STATE_ON
+    assert state.attributes[ATTR_PERCENTAGE] == 25
+
+    # Switched off: a hood keeps its last VentingLevel, only the power state changes
+    await mock_appliance.entities["Test.PowerState"].update({"value": 1})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("fan.fake_brand_homeappliance_fan")
+    assert state.state == STATE_OFF
+    assert state.attributes[ATTR_PERCENTAGE] == 0
+
+    # Switched on again at the same level
+    await mock_appliance.entities["Test.PowerState"].update({"value": 2})
+    await hass.async_block_till_done()
+
+    state = hass.states.get("fan.fake_brand_homeappliance_fan")
+    assert state.state == STATE_ON
+    assert state.attributes[ATTR_PERCENTAGE] == 25
+
+
 async def test_set_speed(
     hass: HomeAssistant,
     mock_appliance: MockAppliance,
