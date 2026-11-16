@@ -68,6 +68,10 @@ class HCData:
     device_info: DeviceInfo
     available_entity_descriptions: _EntityDescriptionsType
     coordinator: HomeConnectCoordinator
+    # Switch "show programs for dishes" (switch_show_dish_programs): when off the program select
+    # leaves the automatic dishes out, the default (on) shows all programs as before. The switch
+    # keeps this value and restores it after a restart.
+    show_dish_programs: bool = True
 
 
 @dataclass
