@@ -912,7 +912,7 @@
         "name": "Huidige temperatuur{group_name}"
       },
       "sensor_oven_current_meatprobe_temperature": {
-        "name": "Huidige vleessonde temperatuur"
+        "name": "Huidige temperatuur vleesthermometer"
       },
       "sensor_heatup_progress": {
         "name": "Voortgang opwarmen"
@@ -2015,7 +2015,7 @@
         "name": "i-DOS doseervolume: wasmiddel of wasverzachter"
       },
       "number_oven_setpoint_temperature": {
-        "name": "Temperatuurinstelling"
+        "name": "Ingestelde temperatuur"
       },
       "number_oven_display_brightness": {
         "name": "Helderheid display"
