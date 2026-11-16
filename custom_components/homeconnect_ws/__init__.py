@@ -231,7 +231,13 @@ async def async_setup_entry(
 
     await coordinator.async_config_entry_first_refresh()
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
+    config_entry.async_on_unload(config_entry.add_update_listener(async_update_options))
     return True
+
+
+async def async_update_options(hass: HomeAssistant, entry: HCConfigEntry) -> None:  # noqa: ARG001
+    """Refresh displayed program options without reconnecting the appliance."""
+    entry.runtime_data.coordinator.async_set_updated_data(None)
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: HCConfigEntry) -> bool:
