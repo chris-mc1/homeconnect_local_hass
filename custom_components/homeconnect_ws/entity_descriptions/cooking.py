@@ -134,13 +134,20 @@ HOOD_FAN_ENTITIES = [
     "Cooking.Common.Option.Hood.VentingLevel",
     "Cooking.Common.Option.Hood.IntensiveLevel",
 ]
+HOOD_VENTING_PROGRAM = "Cooking.Common.Program.Hood.Venting"
 
 
 def generate_hood_fan(appliance: HomeAppliance) -> HCFanEntityDescription:
     """Get Hood Fan description."""
     available_entities = [entity for entity in HOOD_FAN_ENTITIES if entity in appliance.entities]
     if available_entities:
-        return HCFanEntityDescription(key="fan_hood", entities=available_entities)
+        return HCFanEntityDescription(
+            key="fan_hood",
+            entities=available_entities,
+            default_program=(
+                HOOD_VENTING_PROGRAM if HOOD_VENTING_PROGRAM in appliance.programs else None
+            ),
+        )
     return None
 
 

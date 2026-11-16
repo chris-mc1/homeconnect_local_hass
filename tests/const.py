@@ -184,7 +184,13 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             key="Test.Fan",
             name="Fan",
             entities=["Test.FanSpeed1", "Test.FanSpeed2"],
-        )
+        ),
+        HCFanEntityDescription(
+            key="Test.FanProgram",
+            name="FanProgram",
+            entities=["Test.FanSpeed1", "Test.FanSpeed2"],
+            default_program="Test.Program.Program3",
+        ),
     ],
     "light": [
         HCLightEntityDescription(

@@ -133,3 +133,49 @@ async def test_set_speed(
             data=[{"uid": 403, "value": 0}, {"uid": 404, "value": 1}],
         )
     )
+
+
+async def test_set_speed_with_program(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test setting a speed starts the default program."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+
+    await hass.services.async_call(
+        FAN_DOMAIN,
+        SERVICE_SET_PERCENTAGE,
+        {
+            ATTR_ENTITY_ID: "fan.fake_brand_homeappliance_fanprogram",
+            ATTR_PERCENTAGE: 25,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action=Action.POST,
+            data={"program": 502, "options": [{"uid": 403, "value": 1}, {"uid": 404, "value": 0}]},
+        )
+    )
+    mock_appliance.session.send_sync.reset_mock()
+
+    await hass.services.async_call(
+        FAN_DOMAIN,
+        SERVICE_SET_PERCENTAGE,
+        {
+            ATTR_ENTITY_ID: "fan.fake_brand_homeappliance_fanprogram",
+            ATTR_PERCENTAGE: 100,
+        },
+        blocking=True,
+    )
+
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/activeProgram",
+            action=Action.POST,
+            data={"program": 502, "options": [{"uid": 403, "value": 0}, {"uid": 404, "value": 2}]},
+        )
+    )

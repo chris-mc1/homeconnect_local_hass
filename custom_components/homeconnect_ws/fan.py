@@ -93,7 +93,16 @@ class HCFan(HCEntity, FanEntity):
             if speed.speed == new_speed:
                 new_speed_entity = speed.entity_name
                 new_speed_value = speed.entity_value
-        if new_speed_entity or new_speed == 0:
+        program = self._runtime_data.appliance.programs.get(self.entity_description.default_program)
+        if program and new_speed_entity:
+            # Writing the speed options to /ro/values is accepted but not applied by
+            # some hoods, the (start only) program has to be started with them instead
+            options = {
+                entity.uid: new_speed_value if entity.name == new_speed_entity else 0
+                for entity in self._speed_entities.values()
+            }
+            await program.start(options, override_options=True)
+        elif new_speed_entity or new_speed == 0:
             data = []
             for entity in self._speed_entities.values():
                 if entity.name == new_speed_entity:
