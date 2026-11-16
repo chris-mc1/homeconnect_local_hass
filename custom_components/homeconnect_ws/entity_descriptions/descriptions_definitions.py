@@ -76,7 +76,7 @@ class HCBinarySensorEntityDescription(
     """Description for Binary Sensor Entity."""
 
     value_on: set[str] | None = None
-    value_off: set[str] | None = None
+    value_off: set[str | None] | None = None
     available_access: tuple[Access] = (Access.READ, Access.READ_WRITE)
 
 
