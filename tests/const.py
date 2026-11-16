@@ -21,6 +21,7 @@ from custom_components.homeconnect_ws.entity_descriptions import (
     HCSwitchEntityDescription,
     _EntityDescriptionsType,
 )
+from homeassistant.components.diagnostics import REDACTED
 from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST, CONF_NAME
 from homeconnect_websocket.entities import (
@@ -42,6 +43,19 @@ MOCK_APPLIANCE_INFO = {
     "swVersion": "3.3",
     "mac": "78-43-F2-23-C8-D7",
     "serialNumber": "Fake_serialNumber",
+    "model": "Fake_vib",
+}
+
+REDACTED_APPLIANCE_INFO = {
+    "brand": "Fake_Brand",
+    "type": "HomeAppliance",
+    "deviceID": REDACTED,
+    "vib": "Fake_vib",
+    "haVersion": "1.1",
+    "hwVersion": "2.2",
+    "swVersion": "3.3",
+    "mac": REDACTED,
+    "serialNumber": REDACTED,
     "model": "Fake_vib",
 }
 
