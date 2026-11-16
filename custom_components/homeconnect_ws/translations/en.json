@@ -3176,6 +3176,14 @@
           "extradry": "Extra dry"
         }
       },
+      "select_laundry_program_mode": {
+        "name": "Program mode",
+        "state": {
+          "washing": "Washing",
+          "washinganddrying": "Washing and drying",
+          "drying": "Drying"
+        }
+      },
       "select_laundry_refresher": {
         "name": "Drying target",
         "state": {

@@ -311,6 +311,17 @@ LAUNDRY_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             has_state_translation=True,
         ),
         HCSelectEntityDescription(
+            key="select_laundry_washer_dryer_drying_target",
+            entity="LaundryCare.WasherDryer.Option.DryingTarget",
+            has_state_translation=True,
+            translation_key="select_laundry_drying_target",
+        ),
+        HCSelectEntityDescription(
+            key="select_laundry_program_mode",
+            entity="LaundryCare.WasherDryer.Option.ProgramMode",
+            has_state_translation=True,
+        ),
+        HCSelectEntityDescription(
             key="select_laundry_refresher",
             entity="LaundryCare.Dryer.Option.Refresher",
             has_state_translation=True,
