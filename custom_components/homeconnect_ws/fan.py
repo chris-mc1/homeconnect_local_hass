@@ -24,6 +24,8 @@ if TYPE_CHECKING:
 
 PARALLEL_UPDATES = 0
 
+POWER_OFF_STATES = ("Off", "Standby", "MainsOff")
+
 
 class SpeedMapping(NamedTuple):
     """Mapping of entity name / value and speed."""
@@ -50,6 +52,7 @@ class HCFan(HCEntity, FanEntity):
     _speed_entities: dict[str, HcEntity] | None = None
     _speed_range: range = None
     _speed_mapping: list[SpeedMapping]
+    _power_entity: HcEntity | None = None
 
     def __init__(
         self,
@@ -77,8 +80,18 @@ class HCFan(HCEntity, FanEntity):
 
         self._speed_range = (1, self._attr_speed_count)
 
+        if entity_description.power_entity:
+            self._power_entity = self._runtime_data.appliance.entities.get(
+                entity_description.power_entity
+            )
+            if self._power_entity:
+                # Updated when the appliance is switched off or on, not only when a speed changes
+                self._entities.append(self._power_entity)
+
     @property
     def percentage(self) -> int | None:
+        if self._power_entity and self._power_entity.value in POWER_OFF_STATES:
+            return 0
         for speed in self._speed_mapping:
             if self._speed_entities[speed.entity_name].value_raw == speed.entity_value:
                 return ranged_value_to_percentage(self._speed_range, speed.speed)

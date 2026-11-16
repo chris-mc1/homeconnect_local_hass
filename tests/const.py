@@ -184,6 +184,7 @@ ENTITY_DESCRIPTIONS: _EntityDescriptionsType = {
             key="Test.Fan",
             name="Fan",
             entities=["Test.FanSpeed1", "Test.FanSpeed2"],
+            power_entity="Test.PowerState",
         )
     ],
     "light": [
