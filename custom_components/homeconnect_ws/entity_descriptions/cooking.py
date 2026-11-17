@@ -366,6 +366,18 @@ def generate_hood_ambient_light(appliance: HomeAppliance) -> HCFanEntityDescript
 
 
 COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
+    # Two status flags combined into one state: an event sensor, like the per-cavity water tank.
+    "event_sensor": [
+        HCSensorEntityDescription(
+            key="sensor_oven_water_tank",
+            entities=(
+                "Cooking.Oven.Status.WaterTankUnplugged",
+                "Cooking.Oven.Status.WaterTankEmpty",
+            ),
+            device_class=SensorDeviceClass.ENUM,
+            options=["unplugged", "empty", "ok"],
+        ),
+    ],
     "sensor": [
         HCSensorEntityDescription(
             key="sensor_interval_time_off",
@@ -402,15 +414,6 @@ COOKING_ENTITY_DESCRIPTIONS: _EntityDescriptionsDefinitionsType = {
             key="sensor_carbon_filter_saturation",
             entity="Cooking.Hood.Status.CarbonFilterSaturation",
             native_unit_of_measurement=PERCENTAGE,
-        ),
-        HCSensorEntityDescription(
-            key="sensor_oven_water_tank",
-            entities=(
-                "Cooking.Oven.Status.WaterTankUnplugged",
-                "Cooking.Oven.Status.WaterTankEmpty",
-            ),
-            device_class=SensorDeviceClass.ENUM,
-            options=["unplugged", "empty", "ok"],
         ),
         HCSensorEntityDescription(
             key="sensor_oven_current_temperature",
