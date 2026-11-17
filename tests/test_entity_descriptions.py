@@ -322,3 +322,18 @@ def test_descriptions_have_english_name() -> None:
                 missing.append(f"{domain}.{key}")
 
     assert sorted(set(missing)) == []
+
+
+def test_sensor_descriptions_shape() -> None:
+    """Test sensors read one entity and event sensors combine several (issue #557)."""
+    wrong = []
+    for description_type, descriptions in entity_descriptions.get_all_entity_description().items():
+        for description in descriptions:
+            if callable(description):
+                continue
+            if description_type == "sensor" and not description.entity:
+                wrong.append(f"sensor {description.key} has no entity")
+            if description_type == "event_sensor" and not description.entities:
+                wrong.append(f"event_sensor {description.key} has no entities")
+
+    assert wrong == []
