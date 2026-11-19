@@ -155,6 +155,22 @@ async def test_power_switch(mock_homeconnect_appliance: MockApplianceType) -> No
         value_mapping=("Standby", "Off"),
     )
 
+    # Read-only (e.g. refrigerator): no Switch and no Select
+    device_description["setting"][0]["access"] = "read"
+    device_description["setting"][0]["enumeration"] = {
+        "0": "MainsOff",
+        "1": "Off",
+        "2": "On",
+        "3": "Standby",
+    }
+    del device_description["setting"][0]["min"]
+    del device_description["setting"][0]["max"]
+    appliance = await mock_homeconnect_appliance(description=device_description)
+    switch_description = generate_power_switch(appliance)
+
+    assert "switch" not in switch_description
+    assert "select" not in switch_description
+
 
 PROGRAM = DeviceDescription(
     setting=[
