@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_DEVICE_ID, CONF_HOST
+from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeconnect_websocket import (
@@ -36,6 +38,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     _connecting: bool = True
     _reconnecting: bool = False
     connected: bool = False
+    _reconnect_timer: asyncio.TimerHandle | None = None
 
     def __init__(
         self, hass: HomeAssistant, config_entry: HCConfigEntry, description: DeviceDescription
@@ -66,6 +69,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
 
     async def close(self) -> None:
         self._connecting = False
+        self._cancel_reconnect_timer()
         await self.appliance.close()
 
     async def _async_setup(self) -> None:
@@ -101,28 +105,58 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
                 self.logger.exception(msg)
 
+            if self._connecting:
+                await asyncio.sleep(5)
+
     async def _async_update_data(self) -> None:
         return None
 
     async def _connection_state_callback(self, event: ConnectionState) -> None:
-        if event == ConnectionState.RECONNECTING:
-            if not self._reconnecting:
-                self._reconnecting = True
-                reconnect_timeout = int(self.hass.loop.time()) + MAX_RECONECT_TIME
-                self.hass.loop.call_at(reconnect_timeout, self._connection_reconnect_callback)
+        if not self._connecting:
+            return
 
-        elif event == ConnectionState.CONNECTED:
+        if event == ConnectionState.CONNECTED:
             self.connected = True
+            self._cancel_reconnect_timer()
             if self._reconnecting:
                 self.logger.debug("Reconnected to %s", self.appliance.info.get("vib"))
-                self._reconnecting = False
+            self._reconnecting = False
 
-        elif event == ConnectionState.CLOSED:
-            self.connected = False
+        elif event in (
+            ConnectionState.RECONNECTING,
+            ConnectionState.CLOSING,
+            ConnectionState.CLOSED,
+            ConnectionState.ABNORMAL_CLOSURE,
+        ):
+            # A handshake failure can terminate the library's reconnect loop.
+            # Keep one deadline even if the library changes state again.
+            if self._reconnect_timer is None:
+                self._reconnecting = True
+                self._reconnect_timer = self.hass.loop.call_later(
+                    MAX_RECONECT_TIME, self._connection_reconnect_callback
+                )
+            if event in (ConnectionState.CLOSED, ConnectionState.ABNORMAL_CLOSURE):
+                self.connected = False
 
         self.async_set_updated_data(None)
 
+    @callback
+    def _cancel_reconnect_timer(self) -> None:
+        if self._reconnect_timer is not None:
+            self._reconnect_timer.cancel()
+            self._reconnect_timer = None
+
+    @callback
     def _connection_reconnect_callback(self) -> None:
-        if not self.appliance.session.connected:
-            self.connected = False
-            self.async_set_updated_data(None)
+        self._reconnect_timer = None
+        if not self._connecting or self.appliance.session.connected:
+            return
+
+        self.connected = False
+        self.async_set_updated_data(None)
+        self.logger.warning("Connection recovery timed out; reloading this appliance")
+        self.config_entry.async_create_background_task(
+            self.hass,
+            self.hass.config_entries.async_reload(self.config_entry.entry_id),
+            f"homeconnect_ws_recover_{self.name}",
+        )
