@@ -22,6 +22,7 @@ from homeconnect_websocket import (
 from .const import (
     CONF_AES_IV,
     CONF_PSK,
+    DOMAIN,
     INITIAL_RECONNECT_DELAY,
     MAX_RECONECT_TIME,
     MAX_RECONNECT_DELAY,
@@ -69,8 +70,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
 
         self.disconnect_time = time.time()
         if not self.appliance.info:
-            msg = "Appliance has no device info"
-            raise ConfigEntryError(msg)
+            raise ConfigEntryError(translation_domain=DOMAIN, translation_key="no_device_info")
 
     async def close(self) -> None:
         self._connecting = False
