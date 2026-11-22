@@ -33,6 +33,19 @@
       "all_setup": "Alle Geräte in dieser Profildatei sind bereits eingerichtet"
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Home Connect Local Optionen",
+        "data": {
+          "start_without_options": "Programme ohne Optionswerte starten"
+        },
+        "data_description": {
+          "start_without_options": "Beim Drücken der Start-Taste wird nur der Start ausgelöst und das Gerät verwendet die Einstellungen, die gerade an ihm gewählt sind. Standardmäßig werden die zuletzt bekannten Werte aller Optionen mit dem Start gesendet. Diese können veraltet sein, wenn das Programm am Gerät geändert wurde."
+        }
+      }
+    }
+  },
   "entity": {
     "switch": {
       "switch_power_state": {

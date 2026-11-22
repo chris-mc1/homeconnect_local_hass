@@ -34,6 +34,12 @@ To use this integration, you must first create a Home Connect account and connec
 - Select Appliance: Select the Appliance you want to setup
 - Host / IP-Address: Manually enter your Appliance Hostname or IP-Address
 
+### Options
+
+Options can be changed on the Config Entry of the Appliance (Configure).
+
+- Start programs without sending option values: When enabled, the start button only triggers the start and the Appliance uses the settings that are currently set on it. When disabled (default), the last known values of all options are sent along with the start. These values can be outdated after the program was changed on the Appliance, which can lead to unexpected settings, for example a delayed start.
+
 ## Remove integration
 
 This integration follows standard integration removal, no extra steps are required.

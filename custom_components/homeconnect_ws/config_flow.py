@@ -14,7 +14,7 @@ from zipfile import ZipFile
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.file_upload import process_uploaded_file
-from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow
+from homeassistant.config_entries import SOURCE_IGNORE, ConfigFlow, OptionsFlow
 from homeassistant.const import (
     CONF_DEVICE,
     CONF_DEVICE_ID,
@@ -22,6 +22,7 @@ from homeassistant.const import (
     CONF_MODE,
     CONF_NAME,
 )
+from homeassistant.core import callback
 from homeassistant.helpers.selector import (
     FileSelector,
     FileSelectorConfig,
@@ -48,6 +49,7 @@ from .const import (
     CONF_FILE,
     CONF_MANUAL_HOST,
     CONF_PSK,
+    CONF_START_WITHOUT_OPTIONS,
     DOMAIN,
 )
 
@@ -133,6 +135,12 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         self.appliances: dict[str, ProfileFileEntry] = {}
         self.reauth_entry: HCConfigEntry = None
         self.global_config: HCConfig | None = None
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry: HCConfigEntry) -> HomeConnectOptionsFlow:  # noqa: ARG004
+        """Get the options flow for this handler."""
+        return HomeConnectOptionsFlow()
 
     def _set_encryption_keys(self, appliance_info: dict) -> None:
         self.data[CONF_MODE] = appliance_info["connectionType"]
@@ -397,3 +405,20 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             return await self.async_step_upload()
         except KeyError:
             return self.async_abort(reason="invalid_discovery_info")
+
+
+class HomeConnectOptionsFlow(OptionsFlow):
+    """HomeConnect Options flow."""
+
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> FlowResult:
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=self.add_suggested_values_to_schema(
+                vol.Schema({vol.Optional(CONF_START_WITHOUT_OPTIONS, default=False): bool}),
+                self.config_entry.options,
+            ),
+        )

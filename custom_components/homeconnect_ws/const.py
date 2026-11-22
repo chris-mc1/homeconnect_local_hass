@@ -27,5 +27,6 @@ CONF_FEATURE_FILENAME: Final = "feature_filename"
 CONF_APPLIANCE_INFO: Final = "appliance_info"
 CONF_DEV_OVERRIDE_HOST: Final = "override_host"
 CONF_DEV_OVERRIDE_PSK: Final = "override_psk"
+CONF_START_WITHOUT_OPTIONS: Final = "start_without_options"
 
 MAX_RECONECT_TIME: Final = 300
