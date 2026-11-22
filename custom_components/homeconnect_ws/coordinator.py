@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from typing import TYPE_CHECKING
@@ -26,6 +27,8 @@ if TYPE_CHECKING:
     from . import HCConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
+_INITIAL_RETRY_DELAY = 1.0
+_MAX_RETRY_DELAY = 60.0
 
 
 class HomeConnectCoordinator(DataUpdateCoordinator):
@@ -76,6 +79,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
     async def _connect(self) -> None:
         self.logger.debug("Connecting to %s", self.appliance.info.get("vib"))
         first_failure = True
+        retry_delay = _INITIAL_RETRY_DELAY
         while self._connecting:
             try:
                 await self.appliance.connect()
@@ -100,6 +104,10 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 await self.appliance.close()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
                 self.logger.exception(msg)
+
+            if self._connecting:
+                await asyncio.sleep(retry_delay)
+                retry_delay = min(retry_delay * 2, _MAX_RETRY_DELAY)
 
     async def _async_update_data(self) -> None:
         return None
