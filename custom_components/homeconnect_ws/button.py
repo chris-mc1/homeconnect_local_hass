@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 from homeassistant.components.button import ButtonEntity
 
+from .const import CONF_START_WITHOUT_OPTIONS
 from .entity import HCEntity
 from .helpers import create_entities, error_decorator
 
@@ -56,4 +57,9 @@ class HCStartButton(HCEntity, ButtonEntity):
 
     @error_decorator
     async def async_press(self) -> None:
-        await self._runtime_data.appliance.selected_program.start()
+        selected_program = self._runtime_data.appliance.selected_program
+        if self.coordinator.config_entry.options.get(CONF_START_WITHOUT_OPTIONS, False):
+            # Only trigger the start, the Appliance uses the settings that are currently set on it
+            await selected_program.start(override_options=True)
+        else:
+            await selected_program.start()

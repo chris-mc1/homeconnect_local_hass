@@ -34,6 +34,19 @@
       "failed_to_write_profile_file": "Profile File could not be stored"
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Home Connect Local options",
+        "data": {
+          "start_without_options": "Start programs without sending option values"
+        },
+        "data_description": {
+          "start_without_options": "When pressing the start button, only trigger the start and let the Appliance use the settings that are currently set on it. By default the last known values of all options are sent along with the start, which can be outdated after the program was changed on the Appliance."
+        }
+      }
+    }
+  },
   "entity": {
     "switch": {
       "switch_power_state": {
