@@ -24,10 +24,10 @@ from homeassistant.helpers.selector import SelectOptionDict
 from homeconnect_websocket import AuthenticationError, ConnectionFailedError, ParserError
 from pytest_homeassistant.common import MockConfigEntry
 
-from . import MockAppliance
 from .const import (
     MOCK_AES_DEVICE_ID,
     MOCK_AES_DEVICE_INFO,
+    MOCK_APPLIANCE_INFO,
     MOCK_TLS_DEVICE_ID,
     MOCK_TLS_DEVICE_ID_2,
     MOCK_TLS_DEVICE_INFO,
@@ -37,6 +37,7 @@ from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
 if TYPE_CHECKING:
     import pytest
     from homeassistant.core import HomeAssistant
+    from homeconnect_websocket.testutils import MockAppliance
 
 UPLOADED_FILE = str(uuid4())
 
@@ -46,11 +47,9 @@ async def test_user_init(
     mock_process_profile_file: MagicMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_setup_entry: AsyncMock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test config flow init."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
 
     assert result["type"] is FlowResultType.FORM
@@ -93,11 +92,9 @@ async def test_user_tls(
     mock_setup_entry: AsyncMock,
     mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test config flow compleate for TLS Appliance."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
     monkeypatch.setattr(config_flow.random, "randbytes", randbytes)
@@ -122,16 +119,18 @@ async def test_user_tls(
         },
     )
 
-    assert appliance.description == mock_parse_device_description.return_value
-    assert appliance.host == "Test_Brand-Test_TLS-010203040506070809"
-    assert appliance.app_name == "Homeassistant"
-    assert appliance.app_id == "01020304"
-    assert appliance.psk64 == MOCK_TLS_DEVICE_INFO["key"]
-    assert appliance.iv64 is None
-    assert appliance.connection_callback == ANY
+    patch_create_appliance.assert_called_once_with(
+        description=mock_parse_device_description.return_value,
+        host="Test_Brand-Test_TLS-010203040506070809",
+        app_id="01020304",
+        psk64=MOCK_TLS_DEVICE_INFO["key"],
+        iv64=None,
+        connection_callback=ANY,
+    )
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     mock_parse_device_description.assert_called_once_with(
         b"TLS_DeviceDescription",
         b"TLS_FeatureMapping",
@@ -147,7 +146,7 @@ async def test_user_tls(
     assert CONF_AES_IV not in result["data"]
     assert result["data"][CONF_NAME] == "Test_Brand Test_TLS"
     assert result["data"][CONF_DEVICE_ID] == "01020304"
-    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_TLS_DEVICE_INFO
+    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_APPLIANCE_INFO
 
     mock_write_file.assert_any_call(
         ANY,
@@ -171,11 +170,9 @@ async def test_user_aes(
     mock_setup_entry: AsyncMock,
     mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test config flow compleate for AES Appliance."""
-    appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
     monkeypatch.setattr(config_flow.random, "randbytes", randbytes)
@@ -200,16 +197,18 @@ async def test_user_aes(
         },
     )
 
-    assert appliance.description == mock_parse_device_description.return_value
-    assert appliance.host == MOCK_AES_DEVICE_ID
-    assert appliance.app_name == "Homeassistant"
-    assert appliance.app_id == "01020304"
-    assert appliance.psk64 == MOCK_AES_DEVICE_INFO["key"]
-    assert appliance.iv64 == MOCK_AES_DEVICE_INFO["iv"]
-    assert appliance.connection_callback == ANY
+    patch_create_appliance.assert_called_once_with(
+        description=mock_parse_device_description.return_value,
+        host=MOCK_AES_DEVICE_ID,
+        app_id="01020304",
+        psk64=MOCK_AES_DEVICE_INFO["key"],
+        iv64=MOCK_AES_DEVICE_INFO["iv"],
+        connection_callback=ANY,
+    )
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     mock_parse_device_description.assert_called_once_with(
         b"AES_DeviceDescription",
         b"AES_FeatureMapping",
@@ -225,7 +224,7 @@ async def test_user_aes(
     assert result["data"][CONF_AES_IV] == MOCK_AES_DEVICE_INFO["iv"]
     assert result["data"][CONF_NAME] == "Test_Brand Test_AES"
     assert result["data"][CONF_DEVICE_ID] == "01020304"
-    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_AES_DEVICE_INFO
+    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_APPLIANCE_INFO
 
     mock_write_file.assert_any_call(
         ANY,
@@ -290,11 +289,9 @@ async def test_user_select_device_one(
     monkeypatch: pytest.MonkeyPatch,
     mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test select device when only one device left to setup."""
-    appliance = MockAppliance(MOCK_AES_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
     monkeypatch.setattr(config_flow.random, "randbytes", randbytes)
@@ -334,7 +331,7 @@ async def test_user_select_device_one(
     assert result["data"][CONF_AES_IV] == MOCK_AES_DEVICE_INFO["iv"]
     assert result["data"][CONF_NAME] == "Test_Brand Test_AES"
     assert result["data"][CONF_DEVICE_ID] == "01020304"
-    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_AES_DEVICE_INFO
+    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_APPLIANCE_INFO
 
     mock_write_file.assert_any_call(
         ANY,
@@ -402,11 +399,11 @@ async def test_user_set_host(
     monkeypatch: pytest.MonkeyPatch,
     mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test set host."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = ConnectionFailedError()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.side_effect = ConnectionFailedError()
 
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
@@ -431,13 +428,16 @@ async def test_user_set_host(
     assert result["step_id"] == "host"
     assert result["errors"]["base"] == "cannot_connect"
 
-    assert appliance.host == "Test_Brand-Test_TLS-010203040506070809"
+    assert (
+        patch_create_appliance.call_args.kwargs[CONF_HOST]
+        == "Test_Brand-Test_TLS-010203040506070809"
+    )
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
 
-    appliance._connect.reset_mock()
-    appliance._close.reset_mock()
+    appliance.session._connect.reset_mock()
+    appliance.session._close.reset_mock()
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -450,13 +450,13 @@ async def test_user_set_host(
     assert result["step_id"] == "host"
     assert result["errors"]["base"] == "cannot_connect"
 
-    assert appliance.host == "1.2.3.4"
+    assert patch_create_appliance.call_args.kwargs[CONF_HOST] == "1.2.3.4"
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
 
-    appliance._connect.reset_mock(side_effect=True)
-    appliance._close.reset_mock()
+    appliance.session._connect.reset_mock(side_effect=True)
+    appliance.session._close.reset_mock()
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"],
@@ -469,10 +469,10 @@ async def test_user_set_host(
     assert result["data"][CONF_HOST] == "5.6.7.8"
     assert result["data"][CONF_MANUAL_HOST] is True
 
-    assert appliance.host == "5.6.7.8"
+    assert patch_create_appliance.call_args.kwargs[CONF_HOST] == "5.6.7.8"
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
 
     mock_write_file.assert_any_call(
         ANY,
@@ -495,12 +495,11 @@ async def test_user_auth_failed_ssl_error(
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test a config flow with ClientConnectorSSLError."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
-    appliance._connect.side_effect = AuthenticationError()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.side_effect = AuthenticationError()
 
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
     result = await hass.config_entries.flow.async_configure(
@@ -521,7 +520,7 @@ async def test_user_auth_failed_ssl_error(
     assert result["step_id"] == "host"
     assert result["errors"]["base"] == "cannot_connect"
 
-    appliance._close.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     hass.config_entries.flow.async_abort(result["flow_id"])
     mock_setup_entry.assert_not_awaited()
 
@@ -532,11 +531,11 @@ async def test_user_connection_failed_timeout(
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test a config flow with TimeoutError."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = TimeoutError()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.side_effect = TimeoutError()
 
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
     result = await hass.config_entries.flow.async_configure(
@@ -557,7 +556,7 @@ async def test_user_connection_failed_timeout(
     assert result["step_id"] == "host"
     assert result["errors"]["base"] == "cannot_connect"
 
-    appliance._close.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     hass.config_entries.flow.async_abort(result["flow_id"])
     mock_setup_entry.assert_not_awaited()
 
@@ -568,11 +567,11 @@ async def test_user_connection_failed_connection_error(
     mock_setup_entry: AsyncMock,
     monkeypatch: pytest.MonkeyPatch,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test a config flow with ClientConnectionError."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-    appliance._connect.side_effect = ConnectionFailedError()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.side_effect = ConnectionFailedError()
 
     result = await hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_USER})
     result = await hass.config_entries.flow.async_configure(
@@ -593,7 +592,7 @@ async def test_user_connection_failed_connection_error(
     assert result["step_id"] == "host"
     assert result["errors"]["base"] == "cannot_connect"
 
-    appliance._close.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     hass.config_entries.flow.async_abort(result["flow_id"])
     mock_setup_entry.assert_not_awaited()
 

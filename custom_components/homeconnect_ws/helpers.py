@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 from homeassistant.exceptions import HomeAssistantError
+from homeconnect_websocket import HomeAppliance
 from homeconnect_websocket.errors import (
     AccessError,
     CodeResponsError,
@@ -18,11 +19,11 @@ from .const import DOMAIN
 
 if TYPE_CHECKING:
     import re
-    from collections.abc import Callable, Coroutine
+    from collections.abc import Awaitable, Callable, Coroutine
 
-    from homeconnect_websocket import HomeAppliance
-    from homeconnect_websocket.entities import Access
+    from homeconnect_websocket.entities import Access, DeviceDescription
     from homeconnect_websocket.entities import Entity as HcEntity
+    from homeconnect_websocket.session import ConnectionState
 
     from . import HCData
     from .entity import HCEntity
@@ -137,3 +138,23 @@ def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Corou
             ) from exc
 
     return wrap
+
+
+def create_appliance(  # noqa: PLR0913, PLR0917
+    description: DeviceDescription,
+    host: str,
+    app_id: str,
+    psk64: str,
+    iv64: str | None = None,
+    connection_callback: Callable[[ConnectionState], Awaitable[None]] | None = None,
+) -> HomeAppliance:
+    """Create a new HomeAppliance."""
+    return HomeAppliance(
+        description=description,
+        host=host,
+        app_name="Homeassistant",
+        app_id=app_id,
+        psk64=psk64,
+        iv64=iv64,
+        connection_callback=connection_callback,
+    )

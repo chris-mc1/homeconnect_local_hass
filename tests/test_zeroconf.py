@@ -22,17 +22,17 @@ from homeassistant.config_entries import SOURCE_ZEROCONF
 from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST, CONF_NAME
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant.common import MockConfigEntry
 
-from . import MockAppliance
+from .const import MOCK_APPLIANCE_INFO, MOCK_TLS_DEVICE_ID, MOCK_TLS_DEVICE_INFO
 from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
-from .const import MOCK_TLS_DEVICE_ID, MOCK_TLS_DEVICE_INFO
 
 if TYPE_CHECKING:
     from unittest.mock import AsyncMock, MagicMock
 
     import pytest
     from homeassistant.core import HomeAssistant
+    from homeconnect_websocket.testutils import MockAppliance
 
 MOCK_ZEROCONF_DATA = ZeroconfServiceInfo(
     ip_address=ip_address("127.0.0.2"),
@@ -64,11 +64,9 @@ async def test_zeroconf_init(
     mock_setup_entry: AsyncMock,
     mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test setup from zeroconf discovery."""
-    appliance = MockAppliance(MOCK_TLS_DEVICE_INFO)
-    monkeypatch.setattr(config_flow, "HomeAppliance", appliance)
-
     randbytes = Mock()
     randbytes.return_value = bytes.fromhex("01020304")
     monkeypatch.setattr(config_flow.random, "randbytes", randbytes)
@@ -86,16 +84,18 @@ async def test_zeroconf_init(
             CONF_FILE: UPLOADED_FILE,
         },
     )
-    assert appliance.description == mock_parse_device_description.return_value
-    assert appliance.host == "127.0.0.2"
-    assert appliance.app_name == "Homeassistant"
-    assert appliance.app_id == "01020304"
-    assert appliance.psk64 == MOCK_TLS_DEVICE_INFO["key"]
-    assert appliance.iv64 is None
-    assert appliance.connection_callback == ANY
+    patch_create_appliance.assert_called_once_with(
+        description=mock_parse_device_description.return_value,
+        host="127.0.0.2",
+        app_id="01020304",
+        psk64=MOCK_TLS_DEVICE_INFO["key"],
+        iv64=None,
+        connection_callback=ANY,
+    )
 
-    appliance._connect.assert_awaited_once()
-    appliance._close.assert_awaited_once()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
     mock_parse_device_description.assert_called_once_with(
         b"TLS_DeviceDescription",
         b"TLS_FeatureMapping",
@@ -111,7 +111,7 @@ async def test_zeroconf_init(
     assert CONF_AES_IV not in result["data"]
     assert result["data"][CONF_NAME] == "Test_Brand Test_TLS"
     assert result["data"][CONF_DEVICE_ID] == "01020304"
-    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_TLS_DEVICE_INFO
+    assert result["data"][CONF_APPLIANCE_INFO] == MOCK_APPLIANCE_INFO
 
     mock_write_file.assert_any_call(
         ANY,

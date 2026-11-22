@@ -26,6 +26,7 @@ from .const import (
     MAX_RECONECT_TIME,
     MAX_RECONNECT_DELAY,
 )
+from .helpers import create_appliance
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -57,15 +58,15 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             always_update=True,
         )
 
-        self.appliance = HomeAppliance(
+        self.appliance = create_appliance(
             description=description,
             host=config_entry.data[CONF_HOST],
-            app_name="Homeassistant",
             app_id=config_entry.data[CONF_DEVICE_ID],
             psk64=config_entry.data[CONF_PSK],
             iv64=config_entry.data.get(CONF_AES_IV, None),
             connection_callback=self._connection_state_callback,
         )
+
         self.disconnect_time = time.time()
         if not self.appliance.info:
             msg = "Appliance has no device info"

@@ -34,7 +34,6 @@ from homeconnect_websocket import (
     AuthenticationError,
     ConnectionFailedError,
     ConnectionState,
-    HomeAppliance,
     ParserError,
     parse_device_description,
 )
@@ -50,6 +49,7 @@ from .const import (
     CONF_PSK,
     DOMAIN,
 )
+from .helpers import create_appliance
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigFlowResult
@@ -262,10 +262,9 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
             if state == ConnectionState.CONNECTED:
                 event.set()
 
-        appliance = HomeAppliance(
+        appliance = create_appliance(
             description=device_description,
             host=self.data[CONF_HOST],
-            app_name="Homeassistant",
             app_id=self.data[CONF_DEVICE_ID],
             psk64=self.data[CONF_PSK],
             iv64=self.data.get(CONF_AES_IV, None),

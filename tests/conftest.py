@@ -10,13 +10,16 @@ from zipfile import ZipFile
 
 import pytest
 from custom_components import homeconnect_ws
-from custom_components.homeconnect_ws import coordinator, entity_descriptions
+from custom_components.homeconnect_ws import config_flow, coordinator, entity_descriptions
 from custom_components.homeconnect_ws.config_flow import ProfileFileEntry
-from homeconnect_websocket.testutils import MockAppliance
+from homeconnect_websocket.testutils import TEST_PSK64, MockAppliance
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
+    from collections.abc import AsyncGenerator, Awaitable, Callable, Generator
     from pathlib import Path
+
+    from homeconnect_websocket.entities import DeviceDescription
+    from homeconnect_websocket.session import ConnectionState
 
 from .const import (
     DEVICE_DESCRIPTION,
@@ -110,22 +113,42 @@ def mock_process_profile_file() -> Generator[MagicMock]:
 
 
 @pytest.fixture
-def mock_appliance(
-    request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch
-) -> MockAppliance:
-    """Mock HomeAppliance."""
-    if "mock_appliance" in request.keywords:
-        psk64 = request.keywords["mock_appliance"].kwargs.get("psk")
-        iv64 = request.keywords["mock_appliance"].kwargs.get("iv")
-    else:
-        psk64 = None
-        iv64 = None
-    appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", psk64, iv64)
-    appliance.session.connected = True
-    monkeypatch.setattr(coordinator, "HomeAppliance", Mock(return_value=appliance))
-    monkeypatch.setattr(coordinator.HomeConnectCoordinator, "connected", True)
+async def patch_create_appliance(monkeypatch: pytest.MonkeyPatch) -> AsyncGenerator[Mock]:
+    """Patch helpers.create_appliance."""
+    appliance = MockAppliance(
+        DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", TEST_PSK64, None
+    )
+    appliance_mock = Mock(return_value=appliance)
 
-    return appliance
+    def create_appliance(
+        description: DeviceDescription,
+        host: str,
+        app_id: str,
+        psk64: str,
+        iv64: str | None = None,
+        connection_callback: Callable[[ConnectionState], Awaitable[None]] | None = None,
+    ) -> MockAppliance:
+        appliance._ext_connection_state_callback = connection_callback
+        return appliance_mock(
+            description=description,
+            host=host,
+            app_id=app_id,
+            psk64=psk64,
+            iv64=iv64,
+            connection_callback=connection_callback,
+        )
+
+    monkeypatch.setattr(config_flow, "create_appliance", create_appliance)
+    monkeypatch.setattr(coordinator, "create_appliance", create_appliance)
+
+    yield appliance_mock
+    await appliance.close()
+
+
+@pytest.fixture
+def mock_appliance(patch_create_appliance: Mock) -> MockAppliance:
+    """Mock HomeAppliance."""
+    return patch_create_appliance.return_value
 
 
 @pytest.fixture
@@ -143,6 +166,6 @@ def mock_parse_device_description() -> Generator[MagicMock]:
     """Mock parse_device_description."""
     with patch(
         "custom_components.homeconnect_ws.config_flow.parse_device_description",
-        return_value=Mock(),
+        return_value=DEVICE_DESCRIPTION,
     ) as mock_parse_device_description:
         yield mock_parse_device_description

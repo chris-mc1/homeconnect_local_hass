@@ -9,12 +9,12 @@ from unittest.mock import ANY, Mock
 import pytest
 from custom_components import homeconnect_ws
 from homeassistant.config_entries import ConfigEntryState
-from homeconnect_websocket.testutils import MockAppliance
 
 from .const import CONFIG_ENTRIES, DEVICE_DESCRIPTION
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
+    from homeconnect_websocket.testutils import MockAppliance
     from pytest_homeassistant.common import MockConfigEntry
 
 
@@ -23,12 +23,9 @@ async def test_load_unload_entry(
     config_entry: MockConfigEntry,
     hass: HomeAssistant,
     monkeypatch: pytest.MonkeyPatch,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test setup and unload config entry."""
-    appliance = MockAppliance(DEVICE_DESCRIPTION, "host", "mock_app", "mock_app_id", "PSK_KEY")
-    appliance_mock = Mock(return_value=appliance)
-    monkeypatch.setattr(homeconnect_ws.coordinator, "HomeAppliance", appliance_mock)
-
     load_description_mock = Mock(return_value=DEVICE_DESCRIPTION)
     monkeypatch.setattr(homeconnect_ws, "load_description", load_description_mock)
 
@@ -38,10 +35,9 @@ async def test_load_unload_entry(
 
     assert config_entry.state is ConfigEntryState.LOADED
 
-    appliance_mock.assert_called_once_with(
+    patch_create_appliance.assert_called_once_with(
         description=DEVICE_DESCRIPTION,
         host="1.2.3.4",
-        app_name="Homeassistant",
         app_id="Test_Device_ID",
         psk64="PSK_KEY",
         iv64="AES_IV",
@@ -53,7 +49,8 @@ async def test_load_unload_entry(
 
     assert config_entry.state is ConfigEntryState.NOT_LOADED
 
-    appliance.session.close.assert_awaited_once()
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._close.assert_awaited_once()
 
 
 @pytest.mark.parametrize(("config_entry"), CONFIG_ENTRIES)
