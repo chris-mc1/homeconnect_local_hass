@@ -8,14 +8,19 @@ from unittest.mock import ANY, Mock
 
 import pytest
 from custom_components import homeconnect_ws
-from homeassistant.config_entries import ConfigEntryState
+from custom_components.homeconnect_ws.const import DOMAIN
+from homeassistant.config_entries import SOURCE_REAUTH, ConfigEntryState
+from homeconnect_websocket.errors import AuthenticationError
+from homeconnect_websocket.session import ConnectionState
+from pytest_homeassistant.common import MockConfigEntry
 
-from .const import CONFIG_ENTRIES, DEVICE_DESCRIPTION
+from . import setup_config_entry
+from .const import CONFIG_ENTRIES, DEVICE_DESCRIPTION, MOCK_TLS_DEVICE_ID
+from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeconnect_websocket.testutils import MockAppliance
-    from pytest_homeassistant.common import MockConfigEntry
 
 
 @pytest.mark.parametrize(("config_entry"), CONFIG_ENTRIES)
@@ -74,3 +79,45 @@ async def test_remove_entry(
     if config_entry.version == 1:
         unlink_mock.assert_not_called()
         rmdir_mock.assert_not_called()
+
+
+async def test_reauth_callback(
+    hass: HomeAssistant,
+    monkeypatch: pytest.MonkeyPatch,
+    patch_create_appliance: Mock,
+) -> None:
+    """Test start of reauth flow from connection state callback."""
+    load_description_mock = Mock(return_value=DEVICE_DESCRIPTION)
+    monkeypatch.setattr(homeconnect_ws, "load_description", load_description_mock)
+    appliance: MockAppliance = patch_create_appliance.return_value
+    config_entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=MOCK_CONFIG_DATA,
+        unique_id=MOCK_TLS_DEVICE_ID,
+    )
+    await setup_config_entry(hass, config_entry)
+
+    await appliance.session.set_connection_state(ConnectionState.AUTHENTICATION_ERROR)
+    await hass.async_block_till_done()
+    assert any(config_entry.async_get_active_flows(hass, {SOURCE_REAUTH}))
+
+
+async def test_reauth_setup(
+    hass: HomeAssistant,
+    monkeypatch: pytest.MonkeyPatch,
+    patch_create_appliance: Mock,
+) -> None:
+    """Test start of reauth flow from setup."""
+    load_description_mock = Mock(return_value=DEVICE_DESCRIPTION)
+    monkeypatch.setattr(homeconnect_ws, "load_description", load_description_mock)
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.side_effect = AuthenticationError()
+
+    config_entry = MockConfigEntry(
+        domain=DOMAIN,
+        data=MOCK_CONFIG_DATA,
+        unique_id=MOCK_TLS_DEVICE_ID,
+    )
+    await setup_config_entry(hass, config_entry)
+
+    assert any(config_entry.async_get_active_flows(hass, {SOURCE_REAUTH}))
