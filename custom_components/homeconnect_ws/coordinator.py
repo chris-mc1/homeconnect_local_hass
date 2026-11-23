@@ -12,6 +12,7 @@ from homeassistant.exceptions import ConfigEntryError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeconnect_websocket import (
     AllreadyConnectedError,
+    AuthenticationError,
     ConnectionFailedError,
     ConnectionState,
     DeviceDescription,
@@ -37,7 +38,7 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 
-class HomeConnectCoordinator(DataUpdateCoordinator):
+class HomeConnectCoordinator[bool](DataUpdateCoordinator):
     """My custom coordinator."""
 
     config_entry: HCConfigEntry
@@ -57,6 +58,7 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             name=description["info"]["model"],
             config_entry=config_entry,
             always_update=True,
+            update_interval=None,
         )
 
         self.appliance = create_appliance(
@@ -102,6 +104,10 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                     self.logger.debug(msg)
                 await asyncio.sleep(backoff)
                 backoff = min(backoff * 2, MAX_RECONNECT_DELAY)
+            except AuthenticationError:
+                msg = f"Authentication with {self.config_entry.data[CONF_HOST]} failed"
+                self.logger.debug(msg)
+                return
             except AllreadyConnectedError:
                 await self.appliance.close()
                 msg = f"Allready connected to {self.config_entry.data[CONF_HOST]}"
@@ -110,7 +116,11 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
             except Exception:
                 await self.appliance.close()
                 msg = f"Can't connect to {self.config_entry.data[CONF_HOST]}"
-                self.logger.exception(msg)
+                if first_failure:
+                    self.logger.exception(msg)
+                    first_failure = False
+                else:
+                    self.logger.debug(msg, exc_info=True)
                 await asyncio.sleep(backoff)
                 backoff = min(backoff * 2, MAX_RECONNECT_DELAY)
 
@@ -130,12 +140,20 @@ class HomeConnectCoordinator(DataUpdateCoordinator):
                 self.logger.debug("Reconnected to %s", self.appliance.info.get("vib"))
                 self._reconnecting = False
 
-        elif event == ConnectionState.CLOSED:
+        elif event == ConnectionState.AUTHENTICATION_ERROR:
+            self.connected = False
+            self._connecting = False
+            self.config_entry.async_start_reauth(self.hass)
+
+        elif event in (
+            ConnectionState.CLOSED,
+            ConnectionState.ABNORMAL_CLOSURE,
+        ):
             self.connected = False
 
-        self.async_set_updated_data(None)
+        self.async_set_updated_data(self.connected)
 
     def _connection_reconnect_callback(self) -> None:
         if not self.appliance.session.connected:
             self.connected = False
-            self.async_set_updated_data(None)
+            self.async_set_updated_data(self.connected)
