@@ -515,8 +515,8 @@ MOCK_CONFIG_DATA_2 = {
     CONF_AES_IV: "AES_IV",
     CONF_DEVICE_ID: "Test_Device_ID",
     CONF_NAME: "Fake_Brand HomeAppliance",
-    CONF_DESCRIPTION_FILENAME: "Test_Device_ID/FeatureMapping.xml",
-    CONF_FEATURE_FILENAME: "Test_Device_ID/DeviceDescription.xml",
+    CONF_DESCRIPTION_FILENAME: "Test_Device_ID/DeviceDescription.xml",
+    CONF_FEATURE_FILENAME: "Test_Device_ID/FeatureMapping.xml",
     CONF_APPLIANCE_INFO: DEVICE_DESCRIPTION["info"],
 }
 
