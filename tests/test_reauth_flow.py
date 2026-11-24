@@ -3,51 +3,73 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from unittest.mock import ANY
 from uuid import uuid4
 
+import pytest
 from custom_components.homeconnect_ws.const import (
     CONF_AES_IV,
+    CONF_APPLIANCE_INFO,
+    CONF_DESCRIPTION_FILENAME,
+    CONF_FEATURE_FILENAME,
     CONF_FILE,
     CONF_PSK,
     DOMAIN,
 )
+from homeassistant.const import CONF_DESCRIPTION, CONF_DEVICE_ID, CONF_HOST, CONF_NAME
 from homeassistant.data_entry_flow import FlowResultType
 from homeconnect_websocket import AuthenticationError, ConnectionFailedError, ParserError
 from pytest_homeassistant.common import MockConfigEntry
 
-from .const import MOCK_AES_DEVICE_ID
-from .const import MOCK_CONFIG_DATA_1 as MOCK_CONFIG_DATA
+from .const import (
+    DEVICE_DESCRIPTION,
+    MOCK_AES_DEVICE_ID,
+    MOCK_CONFIG_DATA_1,
+    MOCK_CONFIG_DATA_2,
+)
 
 if TYPE_CHECKING:
     from unittest.mock import AsyncMock, MagicMock, Mock
 
-    import pytest
     from homeassistant.core import HomeAssistant
     from homeconnect_websocket.testutils import MockAppliance
 
 UPLOADED_FILE = str(uuid4())
 
 
+@pytest.mark.parametrize(
+    ("config_entry"),
+    [
+        MockConfigEntry(
+            domain=DOMAIN,
+            data=MOCK_CONFIG_DATA_1,
+            unique_id=MOCK_AES_DEVICE_ID,
+            version=1,
+        ),
+        MockConfigEntry(
+            domain=DOMAIN,
+            data=MOCK_CONFIG_DATA_2,
+            unique_id=MOCK_AES_DEVICE_ID,
+            version=2,
+        ),
+    ],
+)
 async def test_reauth(
+    config_entry: MockConfigEntry,
     hass: HomeAssistant,
     mock_process_profile_file: MagicMock,
-    monkeypatch: pytest.MonkeyPatch,
     mock_setup_entry: AsyncMock,
+    mock_write_file: MagicMock,
     mock_parse_device_description: Mock,
-    mock_appliance: MockAppliance,
+    patch_create_appliance: Mock,
 ) -> None:
     """Test a reauthentication flow."""
     mock_process_profile_file.return_value[MOCK_AES_DEVICE_ID]["info"]["key"] = "New_AES_PSK_KEY"
     mock_process_profile_file.return_value[MOCK_AES_DEVICE_ID]["info"]["iv"] = "New_AES_IV"
 
-    mock_config = MockConfigEntry(
-        domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
-        unique_id=MOCK_AES_DEVICE_ID,
-    )
-    mock_config.add_to_hass(hass)
+    config_entry.add_to_hass(hass)
 
-    result = await mock_config.start_reauth_flow(hass)
+    result = await config_entry.start_reauth_flow(hass)
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "upload"
 
@@ -57,15 +79,38 @@ async def test_reauth(
             CONF_FILE: UPLOADED_FILE,
         },
     )
-    await hass.async_block_till_done()
+
+    patch_create_appliance.assert_called_once_with(
+        description=DEVICE_DESCRIPTION,
+        host="1.2.3.4",
+        app_id="Test_Device_ID",
+        psk64="New_AES_PSK_KEY",
+        iv64="New_AES_IV",
+        connection_callback=ANY,
+    )
+
+    appliance: MockAppliance = patch_create_appliance.return_value
+    appliance.session._connect.assert_awaited_once()
+    appliance.session._close.assert_awaited_once()
+
+    mock_process_profile_file.assert_called_once_with(ANY, UPLOADED_FILE)
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reauth_successful"
-    assert mock_config.data[CONF_PSK] == "New_AES_PSK_KEY"
-    assert mock_config.data[CONF_AES_IV] == "New_AES_IV"
+    assert config_entry.data[CONF_PSK] == "New_AES_PSK_KEY"
+    assert config_entry.data[CONF_AES_IV] == "New_AES_IV"
+    assert config_entry.data[CONF_HOST] == "1.2.3.4"
+    assert config_entry.data[CONF_DEVICE_ID] == "Test_Device_ID"
+    assert config_entry.data[CONF_NAME] == "Fake_Brand HomeAppliance"
+    if config_entry.version == 1:
+        assert config_entry.data[CONF_DESCRIPTION] == DEVICE_DESCRIPTION
+    else:
+        assert (
+            config_entry.data[CONF_DESCRIPTION_FILENAME] == "Test_Device_ID/DeviceDescription.xml"
+        )
+        assert config_entry.data[CONF_FEATURE_FILENAME] == "Test_Device_ID/FeatureMapping.xml"
+        assert config_entry.data[CONF_APPLIANCE_INFO] == DEVICE_DESCRIPTION["info"]
 
-    mock_appliance.session._connect.assert_awaited_once()
-    mock_appliance.session._close.assert_awaited_once()
     mock_setup_entry.assert_awaited_once()
 
 
@@ -79,7 +124,7 @@ async def test_reauth_appliance_not_in_profile(
     """Test a reauthentication flow when appliance not in profile."""
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id="other_id",
     )
     mock_config.add_to_hass(hass)
@@ -106,7 +151,7 @@ async def test_reauth_auth_failed_ssl_error(
     """Test a reauthentication flow with ClientConnectorSSLError."""
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
@@ -138,7 +183,7 @@ async def test_reauth_connection_failed_timeout(
     """Test a reauthentication flow with TimeoutError."""
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
@@ -173,7 +218,7 @@ async def test_reauth_connection_failed_connection_error(
     """Test a reauthentication flow with ClientConnectionError."""
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
@@ -205,7 +250,7 @@ async def test_reauth_invalid_config_parser(
     """Test a reauthentication flow with error in config parser."""
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
@@ -235,7 +280,7 @@ async def test_reauth_invalid_profile_no_info(
 
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
@@ -263,7 +308,7 @@ async def test_reauth_invalid_profile_info(
 
     mock_config = MockConfigEntry(
         domain=DOMAIN,
-        data=MOCK_CONFIG_DATA,
+        data=MOCK_CONFIG_DATA_1,
         unique_id=MOCK_AES_DEVICE_ID,
     )
     mock_config.add_to_hass(hass)
