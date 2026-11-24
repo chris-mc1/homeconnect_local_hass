@@ -342,6 +342,7 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         _LOGGER.debug("Reauth flow initialized")
         self.reauth_entry = self.hass.config_entries.async_get_entry(self.context["entry_id"])
         self.data[CONF_HOST] = self.reauth_entry.data[CONF_HOST]
+        self.data[CONF_DEVICE_ID] = self.reauth_entry.data[CONF_DEVICE_ID]
         return await self.async_step_upload()
 
     async def async_step_set_data(
@@ -355,12 +356,14 @@ class HomeConnectConfigFlow(ConfigFlow, domain=DOMAIN):
         try:
             appliance_info = appliance["info"]
 
-            self.data[CONF_DEVICE_ID] = random.randbytes(4).hex()  # noqa: S311
-            self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
-            self.data[CONF_DESCRIPTION_FILENAME] = (
-                self.data[CONF_DEVICE_ID] + "/DeviceDescription.xml"
-            )
-            self.data[CONF_FEATURE_FILENAME] = self.data[CONF_DEVICE_ID] + "/FeatureMapping.xml"
+            if not self.reauth_entry:
+                self.data[CONF_DEVICE_ID] = random.randbytes(4).hex()  # noqa: S311
+                self.data[CONF_NAME] = f"{appliance_info['brand']} {appliance_info['type']}"
+                self.data[CONF_DESCRIPTION_FILENAME] = (
+                    self.data[CONF_DEVICE_ID] + "/DeviceDescription.xml"
+                )
+                self.data[CONF_FEATURE_FILENAME] = self.data[CONF_DEVICE_ID] + "/FeatureMapping.xml"
+
             self._set_encryption_keys(appliance_info)
         except (KeyError, ValueError):
             return self.async_abort(reason="invalid_profile_file")
