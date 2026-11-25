@@ -158,6 +158,11 @@ class HCLight(HCEntity, LightEntity):
         )
         brightness = kwargs.get(ATTR_BRIGHTNESS, self.brightness)
         rgb = kwargs.get(ATTR_RGB_COLOR, self.rgb_color)
+        # Before the light has been on, the appliance reports no colour (and so no brightness)
+        if brightness is None:
+            brightness = 255
+        if rgb is None:
+            rgb = (255, 255, 255)
 
         if self._attr_color_mode == ColorMode.RGB:
             rgb_with_brightness = tuple(color * brightness // 255 for color in rgb)

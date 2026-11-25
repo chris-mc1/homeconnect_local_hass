@@ -797,3 +797,25 @@ async def test_turn_on_when_brightness_has_no_value(
         )
     )
     mock_appliance.session.send_sync.reset_mock()
+
+
+async def test_turn_on_color_without_reported_color(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    patch_entity_description: None,
+) -> None:
+    """Test turning on an RGB light before the appliance has reported a colour."""
+    assert await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await mock_appliance.entities["Test.Lighting"].update({"value": False})
+    await mock_appliance.entities["Test.LightingColor"].update({"value": 1})
+    mock_appliance.entities["Test.LightingCustomColor"]._value = None
+    await hass.async_block_till_done()
+
+    await hass.services.async_call(
+        LIGHT_DOMAIN,
+        SERVICE_TURN_ON,
+        {ATTR_ENTITY_ID: "light.fake_brand_homeappliance_light_4"},
+        blocking=True,
+    )
+    sent = mock_appliance.session.send_sync.await_args.args[0]
+    assert {"uid": 111, "value": "#ffffff"} in sent.data
