@@ -5,11 +5,14 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
+import pytest
 from custom_components.homeconnect_ws.helpers import (
     EntityMatch,
+    error_decorator,
     get_entities_from_regex,
     get_groups_from_regex,
 )
+from homeassistant.exceptions import HomeAssistantError
 
 from .const import DEVICE_DESCRIPTION
 
@@ -36,3 +39,14 @@ async def test_get_groups_from_regex(mock_homeconnect_appliance: MockApplianceTy
     pattern = re.compile(r"^Test\.RegEx\.(.*)\..*$")
     result = get_groups_from_regex(appliance, pattern)
     assert result == {("001",), ("002",)}
+
+
+async def test_error_decorator_turns_a_timeout_into_a_home_assistant_error() -> None:
+    """A command that times out raises HomeAssistantError, so automations can continue."""
+
+    @error_decorator
+    async def command() -> None:
+        raise TimeoutError
+
+    with pytest.raises(HomeAssistantError):
+        await command()

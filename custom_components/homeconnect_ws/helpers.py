@@ -130,5 +130,11 @@ def error_decorator[T](func: Callable[..., Coroutine[T]]) -> Callable[..., Corou
                 translation_domain=DOMAIN,
                 translation_key="not_connected",
             ) from None
+        except TimeoutError:
+            # The appliance didn't answer, typically while the connection is being re-established
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="timeout",
+            ) from None
 
     return wrap
