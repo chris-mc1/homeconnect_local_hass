@@ -1,0 +1,2096 @@
+{
+  "config": {
+    "step": {
+      "upload": {
+        "title": "Dodaj nowe urządzenia Home Connect",
+        "description": "Prześlij plik profilu",
+        "data": {
+          "file": "Plik profilu"
+        }
+      },
+      "device_select": {
+        "title": "Wybierz urządzenie",
+        "description": "Wybierz urządzenie, które chcesz skonfigurować"
+      },
+      "host": {
+        "title": "Wprowadź nazwę hosta",
+        "description": "Spróbuj ręcznie wprowadzić nazwę hosta lub adres IP urządzenia",
+        "data": {
+          "host": "Host / Adres IP"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Połączenie z urządzeniem nie powiodło się",
+      "already_configured": "To urządzenie jest już skonfigurowane"
+    },
+    "abort": {
+      "auth_failed": "Uwierzytelnianie nie powiodło się",
+      "reauth_successful": "Ponowne uwierzytelnianie powiodło się",
+      "invalid_profile_file": "Plik profilu jest nieprawidłowy",
+      "profile_file_parser_error": "Plik profilu jest nieprawidłowy: {error}",
+      "appliance_not_in_profile_file": "Plik profilu nie zawiera profilu dla tego urządzenia",
+      "all_setup": "Wszystkie urządzenia w tym pliku profilu są już skonfigurowane",
+      "failed_to_write_profile_file": "Nie udało się zapisać pliku profilu"
+    }
+  },
+  "entity": {
+    "switch": {
+      "switch_power_state": {
+        "name": "Zasilanie"
+      },
+      "switch_hygiene_plus": {
+        "name": "Hygiene Plus"
+      },
+      "switch_extra_dry_option": {
+        "name": "Extra Dry"
+      },
+      "switch_intensiv_zone": {
+        "name": "Strefa intensywna"
+      },
+      "switch_vario_speed_plus": {
+        "name": "VariospeedPlus"
+      },
+      "switch_silence_on_demand": {
+        "name": "Cisza na żądanie"
+      },
+      "switch_brilliance_dry": {
+        "name": "Brilliance Dry"
+      },
+      "switch_zeolite_dry": {
+        "name": "CrystalDry"
+      },
+      "switch_extra_dry": {
+        "name": "Extra Dry"
+      },
+      "switch_speed_on_demand": {
+        "name": "Prędkość na żądanie"
+      },
+      "switch_info_light": {
+        "name": "Info Light"
+      },
+      "switch_multiple_beverages": {
+        "name": "Wiele napojów"
+      },
+      "switch_cup_warmer": {
+        "name": "Podgrzewacz do filiżanek"
+      },
+      "switch_half_load": {
+        "name": "Połowa załadunku"
+      },
+      "switch_child_lock": {
+        "name": "Blokada rodzicielska"
+      },
+      "switch_door_light_ring": {
+        "name": "Oświetlenie pierścieniowe drzwi"
+      },
+      "switch_drum_light": {
+        "name": "Oświetlenie bębna"
+      },
+      "switch_laundry_end_signal": {
+        "name": "Sygnał końca"
+      },
+      "switch_laundry_sound_mute": {
+        "name": "Wyciszenie dźwięku"
+      },
+      "switch_laundry_time_light": {
+        "name": "Time light"
+      },
+      "switch_laundry_wrinkle_guard": {
+        "name": "Ochrona przed zagnieceniem"
+      },
+      "switch_laundry_silent_mode": {
+        "name": "Tryb cichy"
+      },
+      "switch_laundry_low_temperature_hygiene": {
+        "name": "Higiena w niskiej temperaturze"
+      },
+      "switch_laundry_vario_perfect": {
+        "name": "Vario perfect"
+      },
+      "switch_laundry_gentle": {
+        "name": "Delikatne"
+      },
+      "switch_laundry_hygiene": {
+        "name": "Higiena"
+      },
+      "switch_super_freezer": {
+        "name": "Tryb super zamrażania"
+      },
+      "switch_super_refrigerator": {
+        "name": "Tryb super chłodzenia"
+      },
+      "switch_refrigerator_eco": {
+        "name": "Tryb Eko"
+      },
+      "switch_refrigerator_vacation": {
+        "name": "Tryb wakacyjny"
+      },
+      "switch_laundry_idos1_active": {
+        "name": "Włącz i-DOS 1"
+      },
+      "switch_laundry_idos2_active": {
+        "name": "Włącz i-DOS 2"
+      },
+      "switch_laundry_intensive_plus": {
+        "name": "Intensive Plus"
+      },
+      "switch_laundry_less_ironing": {
+        "name": "Mniej zagnieceń"
+      },
+      "switch_laundry_silent_wash": {
+        "name": "Ciche pranie"
+      },
+      "switch_laundry_speed_perfect": {
+        "name": "Speed Perfect"
+      },
+      "switch_laundry_soak": {
+        "name": "Namaczanie"
+      },
+      "switch_laundry_prewash": {
+        "name": "Pranie wstępne"
+      },
+      "switch_laundry_rinse_hold": {
+        "name": "Zatrzymanie płukania"
+      },
+      "switch_laundry_rinse_plus1": {
+        "name": "Płukanie Plus 1"
+      },
+      "switch_laundry_rinse_plus3": {
+        "name": "Płukanie Plus 3"
+      },
+      "switch_laundry_water_and_rinse_plus1": {
+        "name": "Woda i Płukanie Plus 1"
+      },
+      "switch_laundry_water_plus": {
+        "name": "Woda Plus"
+      },
+      "switch_laundry_disinfectant": {
+        "name": "Dezynfekcja"
+      },
+      "switch_laundry_hygienic_steam": {
+        "name": "Higieniczna para"
+      },
+      "switch_oven_fast_pre_heat": {
+        "name": "Szybkie nagrzewanie wstępne"
+      },
+      "switch_oven_button_tones": {
+        "name": "Dźwięki przycisków"
+      },
+      "switch_oven_light_during_operation": {
+        "name": "Oświetlenie piekarnika podczas pracy"
+      },
+      "switch_oven_sabbath_mode": {
+        "name": "Tryb szabatowy"
+      },
+      "switch_refrigerator_sabbath_mode": {
+        "name": "Tryb szabatowy"
+      },
+      "switch_refrigerator_dispenser_enabled": {
+        "name": "Dozownik"
+      },
+      "switch_refrigerator_dispenser_party_mode": {
+        "name": "Tryb imprezowy dozownika"
+      },
+      "switch_refrigerator_door_assistant_freezer": {
+        "name": "Asystent drzwi zamrażarki"
+      },
+      "switch_refrigeration_light_internal": {
+        "name": "Oświetlenie wewnętrzne"
+      },
+      "switch_refrigeration_light_theater_mode": {
+        "name": "Oświetlenie wewnętrzne w trybie kinowym"
+      },
+      "switch_hood_boost": {
+        "name": "Boost"
+      },
+      "switch_hood_silence_mode": {
+        "name": "Tryb cichy"
+      },
+      "switch_refrigerator_fresh_mode": {
+        "name": "Tryb świeżości"
+      },
+      "switch_extra_rinse": {
+        "name": "Dodatkowe płukanie"
+      },
+      "switch_pretreatment": {
+        "name": "Przetwarzanie wstępne"
+      },
+      "switch_hob_energy_consumption_indication": {
+        "name": "Wskaźnik zużycia energii"
+      }
+    },
+    "binary_sensor": {
+      "connection": {
+        "name": "Połączenie"
+      },
+      "binary_sensor_door_state": {
+        "name": "Drzwi"
+      },
+      "binary_sensor_intensiv_zone_active": {
+        "name": "Strefa intensywna aktywna"
+      },
+      "binary_sensor_half_load_active": {
+        "name": "Połowa załadunku aktywna"
+      },
+      "binary_sensor_hygiene_plus_active": {
+        "name": "Hygiene Plus aktywny"
+      },
+      "binary_sensor_pretreatment_active": {
+        "name": "Przetwarzanie wstępne aktywne"
+      },
+      "binary_sensor_eco_dry_active": {
+        "name": "EcoDry aktywny"
+      },
+      "binary_sensor_aqua_stop": {
+        "name": "Wystąpił AquaStop"
+      },
+      "binary_sensor_low_water_pressure": {
+        "name": "Niskie ciśnienie wody"
+      },
+      "binary_sensor_bean_container_empty": {
+        "name": "Pojemnik na ziarna pusty"
+      },
+      "binary_remote_start_allowed": {
+        "name": "Zdalny start dozwolony"
+      },
+      "binary_sensor_refresher_level": {
+        "name": "Poziom napełnienia odświeżacza",
+        "state": {
+          "on": "Słaby",
+          "off": "Napełniony"
+        }
+      },
+      "binary_sensor_condensate_container_full": {
+        "name": "Pojemnik na skropliny",
+        "state": {
+          "on": "Pełny",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecareandfiltercleaningreminder": {
+        "name": "MachineCare i filtr"
+      },
+      "binary_sensor_lint_filter_full": {
+        "name": "Filtr kłaczków",
+        "state": {
+          "on": "Pełny",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_low_voltage": {
+        "name": "Niskie napięcie"
+      },
+      "binary_sensor_maintenance_reminder": {
+        "name": "Zalecany cykl czyszczenia"
+      },
+      "binary_sensor_machinecarereminder": {
+        "name": "Czyszczenie urządzenia",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_machinecareandfilterreminder": {
+        "name": "Czyszczenie urządzenia i filtra",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_waterheatercalcified": {
+        "name": "Zakamieniony podgrzewacz wody",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_smartfiltercleaningreminder": {
+        "name": "Inteligentne czyszczenie filtra",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_checkfiltersystem": {
+        "name": "Sprawdź system filtrów",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainingnotpossible": {
+        "name": "Odpompowywanie niemożliwe",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_drainpumpblocked": {
+        "name": "Pompa odpływowa zablokowana",
+        "state": {
+          "on": "Wymagana konserwacja",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_blocked": {
+        "name": "FlexSpray zablokowany",
+        "state": {
+          "on": "Wystąpił problem",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_general": {
+        "name": "Błąd FlexSpray",
+        "state": {
+          "on": "Wystąpił problem",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_flexspray_error_spray_arm_not_mounted": {
+        "name": "Ramię natryskowe niezamontowane",
+        "state": {
+          "on": "Wystąpił problem",
+          "off": "OK"
+        }
+      },
+      "binary_sensor_program_finished": {
+        "name": "Program zakończony"
+      },
+      "binary_sensor_program_aborted": {
+        "name": "Program przerwany"
+      },
+      "binary_sensor_foam_detection": {
+        "name": "Wykrycie piany"
+      },
+      "binary_sensor_supply_voltage_too_low": {
+        "name": "Napięcie zasilania za niskie"
+      },
+      "binary_sensor_water_level_too_high": {
+        "name": "Poziom wody za wysoki"
+      },
+      "binary_sensor_door_not_lockable": {
+        "name": "Drzwi nie dają się zaryglować"
+      },
+      "binary_sensor_door_not_unlockable": {
+        "name": "Drzwi nie dają się odryglować"
+      },
+      "binary_sensor_fatal_error_occurred": {
+        "name": "Błąd krytyczny"
+      },
+      "binary_sensor_drum_clean_reminder": {
+        "name": "Przypomnienie o czyszczeniu bębna"
+      },
+      "binary_sensor_idos2_fill_level_poor": {
+        "name": "Niski poziom i-DOS 2"
+      },
+      "binary_sensor_idos1_fill_level_poor": {
+        "name": "Niski poziom i-DOS 1"
+      },
+      "binary_sensor_chiller_common_door_state": {
+        "name": "Drzwi strefy schładzania"
+      },
+      "binary_sensor_freezer_door_state": {
+        "name": "Drzwi zamrażarki"
+      },
+      "binary_sensor_idos_unit_defect": {
+        "name": "Usterka i-DOS"
+      },
+      "binary_sensor_idos_open_tray": {
+        "name": "Otwarta szuflada i-DOS"
+      },
+      "binary_sensor_release_rinse_hold_pending": {
+        "name": "Oczekiwanie na zwolnienie zatrzymania płukania"
+      },
+      "binary_sensor_pump_error": {
+        "name": "Błąd pompy"
+      },
+      "binary_sensor_spin_abort": {
+        "name": "Wirowanie przerwane"
+      },
+      "binary_sensor_fridge_door_state": {
+        "name": "Drzwi lodówki"
+      },
+      "binary_sensor_door_alarm_chiller_common": {
+        "name": "Alarm drzwi strefy schładzania"
+      },
+      "binary_sensor_door_alarm_freezer": {
+        "name": "Alarm drzwi zamrażarki"
+      },
+      "binary_sensor_door_alarm_fridge": {
+        "name": "Alarm drzwi lodówki"
+      },
+      "binary_sensor_temperature_alarm_freezer": {
+        "name": "Alarm temperatury zamrażarki"
+      },
+      "binary_sensor_interior_illumination": {
+        "name": "Oświetlenie wnętrza"
+      },
+      "binary_sensor_refrigerator_defrost": {
+        "name": "Rozmrażanie"
+      },
+      "binary_sensor_water_filter_full": {
+        "name": "Filtr wody pełny"
+      },
+      "binary_sensor_water_filter_almost_full": {
+        "name": "Filtr wody prawie pełny"
+      },
+      "binary_sensor_ice_hopper_full": {
+        "name": "Pojemnik na lód pełny"
+      },
+      "binary_sensor_ice_expired": {
+        "name": "Lód przeterminowany"
+      },
+      "binary_sensor_water_expired": {
+        "name": "Woda przeterminowana"
+      },
+      "binary_sensor_party_mode_empty_ice_hopper": {
+        "name": "Pusty pojemnik na lód w trybie imprezowym"
+      },
+      "binary_sensor_temperature_alarm_chiller_common": {
+        "name": "Alarm temperatury strefy schładzania"
+      },
+      "binary_sensor_freezer_appliance_error": {
+        "name": "Błąd urządzenia"
+      },
+      "binary_sensor_freezer_low_voltage": {
+        "name": "Niskie napięcie"
+      },
+      "binary_sensor_oven_alarm_clock_elapsed": {
+        "name": "Minutnik minął{group_name}"
+      },
+      "binary_sensor_alarm_clock_elapsed": {
+        "name": "Minutnik minął"
+      }
+    },
+    "sensor": {
+      "sensor_remaining_program_time": {
+        "name": "Pozostały czas programu"
+      },
+      "sensor_elapsed_program_time": {
+        "name": "Upływający czas programu"
+      },
+      "sensor_program_progress": {
+        "name": "Postęp programu"
+      },
+      "sensor_water_forecast": {
+        "name": "Prognoza zużycia wody"
+      },
+      "sensor_energy_forecast": {
+        "name": "Prognoza zużycia energii"
+      },
+      "sensor_operation_state": {
+        "name": "Stan operacyjny",
+        "state": {
+          "inactive": "Nieaktywny",
+          "ready": "Gotowy",
+          "delayedstart": "Opóźniony start",
+          "run": "Uruchomiony",
+          "pause": "Wstrzymany",
+          "actionrequired": "Wymagane działanie",
+          "finished": "Zakończony",
+          "error": "Błąd",
+          "aborting": "Przerywanie"
+        }
+      },
+      "sensor_program_phase": {
+        "name": "Faza programu",
+        "state": {
+          "none": "Brak",
+          "prerinse": "Pranie/mycie wstępne",
+          "mainwash": "Pranie/mycie główne",
+          "finalrinse": "Płukanie końcowe",
+          "drying": "Suszenie"
+        }
+      },
+      "sensor_active_program": {
+        "name": "Aktywny program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensywny Plus 70",
+          "dishcare_dishwasher_program_auto2": "Auto45-65",
+          "dishcare_dishwasher_program_eco50": "Eco 50",
+          "dishcare_dishwasher_program_quick45": "Skrócony 45",
+          "dishcare_dishwasher_program_prerinse": "Płukanie wstępne",
+          "dishcare_dishwasher_program_quick65": "Express 65",
+          "dishcare_dishwasher_program_machinecare": "Czyszczenie zmywarki",
+          "dishcare_dishwasher_program_nightwash": "Nocny 50",
+          "dishcare_dishwasher_program_glas40": "Szkło 40",
+          "dishcare_dishwasher_program_glassshine": "Błyszczący połysk",
+          "dishcare_dishwasher_program_kurz60": "Przyśpieszony 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Inteligentny",
+          "dishcare_dishwasher_program_super60": "Super 60",
+          "dishcare_dishwasher_program_intensivpower": "Intensywna Plus 70",
+          "dishcare_dishwasher_program_intensivesuper": "Intensywny super",
+          "dishcare_dishwasher_program_shorthygiene": "Krótki higieniczny",
+          "dishcare_dishwasher_program_quickp": "Szybki P",
+		  "dishcare_dishwasher_program_mixedload": "Mieszany wsad",
+          "favorite_001": "Ulubiony 1",
+          "favorite_002": "Ulubiony 2",
+          "favorite_003": "Ulubiony 3",
+          "favorite_004": "Ulubiony 4",
+          "favorite_005": "Ulubiony 5",
+          "favorite_006": "Ulubiony 6",
+          "favorite_007": "Ulubiony 7",
+          "favorite_008": "Ulubiony 8",
+          "favorite_009": "Ulubiony 9",
+          "favorite_010": "Ulubiony 10",
+          "cooking_common_program_hood_venting": "Poziom wentylatora",
+          "cooking_common_program_hood_automatic": "Tryb automatyczny",
+          "cooking_common_program_hood_interval": "Wentylacja interwałowa",
+          "cooking_common_program_hood_delayedshutoff": "Praca ciągła wentylatora",
+          "cooking_hob_program_cookingsensor": "Czujnik gotowania",
+          "cooking_hob_program_dish_cookingsensor_beansinpressurecooker": "Czujnik gotowania: Fasola w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_beefinpressurecooker": "Czujnik gotowania: Wołowina w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_boiledeggs": "Czujnik gotowania: Gotowane jajka",
+          "cooking_hob_program_dish_cookingsensor_boilingbeef": "Czujnik gotowania: Gotowanie wołowiny",
+          "cooking_hob_program_dish_cookingsensor_boilingbroccoli": "Czujnik gotowania: Gotowanie brokułów",
+          "cooking_hob_program_dish_cookingsensor_boilingbrusselssprout": "Czujnik gotowania: Gotowanie brukselki",
+          "cooking_hob_program_dish_cookingsensor_boilingcauliflower": "Czujnik gotowania: Gotowanie kalafiora",
+          "cooking_hob_program_dish_cookingsensor_boilingchicken": "Czujnik gotowania: Gotowanie kurczaka",
+          "cooking_hob_program_dish_cookingsensor_boilinggreenbeans": "Czujnik gotowania: Gotowanie zielonej fasolki",
+          "cooking_hob_program_dish_cookingsensor_boilingmeatballs": "Czujnik gotowania: Gotowanie klopsików",
+          "cooking_hob_program_dish_cookingsensor_boilingpotatoes": "Czujnik gotowania: Gotowanie ziemniaków",
+          "cooking_hob_program_dish_cookingsensor_chickeninpressurecooker": "Czujnik gotowania: Kurczak w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_chickpeas": "Czujnik gotowania: Ciecierzyca",
+          "cooking_hob_program_dish_cookingsensor_chickpeasinpressurecooker": "Czujnik gotowania: Ciecierzyca w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_chocolatepudding": "Czujnik gotowania: Budyn czekoladowy",
+          "cooking_hob_program_dish_cookingsensor_compote": "Czujnik gotowania: Kompot",
+          "cooking_hob_program_dish_cookingsensor_creamsoups": "Czujnik gotowania: Zupy krem",
+          "cooking_hob_program_dish_cookingsensor_deepfryingberliners": "Czujnik gotowania: Smażenie pączków",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedfish": "Czujnik gotowania: Smażenie ryby w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedmushrooms": "Czujnik gotowania: Smażenie pieczarek w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedvegetables": "Czujnik gotowania: Smażenie warzyw w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbunuelos": "Czujnik gotowania: Smażenie buñuelos",
+          "cooking_hob_program_dish_cookingsensor_deepfryingchickenportions": "Czujnik gotowania: Smażenie porcji kurczaka",
+          "cooking_hob_program_dish_cookingsensor_deepfryingdonuts": "Czujnik gotowania: Smażenie pączków amerykańskich",
+          "cooking_hob_program_dish_cookingsensor_deepfryingfishinbeerbatter": "Czujnik gotowania: Smażenie ryby w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_deepfryingfrenchfriesfrozen": "Czujnik gotowania: Smażenie frytek (mrożone)",
+          "cooking_hob_program_dish_cookingsensor_deepfryingmeatballs": "Czujnik gotowania: Smażenie klopsików",
+          "cooking_hob_program_dish_cookingsensor_deepfryingmushroomsinbeerbatter": "Czujnik gotowania: Smażenie grzybów w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_deepfryingvegetablesinbeerbatter": "Czujnik gotowania: Smażenie warzyw w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_greenbeansfrozen": "Czujnik gotowania: Zielona fasolka (mrożona)",
+          "cooking_hob_program_dish_cookingsensor_heatingupgoulashsoup": "Czujnik gotowania: Podgrzewanie zupy gulaszowej",
+          "cooking_hob_program_dish_cookingsensor_heatinguphotspicedwine": "Czujnik gotowania: Podgrzewanie grzańca",
+          "cooking_hob_program_dish_cookingsensor_heatingupmilk": "Czujnik gotowania: Podgrzewanie mleka",
+          "cooking_hob_program_dish_cookingsensor_homemadestock": "Czujnik gotowania: Domowy wywar",
+          "cooking_hob_program_dish_cookingsensor_homemadestockinpressurecooker": "Czujnik gotowania: Domowy wywar w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_instantsoups": "Czujnik gotowania: Zupy błyskawiczne",
+          "cooking_hob_program_dish_cookingsensor_lentils": "Czujnik gotowania: Soczewica",
+          "cooking_hob_program_dish_cookingsensor_lentilsinpressurecooker": "Czujnik gotowania: Soczewica w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_pasta": "Czujnik gotowania: Makaron",
+          "cooking_hob_program_dish_cookingsensor_peas": "Czujnik gotowania: Groszek",
+          "cooking_hob_program_dish_cookingsensor_polenta": "Czujnik gotowania: Polenta",
+          "cooking_hob_program_dish_cookingsensor_porridgesoats": "Czujnik gotowania: Owsianka / Płatki owsiane",
+          "cooking_hob_program_dish_cookingsensor_potatodumplings": "Czujnik gotowania: Kluski ziemniaczane",
+          "cooking_hob_program_dish_cookingsensor_potatoesinpressurecooker": "Czujnik gotowania: Ziemniaki w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_rice": "Czujnik gotowania: Ryż",
+          "cooking_hob_program_dish_cookingsensor_riceinpressurecooker": "Czujnik gotowania: Ryż w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_ricepudding": "Czujnik gotowania: Puding ryżowy",
+          "cooking_hob_program_dish_cookingsensor_sauteedfish": "Czujnik gotowania: Duszona ryba",
+          "cooking_hob_program_dish_cookingsensor_semolinapuree": "Czujnik gotowania: Kleik manna",
+          "cooking_hob_program_dish_cookingsensor_simmeringsausages": "Czujnik gotowania: Parzenie kiełbasek",
+          "cooking_hob_program_dish_cookingsensor_stuffedpasta": "Czujnik gotowania: Nadziewany makaron",
+          "cooking_hob_program_dish_cookingsensor_vegetablesinpressurecooker": "Czujnik gotowania: Warzywa w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_vegetableswithcreamfrozen": "Czujnik gotowania: Warzywa w śmietanie (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_aubergines": "Czujnik smażenia: Oberżyna",
+          "cooking_hob_program_dish_fryingsensor_bacon": "Czujnik smażenia: Bekon",
+          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Czujnik smażenia: Sos beszamelowy",
+          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Czujnik smażenia: Camembert (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Czujnik smażenia: Sos serowy",
+          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Czujnik smażenia: Nuggetsy z kurczaka (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_chop": "Czujnik smażenia: Kotlet",
+          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Czujnik smażenia: Cordon Bleu",
+          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Czujnik smażenia: Cordon Bleu (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_courgettes": "Czujnik smażenia: Cukinia",
+          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Czujnik smażenia: Suszone dania gotowe",
+          "cooking_hob_program_dish_fryingsensor_escalope": "Czujnik smażenia: Sznycel",
+          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Czujnik smażenia: Sznycel w panierce",
+          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Czujnik smażenia: Sznycel (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fillet": "Czujnik smażenia: Polędwica / Filet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Czujnik smażenia: Filet rybny w panierce",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Czujnik smażenia: Filet rybny w panierce (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Czujnik smażenia: Filet rybny naturalny",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Czujnik smażenia: Filet rybny naturalny (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Czujnik smażenia: Paluszki rybne (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_frenchfriesmadefromrawpotatoes": "Czujnik smażenia: Frytki z surowych ziemniaków",
+          "cooking_hob_program_dish_fryingsensor_frenchtoast": "Czujnik smażenia: Tosty francuskie",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinbutter": "Czujnik smażenia: Jajka sadzone na maśle",
+          "cooking_hob_program_dish_fryingsensor_friedeggsinoil": "Czujnik smażenia: Jajka sadzone na oleju",
+          "cooking_hob_program_dish_fryingsensor_fryingcamembert": "Czujnik smażenia: Smażenie camemberta",
+          "cooking_hob_program_dish_fryingsensor_fryingcroutons": "Czujnik smażenia: Grzanki",
+          "cooking_hob_program_dish_fryingsensor_fryingfishwhole": "Czujnik smażenia: Ryba w całości",
+          "cooking_hob_program_dish_fryingsensor_fryingfrenchfriesfrozen": "Czujnik smażenia: Frytki (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_fryinggreenasparagus": "Czujnik smażenia: Zielone szparagi",
+          "cooking_hob_program_dish_fryingsensor_fryingmeatballs": "Czujnik smażenia: Klopsiki",
+          "cooking_hob_program_dish_fryingsensor_fryingpotatoesboiledintheirskin": "Czujnik smażenia: Ziemniaki gotowane w mundurkach",
+          "cooking_hob_program_dish_fryingsensor_fryingpreboiledsausages": "Czujnik smażenia: Parówki wstępnie ugotowane",
+          "cooking_hob_program_dish_fryingsensor_fryingrawsausages": "Czujnik smażenia: Surowe kiełbaski",
+          "cooking_hob_program_dish_fryingsensor_fryingrissoles": "Czujnik smażenia: Kotlety mielone",
+          "cooking_hob_program_dish_fryingsensor_garlic": "Czujnik smażenia: Czosnek",
+          "cooking_hob_program_dish_fryingsensor_glazedonions": "Czujnik smażenia: Karmelizowana cebula",
+          "cooking_hob_program_dish_fryingsensor_glazedpotatoes": "Czujnik smażenia: Glazurowane ziemniaki",
+          "cooking_hob_program_dish_fryingsensor_glazedvegetables": "Czujnik smażenia: Glazurowane warzywa",
+          "cooking_hob_program_dish_fryingsensor_gyros": "Czujnik smażenia: Gyros",
+          "cooking_hob_program_dish_fryingsensor_gyrosfrozen": "Czujnik smażenia: Gyros (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_hamburgers": "Czujnik smażenia: Hamburgery",
+          "cooking_hob_program_dish_fryingsensor_kebabfrozen": "Czujnik smażenia: Kebab (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_meatloaf": "Czujnik smażenia: Klops / Pieczeń rzymska",
+          "cooking_hob_program_dish_fryingsensor_mincedmeat": "Czujnik smażenia: Mięso mielone",
+          "cooking_hob_program_dish_fryingsensor_mushrooms": "Czujnik smażenia: Grzyby",
+          "cooking_hob_program_dish_fryingsensor_omelettes": "Czujnik smażenia: Omlety",
+          "cooking_hob_program_dish_fryingsensor_pancake": "Czujnik smażenia: Naleśnik",
+          "cooking_hob_program_dish_fryingsensor_pancakes": "Czujnik smażenia: Naleśniki",
+          "cooking_hob_program_dish_fryingsensor_peppers": "Czujnik smażenia: Papryka",
+          "cooking_hob_program_dish_fryingsensor_potatopancakes": "Czujnik smażenia: Placki ziemniaczane",
+          "cooking_hob_program_dish_fryingsensor_poultrybreast": "Czujnik smażenia: Piersi drobiowe",
+          "cooking_hob_program_dish_fryingsensor_poultrybreastfrozen": "Czujnik smażenia: Piersi drobiowe (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_prawns": "Czujnik smażenia: Krewetki",
+          "cooking_hob_program_dish_fryingsensor_reducingsauces": "Czujnik smażenia: Redukowanie sosów",
+          "cooking_hob_program_dish_fryingsensor_sauteingvegetablesinoil": "Czujnik smażenia: Podsmażanie warzyw na oleju",
+          "cooking_hob_program_dish_fryingsensor_scampi": "Czujnik smażenia: Langustynki / Scampi",
+          "cooking_hob_program_dish_fryingsensor_scrambledeggs": "Czujnik smażenia: Jajecznica",
+          "cooking_hob_program_dish_fryingsensor_springrollsfrozen": "Czujnik smażenia: Kajzerek / Rollsy wiosenne (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_steaksmedium": "Czujnik smażenia: Steki (średnio wypieczone)",
+          "cooking_hob_program_dish_fryingsensor_steaksrare": "Czujnik smażenia: Steki (krwiste)",
+          "cooking_hob_program_dish_fryingsensor_steakswelldone": "Czujnik smażenia: Steki (dobrze wypieczone)",
+          "cooking_hob_program_dish_fryingsensor_stirfriesfrozen": "Czujnik smażenia: Dania z woka (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_stripsofmeat": "Czujnik smażenia: Paski mięsa",
+          "cooking_hob_program_dish_fryingsensor_sweetsauces": "Czujnik smażenia: Słodkie sosy",
+          "cooking_hob_program_dish_fryingsensor_swissroesti": "Czujnik smażenia: Placki szwajcarskie Rösti",
+          "cooking_hob_program_dish_fryingsensor_toastingalmonds": "Czujnik smażenia: Prażenie migdałów",
+          "cooking_hob_program_dish_fryingsensor_toastingnuts": "Czujnik smażenia: Prażenie orzechów",
+          "cooking_hob_program_dish_fryingsensor_toastingpinenuts": "Czujnik smażenia: Prażenie orzechów pinii",
+          "cooking_hob_program_dish_fryingsensor_tomatosaucewithvegetables": "Czujnik smażenia: Sos pomidorowy z warzywami",
+          "cooking_hob_program_dish_fryingsensor_vienneseschnitzel": "Czujnik smażenia: Sznycel wiedeński",
+          "cooking_hob_program_fryingsensormode": "Tryb czujnika smażenia",
+          "cooking_hob_program_powerlevelmode": "Tryb poziomu mocy",
+          "cooking_hob_program_powermovemode": "Tryb PowerMove",
+          "cooking_oven_program_heatingmode_bottomheating": "Ogrzewanie dolne",
+          "cooking_oven_program_heatingmode_frozenheatupspecial": "Funkcja CoolStart",
+          "cooking_oven_program_heatingmode_grillargearea": "Grill, duża powierzchnia",
+          "cooking_oven_program_heatingmode_grillsmallarea": "Grill, mała powierzchnia",
+          "cooking_oven_program_heatingmode_hotair": "Gorące powietrze",
+          "cooking_oven_program_heatingmode_hotaireco": "Gorące powietrze Eco",
+          "cooking_oven_program_heatingmode_hotairgrilling": "Grillowanie z termoobiegiem",
+          "cooking_oven_program_heatingmode_keepwarm": "Podtrzymywanie temperatury",
+          "cooking_oven_program_heatingmode_pizzasetting": "Ustawienie do pizzy",
+          "cooking_oven_program_heatingmode_preheatovenware": "Podgrzewanie naczyń",
+          "cooking_oven_program_heatingmode_sabbathprogramme": "Program szabatowy",
+          "cooking_oven_program_heatingmode_slowcook": "Puste gotowanie / Wolne gotowanie",
+          "cooking_oven_program_heatingmode_topbottomheating": "Ogrzewanie górne/dolne",
+          "cooking_oven_program_heatingmode_topbottomheatingeco": "Ogrzewanie górne/dolne Eco",
+          "cooking_oven_program_microwave_90watt": "Mikrofalówka 90 W",
+          "cooking_oven_program_microwave_180watt": "Mikrofalówka 180 W",
+          "cooking_oven_program_microwave_360watt": "Mikrofalówka 360 W",
+          "cooking_oven_program_microwave_600watt": "Mikrofalówka 600 W",
+          "cooking_oven_program_microwave_max": "Mikrofalówka Maks.",
+          "cooking_oven_program_cleaning_drying": "Czyszczenie: Suszenie",
+          "cooking_oven_program_cleaning_easyclean": "Czyszczenie: EasyClean",
+          "cooking_oven_program_cleaning_pyrolysis": "Czyszczenie: Pyroliza",
+          "cooking_oven_program_dish_automatic_conv_beefroulade": "Auto: Zrazy wołowe",
+          "cooking_oven_program_dish_automatic_conv_belly": "Auto: Boczek",
+          "cooking_oven_program_dish_automatic_conv_bonelesslegoflambmedium": "Auto: Udziec jagnięcy bez kości (średnio wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_bonelesslegoflambwelldone": "Auto: Udziec jagnięcy bez kości (dobrze wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_bonelesslegofroevenison": "Auto: Udziec z sarny bez kości",
+          "cooking_oven_program_dish_automatic_conv_bonelesslegofvenison": "Auto: Udziec z jelenia bez kości",
+          "cooking_oven_program_dish_automatic_conv_bonelessporkneckjoint": "Auto: Karkówka wieprzowa bez kości",
+          "cooking_oven_program_dish_automatic_conv_fishwholestew": "Auto: Cała ryba duszona",
+          "cooking_oven_program_dish_automatic_conv_goosebreast": "Auto: Pierś z gęsi",
+          "cooking_oven_program_dish_automatic_conv_gooselegs": "Auto: Nogi z gęsi",
+          "cooking_oven_program_dish_automatic_conv_goulash": "Auto: Gulasz",
+          "cooking_oven_program_dish_automatic_conv_jointofporkwithcracklingegshoulder": "Auto: Pieczeń wieprzowa ze skórką (np. łopatka)",
+          "cooking_oven_program_dish_automatic_conv_jointofveallean": "Auto: Pieczeń cielęca (chuda)",
+          "cooking_oven_program_dish_automatic_conv_jointofvealmarbled": "Auto: Pieczeń cielęca (marmurkowata)",
+          "cooking_oven_program_dish_automatic_conv_knuckleofveal": "Auto: Golonka cielęca",
+          "cooking_oven_program_dish_automatic_conv_legoflambonthebonewelldone": "Auto: Udziec jagnięcy z kością (dobrze wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_meatloafmadefromfreshmincedmeat": "Auto: Klops z świeżego mięsa mielonego",
+          "cooking_oven_program_dish_automatic_conv_microwave_bakesavouryfreshcookedingredients": "Auto MW: Zapiekanka z wytrawnymi świeżymi składnikami",
+          "cooking_oven_program_dish_automatic_conv_microwave_bakesweetfresh": "Auto MW: Słodka zapiekanka ze świeżych składników",
+          "cooking_oven_program_dish_automatic_conv_microwave_bonelesslegoflambmedium": "Auto MW: Udziec jagnięcy bez kości (średnio wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_microwave_bonelesslegoflambwelldone": "Auto MW: Udziec jagnięcy bez kości (dobrze wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_microwave_bonelessporkneckjoint": "Auto MW: Karkówka wieprzowa bez kości",
+          "cooking_oven_program_dish_automatic_conv_microwave_cannelloni": "Auto MW: Cannelloni",
+          "cooking_oven_program_dish_automatic_conv_microwave_chickengoujonsnuggets": "Auto MW: Stripsy/nuggetsy z kurczaka",
+          "cooking_oven_program_dish_automatic_conv_microwave_chickenlegswithvegetables": "Auto MW: Nogi z kurczaka z warzywami",
+          "cooking_oven_program_dish_automatic_conv_microwave_chickenparts": "Auto MW: Porcje kurczaka",
+          "cooking_oven_program_dish_automatic_conv_microwave_chips": "Auto MW: Frytki",
+          "cooking_oven_program_dish_automatic_conv_microwave_croquettes": "Auto MW: Krokiety",
+          "cooking_oven_program_dish_automatic_conv_microwave_defrostbreadrolls": "Auto MW: Rozmrażanie bułek",
+          "cooking_oven_program_dish_automatic_conv_microwave_halvedchicken": "Auto MW: Połówki kurczaka",
+          "cooking_oven_program_dish_automatic_conv_microwave_lasagnefrozen": "Auto MW: Lasagne (mrożona)",
+          "cooking_oven_program_dish_automatic_conv_microwave_meatloafmadefromfreshmincedmeat": "Auto MW: Klops z świeżego mięsa mielonego",
+          "cooking_oven_program_dish_automatic_conv_microwave_minipizzas": "Auto MW: Mini pizze",
+          "cooking_oven_program_dish_automatic_conv_microwave_partcookedbreadrollsorbaguettefrozen": "Auto MW: Bułki / bagietki podpiekane (mrożone)",
+          "cooking_oven_program_dish_automatic_conv_microwave_pizzathickcrust1slicefrozen": "Auto MW: Pizzy grube ciasto 1 kromka/kawałek (mrożona)",
+          "cooking_oven_program_dish_automatic_conv_microwave_pizzathincrust1slice": "Auto MW: Pizzy cienkie ciasto 1 kawałek",
+          "cooking_oven_program_dish_automatic_conv_microwave_potatogratinrawingredients4cmdeep": "Auto MW: Zapiekanka ziemniaczana z surowych składników (głębokość 4 cm)",
+          "cooking_oven_program_dish_automatic_conv_microwave_potatopocketsfilled": "Auto MW: Nadziewane kieszonki ziemniaczane",
+          "cooking_oven_program_dish_automatic_conv_microwave_sirloinmedium": "Auto MW: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_automatic_conv_microwave_squidringsbreaded": "Auto MW: Krążki kalmarów w panierce",
+          "cooking_oven_program_dish_automatic_conv_microwave_turkeybreast": "Auto MW: Pierś z indyka",
+          "cooking_oven_program_dish_automatic_conv_microwave_unstuffedchicken": "Auto MW: Kurczak bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_microwave_wholebakedpotatoes": "Auto MW: Pieczone ziemniaki w całości",
+          "cooking_oven_program_dish_automatic_conv_pavlova": "Auto: Beza Pavlova",
+          "cooking_oven_program_dish_automatic_conv_porkchopfryonthebone": "Auto: Kotlet wieprzowy z kością",
+          "cooking_oven_program_dish_automatic_conv_potroastedbeef": "Auto: Wołowina duszona w garnku",
+          "cooking_oven_program_dish_automatic_conv_poulardunstuffed": "Auto: Parda bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_roastjoint": "Auto: Pieczeń w kawałku",
+          "cooking_oven_program_dish_automatic_conv_roastporkloin": "Auto: Schab wieprzowy pieczony",
+          "cooking_oven_program_dish_automatic_conv_rolledporkjoint": "Auto: Pieczeń wieprzowa zwijana",
+          "cooking_oven_program_dish_automatic_conv_salmonfillet": "Auto: Filet z łososia",
+          "cooking_oven_program_dish_automatic_conv_scandinavianchristmasham": "Auto: Skandynawska szynka świąteczna",
+          "cooking_oven_program_dish_automatic_conv_sirloinmedium": "Auto: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_automatic_conv_sirloinrare": "Auto: Polędwica wołowa (krwista)",
+          "cooking_oven_program_dish_automatic_conv_slowroastjoint": "Auto: Wolno pieczona pieczeń",
+          "cooking_oven_program_dish_automatic_conv_stewwithmeat": "Auto: Gulasz/potrawka z mięsem",
+          "cooking_oven_program_dish_automatic_conv_stewwithvegetables": "Auto: Potrawka warzywna",
+          "cooking_oven_program_dish_automatic_conv_turkeybreast": "Auto: Pierś z indyka",
+          "cooking_oven_program_dish_automatic_conv_unstuffedchicken": "Auto: Kurczak bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_unstuffedduck": "Auto: Kaczka bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_unstuffedgoose": "Auto: Gęś bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_unstuffedsmallturkey": "Auto: Mały indyk bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_vealossobuco": "Auto: Ossobuco cielęce",
+          "cooking_oven_program_dish_automatic_conv_wholerabbit": "Auto: Królik w całości",
+          "cooking_oven_program_dish_automatic_conv_wildboarroast": "Auto: Pieczeń z dzika",
+          "cooking_oven_program_dish_automatic_microwave_basmatirice": "Auto MW: Ryż basmati",
+          "cooking_oven_program_dish_automatic_microwave_boiledpotatoes": "Auto MW: Ziemniaki gotowane",
+          "cooking_oven_program_dish_automatic_microwave_boiledpotatoeswskin": "Auto MW: Ziemniaki gotowane w mundurkach",
+          "cooking_oven_program_dish_automatic_microwave_brownrice": "Auto MW: Ryż brązowy",
+          "cooking_oven_program_dish_automatic_microwave_cakedrydefrost": "Auto MW: Rozmrażanie suchego ciasta",
+          "cooking_oven_program_dish_automatic_microwave_couscous": "Auto MW: Kuskus",
+          "cooking_oven_program_dish_automatic_microwave_defrostcakesmoist": "Auto MW: Rozmrażanie wilgotnych ciast",
+          "cooking_oven_program_dish_automatic_microwave_defrostfishfillet": "Auto MW: Rozmrażanie fileta rybnego",
+          "cooking_oven_program_dish_automatic_microwave_defrostfishwhole": "Auto MW: Rozmrażanie całości ryby",
+          "cooking_oven_program_dish_automatic_microwave_defrostmeat": "Auto MW: Rozmrażanie mięsa",
+          "cooking_oven_program_dish_automatic_microwave_defrostmultigrainbread": "Auto MW: Rozmrażanie chleba wieloziarnistego",
+          "cooking_oven_program_dish_automatic_microwave_defrostpoultryportions": "Auto MW: Rozmrażanie porcji drobiu",
+          "cooking_oven_program_dish_automatic_microwave_defrostspinach": "Auto MW: Rozmrażanie szpinaku",
+          "cooking_oven_program_dish_automatic_microwave_defrostwhitebread": "Auto MW: Rozmrażanie białego pieczywa",
+          "cooking_oven_program_dish_automatic_microwave_defrostveg": "Auto MW: Rozmrażanie warzyw",
+          "cooking_oven_program_dish_automatic_microwave_defrostberries": "Auto MW: Rozmrażanie jagód/owoców leśnych",
+          "cooking_oven_program_dish_automatic_microwave_defrostmincedmeat": "Auto MW: Rozmrażanie mięsa mielonego",
+          "cooking_oven_program_dish_automatic_microwave_defrostpoultry": "Auto MW: Rozmrażanie drobiu",
+          "cooking_oven_program_dish_automatic_microwave_defrostsoup": "Auto MW: Rozmrażanie zupy",
+          "cooking_oven_program_dish_automatic_microwave_dissolvegelatine": "Auto MW: Rozpuszczanie żelatyny",
+          "cooking_oven_program_dish_automatic_microwave_dissolveyeast": "Auto MW: Rozpuszczanie drożdży",
+          "cooking_oven_program_dish_automatic_microwave_heatupbeverages": "Auto MW: Podgrzewanie napojów",
+          "cooking_oven_program_dish_automatic_microwave_heatupplatedmeal": "Auto MW: Podgrzewanie gotowego posiłku na talerzu",
+          "cooking_oven_program_dish_automatic_microwave_longgrainrice": "Auto MW: Ryż długoziarnisty",
+          "cooking_oven_program_dish_automatic_microwave_meltbutter": "Auto MW: Topienie masła",
+          "cooking_oven_program_dish_automatic_microwave_meltchocolate": "Auto MW: Topienie czekolady",
+          "cooking_oven_program_dish_automatic_microwave_meltcookingchocolate": "Auto MW: Topienie czekolady deserowej/do wypieków",
+          "cooking_oven_program_dish_automatic_microwave_milletorquinoa": "Auto MW: Proso lub komosa ryżowa",
+          "cooking_oven_program_dish_automatic_microwave_mixedgrain": "Auto MW: Kasza mieszana",
+          "cooking_oven_program_dish_automatic_microwave_oatmealorricepudding": "Auto MW: Owsianka lub budyń ryżowy",
+          "cooking_oven_program_dish_automatic_microwave_polenta": "Auto MW: Polenta",
+          "cooking_oven_program_dish_automatic_microwave_popcorn": "Auto MW: Popcorn",
+          "cooking_oven_program_dish_automatic_microwave_semolinapudding": "Auto MW: Budyń manna",
+          "cooking_oven_program_dish_automatic_microwave_softenbutter": "Auto MW: Mięknienie masła",
+          "cooking_oven_program_dish_automatic_microwave_softenicecream": "Auto MW: Zmiękczanie lodów",
+          "cooking_oven_program_dish_automatic_microwave_spinachleavescauliflowerflorets": "Auto MW: Liście szpinaku / różyczki kalafiora",
+          "cooking_oven_program_dish_automatic_microwave_steambroccoli": "Auto MW: Gotowanie brokułów na parze",
+          "cooking_oven_program_dish_automatic_microwave_steambrusselsprouts": "Auto MW: Gotowanie brukselki na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamcarrots": "Auto MW: Gotowanie marchewki na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamfennel": "Auto MW: Gotowanie koperku włoskiego na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamfishfillet": "Auto MW: Gotowanie fileta rybnego na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamgreenbeans": "Auto MW: Gotowanie zielonej fasolki na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamkohlrabi": "Auto MW: Gotowanie kalarepy na parze",
+          "cooking_oven_program_dish_automatic_microwave_steampeas": "Auto MW: Gotowanie groszku na parze",
+          "cooking_oven_program_dish_automatic_microwave_steamzucchini": "Auto MW: Gotowanie cukinii na parze",
+          "cooking_oven_program_dish_automatic_microwave_warmupbabyfood": "Auto MW: Podgrzewanie potraw dla dzieci",
+          "cooking_oven_program_dish_bakingsensor_applecakecovered": "Czujnik pieczenia: Ciasto jabłkowe (przykryte)",
+          "cooking_oven_program_dish_bakingsensor_applecakeopen": "Czujnik pieczenia: Ciasto jabłkowe (otwarte)",
+          "cooking_oven_program_dish_bakingsensor_applepie": "Czujnik pieczenia: Szarlotka",
+          "cooking_oven_program_dish_bakingsensor_beefburgers": "Czujnik pieczenia: Hamburgery wołowe",
+          "cooking_oven_program_dish_bakingsensor_bread": "Czujnik pieczenia: Chleb",
+          "cooking_oven_program_dish_bakingsensor_brownies": "Czujnik pieczenia: Brownies",
+          "cooking_oven_program_dish_bakingsensor_bunschouxbuns": "Czujnik pieczenia: Bułki / ptysie",
+          "cooking_oven_program_dish_bakingsensor_cheesecake": "Czujnik pieczenia: Sernik",
+          "cooking_oven_program_dish_bakingsensor_cheesecaketall": "Czujnik pieczenia: Sernik (wysoki)",
+          "cooking_oven_program_dish_bakingsensor_christmasstollen": "Czujnik pieczenia: Keks / stollen świąteczny",
+          "cooking_oven_program_dish_bakingsensor_creamsponge": "Czujnik pieczenia: Biszkopt kremowy",
+          "cooking_oven_program_dish_bakingsensor_croissantsyeast": "Czujnik pieczenia: Rogaliki drożdżowe",
+          "cooking_oven_program_dish_bakingsensor_cupcakesmuffins": "Czujnik pieczenia: Babeczki / muffinki",
+          "cooking_oven_program_dish_bakingsensor_flatbreadpita": "Czujnik pieczenia: Płaski chleb / pita",
+          "cooking_oven_program_dish_bakingsensor_fruitflanbaking": "Czujnik pieczenia: Placek z owocami",
+          "cooking_oven_program_dish_bakingsensor_gateausponge": "Czujnik pieczenia: Tort biszkoptowy",
+          "cooking_oven_program_dish_bakingsensor_lasagnecooked": "Czujnik pieczenia: Lasagne (ugotowana)",
+          "cooking_oven_program_dish_bakingsensor_lasagneraw": "Czujnik pieczenia: Lasagne (surowa)",
+          "cooking_oven_program_dish_bakingsensor_loafcake": "Czujnik pieczenia: Ciasto keksowe",
+          "cooking_oven_program_dish_bakingsensor_marblesponge": "Czujnik pieczenia: Babka piaskowa / ciasto marmurkowe",
+          "cooking_oven_program_dish_bakingsensor_meatball": "Czujnik pieczenia: Klops",
+          "cooking_oven_program_dish_bakingsensor_partcookedbaguettes": "Czujnik pieczenia: Podpiekane bagietki",
+          "cooking_oven_program_dish_bakingsensor_partcookedrolls": "Czujnik pieczenia: Podpiekane bułki",
+          "cooking_oven_program_dish_bakingsensor_pizza": "Czujnik pieczenia: Piza",
+          "cooking_oven_program_dish_bakingsensor_plainsponge": "Czujnik pieczenia: Prosty biszkopt",
+          "cooking_oven_program_dish_bakingsensor_potatogratin": "Czujnik pieczenia: Zapiekanka ziemniaczana",
+          "cooking_oven_program_dish_bakingsensor_quiche": "Czujnik pieczenia: Quiche",
+          "cooking_oven_program_dish_bakingsensor_ringcake": "Czujnik pieczenia: Ciasto w formie z kominem",
+          "cooking_oven_program_dish_bakingsensor_roastbeefmedium": "Czujnik pieczenia: Rostbef (średnio wypieczony)",
+          "cooking_oven_program_dish_bakingsensor_roastbeefrare": "Czujnik pieczenia: Rostbef (krwisty)",
+          "cooking_oven_program_dish_bakingsensor_roastbeefwelldone": "Czujnik pieczenia: Rostbef (dobrze wypieczony)",
+          "cooking_oven_program_dish_bakingsensor_rolls": "Czujnik pieczenia: Bułki",
+          "cooking_oven_program_dish_bakingsensor_schweinebraten": "Czujnik pieczenia: Pieczeń wieprzowa",
+          "cooking_oven_program_dish_bakingsensor_shortcrust": "Czujnik pieczenia: Ciasto kruche",
+          "cooking_oven_program_dish_bakingsensor_smallbiscuits": "Czujnik pieczenia: Drobne ciasteczka",
+          "cooking_oven_program_dish_bakingsensor_souffle": "Czujnik pieczenia: Suflet",
+          "cooking_oven_program_dish_bakingsensor_streuselkuchen": "Czujnik pieczenia: Ciasto z kruszonką",
+          "cooking_oven_program_dish_bakingsensor_swiss_roll": "Czujnik pieczenia: Rolada biszkoptowa",
+          "cooking_oven_program_dish_bakingsensor_tinloaf": "Czujnik pieczenia: Chleb w keksówce",
+          "cooking_oven_program_dish_bakingsensor_veggieburgers": "Czujnik pieczenia: Burgery wegetariańskie",
+          "cooking_oven_program_dish_bakingsensor_whitebread": "Czujnik pieczenia: Biały chleb",
+          "cooking_oven_program_dish_bakingsensor_wholemealspeltbread": "Czujnik pieczenia: Chleb pełnoziarnisty / orkiszowy",
+          "cooking_oven_program_dish_bakingsensor_yeastdough": "Czujnik pieczenia: Ciasto drożdżowe",
+          "cooking_oven_program_dish_meatprobe_beeffiletmedium": "Termometr do mięsa: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_meatprobe_beeffiletrare": "Termometr do mięsa: Polędwica wołowa (krwista)",
+          "cooking_oven_program_dish_meatprobe_beeffiletwelldone": "Termometr do mięsa: Polędwica wołowa (dobrze wypieczona)",
+          "cooking_oven_program_dish_meatprobe_beefroast": "Termometr do mięsa: Pieczeń wołowa",
+          "cooking_oven_program_dish_meatprobe_duckbreast": "Termometr do mięsa: Pierś z kaczki",
+          "cooking_oven_program_dish_meatprobe_fish": "Termometr do mięsa: Ryba",
+          "cooking_oven_program_dish_meatprobe_lamblegbonein": "Termometr do mięsa: Udziec jagnięcy (z kością)",
+          "cooking_oven_program_dish_meatprobe_lamblegboneless": "Termometr do mięsa: Udziec jagnięcy (bez kości)",
+          "cooking_oven_program_dish_meatprobe_lambsaddle": "Termometr do mięsa: Siodło jagnięce",
+          "cooking_oven_program_dish_meatprobe_porkbelly": "Termometr do mięsa: Boczek wieprzowy",
+          "cooking_oven_program_dish_meatprobe_porkneck": "Termometr do mięsa: Karkówka wieprzowa",
+          "cooking_oven_program_dish_meatprobe_porkroast": "Termometr do mięsa: Pieczeń wieprzowa",
+          "cooking_oven_program_dish_meatprobe_poultrystuffed": "Termometr do mięsa: Drób (nadziewany)",
+          "cooking_oven_program_dish_meatprobe_poultryunstuffed": "Termometr do mięsa: Drób (nienadziewany)",
+          "cooking_oven_program_dish_meatprobe_sirloinsteakmedium": "Termometr do mięsa: Befsztyk z polędwicy (średnio wypieczony)",
+          "cooking_oven_program_dish_meatprobe_sirloinsteakrare": "Termometr do mięsa: Befsztyk z polędwicy (krwisty)",
+          "cooking_oven_program_dish_meatprobe_sirloinsteakwelldone": "Termometr do mięsa: Befsztyk z polędwicy (dobrze wypieczony)",
+          "cooking_oven_program_dish_meatprobe_vealroast": "Termometr do mięsa: Pieczeń cielęca",
+          "cooking_oven_program_dish_meatprobe_venison": "Termometr do mięsa: Dzicizna",
+          "cooking_oven_program_dish_meatprobe_wildboar": "Termometr do mięsa: Dzik",
+          "cooking_oven_program_dish_recommendation_breadrolls": "Zalecenie: Bułeczki",
+          "cooking_oven_program_dish_recommendation_cakeoncookingtray": "Zalecenie: Ciasto na blasze do pieczenia",
+          "cooking_oven_program_dish_recommendation_casserole": "Zalecenie: Zapiekanka",
+          "cooking_oven_program_dish_recommendation_chips": "Zalecenie: Frytki",
+          "cooking_oven_program_dish_recommendation_custard": "Zalecenie: Budyń / krem custard",
+          "cooking_oven_program_dish_recommendation_fishsticks": "Zalecenie: Paluszki rybne",
+          "cooking_oven_program_dish_recommendation_frozenpizza": "Zalecenie: Mrożona pizza",
+          "cooking_oven_program_dish_recommendation_gratin": "Zalecenie: Zapiekanka gratin",
+          "cooking_oven_program_dish_recommendation_meringues": "Zalecenie: Bezy",
+          "cooking_oven_program_dish_recommendation_ovenroast": "Zalecenie: Pieczeń z piekarnika",
+          "cooking_oven_program_dish_recommendation_poultry": "Zalecenie: Drób",
+          "cooking_oven_program_dish_recommendation_preserving": "Zalecenie: Pasteryzacja / Wekowanie",
+          "cooking_oven_program_dish_recommendation_quiche": "Zalecenie: Quiche",
+          "cooking_oven_program_dish_recommendation_readymealinfan": "Zalecenie: Danie gotowe w termoobiegu",
+          "cooking_oven_program_dish_recommendation_ringcake": "Zalecenie: Ciasto w formie z kominem",
+          "cooking_oven_program_dish_recommendation_souffle": "Zalecenie: Suflet",
+          "cooking_oven_program_dish_recommendation_swissroll": "Zalecenie: Rolada biszkoptowa",
+          "cooking_oven_program_dish_recommendation_vegetablegratin": "Zalecenie: Zapiekanka warzywna",
+          "cooking_oven_program_dish_recommendation_wholemealbreads": "Zalecenie: Chleby pełnoziarniste",
+          "cooking_oven_program_heatingmode_defrost": "Rozmrażanie",
+          "cooking_oven_program_heatingmode_desiccation": "Suszenie",
+          "cooking_oven_program_heatingmode_proofdough": "Wyrastanie ciasta",
+          "cooking_oven_program_heatingmode_steamassist": "Wspomaganie parowe",
+          "cooking_oven_program_heatingmode_intensiveheat": "Ciepło intensywne",
+          "cooking_oven_program_heatingmode_fullsurfacegrill": "Grill o dużej powierzchni",
+          "cooking_oven_program_heatingmode_economygrill": "Grill oszczędny",
+          "cooking_oven_program_heatingmode_circuitedgrill": "Grill z obiegiem powietrza",
+          "cooking_oven_program_heatingmode_warmingdrawer": "Szuflada grzewcza",
+          "cooking_oven_program_microwave_900watt": "Mikrofalówka 900 W",
+          "cooking_oven_program_microwave_1000watt": "Mikrofalówka 1000 W",
+          "cooking_oven_program_subsequentmode_subsequentmicrowavecooking": "Tryb następny: Gotowanie w mikrofalówce",
+          "cooking_oven_program_subsequentmode_subsequentbrowning": "Tryb następny: Przypiekanie",
+          "cooking_oven_program_subsequentmode_subsequentkeepwarm": "Tryb następny: Podtrzymywanie temperatury",
+          "cooking_oven_program_cleaning_descale": "Czyszczenie: Odkamienianie",
+          "cooking_oven_program_cleaning_draining": "Czyszczenie: Opróżnianie",
+          "cooking_oven_program_cleaning_ecolysis": "Czyszczenie: Ekoliza",
+          "cooking_oven_program_cleaning_flushing": "Czyszczenie: Płukanie",
+          "cooking_oven_program_cleaningmodes_autosteamcalibration": "Czyszczenie: Automatyczna kalibracja pary",
+          "cooking_oven_program_heatingmode_airfry": "Smażenie beztłuszczowe (Air Fry)",
+          "cooking_oven_program_heatingmode_grilllargearea": "Grill, duża powierzchnia",
+          "cooking_oven_program_heatingmode_hotairgentle": "Gorące powietrze delikatne",
+          "cooking_oven_program_heatingmode_letrest": "Pozwól odpocząć",
+          "cooking_oven_program_heatingmode_preheating": "Nagrzewanie wstępne",
+          "cooking_oven_program_dish_automatic_conv_bakeditems": "Auto: Wypieki",
+          "cooking_oven_program_dish_automatic_conv_bonedlegoflambmedium": "Auto: Udziec jagnięcy z kością (średnio wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_bread": "Auto: Chleb",
+          "cooking_oven_program_dish_automatic_conv_breadrollsbaguette": "Auto: Bułki/bagietka",
+          "cooking_oven_program_dish_automatic_conv_pastadumplingspotatoesrice": "Auto: Makaron/kluski/ziemniaki/ryż",
+          "cooking_oven_program_dish_automatic_conv_reheatplatedmeal": "Auto: Podgrzewanie posiłku na talerzu",
+          "cooking_oven_program_dish_automatic_conv_reheatvegetables": "Auto: Podgrzewanie warzyw",
+          "cooking_oven_program_dish_automatic_conv_roastbeefenglish": "Auto: Rostbef po angielsku",
+          "cooking_oven_program_dish_automatic_conv_steam_bonelesslegoflambmedium": "Auto Parowe: Udziec jagnięcy bez kości (średnio wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_steam_bonelesslegoflambwelldone": "Auto Parowe: Udziec jagnięcy bez kości (dobrze wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_steam_bonelesslegofroevenison": "Auto Parowe: Udziec z sarny bez kości",
+          "cooking_oven_program_dish_automatic_conv_steam_bonelesslegofvenison": "Auto Parowe: Udziec z jelenia bez kości",
+          "cooking_oven_program_dish_automatic_conv_steam_bonelessporkneckjoint": "Auto Parowe: Karkówka wieprzowa bez kości",
+          "cooking_oven_program_dish_automatic_conv_steam_breastofvealstuffed": "Auto Parowe: Piersi cielęce nadziewane",
+          "cooking_oven_program_dish_automatic_conv_steam_chickenparts": "Auto Parowe: Porcje kurczaka",
+          "cooking_oven_program_dish_automatic_conv_steam_fatlessspongecake": "Auto Parowe: Biszkopt beztłuszczowy",
+          "cooking_oven_program_dish_automatic_conv_steam_fishfilletgratinated": "Auto Parowe: Zapiekany filet rybny",
+          "cooking_oven_program_dish_automatic_conv_steam_fishfilletstew": "Auto Parowe: Duszony filet rybny",
+          "cooking_oven_program_dish_automatic_conv_steam_flatbread": "Auto Parowe: Płaski chleb",
+          "cooking_oven_program_dish_automatic_conv_steam_jointofporkwithcracklingegshoulder": "Auto Parowe: Pieczeń wieprzowa ze skórką (np. łopatka)",
+          "cooking_oven_program_dish_automatic_conv_steam_jointofveallean": "Auto Parowe: Pieczeń cielęca (chuda)",
+          "cooking_oven_program_dish_automatic_conv_steam_jointofvealmarbled": "Auto Parowe: Pieczeń cielęca (marmurkowata)",
+          "cooking_oven_program_dish_automatic_conv_steam_knuckleofpork": "Auto Parowe: Golonka wieprzowa",
+          "cooking_oven_program_dish_automatic_conv_steam_knuckleofveal": "Auto Parowe: Golonka cielęca",
+          "cooking_oven_program_dish_automatic_conv_steam_legoflambonthebonewelldone": "Auto Parowe: Udziec jagnięcy z kością (dobrze wypieczony)",
+          "cooking_oven_program_dish_automatic_conv_steam_meatloafmadefromfreshmincedmeat": "Auto Parowe: Klops z świeżego mięsa mielonego",
+          "cooking_oven_program_dish_automatic_conv_steam_multigrainryebreadwithyeastinaloaftin": "Auto Parowe: Chleb żytni wieloziarnisty z drożdżami w keksówce",
+          "cooking_oven_program_dish_automatic_conv_steam_pizzawiththickbaseonepizza": "Auto Parowe: Pizza na grubym ciecie (jedna pizza)",
+          "cooking_oven_program_dish_automatic_conv_steam_pizzawiththinbaseonepizza": "Auto Parowe: Pizza na cienkim cieście (jedna pizza)",
+          "cooking_oven_program_dish_automatic_conv_steam_porkchopfryonthebone": "Auto Parowe: Kotlet wieprzowy z kością",
+          "cooking_oven_program_dish_automatic_conv_steam_poulardunstuffed": "Auto Parowe: Parda bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_steam_roastporkloin": "Auto Parowe: Schab wieprzowy pieczony",
+          "cooking_oven_program_dish_automatic_conv_steam_roastwholefish": "Auto Parowe: Pieczona ryba w całości",
+          "cooking_oven_program_dish_automatic_conv_steam_rolledporkjoint": "Auto Parowe: Pieczeń wieprzowa zwijana",
+          "cooking_oven_program_dish_automatic_conv_steam_saddleofvenisononthebone": "Auto Parowe: Siodło z dziczyzny z kością",
+          "cooking_oven_program_dish_automatic_conv_steam_sirloinmedium": "Auto Parowe: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_automatic_conv_steam_sirloinrare": "Auto Parowe: Polędwica wołowa (krwista)",
+          "cooking_oven_program_dish_automatic_conv_steam_smokedporkbonedrolledfry": "Auto Parowe: Wędzona wieprzowina bez kości zwijana",
+          "cooking_oven_program_dish_automatic_conv_steam_smokedporkonthebone": "Auto Parowe: Wędzona wieprzowina z kością",
+          "cooking_oven_program_dish_automatic_conv_steam_tenderloinmedium": "Auto Parowe: Polędwiczka (średnio wypieczona)",
+          "cooking_oven_program_dish_automatic_conv_steam_topsideandtoprump": "Auto Parowe: Górna część udźca wołowego",
+          "cooking_oven_program_dish_automatic_conv_steam_unstuffedchicken": "Auto Parowe: Kurczak bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_steam_unstuffedduck": "Auto Parowe: Kaczka bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_steam_unstuffedgoose": "Auto Parowe: Gęś bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_steam_unstuffedsmallturkey": "Auto Parowe: Mały indyk bez nadzienia",
+          "cooking_oven_program_dish_automatic_conv_steam_vienneseboiledbeef": "Auto Parowe: Wołowina gotowana po wiedeńsku",
+          "cooking_oven_program_dish_automatic_conv_steam_wheatbreadmultigrainwheatbreadinaloaftin": "Auto Parowe: Chleb pszenny / wieloziarnisty pszenny w keksówce",
+          "cooking_oven_program_dish_automatic_conv_steam_wheatbreadmultigrainwheatbreadonabakingtray": "Auto Parowe: Chleb pszenny / wieloziarnisty pszenny na blasze",
+          "cooking_oven_program_dish_automatic_conv_steam_whitebreadinaloaftin": "Auto Parowe: Biały chleb w keksówce",
+          "cooking_oven_program_dish_automatic_conv_steam_whitebreadonabakingtray": "Auto Parowe: Biały chleb na blasze",
+          "cooking_oven_program_dish_automatic_conv_steam_wholerabbit": "Auto Parowe: Królik w całości",
+          "cooking_oven_program_dish_automatic_conv_steam_wholemealbreadonbakingtray": "Auto Parowe: Chleb pełnoziarnisty na blasze",
+          "cooking_oven_program_dish_automatic_conv_steam_wildboarroast": "Auto Parowe: Pieczeń z dzika",
+          "cooking_oven_program_dish_automatic_fullsteam_fishwholesteam": "Pełna para auto: Cała ryba",
+          "cooking_oven_program_dish_recommendation_conv_bakesavouryfreshcookedingredients": "Zalecenie: Zapiekanka z wytrawnymi świeżymi składnikami",
+          "cooking_oven_program_dish_recommendation_conv_bakesweetfresh": "Zalecenie: Słodka zapiekanka ze świeżymi składnikami",
+          "cooking_oven_program_dish_recommendation_conv_bakedpotatoes": "Zalecenie: Pieczone ziemniaki",
+          "cooking_oven_program_dish_recommendation_conv_bakedpotatoeson2levels": "Zalecenie: Pieczone ziemniaki na 2 poziom",
+          "cooking_oven_program_dish_recommendation_conv_baklava": "Zalecenie: Baklava",
+          "cooking_oven_program_dish_recommendation_conv_biscuits": "Zalecenie: Ciasteczka",
+          "cooking_oven_program_dish_recommendation_conv_blindbakepastrybase": "Zalecenie: Wypiek spodu ciasta bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_boerek": "Zalecenie: Börek",
+          "cooking_oven_program_dish_recommendation_conv_bonlessrolledshoulder": "Zalecenie: Rolowana łopatka bez kości",
+          "cooking_oven_program_dish_recommendation_conv_breadrolls": "Zalecenie: Bułeczki",
+          "cooking_oven_program_dish_recommendation_conv_breadrollsfrozen": "Zalecenie: Bułeczki (mrożone)",
+          "cooking_oven_program_dish_recommendation_conv_breastofvealstuffed": "Zalecenie: Piersi cielęce nadziewane",
+          "cooking_oven_program_dish_recommendation_conv_cannelloni": "Zalecenie: Cannelloni",
+          "cooking_oven_program_dish_recommendation_conv_chickenbreastfillet": "Zalecenie: Filet z piersi kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_chickenbreastfilletgrill": "Zalecenie: Grillowany filet z piersi kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_chickendrumsticks": "Zalecenie: Podudzia z kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_chickengoujonsnuggets": "Zalecenie: Stripsy/nuggetsy z kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_chickenparts": "Zalecenie: Porcje kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_chilledlasagne": "Zalecenie: Schłodzona lasagne",
+          "cooking_oven_program_dish_recommendation_conv_chilledpasta": "Zalecenie: Schłodzony makaron",
+          "cooking_oven_program_dish_recommendation_conv_chips": "Zalecenie: Frytki",
+          "cooking_oven_program_dish_recommendation_conv_chouxpastry": "Zalecenie: Ciasto parzone",
+          "cooking_oven_program_dish_recommendation_conv_ciabatta": "Zalecenie: Ciabatta",
+          "cooking_oven_program_dish_recommendation_conv_croissantsdough": "Zalecenie: Rogaliki (ciasto)",
+          "cooking_oven_program_dish_recommendation_conv_croquettes": "Zalecenie: Krokiety",
+          "cooking_oven_program_dish_recommendation_conv_danishpastry": "Zalecenie: Ciasto duńskie",
+          "cooking_oven_program_dish_recommendation_conv_duckbreast": "Zalecenie: Pierś z kaczki",
+          "cooking_oven_program_dish_recommendation_conv_empanada": "Zalecenie: Empanada",
+          "cooking_oven_program_dish_recommendation_conv_fatlessspongecake": "Zalecenie: Biszkopt beztłuszczowy",
+          "cooking_oven_program_dish_recommendation_conv_fishfilletstew": "Zalecenie: Duszony filet rybny",
+          "cooking_oven_program_dish_recommendation_conv_flatbread": "Zalecenie: Płaski chleb",
+          "cooking_oven_program_dish_recommendation_conv_freshbreadrolls": "Zalecenie: Świeże bułeczki",
+          "cooking_oven_program_dish_recommendation_conv_freshlasagne": "Zalecenie: Świeża lasagne",
+          "cooking_oven_program_dish_recommendation_conv_freshsweetbreadrolls": "Zalecenie: Świeże słodkie bułeczki",
+          "cooking_oven_program_dish_recommendation_conv_fruitcrumble": "Zalecenie: Crumble owocowe",
+          "cooking_oven_program_dish_recommendation_conv_fruittartorcheesecakewithpastrybase": "Zalecenie: Tart owocowa lub sernik na spodzie z ciasta",
+          "cooking_oven_program_dish_recommendation_conv_gammonjoint": "Zalecenie: Szynka peklowana w kawałku",
+          "cooking_oven_program_dish_recommendation_conv_goosestuffed": "Zalecenie: Gęś (nadziewana)",
+          "cooking_oven_program_dish_recommendation_conv_halvedchicken": "Zalecenie: Połówki kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_hashbrowns": "Zalecenie: Placek ziemniaczany / hash browns",
+          "cooking_oven_program_dish_recommendation_conv_hashbrownsgb": "Zalecenie: Hash browns (Wielka Brytania)",
+          "cooking_oven_program_dish_recommendation_conv_jamtarts": "Zalecenie: Babeczki z dżemem",
+          "cooking_oven_program_dish_recommendation_conv_jamtarts2levels": "Zalecenie: Babeczki z dżemem (na 2 poziomach)",
+          "cooking_oven_program_dish_recommendation_conv_knuckleofpork": "Zalecenie: Golonka wieprzowa",
+          "cooking_oven_program_dish_recommendation_conv_lambkarree": "Zalecenie: Kotlety jagnięce (karre)",
+          "cooking_oven_program_dish_recommendation_conv_lasagnefrozen": "Zalecenie: Lasagne (mrożona)",
+          "cooking_oven_program_dish_recommendation_conv_leavenedcake": "Zalecenie: Ciasto drożdżowe",
+          "cooking_oven_program_dish_recommendation_conv_loinjoint": "Zalecenie: Schab / polędwica w kawałku",
+          "cooking_oven_program_dish_recommendation_conv_macaroons": "Zalecenie: Makaroniki",
+          "cooking_oven_program_dish_recommendation_conv_meringue": "Zalecenie: Beza",
+          "cooking_oven_program_dish_recommendation_conv_minipizzas": "Zalecenie: Mini pizze",
+          "cooking_oven_program_dish_recommendation_conv_muffins": "Zalecenie: Muffinki",
+          "cooking_oven_program_dish_recommendation_conv_partcookedbreadrollsorbaguette": "Zalecenie: Podpiekane bułki lub bagietka",
+          "cooking_oven_program_dish_recommendation_conv_partcookedbreadrollsorbaguettefrozen": "Zalecenie: Podpiekane bułki lub bagietka (mrożone)",
+          "cooking_oven_program_dish_recommendation_conv_pierogi": "Zalecenie: Pierogi",
+          "cooking_oven_program_dish_recommendation_conv_pipedcookies": "Zalecenie: Ciasteczka wyciskane",
+          "cooking_oven_program_dish_recommendation_conv_pizzabaguettefrozen": "Zalecenie: Bagietka z pizzą (mrożona)",
+          "cooking_oven_program_dish_recommendation_conv_pizzachilled": "Zalecenie: Pizza schłodzona",
+          "cooking_oven_program_dish_recommendation_conv_pizzafreshonbakingtray": "Zalecenie: Świeża pizza na blasze do pieczenia",
+          "cooking_oven_program_dish_recommendation_conv_pizzafreshthinbaseinpizzatray": "Zalecenie: Świeża pizza na cienkim cieście w formie do pizzy",
+          "cooking_oven_program_dish_recommendation_conv_pizzathickcrust1slicefrozen": "Zalecenie: Pizzy grube ciasto 1 kawałek (mrożona)",
+          "cooking_oven_program_dish_recommendation_conv_pizzathincrust1slice": "Zalecenie: Pizzy cienkie ciasto 1 kawałek",
+          "cooking_oven_program_dish_recommendation_conv_porkroast": "Zalecenie: Pieczeń wieprzowa",
+          "cooking_oven_program_dish_recommendation_conv_potatogratinrawingredients4cmdeep": "Zalecenie: Zapiekanka ziemniaczana z surowych składników (głębokość 4 cm)",
+          "cooking_oven_program_dish_recommendation_conv_potatopocketsfilled": "Zalecenie: Nadziewane kieszonki ziemniaczane",
+          "cooking_oven_program_dish_recommendation_conv_potatowedges": "Zalecenie: Łódź ziemniaczane / wedges",
+          "cooking_oven_program_dish_recommendation_conv_pretzelsdough": "Zalecenie: Precle (ciasto)",
+          "cooking_oven_program_dish_recommendation_conv_puffpastry": "Zalecenie: Ciasto francuskie",
+          "cooking_oven_program_dish_recommendation_conv_quichetart": "Zalecenie: Quiche / tarta",
+          "cooking_oven_program_dish_recommendation_conv_richfruitcake": "Zalecenie: Bogate ciasto owocowe",
+          "cooking_oven_program_dish_recommendation_conv_roasthalvedpotatoes": "Zalecenie: Pieczone połówki ziemniaków",
+          "cooking_oven_program_dish_recommendation_conv_roastwholefish": "Zalecenie: Pieczona ryba w całości",
+          "cooking_oven_program_dish_recommendation_conv_roastbeefmedium": "Zalecenie: Rostbef (średnio wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_rolledturkeyjoint": "Zalecenie: Rolowana pieczeń z indyka",
+          "cooking_oven_program_dish_recommendation_conv_saddleofveal": "Zalecenie: Siodło cielęce",
+          "cooking_oven_program_dish_recommendation_conv_saddleofvenisononthebone": "Zalecenie: Siodło z dziczyzny z kością",
+          "cooking_oven_program_dish_recommendation_conv_savarinplaitedloaf": "Zalecenie: Babka / chałka Savarin",
+          "cooking_oven_program_dish_recommendation_conv_scones": "Zalecenie: Bułeczki scones",
+          "cooking_oven_program_dish_recommendation_conv_scones2levels": "Zalecenie: Bułeczki scones (na 2 poziomach)",
+          "cooking_oven_program_dish_recommendation_conv_shortcrustpastrydishes": "Zalecenie: Potrawy z ciasta kruchego",
+          "cooking_oven_program_dish_recommendation_conv_shortcrustpastryflanbase": "Zalecenie: Spód z ciasta kruchego do tarty",
+          "cooking_oven_program_dish_recommendation_conv_shortcrustpastrywithmoisttopping": "Zalecenie: Ciasto kruche z wilgotnym nadzieniem",
+          "cooking_oven_program_dish_recommendation_conv_shoulderonthebone": "Zalecenie: Łopatka z kością",
+          "cooking_oven_program_dish_recommendation_conv_simplespongecake": "Zalecenie: Proste ciasto biszkoptowe",
+          "cooking_oven_program_dish_recommendation_conv_slicesofmeatinsauceegschnitzelstew": "Zalecenie: Kawałki mięsa w sosie (np. potrawka sznyclowa)",
+          "cooking_oven_program_dish_recommendation_conv_smallcakes": "Zalecenie: Małe ciastka",
+          "cooking_oven_program_dish_recommendation_conv_smallcakes2levels": "Zalecenie: Małe ciastka (na 2 poziomach)",
+          "cooking_oven_program_dish_recommendation_conv_soufflesinindividualmolds": "Zalecenie: Suflety w pojedynczych foremkach",
+          "cooking_oven_program_dish_recommendation_conv_spongecakewithdrytopping": "Zalecenie: Ciasto biszkoptowe z suchą posypką",
+          "cooking_oven_program_dish_recommendation_conv_spongecakewithmoisttopping": "Zalecenie: Ciasto biszkoptowe z wilgotnym nadzieniem",
+          "cooking_oven_program_dish_recommendation_conv_spongeflanbase": "Zalecenie: Spód biszkoptowy do tarty",
+          "cooking_oven_program_dish_recommendation_conv_spongefruitflan": "Zalecenie: Tarta biszkoptowa z owocami",
+          "cooking_oven_program_dish_recommendation_conv_squidringsbreaded": "Zalecenie: Krążki kalmarów w panierce",
+          "cooking_oven_program_dish_recommendation_conv_stuffedchicken": "Zalecenie: Nadziewany kurczak",
+          "cooking_oven_program_dish_recommendation_conv_stuffedduck": "Zalecenie: Nadziewana kaczka",
+          "cooking_oven_program_dish_recommendation_conv_stuffedvegetables": "Zalecenie: Nadziewane warzywa",
+          "cooking_oven_program_dish_recommendation_conv_sweetstrudel": "Zalecenie: Słodki strudel",
+          "cooking_oven_program_dish_recommendation_conv_swissroll": "Zalecenie: Rolada biszkoptowa",
+          "cooking_oven_program_dish_recommendation_conv_swissrollgb": "Zalecenie: Rolada biszkoptowa (Wielka Brytania)",
+          "cooking_oven_program_dish_recommendation_conv_tart": "Zalecenie: Tarta",
+          "cooking_oven_program_dish_recommendation_conv_tarteflambee": "Zalecenie: Tarte flambée",
+          "cooking_oven_program_dish_recommendation_conv_tenderloinmedium": "Zalecenie: Polędwiczka (średnio wypieczona)",
+          "cooking_oven_program_dish_recommendation_conv_topsideandtoprump": "Zalecenie: Górna i środkowa część udźca",
+          "cooking_oven_program_dish_recommendation_conv_turkeycrownbritishstyle": "Zalecenie: Korpus indyka w stylu brytyjskim",
+          "cooking_oven_program_dish_recommendation_conv_vegetablesaugratin": "Zalecenie: Warzywa zapiekane z serem",
+          "cooking_oven_program_dish_recommendation_conv_victoriaspongecake": "Zalecenie: Ciasto Victoria Sponge",
+          "cooking_oven_program_dish_recommendation_conv_victoriaspongecake2levels": "Zalecenie: Ciasto Victoria Sponge (na 2 poziomach)",
+          "cooking_oven_program_dish_recommendation_conv_volauvents": "Zalecenie: Vol-au-vent (foremkowe paszteciki)",
+          "cooking_oven_program_dish_recommendation_conv_wheatbreadmultigrainwheatbreadinaloaftin": "Zalecenie: Chleb pszenny / wieloziarnisty pszenny w keksówce",
+          "cooking_oven_program_dish_recommendation_conv_wheatbreadmultigrainwheatbreadonabakingtray": "Zalecenie: Chleb pszenny / wieloziarnisty pszenny na blasze",
+          "cooking_oven_program_dish_recommendation_conv_whitebread": "Zalecenie: Biały chleb",
+          "cooking_oven_program_dish_recommendation_conv_whitebreadinaloaftin": "Zalecenie: Biały chleb w keksówce",
+          "cooking_oven_program_dish_recommendation_conv_whitebreadonabakingtray": "Zalecenie: Biały chleb na blasze",
+          "cooking_oven_program_dish_recommendation_conv_wholebakedpotatoes": "Zalecenie: Pieczone ziemniaki w całości",
+          "cooking_oven_program_dish_recommendation_conv_wholechicken": "Zalecenie: Cały kurczak",
+          "cooking_oven_program_dish_recommendation_conv_yeastcakewithdrytopping": "Zalecenie: Ciasto drożdżowe z suchą posypką",
+          "cooking_oven_program_dish_recommendation_conv_yeastcakewithmoisttopping": "Zalecenie: Ciasto drożdżowe z wilgotnym nadzieniem",
+          "cooking_oven_program_dish_recommendation_conv_yeastleavenedbundtcake": "Zalecenie: Babka drożdżowa",
+          "cooking_oven_program_dish_recommendation_conv_yogurtinglassjars": "Zalecenie: Jogurt w szklanych słoiczkach",
+          "cooking_oven_program_dish_recommendation_conv_yorkshirepudding": "Zalecenie: Pudding Yorkshire",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_bonelesslegoflambmedium": "Termometr do mięsa: Udziec jagnięcy bez kości (średnio wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_bonelesslegoflambwelldone": "Termometr do mięsa: Udziec jagnięcy bez kości (dobrze wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_bonelessporkneckjoint": "Termometr do mięsa: Karkówka wieprzowa bez kości",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_breastofvealstuffed": "Termometr do mięsa: Piersi cielęce nadziewane",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_chickenbreastfillet": "Termometr do mięsa: Filet z piersi kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_duckbreast": "Termometr do mięsa: Pierś z kaczki",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_goosebreast": "Termometr do mięsa: Pierś z gęsi",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_gooselegs": "Termometr do mięsa: Nogi z gęsi",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_jointofporkwithcracklingegshoulder": "Termometr do mięsa: Pieczeń wieprzowa ze skórką (np. łopatka)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_jointofveallean": "Termometr do mięsa: Pieczeń cielęca (chuda)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_jointofvealmarbled": "Termometr do mięsa: Pieczeń cielęca (marmurkowata)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_knuckleofpork": "Termometr do mięsa: Golonka wieprzowa",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_knuckleofveal": "Termometr do mięsa: Golonka cielęca",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_legoflambonthebonewelldone": "Termometr do mięsa: Udziec jagnięcy z kością (dobrze wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_loinjoint": "Termometr do mięsa: Schab w kawałku",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_meatloafmadefromfreshmincedmeat": "Termometr do mięsa: Klops z świeżego mięsa mielonego",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_poulardunstuffed": "Termometr do mięsa: Parda bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_roastjoint": "Termometr do mięsa: Pieczeń w kawałku",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_roastporkchoponthebone": "Termometr do mięsa: Schab wieprzowy z kością",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_roastporkloin": "Termometr do mięsa: Schab wieprzowy pieczony",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_roastwholefish": "Termometr do mięsa: Pieczona ryba w całości",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_rolledporkjoint": "Termometr do mięsa: Pieczeń wieprzowa zwijana",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_rolledturkeyjoint": "Termometr do mięsa: Rolowana pieczeń z indyka",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_saddleofveal": "Termometr do mięsa: Siodło cielęce",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_sirloinmedium": "Termometr do mięsa: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_sirloinrare": "Termometr do mięsa: Polędwica wołowa (krwista)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_stuffedchicken": "Termometr do mięsa: Nadziewany kurczak",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_tenderloinmedium": "Termometr do mięsa: Polędwiczka (średnio wypieczona)",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_turkeybreast": "Termometr do mięsa: Pierś z indyka",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_unstuffedchicken": "Termometr do mięsa: Kurczak bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_meatprobe_unstuffedsmallturkey": "Termometr do mięsa: Mały indyk bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_steam_bakesavouryfreshcookedingredients": "Zalecenie parowe: Zapiekanka z wytrawnymi świeżymi składnikami",
+          "cooking_oven_program_dish_recommendation_conv_steam_bakesweetfresh": "Zalecenie parowe: Słodka zapiekanka ze świeżymi składnikami",
+          "cooking_oven_program_dish_recommendation_conv_steam_baklava": "Zalecenie parowe: Baklava",
+          "cooking_oven_program_dish_recommendation_conv_steam_cannelloni": "Zalecenie parowe: Cannelloni",
+          "cooking_oven_program_dish_recommendation_conv_steam_chouxpastry": "Zalecenie parowe: Ciasto parzone",
+          "cooking_oven_program_dish_recommendation_conv_steam_ciabatta": "Zalecenie parowe: Ciabatta",
+          "cooking_oven_program_dish_recommendation_conv_steam_croissantsdough": "Zalecenie parowe: Rogaliki (ciasto)",
+          "cooking_oven_program_dish_recommendation_conv_steam_danishpastry": "Zalecenie parowe: Ciasto duńskie",
+          "cooking_oven_program_dish_recommendation_conv_steam_duckbreast": "Zalecenie parowe: Pierś z kaczki",
+          "cooking_oven_program_dish_recommendation_conv_steam_filletofpork": "Zalecenie parowe: Polędwiczka wieprzowa",
+          "cooking_oven_program_dish_recommendation_conv_steam_freshbreadrolls": "Zalecenie parowe: Świeże bułeczki",
+          "cooking_oven_program_dish_recommendation_conv_steam_freshlasagne": "Zalecenie parowe: Świeża lasagne",
+          "cooking_oven_program_dish_recommendation_conv_steam_freshsweetbreadrolls": "Zalecenie parowe: Świeże słodkie bułeczki",
+          "cooking_oven_program_dish_recommendation_conv_steam_gooselegs": "Zalecenie parowe: Nogi z gęsi",
+          "cooking_oven_program_dish_recommendation_conv_steam_goosestuffed": "Zalecenie parowe: Gęś (nadziewana)",
+          "cooking_oven_program_dish_recommendation_conv_steam_halvedchicken": "Zalecenie parowe: Połówki kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_steam_lasagnefrozen": "Zalecenie parowe: Lasagne (mrożona)",
+          "cooking_oven_program_dish_recommendation_conv_steam_leavenedcake": "Zalecenie parowe: Ciasto drożdżowe",
+          "cooking_oven_program_dish_recommendation_conv_steam_partcookedbreadrollsorbaguette": "Zalecenie parowe: Podpiekane bułki lub bagietka",
+          "cooking_oven_program_dish_recommendation_conv_steam_partcookedrollsorbaguettefrozen": "Zalecenie parowe: Podpiekane bułki lub bagietka (mrożone)",
+          "cooking_oven_program_dish_recommendation_conv_steam_potatogratinrawingredients4cmdeep": "Zalecenie parowe: Zapiekanka ziemniaczana z surowych składników (głębokość 4 cm)",
+          "cooking_oven_program_dish_recommendation_conv_steam_pretzelsdough": "Zalecenie parowe: Precle (ciasto)",
+          "cooking_oven_program_dish_recommendation_conv_steam_puffpastry": "Zalecenie parowe: Ciasto francuskie",
+          "cooking_oven_program_dish_recommendation_conv_steam_rolledturkeyjoint": "Zalecenie parowe: Rolowana pieczeń z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_saddleofveal": "Zalecenie parowe: Siodło cielęce",
+          "cooking_oven_program_dish_recommendation_conv_steam_savarinplaitedloaf": "Zalecenie parowe: Babka / chałka Savarin",
+          "cooking_oven_program_dish_recommendation_conv_steam_stuffedchicken": "Zalecenie parowe: Nadziewany kurczak",
+          "cooking_oven_program_dish_recommendation_conv_steam_stuffedduck": "Zalecenie parowe: Nadziewana kaczka",
+          "cooking_oven_program_dish_recommendation_conv_steam_sweetstrudel": "Zalecenie parowe: Słodki strudel",
+          "cooking_oven_program_dish_recommendation_conv_steam_turkeybreast": "Zalecenie parowe: Pierś z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_turkeythigh": "Zalecenie parowe: Udo z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_whitebread": "Zalecenie parowe: Biały chleb",
+          "cooking_oven_program_dish_recommendation_conv_steam_yeastleavenedbundtcake": "Zalecenie parowe: Babka drożdżowa",
+          "cooking_oven_program_dish_recommendation_conv_steam_yeaststollen": "Zalecenie parowe: Stollen drożdżowy",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_bonelesslegoflambmedium": "Parowy termometr do mięsa: Udziec jagnięcy bez kości (średnio wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_bonelesslegoflambwelldone": "Parowy termometr do mięsa: Udziec jagnięcy bez kości (dobrze wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_bonelessporkneckjoint": "Parowy termometr do mięsa: Karkówka wieprzowa bez kości",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_breastofvealstuffed": "Parowy termometr do mięsa: Piersi cielęce nadziewane",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_duckbreast": "Parowy termometr do mięsa: Pierś z kaczki",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_filletofpork": "Parowy termometr do mięsa: Polędwiczka wieprzowa",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_gooselegs": "Parowy termometr do mięsa: Nogi z gęsi",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_halvedchicken": "Parowy termometr do mięsa: Połówki kurczaka",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_jointofveallean": "Parowy termometr do mięsa: Pieczeń cielęca (chuda)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_jointofvealmarbled": "Parowy termometr do mięsa: Pieczeń cielęca (marmurkowata)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_knuckleofveal": "Parowy termometr do mięsa: Golonka cielęca",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_legoflambonthebonewelldone": "Parowy termometr do mięsa: Udziec jagnięcy z kością (dobrze wypieczony)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_meatloafmadefromfreshmincedmeat": "Parowy termometr do mięsa: Klops z świeżego mięsa mielonego",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_poulardunstuffed": "Parowy termometr do mięsa: Parda bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_roastporkchoponthebone": "Parowy termometr do mięsa: Schab wieprzowy z kością",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_roastporkloin": "Parowy termometr do mięsa: Schab wieprzowy pieczony",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_rolledporkjoint": "Parowy termometr do mięsa: Pieczeń wieprzowa zwijana",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_rolledturkeyjoint": "Parowy termometr do mięsa: Rolowana pieczeń z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_saddleofveal": "Parowy termometr do mięsa: Siodło cielęce",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_sirloinmedium": "Parowy termometr do mięsa: Polędwica wołowa (średnio wypieczona)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_sirloinrare": "Parowy termometr do mięsa: Polędwica wołowa (krwista)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_smokedporkonthebone": "Parowy termometr do mięsa: Wędzona wieprzowina z kością",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_tenderloinmedium": "Parowy termometr do mięsa: Polędwiczka (średnio wypieczona)",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_turkeybreast": "Parowy termometr do mięsa: Pierś z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_turkeythigh": "Parowy termometr do mięsa: Udo z indyka",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_unstuffedchicken": "Parowy termometr do mięsa: Kurczak bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_unstuffedduck": "Parowy termometr do mięsa: Kaczka bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_unstuffedgoose": "Parowy termometr do mięsa: Gęś bez nadzienia",
+          "cooking_oven_program_dish_recommendation_conv_steam_meatprobe_unstuffedsmallturkey": "Parowy termometr do mięsa: Mały indyk bez nadzienia",
+          "cooking_oven_program_dish_recommendation_fullsteam_applesinslices5mm": "Pełna para: Jabłka w plastrach 5 mm",
+          "cooking_oven_program_dish_recommendation_fullsteam_basmatirice": "Pełna para: Ryż basmati",
+          "cooking_oven_program_dish_recommendation_fullsteam_beans": "Pełna para: Fasola",
+          "cooking_oven_program_dish_recommendation_fullsteam_beetrootwholesteam": "Pełna para: Buraki w całości",
+          "cooking_oven_program_dish_recommendation_fullsteam_bluemussels": "Pełna para: Omułki (małże)",
+          "cooking_oven_program_dish_recommendation_fullsteam_boiledpotatoes": "Pełna para: Ziemniaki gotowane",
+          "cooking_oven_program_dish_recommendation_fullsteam_boiledpotatoeswskinlarge": "Pełna para: Ziemniaki w mundurkach (duże)",
+          "cooking_oven_program_dish_recommendation_fullsteam_boiledpotatoeswskinmedium": "Pełna para: Ziemniaki w mundurkach (średnie)",
+          "cooking_oven_program_dish_recommendation_fullsteam_boiledpotatoeswskinsmall": "Pełna para: Ziemniaki w mundurkach (małe)",
+          "cooking_oven_program_dish_recommendation_fullsteam_boiledsausages": "Pełna para: Parówki / kiełbaski gotowane",
+          "cooking_oven_program_dish_recommendation_fullsteam_broccoli": "Pełna para: Brokuły",
+          "cooking_oven_program_dish_recommendation_fullsteam_brownrice": "Pełna para: Ryż brązowy",
+          "cooking_oven_program_dish_recommendation_fullsteam_brusselssprouts": "Pełna para: Brukselka",
+          "cooking_oven_program_dish_recommendation_fullsteam_canellinibeanspresoftened": "Pełna para: Fasola cannellini (wstępnie zmiękczona)",
+          "cooking_oven_program_dish_recommendation_fullsteam_carrots": "Pełna para: Marchewka",
+          "cooking_oven_program_dish_recommendation_fullsteam_cauliflower": "Pełna para: Kalafior",
+          "cooking_oven_program_dish_recommendation_fullsteam_cauliflowerfloretssteam": "Pełna para: Różyczki kalafiora",
+          "cooking_oven_program_dish_recommendation_fullsteam_chickenbreastfilletsteam": "Pełna para: Filet z piersi kurczaka",
+          "cooking_oven_program_dish_recommendation_fullsteam_cod": "Pełna para: Dorsz",
+          "cooking_oven_program_dish_recommendation_fullsteam_codcutlet": "Pełna para: Kotlet z dorsza",
+          "cooking_oven_program_dish_recommendation_fullsteam_couscous": "Pełna para: Kuskus",
+          "cooking_oven_program_dish_recommendation_fullsteam_cremecaramel": "Pełna para: Crème caramel",
+          "cooking_oven_program_dish_recommendation_fullsteam_defrostberries": "Pełna para: Rozmrażanie jagód/owoców leśnych",
+          "cooking_oven_program_dish_recommendation_fullsteam_defrostinblockfrozenvegetables": "Pełna para: Rozmrażanie warzyw w zablokowanym bloku",
+          "cooking_oven_program_dish_recommendation_fullsteam_defrostloosevegetables": "Pełna para: Rozmrażanie sypkich warzyw",
+          "cooking_oven_program_dish_recommendation_fullsteam_dumplings": "Pełna para: Kluski / pierogi",
+          "cooking_oven_program_dish_recommendation_fullsteam_fishfilletfreshsteam": "Pełna para: Świeży filet rybny",
+          "cooking_oven_program_dish_recommendation_fullsteam_fishterrine": "Pełna para: Terrina rybna",
+          "cooking_oven_program_dish_recommendation_fullsteam_frozenfishfillet": "Pełna para: Mrożony filet rybny",
+          "cooking_oven_program_dish_recommendation_fullsteam_fruitcompote": "Pełna para: Kompot owocowy",
+          "cooking_oven_program_dish_recommendation_fullsteam_greenasparagus": "Pełna para: Zielone szparagi",
+          "cooking_oven_program_dish_recommendation_fullsteam_greenbeanssteam": "Pełna para: Zielona fasolka",
+          "cooking_oven_program_dish_recommendation_fullsteam_halibut": "Pełna para: Halibut",
+          "cooking_oven_program_dish_recommendation_fullsteam_halibutcutlet": "Pełna para: Kotlet z halibuta",
+          "cooking_oven_program_dish_recommendation_fullsteam_hardboiledeggs": "Pełna para: Jajka na twardo",
+          "cooking_oven_program_dish_recommendation_fullsteam_lentils": "Pełna para: Soczewica",
+          "cooking_oven_program_dish_recommendation_fullsteam_longgrainrice": "Pełna para: Ryż długoziarnisty",
+          "cooking_oven_program_dish_recommendation_fullsteam_meatprobe_chickenbreastfilletsteam": "Sonda do mięsa (pełna para): Filet z piersi kurczaka",
+          "cooking_oven_program_dish_recommendation_fullsteam_meatprobe_fishwholesteam": "Sonda do mięsa (pełna para): Cała ryba",
+          "cooking_oven_program_dish_recommendation_fullsteam_millet": "Pełna para: Kasza jaglana",
+          "cooking_oven_program_dish_recommendation_fullsteam_mixedvegetablesfrozen": "Pełna para: Warzywa mieszane (mrożone)",
+          "cooking_oven_program_dish_recommendation_fullsteam_monkfish": "Pełna para: Żabnica",
+          "cooking_oven_program_dish_recommendation_fullsteam_parboiledrice": "Pełna para: Ryż parboiled",
+          "cooking_oven_program_dish_recommendation_fullsteam_pearlbarley": "Pełna para: Kasza jęczmienna perłowa",
+          "cooking_oven_program_dish_recommendation_fullsteam_peas": "Pełna para: Groszek",
+          "cooking_oven_program_dish_recommendation_fullsteam_pineappleinslices1to2cm": "Pełna para: Ananas w plastrach 1-2 cm",
+          "cooking_oven_program_dish_recommendation_fullsteam_pipfruits": "Pełna para: Owoce ziarnkowe",
+          "cooking_oven_program_dish_recommendation_fullsteam_polenta": "Pełna para: Polenta",
+          "cooking_oven_program_dish_recommendation_fullsteam_prawns": "Pełna para: Krewetki",
+          "cooking_oven_program_dish_recommendation_fullsteam_pumpkin": "Pełna para: Dynia",
+          "cooking_oven_program_dish_recommendation_fullsteam_raspberries": "Pełna para: Maliny",
+          "cooking_oven_program_dish_recommendation_fullsteam_redcurrants": "Pełna para: Czerwona porzeczka",
+          "cooking_oven_program_dish_recommendation_fullsteam_ricepudding": "Pełna para: Ryż na mleku",
+          "cooking_oven_program_dish_recommendation_fullsteam_risotto": "Pełna para: Risotto",
+          "cooking_oven_program_dish_recommendation_fullsteam_royale": "Pełna para: Royale (masa jajeczno-śmietankowa)",
+          "cooking_oven_program_dish_recommendation_fullsteam_salmon": "Pełna para: Łosoś",
+          "cooking_oven_program_dish_recommendation_fullsteam_salmoncutlet": "Pełna para: Kotlet z łososia",
+          "cooking_oven_program_dish_recommendation_fullsteam_salmonfillet": "Pełna para: Filet z łososia",
+          "cooking_oven_program_dish_recommendation_fullsteam_seabass": "Pełna para: Okoń morski",
+          "cooking_oven_program_dish_recommendation_fullsteam_semolinadumplings": "Pełna para: Kluski z kaszy manny",
+          "cooking_oven_program_dish_recommendation_fullsteam_softboiledeggs": "Pełna para: Jajka na miękko",
+          "cooking_oven_program_dish_recommendation_fullsteam_softwheatwhole": "Pełna para: Pszenica miękka cała",
+          "cooking_oven_program_dish_recommendation_fullsteam_solerollsstuffed": "Pełna para: Roladki z soli (faszerowane)",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamartichokes": "Pełna para: Karczochy",
+          "cooking_oven_program_dish_recommendation_fullsteam_steambroccoliflorets": "Pełna para: Różyczki brokuła",
+          "cooking_oven_program_dish_recommendation_fullsteam_steambrusselssprouts": "Pełna para: Brukselka",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamgreenasparagus": "Pełna para: Zielone szparagi",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamleeksinrings": "Pełna para: Pory w krążkach",
+          "cooking_oven_program_dish_recommendation_fullsteam_steammangetout": "Pełna para: Groszek cukrowy",
+          "cooking_oven_program_dish_recommendation_fullsteam_steampeas": "Pełna para: Groszek",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamshreddedredcabbage": "Pełna para: Poszatkowana czerwona kapusta",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamshreddedswisschard": "Pełna para: Poszatkowanać boćwina",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamshreddedwhitecabbage": "Pełna para: Poszatkowana biała kapusta",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamslicedcarrots": "Pełna para: Marchew w plastrach",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamslicedcourgettes": "Pełna para: Cukinia w plastrach",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamslicedfennel": "Pełna para: Koper włoski w plastrach",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamslicedkohlrabi": "Pełna para: Kalarepa w plastrach",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamspinach": "Pełna para: Szpinak",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamvegetableflan": "Pełna para: Flan warzywny",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamwhiteasparagus": "Pełna para: Białe szparagi",
+          "cooking_oven_program_dish_recommendation_fullsteam_steamwholecauliflower": "Pełna para: Cały kalafior",
+          "cooking_oven_program_dish_recommendation_fullsteam_sterilisingbottles": "Pełna para: Sterylizacja butelek",
+          "cooking_oven_program_dish_recommendation_fullsteam_stonefruits": "Pełna para: Owoce pestkowe",
+          "cooking_oven_program_dish_recommendation_fullsteam_tomatoes": "Pełna para: Pomidory",
+          "cooking_oven_program_dish_recommendation_fullsteam_trout": "Pełna para: Pstrąg",
+          "cooking_oven_program_dish_recommendation_fullsteam_turbot": "Pełna para: Turbot",
+          "cooking_oven_program_dish_recommendation_fullsteam_turbotcutlet": "Pełna para: Kotlet z turbota",
+          "cooking_oven_program_dish_recommendation_fullsteam_unripespeltgraincoarseground": "Pełna para: Grubo mielone ziarna niedojrzałej orkiszu",
+          "cooking_oven_program_dish_recommendation_fullsteam_vanillasauce": "Pełna para: Sos waniliowy",
+          "cooking_oven_program_dish_recommendation_fullsteam_vegetables": "Pełna para: Warzywa",
+          "cooking_oven_program_dish_recommendation_fullsteam_wholewheat": "Pełna para: Pełne ziarno pszenicy",
+          "cooking_oven_program_dish_recommendation_fullsteam_yeastdumplings": "Pełna para: Pampuchy / Kluski na parze",
+          "cooking_oven_program_dish_sousvide_fullsteam_beeforvealfiletmedallions3to4cm": "Sous Vide: Medalliony z polędwicy wołowej lub cielęcej 3-4 cm",
+          "cooking_oven_program_dish_sousvide_fullsteam_beeforvealsteak": "Sous Vide: Stek wołowy lub cielęcy",
+          "cooking_oven_program_dish_sousvide_fullsteam_chickenbreastfillet": "Sous Vide: Filet z piersi kurczaka",
+          "cooking_oven_program_dish_sousvide_fullsteam_duckbreast": "Sous Vide: Pierś z kaczki",
+          "cooking_oven_program_dish_sousvide_fullsteam_fishfillet": "Sous Vide: Filet rybny",
+          "cooking_oven_program_dish_sousvide_fullsteam_porkfiletmedaillions4to5cm": "Sous Vide: Medalliony z polędwiczki wieprzowej 4-5 cm",
+          "cooking_oven_program_dish_sousvide_fullsteam_prawns": "Sous Vide: Krewetki",
+          "cooking_oven_program_dish_sousvide_fullsteam_saddleoflamb": "Sous Vide: Siodło jagnięce",
+          "cooking_oven_program_dish_sousvide_fullsteam_scallops": "Sous Vide: Przegrzebki",
+          "cooking_oven_program_steammodes_defrosting": "Para: Rozmrażanie",
+          "cooking_oven_program_steammodes_doughproving": "Para: Wyrastanie ciasta",
+          "cooking_oven_program_steammodes_reheat": "Para: Podgrzewanie",
+          "cooking_oven_program_steammodes_sousvide": "Para: Sous Vide",
+          "cooking_oven_program_steammodes_steam": "Para",
+          "cooking_oven_program_subsequentmode_continuecooking": "Tryb następczy: Kontynuuj gotowanie",
+          "cooking_oven_program_subsequentmode_drying": "Tryb następczy: Suszenie",
+          "cooking_oven_program_subsequentmode_keepwarm": "Tryb następczy: Podtrzymywanie temperatury",
+          "cooking_oven_program_subsequentmode_leavetorest": "Tryb następczy: Pozostaw do wypoczynku",
+          "cooking_oven_program_subsequentmode_startbaking": "Tryb następczy: Rozpocznij pieczenie",
+          "laundrycare_washer_program_automatic30_auto30_auto30": "Pranie – Automatyczny delikatny/30",
+          "laundrycare_washer_program_auto60": "Pranie – Automatyczny 60",
+          "laundrycare_washer_program_automatic4060_auto40_auto40": "Pranie – Automatyczny 40-60",
+          "laundrycare_washer_program_cotton_cotton_cotton": "Pranie – Bawełna",
+          "laundrycare_washer_program_cotton": "Pranie – Bawełna",
+          "laundrycare_washer_program_darkwash_darkwash_darkwash": "Pranie – Ciemne tkaniny",
+          "laundrycare_washer_program_darkwash_curtains_curtains": "Pranie – Zasłony",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilk": "Pranie – Delikatne / Jedwab",
+          "laundrycare_washer_program_delicatessilk_delicatessilk_delicatessilkmp": "Pranie – Antymikroplastik",
+          "laundrycare_washer_program_downduvet_down_down": "Pranie – Puch",
+          "laundrycare_washer_program_drumclean_drumclean_drumclean": "Czyszczenie bębna (poprzednia wersja)",
+          "laundrycare_washer_program_drumclean_drumclean70_drumclean70": "Czyszczenie bębna",
+          "laundrycare_washer_program_easycare_easycare_easycare": "Pranie – Syntetyki",
+          "laundrycare_washer_program_labeleu19_labeleu19_eco4060": "Pranie – Eco 40-60",
+          "laundrycare_washer_program_mix_mix_mix": "Szybki / Mieszany",
+          "laundrycare_washer_program_outdoor_outdoor_outdoor": "Pranie – Odzież outdoorowa",
+          "laundrycare_washer_program_powerspeed59_powerspeed59_powerspeed59": "powerSpeed 59'",
+          "laundrycare_washer_program_rinse_rinse_rinse": "Płukanie",
+          "laundrycare_washer_program_sensitive_sensitive_sensitive": "Pranie – Wrażliwe",
+          "laundrycare_washer_program_shirtsblouses_shirtsblouses_shirtsblouses": "Pranie – Koszule / Bluzki",
+          "laundrycare_washer_program_shirtsblouses_sportfitness_sportfitness": "Pranie – Odzież sportowa",
+          "laundrycare_washer_program_spin_spin_spindrain": "Wirowanie / Odpompowanie",
+          "laundrycare_washer_program_steaming_steaming_steaming": "Para / Asystent prasowania",
+          "laundrycare_washer_program_super153045_super1530_super1530": "Pranie – Super krótkie 15 min / 30 min",
+          "laundrycare_washer_program_towels_towels_towels": "Ręczniki",
+          "laundrycare_washer_program_wool_wool_wool": "Pranie – Wełna",
+          "laundrycare_washer_program_sportfitness": "Pranie – Odzież sportowa",
+          "laundrycare_common_program_juststart": "Po prostu start",
+          "laundrycare_dryer_program_blankets": "Suszenie – Odzież puchowa",
+          "laundrycare_dryer_program_businessshirts": "Koszule",
+          "laundrycare_dryer_program_cotton": "Suszenie – Bawełna",
+          "laundrycare_dryer_program_dessous": "Suszenie – Bielizna",
+          "laundrycare_dryer_program_hygiene": "Suszenie – Higiena",
+          "laundrycare_dryer_program_inbasket": "Suszenie – Wełna w koszu",
+          "laundrycare_dryer_program_mix": "Suszenie – Tkaniny mieszane",
+          "laundrycare_dryer_program_outdoor": "Suszenie – Odzież outdoorowa",
+          "laundrycare_dryer_program_pillow": "Suszenie – Kołdra",
+          "laundrycare_dryer_program_super40": "Suszenie – Szybkie 40 min",
+          "laundrycare_dryer_program_synthetic": "Suszenie – Syntetyki",
+          "laundrycare_dryer_program_timecold": "Program czasowy zimny",
+          "laundrycare_dryer_program_timewarm": "Program czasowy ciepły",
+          "laundrycare_dryer_program_towels": "Suszenie – Ręczniki",
+          "laundrycare_dryer_program_shirtsblouses_sportfitness": "Suszenie – Odzież sportowa",
+          "laundrycare_washerdryer_program_towels_towels": "Pranie i suszenie – Ręczniki",
+          "laundrycare_washerdryer_program_cotton_cotton": "Pranie i suszenie – Bawełna",
+          "laundrycare_washerdryer_program_mix_mix": "Pranie i suszenie – Mieszane",
+          "laundrycare_washerdryer_program_wool_wool": "Pranie i suszenie – Wełna",
+          "laundrycare_washerdryer_program_sportfitness_sportfitness": "Pranie i suszenie – Odzież sportowa",
+          "laundrycare_washerdryer_program_washanddry_60": "Pranie i suszenie – 60'",
+          "laundrycare_washerdryer_program_downduvet_down": "Pranie i suszenie – Puch",
+          "laundrycare_washer_program_cotton_colour": "Kolorowa bawełna",
+          "laundrycare_washer_program_cotton_eco4060": "Bawełna Eco 40–60",
+          "laundrycare_washer_program_delicatessilk": "Delikatne / Jedwab",
+          "laundrycare_washer_program_downduvet_duvet": "Puch / Kołdra",
+          "laundrycare_washer_program_easycare": "Syntetyki",
+          "laundrycare_washer_program_mix": "Wsad mieszany",
+          "laundrycare_washer_program_rinse": "Płukanie",
+          "laundrycare_washer_program_sensitive": "Wrażliwe",
+          "laundrycare_washer_program_spin_spindrain": "Wirowanie / Odpompowanie",
+          "laundrycare_washer_program_super153045_super1530": "Super 15/30",
+          "laundrycare_washer_program_wool": "Wełna",
+          "laundrycare_washer_program_easycare_antistainlight_blood": "Syntetyki – Anty-plamy (Krew)",
+          "laundrycare_washer_program_easycare_antistainlight_butteroil": "Syntetyki – Anty-plamy (Masło/Olej)",
+          "laundrycare_washer_program_easycare_antistainlight_cosmetics": "Syntetyki – Anty-plamy (Kosmetyki)",
+          "laundrycare_washer_program_easycare_antistainlight_tea": "Syntetyki – Anty-plamy (Herbata)",
+          "consumerproducts_coffeemaker_program_beverage_caffegrande": "Caffè Grande",
+          "consumerproducts_coffeemaker_program_beverage_caffelatte": "Caffè Latte",
+          "consumerproducts_coffeemaker_program_beverage_cappuccino": "Cappuccino",
+          "consumerproducts_coffeemaker_program_beverage_coffee": "Kawa",
+          "consumerproducts_coffeemaker_program_beverage_espresso": "Espresso",
+          "consumerproducts_coffeemaker_program_beverage_espressodoppio": "Espresso Doppio",
+          "consumerproducts_coffeemaker_program_beverage_espressomacchiato": "Espresso Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_hotwater": "Gorąca woda",
+          "consumerproducts_coffeemaker_program_beverage_lattemacchiato": "Latte Macchiato",
+          "consumerproducts_coffeemaker_program_beverage_milkfroth": "Pianka z mleka",
+          "consumerproducts_coffeemaker_program_beverage_ristretto": "Ristretto",
+          "consumerproducts_coffeemaker_program_beverage_warmmilk": "Ciepłe mleko",
+          "consumerproducts_coffeemaker_program_beverage_xlcoffee": "Kawa XL",
+          "consumerproducts_coffeemaker_program_coffeeworld_americano": "Americano",
+          "consumerproducts_coffeemaker_program_coffeeworld_blackeye": "Blackeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeaulait": "Café au Lait",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafeconleche": "Café Con Leche",
+          "consumerproducts_coffeemaker_program_coffeeworld_cafecortado": "Café Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrew": "Cold Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_coldbrewmacchiato": "Cold Brew macchiato",
+          "consumerproducts_coffeemaker_program_coffeeworld_cortado": "Cortado",
+          "consumerproducts_coffeemaker_program_coffeeworld_deadeye": "Deadeye",
+          "consumerproducts_coffeemaker_program_coffeeworld_doppio": "Doppio",
+          "consumerproducts_coffeemaker_program_coffeeworld_flatwhite": "Flat White",
+          "consumerproducts_coffeemaker_program_coffeeworld_galao": "Galão",
+          "consumerproducts_coffeemaker_program_coffeeworld_garoto": "Garoto",
+          "consumerproducts_coffeemaker_program_coffeeworld_grosserbrauner": "Großer Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_kaapi": "Kaapi",
+          "consumerproducts_coffeemaker_program_coffeeworld_kleinerbrauner": "Kleiner Brauner",
+          "consumerproducts_coffeemaker_program_coffeeworld_koffieverkeerd": "Koffie Verkeerd",
+          "consumerproducts_coffeemaker_program_coffeeworld_redeye": "Red Eye",
+          "consumerproducts_coffeemaker_program_coffeeworld_slowbrew": "Slow Brew",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerter": "Verlängerter",
+          "consumerproducts_coffeemaker_program_coffeeworld_verlaengerterbraun": "Verlängerter Braun",
+          "consumerproducts_coffeemaker_program_coffeeworld_wienermelange": "Wiener Melange",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceoffrinsing": "Płukanie przy wyłączaniu",
+          "consumerproducts_coffeemaker_program_cleaningmodes_applianceonrinsing": "Płukanie przy włączaniu",
+          "consumerproducts_coffeemaker_program_cleaningmodes_calcnclean": "Calc'n'clean",
+          "consumerproducts_coffeemaker_program_cleaningmodes_clean": "Czyszczenie",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanually": "Czyszczenie zaparzacza",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanbrewingunitmanuallydetailed": "Czyszczenie zaparzacza (szczegółowe)",
+          "consumerproducts_coffeemaker_program_cleaningmodes_cleanoutletmanually": "Czyszczenie wylewki napojów",
+          "consumerproducts_coffeemaker_program_cleaningmodes_descale": "Odkamienianie",
+          "consumerproducts_coffeemaker_program_cleaningmodes_frostprotection": "Ochrona przed mrozem",
+          "consumerproducts_coffeemaker_program_cleaningmodes_removewaterfilter": "Wyjmij filtr wody",
+          "consumerproducts_coffeemaker_program_cleaningmodes_replacewaterfilter": "Wymień filtr wody",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsemilksystem": "Płukanie systemu mlecznego",
+          "consumerproducts_coffeemaker_program_cleaningmodes_rinsewaterfilter": "Płukanie filtra wody",
+          "consumerproducts_coffeemaker_program_cleaningmodes_specialrinsing": "Płukanie specjalne",
+          "laundrycare_common_program_memory1": "Pamięć 1",
+          "laundrycare_common_program_memory2": "Pamięć 2",
+          "laundrycare_common_program_memory3": "Pamięć 3",
+          "laundrycare_common_program_memory4": "Pamięć 4",
+          "laundrycare_common_program_memory5": "Pamięć 5",
+          "laundrycare_common_program_memory6": "Pamięć 6",
+          "laundrycare_common_program_memory7": "Pamięć 7",
+          "laundrycare_common_program_memory8": "Pamięć 8"
+        }
+      },
+      "sensor_rinse_aid": {
+        "name": "Nabłyszczacz",
+        "state": {
+          "empty": "Pusty",
+          "nearly_empty": "Prawie pusty",
+          "full": "Pełny"
+        }
+      },
+      "sensor_salt": {
+        "name": "Sól",
+        "state": {
+          "empty": "Pusta",
+          "nearly_empty": "Prawie pusta",
+          "full": "Pełna"
+        }
+      },
+      "sensor_water_tank": {
+        "name": "Zbiornik na wodę",
+        "state": {
+          "empty": "Pusty",
+          "nearly_empty": "Prawie pusty",
+          "not_inserted": "Niewłożony",
+          "full": "Pełny"
+        }
+      },
+      "sensor_drip_tray": {
+        "name": "Tacka ociekowa",
+        "state": {
+          "ok": "OK",
+          "not_inserted": "Niewłożona",
+          "full": "Pełna"
+        }
+      },
+      "sensor_start_in": {
+        "name": "Start za"
+      },
+      "sensor_finish_in": {
+        "name": "Koniec za"
+      },
+      "sensor_count_started": {
+        "name": "Liczba uruchomień"
+      },
+      "sensor_end_trigger": {
+        "name": "Warunek zakończenia programu",
+        "state": {
+          "programfinished": "Zakończony",
+          "programabortedbyuser": "Przerwany przez użytkownika",
+          "programabortedbyappliance": "Przerwany przez urządzenie",
+          "programabortedbyappliancecriticalerror": "Błąd krytyczny"
+        }
+      },
+      "sensor_interval_time_off": {
+        "name": "Interwał wyłączenia"
+      },
+      "sensor_interval_time_on": {
+        "name": "Interwał włączenia"
+      },
+      "sensor_delayed_shutoff_time": {
+        "name": "Opóźnione wyłączenie"
+      },
+      "sensor_power_state": {
+        "name": "Stan zasilania",
+        "state": {
+          "mainsoff": "Zasilanie wyłączone",
+          "off": "Wyłączony",
+          "on": "Włączony",
+          "standby": "Tryb czuwania"
+        }
+      },
+      "sensor_door_state": {
+        "name": "Drzwi",
+        "state": {
+          "open": "Otwarte",
+          "closed": "Zamknięte",
+          "locked": "Zablokowane",
+          "ajar": "Uchylone"
+        }
+      },
+      "sensor_laundry_reload": {
+        "name": "Dołożenie prania",
+        "state": {
+          "impossible": "Niemożliwe",
+          "possiblepauseprogram": "Możliwe po wstrzymaniu programu",
+          "possibleopendoor": "Możliwe po otwarciu drzwi"
+        }
+      },
+      "sensor_laundry_process_phase": {
+        "name": "Faza procesu",
+        "state": {
+          "nophase": "Brak fazy",
+          "prewash": "Pranie wstępne",
+          "intermediatespin": "Wirowanie pośrednie",
+          "fillingdetergent": "Pobieranie detergentu",
+          "detectingload": "Wykrywanie załadunku",
+          "heating": "Nagrzewanie",
+          "washing": "Pranie",
+          "cooldown": "Chłodzenie",
+          "rinsingfoam": "Płukanie piany",
+          "rinsing": "Płukanie",
+          "rinsingaquasensor": "Płukanie Aqua Sensor",
+          "rinseonly": "Tylko płukanie",
+          "waterproofing": "Impregnacja",
+          "rinsingsoftener": "Płukanie z płynem zmiękczającym",
+          "holdafterrinse": "Zatrzymanie po płukaniu",
+          "pumping": "Wypompowywanie",
+          "spinningfinal": "Wirowanie końcowe",
+          "lessironing": "Mniej zagnieceń",
+          "fluffing": "Rozluźnianie puchu",
+          "soaking": "Namaczanie",
+          "hygienicsteamfogging": "Higieniczne zamgławianie parowe",
+          "guardingoxy": "Ochrona tlenowa",
+          "generatingozone": "Generowanie ozonu",
+          "degradingozone": "Rozkładanie ozonu",
+          "drying": "Suszenie",
+          "coolingdown": "Chłodzenie",
+          "additionalcoolingdown": "Dodatkowe chłodzenie",
+          "guardingwrinkle": "Ochrona przed zagnieceniami",
+          "detectingtextile": "Wykrywanie tkaniny",
+          "detectingsoil": "Wykrywanie stopnia zabrudzenia",
+          "disinfecting": "Dezynfekcja",
+          "lowtemperaturehygiene": "Higiena w niskiej temperaturze",
+          "steamingactive": "Parowanie aktywne",
+          "irondryreached": "Osiągnięto suchość do prasowania",
+          "cupboarddryreached": "Osiągnięto suchość do szafy",
+          "cupboarddryplusreached": "Osiągnięto suchość plus do szafy",
+          "cleaningheatexchanger": "Czyszczenie wymiennika ciepła",
+          "slightlydampreached": "Osiągnięto lekko wilgotne",
+          "extradryreached": "Osiągnięto ekstra suche",
+          "gentlydryreached": "Osiągnięto delikatne suszenie",
+          "quickcare": "Szybka pielęgnacja",
+          "depthcarephase1": "Faza głębokiej pielęgnacji 1",
+          "depthcarephase2": "Faza głębokiej pielęgnacji 2",
+          "coldrefreshing": "Zimne odświeżanie",
+          "steaming": "Parowanie",
+          "foam": "Piana",
+          "testprogramdummytextfinalspeedreached": "Program testowy – osiągnięto prędkość końcową",
+          "rinsingfoamf21": "Płukanie piany F21",
+          "handsoak": "Namaczanie ręczne",
+          "vacant": "Wolny",
+          "spinning": "Wirowanie",
+          "displayspinabortnospin": "Wyświetl anulowanie wirowania – brak wirowania",
+          "multiplesoak": "Wielokrotne namaczanie",
+          "laundryrefreshing": "Odświeżanie prania",
+          "reload": "Dołożenie prania",
+          "hotmoistheatingwetting": "Gorące wilgotne nagrzewanie i zwilżanie",
+          "hotmoistheatingheating": "Gorące wilgotne nagrzewanie",
+          "hotmoistheatingwashing": "Gorące wilgotne pranie",
+          "moistureremoval": "Usuwanie wilgoci",
+          "selfcleaning": "Czyszczenie własne",
+          "hygiene": "Higiena",
+          "smartsoak": "Inteligentne namaczanie",
+          "soakpause": "Przerwa w namaczaniu",
+          "soakfinished": "Namaczanie zakończone",
+          "anyphase": "Dowolna faza"
+        }
+      },
+      "sensor_count_completed": {
+        "name": "Liczba ukończonych"
+      },
+      "sensor_flex_start": {
+        "name": "Flex start",
+        "state": {
+          "disabled": "Wyłączony",
+          "enabled": "Włączony",
+          "pending": "Oczekujący",
+          "scheduled": "Zaplanowany",
+          "started": "Uruchomiony",
+          "finished": "Zakończony"
+        }
+      },
+      "sensor_dryer_process_phase": {
+        "name": "Faza procesu",
+        "state": {
+          "steamactive": "Para aktywna",
+          "progstarted": "Program uruchomiony",
+          "drying": "Suszenie",
+          "irondryreached": "Osiągnięto suchość do prasowania",
+          "cupboarddryreached": "Osiągnięto suchość do szafy",
+          "cubboarddryplusreached": "Osiągnięto suchość plus do szafy",
+          "cooling": "Chłodzenie",
+          "finishedanticrease": "Zakończono – ochrona przed zagnieceniami",
+          "heatexchangercleaning": "Czyszczenie wymiennika ciepła",
+          "slightlydampreached": "Osiągnięto lekko wilgotne",
+          "extradryreached": "Osiągnięto ekstra suche",
+          "quickcare": "Szybka pielęgnacja",
+          "depthcarephase1": "Faza głębokiej pielęgnacji 1",
+          "depthcarephase2": "Faza głębokiej pielęgnacji 2",
+          "spare": "Zapasowy"
+        }
+      },
+      "sensor_temperature_ambient": {
+        "name": "Temperatura otoczenia"
+      },
+      "sensor_laundry_load_recommendation": {
+        "name": "Zalecenie dotyczące załadunku"
+      },
+      "sensor_water_filter_saturation": {
+        "name": "Nasycenie filtra wody"
+      },
+      "sensor_temperature_memory_freezer": {
+        "name": "Zapamiętana temperatura zamrażarki"
+      },
+      "sensor_laundry_spin_speed": {
+        "name": "Prędkość wirowania",
+        "state": {
+          "off": "Wyłączone",
+          "rpm400": "400 obr./min",
+          "rpm600": "600 obr./min",
+          "rpm700": "700 obr./min",
+          "rpm800": "800 obr./min",
+          "rpm900": "900 obr./min",
+          "rpm1000": "1000 obr./min",
+          "rpm1200": "1200 obr./min",
+          "rpm1400": "1400 obr./min",
+          "rpm1500": "1500 obr./min",
+          "rpm1600": "1600 obr./min",
+          "rinsehold": "Zatrzymanie płukania",
+          "auto": "Automatycznie"
+        }
+      },
+      "sensor_estimated_remaining_program_time": {
+        "name": "Szacowany całkowity czas programu"
+      },
+      "sensor_oven_water_tank": {
+        "name": "Zbiornik na wodę",
+        "state": {
+          "ok": "OK",
+          "empty": "Pusty",
+          "unplugged": "Odłączony"
+        }
+      },
+      "sensor_oven_water_tank_group": {
+        "name": "Zbiornik na wodę {group_name}",
+        "state": {
+          "ok": "OK",
+          "empty": "Pusty",
+          "unplugged": "Odłączony"
+        }
+      },
+      "sensor_oven_current_temperature": {
+        "name": "Aktualna temperatura"
+      },
+      "sensor_oven_current_temperature_group": {
+        "name": "Aktualna temperatura {group_name}"
+      },
+      "sensor_oven_current_meatprobe_temperature": {
+        "name": "Aktualna temperatura sondy do mięsa"
+      },
+      "sensor_heatup_progress": {
+        "name": "Postęp nagrzewania"
+      },
+      "sensor_wifi_signal_strength": {
+        "name": "Siła sygnału Wi-Fi"
+      },
+      "sensor_grease_filter_saturation": {
+        "name": "Nasycenie filtra tłuszczu"
+      },
+      "sensor_carbon_filter_saturation": {
+        "name": "Nasycenie filtra węglowego"
+      },
+      "sensor_hob_zone_state": {
+        "name": "Stan strefy {group_name}",
+        "state": {
+          "notselectable": "Niedostępna",
+          "off": "Wyłączona",
+          "active": "Aktywna",
+          "residuelheat": "Ciepło resztkowe"
+        }
+      },
+      "sensor_hob_zone_operationstate": {
+        "name": "Stan operacyjny strefy {group_name}",
+        "state": {
+          "inactive": "Nieaktywna",
+          "ready": "Gotowa",
+          "delayedstart": "Opóźniony start",
+          "run": "Działa",
+          "pause": "Wstrzymana",
+          "actionrequired": "Wymagane działanie",
+          "finished": "Zakończona",
+          "error": "Błąd",
+          "aborting": "Przerywanie"
+        }
+      },
+      "sensor_hob_zone_power_level": {
+        "name": "Poziom mocy strefy {group_name}",
+        "state": {
+          "off": "Wyłączona",
+          "keepwarm": "Podtrzymanie temperatury",
+          "10": "10",
+          "15": "15",
+          "20": "20",
+          "25": "25",
+          "30": "30",
+          "35": "35",
+          "40": "40",
+          "45": "45",
+          "50": "50",
+          "55": "55",
+          "60": "60",
+          "65": "65",
+          "70": "70",
+          "75": "75",
+          "80": "80",
+          "85": "85",
+          "90": "90",
+          "boost1": "Boost 1",
+          "boost2": "Boost 2"
+        }
+      },
+      "sensor_hob_zone_frying_sensor_level": {
+        "name": "Poziom czujnika smażenia dla strefy {group_name}",
+        "state": {
+          "off": "Wyłączony",
+          "70dc": "70 °C",
+          "80dc": "80 °C",
+          "90dc": "90 °C",
+          "100dc": "100 °C",
+          "110dc": "110 °C",
+          "120dc": "120 °C",
+          "140dc": "140 °C",
+          "160dc": "160 °C",
+          "180dc": "180 °C",
+          "200dc": "200 °C",
+          "220dc": "220 °C"
+        }
+      },
+      "sensor_hob_zone_current_temperature": {
+        "name": "Aktualna temperatura strefy {group_name}"
+      },
+      "sensor_hob_zone_heatup_progress": {
+        "name": "Postęp nagrzewania strefy {group_name}"
+      },
+      "sensor_hob_zone_duration": {
+        "name": "Czas trwania strefy {group_name}"
+      },
+      "sensor_hob_zone_elapsed_program_time": {
+        "name": "Upływający czas programu strefy {group_name}"
+      },
+      "sensor_hob_zone_remaining_program_time": {
+        "name": "Pozostały czas programu strefy {group_name}"
+      },
+      "sensor_hob_zone_program_progress": {
+        "name": "Postęp programu strefy {group_name}"
+      },
+      "sensor_count_ristretto_espresso": {
+        "name": "Liczba ristretto / espresso"
+      },
+      "sensor_count_coffee": {
+        "name": "Liczba kaw"
+      },
+      "sensor_count_coffee_milk": {
+        "name": "Liczba kaw z mlekiem"
+      },
+      "sensor_count_frothy_milk": {
+        "name": "Liczba spienionego mleka"
+      },
+      "sensor_count_hot_milk": {
+        "name": "Liczba porcji gorącego mleka"
+      },
+      "sensor_count_hot_water": {
+        "name": "Liczba porcji gorącej wody"
+      },
+      "sensor_count_hot_water_cups": {
+        "name": "Liczba filiżanek gorącej wody"
+      },
+      "sensor_count_powder_coffee": {
+        "name": "Liczba kaw z mielonej"
+      },
+      "sensor_countdown_calc_n_clean": {
+        "name": "Wymagane Calc'n Clean"
+      },
+      "sensor_countdown_cleaning": {
+        "name": "Wymagane czyszczenie"
+      },
+      "sensor_countdown_descaling": {
+        "name": "Wymagane odkamienianie"
+      },
+      "sensor_countdown_water_filter": {
+        "name": "Wymiana filtra wody"
+      },
+      "sensor_coffeemaker_process_phase": {
+        "name": "Faza procesu",
+        "state": {
+          "none": "Bezczynny",
+          "beverageaborting": "Anulowanie przygotowania napoju",
+          "grinding": "Mielenie ziaren",
+          "brewingunitmovesup": "Przygotowywanie jednostki zaparzania",
+          "coffeebrewing": "Parzenie kawy",
+          "brewingunitmovesdown": "Kończenie parzenia",
+          "milkfroth": "Spienianie mleka",
+          "cleaningmilksystem": "Czyszczenie systemu mlecznego",
+          "hotwaterdispensing": "Wydawanie gorącej wody",
+          "cleaningmode": "Tryb czyszczenia",
+          "descalephase": "Odkamienianie",
+          "rinsephase": "Płukanie",
+          "cleanphase": "Czyszczenie",
+          "warmmilk": "Podgrzewanie mleka",
+          "frostprotection": "Ochrona przed mrozem aktywna",
+          "specialrinsing": "Specjalne płukanie",
+          "waterfilteractivation": "Aktywacja filtra wody",
+          "lattemacpause": "Przerwa na Latte Macchiato",
+          "startphase": "Uruchamianie",
+          "skipphase": "Pominięcie kroku",
+          "preliminary": "Krok wstępny",
+          "autodescalephase": "Automatyczne odkamienianie",
+          "autocleanphase": "Automatyczne czyszczenie",
+          "drainingdescalephase": "Opróżnianie po odkamienianiu",
+          "milkdescalephase": "Odkamienianie systemu mlecznego",
+          "coldbrew": "Parzenie Cold Brew",
+          "dripbrew": "Parzenie przelewowe",
+          "emptypowdersources": "Opróżnianie zasobnika na kawę mieloną",
+          "roundrobinflush": "Płukanie systemu",
+          "initializenewcartridge": "Inicjalizacja nowego wkładu"
+        }
+      },
+      "sensor_laundry_status_idos1_fill_level": {
+        "name": "Poziom napełnienia i-DOS 1",
+        "state": {
+          "poor": "Niski",
+          "filled": "Napełniony"
+        }
+      },
+      "sensor_laundry_status_idos2_fill_level": {
+        "name": "Poziom napełnienia i-DOS 2",
+        "state": {
+          "poor": "Niski",
+          "filled": "Napełniony"
+        }
+      },
+      "sensor_machinecare_remaining_runs": {
+        "name": "Pozostało uruchomień do MachineCare"
+      }
+    },
+    "select": {
+      "select_drying_assistant_all_programs": {
+        "name": "Asystent suszenia dla wszystkich programów",
+        "state": {
+          "off": "Wyłączony",
+          "allprograms": "Wszystkie programy",
+          "ecoasdefault": "Eco 50"
+        }
+      },
+      "select_hot_water": {
+        "name": "Podłączenie wody",
+        "state": {
+          "coldwater": "Zimna woda",
+          "hotwater": "Gorąca woda"
+        }
+      },
+      "select_rinse_aid": {
+        "name": "Nabłyszczacz",
+        "state": {
+          "off": "Poziom 0 (Wyłączony)",
+          "r01": "Poziom 1 (Najniższy)",
+          "r02": "Poziom 2 (Niski)",
+          "r03": "Poziom 3 (Średni)",
+          "r04": "Poziom 4 (Średni/Wysoki)",
+          "r05": "Poziom 5 (Wysoki)",
+          "r06": "Poziom 6 (Najwyższy)"
+        }
+      },
+      "select_sound_level_signal": {
+        "name": "Poziom głośności sygnału",
+        "state": {
+          "high": "Wysoki",
+          "low": "Niski",
+          "medium": "Średni",
+          "off": "Wyłączony"
+        }
+      },
+      "select_sound_level_key": {
+        "name": "Poziom głośności dźwięku przycisków",
+        "state": {
+          "off": "Wyłączony",
+          "low": "Niski",
+          "medium": "Średni",
+          "high": "Wysoki"
+        }
+      },
+      "select_flexspray_type": {
+        "name": "Typ PowerControl",
+        "state": {
+          "front": "Przód",
+          "back": "Tył",
+          "custom": "Niestandardowy",
+          "individual": "Indywidualny"
+        }
+      },
+      "select_flexspray_front_left": {
+        "name": "PowerControl z przodu po lewej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_back_left": {
+        "name": "PowerControl z tyłu po lewej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_back_right": {
+        "name": "PowerControl z tyłu po prawej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_front_right": {
+        "name": "PowerControl z przodu po prawej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_custom_front_left": {
+        "name": "Niestandardowy PowerControl z przodu po lewej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_custom_back_left": {
+        "name": "Niestandardowy PowerControl z tyłu po lewej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_custom_back_right": {
+        "name": "Niestandardowy PowerControl z tyłu po prawej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_flexspray_custom_front_right": {
+        "name": "Niestandardowy PowerControl z przodu po prawej",
+        "state": {
+          "delicate": "Delikatny",
+          "normal": "Normalny",
+          "heavy": "Intensywny"
+        }
+      },
+      "select_water_hardness": {
+        "name": "Twardość wody",
+        "state": {
+          "h00": "°E 0-8 miękka (0-1.1 mmol/l)",
+          "h01": "°E 9-10 miękka (1.2-1.4 mmol/l)",
+          "h02": "°E 11-12 średnia (1.5-1.8 mmol/l)",
+          "h03": "°E 13-15 średnia (1.9-2.1 mmol/l)",
+          "h04": "°E 16-20 średnia (2.2-2.9 mmol/l)",
+          "h05": "°E 21-26 twarda (3.0-3.7 mmol/l)",
+          "h06": "°E 27-38 twarda (3.8-5.4 mmol/l)",
+          "h07": "°E 39-62 twarda (5.5-8.9 mmol/l)"
+        }
+      },
+      "select_remote_control_level": {
+        "name": "Zdalne sterowanie",
+        "state": {
+          "monitoring": "Wyłączone",
+          "manualremotestart": "Ręczny start zdalny",
+          "permanentremotestart": "Stały start zdalny"
+        }
+      },
+      "select_program": {
+        "name": "Wybrany program",
+        "state": {
+          "dishcare_dishwasher_program_intensiv70": "Intensywny Plus 70",
+          "dishcare_dishwasher_program_auto2": "Auto45-65",
+          "dishcare_dishwasher_program_eco50": "Eco 50",
+          "dishcare_dishwasher_program_quick45": "Skrócony 45",
+          "dishcare_dishwasher_program_prerinse": "Płukanie wstępne",
+          "dishcare_dishwasher_program_quick65": "Express 65",
+          "dishcare_dishwasher_program_machinecare": "Czyszczenie zmywarki",
+          "dishcare_dishwasher_program_nightwash": "Nocny 50",
+          "dishcare_dishwasher_program_glas40": "Szkło 40",
+          "dishcare_dishwasher_program_glassshine": "Błyszczący połysk",
+          "dishcare_dishwasher_program_kurz60": "Przyśpieszony 60",
+          "dishcare_dishwasher_program_learningdishwasher": "Inteligentny",
+          "dishcare_dishwasher_program_super60": "Super 60",
+          "dishcare_dishwasher_program_intensivpower": "Intensywna Plus 70",
+          "dishcare_dishwasher_program_intensivesuper": "Intensywny super",
+          "dishcare_dishwasher_program_shorthygiene": "Krótki higieniczny",
+          "dishcare_dishwasher_program_quickp": "Szybki P",
+		  "dishcare_dishwasher_program_mixedload": "Mieszany wsad",
+          "favorite_001": "Ulubiony 1",
+          "favorite_002": "Ulubiony 2",
+          "favorite_003": "Ulubiony 3",
+          "favorite_004": "Ulubiony 4",
+          "favorite_005": "Ulubiony 5",
+          "favorite_006": "Ulubiony 6",
+          "favorite_007": "Ulubiony 7",
+          "favorite_008": "Ulubiony 8",
+          "favorite_009": "Ulubiony 9",
+          "favorite_010": "Ulubiony 10",
+          "cooking_common_program_hood_venting": "Poziom wentylatora",
+          "cooking_common_program_hood_automatic": "Tryb automatyczny",
+          "cooking_common_program_hood_interval": "Wentylacja interwałowa",
+          "cooking_common_program_hood_delayedshutoff": "Opóźnione wyłączenie wentylatora",
+          "cooking_hob_program_cookingsensor": "Czujnik gotowania",
+          "cooking_hob_program_dish_cookingsensor_beansinpressurecooker": "Czujnik gotowania: Fasola w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_beefinpressurecooker": "Czujnik gotowania: Wołowina w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_boiledeggs": "Czujnik gotowania: Jajka na twardo",
+          "cooking_hob_program_dish_cookingsensor_boilingbeef": "Czujnik gotowania: Gotowanie wołowiny",
+          "cooking_hob_program_dish_cookingsensor_boilingbroccoli": "Czujnik gotowania: Gotowanie brokułów",
+          "cooking_hob_program_dish_cookingsensor_boilingbrusselssprout": "Czujnik gotowania: Gotowanie brukselki",
+          "cooking_hob_program_dish_cookingsensor_boilingcauliflower": "Czujnik gotowania: Gotowanie kalafiora",
+          "cooking_hob_program_dish_cookingsensor_boilingchicken": "Czujnik gotowania: Gotowanie kurczaka",
+          "cooking_hob_program_dish_cookingsensor_boilinggreenbeans": "Czujnik gotowania: Gotowanie zielonej fasolki",
+          "cooking_hob_program_dish_cookingsensor_boilingmeatballs": "Czujnik gotowania: Gotowanie klopsików",
+          "cooking_hob_program_dish_cookingsensor_boilingpotatoes": "Czujnik gotowania: Gotowanie ziemniaków",
+          "cooking_hob_program_dish_cookingsensor_chickeninpressurecooker": "Czujnik gotowania: Kurczak w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_chickpeas": "Czujnik gotowania: Ciecierzyca",
+          "cooking_hob_program_dish_cookingsensor_chickpeasinpressurecooker": "Czujnik gotowania: Ciecierzyca w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_chocolatepudding": "Czujnik gotowania: Budyn czekoladowy",
+          "cooking_hob_program_dish_cookingsensor_compote": "Czujnik gotowania: Kompot",
+          "cooking_hob_program_dish_cookingsensor_creamsoups": "Czujnik gotowania: Zupy krem",
+          "cooking_hob_program_dish_cookingsensor_deepfryingberliners": "Czujnik gotowania: Smażenie pączków",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedfish": "Czujnik gotowania: Smażenie ryby w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedmushrooms": "Czujnik gotowania: Smażenie pieczarek w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbreadedvegetables": "Czujnik gotowania: Smażenie warzyw w panierce",
+          "cooking_hob_program_dish_cookingsensor_deepfryingbunuelos": "Czujnik gotowania: Smażenie buñuelos",
+          "cooking_hob_program_dish_cookingsensor_deepfryingchickenportions": "Czujnik gotowania: Smażenie porcji kurczaka",
+          "cooking_hob_program_dish_cookingsensor_deepfryingdonuts": "Czujnik gotowania: Smażenie pączków amerykańskich",
+          "cooking_hob_program_dish_cookingsensor_deepfryingfishinbeerbatter": "Czujnik gotowania: Smażenie ryby w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_deepfryingfrenchfriesfrozen": "Czujnik gotowania: Smażenie frytek (mrożone)",
+          "cooking_hob_program_dish_cookingsensor_deepfryingmeatballs": "Czujnik gotowania: Smażenie klopsików",
+          "cooking_hob_program_dish_cookingsensor_deepfryingmushroomsinbeerbatter": "Czujnik gotowania: Smażenie grzybów w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_deepfryingvegetablesinbeerbatter": "Czujnik gotowania: Smażenie warzyw w cieście piwnym",
+          "cooking_hob_program_dish_cookingsensor_greenbeansfrozen": "Czujnik gotowania: Zielona fasolka (mrożona)",
+          "cooking_hob_program_dish_cookingsensor_heatingupgoulashsoup": "Czujnik gotowania: Podgrzewanie zupy gulaszowej",
+          "cooking_hob_program_dish_cookingsensor_heatinguphotspicedwine": "Czujnik gotowania: Podgrzewanie grzańca",
+          "cooking_hob_program_dish_cookingsensor_heatingupmilk": "Czujnik gotowania: Podgrzewanie mleka",
+          "cooking_hob_program_dish_cookingsensor_homemadestock": "Czujnik gotowania: Domowy bulion",
+          "cooking_hob_program_dish_cookingsensor_homemadestockinpressurecooker": "Czujnik gotowania: Domowy bulion w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_instantsoups": "Czujnik gotowania: Zupy instant",
+          "cooking_hob_program_dish_cookingsensor_lentils": "Czujnik gotowania: Soczewica",
+          "cooking_hob_program_dish_cookingsensor_lentilsinpressurecooker": "Czujnik gotowania: Soczewica w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_pasta": "Czujnik gotowania: Makaron",
+          "cooking_hob_program_dish_cookingsensor_peas": "Czujnik gotowania: Groszek",
+          "cooking_hob_program_dish_cookingsensor_polenta": "Czujnik gotowania: Polenta",
+          "cooking_hob_program_dish_cookingsensor_porridgesoats": "Czujnik gotowania: Owsianka",
+          "cooking_hob_program_dish_cookingsensor_potatodumplings": "Czujnik gotowania: Kluski ziemniaczane",
+          "cooking_hob_program_dish_cookingsensor_potatoesinpressurecooker": "Czujnik gotowania: Ziemniaki w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_rice": "Czujnik gotowania: Ryż",
+          "cooking_hob_program_dish_cookingsensor_riceinpressurecooker": "Czujnik gotowania: Ryż w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_ricepudding": "Czujnik gotowania: Ryż na mleku",
+          "cooking_hob_program_dish_cookingsensor_sauteedfish": "Czujnik gotowania: Podsmażana ryba",
+          "cooking_hob_program_dish_cookingsensor_semolinapuree": "Czujnik gotowania: Puree z kaszy manny",
+          "cooking_hob_program_dish_cookingsensor_simmeringsausages": "Czujnik gotowania: Parzenie kiełbasek",
+          "cooking_hob_program_dish_cookingsensor_stuffedpasta": "Czujnik gotowania: Makaron nadziewany",
+          "cooking_hob_program_dish_cookingsensor_vegetablesinpressurecooker": "Czujnik gotowania: Warzywa w szybkowarze",
+          "cooking_hob_program_dish_cookingsensor_vegetableswithcreamfrozen": "Czujnik gotowania: Warzywa w śmietanie (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_aubergines": "Czujnik smażenia: Oberżyna",
+          "cooking_hob_program_dish_fryingsensor_bacon": "Czujnik smażenia: Bekon",
+          "cooking_hob_program_dish_fryingsensor_bechamelsauce": "Czujnik smażenia: Sos beszamelowy",
+          "cooking_hob_program_dish_fryingsensor_camembertfrozen": "Czujnik smażenia: Camembert (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_cheesesauce": "Czujnik smażenia: Sos serowy",
+          "cooking_hob_program_dish_fryingsensor_chickennuggetsfrozen": "Czujnik smażenia: Nuggetsy z kurczaka (mrożone)",
+          "cooking_hob_program_dish_fryingsensor_chop": "Czujnik smażenia: Kotlet",
+          "cooking_hob_program_dish_fryingsensor_cordonbleu": "Czujnik smażenia: Cordon Bleu",
+          "cooking_hob_program_dish_fryingsensor_cordonbleufrozen": "Czujnik smażenia: Cordon Bleu (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_courgettes": "Czujnik smażenia: Cukinia",
+          "cooking_hob_program_dish_fryingsensor_driedreadymeals": "Czujnik smażenia: Suszone dania gotowe",
+          "cooking_hob_program_dish_fryingsensor_escalope": "Czujnik smażenia: Sznycel",
+          "cooking_hob_program_dish_fryingsensor_escalopebreaded": "Czujnik smażenia: Sznycel w panierce",
+          "cooking_hob_program_dish_fryingsensor_escalopefrozen": "Czujnik smażenia: Sznycel (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fillet": "Czujnik smażenia: Polędwica / Filet",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreaded": "Czujnik smażenia: Filet rybny w panierce",
+          "cooking_hob_program_dish_fryingsensor_fishfilletbreadedfrozen": "Czujnik smażenia: Filet rybny w panierce (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplain": "Czujnik smażenia: Filet rybny naturalny",
+          "cooking_hob_program_dish_fryingsensor_fishfilletplainfrozen": "Czujnik smażenia: Filet rybny naturalny (mrożony)",
+          "cooking_hob_program_dish_fryingsensor_fishfingersfrozen": "Czujnik smażenia: Paluszki"
+        }
+      }
+    }
+  }
+}
