@@ -35,6 +35,8 @@ from .const import (
     CONF_FEATURE_FILENAME,
     DOMAIN,
     PLATFORMS,
+    SERVICE_ACKNOWLEDGE_EVENT,
+    SERVICE_REJECT_EVENT,
     SERVICE_SET_FINISH_IN,
     SERVICE_SET_START_IN,
     SERVICE_START_PROGRAM,
@@ -86,7 +88,7 @@ type HCConfigEntry = ConfigEntry[HCData]
 HC_KEY: HassKey[HCConfig] = HassKey(DOMAIN)
 
 
-async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:  # noqa: PLR0915
     """Set up integration global config."""
     hass.data.setdefault(DOMAIN, HCConfig())
     if DOMAIN in config:
@@ -146,6 +148,32 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         )
         await entity.set_value(duration_to_seconds(call.data["finish_in"]))
 
+    @error_decorator
+    async def handle_acknowledge_event(call: ServiceCall) -> ServiceResponse:
+        config_entry: HCConfigEntry = async_get_config_entry(hass, DOMAIN, call.data["device_id"])
+        appliance = config_entry.runtime_data.appliance
+        event = appliance.events.get(call.data["event"])
+        if event is None:
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="event_unknown",
+            )
+        await event.acknowledge()
+
+    @error_decorator
+    async def handle_reject_event(call: ServiceCall) -> ServiceResponse:
+        config_entry: HCConfigEntry = async_get_config_entry(hass, DOMAIN, call.data["device_id"])
+        appliance = config_entry.runtime_data.appliance
+        event = appliance.events.get(call.data["event"])
+        if event is None:
+            raise ServiceValidationError(
+                translation_domain=DOMAIN,
+                translation_key="event_unknown",
+            )
+        await event.reject()
+
+    hass.services.async_register(DOMAIN, SERVICE_ACKNOWLEDGE_EVENT, handle_acknowledge_event)
+    hass.services.async_register(DOMAIN, SERVICE_REJECT_EVENT, handle_reject_event)
     hass.services.async_register(DOMAIN, SERVICE_START_PROGRAM, handle_start_program)
     hass.services.async_register(DOMAIN, SERVICE_SET_START_IN, handle_set_start_in)
     hass.services.async_register(DOMAIN, SERVICE_SET_FINISH_IN, handle_set_finish_in)

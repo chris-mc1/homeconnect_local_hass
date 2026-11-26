@@ -37,3 +37,27 @@ set_finish_in:
       required: true
       selector:
         duration:
+
+acknowledge_event:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: homeconnect_ws
+    event:
+      required: true
+      selector:
+        text:
+
+reject_event:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: homeconnect_ws
+    event:
+      required: true
+      selector:
+        text:

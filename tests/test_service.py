@@ -4,13 +4,18 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
 from custom_components.homeconnect_ws.const import (
     DOMAIN,
+    SERVICE_ACKNOWLEDGE_EVENT,
+    SERVICE_REJECT_EVENT,
     SERVICE_SET_FINISH_IN,
     SERVICE_SET_START_IN,
     SERVICE_START_PROGRAM,
 )
 from homeassistant.const import ATTR_DEVICE_ID
+from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
+from homeconnect_websocket import CodeResponsError
 from homeconnect_websocket.message import Action, Message
 
 from . import setup_config_entry
@@ -28,10 +33,12 @@ async def test_service_registration(hass: HomeAssistant) -> None:
 
     services = hass.services.async_services_for_domain(DOMAIN)
 
-    assert len(services) == 3
+    assert len(services) == 5
     assert SERVICE_START_PROGRAM in services
     assert SERVICE_SET_START_IN in services
     assert SERVICE_SET_FINISH_IN in services
+    assert SERVICE_ACKNOWLEDGE_EVENT in services
+    assert SERVICE_REJECT_EVENT in services
 
 
 async def test_start_program(
@@ -118,3 +125,115 @@ async def test_set_finish_in(
             data={"uid": 406, "value": 4215},
         )
     )
+
+
+async def test_acknowledge_event(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    device_registry: DeviceRegistry,
+) -> None:
+    """Test set_finish_in service."""
+    config_entry = await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await hass.services.async_call(
+        DOMAIN,
+        SERVICE_ACKNOWLEDGE_EVENT,
+        {
+            ATTR_DEVICE_ID: config_entry.entry_id,
+            "event": "Test.Event1",
+        },
+        blocking=True,
+    )
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data={"uid": 301, "value": 800},
+        )
+    )
+
+    mock_appliance.session.send_sync.side_effect = CodeResponsError(code=400, resource="/ro/values")
+    with pytest.raises(
+        HomeAssistantError,
+        check=lambda e: (
+            e.translation_key == "code_respons"
+            and e.translation_placeholders == {"message": "400 BadRequest"}
+        ),
+    ):
+        await hass.services.async_call(
+            DOMAIN,
+            SERVICE_ACKNOWLEDGE_EVENT,
+            {
+                ATTR_DEVICE_ID: config_entry.entry_id,
+                "event": "Test.Event1",
+            },
+            blocking=True,
+        )
+
+    with pytest.raises(
+        ServiceValidationError, check=lambda e: e.translation_key == "event_unknown"
+    ):
+        await hass.services.async_call(
+            DOMAIN,
+            SERVICE_ACKNOWLEDGE_EVENT,
+            {
+                ATTR_DEVICE_ID: config_entry.entry_id,
+                "event": "Test.Not_existing_Event",
+            },
+            blocking=True,
+        )
+
+
+async def test_reject_event(
+    hass: HomeAssistant,
+    mock_appliance: MockAppliance,
+    device_registry: DeviceRegistry,
+) -> None:
+    """Test set_finish_in service."""
+    config_entry = await setup_config_entry(hass, CONFIG_ENTRIES[0])
+    await hass.services.async_call(
+        DOMAIN,
+        SERVICE_REJECT_EVENT,
+        {
+            ATTR_DEVICE_ID: config_entry.entry_id,
+            "event": "Test.Event1",
+        },
+        blocking=True,
+    )
+    mock_appliance.session.send_sync.assert_awaited_once_with(
+        Message(
+            resource="/ro/values",
+            action=Action.POST,
+            data={"uid": 302, "value": 800},
+        )
+    )
+
+    mock_appliance.session.send_sync.side_effect = CodeResponsError(code=400, resource="/ro/values")
+    with pytest.raises(
+        HomeAssistantError,
+        check=lambda e: (
+            e.translation_key == "code_respons"
+            and e.translation_placeholders == {"message": "400 BadRequest"}
+        ),
+    ):
+        await hass.services.async_call(
+            DOMAIN,
+            SERVICE_REJECT_EVENT,
+            {
+                ATTR_DEVICE_ID: config_entry.entry_id,
+                "event": "Test.Event1",
+            },
+            blocking=True,
+        )
+
+    with pytest.raises(
+        ServiceValidationError, check=lambda e: e.translation_key == "event_unknown"
+    ):
+        await hass.services.async_call(
+            DOMAIN,
+            SERVICE_REJECT_EVENT,
+            {
+                ATTR_DEVICE_ID: config_entry.entry_id,
+                "event": "Test.Not_existing_Event",
+            },
+            blocking=True,
+        )

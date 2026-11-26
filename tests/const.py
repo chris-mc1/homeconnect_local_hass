@@ -418,7 +418,19 @@ DEVICE_DESCRIPTION = DeviceDescription(
             name="Test.AbortProgram",
             available=True,
             access=Access.READ_WRITE,
-        )
+        ),
+        EntityDescription(
+            uid=301,
+            name="BSH.Common.Command.AcknowledgeEvent",
+            available=True,
+            access=Access.WRITE_ONLY,
+        ),
+        EntityDescription(
+            uid=302,
+            name="BSH.Common.Command.RejectEvent",
+            available=True,
+            access=Access.WRITE_ONLY,
+        ),
     ],
     option=[
         EntityDescription(

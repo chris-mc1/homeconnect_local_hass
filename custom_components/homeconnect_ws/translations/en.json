@@ -3654,6 +3654,32 @@
           "description": "Set the time the Program should be finished in"
         }
       }
+    },
+    "acknowledge_event": {
+      "name": "Acknowledge event",
+      "description": "Acknowledge an Event on the Appliance",
+      "fields": {
+        "device_id": {
+          "name": "Appliance"
+        },
+        "event": {
+          "name": "Event",
+          "description": "The name of the Event to acknowledge"
+        }
+      }
+    },
+    "reject_event": {
+      "name": "Reject event",
+      "description": "Reject an Event on the Appliance",
+      "fields": {
+        "device_id": {
+          "name": "Appliance"
+        },
+        "event": {
+          "name": "Event",
+          "description": "The name of the Event to reject"
+        }
+      }
     }
   },
   "exceptions": {
@@ -3686,6 +3712,9 @@
     },
     "connection_error": {
       "message": "Connection Error"
+    },
+    "event_unknown": {
+      "message": "Event unknown"
     }
   }
 }

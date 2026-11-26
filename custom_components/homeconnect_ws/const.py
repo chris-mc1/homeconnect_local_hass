@@ -35,3 +35,5 @@ MAX_RECONNECT_DELAY: Final = 300
 SERVICE_START_PROGRAM: Final = "start_program"
 SERVICE_SET_START_IN: Final = "set_start_in"
 SERVICE_SET_FINISH_IN: Final = "set_finish_in"
+SERVICE_ACKNOWLEDGE_EVENT: Final = "acknowledge_event"
+SERVICE_REJECT_EVENT: Final = "reject_event"

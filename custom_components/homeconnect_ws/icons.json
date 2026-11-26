@@ -175,7 +175,7 @@
             },
             "sensor_elapsed_program_time": {
                 "default": "mdi:progress-clock"
-            },            
+            },
             "sensor_program_progress": {
                 "default": "mdi:progress-check"
             },
@@ -405,6 +405,12 @@
     "services": {
         "start_program": {
             "service": "mdi:play"
+        },
+        "acknowledge_event": {
+            "service": "mdi:check-circle-outline"
+        },
+        "reject_event": {
+            "service": "mdi:close-circle-outline"
         }
     }
 }
