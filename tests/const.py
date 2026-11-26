@@ -449,6 +449,24 @@ DEVICE_DESCRIPTION = DeviceDescription(
             enumeration={"0": "Off", "1": "Speed1", "2": "Speed1"},
             default=0,
         ),
+        EntityDescription(
+            uid=405,
+            name="BSH.Common.Option.StartInRelative",
+            available=True,
+            access=Access.READ_WRITE,
+            default=0,
+            min=0,
+            max=86340,
+        ),
+        EntityDescription(
+            uid=406,
+            name="BSH.Common.Option.FinishInRelative",
+            available=True,
+            access=Access.READ_WRITE,
+            default=0,
+            min=0,
+            max=86340,
+        ),
     ],
     program=[
         EntityDescription(
